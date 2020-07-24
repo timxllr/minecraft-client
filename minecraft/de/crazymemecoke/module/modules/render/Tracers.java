@@ -12,7 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class Tracers extends Module {
 
 	public Tracers() {
-		super("Tracers", Keyboard.KEY_NUMPAD8, Category.RENDER, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("Tracers", Keyboard.KEY_NUMPAD8, Category.RENDER, Rainbow.rainbow(1, 1).hashCode());
 	}
 
 	public void onRender() {

@@ -50,7 +50,7 @@ public class Tab {
             // Selected Tab Rect
             RenderHelper.drawRect(x - 1, y + this.gui.tabHeight * i - 1, x + this.menuWidth - 2, y + this.gui.tabHeight * i + 10, i == TabGUI.selectedItem ? new Color(255, 140, 59, 120) : new Color(0, 0, 0, 0));
             // Selected Tab String
-            Client.getInstance().getFontManager().comfortaa20.drawString(currentHack.getName(), x, y + this.gui.tabHeight * i + 1, currentHack.getState() ? Rainbow.rainbowNormal(1, 1).hashCode() : -1);
+            Client.getInstance().getFontManager().comfortaa20.drawString(currentHack.getName(), x, y + this.gui.tabHeight * i + 1, currentHack.getState() ? Rainbow.rainbow(1, 1).hashCode() : -1);
         }
     }
 }

@@ -6,6 +6,8 @@ import de.Hero.settings.SettingsManager;
 import de.crazymemecoke.command.CommandManager;
 import de.crazymemecoke.module.Module;
 import de.crazymemecoke.module.ModuleManager;
+import de.crazymemecoke.notification.Notification;
+import de.crazymemecoke.notification.NotificationManager;
 import de.crazymemecoke.ui.GuiIngameHook;
 import de.crazymemecoke.ui.alts.AltManager;
 import de.crazymemecoke.ui.fontmanager.FontManager;
@@ -40,7 +42,10 @@ public class Client {
     private ClickGUI clickgui;
     //private CSGOGui clickgui;
     private FontManager fontManager;
+    private AltManager altMgr;
     private File clientDir;
+    private NotificationManager notificationManager;
+    private Notification notification;
     private GuiIngameHook guiIngameHook;
 
     private Setting colorMode;
@@ -53,20 +58,14 @@ public class Client {
 
         fontManager = new FontManager();
         fontManager.initFonts();
-
         setmgr = new SettingsManager();
         moduleManager = new ModuleManager();
         setmgr.loadSettings();
-
         moduleManager.loadModules();
         moduleManager.loadBinds();
-        colorMode = getSetmgr().getSettingByName("Color Scheme", getModuleManager().getModByName("HUD"));
-
         commandManager = new CommandManager();
-
         AltManager.loadAlts();
         raidriarDir = new File(Minecraft.getMinecraft().mcDataDir + File.separator + getClientName());
-        //clickgui = new CSGOGui();
         clickgui = new ClickGUI();
         Runtime.getRuntime().addShutdownHook(new Thread(this::onShutdown));
     }
@@ -144,5 +143,13 @@ public class Client {
 
     public FontManager getFontManager() {
         return fontManager;
+    }
+
+    public NotificationManager getNotificationManager() {
+        return notificationManager;
+    }
+
+    public Notification getNotification() {
+        return notification;
     }
 }

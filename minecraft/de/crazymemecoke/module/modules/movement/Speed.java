@@ -38,7 +38,7 @@ public class Speed extends Module {
     private boolean speedUp;
 
     public Speed() {
-        super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbowNormal(1, 1).hashCode());
+        super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
         mode.add("Latest OnGround");
         mode.add("AAC 1.9.10");
         mode.add("Frames");

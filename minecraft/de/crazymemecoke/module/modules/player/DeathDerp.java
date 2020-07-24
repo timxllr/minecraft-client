@@ -11,7 +11,7 @@ import de.crazymemecoke.utils.events.UpdateEvent;
 
 public class DeathDerp extends Module {
 	public DeathDerp() {
-		super("DeathDerp", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("DeathDerp", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).hashCode());
 	}
 
 	@EventTarget

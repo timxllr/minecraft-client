@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 public class SafeWalk extends Module {
 
     public SafeWalk() {
-        super("SafeWalk", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbowNormal(1, 1).hashCode());
+        super("SafeWalk", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
     }
 
 }

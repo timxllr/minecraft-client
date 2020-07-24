@@ -2,6 +2,9 @@ package de.crazymemecoke.module;
 
 import com.darkmagician6.eventapi.EventManager;
 import de.crazymemecoke.Client;
+import de.crazymemecoke.notification.Notification;
+import de.crazymemecoke.notification.NotificationManager;
+import de.crazymemecoke.notification.NotificationType;
 import de.crazymemecoke.utils.Notify;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
@@ -50,9 +53,9 @@ public class Module {
             this.isEnabled = true;
             if (!(Client.getInstance().getModuleManager().getModByName("Invis").getState())) {
                 if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
-                    Notify.chatMessage("§7[§2+§7] §a" + getName());
-                    if (Minecraft.getMinecraft().thePlayer != null)
-                        mc.thePlayer.playSound("random.pop", 100.0F, 1.0F);
+                    if (Client.getInstance().getSetmgr().getSettingByName("Notifications", Client.getInstance().getModuleManager().getModByName("HUD")).getValBoolean()) {
+                        NotificationManager.show(new Notification(NotificationType.INFO, "§7[§a+§7] §6" + getName(), "§6Module §aaktiviert", 2));
+                    }
                 }
             }
         } else {
@@ -60,9 +63,9 @@ public class Module {
             this.isEnabled = false;
             if (!(Client.getInstance().getModuleManager().getModByName("Invis").getState())) {
                 if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
-                    Notify.chatMessage("§7[§c-§7] §a" + getName());
-                    if (Minecraft.getMinecraft().thePlayer != null)
-                        mc.thePlayer.playSound("random.pop", 100.0F, 1.0F);
+                    if (Client.getInstance().getSetmgr().getSettingByName("Notifications", Client.getInstance().getModuleManager().getModByName("HUD")).getValBoolean()) {
+                        NotificationManager.show(new Notification(NotificationType.INFO, "§7[§c-§7] §6" + getName(), "§6Module §cdeaktiviert", 2));
+                    }
                 }
             }
         }

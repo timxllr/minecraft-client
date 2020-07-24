@@ -10,7 +10,7 @@ import net.minecraft.init.Blocks;
 public class IceSpeed extends Module {
 
 	public IceSpeed() {
-		super("IceSpeed", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("IceSpeed", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
 	}
 
 	public void onUpdate() {

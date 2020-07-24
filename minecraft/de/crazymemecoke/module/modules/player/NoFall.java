@@ -17,7 +17,7 @@ public class NoFall extends Module {
     ArrayList<String> mode = new ArrayList<>();
 
     public NoFall() {
-        super("NoFall", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbowNormal(1, 1).hashCode());
+        super("NoFall", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).hashCode());
 
         mode.add("AAC 1.9.10");
         mode.add("NCP");

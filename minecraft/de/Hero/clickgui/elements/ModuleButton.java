@@ -64,7 +64,7 @@ public class ModuleButton {
         }
 
         if (mod.isEnabled()) {
-            FontUtil.drawTotalCenteredStringWithShadow(mod.getName(), x + width / 2, y + 1 + height / 2, Rainbow.rainbowNormal(1, 1).getRGB());
+            FontUtil.drawTotalCenteredStringWithShadow(mod.getName(), x + width / 2, y + 1 + height / 2, Rainbow.rainbow(1, 1).getRGB());
         } else {
             FontUtil.drawTotalCenteredStringWithShadow(mod.getName(), x + width / 2, y + 1 + height / 2, 0xffafafaf);
         }

@@ -13,7 +13,7 @@ import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 public class NoRotation extends Module{
 
 	public NoRotation(){
-		super("NoRotation", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("NoRotation", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).hashCode());
 	}
 	
 	@EventTarget

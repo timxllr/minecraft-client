@@ -28,8 +28,8 @@ public class ClientManager extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        RenderUtils.drawBorderedRect(20, 20, width - 20, height - 20, 2, Rainbow.rainbowNormal(1, 1).hashCode(), new Color(0, 0, 0, 150).hashCode());
-        Client.getInstance().getFontManager().comfortaa22.drawString(Client.getInstance().getClientName(), width / 2 - 40, 25, Rainbow.rainbowNormal(1, 1).hashCode());
+        RenderUtils.drawBorderedRect(20, 20, width - 20, height - 20, 2, Rainbow.rainbow(1, 1).hashCode(), new Color(0, 0, 0, 150).hashCode());
+        Client.getInstance().getFontManager().comfortaa22.drawString(Client.getInstance().getClientName(), width / 2 - 40, 25, Rainbow.rainbow(1, 1).hashCode());
 
         Client.getInstance().getFontManager().comfortaa22.drawString("Modules:", width / 4 - 100, 60, -1);
         int yModPos = 80;

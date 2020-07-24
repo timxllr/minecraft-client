@@ -10,7 +10,7 @@ import de.crazymemecoke.utils.Wrapper;
 public class Sprint extends Module {
 
 	public Sprint() {
-		super("Sprint", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("Sprint", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
 
 	}
 

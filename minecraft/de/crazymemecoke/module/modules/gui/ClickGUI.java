@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ClickGUI extends Module {
 
     public ClickGUI() {
-        super("ClickGUI", Keyboard.KEY_RSHIFT, Category.GUI, Rainbow.rainbowNormal(1, 1).hashCode());
+        super("ClickGUI", Keyboard.KEY_RSHIFT, Category.GUI, Rainbow.rainbow(1, 1).hashCode());
     }
 
     @Override

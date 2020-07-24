@@ -10,7 +10,7 @@ import de.crazymemecoke.utils.Wrapper;
 public class Fullbright extends Module {
 
 	public Fullbright() {
-		super("Fullbright", Keyboard.KEY_NONE, Category.RENDER, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("Fullbright", Keyboard.KEY_NONE, Category.RENDER, Rainbow.rainbow(1, 1).hashCode());
 	}
 
 	public void onUpdate() {

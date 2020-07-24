@@ -11,6 +11,8 @@ import java.util.Random;
 
 import de.Hero.settings.Setting;
 import de.crazymemecoke.Client;
+import de.crazymemecoke.notification.Notification;
+import de.crazymemecoke.notification.NotificationManager;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.material.Material;
@@ -332,6 +334,8 @@ public class GuiIngame extends Gui {
             this.overlayPlayerList.renderPlayerlist(i, scoreboard, scoreobjective1);
         }
 
+        NotificationManager.render();
+
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableLighting();
         GlStateManager.enableAlpha();
@@ -341,7 +345,7 @@ public class GuiIngame extends Gui {
         Setting hotbar = Client.getInstance().getSetmgr().getSettingByName("Hotbar", Client.getInstance().getModuleManager().getModByName("HUD"));
         if (!Client.getInstance().getModuleManager().getModByName("Invis").getState() && hotbar.getValBoolean() && Client.getInstance().getModuleManager().getModByName("HUD").getState()) {
             ScaledResolution s = new ScaledResolution(Wrapper.mc);
-            RenderUtils.drawRect((s.getScaledWidth() / 2) - 91, s.getScaledHeight() - 23, (s.getScaledWidth() / 2) + 91, s.getScaledHeight(), new Color(0, 0, 0, 180).hashCode());
+            RenderUtils.drawRect((s.getScaledWidth() / 2) - 91, s.getScaledHeight() - 23, (s.getScaledWidth() / 2) + 91, s.getScaledHeight(), new Color(12, 14, 13).getRGB());
 
             if (Wrapper.mc.thePlayer.inventory.currentItem == 0) {
                 RenderUtils.drawRect((s.getScaledWidth() / 2) - 91 + Wrapper.mc.thePlayer.inventory.currentItem * 20, s.getScaledHeight() - 23, (s.getScaledWidth() / 2) + 91 - 20 * 8, s.getScaledHeight(), new Color(255, 255, 255, 120).getRGB());
@@ -349,13 +353,13 @@ public class GuiIngame extends Gui {
                 RenderUtils.drawRect((s.getScaledWidth() / 2) - 91 + Wrapper.mc.thePlayer.inventory.currentItem * 20, s.getScaledHeight() - 23, (s.getScaledWidth() / 2) + 91 - 20 * (8 - Wrapper.mc.thePlayer.inventory.currentItem), s.getScaledHeight(), new Color(255, 255, 255, 120).getRGB());
             }
 
-            EntityPlayer var3 = (EntityPlayer) this.mc.getRenderViewEntity();
+            EntityPlayer entityplayer = (EntityPlayer) this.mc.getRenderViewEntity();
             RenderHelper.enableGUIStandardItemLighting();
 
-            for (int var6 = 0; var6 < 9; ++var6) {
-                int var7 = sr.getScaledWidth() / 2 - 90 + var6 * 20 + 2;
-                int var8 = sr.getScaledHeight() - 16 - 3;
-                this.renderHotbarItem(var6, var7, var8, partialTicks, var3);
+            for (int j = 0; j < 9; ++j) {
+                int k = sr.getScaledWidth() / 2 - 90 + j * 20 + 2;
+                int l = sr.getScaledHeight() - 16 - 3;
+                this.renderHotbarItem(j, k, l, partialTicks, entityplayer);
             }
 
             RenderHelper.disableStandardItemLighting();
@@ -386,6 +390,7 @@ public class GuiIngame extends Gui {
                 RenderHelper.disableStandardItemLighting();
                 GlStateManager.disableRescaleNormal();
                 GlStateManager.disableBlend();
+
             }
         }
     }

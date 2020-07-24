@@ -12,7 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class ESP extends Module {
 
 	public ESP() {
-		super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER, Rainbow.rainbow(1, 1).hashCode());
 	}
 
 	@Override

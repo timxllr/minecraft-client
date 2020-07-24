@@ -16,7 +16,7 @@ import net.minecraft.util.MathHelper;
 public class ProphuntESP extends Module {
 
 	public ProphuntESP() {
-		super("ProphuntESP", Keyboard.KEY_NONE, Category.RENDER, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("ProphuntESP", Keyboard.KEY_NONE, Category.RENDER, Rainbow.rainbow(1, 1).hashCode());
 	}
 
 	@Override

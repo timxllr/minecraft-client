@@ -19,7 +19,7 @@ import net.minecraft.util.EnumFacing;
 public class FastUse extends Module {
 
 	public FastUse() {
-		super("FastUse", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("FastUse", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).hashCode());
 	}
 
 	boolean NCP = true;

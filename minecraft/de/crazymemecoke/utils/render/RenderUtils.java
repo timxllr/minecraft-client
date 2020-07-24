@@ -37,27 +37,6 @@ public class RenderUtils {
         return (new Color(r, g, b, alpha)).getRGB();
     }
 
-    public static void drawOldRect(double left, double top, double right, double bottom, int color) {
-        float alpha = (float) (color >> 24 & 255) / 255.0F;
-        float red = (float) (color >> 16 & 255) / 255.0F;
-        float green = (float) (color >> 8 & 255) / 255.0F;
-        float blue = (float) (color & 255) / 255.0F;
-        Tessellator var9 = Tessellator.getInstance();
-        WorldRenderer worldRenderer = var9.getWorldRenderer();
-        GlStateManager.enableBlend();
-        GlStateManager.disableTexture2D();
-        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        GlStateManager.color(red, green, blue, alpha);
-        worldRenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);//
-        worldRenderer.pos(left, bottom, 0.0D);
-        worldRenderer.pos(right, bottom, 0.0D);
-        worldRenderer.pos(right, top, 0.0D);
-        worldRenderer.pos(left, top, 0.0D);
-        var9.draw();
-        GlStateManager.enableTexture2D();
-        GlStateManager.disableBlend();
-    }
-
     public static void drawRect(double x, double y, double x2, double y2, int color) {
         float red = (color >> 24 & 0xFF) / 255.0F;
         float green = (color >> 16 & 0xFF) / 255.0F;

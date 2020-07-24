@@ -80,7 +80,7 @@ public class TabGUI {
         this.guiWidth = width;
         RenderHelper.drawRect(posY - 1, posX - 1, posY + this.guiWidth, posX + this.guiHeight - 13, -1879048192);
         RenderHelper.drawRect(posY - 2, posX - 1, posY + this.guiWidth + 1, posX, -16777216);
-        RenderHelper.drawRect(posY - 2, posX - 1, posY - 1, posX + this.guiHeight - 12, Rainbow.rainbowNormal(1, 1).hashCode());
+        RenderHelper.drawRect(posY - 2, posX - 1, posY - 1, posX + this.guiHeight - 12, Rainbow.rainbow(1, 1).hashCode());
         RenderHelper.drawRect(posY - 2, posX + this.guiHeight - 13, posY + this.guiWidth + 1,
                 posX + this.guiHeight - 12, -16777216);
         RenderHelper.drawRect(posY + this.guiWidth, posX - 1, posY + this.guiWidth + 1, posX + this.guiHeight - 12,

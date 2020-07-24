@@ -3,6 +3,7 @@ package net.minecraft.client.gui;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.ui.menus.ClientMenu;
 import de.crazymemecoke.utils.render.Rainbow;
+import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -20,20 +21,11 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         int i = 24;
         int j = height / 4 + 48;
 
-        addSingleplayerMultiplayerButtons(j, 24);
-        buttonList.add(
-                new GuiButton(0, width / 2 - 100, j + 72 + 12, 98, 20, I18n.format("menu.options")));
-        buttonList
-                .add(new GuiButton(5, width / 2 + 2, j + 72 + 12, 98, 20, I18n.format("menu.quit")));
-    }
-
-    private void addSingleplayerMultiplayerButtons(int height, int p_73969_2_) {
-        buttonList
-                .add(new GuiButton(1, width / 2 - 100, height, I18n.format("menu.singleplayer")));
-        buttonList.add(new GuiButton(2, width / 2 - 100, height + p_73969_2_ * 1,
-                I18n.format("menu.multiplayer")));
-        buttonList.add(new GuiButton(6, width / 2 - 100, height + p_73969_2_ * 2,
-                I18n.format(Client.getInstance().getClientName())));
+        buttonList.add(new GuiButton(1, width - 120, 0, 120, 20, I18n.format("menu.singleplayer")));
+        buttonList.add(new GuiButton(2, width - 120, 20, 120, 20, I18n.format("menu.multiplayer")));
+        buttonList.add(new GuiButton(6, width - 120, 40, 120, 20, Client.getInstance().getClientName()));
+        buttonList.add(new GuiButton(0, width - 120, 60, 120, 20, I18n.format("menu.options")));
+        buttonList.add(new GuiButton(5, width - 120, 80, 120, 20, I18n.format("menu.quit")));
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
@@ -68,9 +60,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         ScaledResolution sr = new ScaledResolution(mc);
         Gui.drawRect(0, 0, sr.getScaledWidth(), sr.getScaledHeight(), new Color(28, 26, 28).getRGB());
-        //mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
-        //Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
-        //        width, height, sr.getScaledWidth(), sr.getScaledHeight());
 
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) (width / 2 + 90), 70.0F, 0.0F);
@@ -80,14 +69,13 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.scale(f, f, f);
         GlStateManager.popMatrix();
 
-        String s = Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion();
-        Client.getInstance().getFontManager().comfortaa20.drawString(s, 2, height - 12, -1);
+        String str1 = "Username: " + mc.session.getUsername();
+        RenderUtils.drawRect(15, height - 15, Client.getInstance().getFontManager().comfortaa22.getStringWidth(str1) + 25, height - 35, new Color(55, 55, 55, 150).getRGB());
+        Client.getInstance().getFontManager().comfortaa22.drawString(str1, 20, height - 29, new Color(255, 255, 255).getRGB());
 
-        String s1 = "made by " + Client.getInstance().getClientAuthor();
-        Client.getInstance().getFontManager().comfortaa20.drawString(s1, width - Client.getInstance().getFontManager().comfortaa20.getStringWidth(s1) - 2, height - 12, -1);
-
-        String header = Client.getInstance().getClientName();
-        Client.getInstance().getFontManager().comfortaa40.drawString(header, width / 2 - Client.getInstance().getFontManager().comfortaa40.getStringWidth(header) / 2, height / 4, Rainbow.rainbowNormal(1, 1).hashCode());
+        String header = Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion() + "\n" +
+                "by " + Client.getInstance().getClientAuthor();
+        Client.getInstance().getFontManager().mainMenuFont.drawString(header, 2, 4, Rainbow.rainbow(1, 1).hashCode());
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);

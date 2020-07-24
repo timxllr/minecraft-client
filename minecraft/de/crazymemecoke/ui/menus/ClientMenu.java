@@ -23,18 +23,11 @@ public class ClientMenu extends GuiScreen implements GuiYesNoCallback {
         int i = 24;
         int j = this.height / 4 + 48;
 
-        this.addSingleplayerMultiplayerButtons(j, 24);
-    }
-
-    private void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_) {
-        this.buttonList.add(
-                new GuiButton(0, this.width / 2 - 100, this.height / 4 + 96 + 200, I18n.format("Zurück")));
-        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("Alt Login")));
-        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, p_73969_1_ + 25, I18n.format("Alt Manager")));
-        this.buttonList.add(new GuiButton(2, this.width / 2 - 100, p_73969_1_ + 50, I18n.format("Session Stealer")));
-        this.buttonList.add(new GuiButton(4, this.width / 2 - 100, p_73969_1_ + 75, I18n.format("MCLeaks")));
-        this.buttonList.add(new GuiButton(5, this.width / 2 - 100, p_73969_1_ + 100, I18n.format("TheAltening")));
-        this.buttonList.add(new GuiButton(6, this.width / 2 - 100, p_73969_1_ + 125, I18n.format("Changelog")));
+        buttonList.add(new GuiButton(0, width - 120, 0, 120, 20, "Zurück"));
+        buttonList.add(new GuiButton(1, width - 120, 40, 120, 20, "Alt Login"));
+        buttonList.add(new GuiButton(2, width - 120, 60, 120, 20, "Session Stealer"));
+        buttonList.add(new GuiButton(3, width - 120, 80, 120, 20, "Alt Manager"));
+        buttonList.add(new GuiButton(4, width - 120, 100, 120, 20, "Changelog"));
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
@@ -51,12 +44,6 @@ public class ClientMenu extends GuiScreen implements GuiYesNoCallback {
             this.mc.displayGuiScreen(new GuiAltManager(this));
         }
         if (button.id == 4) {
-            mc.displayGuiScreen(new SoonScreen(this));
-        }
-        if (button.id == 5) {
-            mc.displayGuiScreen(new SoonScreen(this));
-        }
-        if (button.id == 6) {
             mc.displayGuiScreen(new Changelog());
         }
     }

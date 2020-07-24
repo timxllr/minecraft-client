@@ -11,49 +11,34 @@ public class FontManager {
     public UnicodeFontRenderer mainFont;
     public UnicodeFontRenderer arrayFont;
     public UnicodeFontRenderer testarrayFont;
-
     public UnicodeFontRenderer comfortaa18;
     public UnicodeFontRenderer comfortaa20;
     public UnicodeFontRenderer comfortaa22;
     public UnicodeFontRenderer comfortaa40;
     public UnicodeFontRenderer comfortaa45;
     public UnicodeFontRenderer comfortaa50;
-
-
     public UnicodeFontRenderer notificationFont;
-
     public UnicodeFontRenderer americanBig;
     public UnicodeFontRenderer americanSmall;
-
     public UnicodeFontRenderer cInfoFont;
-
-    /*
-     * TabGui Fonts
-     */
     public UnicodeFontRenderer playerWorldFont;
     public UnicodeFontRenderer eyeFont;
     public UnicodeFontRenderer movementFont;
-//	public static UnicodeFontRenderer settingsFont = new UnicodeFontRenderer(getFont("Breezi", 22), true, 8);
-
-
     public UnicodeFontRenderer centuryFont;
     public UnicodeFontRenderer licenseFont;
     public UnicodeFontRenderer smallLicenseFont;
     public UnicodeFontRenderer statusFont;
-
     public UnicodeFontRenderer blockoverlayFont;
-
-
     public UnicodeFontRenderer guiFont;
     public UnicodeFontRenderer frameFont;
     public UnicodeFontRenderer altFont;
     public UnicodeFontRenderer bigKeyFont;
-
-
     public UnicodeFontRenderer sliderFont;
+    public UnicodeFontRenderer mainMenuFont;
 
     public void initFonts() {
         this.mainFont = new UnicodeFontRenderer(getFont("Rainbow Veins", 50, FontExtension.TTF), true, 8);
+        this.mainMenuFont = new UnicodeFontRenderer(getFont("Rainbow Veins", 80, FontExtension.TTF), true, 8);
         this.arrayFont = new UnicodeFontRenderer(getFont("Verdana", 19, FontExtension.TTF), true, 8);
         this.testarrayFont = new UnicodeFontRenderer(getFont("Cabin", 19, FontExtension.TTF), true, 8);
 

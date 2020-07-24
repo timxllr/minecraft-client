@@ -15,7 +15,7 @@ import net.minecraft.potion.PotionEffect;
 public class Zoot extends Module {
 
 	public Zoot() {
-		super("Zoot", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbowNormal(1, 1).hashCode());
+		super("Zoot", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).hashCode());
 	}
 
 	public boolean potion = true;
