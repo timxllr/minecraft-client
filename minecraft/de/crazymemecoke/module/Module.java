@@ -1,0 +1,119 @@
+package de.crazymemecoke.module;
+
+import com.darkmagician6.eventapi.EventManager;
+import de.crazymemecoke.Client;
+import de.crazymemecoke.utils.Notify;
+import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
+
+public class Module {
+
+    private final String name;
+    private int bind;
+    private final Category category;
+    private boolean isEnabled;
+    public static Minecraft mc = Minecraft.getMinecraft();
+    public boolean enabled;
+    private String displayName;
+
+    public Module(String name, int bind, Category category, int color) {
+        this.name = name;
+        this.bind = bind;
+        this.category = category;
+        setup();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getBind() {
+        return bind;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public boolean getState() {
+        return isEnabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setState(boolean state) {
+        this.onToggle();
+        if (state) {
+            this.onEnable();
+            this.isEnabled = true;
+            if (!(Client.getInstance().getModuleManager().getModByName("Invis").getState())) {
+                if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
+                    Notify.chatMessage("§7[§2+§7] §a" + getName());
+                    if (Minecraft.getMinecraft().thePlayer != null)
+                        mc.thePlayer.playSound("random.pop", 100.0F, 1.0F);
+                }
+            }
+        } else {
+            this.onDisable();
+            this.isEnabled = false;
+            if (!(Client.getInstance().getModuleManager().getModByName("Invis").getState())) {
+                if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
+                    Notify.chatMessage("§7[§c-§7] §a" + getName());
+                    if (Minecraft.getMinecraft().thePlayer != null)
+                        mc.thePlayer.playSound("random.pop", 100.0F, 1.0F);
+                }
+            }
+        }
+    }
+
+    public void toggleModule() {
+        this.setState(!this.getState());
+    }
+
+    public void onEnable1() {
+        EventManager.register(this);
+    }
+
+    public void onToggle() {
+    }
+
+    public void onEnable() {
+    }
+
+    public void onDisable() {
+    }
+
+    public void onUpdate() {
+    }
+
+    public void onRender() {
+    }
+
+    public void setup() {
+    }
+
+    public void onPreMotionUpdate() {
+    }
+
+    public void setBind(int bind) {
+        if (!(bind == 0)) {
+            System.out.println("Keybind of " + getName() + " was set to: " + Keyboard.getKeyName(bind));
+        }
+        this.bind = bind;
+    }
+
+    public void onPostMotionUpdate() {
+    }
+
+    public final boolean isCategory(Category s) {
+        return s == category;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+
+}
