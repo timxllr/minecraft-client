@@ -101,6 +101,7 @@ public class ModuleManager {
         modules.add(new Eagle());
         modules.add(new Step());
         modules.add(new Zoot());
+        modules.add(new Aura());
         modules.add(new ESP());
         modules.add(new HUD());
         modules.add(new Fly());
