@@ -3,20 +3,15 @@ package de.crazymemecoke.ui;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;
-import de.crazymemecoke.ui.menus.ClientManager;
+import de.crazymemecoke.ui.guiscreens.ClientManager;
 import de.crazymemecoke.ui.tabgui.TabGUI;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.Rainbow;
-import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
-
-import java.awt.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class GuiIngameHook extends GuiIngame {
 

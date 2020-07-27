@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
 
-import de.Hero.settings.Setting;
+import de.crazymemecoke.ui.clickgui.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;

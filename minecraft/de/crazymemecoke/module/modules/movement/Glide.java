@@ -1,6 +1,6 @@
 package de.crazymemecoke.module.modules.movement;
 
-import de.Hero.settings.Setting;
+import de.crazymemecoke.ui.clickgui.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;

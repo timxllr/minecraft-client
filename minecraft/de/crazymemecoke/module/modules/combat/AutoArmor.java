@@ -1,13 +1,12 @@
 package de.crazymemecoke.module.modules.combat;
 
-import de.Hero.settings.Setting;
+import de.crazymemecoke.ui.clickgui.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.utils.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;
-import de.crazymemecoke.utils.render.Rainbow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;

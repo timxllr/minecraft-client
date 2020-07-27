@@ -2,10 +2,9 @@ package de.crazymemecoke.module;
 
 import com.darkmagician6.eventapi.EventManager;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.notification.Notification;
-import de.crazymemecoke.notification.NotificationManager;
-import de.crazymemecoke.notification.NotificationType;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.ui.notificationmanager.Notification;
+import de.crazymemecoke.ui.notificationmanager.NotificationManager;
+import de.crazymemecoke.ui.notificationmanager.NotificationType;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 

@@ -1,7 +1,7 @@
 package de.crazymemecoke.module.modules.movement;
 
 import com.darkmagician6.eventapi.EventTarget;
-import de.Hero.settings.Setting;
+import de.crazymemecoke.ui.clickgui.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;

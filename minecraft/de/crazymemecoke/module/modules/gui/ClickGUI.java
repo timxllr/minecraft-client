@@ -1,6 +1,6 @@
 package de.crazymemecoke.module.modules.gui;
 
-import de.Hero.settings.Setting;
+import de.crazymemecoke.ui.clickgui.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;
@@ -39,7 +39,7 @@ public class ClickGUI extends Module {
 
 import de.crazymemecoke.ui.clickgui.CSGOGui;
 import org.lwjgl.input.Keyboard;
-import de.Hero.settings.Setting;
+import de.crazymemecoke.ui.Hero.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;

@@ -1,13 +1,11 @@
 package de.crazymemecoke.module.modules.gui;
 
-import de.Hero.settings.Setting;
+import de.crazymemecoke.ui.clickgui.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;
 import de.crazymemecoke.utils.render.Rainbow;
 import org.lwjgl.input.Keyboard;
-
-import java.util.ArrayList;
 
 public class HUD extends Module {
 

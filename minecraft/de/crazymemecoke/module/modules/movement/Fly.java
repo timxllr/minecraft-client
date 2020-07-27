@@ -1,7 +1,7 @@
 package de.crazymemecoke.module.modules.movement;
 
-import de.Hero.settings.Setting;
-import de.Hero.settings.SettingsManager;
+import de.crazymemecoke.ui.clickgui.settings.Setting;
+import de.crazymemecoke.ui.clickgui.settings.SettingsManager;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;
@@ -9,7 +9,6 @@ import de.crazymemecoke.utils.entity.PlayerUtil;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.network.play.client.C03PacketPlayer;
-import net.minecraft.util.Timer;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;

@@ -1,19 +1,13 @@
 package de.crazymemecoke.module.modules.combat;
 
-import de.Hero.settings.Setting;
+import de.crazymemecoke.ui.clickgui.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Category;
 import de.crazymemecoke.module.Module;
-import de.crazymemecoke.utils.Wrapper;
-import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
 import org.lwjgl.input.Keyboard;
 
 public class Aura extends Module {
