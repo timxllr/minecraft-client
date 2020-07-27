@@ -50,7 +50,6 @@ public class SettingsManager {
         for (Setting s : getSettings()) {
             if (s.getParentMod() != null) {
                 if (s.getParentMod().equals(mod)) {
-                    System.out.println("added " + s.getFullName() + " to " + mod.getName());
                     out.add(s);
                 }
             } else
