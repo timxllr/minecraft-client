@@ -32,7 +32,7 @@ public class Fly extends Module {
         mode.add("AAC 1.9.10 New");
         mode.add("AAC 3.0.5");
 
-        Client.getInstance().getSetmgr().rSetting(new Setting("Fly Mode", this, "Jetpack", mode));
+        Client.getInstance().getSetmgr().rSetting(new Setting("Mode", this, "Jetpack", mode));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Fly extends Module {
 
     @Override
     public void onUpdate() {
-        String mode = setMgr.getSettingByName("Fly Mode", this).getValString();
+        String mode = setMgr.getSettingByName("Mode", this).getValString();
         if (getState()) {
             if (mode.equalsIgnoreCase("Vanilla")) {
                 mc.thePlayer.capabilities.isFlying = true;

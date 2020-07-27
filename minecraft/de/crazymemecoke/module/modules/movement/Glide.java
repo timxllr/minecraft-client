@@ -21,7 +21,7 @@ public class Glide extends Module {
         mode.add("New");
         mode.add("Old");
 
-        Client.getInstance().getSetmgr().rSetting(new Setting("Glide Mode", this, "New", mode));
+        Client.getInstance().getSetmgr().rSetting(new Setting("Mode", this, "New", mode));
     }
 
     public double motion;
@@ -31,7 +31,7 @@ public class Glide extends Module {
 
     @Override
     public void onEnable() {
-        if (Client.getInstance().getSetmgr().getSettingByName("Glide Mode", this).getValString().equalsIgnoreCase("New")) {
+        if (Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString().equalsIgnoreCase("New")) {
             time = 0;
             dtime = 0;
             mc.thePlayer.setSprinting(false);
@@ -59,7 +59,7 @@ public class Glide extends Module {
 
     @Override
     public void onDisable() {
-        if (Client.getInstance().getSetmgr().getSettingByName("Glide Mode", this).getValString().equalsIgnoreCase("New")) {
+        if (Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString().equalsIgnoreCase("New")) {
             time = 0;
             dtime = 0;
         }
@@ -68,7 +68,7 @@ public class Glide extends Module {
     @Override
     public void onUpdate() {
         if (getState()) {
-            if (Client.getInstance().getSetmgr().getSettingByName("Glide Mode", this).getValString().equalsIgnoreCase("New")) {
+            if (Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString().equalsIgnoreCase("New")) {
                 motion = 0f;
                 this.motion = 0.0;
                 this.speed = true;
@@ -82,7 +82,7 @@ public class Glide extends Module {
                         mc.thePlayer.jumpMovementFactor *= 1.21337F;
                     }
                 }
-            } else if (Client.getInstance().getSetmgr().getSettingByName("Glide Mode", this).getValString().equalsIgnoreCase("Old")) {
+            } else if (Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString().equalsIgnoreCase("Old")) {
                 EntityUtils.damagePlayer(1);
                 if ((mc.thePlayer.motionY <= -Values.getValues().glidespeed) && (!mc.thePlayer.isInWater())
                         && (!mc.thePlayer.onGround) && (!mc.thePlayer.isOnLadder())) {

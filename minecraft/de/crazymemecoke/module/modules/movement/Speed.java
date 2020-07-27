@@ -46,7 +46,7 @@ public class Speed extends Module {
         mode.add("Jump");
         mode.add("Timer");
 
-        Client.getInstance().getSetmgr().rSetting(new Setting("Speed Mode", this, "Jump", mode));
+        Client.getInstance().getSetmgr().rSetting(new Setting("Mode", this, "Jump", mode));
         Client.getInstance().getSetmgr().rSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
         Client.getInstance().getSetmgr().rSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
         Client.getInstance().getSetmgr().rSetting(new Setting("Wall Speed", this, 4.25, 0, 50, true));
@@ -75,7 +75,7 @@ public class Speed extends Module {
 
     @Override
     public void onUpdate() {
-        speedMode = Client.getInstance().getSetmgr().getSettingByName("Speed Mode", this).getValString();
+        speedMode = Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString();
         if (getState()) {
             if (speedMode.equalsIgnoreCase("AAC 1.9.10")) {
                 doAACSpeed();
