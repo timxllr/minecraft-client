@@ -17,4 +17,8 @@ public class MathUtils {
     public static int customRandInt(int min, int max) {
         return new Random().nextInt(max - min + 1) + min;
     }
+
+    public static double randomNumber(final double max, final double min) {
+        return Math.random() * (max - min) + min;
+    }
 }

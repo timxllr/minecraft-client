@@ -14,7 +14,7 @@ public class C03PacketPlayer implements Packet<INetHandlerPlayServer>
     public float pitch;
     protected boolean onGround;
     protected boolean moving;
-    protected boolean rotating;
+    public boolean rotating;
 
     public C03PacketPlayer()
     {

@@ -1,9 +1,11 @@
 package net.minecraft.client.entity;
 
+import com.darkmagician6.eventapi.EventManager;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.module.Module;
 import de.crazymemecoke.module.modules.movement.NoSlowDown;
 import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.events.MoveEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -196,7 +198,8 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         for (Module m : Client.getInstance().getModuleManager().getModules()) {
             m.onPreMotionUpdate();
         }
-
+        MoveEvent e = new MoveEvent(this.mc.thePlayer.posX, this.getEntityBoundingBox().minY, this.mc.thePlayer.posZ, this.mc.thePlayer.rotationYaw, this.mc.thePlayer.rotationPitch, this.mc.thePlayer.onGround);
+        EventManager.call(e);
         boolean flag = this.isSprinting();
 
         if (flag != this.serverSprintState) {
@@ -222,26 +225,40 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         }
 
         if (this.isCurrentViewEntity()) {
-            double d0 = this.posX - this.lastReportedPosX;
-            double d1 = this.getEntityBoundingBox().minY - this.lastReportedPosY;
-            double d2 = this.posZ - this.lastReportedPosZ;
-            double d3 = (double) (this.rotationYaw - this.lastReportedYaw);
-            double d4 = (double) (this.rotationPitch - this.lastReportedPitch);
-            boolean flag2 = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D || this.positionUpdateTicks >= 20;
-            boolean flag3 = d3 != 0.0D || d4 != 0.0D;
+
+            double x = this.posX - this.lastReportedPosX;
+            double y = this.getEntityBoundingBox().minY - this.lastReportedPosY;
+            double z = this.posZ - this.lastReportedPosZ;
+            double yaw = (double) (this.rotationYaw - this.lastReportedYaw);
+            double pitch = (double) (this.rotationPitch - this.lastReportedPitch);
+
+
+            boolean flag2 = x * x + y * y + z * z > 9.0E-4D || this.positionUpdateTicks >= 20;
+            boolean flag3 = yaw != 0.0D || pitch != 0.0D;
+
+            if (e.isCancelled())
+                return;
+
+            x = e.getX();
+            y = e.getY();
+            z = e.getZ();
+            yaw = e.getYaw();
+            pitch = e.getPitch();
+            onGround = e.isOnGround();
+
 
             if (this.ridingEntity == null) {
                 if (flag2 && flag3) {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.rotationYaw, this.rotationPitch, this.onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(x, y, z, (float) yaw, (float) pitch, onGround));
                 } else if (flag2) {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(x, y, z, onGround));
                 } else if (flag3) {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(this.rotationYaw, this.rotationPitch, this.onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook((float) yaw, (float) pitch, onGround));
                 } else {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer(this.onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer(onGround));
                 }
             } else {
-                this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999.0D, this.motionZ, this.rotationYaw, this.rotationPitch, this.onGround));
+                this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999.0D, this.motionZ, (float) yaw, (float) pitch, onGround));
                 flag2 = false;
             }
 

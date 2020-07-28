@@ -70,7 +70,7 @@ public class Notification {
             color = new Color(i, 0, 0, 220);
         }
 
-        FontRenderer fontRenderer = Client.getInstance().getFontManager().guiFont;
+        FontRenderer fontRenderer = Client.getInstance().getFontManager().cabin18;
 
         drawRect(GuiScreen.width - offset, GuiScreen.height - 5 - height, GuiScreen.width, GuiScreen.height - 5, color.getRGB());
         drawRect(GuiScreen.width - offset, GuiScreen.height - 5 - height, GuiScreen.width - offset + 4, GuiScreen.height - 5, color1.getRGB());

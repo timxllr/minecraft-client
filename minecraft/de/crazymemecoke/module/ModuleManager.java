@@ -16,7 +16,6 @@ import de.crazymemecoke.module.modules.world.Fucker;
 import de.crazymemecoke.module.modules.world.Scaffold;
 import de.crazymemecoke.module.modules.world.Tower;
 import de.crazymemecoke.utils.FileUtils;
-import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
 import java.io.File;
@@ -71,7 +70,6 @@ public class ModuleManager {
         modules.add(new Criticals());
         modules.add(new AutoClimb());
         modules.add(new FastFall());
-        modules.add(new KillAura());
         modules.add(new Velocity());
         modules.add(new IceSpeed());
         modules.add(new AutoSoup());
@@ -146,7 +144,7 @@ public class ModuleManager {
                 Module module = getModByName(args[0]);
                 boolean state = Boolean.valueOf(args[1]);
 
-                if (state )
+                if (state)
                     module.setState(true);
             }
         });

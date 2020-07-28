@@ -1,7 +1,9 @@
 package de.crazymemecoke.utils;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.util.EnumFacing;
@@ -80,4 +82,23 @@ public class RotationUtil {
         temp.posZ += facing.getDirectionVec().getZ() * 0.25D;
         return getAngles(temp);
     }
+
+    public static float[] getRotations(final double posX, final double posY, final double posZ) {
+        final EntityPlayerSP player = mc.thePlayer;
+        final double x = posX - player.posX;
+        final double y = posY - (player.posY + player.getEyeHeight());
+        final double z = posZ - player.posZ;
+        final double dist = MathHelper.sqrt_double(x * x + z * z);
+        final float yaw = (float) (Math.atan2(z, x) * 180.0 / 3.141592653589793) - 90.0f;
+        final float pitch = (float) (-(Math.atan2(y, dist) * 180.0 / 3.141592653589793));
+        return new float[]{yaw, pitch};
+    }
+
+    public static float[] getRotationsEntity(final Entity entity) {
+        if (mc.thePlayer.moveForward != 0.0f || mc.thePlayer.moveStrafing != 0.0f) {
+            return getRotations(entity.posX + MathUtils.randomNumber(0.03, -0.03), entity.posY + entity.getEyeHeight() - 0.4 + MathUtils.randomNumber(0.07, -0.07), entity.posZ + MathUtils.randomNumber(0.03, -0.03));
+        }
+        return getRotations(entity.posX, entity.posY + entity.getEyeHeight() - 0.4, entity.posZ);
+    }
+
 }
