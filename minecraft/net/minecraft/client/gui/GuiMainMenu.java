@@ -75,7 +75,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         String header = Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion() + "\n" +
                 "by " + Client.getInstance().getClientAuthor();
-        Client.getInstance().getFontManager().mainMenuFont.drawString(header, 2, 4, Rainbow.rainbow(1, 1).hashCode());
+        Client.getInstance().getFontManager().rainbowVeins80.drawString(header, 2, 4, Rainbow.rainbow(1, 1).hashCode());
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);

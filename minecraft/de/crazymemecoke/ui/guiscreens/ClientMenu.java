@@ -45,6 +45,10 @@ public class ClientMenu extends GuiScreen implements GuiYesNoCallback {
         if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && Keyboard.isKeyDown(Keyboard.KEY_X)) {
             mc.displayGuiScreen(new FirstUsage());
         }
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
+            mc.displayGuiScreen(new GuiMainMenu());
+        }
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
