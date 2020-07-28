@@ -17,6 +17,7 @@ public class HUD extends Module {
         Client.getInstance().getSetmgr().rSetting(new Setting("TabGUI", this, true));
         Client.getInstance().getSetmgr().rSetting(new Setting("Watermark", this, true));
         Client.getInstance().getSetmgr().rSetting(new Setting("Notifications", this, true));
+        Client.getInstance().getSetmgr().rSetting(new Setting("Target HUD", this, true));
         Client.getInstance().getSetmgr().rSetting(new Setting("Developer Mode", this, false));
     }
 
