@@ -1,7 +1,7 @@
 package net.minecraft.client.gui;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.ui.guiscreens.ClientMenu;
+import de.crazymemecoke.features.ui.guiscreens.ClientMenu;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;

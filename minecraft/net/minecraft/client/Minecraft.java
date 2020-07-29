@@ -38,9 +38,9 @@ import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.module.Module;
-import de.crazymemecoke.ui.GuiIngameHook;
-import de.crazymemecoke.ui.tabgui.TabGUI;
+import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.ui.GuiIngameHook;
+import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;

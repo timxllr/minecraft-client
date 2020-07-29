@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-import de.crazymemecoke.ui.altmanager.GuiAltManager;
+import de.crazymemecoke.manager.altmanager.GuiAltManager;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.ServerList;

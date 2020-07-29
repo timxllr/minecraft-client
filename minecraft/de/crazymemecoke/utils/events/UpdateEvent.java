@@ -1,6 +1,5 @@
 package de.crazymemecoke.utils.events;
 
-import de.crazymemecoke.module.Module;
 import net.minecraft.client.renderer.WorldRenderer.State;
 
 public class UpdateEvent{

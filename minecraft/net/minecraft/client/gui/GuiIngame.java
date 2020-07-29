@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-import de.crazymemecoke.ui.clickgui.settings.Setting;
+import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.ui.notificationmanager.NotificationManager;
+import de.crazymemecoke.manager.notificationmanager.NotificationManager;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.material.Material;

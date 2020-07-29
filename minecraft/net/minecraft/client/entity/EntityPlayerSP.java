@@ -2,10 +2,12 @@ package net.minecraft.client.entity;
 
 import com.darkmagician6.eventapi.EventManager;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.module.Module;
-import de.crazymemecoke.module.modules.movement.NoSlowDown;
+import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.modules.movement.NoSlowDown;
 import de.crazymemecoke.utils.Notify;
 import de.crazymemecoke.utils.events.MoveEvent;
+import de.crazymemecoke.utils.events.PostMotion;
+import de.crazymemecoke.utils.events.PreMotion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -197,6 +199,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     public void onUpdateWalkingPlayer() {
         for (Module m : Client.getInstance().getModuleManager().getModules()) {
             m.onPreMotionUpdate();
+            EventManager.register(PreMotion.class);
         }
         MoveEvent e = new MoveEvent(this.mc.thePlayer.posX, this.getEntityBoundingBox().minY, this.mc.thePlayer.posZ, this.mc.thePlayer.rotationYaw, this.mc.thePlayer.rotationPitch, this.mc.thePlayer.onGround);
         EventManager.call(e);
@@ -278,6 +281,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
 
             for (Module m : Client.getInstance().getModuleManager().getModules()) {
                 m.onPostMotionUpdate();
+                EventManager.register(PostMotion.class);
             }
         }
     }
