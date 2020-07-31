@@ -5,7 +5,10 @@ import de.crazymemecoke.manager.commandmanager.Command;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
@@ -28,6 +31,11 @@ public class ClientManager extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+
+        ScaledResolution sr = new ScaledResolution(mc);
+        mc.getTextureManager().bindTexture(new ResourceLocation("textures/client/background.jpg"));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
+                width, height, sr.getScaledWidth(), sr.getScaledHeight());
         RenderUtils.drawBorderedRect(20, 20, width - 20, height - 20, 2, Rainbow.rainbow(1, 1).hashCode(), new Color(0, 0, 0, 150).hashCode());
         Client.getInstance().getFontManager().comfortaa22.drawString(Client.getInstance().getClientName(), width / 2 - 40, 25, Rainbow.rainbow(1, 1).hashCode());
 

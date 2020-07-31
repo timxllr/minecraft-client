@@ -6,37 +6,49 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class ClientMenu extends GuiScreen implements GuiYesNoCallback {
 
     public void initGui() {
-        buttonList.add(new GuiButton(1, width / 2 - 50, height / 2 - 30, 120, 20, "Alt Login"));
-        buttonList.add(new GuiButton(3, width / 2 - 50, height / 2 - 60, 120, 20, "Alt Manager"));
-        buttonList.add(new GuiButton(0, width / 2 - 50, height / 2, 120, 20, "Zurück"));
-        buttonList.add(new GuiButton(2, width / 2 - 50, height / 2 + 30, 120, 20, "Session Stealer"));
-        buttonList.add(new GuiButton(4, width / 2 - 50, height / 2 + 60, 120, 20, "Changelog"));
+        buttonList.add(new GuiButton(1, width / 2 - 50, height / 2 - 60, 120, 20, "AltLogin"));
+        buttonList.add(new GuiButton(2, width / 2 - 50, height / 2 - 30, 120, 20, "AltManager"));
+        buttonList.add(new GuiButton(3, width / 2 - 50, height / 2, 120, 20, "SessionStealer"));
+        buttonList.add(new GuiButton(4, width / 2 - 50, height / 2 + 30, 120, 20, "Changelog"));
+        buttonList.add(new GuiButton(5, width / 2 - 50, height / 2 + 60, 120, 20, "Alpha AltManager"));
+        buttonList.add(new GuiButton(0, width / 2 - 50, height - 40, 120, 20, "Zurück"));
     }
 
-    protected void actionPerformed(GuiButton button) throws IOException {
+    protected void actionPerformed(GuiButton button) {
         if (button.id == 0) {
             mc.displayGuiScreen(new GuiMainMenu());
         }
         if (button.id == 1) {
             mc.displayGuiScreen(new AltLogin(this));
         }
-        if (button.id == 2) {
+        if (button.id == 3) {
             mc.displayGuiScreen(new SessionStealer(this));
         }
-        if (button.id == 3) {
+        if (button.id == 2) {
             mc.displayGuiScreen(new GuiAltManager(this));
         }
         if (button.id == 4) {
-            mc.displayGuiScreen(new Changelog());
+            try {
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI("https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master"));
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        if (button.id == 5) {
+            mc.displayGuiScreen(new AltMgr(this));
         }
     }
 
@@ -58,8 +70,10 @@ public class ClientMenu extends GuiScreen implements GuiYesNoCallback {
         drawGradientRect(0, 0, width, height, 0, Integer.MIN_VALUE);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        ScaledResolution scaledRes = new ScaledResolution(mc);
-        Gui.drawRect(0, 0, scaledRes.getScaledWidth(), scaledRes.getScaledHeight(), new Color(28, 26, 28).getRGB());
+        ScaledResolution sr = new ScaledResolution(mc);
+        mc.getTextureManager().bindTexture(new ResourceLocation("textures/client/background.jpg"));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
+                width, height, sr.getScaledWidth(), sr.getScaledHeight());
 
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) (width / 2 + 90), 70.0F, 0.0F);

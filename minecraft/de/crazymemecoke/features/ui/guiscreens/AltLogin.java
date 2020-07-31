@@ -6,6 +6,7 @@ import de.crazymemecoke.utils.Util;
 import de.crazymemecoke.utils.Values;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
@@ -22,17 +23,17 @@ public class AltLogin extends GuiScreen {
     public static String lastPassword = "";
 
     public AltLogin(GuiScreen parentScreen) {
-        this.parent = parentScreen;
+        parent = parentScreen;
     }
 
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
-        this.buttonList.add(new GuiButton(1, width / 2 - 100, height / 4, "Einloggen"));
-        this.buttonList.add(new GuiButton(3, width / 2 - 100, height / 4 + 22, "Neu einloggen"));
-        this.buttonList.add(new GuiButton(4, width / 2 - 100, height / 4 + 44, "Aus Zwischenablage einloggen"));
-        this.buttonList.add(new GuiButton(2, width / 2 - 100, height / 4 + 96 + 200, "Zurück"));
-        this.usernameBox = new GuiTextField(3, this.mc.fontRendererObj, width / 2 - 100, 50, 200, 20);
-        this.passwordBox = new GuiPasswordField(this.mc.fontRendererObj, width / 2 - 100, 95, 200, 20);
+        buttonList.add(new GuiButton(1, width / 2 - 100, height / 4, "Einloggen"));
+        buttonList.add(new GuiButton(3, width / 2 - 100, height / 4 + 22, "Neu einloggen"));
+        buttonList.add(new GuiButton(4, width / 2 - 100, height / 4 + 44, "Aus Zwischenablage einloggen"));
+        buttonList.add(new GuiButton(2, width / 2 - 100, height / 4 + 96 + 200, "Zurück"));
+        usernameBox = new GuiTextField(3, mc.fontRendererObj, width / 2 - 100, 50, 200, 20);
+        passwordBox = new GuiPasswordField(mc.fontRendererObj, width / 2 - 100, 95, 200, 20);
     }
 
     public void onGuiClosed() {
@@ -40,13 +41,13 @@ public class AltLogin extends GuiScreen {
     }
 
     public void updateScreen() {
-        this.usernameBox.updateCursorCounter();
-        this.passwordBox.updateCursorCounter();
+        usernameBox.updateCursorCounter();
+        passwordBox.updateCursorCounter();
     }
 
     public void mouseClicked(int x, int y, int b) {
-        this.usernameBox.mouseClicked(x, y, b);
-        this.passwordBox.mouseClicked(x, y, b);
+        usernameBox.mouseClicked(x, y, b);
+        passwordBox.mouseClicked(x, y, b);
         try {
             super.mouseClicked(x, y, b);
         } catch (IOException e) {
@@ -56,13 +57,13 @@ public class AltLogin extends GuiScreen {
 
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.id == 1) {
-            if (this.usernameBox.getText().length() > 0) {
+            if (usernameBox.getText().length() > 0) {
                 new Thread() {
                     public void run() {
-                        AltLogin.lastUsername = AltLogin.this.usernameBox.getText();
-                        AltLogin.lastPassword = AltLogin.this.passwordBox.getText();
-                        Values.getValues().premium = Util.login(AltLogin.this.usernameBox.getText(),
-                                AltLogin.this.passwordBox.getText());
+                        lastUsername = usernameBox.getText();
+                        lastPassword = passwordBox.getText();
+                        Values.getValues().premium = Util.login(usernameBox.getText(),
+                                passwordBox.getText());
                     }
                 }.start();
             }
@@ -71,7 +72,7 @@ public class AltLogin extends GuiScreen {
         } else if (button.id == 3) {
             new Thread() {
                 public void run() {
-                    Values.getValues().premium = Util.login(AltLogin.lastUsername, AltLogin.lastPassword);
+                    Values.getValues().premium = Util.login(lastUsername, lastPassword);
                 }
             }.start();
         } else if (button.id == 4) {
@@ -87,8 +88,8 @@ public class AltLogin extends GuiScreen {
 
             new Thread() {
                 public void run() {
-                    AltLogin.lastUsername = args[0];
-                    AltLogin.lastPassword = args[1];
+                    lastUsername = args[0];
+                    lastPassword = args[1];
                     Values.getValues().premium = Util.login(args[0], args[1]);
                 }
             }.start();
@@ -97,54 +98,56 @@ public class AltLogin extends GuiScreen {
 
     public void keyTyped(char ch, int key) {
         if (key == 1) {
-            Minecraft.getMinecraft().displayGuiScreen(this.parent);
+            Minecraft.getMinecraft().displayGuiScreen(parent);
         }
-        this.usernameBox.textboxKeyTyped(ch, key);
-        this.passwordBox.textboxKeyTyped(ch, key);
+        usernameBox.textboxKeyTyped(ch, key);
+        passwordBox.textboxKeyTyped(ch, key);
         if (key == 15) {
-            if (this.usernameBox.isFocused()) {
-                this.usernameBox.setFocused(false);
-                this.passwordBox.setFocused(true);
+            if (usernameBox.isFocused()) {
+                usernameBox.setFocused(false);
+                passwordBox.setFocused(true);
             } else {
-                this.usernameBox.setFocused(true);
-                this.passwordBox.setFocused(false);
+                usernameBox.setFocused(true);
+                passwordBox.setFocused(false);
             }
         }
         if (key == 28) {
             try {
-                actionPerformed((GuiButton) this.buttonList.get(0));
+                actionPerformed((GuiButton) buttonList.get(0));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         if (key == 13) {
             try {
-                actionPerformed((GuiButton) this.buttonList.get(0));
+                actionPerformed((GuiButton) buttonList.get(0));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        ((GuiButton) this.buttonList.get(0)).enabled = (this.usernameBox.getText().length() > 3);
+        ((GuiButton) buttonList.get(0)).enabled = (usernameBox.getText().length() > 3);
     }
 
     public void drawScreen(int x, int y, float f) {
         drawDefaultBackground();
-        drawString(this.mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
+        drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
 
-        ScaledResolution s = new ScaledResolution(this.mc);
-        Gui.drawRect(0, 0, s.getScaledWidth(), s.getScaledHeight(), new Color(28, 26, 28).getRGB());
+        ScaledResolution sr = new ScaledResolution(mc);
+        mc.getTextureManager().bindTexture(new ResourceLocation("textures/client/background.jpg"));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
+                width, height, sr.getScaledWidth(), sr.getScaledHeight());
 
-        Client.getInstance().getFontManager().comfortaa20.drawString("E-Mail / Username:", s.getScaledWidth() / 2 + 35, s.getScaledHeight() / 4 - 62, 0xFFFFFF);
-        Client.getInstance().getFontManager().comfortaa20.drawString("Passwort:", s.getScaledWidth() / 2 + 35, s.getScaledHeight() / 4 - 18, 0xFFFFFF);
+        Client.getInstance().getFontManager().comfortaa20.drawString("E-Mail / Username:", sr.getScaledWidth() / 2 - 100, sr.getScaledHeight() / 4 - 90, 0xFFFFFF);
+        Client.getInstance().getFontManager().comfortaa20.drawString("Passwort:", sr.getScaledWidth() / 2 - 100, sr.getScaledHeight() / 4 - 45, 0xFFFFFF);
 
         if (Values.getValues().premium)
-            Client.getInstance().getFontManager().comfortaa20.drawString("Nutzername: " + this.mc.session.getUsername(), 3, 3, 16777215);
+            Client.getInstance().getFontManager().comfortaa20.drawString("Nutzername: " + mc.session.getUsername(), 3, 3, 16777215);
         else
-            Client.getInstance().getFontManager().comfortaa20.drawString("Nutzername (Cracked): " + this.mc.session.getUsername(), 3, 3, 16777215);
+            Client.getInstance().getFontManager().comfortaa20.drawString("Nutzername (Cracked): " + mc.session.getUsername(), 3, 3, 16777215);
 
         try {
-            this.usernameBox.drawTextBox();
-            this.passwordBox.drawTextBox();
+            usernameBox.drawTextBox();
+            passwordBox.drawTextBox();
         } catch (Exception err) {
             err.printStackTrace();
         }

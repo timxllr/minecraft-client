@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -40,8 +41,10 @@ public class FirstUsage extends GuiScreen implements GuiYesNoCallback {
         drawGradientRect(0, 0, width, height, 0, Integer.MIN_VALUE);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        ScaledResolution scaledRes = new ScaledResolution(mc);
-        Gui.drawRect(0, 0, scaledRes.getScaledWidth(), scaledRes.getScaledHeight(), new Color(28, 26, 28).getRGB());
+        ScaledResolution sr = new ScaledResolution(mc);
+        mc.getTextureManager().bindTexture(new ResourceLocation("textures/client/background.jpg"));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
+                width, height, sr.getScaledWidth(), sr.getScaledHeight());
 
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) (width / 2 + 90), 70.0F, 0.0F);
