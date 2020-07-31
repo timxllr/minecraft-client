@@ -93,7 +93,6 @@ public class ModuleManager {
         modules.add(new Jesus());
         modules.add(new Tower());
         modules.add(new Blink());
-        modules.add(new Glide());
         modules.add(new NoBob());
         modules.add(new Invis());
         modules.add(new Phase());

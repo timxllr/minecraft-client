@@ -2287,4 +2287,5 @@ public abstract class EntityLivingBase extends Entity
     {
         this.potionsNeedUpdate = true;
     }
+
 }
