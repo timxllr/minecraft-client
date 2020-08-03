@@ -13,6 +13,7 @@ import de.crazymemecoke.manager.modulemanager.ModuleManager;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
 import java.io.IOException;
@@ -113,7 +114,7 @@ public class ModuleButton {
         if (listening) {
             ModuleManager moduleManager = Client.getInstance().getModuleManager();
             Module module = moduleManager.getModByName(mod.getName());
-            int bind = moduleManager.convertKeyCodeToInt(mod.getName());
+            int bind = Keyboard.getKeyIndex(mod.getName());
             module.setBind(bind);
             listening = false;
             return true;

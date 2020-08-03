@@ -56,7 +56,7 @@ public class Trigger extends Module {
 					if (!(ent instanceof EntityPlayer)) {
 						return;
 					}
-					if (Friend.Friend.contains(ent.getName())) {
+					if (Friend.friends.contains(ent.getName())) {
 						return;
 					}
 					if (ent.isInvisible()) {
