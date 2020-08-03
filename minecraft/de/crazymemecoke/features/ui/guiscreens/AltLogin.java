@@ -133,7 +133,7 @@ public class AltLogin extends GuiScreen {
         drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
 
         ScaledResolution sr = new ScaledResolution(mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation("textures/client/background.jpg"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
                 width, height, sr.getScaledWidth(), sr.getScaledHeight());
 

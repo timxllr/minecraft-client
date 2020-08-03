@@ -33,7 +33,7 @@ public class ClientManager extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
         ScaledResolution sr = new ScaledResolution(mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation("textures/client/background.jpg"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
                 width, height, sr.getScaledWidth(), sr.getScaledHeight());
         RenderUtils.drawBorderedRect(20, 20, width - 20, height - 20, 2, Rainbow.rainbow(1, 1).hashCode(), new Color(0, 0, 0, 150).hashCode());

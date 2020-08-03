@@ -1,5 +1,6 @@
 package de.crazymemecoke.features.ui.guiscreens;
 
+import de.crazymemecoke.Client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.util.ResourceLocation;
@@ -34,7 +35,7 @@ public class AltMgr extends GuiScreen {
         drawString(this.mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
 
         ScaledResolution sr = new ScaledResolution(this.mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation("textures/client/background.jpg"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
                 width, height, sr.getScaledWidth(), sr.getScaledHeight());
 

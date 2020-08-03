@@ -42,7 +42,7 @@ public class ClientMenu extends GuiScreen implements GuiYesNoCallback {
         if (button.id == 4) {
             try {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                    Desktop.getDesktop().browse(new URI("https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master"));
+                    Desktop.getDesktop().browse(new URI(Client.getInstance().getClientChangelog()));
                 }
             } catch (Exception ignored) {
             }
@@ -71,7 +71,7 @@ public class ClientMenu extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         ScaledResolution sr = new ScaledResolution(mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation("textures/client/background.jpg"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
                 width, height, sr.getScaledWidth(), sr.getScaledHeight());
 

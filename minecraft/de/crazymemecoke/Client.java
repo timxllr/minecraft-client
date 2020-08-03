@@ -24,7 +24,8 @@ public class Client {
     private final String clientPrefix = ".";
 
     // Paths of Files
-    private final String clientBackground = "client/background.jpg";
+    private final String clientBackground = "textures/client/background.jpg";
+    private final String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
 
     private ModuleManager moduleManager;
     private CommandManager commandManager;
@@ -111,5 +112,13 @@ public class Client {
 
     public Notification getNotification() {
         return notification;
+    }
+
+    public String getClientChangelog() {
+        return clientChangelog;
+    }
+
+    public String getClientBackground() {
+        return clientBackground;
     }
 }
