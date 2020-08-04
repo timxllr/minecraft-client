@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.altmanager;
+package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.utils.Wrapper;
@@ -6,7 +6,7 @@ import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 
-public class GuiAltSlot {
+public class AltSlot {
     private String username;
     private String password;
     public int x;
@@ -20,7 +20,7 @@ public class GuiAltSlot {
     public int MIN_HEIGHT;
     public int MAX_HEIGHT;
 
-    public GuiAltSlot(String username, String password) {
+    public AltSlot(String username, String password) {
         this.username = username;
         this.password = password;
         this.x = 12;
@@ -44,7 +44,7 @@ public class GuiAltSlot {
                 }
 
                 String text = this.username + ":******";
-                Client.getInstance().getFontManager().comfortaa20.drawString(text, ((10 + this.res.getScaledWidth() - 150) / 2), (this.y + 12 - Client.getInstance().getFontManager().comfortaa20.getStringHeight(text) / 2), RenderUtils.reAlpha(-4340793, this.opacity));
+                Client.getInstance().getFontManager().comfortaa20.drawString(text, res.getScaledWidth() / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth(text) / 2, (this.y + 12 - Client.getInstance().getFontManager().comfortaa20.getStringHeight(text) / 2), RenderUtils.reAlpha(-4340793, this.opacity));
             }
         }
     }

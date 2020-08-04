@@ -22,10 +22,10 @@ public class Crash extends Command {
                     Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C14PacketTabComplete("/"));
                 }
             } else {
-                Notify.chatMessage(syntax);
+                Notify.chat(syntax);
             }
         } else {
-            Notify.chatMessage(syntax);
+            Notify.chat(syntax);
         }
     }
 

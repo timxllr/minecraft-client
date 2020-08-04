@@ -12,9 +12,9 @@ public class Fix extends Command {
     public void execute(String[] args) {
         if (args.length == 0) {
             Wrapper.mc.thePlayer.motionY = 0.1;
-            Notify.chatMessage("Deine PlayerPos wurde gefixed");
+            Notify.chat("Deine PlayerPos wurde gefixed");
         } else {
-            Notify.chatMessage(syntax);
+            Notify.chat(syntax);
         }
     }
 

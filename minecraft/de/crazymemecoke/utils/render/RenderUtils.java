@@ -1,17 +1,5 @@
 package de.crazymemecoke.utils.render;
 
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.GL_LINES;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glDepthMask;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glLineWidth;
-import static org.lwjgl.opengl.GL11.glVertex3d;
-
 import java.awt.Color;
 
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -26,6 +14,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class RenderUtils {
 
@@ -49,7 +39,7 @@ public class RenderUtils {
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
 
         GL11.glPushMatrix();
-        GL11.glColor4f(green, blue, alpha, red);
+        glColor4f(green, blue, alpha, red);
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glVertex2d(x2, y);
         GL11.glVertex2d(x, y);
@@ -93,6 +83,74 @@ public class RenderUtils {
         GlStateManager.disableBlend();
         GlStateManager.enableAlpha();
         GlStateManager.enableTexture2D();
+    }
+
+    private static void circle(double d, double e, float radius, int fill) {
+        arc(d, e, 0.0F, 360.0F, radius, fill);
+    }
+
+    private static void arc(double d, double e, float start, float end, float radius, int color) {
+        arcEllipse(d, e, start, end, radius, radius, color);
+    }
+
+    private static void arcEllipse(double d, double e, float start, float end, float w, float h, int color) {
+        GlStateManager.color(0.0F, 0.0F, 0.0F);
+        glColor4f(0.0F, 0.0F, 0.0F, 0.0F);
+
+        float temp = 0.0F;
+        if (start > end) {
+            temp = end;
+            end = start;
+            start = temp;
+        }
+
+        float red = (color >> 16 & 0xFF) / 255.0F;
+        float green = (color >> 8 & 0xFF) / 255.0F;
+        float blue = (color & 0xFF) / 255.0F;
+        float alpha = (color >> 24 & 0xFF) / 255.0F;
+
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, 1, 0);
+        GlStateManager.color(red, green, blue, alpha);
+        if (alpha > 0.5F) {
+            glEnable(GL_LINE_SMOOTH);
+            glLineWidth(2.0F);
+            glBegin(3);
+            for (float i = end; i >= start; i -= 4.0F) {
+                float ldx = (float) Math.cos(i * 3.141592653589793D / 180.0D) * (w * 1.001F);
+                float ldy = (float) Math.sin(i * 3.141592653589793D / 180.0D) * (h * 1.001F);
+                glVertex2d(d + ldx, e + ldy);
+            }
+            glEnd();
+            glDisable(GL_LINE_SMOOTH);
+        }
+        glBegin(GL_TRIANGLE_FAN);
+        for (float i = end; i >= start; i -= 4.0F) {
+            float ldx = (float) Math.cos(i * 3.141592653589793D / 180.0D) * w;
+            float ldy = (float) Math.sin(i * 3.141592653589793D / 180.0D) * h;
+            glVertex2d(d + ldx, e + ldy);
+        }
+        glEnd();
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
+    public static void drawRoundedRect(double left, double top, double right, double bottom, float roundness, int color) {
+        left = (float) (left + (roundness / 2.0F + 0.5D));
+        top = (float) (top + (roundness / 2.0F + 0.5D));
+        right = (float) (right - (roundness / 2.0F + 0.5D));
+        bottom = (float) (bottom - (roundness / 2.0F + 0.5D));
+        drawRect(left, top, right, bottom, color);
+        circle(right - roundness / 2.0F, top + roundness / 2.0F, roundness, color);
+        circle(left + roundness / 2.0F, bottom - roundness / 2.0F, roundness, color);
+        circle(left + roundness / 2.0F, top + roundness / 2.0F, roundness, color);
+        circle(right - roundness / 2.0F, bottom - roundness / 2.0F, roundness, color);
+        drawRect(left - roundness / 2.0F - 0.5F, top + roundness / 2.0F, right, bottom - roundness / 2.0F, color);
+        drawRect(left, top + roundness / 2.0F, right + roundness / 2.0F + 0.5F, bottom - roundness / 2.0F, color);
+        drawRect(left + roundness / 2.0F, top - roundness / 2.0F - 0.5F, right - roundness / 2.0F, bottom - roundness / 2.0F, color);
+        drawRect(left + roundness / 2.0F, top, right - roundness / 2.0F, bottom + roundness / 2.0F + 0.5F, color);
     }
 
     public static void drawBorderedRect(double left, double top, double right, double bottom, float borderWidth,
@@ -460,7 +518,7 @@ public class RenderUtils {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
         GL11.glLineWidth(lineWidth);
-        GL11.glColor4f(red, green, blue, alpha);
+        glColor4f(red, green, blue, alpha);
         drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z, x + 1D, y + 1D, z + 1D));
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -481,10 +539,10 @@ public class RenderUtils {
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
-        GL11.glColor4f(red, green, blue, alpha);
+        glColor4f(red, green, blue, alpha);
         drawBoundingBox(new AxisAlignedBB(x, y, z, x + 1D, y + 1D, z + 1D));
         GL11.glLineWidth(lineWidth);
-        GL11.glColor4f(lineRed, lineGreen, lineBlue, lineAlpha);
+        glColor4f(lineRed, lineGreen, lineBlue, lineAlpha);
         drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z, x + 1D, y + 1D, z + 1D));
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -505,7 +563,7 @@ public class RenderUtils {
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
-        GL11.glColor4f(red, green, blue, alpha);
+        glColor4f(red, green, blue, alpha);
         drawBoundingBox(new AxisAlignedBB(x, y, z, x + 1D, y + 1D, z + 1D));
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -526,7 +584,7 @@ public class RenderUtils {
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
-        GL11.glColor4f(red, green, blue, alpha);
+        glColor4f(red, green, blue, alpha);
         drawOutlinedBoundingBox(new AxisAlignedBB(x - width, y, z - width, x + width, y + height, z + width));
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -547,7 +605,7 @@ public class RenderUtils {
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
-        GL11.glColor4f(red, green, blue, alpha);
+        glColor4f(red, green, blue, alpha);
         drawBoundingBox(new AxisAlignedBB(x - width, y, z - width, x + width, y + height, z + width));
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -568,10 +626,10 @@ public class RenderUtils {
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
-        GL11.glColor4f(red, green, blue, alpha);
+        glColor4f(red, green, blue, alpha);
         drawBoundingBox(new AxisAlignedBB(x - width, y, z - width, x + width, y + height, z + width));
         GL11.glLineWidth(lineWdith);
-        GL11.glColor4f(lineRed, lineGreen, lineBlue, lineAlpha);
+        glColor4f(lineRed, lineGreen, lineBlue, lineAlpha);
         drawOutlinedBoundingBox(new AxisAlignedBB(x - width, y, z - width, x + width, y + height, z + width));
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -593,7 +651,7 @@ public class RenderUtils {
         GL11.glBlendFunc(770, 771);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glLineWidth(lineWdith);
-        GL11.glColor4f(red, green, blue, alpha);
+        glColor4f(red, green, blue, alpha);
         GL11.glBegin(2);
         GL11.glVertex3d(0.0D, 0.0D + Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0.0D);
         GL11.glVertex3d(x, y, z);
@@ -616,7 +674,7 @@ public class RenderUtils {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(f1, f2, f3, f);
+        glColor4f(f1, f2, f3, f);
         GL11.glBegin(GL11.GL_LINE_LOOP);
 
         for (int i = 0; i <= 360; i++) {
@@ -640,7 +698,7 @@ public class RenderUtils {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_LINE_SMOOTH);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(f1, f2, f3, f);
+        glColor4f(f1, f2, f3, f);
         GL11.glBegin(GL11.GL_TRIANGLE_FAN);
 
         for (int i = 0; i <= 360; i++) {
@@ -677,7 +735,7 @@ public class RenderUtils {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(f1, f2, f3, f);
+        glColor4f(f1, f2, f3, f);
         worldRenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);//
         worldRenderer.pos(i, l, 0.0D);
         worldRenderer.pos(k, l, 0.0D);

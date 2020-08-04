@@ -37,9 +37,9 @@ public class GuiSelectWorld extends GuiScreen implements GuiYesNoCallback
     private GuiButton renameButton;
     private GuiButton recreateButton;
 
-    public GuiSelectWorld(GuiScreen parentScreenIn)
+    public GuiSelectWorld(GuiScreen parentScreen)
     {
-        this.parentScreen = parentScreenIn;
+        this.parentScreen = parentScreen;
     }
 
     /**

@@ -1,13 +1,14 @@
 package de.crazymemecoke;
 
+import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGUI;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
 import de.crazymemecoke.manager.notificationmanager.Notification;
-import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.features.ui.guiscreens.FirstUsage;
+import de.crazymemecoke.utils.Notify;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;

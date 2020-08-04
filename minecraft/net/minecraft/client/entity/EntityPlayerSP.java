@@ -309,7 +309,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             return;
         }
         if (message.startsWith(Client.getInstance().getClientPrefix())) {
-            Notify.chatMessage("Befehl nicht gefunden - versuche .help!");
+            Notify.chat("Befehl nicht gefunden - versuche .help!");
             return;
         }
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));

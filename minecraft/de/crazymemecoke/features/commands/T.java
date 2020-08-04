@@ -25,7 +25,7 @@ public class T extends Command {
 				}
 			}
 		} else {
-			Notify.chatMessage(syntax);
+			Notify.chat(syntax);
 		}
 	}
 

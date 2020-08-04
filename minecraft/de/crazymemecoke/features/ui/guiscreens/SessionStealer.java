@@ -62,7 +62,7 @@ public class SessionStealer extends GuiScreen {
     protected void actionPerformed(GuiButton button) {
         if (button.enabled)
             if (button.id == 1)
-                this.mc.displayGuiScreen(new ClientMenu());
+                this.mc.displayGuiScreen(prevMenu);
             else if (button.id == 0) {
                 String input = tokenBox.getText();
                 if (input.length() != 65 || !input.startsWith(":", 32) || input.split(":").length != 2) {
@@ -130,7 +130,7 @@ public class SessionStealer extends GuiScreen {
 
                 // use session
                 mc.session = new Session(name, uuid, input.split(":")[0], "mojang");
-                mc.displayGuiScreen(new GuiMainMenu());
+                mc.displayGuiScreen(new MainMenu());
             }
     }
 

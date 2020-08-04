@@ -9,7 +9,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class FirstUsage extends GuiScreen implements GuiYesNoCallback {
@@ -20,17 +19,7 @@ public class FirstUsage extends GuiScreen implements GuiYesNoCallback {
 
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.id == 0) {
-            mc.displayGuiScreen(new GuiMainMenu());
-        }
-    }
-
-    @Override
-    protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        if (Keyboard.isKeyDown(Keyboard.KEY_F6) || Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-            return;
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && Keyboard.isKeyDown(Keyboard.KEY_X)) {
-            mc.displayGuiScreen(new ClientMenu());
+            mc.displayGuiScreen(new MainMenu());
         }
     }
 

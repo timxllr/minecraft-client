@@ -19,11 +19,11 @@ public class TrollPotion extends Command{
 		if(args.length == 0){
 			if(Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null)
 			{
-				Notify.chatMessage("Bitte leere den ersten Slot in der Hotbar!");
+				Notify.chat("Bitte leere den ersten Slot in der Hotbar!");
 				return;
 			}else if(!Wrapper.mc.thePlayer.capabilities.isCreativeMode)
 			{
-				Notify.chatMessage("Nur im Kreativmodus verfügbar!");
+				Notify.chat("Nur im Kreativmodus verfügbar!");
 				return;
 			}
 			ItemStack stack = new ItemStack(Items.potionitem);
@@ -40,9 +40,9 @@ public class TrollPotion extends Command{
 			stack.setTagInfo("CustomPotionEffects", effects);
 			stack.setStackDisplayName(itemName);
 			Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, stack));
-			Notify.chatMessage("Du hast eine TrollPotion erhalten!");
+			Notify.chat("Du hast eine TrollPotion erhalten!");
 		}else{
-			Notify.chatMessage(syntax);
+			Notify.chat(syntax);
 		}
 	}
 

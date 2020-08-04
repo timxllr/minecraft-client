@@ -26,9 +26,9 @@ public class GuiOptions extends GuiScreen implements GuiYesNoCallback
     private GuiLockIconButton field_175356_r;
     protected String field_146442_a = "Options";
 
-    public GuiOptions(GuiScreen p_i1046_1_, GameSettings p_i1046_2_)
+    public GuiOptions(GuiScreen parentScreen, GameSettings p_i1046_2_)
     {
-        this.field_146441_g = p_i1046_1_;
+        this.field_146441_g = parentScreen;
         this.game_settings_1 = p_i1046_2_;
     }
 

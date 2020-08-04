@@ -11,11 +11,11 @@ public class Info extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length == 0) {
-            Notify.chatMessage("Client-Name: " + Client.getInstance().getClientName());
-            Notify.chatMessage("Client-Version: " + Client.getInstance().getClientVersion());
-            Notify.chatMessage("Client-Author: " + Client.getInstance().getClientAuthor());
+            Notify.chat("Client-Name: " + Client.getInstance().getClientName());
+            Notify.chat("Client-Version: " + Client.getInstance().getClientVersion());
+            Notify.chat("Client-Author: " + Client.getInstance().getClientAuthor());
         } else {
-            Notify.chatMessage(syntax);
+            Notify.chat(syntax);
         }
     }
 

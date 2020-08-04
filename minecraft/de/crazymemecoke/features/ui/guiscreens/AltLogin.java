@@ -68,7 +68,7 @@ public class AltLogin extends GuiScreen {
                 }.start();
             }
         } else if (button.id == 2) {
-            Minecraft.getMinecraft().displayGuiScreen(new ClientMenu());
+            Minecraft.getMinecraft().displayGuiScreen(parent);
         } else if (button.id == 3) {
             new Thread() {
                 public void run() {
@@ -137,20 +137,22 @@ public class AltLogin extends GuiScreen {
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
                 width, height, sr.getScaledWidth(), sr.getScaledHeight());
 
-        Client.getInstance().getFontManager().comfortaa20.drawString("E-Mail / Username:", sr.getScaledWidth() / 2 - 100, sr.getScaledHeight() / 4 - 90, 0xFFFFFF);
-        Client.getInstance().getFontManager().comfortaa20.drawString("Passwort:", sr.getScaledWidth() / 2 - 100, sr.getScaledHeight() / 4 - 45, 0xFFFFFF);
-
-        if (Values.getValues().premium)
-            Client.getInstance().getFontManager().comfortaa20.drawString("Nutzername: " + mc.session.getUsername(), 3, 3, 16777215);
-        else
-            Client.getInstance().getFontManager().comfortaa20.drawString("Nutzername (Cracked): " + mc.session.getUsername(), 3, 3, 16777215);
-
         try {
             usernameBox.drawTextBox();
             passwordBox.drawTextBox();
         } catch (Exception err) {
             err.printStackTrace();
         }
+
+        String l1 = "MAIL / USERNAME";
+        String l2 = "PASSWORD";
+        Client.getInstance().getFontManager().comfortaa20.drawString(l1, sr.getScaledWidth() / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth(l1) / 2, sr.getScaledHeight() / 4 - 90, 0xFFFFFF);
+        Client.getInstance().getFontManager().comfortaa20.drawString(l2, sr.getScaledWidth() / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth(l2) / 2, sr.getScaledHeight() / 4 - 45, 0xFFFFFF);
+
+        if (Values.getValues().premium)
+            Client.getInstance().getFontManager().comfortaa20.drawString("Nutzername: " + mc.session.getUsername(), 3, 3, 16777215);
+        else
+            Client.getInstance().getFontManager().comfortaa20.drawString("Nutzername (Cracked): " + mc.session.getUsername(), 3, 3, 16777215);
 
         super.drawScreen(x, y, f);
     }

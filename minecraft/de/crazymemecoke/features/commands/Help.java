@@ -11,13 +11,13 @@ public class Help extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length == 0) {
-            Notify.chatMessage("Alle Befehle:");
+            Notify.chat("Alle Befehle:");
 
             for (Command c : Client.getInstance().getCommandManager().getCommands()) {
-                Notify.chatMessage(Client.getInstance().getClientPrefix() + c.getName().toLowerCase());
+                Notify.chat(Client.getInstance().getClientPrefix() + c.getName().toLowerCase());
             }
         } else {
-            Notify.chatMessage(syntax);
+            Notify.chat(syntax);
         }
     }
 

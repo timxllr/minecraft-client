@@ -27,7 +27,7 @@ public class SoonScreen extends GuiScreen {
 
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.id == 1) {
-            Minecraft.getMinecraft().displayGuiScreen(new ClientMenu());
+            Minecraft.getMinecraft().displayGuiScreen(parent);
         }
     }
 

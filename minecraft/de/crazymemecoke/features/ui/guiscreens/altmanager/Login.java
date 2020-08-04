@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.altmanager;
+package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import com.mojang.authlib.Agent;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
@@ -7,7 +7,7 @@ import java.net.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
 
-public class AltLogin {
+public class Login {
     public static void login(String username, String password) {
         YggdrasilAuthenticationService authenticationService = new YggdrasilAuthenticationService(Proxy.NO_PROXY, "");
         YggdrasilUserAuthentication authentication = (YggdrasilUserAuthentication)authenticationService.createUserAuthentication(Agent.MINECRAFT);

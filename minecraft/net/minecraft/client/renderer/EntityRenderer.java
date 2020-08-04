@@ -19,7 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.GuiDownloadTerrain;
-import net.minecraft.client.gui.GuiMainMenu;
+import de.crazymemecoke.features.ui.guiscreens.MainMenu;
 import net.minecraft.client.gui.MapItemRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -2324,8 +2324,8 @@ public class EntityRenderer implements IResourceManagerReloadListener {
             }
         }
 
-        if (this.mc.currentScreen instanceof GuiMainMenu) {
-            this.updateMainMenu((GuiMainMenu) this.mc.currentScreen);
+        if (this.mc.currentScreen instanceof MainMenu) {
+            this.updateMainMenu((MainMenu) this.mc.currentScreen);
         }
 
         if (this.updatedWorld != world) {
@@ -2358,7 +2358,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
         }
     }
 
-    private void updateMainMenu(GuiMainMenu p_updateMainMenu_1_) {
+    private void updateMainMenu(MainMenu p_updateMainMenu_1_) {
         try {
             String s = null;
             Calendar calendar = Calendar.getInstance();
@@ -2378,7 +2378,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
                 return;
             }
 
-            Field[] afield = GuiMainMenu.class.getDeclaredFields();
+            Field[] afield = MainMenu.class.getDeclaredFields();
 
             for (int k = 0; k < afield.length; ++k) {
                 if (afield[k].getType() == String.class) {

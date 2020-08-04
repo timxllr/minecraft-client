@@ -14,13 +14,13 @@ public class Enchant extends Command {
     public void execute(String[] args) {
 
         if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode)
-            Notify.chatMessage("Nur im Kreativmodus verfügbar!");
+            Notify.chat("Nur im Kreativmodus verfügbar!");
 
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("hand")) {
                 ItemStack currentItem = Wrapper.mc.thePlayer.inventory.getCurrentItem();
                 if (currentItem == null)
-                    Notify.chatMessage("Halte ein Item in der Hand!");
+                    Notify.chat("Halte ein Item in der Hand!");
                 for (Enchantment enchantment : Enchantment.enchantmentsList)
                     try {
                         if (enchantment == Enchantment.silkTouch)
@@ -46,12 +46,12 @@ public class Enchant extends Command {
 
                         }
                 }
-                Notify.chatMessage("Erfolgreich alle Items verzaubert!");
+                Notify.chat("Erfolgreich alle Items verzaubert!");
             } else {
-                Notify.chatMessage(syntax);
+                Notify.chat(syntax);
             }
         } else {
-            Notify.chatMessage(syntax);
+            Notify.chat(syntax);
         }
     }
 

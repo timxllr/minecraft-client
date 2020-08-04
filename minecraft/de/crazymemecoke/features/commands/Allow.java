@@ -16,7 +16,7 @@ public class Allow extends Command {
                 } else if (args[1].equalsIgnoreCase("false")) {
                     Wrapper.mc.thePlayer.capabilities.allowFlying = false;
                 } else {
-                    Notify.chatMessage(syntax);
+                    Notify.chat(syntax);
                 }
             } else if (args[0].equalsIgnoreCase("edit")) {
                 if (args[1].equalsIgnoreCase("true")) {
@@ -24,13 +24,13 @@ public class Allow extends Command {
                 } else if (args[1].equalsIgnoreCase("false")) {
                     Wrapper.mc.thePlayer.capabilities.allowEdit = false;
                 } else {
-                    Notify.chatMessage(syntax);
+                    Notify.chat(syntax);
                 }
             } else {
-                Notify.chatMessage(syntax);
+                Notify.chat(syntax);
             }
         } else {
-            Notify.chatMessage(syntax);
+            Notify.chat(syntax);
         }
     }
 

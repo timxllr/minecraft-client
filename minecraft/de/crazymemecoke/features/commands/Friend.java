@@ -14,36 +14,36 @@ public class Friend extends Command {
     public void execute(String[] args) {
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("list")) {
-                Notify.chatMessage("Deine Freunde:");
-                Notify.chatMessage(friends.toString());
+                Notify.chat("Deine Freunde:");
+                Notify.chat(friends.toString());
             } else {
-                Notify.chatMessage(syntax);
+                Notify.chat(syntax);
             }
         } else {
             if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("add")) {
                     if (!friends.contains(args[1])) {
                         friends.add(args[1]);
-                        Notify.chatMessage(args[1] + " wurde zu deiner Freundesliste hinzugefügt!");
+                        Notify.chat(args[1] + " wurde zu deiner Freundesliste hinzugefügt!");
                     } else {
                         if (friends.contains(args[1])) {
-                            Notify.chatMessage(args[1] + " ist bereits in deiner Freundesliste!");
+                            Notify.chat(args[1] + " ist bereits in deiner Freundesliste!");
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("remove")) {
                     if (friends.contains(args[1])) {
                         friends.remove(args[1]);
-                        Notify.chatMessage(args[1] + " wurde aus deiner Freundesliste entfernt!");
+                        Notify.chat(args[1] + " wurde aus deiner Freundesliste entfernt!");
                     } else {
                         if (!friends.contains(args[1])) {
-                            Notify.chatMessage(args[1] + " ist nicht in deiner Freundesliste!");
+                            Notify.chat(args[1] + " ist nicht in deiner Freundesliste!");
                         }
                     }
                 } else {
-                    Notify.chatMessage(syntax);
+                    Notify.chat(syntax);
                 }
             } else {
-                Notify.chatMessage(syntax);
+                Notify.chat(syntax);
             }
         }
     }

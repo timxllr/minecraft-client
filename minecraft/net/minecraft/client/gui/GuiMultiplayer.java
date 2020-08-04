@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-import de.crazymemecoke.manager.altmanager.GuiAltManager;
+import de.crazymemecoke.features.ui.guiscreens.altmanager.GuiAltManager;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.ServerList;
@@ -162,7 +162,7 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
             } else if (button.id == 8) {
                 this.refreshServerList();
             } else if (button.id == 9) {
-                mc.displayGuiScreen(new GuiAltManager(null));
+                mc.displayGuiScreen(new GuiAltManager(this));
             }
         }
     }

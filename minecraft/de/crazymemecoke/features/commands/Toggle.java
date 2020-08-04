@@ -25,7 +25,7 @@ public class Toggle extends Command {
 				}
 			}
 		} else {
-			Notify.chatMessage(syntax);
+			Notify.chat(syntax);
 		}
 	}
 

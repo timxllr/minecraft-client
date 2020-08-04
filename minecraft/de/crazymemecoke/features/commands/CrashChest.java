@@ -19,12 +19,12 @@ public class CrashChest extends Command {
             if (Wrapper.mc.thePlayer.inventory.getStackInSlot(36) != null) {
                 if (Wrapper.mc.thePlayer.inventory.getStackInSlot(36).getDisplayName()
                         .equals(itemName))
-                    Notify.chatMessage("Du hast bereits eine CrashChest");
+                    Notify.chat("Du hast bereits eine CrashChest");
                 else
-                    Notify.chatMessage("Ziehe deine Schuhe aus, um die CrashChest zu erhalten!");
+                    Notify.chat("Ziehe deine Schuhe aus, um die CrashChest zu erhalten!");
                 return;
             } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
-                Notify.chatMessage("Nur im Kreativmodus verfügbar!");
+                Notify.chat("Nur im Kreativmodus verfügbar!");
                 return;
             }
             ItemStack stack = new ItemStack(Blocks.chest);
@@ -36,9 +36,9 @@ public class CrashChest extends Command {
             stack.setTagInfo("www.masterof13fps.com", nbtTagCompound);
             Wrapper.mc.thePlayer.getInventory()[0] = stack;
             stack.setStackDisplayName(itemName);
-            Notify.chatMessage("Du hast eine CrashChest erhalten!");
+            Notify.chat("Du hast eine CrashChest erhalten!");
         } else {
-            Notify.chatMessage(syntax);
+            Notify.chat(syntax);
         }
     }
 
