@@ -1,8 +1,8 @@
 package de.crazymemecoke.features.modules.movement;
 
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
-import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Values;
@@ -12,6 +12,7 @@ import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.network.play.client.C03PacketPlayer;
+import net.minecraft.util.Timer;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class Fly extends Module {
         flyMode.add("AAC 1.9.10 Old");
         flyMode.add("AAC 1.9.10 New");
         flyMode.add("AAC 3.0.5");
+        flyMode.add("CubeCraft");
+        flyMode.add("Intave");
 
         glideMode.add("Old");
         glideMode.add("New");
@@ -53,16 +56,10 @@ public class Fly extends Module {
 
     @Override
     public void onDisable() {
-        if (sM.getSettingByName("Mode", this).getValString().equalsIgnoreCase("Glide")) {
-            if (sM.getSettingByName("Glide Mode", this).getValString().equalsIgnoreCase("New")) {
-                time = 0;
-                dtime = 0;
-            }
-        } else if (sM.getSettingByName("Mode", this).getValString().equalsIgnoreCase("Fly")) {
-            if (sM.getSettingByName("Fly Mode", this).getValString().equalsIgnoreCase("Vanilla")) {
-                mc.thePlayer.capabilities.isFlying = false;
-            }
-        }
+        time = 0;
+        dtime = 0;
+        mc.thePlayer.capabilities.isFlying = false;
+        mc.timer.timerSpeed = 1F;
     }
 
     @Override
@@ -161,28 +158,52 @@ public class Fly extends Module {
                         mc.thePlayer.motionY = -0.3D;
                         timer.reset();
                     }
+                } else if (flyMode.equalsIgnoreCase("CubeCraft")) {
+                    if (EntityUtils.isMoving() && !mc.thePlayer.onGround)
+                        mc.timer.timerSpeed = 0.29f;
+
+                    if (timer.hasReached(200) && !mc.thePlayer.isCollidedHorizontally && !mc.thePlayer.isInWater() && !mc.thePlayer.onGround && EntityUtils.isMoving()) {
+                        double multiply = 2.1;
+                        double yaw = Math.toRadians(mc.thePlayer.rotationYaw);
+                        double posX = -Math.sin(yaw) * multiply;
+                        double posZ = Math.cos(yaw) * multiply;
+                        mc.thePlayer.setPosition(mc.thePlayer.posX + posX, mc.thePlayer.posY, mc.thePlayer.posZ + posZ);
+                    }
+                    mc.thePlayer.motionY = -0.01;
+                } else if (flyMode.equalsIgnoreCase("Intave")) {
+                    if (EntityUtils.isMoving() && !mc.thePlayer.onGround)
+                        mc.timer.timerSpeed = 0.29f;
+
+                    if (timer.hasReached(200) && !mc.thePlayer.isCollidedHorizontally && !mc.thePlayer.isInWater() && !mc.thePlayer.onGround && EntityUtils.isMoving()) {
+                        double multiply = 2.1;
+                        double yaw = Math.toRadians(mc.thePlayer.rotationYaw);
+                        double posX = -Math.sin(yaw) * multiply;
+                        double posZ = Math.cos(yaw) * multiply;
+                        mc.thePlayer.setPosition(mc.thePlayer.posX + posX, mc.thePlayer.posY, mc.thePlayer.posZ + posZ);
+                    }
+                    mc.thePlayer.motionY = -0.01;
                 }
-            } else if (mode.equalsIgnoreCase("Glide")) {
-                if (glideMode.equalsIgnoreCase("New")) {
-                    motion = 0f;
-                    motion = 0.0;
-                    speed = true;
-                    if (mc.thePlayer.isSneaking()) {
-                        mc.thePlayer.motionY = -0.5;
-                    } else {
-                        if ((mc.thePlayer.motionY < 0.0D) && (mc.thePlayer.isAirBorne) && (!mc.thePlayer.isInWater())
-                                && (!mc.thePlayer.isOnLadder()) && (!mc.thePlayer.isInsideOfMaterial(Material.lava))) {
-                            mc.thePlayer.setSprinting(false);
-                            mc.thePlayer.motionY = -motion;
-                            mc.thePlayer.jumpMovementFactor *= 1.21337F;
-                        }
+            }
+        } else if (mode.equalsIgnoreCase("Glide")) {
+            if (glideMode.equalsIgnoreCase("New")) {
+                motion = 0f;
+                motion = 0.0;
+                speed = true;
+                if (mc.thePlayer.isSneaking()) {
+                    mc.thePlayer.motionY = -0.5;
+                } else {
+                    if ((mc.thePlayer.motionY < 0.0D) && (mc.thePlayer.isAirBorne) && (!mc.thePlayer.isInWater())
+                            && (!mc.thePlayer.isOnLadder()) && (!mc.thePlayer.isInsideOfMaterial(Material.lava))) {
+                        mc.thePlayer.setSprinting(false);
+                        mc.thePlayer.motionY = -motion;
+                        mc.thePlayer.jumpMovementFactor *= 1.21337F;
                     }
-                } else if (glideMode.equalsIgnoreCase("Old")) {
-                    EntityUtils.damagePlayer(1);
-                    if ((mc.thePlayer.motionY <= -Values.getValues().glidespeed) && (!mc.thePlayer.isInWater())
-                            && (!mc.thePlayer.onGround) && (!mc.thePlayer.isOnLadder())) {
-                        mc.thePlayer.motionY = (-Values.getValues().glidespeed);
-                    }
+                }
+            } else if (glideMode.equalsIgnoreCase("Old")) {
+                EntityUtils.damagePlayer(1);
+                if ((mc.thePlayer.motionY <= -Values.getValues().glidespeed) && (!mc.thePlayer.isInWater())
+                        && (!mc.thePlayer.onGround) && (!mc.thePlayer.isOnLadder())) {
+                    mc.thePlayer.motionY = (-Values.getValues().glidespeed);
                 }
             }
         }
