@@ -17,7 +17,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 
-public class MainMenu extends GuiScreen implements GuiYesNoCallback {
+public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
     public void initGui() {
         buttonList.add(new GuiButton(0, width / 2 - 120, height / 2 - 60, 120, 20, I18n.format("menu.singleplayer")));

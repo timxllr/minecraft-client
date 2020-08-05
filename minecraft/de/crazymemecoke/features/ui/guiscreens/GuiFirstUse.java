@@ -6,12 +6,11 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 
-public class FirstUsage extends GuiScreen implements GuiYesNoCallback {
+public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
 
     public void initGui() {
         buttonList.add(new GuiButton(0, width / 2 - 50, 250, 120, 20, "Ok, verstanden!"));
@@ -19,7 +18,7 @@ public class FirstUsage extends GuiScreen implements GuiYesNoCallback {
 
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.id == 0) {
-            mc.displayGuiScreen(new MainMenu());
+            mc.displayGuiScreen(new GuiMainMenu());
         }
     }
 

@@ -19,7 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.GuiDownloadTerrain;
-import de.crazymemecoke.features.ui.guiscreens.MainMenu;
+import de.crazymemecoke.features.ui.guiscreens.GuiMainMenu;
 import net.minecraft.client.gui.MapItemRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -2324,8 +2324,8 @@ public class EntityRenderer implements IResourceManagerReloadListener {
             }
         }
 
-        if (this.mc.currentScreen instanceof MainMenu) {
-            this.updateMainMenu((MainMenu) this.mc.currentScreen);
+        if (this.mc.currentScreen instanceof GuiMainMenu) {
+            this.updateMainMenu((GuiMainMenu) this.mc.currentScreen);
         }
 
         if (this.updatedWorld != world) {
@@ -2358,7 +2358,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
         }
     }
 
-    private void updateMainMenu(MainMenu p_updateMainMenu_1_) {
+    private void updateMainMenu(GuiMainMenu p_updateGuiMainMenu_1_) {
         try {
             String s = null;
             Calendar calendar = Calendar.getInstance();
@@ -2378,12 +2378,12 @@ public class EntityRenderer implements IResourceManagerReloadListener {
                 return;
             }
 
-            Field[] afield = MainMenu.class.getDeclaredFields();
+            Field[] afield = GuiMainMenu.class.getDeclaredFields();
 
             for (int k = 0; k < afield.length; ++k) {
                 if (afield[k].getType() == String.class) {
                     afield[k].setAccessible(true);
-                    afield[k].set(p_updateMainMenu_1_, s);
+                    afield[k].set(p_updateGuiMainMenu_1_, s);
                     break;
                 }
             }

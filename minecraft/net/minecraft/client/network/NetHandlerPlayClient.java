@@ -22,7 +22,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiDisconnected;
 import net.minecraft.client.gui.GuiDownloadTerrain;
-import de.crazymemecoke.features.ui.guiscreens.MainMenu;
+import de.crazymemecoke.features.ui.guiscreens.GuiMainMenu;
 import net.minecraft.client.gui.GuiMerchant;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiScreen;
@@ -807,7 +807,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         }
         else
         {
-            this.gameController.displayGuiScreen(new GuiDisconnected(new GuiMultiplayer(new MainMenu()), "disconnect.lost", reason));
+            this.gameController.displayGuiScreen(new GuiDisconnected(new GuiMultiplayer(new GuiMainMenu()), "disconnect.lost", reason));
         }
     }
 

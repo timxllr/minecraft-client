@@ -46,7 +46,6 @@ public class SettingsManager {
 
     public ArrayList<Setting> getSettingsByMod(Module mod) {
         ArrayList<Setting> out = new ArrayList<>();
-        System.out.println(settings.size());
         for (Setting s : getSettings()) {
             if (s.getParentMod() != null) {
                 if (s.getParentMod().equals(mod)) {

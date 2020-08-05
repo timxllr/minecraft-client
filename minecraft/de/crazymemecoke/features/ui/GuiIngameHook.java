@@ -66,7 +66,7 @@ public class GuiIngameHook extends GuiIngame {
     private void renderTargetHUD() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        if (!(Aura.currentTarget == null) && Aura.currentTarget instanceof EntityPlayer) {
+        if (!(Aura.currentTarget == null) && Aura.currentTarget instanceof EntityPlayer && Client.getInstance().getSetmgr().getSettingByName("Target HUD", Client.getInstance().getModuleManager().getModByName("HUD")).getValBoolean()) {
             RenderUtils.drawRect(s.getScaledWidth() / 2 - 130, s.getScaledHeight() / 2 - 50, s.getScaledWidth() / 2 + 130, s.getScaledHeight() / 2 + 50, new Color(0, 0, 0, 110).getRGB());
 
             EntityPlayer p = (EntityPlayer) Aura.currentTarget;

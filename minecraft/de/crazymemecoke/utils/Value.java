@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import de.crazymemecoke.features.ui.guiscreens.MainMenu;
+import de.crazymemecoke.features.ui.guiscreens.GuiMainMenu;
 
 public final class Value<T>
 {
@@ -53,7 +53,7 @@ public final class Value<T>
 			return 0;
 		}
 	    });
-	    Minecraft.getMinecraft().displayGuiScreen(new MainMenu());
+	    Minecraft.getMinecraft().displayGuiScreen(new GuiMainMenu());
 	  }
 	  
 	  public final String getValueName()

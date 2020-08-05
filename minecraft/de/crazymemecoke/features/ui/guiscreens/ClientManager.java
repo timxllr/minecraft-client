@@ -33,9 +33,6 @@ public class ClientManager extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
         ScaledResolution sr = new ScaledResolution(mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
-                width, height, sr.getScaledWidth(), sr.getScaledHeight());
         RenderUtils.drawBorderedRect(20, 20, width - 20, height - 20, 2, Rainbow.rainbow(1, 1).hashCode(), new Color(0, 0, 0, 150).hashCode());
         Client.getInstance().getFontManager().comfortaa22.drawString(Client.getInstance().getClientName(), width / 2 - 40, 25, Rainbow.rainbow(1, 1).hashCode());
 
@@ -53,17 +50,16 @@ public class ClientManager extends GuiScreen {
             }
         }
 
-        Client.getInstance().getFontManager().comfortaa22.drawString("Commands:", width / 4 + width / 2, 60, -1);
         int yCmdPos = 80;
+        Client.getInstance().getFontManager().comfortaa22.drawString("Commands:", width / 4 + width / 2, 60, -1);
         for (Command cmd : Client.getInstance().getCommandManager().getCommands()) {
             if (yCmdPos < height - 30) {
                 Client.getInstance().getFontManager().comfortaa20.drawString(Client.getInstance().getClientPrefix() + cmd.getName().toLowerCase(), width / 4 + width / 2, yCmdPos, -1);
-                yCmdPos += 10;
             }
             if (yCmdPos > height - 30) {
                 Client.getInstance().getFontManager().comfortaa20.drawString(Client.getInstance().getClientPrefix() + cmd.getName().toLowerCase(), width / 4 + width / 2 + 100, yCmdPos, -1);
-                yCmdPos += 10;
             }
+            yCmdPos += 10;
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);

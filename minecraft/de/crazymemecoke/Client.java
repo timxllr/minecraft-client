@@ -7,8 +7,7 @@ import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
 import de.crazymemecoke.manager.notificationmanager.Notification;
 import de.crazymemecoke.manager.fontmanager.FontManager;
-import de.crazymemecoke.features.ui.guiscreens.FirstUsage;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -40,7 +39,7 @@ public class Client {
         clientDir = new File(Minecraft.getMinecraft().mcDataDir + "/" + getClientName());
         if (!clientDir.exists()) {
             clientDir.mkdir();
-            mc.displayGuiScreen(new FirstUsage());
+            mc.displayGuiScreen(new GuiFirstUse());
         }
 
         fontManager = new FontManager();

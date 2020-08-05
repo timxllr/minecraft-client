@@ -12,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import de.crazymemecoke.features.ui.guiscreens.MainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.model.ModelBanner;
 import net.minecraft.client.model.ModelBase;
@@ -267,7 +266,7 @@ public class Reflector
     private static boolean logVanilla = logEntry("*** Reflector Vanilla ***");
     public static ReflectorClass ChunkProviderClient = new ReflectorClass(ChunkProviderClient.class);
     public static ReflectorField ChunkProviderClient_chunkMapping = new ReflectorField(ChunkProviderClient, LongHashMap.class);
-    public static ReflectorClass GuiMainMenu = new ReflectorClass(MainMenu.class);
+    public static ReflectorClass GuiMainMenu = new ReflectorClass(de.crazymemecoke.features.ui.guiscreens.GuiMainMenu.class);
     public static ReflectorField GuiMainMenu_splashText = new ReflectorField(GuiMainMenu, String.class);
     public static ReflectorClass Minecraft = new ReflectorClass(Minecraft.class);
     public static ReflectorField Minecraft_defaultResourcePack = new ReflectorField(Minecraft, DefaultResourcePack.class);

@@ -1,7 +1,6 @@
 package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.ui.guiscreens.SessionStealer;
 import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.utils.Colors;
 import de.crazymemecoke.utils.Wrapper;
@@ -126,7 +125,7 @@ public class GuiAltManager extends GuiScreen {
 
         // Open Session Stealer
         if (button.id == 6) {
-            mc.displayGuiScreen(new SessionStealer(this));
+            mc.displayGuiScreen(new GuiSessionStealer(this));
         }
 
         // Direct login

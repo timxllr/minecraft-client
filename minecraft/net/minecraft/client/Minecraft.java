@@ -38,7 +38,7 @@ import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.ui.guiscreens.MainMenu;
+import de.crazymemecoke.features.ui.guiscreens.GuiMainMenu;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.features.ui.GuiIngameHook;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
@@ -566,9 +566,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         this.ingameGUI = new GuiIngameHook(this);
 
         if (this.serverName != null) {
-            this.displayGuiScreen(new GuiConnecting(new MainMenu(), this, this.serverName, this.serverPort));
+            this.displayGuiScreen(new GuiConnecting(new GuiMainMenu(), this, this.serverName, this.serverPort));
         } else {
-            this.displayGuiScreen(new MainMenu());
+            this.displayGuiScreen(new GuiMainMenu());
         }
 
         this.renderEngine.deleteTexture(this.mojangLogo);
@@ -896,12 +896,12 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         }
 
         if (guiScreenIn == null && this.theWorld == null) {
-            guiScreenIn = new MainMenu();
+            guiScreenIn = new GuiMainMenu();
         } else if (guiScreenIn == null && this.thePlayer.getHealth() <= 0.0F) {
             guiScreenIn = new GuiGameOver();
         }
 
-        if (guiScreenIn instanceof MainMenu) {
+        if (guiScreenIn instanceof GuiMainMenu) {
             this.gameSettings.showDebugInfo = false;
             this.ingameGUI.getChatGUI().clearChatMessages();
         }
