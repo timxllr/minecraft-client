@@ -3,8 +3,10 @@ package de.crazymemecoke.features.modules.movement;
 import com.darkmagician6.eventapi.EventTarget;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
 import de.crazymemecoke.utils.events.MoveEvent;
 import de.crazymemecoke.utils.events.UpdateEvent;
@@ -34,8 +36,8 @@ public class Speed extends Module {
     private double prevY;
     private int motionTicks;
     private final TimerUtil delayTimer = new TimerUtil();
-    private double speedVal;
-    private boolean speedUp;
+
+    SettingsManager sM = Client.getInstance().getSetmgr();
 
     public Speed() {
         super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
@@ -46,14 +48,14 @@ public class Speed extends Module {
         mode.add("Jump");
         mode.add("Timer");
 
-        Client.getInstance().getSetmgr().rSetting(new Setting("Mode", this, "Jump", mode));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Wall Speed", this, 4.25, 0, 50, true));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Water Speed", this, 4.25, 0, 50, true));
-    }
+        sM.rSetting(new Setting("Mode", this, "Jump", mode));
+        sM.rSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
+        sM.rSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
+        sM.rSetting(new Setting("Wall Speed", this, 4.25, 0, 50, true));
+        sM.rSetting(new Setting("Water Speed", this, 4.25, 0, 50, true));
 
-    private int buffer;
+        sM.rSetting(new Setting("[Jump] Auto Jump", this, false));
+    }
 
     public void onEnable() {
         framesDelay.setLastMS();
@@ -62,7 +64,6 @@ public class Speed extends Module {
         move = false;
         hop = false;
         prevY = 0.0D;
-        buffer = 0;
         ticks = 0;
     }
 
@@ -75,7 +76,7 @@ public class Speed extends Module {
 
     @Override
     public void onUpdate() {
-        speedMode = Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString();
+        speedMode = sM.getSettingByName("Mode", this).getValString();
         if (getState()) {
             if (speedMode.equalsIgnoreCase("AAC 1.9.10")) {
                 doAACSpeed();
@@ -84,7 +85,7 @@ public class Speed extends Module {
                     doLatestOnGroundSpeed();
                 } else {
                     if (speedMode.equalsIgnoreCase("Frames")) {
-                        doFrames(Client.getInstance().getSetmgr().getSettingByName("Frames Speed", this).getValDouble());
+                        doFrames(sM.getSettingByName("Frames Speed", this).getValDouble());
                     } else {
                         if (speedMode.equalsIgnoreCase("New")) {
                             doNewSpeed();
@@ -104,16 +105,17 @@ public class Speed extends Module {
     }
 
     private void doTimerSpeed() {
-        mc.timer.timerSpeed = (float) Client.getInstance().getSetmgr().getSettingByName("Timer Speed", this).getValDouble();
+        mc.timer.timerSpeed = (float) sM.getSettingByName("Timer Speed", this).getValDouble();
     }
 
     private void doJumpSpeed() {
-        if (((mc.thePlayer.moveForward == 0.0F)
-                && (mc.thePlayer.moveStrafing == 0.0F))
-                || (mc.thePlayer.isCollidedHorizontally)) {
+        if (!(EntityUtils.isMoving())) {
             return;
         }
         if (mc.thePlayer.moveForward > 0.0F) {
+            if (sM.getSettingByName("[Jump] Auto Jump", this).getValBoolean()) {
+                mc.thePlayer.jump();
+            }
             float var1 = mc.thePlayer.rotationYaw * 0.017453292F;
             mc.thePlayer.motionX -= MathHelper.sin(var1) * 0.2D;
             mc.thePlayer.motionZ += MathHelper.cos(var1) * 0.2D;
