@@ -341,9 +341,20 @@ public class GuiIngame extends Gui {
     }
 
     protected void renderTooltip(ScaledResolution sr, float partialTicks) {
+        Boolean devMode = Client.getInstance().getSetmgr().getSettingByName("Developer Mode", Client.getInstance().getModuleManager().getModByName("HUD")).getValBoolean();
+
+        if (devMode) {
+            renderHotbar(partialTicks);
+        } else if (mc.currentScreen == null) {
+            renderHotbar(partialTicks);
+        }
+    }
+
+    private void renderHotbar(float partialTicks) {
         Setting hotbar = Client.getInstance().getSetmgr().getSettingByName("Hotbar", Client.getInstance().getModuleManager().getModByName("HUD"));
+        ScaledResolution s = new ScaledResolution(Wrapper.mc);
+
         if (!Client.getInstance().getModuleManager().getModByName("Invis").getState() && hotbar.getValBoolean() && Client.getInstance().getModuleManager().getModByName("HUD").getState()) {
-            ScaledResolution s = new ScaledResolution(Wrapper.mc);
             RenderUtils.drawRect((s.getScaledWidth() / 2) - 91, s.getScaledHeight() - 23, (s.getScaledWidth() / 2) + 91, s.getScaledHeight(), new Color(12, 14, 13).getRGB());
 
             if (Wrapper.mc.thePlayer.inventory.currentItem == 0) {
@@ -356,8 +367,8 @@ public class GuiIngame extends Gui {
             RenderHelper.enableGUIStandardItemLighting();
 
             for (int j = 0; j < 9; ++j) {
-                int k = sr.getScaledWidth() / 2 - 90 + j * 20 + 2;
-                int l = sr.getScaledHeight() - 16 - 3;
+                int k = s.getScaledWidth() / 2 - 90 + j * 20 + 2;
+                int l = s.getScaledHeight() - 16 - 3;
                 this.renderHotbarItem(j, k, l, partialTicks, entityplayer);
             }
 
@@ -369,11 +380,11 @@ public class GuiIngame extends Gui {
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 this.mc.getTextureManager().bindTexture(widgetsTexPath);
                 EntityPlayer entityplayer = (EntityPlayer) this.mc.getRenderViewEntity();
-                int i = sr.getScaledWidth() / 2;
+                int i = s.getScaledWidth() / 2;
                 float f = this.zLevel;
                 this.zLevel = -90.0F;
-                this.drawTexturedModalRect(i - 91, sr.getScaledHeight() - 22, 0, 0, 182, 22);
-                this.drawTexturedModalRect(i - 91 - 1 + entityplayer.inventory.currentItem * 20, sr.getScaledHeight() - 22 - 1, 0, 22, 24, 22);
+                this.drawTexturedModalRect(i - 91, s.getScaledHeight() - 22, 0, 0, 182, 22);
+                this.drawTexturedModalRect(i - 91 - 1 + entityplayer.inventory.currentItem * 20, s.getScaledHeight() - 22 - 1, 0, 22, 24, 22);
                 this.zLevel = f;
                 GlStateManager.enableRescaleNormal();
                 GlStateManager.enableBlend();
@@ -381,8 +392,8 @@ public class GuiIngame extends Gui {
                 RenderHelper.enableGUIStandardItemLighting();
 
                 for (int j = 0; j < 9; ++j) {
-                    int k = sr.getScaledWidth() / 2 - 90 + j * 20 + 2;
-                    int l = sr.getScaledHeight() - 16 - 3;
+                    int k = s.getScaledWidth() / 2 - 90 + j * 20 + 2;
+                    int l = s.getScaledHeight() - 16 - 3;
                     this.renderHotbarItem(j, k, l, partialTicks, entityplayer);
                 }
 

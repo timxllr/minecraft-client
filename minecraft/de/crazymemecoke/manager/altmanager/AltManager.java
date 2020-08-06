@@ -20,7 +20,7 @@ public class AltManager {
             if (altFile.createNewFile()) {
                 System.out.println("File created: " + altFile.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File \"alts.txt\" already exists.");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");

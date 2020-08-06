@@ -13,7 +13,7 @@ public class Info extends Command {
         if (args.length == 0) {
             Notify.chat("Client-Name: " + Client.getInstance().getClientName());
             Notify.chat("Client-Version: " + Client.getInstance().getClientVersion());
-            Notify.chat("Client-Author: " + Client.getInstance().getClientAuthor());
+            Notify.chat("Client-Author: " + Client.getInstance().getClientCoder());
         } else {
             Notify.chat(syntax);
         }

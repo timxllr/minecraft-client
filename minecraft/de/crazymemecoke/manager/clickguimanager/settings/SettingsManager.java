@@ -27,7 +27,7 @@ public class SettingsManager {
             if (settingsFile.createNewFile()) {
                 System.out.println("File created: " + settingsFile.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File \"config.txt\" already exists.");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");

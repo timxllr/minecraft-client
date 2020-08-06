@@ -1,10 +1,11 @@
 package de.crazymemecoke.features.ui;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.features.modules.combat.Aura;
-import de.crazymemecoke.features.ui.guiscreens.ClientManager;
+import de.crazymemecoke.features.ui.guiscreens.clienthelper.GuiClientHelper;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.Rainbow;
@@ -23,6 +24,8 @@ public class GuiIngameHook extends GuiIngame {
 
     Minecraft mc = Wrapper.mc;
 
+    FontManager font = Client.getInstance().getFontManager();
+
     public GuiIngameHook(Minecraft mcIn) {
         super(mcIn);
     }
@@ -30,7 +33,7 @@ public class GuiIngameHook extends GuiIngame {
     public void renderGameOverlay(float p_175180_1_) {
         super.renderGameOverlay(p_175180_1_);
         if (!(Client.getInstance().getModuleManager().getModByName("Invis").getState())) {
-            Display.setTitle(Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion() + " | made by " + Client.getInstance().getClientAuthor());
+            Display.setTitle(Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion() + " | made by " + Client.getInstance().getClientCoder());
             if (Client.getInstance().getModuleManager().getModByName("HUD").getState()) {
                 if (Client.getInstance().getSetmgr().getSettingByName("Developer Mode", Client.getInstance().getModuleManager().getModByName("HUD")).getValBoolean()) {
                     doRenderStuff();
@@ -59,7 +62,7 @@ public class GuiIngameHook extends GuiIngame {
             renderTargetHUD();
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-            mc.displayGuiScreen(new ClientManager());
+            mc.displayGuiScreen(new GuiClientHelper());
         }
     }
 
@@ -88,7 +91,9 @@ public class GuiIngameHook extends GuiIngame {
 
     private void renderWatermark() {
         ScaledResolution s = new ScaledResolution(mc);
-        Client.getInstance().getFontManager().comfortaa40.drawString(Client.getInstance().getClientName(), s.getScaledWidth() - 85, 2, Rainbow.rainbow(1, 1).getRGB());
+        String clientName = Client.getInstance().getClientName();
+        RenderUtils.drawRect(s.getScaledWidth() - Client.getInstance().getFontManager().centuryGothic45.getStringWidth(clientName) - 2, 0, s.getScaledWidth(), Client.getInstance().getFontManager().centuryGothic45.getStringHeight(clientName) - 4, new Color(0, 0, 0, 150).getRGB());
+        Client.getInstance().getFontManager().centuryGothic45.drawString(clientName, s.getScaledWidth() - Client.getInstance().getFontManager().centuryGothic45.getStringWidth(clientName) - 2, -2, Rainbow.rainbow(1, 1).getRGB());
     }
 
     private void renderTabGUI() {
@@ -110,7 +115,7 @@ public class GuiIngameHook extends GuiIngame {
                 }
             }
         } else {
-            int yDist = 20;
+            int yDist = 25;
             for (Module m : Client.getInstance().getModuleManager().modules) {
                 {
                     if (m.getState() && !m.isCategory(Category.GUI)) {

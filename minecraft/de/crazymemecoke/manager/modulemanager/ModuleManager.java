@@ -36,7 +36,7 @@ public class ModuleManager {
             if (modulesFile.createNewFile()) {
                 System.out.println("File created: " + modulesFile.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File \"modules.txt\" already exists.");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -48,7 +48,7 @@ public class ModuleManager {
             if (bindsFile.createNewFile()) {
                 System.out.println("File created: " + bindsFile.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File \"binds.txt\" already exists.");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");

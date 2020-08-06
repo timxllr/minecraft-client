@@ -49,7 +49,7 @@ public class ClickGUI extends GuiScreen {
             if (guiFile.createNewFile()) {
                 System.out.println("File created: " + guiFile.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File \"gui.txt\" already exists.");
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");

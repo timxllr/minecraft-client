@@ -20,7 +20,7 @@ public class Client {
     // Naming Stuff
     private final String clientName = "Lifetime";
     private final String clientVersion = "b1";
-    private final String clientAuthor = "CrazyMemeCoke";
+    private final String clientCoder = "CrazyMemeCoke";
     private final String clientPrefix = ".";
 
     // Paths of Files
@@ -82,8 +82,8 @@ public class Client {
         return clientVersion;
     }
 
-    public String getClientAuthor() {
-        return clientAuthor;
+    public String getClientCoder() {
+        return clientCoder;
     }
 
     public CommandManager getCommandManager() {

@@ -15,7 +15,6 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.io.IOException;
-import java.net.URI;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
@@ -25,7 +24,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         buttonList.add(new GuiButton(2, width / 2 + 10, height / 2 - 60, 120, 20, I18n.format("menu.options")));
         buttonList.add(new GuiButton(3, width / 2 + 10, height / 2 - 30, 120, 20, I18n.format("menu.quit")));
         buttonList.add(new GuiButton(4, width / 2 - 120, height / 2, 120, 20, "AltManager"));
-        buttonList.add(new GuiButton(5, width / 2 + 10, height / 2, 120, 20, "Changelog"));
+        buttonList.add(new GuiButton(5, width / 2 + 10, height / 2, 120, 20, "Credits"));
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
@@ -45,12 +44,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
             mc.displayGuiScreen(new GuiAltManager(this));
         }
         if (button.id == 5) {
-            try {
-                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                    Desktop.getDesktop().browse(new URI(Client.getInstance().getClientChangelog()));
-                }
-            } catch (Exception ignored) {
-            }
+            mc.displayGuiScreen(new GuiCredits(this));
         }
     }
 
@@ -81,14 +75,13 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         RenderUtils.drawRect(width / 2 - 130, height / 2 - 70, width / 2 + 140, height / 2 + 30, new Color(55, 55, 55, 150).getRGB());
 
-        String str1 = "Username: " + mc.session.getUsername();
-        RenderUtils.drawRect(15, height - 15, Client.getInstance().getFontManager().comfortaa22.getStringWidth(str1) + 25, height - 35, new Color(55, 55, 55, 150).getRGB());
-        Client.getInstance().getFontManager().comfortaa22.drawString(str1, 20, height - 29, new Color(255, 255, 255).getRGB());
-
-        String header = Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion() + " by " + Client.getInstance().getClientAuthor();
+        String header = Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion() + " by " + Client.getInstance().getClientCoder();
         RenderUtils.drawRect(0, 0, Client.getInstance().getFontManager().rainbowVeins50.getStringWidth(header) + 5, Client.getInstance().getFontManager().rainbowVeins50.getStringHeight(header) + 5, new Color(55, 55, 55, 150).getRGB());
         Client.getInstance().getFontManager().rainbowVeins50.drawString(header, 2, 4, -1);
 
+        String s1 = "Username: " + mc.session.getUsername();
+        RenderUtils.drawRect(15, height - 15, Client.getInstance().getFontManager().comfortaa22.getStringWidth(s1) + 25, height - 35, new Color(55, 55, 55, 150).getRGB());
+        Client.getInstance().getFontManager().comfortaa22.drawString(s1, 20, height - 29, -1);
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);
