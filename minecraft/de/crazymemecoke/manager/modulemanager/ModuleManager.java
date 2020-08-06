@@ -10,13 +10,14 @@ import de.crazymemecoke.features.modules.gui.HUD;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.modules.movement.*;
 import de.crazymemecoke.features.modules.player.*;
-import de.crazymemecoke.features.modules.render.*;
+import de.crazymemecoke.features.modules.render.ESP;
+import de.crazymemecoke.features.modules.render.Fullbright;
+import de.crazymemecoke.features.modules.render.NoBob;
 import de.crazymemecoke.features.modules.world.Eagle;
 import de.crazymemecoke.features.modules.world.Fucker;
 import de.crazymemecoke.features.modules.world.Scaffold;
 import de.crazymemecoke.features.modules.world.Tower;
 import de.crazymemecoke.utils.FileUtils;
-import org.lwjgl.input.Keyboard;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,9 +58,7 @@ public class ModuleManager {
 
         modules.add(new InventoryMove());
         modules.add(new ChestStealer());
-        modules.add(new ProphuntESP());
         modules.add(new Fullbright());
-        modules.add(new OutlineESP());
         modules.add(new FastLadder());
         modules.add(new NoSlowDown());
         modules.add(new NoRotation());
@@ -77,7 +76,6 @@ public class ModuleManager {
         modules.add(new SafeWalk());
         modules.add(new Paralyze());
         modules.add(new ClickGUI());
-        //modules.add(new KillAura());
         modules.add(new FastUse());
         modules.add(new AntiWeb());
         modules.add(new Trigger());
