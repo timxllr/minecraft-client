@@ -13,10 +13,7 @@ import de.crazymemecoke.features.modules.player.*;
 import de.crazymemecoke.features.modules.render.ESP;
 import de.crazymemecoke.features.modules.render.Fullbright;
 import de.crazymemecoke.features.modules.render.NoBob;
-import de.crazymemecoke.features.modules.world.Eagle;
-import de.crazymemecoke.features.modules.world.Fucker;
-import de.crazymemecoke.features.modules.world.Scaffold;
-import de.crazymemecoke.features.modules.world.Tower;
+import de.crazymemecoke.features.modules.world.*;
 import de.crazymemecoke.utils.FileUtils;
 
 import java.io.File;
@@ -95,6 +92,7 @@ public class ModuleManager {
         modules.add(new Invis());
         modules.add(new Phase());
         modules.add(new Eagle());
+        modules.add(new Nuker());
         modules.add(new Step());
         modules.add(new Zoot());
         modules.add(new Aura());
