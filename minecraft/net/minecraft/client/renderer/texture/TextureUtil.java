@@ -11,9 +11,9 @@ import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import optifine.Mipmaps;
-import optifine.Reflector;
+import net.optifine.Config;
+import net.optifine.Mipmaps;
+import net.optifine.Reflector;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;

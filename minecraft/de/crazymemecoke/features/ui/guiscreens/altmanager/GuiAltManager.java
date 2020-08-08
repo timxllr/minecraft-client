@@ -6,7 +6,10 @@ import de.crazymemecoke.utils.Colors;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import de.crazymemecoke.utils.time.TimerUtil;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -53,7 +56,7 @@ public class GuiAltManager extends GuiScreen {
 
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
-        AltManager.loadAlts();
+        Client.getInstance().getAltManager().loadAlts();
         selected = null;
         scroll = 0;
         int c = -15698006;
@@ -108,12 +111,12 @@ public class GuiAltManager extends GuiScreen {
         // Remove selected alt
         if (button.id == 3 && selected != null) {
             AltManager.slotList.remove(selected);
-            AltManager.saveAlts();
+            Client.getInstance().getAltManager().saveAlts();
         }
 
         // Back with save
         if (button.id == 4) {
-            AltManager.saveAlts();
+            Client.getInstance().getAltManager().saveAlts();
             mc.displayGuiScreen(parent);
         }
 

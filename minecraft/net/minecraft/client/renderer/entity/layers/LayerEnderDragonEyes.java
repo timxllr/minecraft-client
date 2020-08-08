@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.entity.RenderDragon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import shadersmod.client.Shaders;
+import net.optifine.Config;
+import net.optifine.shadersmod.client.Shaders;
 
 public class LayerEnderDragonEyes implements LayerRenderer
 {

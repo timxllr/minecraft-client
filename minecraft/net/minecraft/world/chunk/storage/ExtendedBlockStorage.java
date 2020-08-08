@@ -5,7 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.chunk.NibbleArray;
-import optifine.Reflector;
+import net.optifine.Reflector;
 
 public class ExtendedBlockStorage
 {

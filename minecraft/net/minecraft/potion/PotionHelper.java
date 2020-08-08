@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.util.IntegerCache;
-import optifine.Config;
-import optifine.CustomColors;
+import net.optifine.Config;
+import net.optifine.CustomColors;
 
 public class PotionHelper
 {

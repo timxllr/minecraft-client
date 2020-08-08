@@ -15,9 +15,9 @@ import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import optifine.TextureUtils;
-import shadersmod.client.Shaders;
+import net.optifine.Config;
+import net.optifine.TextureUtils;
+import net.optifine.shadersmod.client.Shaders;
 
 public class TextureAtlasSprite
 {

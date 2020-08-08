@@ -7,7 +7,7 @@ import java.util.Set;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import optifine.IntegerCache;
+import net.optifine.IntegerCache;
 
 public class VisGraph
 {

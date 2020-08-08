@@ -31,11 +31,11 @@ import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import optifine.ConnectedTextures;
-import optifine.Reflector;
-import optifine.TextureUtils;
-import shadersmod.client.ShadersTex;
+import net.optifine.Config;
+import net.optifine.ConnectedTextures;
+import net.optifine.Reflector;
+import net.optifine.TextureUtils;
+import net.optifine.shadersmod.client.ShadersTex;
 
 public class TextureMap extends AbstractTexture implements ITickableTextureObject
 {
@@ -611,7 +611,7 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
     private boolean isAbsoluteLocationPath(String p_isAbsoluteLocationPath_1_)
     {
         String s = p_isAbsoluteLocationPath_1_.toLowerCase();
-        return s.startsWith("mcpatcher/") || s.startsWith("optifine/");
+        return s.startsWith("mcpatcher/") || s.startsWith("net/optifine/");
     }
 
     public TextureAtlasSprite getSpriteSafe(String p_getSpriteSafe_1_)

@@ -2,8 +2,8 @@ package net.minecraft.client.renderer.texture;
 
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.opengl.GL11;
-import shadersmod.client.MultiTexID;
-import shadersmod.client.ShadersTex;
+import net.optifine.shadersmod.client.MultiTexID;
+import net.optifine.shadersmod.client.ShadersTex;
 
 public abstract class AbstractTexture implements ITextureObject
 {

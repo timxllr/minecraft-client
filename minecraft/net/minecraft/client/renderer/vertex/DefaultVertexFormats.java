@@ -1,8 +1,8 @@
 package net.minecraft.client.renderer.vertex;
 
-import optifine.Config;
-import optifine.Reflector;
-import shadersmod.client.SVertexFormat;
+import net.optifine.Config;
+import net.optifine.Reflector;
+import net.optifine.shadersmod.client.SVertexFormat;
 
 public class DefaultVertexFormats
 {

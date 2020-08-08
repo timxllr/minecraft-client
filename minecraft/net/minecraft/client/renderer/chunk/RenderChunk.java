@@ -30,11 +30,11 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
-import optifine.BlockPosM;
-import optifine.Config;
-import optifine.Reflector;
-import optifine.ReflectorForge;
-import shadersmod.client.SVertexBuilder;
+import net.optifine.BlockPosM;
+import net.optifine.Config;
+import net.optifine.Reflector;
+import net.optifine.ReflectorForge;
+import net.optifine.shadersmod.client.SVertexBuilder;
 
 public class RenderChunk
 {

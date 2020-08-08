@@ -6,7 +6,7 @@ import java.nio.IntBuffer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 
-import optifine.Config;
+import net.optifine.Config;
 
 public class GlStateManager
 {

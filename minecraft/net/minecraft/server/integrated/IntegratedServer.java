@@ -28,8 +28,8 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.demo.DemoWorldServer;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
-import optifine.Reflector;
-import optifine.WorldServerOF;
+import net.optifine.Reflector;
+import net.optifine.WorldServerOF;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

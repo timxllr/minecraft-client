@@ -21,9 +21,9 @@ import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import optifine.CustomColors;
-import optifine.FontUtils;
+import net.optifine.Config;
+import net.optifine.CustomColors;
+import net.optifine.FontUtils;
 
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.opengl.GL11;

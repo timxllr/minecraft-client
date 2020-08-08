@@ -4,8 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import optifine.Config;
-import shadersmod.client.ShadersTex;
+import net.optifine.Config;
+import net.optifine.shadersmod.client.ShadersTex;
 
 public class TextureCompass extends TextureAtlasSprite
 {

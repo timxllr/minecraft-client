@@ -27,6 +27,36 @@ public class RenderUtils {
         return (new Color(r, g, b, alpha)).getRGB();
     }
 
+    public static void drawOutlinedBox(AxisAlignedBB boundingBox, int color) {
+        if (boundingBox != null) {
+            GL11.glBegin(3);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.minY, boundingBox.minZ);
+            GL11.glVertex3d(boundingBox.maxX, boundingBox.minY, boundingBox.minZ);
+            GL11.glVertex3d(boundingBox.maxX, boundingBox.minY, boundingBox.maxZ);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.minY, boundingBox.maxZ);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.minY, boundingBox.minZ);
+            GL11.glEnd();
+            GL11.glBegin(3);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.maxY, boundingBox.minZ);
+            GL11.glVertex3d(boundingBox.maxX, boundingBox.maxY, boundingBox.minZ);
+            GL11.glVertex3d(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.maxY, boundingBox.maxZ);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.maxY, boundingBox.minZ);
+            GL11.glEnd();
+            GL11.glBegin(1);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.minY, boundingBox.minZ);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.maxY, boundingBox.minZ);
+            GL11.glVertex3d(boundingBox.maxX, boundingBox.minY, boundingBox.minZ);
+            GL11.glVertex3d(boundingBox.maxX, boundingBox.maxY, boundingBox.minZ);
+            GL11.glVertex3d(boundingBox.maxX, boundingBox.minY, boundingBox.maxZ);
+            GL11.glVertex3d(boundingBox.maxX, boundingBox.maxY, boundingBox.maxZ);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.minY, boundingBox.maxZ);
+            GL11.glVertex3d(boundingBox.minX, boundingBox.maxY, boundingBox.maxZ);
+            GL11.glEnd();
+        }
+    }
+
+
     public static void drawRect(double x, double y, double x2, double y2, int color) {
         float red = (color >> 24 & 0xFF) / 255.0F;
         float green = (color >> 16 & 0xFF) / 255.0F;

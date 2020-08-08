@@ -1,13 +1,14 @@
 package de.crazymemecoke.manager.altmanager;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.features.ui.guiscreens.altmanager.AltSlot;
+import de.crazymemecoke.utils.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import de.crazymemecoke.Client;
-import de.crazymemecoke.features.ui.guiscreens.altmanager.AltSlot;
-import de.crazymemecoke.utils.FileUtils;
 
 public class AltManager {
     public static ArrayList altList = new ArrayList();

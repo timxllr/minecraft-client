@@ -17,10 +17,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
-import optifine.CapeUtils;
-import optifine.Config;
-import optifine.PlayerConfigurations;
-import optifine.Reflector;
+import net.optifine.CapeUtils;
+import net.optifine.Config;
+import net.optifine.PlayerConfigurations;
+import net.optifine.Reflector;
 
 public abstract class AbstractClientPlayer extends EntityPlayer
 {

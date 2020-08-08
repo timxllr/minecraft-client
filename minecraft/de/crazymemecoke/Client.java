@@ -1,13 +1,14 @@
 package de.crazymemecoke;
 
+import de.crazymemecoke.features.commands.Friend;
+import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGUI;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.commandmanager.CommandManager;
+import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
 import de.crazymemecoke.manager.notificationmanager.Notification;
-import de.crazymemecoke.manager.fontmanager.FontManager;
-import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -33,6 +34,8 @@ public class Client {
     private ClickGUI clickgui;
     private FontManager fontManager;
     private File clientDir;
+    private Friend friend;
+    private AltManager altManager;
     private Notification notification;
 
     public void startClient() {
@@ -120,5 +123,13 @@ public class Client {
 
     public String getClientBackground() {
         return clientBackground;
+    }
+
+    public Friend getFriend() {
+        return friend;
+    }
+
+    public AltManager getAltManager() {
+        return altManager;
     }
 }

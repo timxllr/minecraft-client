@@ -12,8 +12,8 @@ import de.crazymemecoke.Client;
 public class ColorUtil {
 
     public static Color getClickGUIColor() {
-        return new Color((int) Client.getInstance().getSetmgr().getSettingByName("GuiRed", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValDouble(),
-                (int) Client.getInstance().getSetmgr().getSettingByName("GuiGreen", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValDouble(),
-                (int) Client.getInstance().getSetmgr().getSettingByName("GuiBlue", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValDouble());
+        return new Color((int) Client.getInstance().getSetmgr().getSettingByName("Red", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValDouble(),
+                (int) Client.getInstance().getSetmgr().getSettingByName("Green", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValDouble(),
+                (int) Client.getInstance().getSetmgr().getSettingByName("Blue", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValDouble());
     }
 }

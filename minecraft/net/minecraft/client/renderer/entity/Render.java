@@ -18,10 +18,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import optifine.Config;
+import net.optifine.Config;
 
 import org.lwjgl.opengl.GL11;
-import shadersmod.client.Shaders;
+import net.optifine.shadersmod.client.Shaders;
 
 public abstract class Render<T extends Entity>
 {

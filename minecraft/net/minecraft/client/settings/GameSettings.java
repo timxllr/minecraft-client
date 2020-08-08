@@ -27,15 +27,15 @@ import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.network.play.client.C15PacketClientSettings;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumDifficulty;
-import optifine.ClearWater;
-import optifine.Config;
-import optifine.CustomColors;
-import optifine.CustomSky;
-import optifine.DynamicLights;
-import optifine.Lang;
-import optifine.NaturalTextures;
-import optifine.RandomMobs;
-import optifine.Reflector;
+import net.optifine.ClearWater;
+import net.optifine.Config;
+import net.optifine.CustomColors;
+import net.optifine.CustomSky;
+import net.optifine.DynamicLights;
+import net.optifine.Lang;
+import net.optifine.NaturalTextures;
+import net.optifine.RandomMobs;
+import net.optifine.Reflector;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
@@ -43,7 +43,7 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
-import shadersmod.client.Shaders;
+import net.optifine.shadersmod.client.Shaders;
 
 public class GameSettings
 {

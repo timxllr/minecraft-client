@@ -7,11 +7,11 @@ import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.data.TextureMetadataSection;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
+import net.optifine.Config;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import shadersmod.client.ShadersTex;
+import net.optifine.shadersmod.client.ShadersTex;
 
 public class SimpleTexture extends AbstractTexture
 {

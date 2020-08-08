@@ -4,8 +4,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.Vec3;
-import optifine.Config;
-import shadersmod.client.SVertexFormat;
+import net.optifine.Config;
+import net.optifine.shadersmod.client.SVertexFormat;
 
 public class TexturedQuad
 {

@@ -30,11 +30,11 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.MapData;
-import optifine.Config;
-import optifine.Reflector;
+import net.optifine.Config;
+import net.optifine.Reflector;
 
 import org.lwjgl.opengl.GL11;
-import shadersmod.client.ShadersTex;
+import net.optifine.shadersmod.client.ShadersTex;
 
 public class RenderItemFrame extends Render
 {

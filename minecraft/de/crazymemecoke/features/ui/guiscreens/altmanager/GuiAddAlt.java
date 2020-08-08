@@ -54,12 +54,12 @@ public class GuiAddAlt extends GuiScreen {
         if (button.id == 0) {
             if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
                 AltManager.slotList.add(new AltSlot(usernameField.getText(), passwordField.getText()));
-                AltManager.saveAlts();
+                Client.getInstance().getAltManager().saveAlts();
                 mc.displayGuiScreen(parent);
             } else if (!usernamePasswordField.getText().isEmpty() && usernamePasswordField.getText().contains(":") && usernamePasswordField.getText().split(":").length == 2) {
                 String[] alt = usernamePasswordField.getText().split(":");
                 AltManager.slotList.add(new AltSlot(alt[0], alt[1]));
-                AltManager.saveAlts();
+                Client.getInstance().getAltManager().saveAlts();
                 mc.displayGuiScreen(parent);
             }
         }

@@ -12,12 +12,12 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
-import optifine.Config;
-import optifine.TextureUtils;
+import net.optifine.Config;
+import net.optifine.TextureUtils;
 
 import org.apache.logging.log4j.LogManager;
 import org.lwjgl.opengl.GL11;
-import shadersmod.client.SVertexBuilder;
+import net.optifine.shadersmod.client.SVertexBuilder;
 
 public class WorldRenderer
 {

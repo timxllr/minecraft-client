@@ -10,8 +10,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
-import optifine.CustomColors;
-import optifine.RenderEnv;
+import net.optifine.CustomColors;
+import net.optifine.RenderEnv;
 
 public class BlockFluidRenderer
 {

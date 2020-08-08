@@ -11,8 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import optifine.CustomColors;
+import net.optifine.Config;
+import net.optifine.CustomColors;
 
 import org.lwjgl.opengl.GL11;
 

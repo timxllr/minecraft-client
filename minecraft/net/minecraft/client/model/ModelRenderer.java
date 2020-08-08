@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
-import optifine.ModelSprite;
+import net.optifine.ModelSprite;
 
 import org.lwjgl.opengl.GL11;
 

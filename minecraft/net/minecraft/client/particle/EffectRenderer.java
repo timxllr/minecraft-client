@@ -28,8 +28,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import optifine.Config;
-import optifine.Reflector;
+import net.optifine.Config;
+import net.optifine.Reflector;
 
 public class EffectRenderer
 {

@@ -37,9 +37,9 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeGenBase;
-import optifine.BlockPosM;
-import optifine.Config;
-import optifine.Reflector;
+import net.optifine.BlockPosM;
+import net.optifine.Config;
+import net.optifine.Reflector;
 
 public abstract class EntityLiving extends EntityLivingBase
 {

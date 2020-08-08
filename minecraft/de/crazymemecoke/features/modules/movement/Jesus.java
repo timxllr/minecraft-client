@@ -13,7 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
-import optifine.BlockPosM;
+import net.optifine.BlockPosM;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;

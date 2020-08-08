@@ -10,8 +10,8 @@ import net.minecraft.util.Vec3i;
 import net.minecraft.world.ChunkCache;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import optifine.Config;
-import optifine.DynamicLights;
+import net.optifine.Config;
+import net.optifine.DynamicLights;
 
 public class RegionRenderCache extends ChunkCache
 {

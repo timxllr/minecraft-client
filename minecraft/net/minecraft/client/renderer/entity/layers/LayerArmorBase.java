@@ -10,11 +10,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import optifine.CustomItems;
-import optifine.Reflector;
-import shadersmod.client.Shaders;
-import shadersmod.client.ShadersRender;
+import net.optifine.Config;
+import net.optifine.CustomItems;
+import net.optifine.Reflector;
+import net.optifine.shadersmod.client.Shaders;
+import net.optifine.shadersmod.client.ShadersRender;
 
 public abstract class LayerArmorBase<T extends ModelBase> implements LayerRenderer<EntityLivingBase>
 {

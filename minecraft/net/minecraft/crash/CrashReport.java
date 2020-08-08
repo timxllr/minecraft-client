@@ -15,9 +15,9 @@ import java.util.concurrent.Callable;
 
 import net.minecraft.util.ReportedException;
 import net.minecraft.world.gen.layer.IntCache;
-import optifine.CrashReportCpu;
-import optifine.CrashReporter;
-import optifine.Reflector;
+import net.optifine.CrashReportCpu;
+import net.optifine.CrashReporter;
+import net.optifine.Reflector;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;

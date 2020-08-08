@@ -18,15 +18,15 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.IBlockAccess;
-import optifine.BetterGrass;
-import optifine.BetterSnow;
-import optifine.Config;
-import optifine.ConnectedTextures;
-import optifine.CustomColors;
-import optifine.NaturalTextures;
-import optifine.Reflector;
-import optifine.RenderEnv;
-import optifine.SmartLeaves;
+import net.optifine.BetterGrass;
+import net.optifine.BetterSnow;
+import net.optifine.Config;
+import net.optifine.ConnectedTextures;
+import net.optifine.CustomColors;
+import net.optifine.NaturalTextures;
+import net.optifine.Reflector;
+import net.optifine.RenderEnv;
+import net.optifine.SmartLeaves;
 
 public class BlockModelRenderer
 {

@@ -58,12 +58,12 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3i;
-import optifine.Config;
-import optifine.CustomColors;
-import optifine.CustomItems;
-import optifine.Reflector;
-import shadersmod.client.Shaders;
-import shadersmod.client.ShadersRender;
+import net.optifine.Config;
+import net.optifine.CustomColors;
+import net.optifine.CustomItems;
+import net.optifine.Reflector;
+import net.optifine.shadersmod.client.Shaders;
+import net.optifine.shadersmod.client.ShadersRender;
 
 public class RenderItem implements IResourceManagerReloadListener
 {

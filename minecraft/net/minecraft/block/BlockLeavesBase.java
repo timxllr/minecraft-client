@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import optifine.Config;
+import net.optifine.Config;
 
 public class BlockLeavesBase extends Block
 {

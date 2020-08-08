@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.data.IMetadataSection;
 import net.minecraft.client.resources.data.IMetadataSerializer;
 import net.minecraft.util.ResourceLocation;
-import optifine.ReflectorForge;
+import net.optifine.ReflectorForge;
 
 public class DefaultResourcePack implements IResourcePack
 {

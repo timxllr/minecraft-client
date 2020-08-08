@@ -7,8 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import optifine.CustomColors;
+import net.optifine.Config;
+import net.optifine.CustomColors;
 
 public class LayerSheepWool implements LayerRenderer
 {

@@ -101,8 +101,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import optifine.PlayerItemsLayer;
-import optifine.Reflector;
+import net.optifine.PlayerItemsLayer;
+import net.optifine.Reflector;
 
 public class RenderManager
 {
@@ -117,9 +117,9 @@ public class RenderManager
 
     /** Renders fonts */
     private FontRenderer textRenderer;
-    public double renderPosX;
-    public double renderPosY;
-    public double renderPosZ;
+    public static double renderPosX;
+    public static double renderPosY;
+    public static double renderPosZ;
     public TextureManager renderEngine;
 
     /** Reference to the World object. */

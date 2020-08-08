@@ -26,7 +26,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.Chunk;
-import optifine.Reflector;
+import net.optifine.Reflector;
 
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;

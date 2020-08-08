@@ -17,9 +17,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ReportedException;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
-import optifine.Config;
-import optifine.Reflector;
-import shadersmod.client.SVertexBuilder;
+import net.optifine.Config;
+import net.optifine.Reflector;
+import net.optifine.shadersmod.client.SVertexBuilder;
 
 public class BlockRendererDispatcher implements IResourceManagerReloadListener
 {

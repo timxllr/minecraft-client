@@ -7,13 +7,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3i;
 import net.minecraftforge.client.model.ITransformation;
-import optifine.Config;
-import optifine.Reflector;
+import net.optifine.Config;
+import net.optifine.Reflector;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
-import shadersmod.client.Shaders;
+import net.optifine.shadersmod.client.Shaders;
 
 public class FaceBakery
 {

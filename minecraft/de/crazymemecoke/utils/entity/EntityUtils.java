@@ -21,13 +21,12 @@ public class EntityUtils {
     private static final Minecraft MINECRAFT = Minecraft.getMinecraft();
     private static boolean set = false;
     private static EntityPlayer reference;
-	  
-	  /*
-	   * public static EntityPlayer getReference()
-	   * {
-	    return (set) || (!((Boolean)RenderUtils.getTracerEntity().getValue()).booleanValue()) ? MINECRAFT.thePlayer : reference == null ? (reference = MINECRAFT.thePlayer) : reference;
-	  }
-	   */
+
+    public static double[] interpolate(Entity entity) {
+        double partialTicks = (double) Minecraft.getMinecraft().timer.renderPartialTicks;
+        double[] pos = new double[]{entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * partialTicks, entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * partialTicks, entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * partialTicks};
+        return pos;
+    }
 
     public static boolean isMoving() {
         return (Wrapper.mc.thePlayer.moveForward > 0F || Wrapper.mc.thePlayer.moveStrafing > 0F) && Wrapper.mc.thePlayer != null;

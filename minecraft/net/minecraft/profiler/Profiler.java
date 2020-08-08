@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.client.renderer.GlStateManager;
-import optifine.Config;
-import optifine.Lagometer;
+import net.optifine.Config;
+import net.optifine.Lagometer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

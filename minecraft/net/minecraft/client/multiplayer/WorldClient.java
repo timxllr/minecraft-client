@@ -34,11 +34,11 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.storage.SaveDataMemoryStorage;
 import net.minecraft.world.storage.SaveHandlerMP;
 import net.minecraft.world.storage.WorldInfo;
-import optifine.BlockPosM;
-import optifine.Config;
-import optifine.DynamicLights;
-import optifine.PlayerControllerOF;
-import optifine.Reflector;
+import net.optifine.BlockPosM;
+import net.optifine.Config;
+import net.optifine.DynamicLights;
+import net.optifine.PlayerControllerOF;
+import net.optifine.Reflector;
 
 public class WorldClient extends World
 {

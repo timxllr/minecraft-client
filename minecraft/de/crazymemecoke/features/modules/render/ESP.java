@@ -1,11 +1,16 @@
 package de.crazymemecoke.features.modules.render;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
+import de.crazymemecoke.utils.entity.EntityHelper;
+import de.crazymemecoke.utils.entity.EntityUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.input.Keyboard;
 
@@ -15,9 +20,11 @@ import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ESP extends Module {
 
@@ -43,18 +50,43 @@ public class ESP extends Module {
     public void onRender() {
         if (getState()) {
             if (sM.getSettingByName("Mode", this).getValString().equalsIgnoreCase("Box")) {
-                for (Object players : mc.theWorld.loadedEntityList) {
-                    if (!(players instanceof EntityLivingBase))
-                        continue;
+                Iterator var3 = mc.theWorld.loadedEntityList.iterator();
 
-                    EntityLivingBase entity = (EntityLivingBase) players;
+                while (true) {
+                    EntityPlayer player;
+                    do {
+                        do {
+                            Object object;
+                            do {
+                                if (!var3.hasNext()) {
+                                    return;
+                                }
 
-                    if (entity instanceof EntityPlayer) {
-                        if (entity != mc.thePlayer)
-                            player(entity);
-                        continue;
+                                object = var3.next();
+                            } while (!(object instanceof EntityPlayer));
+
+                            player = (EntityPlayer) object;
+                        } while (player == mc.thePlayer);
+                    } while (player.rotationPitch != 0.0F);
+
+                    double[] pos = EntityUtils.interpolate(player);
+                    double x = pos[0] - RenderManager.renderPosX;
+                    double y = pos[1] - RenderManager.renderPosY;
+                    double z = pos[2] - RenderManager.renderPosZ;
+                    GL11.glPushMatrix();
+                    GL11.glTranslated(x, y, z);
+                    GL11.glRotatef(-player.rotationYaw, 0.0F, 1.0F, 0.0F);
+                    int color;
+                    if (Friend.friends.contains(player)) {
+                        color = 65280;
+                    } else {
+                        color = 68029;
                     }
+
+                    RenderUtils.drawOutlinedBox(new AxisAlignedBB((double) player.width / 2.0D, 0.0D, -((double) player.width / 2.0D), (double) (-player.width) / 2.0D, (double) player.height + 0.1D, (double) player.width / 2.0D), color);
+                    GL11.glPopMatrix();
                 }
+
             } else if (sM.getSettingByName("Mode", this).getValString().equalsIgnoreCase("Prophunt")) {
                 for (Object entity : mc.theWorld.loadedEntityList)
                     if (entity instanceof EntityLiving && ((Entity) entity).isInvisible()) {

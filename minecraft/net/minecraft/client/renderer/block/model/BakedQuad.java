@@ -5,8 +5,8 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 import net.minecraftforge.client.model.pipeline.IVertexProducer;
-import optifine.Config;
-import optifine.Reflector;
+import net.optifine.Config;
+import net.optifine.Reflector;
 
 public class BakedQuad implements IVertexProducer
 {

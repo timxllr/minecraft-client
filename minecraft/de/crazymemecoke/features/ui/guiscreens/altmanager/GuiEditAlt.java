@@ -60,7 +60,7 @@ public class GuiEditAlt extends GuiScreen {
                 this.altToEdit.setUsername(this.usernameField.getText());
                 this.altToEdit.setPassword(this.passwordField.getText());
 
-                AltManager.saveAlts();
+                Client.getInstance().getAltManager().saveAlts();
                 mc.displayGuiScreen(parent);
             }
         }

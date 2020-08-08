@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.entity.RenderEnderman;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.util.ResourceLocation;
-import optifine.Config;
-import shadersmod.client.Shaders;
+import net.optifine.Config;
+import net.optifine.shadersmod.client.Shaders;
 
 public class LayerEndermanEyes implements LayerRenderer
 {
