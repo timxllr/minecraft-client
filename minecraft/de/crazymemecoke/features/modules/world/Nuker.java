@@ -11,8 +11,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import org.lwjgl.input.Keyboard;
 
-import java.util.ArrayList;
-
 public class Nuker extends Module {
 
     float nukerRange;
@@ -20,13 +18,13 @@ public class Nuker extends Module {
     public Nuker() {
         super("Nuker", Keyboard.KEY_NONE, Category.WORLD, -1);
 
-        Client.getInstance().getSetmgr().rSetting(new Setting("Range", this, 3.5, 0, 5, false));
+        Client.instance().getSetmgr().rSetting(new Setting("Range", this, 3.5, 0, 5, false));
     }
 
     @Override
     public void onUpdate() {
         if (getState()) {
-            nukerRange = (float) Client.getInstance().getSetmgr().getSettingByName("Range", this).getValDouble();
+            nukerRange = (float) Client.instance().getSetmgr().getSettingByName("Range", this).getNum();
             if (mc.thePlayer.capabilities.isCreativeMode) {
                 for (int y = (int) nukerRange; y >= (int) (-nukerRange); --y) {
                     for (int z = (int) (-nukerRange); (float) z <= nukerRange; ++z) {

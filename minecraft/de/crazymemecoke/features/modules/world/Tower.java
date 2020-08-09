@@ -1,6 +1,6 @@
 package de.crazymemecoke.features.modules.world;
 
-import com.darkmagician6.eventapi.EventTarget;
+import de.crazymemecoke.utils.events.eventapi.EventTarget;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.events.UpdateEvent;

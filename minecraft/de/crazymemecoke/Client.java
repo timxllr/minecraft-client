@@ -9,6 +9,7 @@ import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
 import de.crazymemecoke.manager.notificationmanager.Notification;
+import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -26,6 +27,8 @@ public class Client {
 
     // Paths of Files
     private final String clientBackground = "textures/client/background.jpg";
+    private final String clientIcon = "textures/client/icon.png";
+    private final String shaderLoc = "textures/client/shader/";
     private final String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
 
     private ModuleManager moduleManager;
@@ -35,6 +38,7 @@ public class Client {
     private FontManager fontManager;
     private File clientDir;
     private Friend friend;
+    private Shader shader;
     private AltManager altManager;
     private Notification notification;
 
@@ -58,7 +62,7 @@ public class Client {
         Runtime.getRuntime().addShutdownHook(new Thread(this::onShutdown));
     }
 
-    public static Client getInstance() {
+    public static Client instance() {
         return instance;
     }
 
@@ -73,7 +77,7 @@ public class Client {
         AltManager.saveAlts();
     }
 
-    public ModuleManager getModuleManager() {
+    public ModuleManager modManager() {
         return moduleManager;
     }
 
@@ -131,5 +135,17 @@ public class Client {
 
     public AltManager getAltManager() {
         return altManager;
+    }
+
+    public String getClientIcon() {
+        return clientIcon;
+    }
+
+    public String getShaderLoc() {
+        return shaderLoc;
+    }
+
+    public Shader getShader() {
+        return shader;
     }
 }

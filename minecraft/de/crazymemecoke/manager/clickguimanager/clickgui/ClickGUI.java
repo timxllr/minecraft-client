@@ -1,10 +1,10 @@
 package de.crazymemecoke.manager.clickguimanager.clickgui;
 
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.clickgui.elements.Element;
 import de.crazymemecoke.manager.clickguimanager.clickgui.elements.ModuleButton;
 import de.crazymemecoke.manager.clickguimanager.clickgui.elements.menu.ElementSlider;
 import de.crazymemecoke.manager.clickguimanager.clickgui.util.ColorUtil;
-import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.FileUtils;
@@ -45,7 +45,7 @@ public class ClickGUI extends GuiScreen {
         double pyplus = pheight + 10;
 
         try {
-            guiFile = new File(Client.getInstance().getClientDir() + "/gui.txt");
+            guiFile = new File(Client.instance().getClientDir() + "/gui.txt");
             if (guiFile.createNewFile()) {
                 System.out.println("File created: " + guiFile.getName());
             } else {
@@ -91,7 +91,7 @@ public class ClickGUI extends GuiScreen {
             ClickGUI.panels.add(new Panel(title, categoryX, categoryY, pwidth, pheight, expanded, this) {
                 @Override
                 public void setup() {
-                    for (Module m : Client.getInstance().getModuleManager().getModules()) {
+                    for (Module m : Client.instance().modManager().getModules()) {
                         if (!m.getCategory().equals(c))
                             continue;
                         this.Elements.add(new ModuleButton(m, this));
@@ -141,7 +141,7 @@ public class ClickGUI extends GuiScreen {
                         for (Element e : b.menuelements) {
                             e.offset = off;
                             e.update();
-                            if (Client.getInstance().getSetmgr().getSettingByName("Design", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValString()
+                            if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode()
                                     .equalsIgnoreCase("New")) {
                                 RenderUtils.drawRect(e.x, e.y, e.x + e.width + 2, e.y + e.height, outlineColor);
                             }
@@ -252,7 +252,7 @@ public class ClickGUI extends GuiScreen {
             if (mc.entityRenderer.theShaderGroup != null) {
                 mc.entityRenderer.theShaderGroup.deleteShaderGroup();
             }
-            if (Client.getInstance().getSetmgr().getSettingByName("Blur", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValBoolean()) {
+            if (Client.instance().getSetmgr().getSettingByName("Blur", Client.instance().modManager().getByName("ClickGUI")).getBool()) {
                 mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
             }
         }
@@ -284,7 +284,7 @@ public class ClickGUI extends GuiScreen {
 
         FileUtils.saveFile(guiFile, lines);
 
-        Client.getInstance().getModuleManager().getModByName("ClickGUI").setState(false);
+        Client.instance().modManager().getByName("ClickGUI").setState(false);
     }
 
     public void closeAllSettings() {

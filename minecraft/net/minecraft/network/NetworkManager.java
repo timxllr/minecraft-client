@@ -1,6 +1,6 @@
 package net.minecraft.network;
 
-import com.darkmagician6.eventapi.EventManager;
+import de.crazymemecoke.utils.events.eventapi.EventManager;
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import de.crazymemecoke.utils.events.PacketSendEvent;
@@ -36,7 +36,6 @@ import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.crypto.SecretKey;
 
-import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.CryptManager;

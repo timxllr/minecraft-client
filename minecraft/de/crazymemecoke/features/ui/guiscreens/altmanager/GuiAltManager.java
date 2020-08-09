@@ -56,7 +56,7 @@ public class GuiAltManager extends GuiScreen {
 
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
-        Client.getInstance().getAltManager().loadAlts();
+        Client.instance().getAltManager().loadAlts();
         selected = null;
         scroll = 0;
         int c = -15698006;
@@ -111,12 +111,12 @@ public class GuiAltManager extends GuiScreen {
         // Remove selected alt
         if (button.id == 3 && selected != null) {
             AltManager.slotList.remove(selected);
-            Client.getInstance().getAltManager().saveAlts();
+            Client.instance().getAltManager().saveAlts();
         }
 
         // Back with save
         if (button.id == 4) {
-            Client.getInstance().getAltManager().saveAlts();
+            Client.instance().getAltManager().saveAlts();
             mc.displayGuiScreen(parent);
         }
 
@@ -140,8 +140,8 @@ public class GuiAltManager extends GuiScreen {
     private void drawSlider(int mouseX, int mouseY) {
         ScaledResolution res = new ScaledResolution(Wrapper.mc);
         boolean MIN_HEIGHT = true;
-        int MAX_HEIGHT = res.getScaledHeight() - 35;
-        int WIDTH = res.getScaledWidth() - 150;
+        int MAX_HEIGHT = res.height() - 35;
+        int WIDTH = res.width() - 150;
         byte radius = 2;
         int var10000 = AltManager.slotList.size();
         byte var10001;
@@ -276,25 +276,25 @@ public class GuiAltManager extends GuiScreen {
             opacity = 1;
         }
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
-                width, height, sr.getScaledWidth(), sr.getScaledHeight());
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
+                width, height, sr.width(), sr.height());
         byte y = 0;
-        Client.getInstance().getFontManager().comfortaa20.drawString("AltManager", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("AltManager") / 2, 21, RenderUtils.reAlpha(Colors.DARKGREY.c, opacity));
-        Client.getInstance().getFontManager().comfortaa20.drawString("AltManager", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("AltManager") / 2, 20, RenderUtils.reAlpha(-1, opacity));
-        Gui.drawRect(10, 50, sr.getScaledWidth() - 150, sr.getScaledHeight() - 10, RenderUtils.reAlpha(darkGray, opacity));
-        Gui.drawRect(sr.getScaledWidth() - 150, 50, sr.getScaledWidth() - 5, sr.getScaledHeight() - 10, RenderUtils.reAlpha(-16119286, 0.75F * opacity));
-        Client.getInstance().getFontManager().comfortaa20.drawString("Status:", (sr.getScaledWidth() - 145), 55, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
+        Client.instance().getFontManager().comfortaa20.drawString("AltManager", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("AltManager") / 2, 21, RenderUtils.reAlpha(Colors.DARKGREY.c, opacity));
+        Client.instance().getFontManager().comfortaa20.drawString("AltManager", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("AltManager") / 2, 20, RenderUtils.reAlpha(-1, opacity));
+        Gui.drawRect(10, 50, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(darkGray, opacity));
+        Gui.drawRect(sr.width() - 150, 50, sr.width() - 5, sr.height() - 10, RenderUtils.reAlpha(-16119286, 0.75F * opacity));
+        Client.instance().getFontManager().comfortaa20.drawString("Status:", (sr.width() - 145), 55, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
         boolean premium = mc.session.getProfile().isComplete();
         String strPremium = premium ? "Premium" : "Cracked";
-        Client.getInstance().getFontManager().comfortaa20.drawString(strPremium, (sr.getScaledWidth() - Client.getInstance().getFontManager().comfortaa20.getStringWidth(strPremium) - 8), 55, premium ? RenderUtils.reAlpha(Colors.YELLOW.c, opacity) : RenderUtils.reAlpha(Colors.DARKRED.c, opacity));
-        Client.getInstance().getFontManager().comfortaa20.drawString("Username:", (sr.getScaledWidth() - 145), 70, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
-        Client.getInstance().getFontManager().comfortaa20.drawString(mc.session.getUsername(), (sr.getScaledWidth() - Client.getInstance().getFontManager().comfortaa20.getStringWidth(mc.session.getUsername()) - 8), 70, RenderUtils.reAlpha(Colors.MAGENTA.c, opacity));
-        Client.getInstance().getFontManager().comfortaa20.drawString("Alts:", (sr.getScaledWidth() - 145), 85, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
-        Client.getInstance().getFontManager().comfortaa20.drawString(String.valueOf(AltManager.slotList.size()), (sr.getScaledWidth() - Client.getInstance().getFontManager().comfortaa20.getStringWidth(String.valueOf(AltManager.slotList.size())) - 8), 85, RenderUtils.reAlpha(Colors.WHITE.c, opacity));
+        Client.instance().getFontManager().comfortaa20.drawString(strPremium, (sr.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(strPremium) - 8), 55, premium ? RenderUtils.reAlpha(Colors.YELLOW.c, opacity) : RenderUtils.reAlpha(Colors.DARKRED.c, opacity));
+        Client.instance().getFontManager().comfortaa20.drawString("Username:", (sr.width() - 145), 70, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
+        Client.instance().getFontManager().comfortaa20.drawString(mc.session.getUsername(), (sr.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(mc.session.getUsername()) - 8), 70, RenderUtils.reAlpha(Colors.MAGENTA.c, opacity));
+        Client.instance().getFontManager().comfortaa20.drawString("Alts:", (sr.width() - 145), 85, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
+        Client.instance().getFontManager().comfortaa20.drawString(String.valueOf(AltManager.slotList.size()), (sr.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(String.valueOf(AltManager.slotList.size())) - 8), 85, RenderUtils.reAlpha(Colors.WHITE.c, opacity));
 
         byte MIN_HEIGHT = 75;
-        int MAX_HEIGHT = sr.getScaledHeight() - 35;
+        int MAX_HEIGHT = sr.height() - 35;
         float percent = (sliderY - MIN_HEIGHT) / (MAX_HEIGHT - MIN_HEIGHT);
         float scrollAmount = (-Mouse.getDWheel()) * 0.07F;
         int all = 0;
@@ -322,17 +322,17 @@ public class GuiAltManager extends GuiScreen {
             AltSlot altSlot = (AltSlot) var21.next();
             altSlot.y = altSlotY;
             altSlot.opacity = opacity;
-            altSlot.WIDTH = sr.getScaledWidth() - 160;
+            altSlot.WIDTH = sr.width() - 160;
             altSlot.MIN_HEIGHT = 50;
-            altSlot.MAX_HEIGHT = sr.getScaledHeight() - 10;
+            altSlot.MAX_HEIGHT = sr.height() - 10;
             altSlot.drawScreen(posX, posY);
         }
 
         drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
-        Gui.drawRect(10, 50, sr.getScaledWidth() - 150, 75, RenderUtils.reAlpha(lightGray, opacity));
-        Client.getInstance().getFontManager().comfortaa20.drawString("EMAIL:PASS", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("EMAIL:PASS") / 2, 59, RenderUtils.reAlpha(-1, opacity));
+        Gui.drawRect(10, 50, sr.width() - 150, 75, RenderUtils.reAlpha(lightGray, opacity));
+        Client.instance().getFontManager().comfortaa20.drawString("EMAIL:PASS", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("EMAIL:PASS") / 2, 59, RenderUtils.reAlpha(-1, opacity));
         drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
-        Gui.drawRect(10, sr.getScaledHeight() - 35, sr.getScaledWidth() - 150, sr.getScaledHeight() - 10, RenderUtils.reAlpha(lightGray, opacity));
+        Gui.drawRect(10, sr.height() - 35, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(lightGray, opacity));
         super.drawScreen(posX, posY, f);
         drawSlider(posX, posY);
     }

@@ -56,10 +56,10 @@ public class GuiSpectator extends Gui implements ISpectatorMenuRecipient
             }
             else
             {
-                int i = p_175264_1_.getScaledWidth() / 2;
+                int i = p_175264_1_.width() / 2;
                 float f1 = this.zLevel;
                 this.zLevel = -90.0F;
-                float f2 = (float)p_175264_1_.getScaledHeight() - 22.0F * f;
+                float f2 = (float)p_175264_1_.height() - 22.0F * f;
                 SpectatorDetails spectatordetails = this.field_175271_i.func_178646_f();
                 this.func_175258_a(p_175264_1_, f, i, f2, spectatordetails);
                 this.zLevel = f1;
@@ -85,7 +85,7 @@ public class GuiSpectator extends Gui implements ISpectatorMenuRecipient
 
         for (int i = 0; i < 9; ++i)
         {
-            this.func_175266_a(i, p_175258_1_.getScaledWidth() / 2 - 90 + i * 20 + 2, p_175258_4_ + 3.0F, p_175258_2_, p_175258_5_.func_178680_a(i));
+            this.func_175266_a(i, p_175258_1_.width() / 2 - 90 + i * 20 + 2, p_175258_4_ + 3.0F, p_175258_2_, p_175258_5_.func_178680_a(i));
         }
 
         RenderHelper.disableStandardItemLighting();
@@ -126,8 +126,8 @@ public class GuiSpectator extends Gui implements ISpectatorMenuRecipient
 
             if (s != null)
             {
-                int j = (p_175263_1_.getScaledWidth() - this.field_175268_g.fontRendererObj.getStringWidth(s)) / 2;
-                int k = p_175263_1_.getScaledHeight() - 35;
+                int j = (p_175263_1_.width() - this.field_175268_g.fontRendererObj.getStringWidth(s)) / 2;
+                int k = p_175263_1_.height() - 35;
                 GlStateManager.pushMatrix();
                 GlStateManager.enableBlend();
                 GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);

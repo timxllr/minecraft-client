@@ -3,6 +3,7 @@ package de.crazymemecoke.features.ui.guiscreens;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.ui.guiscreens.altmanager.GuiAltManager;
 import de.crazymemecoke.utils.render.RenderUtils;
+import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
@@ -61,9 +62,9 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         ScaledResolution sr = new ScaledResolution(mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
-                width, height, sr.getScaledWidth(), sr.getScaledHeight());
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
+                width, height, sr.width(), sr.height());
 
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) (width / 2 + 90), 70.0F, 0.0F);
@@ -75,13 +76,13 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         RenderUtils.drawRect(width / 2 - 130, height / 2 - 70, width / 2 + 140, height / 2 + 30, new Color(55, 55, 55, 150).getRGB());
 
-        String header = Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion() + " by " + Client.getInstance().getClientCoder();
-        RenderUtils.drawRect(0, 0, Client.getInstance().getFontManager().rainbowVeins50.getStringWidth(header) + 5, Client.getInstance().getFontManager().rainbowVeins50.getStringHeight(header) + 5, new Color(55, 55, 55, 150).getRGB());
-        Client.getInstance().getFontManager().rainbowVeins50.drawString(header, 2, 4, -1);
+        String header = Client.instance().getClientName() + " " + Client.instance().getClientVersion() + " by " + Client.instance().getClientCoder();
+        RenderUtils.drawRect(0, 0, Client.instance().getFontManager().bebasNeue50.getStringWidth(header) + 8, Client.instance().getFontManager().rainbowVeins50.getStringHeight(header) + 5, new Color(55, 55, 55, 150).getRGB());
+        Client.instance().getFontManager().bebasNeue50.drawString(header, 2, 2, -1);
 
         String s1 = "Username: " + mc.session.getUsername();
-        RenderUtils.drawRect(15, height - 15, Client.getInstance().getFontManager().comfortaa22.getStringWidth(s1) + 25, height - 35, new Color(55, 55, 55, 150).getRGB());
-        Client.getInstance().getFontManager().comfortaa22.drawString(s1, 20, height - 29, -1);
+        RenderUtils.drawRect(15, height - 15, Client.instance().getFontManager().bebasNeue30.getStringWidth(s1) + 25, height - 35, new Color(55, 55, 55, 150).getRGB());
+        Client.instance().getFontManager().bebasNeue30.drawString(s1, 20, height - 31, -1);
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);

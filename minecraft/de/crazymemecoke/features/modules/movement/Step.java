@@ -17,14 +17,14 @@ public class Step extends Module {
 
         mode.add("Vanilla");
 
-        Client.getInstance().getSetmgr().rSetting(new Setting("Mode", this, "Vanilla", mode));
+        Client.instance().getSetmgr().rSetting(new Setting("Mode", this, "Vanilla", mode));
     }
 
-    SettingsManager sM = Client.getInstance().getSetmgr();
+    SettingsManager sM = Client.instance().getSetmgr();
 
     public void onUpdate() {
         if (this.getState()) {
-            if (sM.getSettingByName("Mode", this).getValString().equalsIgnoreCase("Vanilla")) {
+            if (sM.getSettingByName("Mode", this).getMode().equalsIgnoreCase("Vanilla")) {
                 if (mc.thePlayer.isCollidedHorizontally && mc.thePlayer.onGround) {
                     mc.thePlayer.jump();
                 } else {

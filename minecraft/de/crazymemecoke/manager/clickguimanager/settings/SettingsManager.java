@@ -23,7 +23,7 @@ public class SettingsManager {
         this.settings = new ArrayList<>();
 
         try {
-            settingsFile = new File(Client.getInstance().getClientDir() + "/config.txt");
+            settingsFile = new File(Client.instance().getClientDir() + "/config.txt");
             if (settingsFile.createNewFile()) {
                 System.out.println("File created: " + settingsFile.getName());
             } else {
@@ -66,23 +66,23 @@ public class SettingsManager {
                 return set;
             }
         }
-        System.err.println("[" + Client.getInstance().getClientName() + "] Error Setting NOT found: '" + name + "'!");
+        System.err.println("[" + Client.instance().getClientName() + "] Error Setting NOT found: '" + name + "'!");
         return null;
     }
 
 
     public void saveSettings() {
         List<String> formattedSettings = new ArrayList<String>();
-        for (final Setting set : Client.getInstance().getSetmgr().getSettings()) {
+        for (final Setting set : Client.instance().getSetmgr().getSettings()) {
             String yeet = set.getParentMod() != null ? set.getParentMod().getName() : "global";
             if (set.isSlider()) {
-                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getValDouble());
+                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getNum());
             }
             if (set.isCheck()) {
-                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getValBoolean());
+                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getBool());
             }
             if (set.isCombo()) {
-                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getValString());
+                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getMode());
             }
         }
         FileUtils.saveFile(settingsFile, formattedSettings);
@@ -92,16 +92,16 @@ public class SettingsManager {
         FileUtils.loadFile(settingsFile).forEach(line -> {
             final String[] arguments = line.split(":");
             if (arguments.length == 3) {
-                Module parent = arguments[0].equalsIgnoreCase("global") ? null : Client.getInstance().getModuleManager().getModByName(arguments[0]);
+                Module parent = arguments[0].equalsIgnoreCase("global") ? null : Client.instance().modManager().getByName(arguments[0]);
                 Setting set = getSettingByName(arguments[1], parent);
 
                 if (set != null) {
                     if (set.isSlider())
-                        set.setValDouble(Double.parseDouble(arguments[2]));
+                        set.setNum(Double.parseDouble(arguments[2]));
                     if (set.isCheck())
-                        set.setValBoolean(Boolean.parseBoolean(arguments[2]));
+                        set.setBool(Boolean.parseBoolean(arguments[2]));
                     if (set.isCombo())
-                        set.setValString(arguments[2]);
+                        set.setMode(arguments[2]);
                 }
             }
         });

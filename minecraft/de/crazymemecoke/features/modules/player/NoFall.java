@@ -17,18 +17,18 @@ public class NoFall extends Module {
     ArrayList<String> mode = new ArrayList<>();
 
     public NoFall() {
-        super("NoFall", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).hashCode());
+        super("NoFall", Keyboard.KEY_NONE, Category.PLAYER, -1);
 
         mode.add("AAC 1.9.10");
         mode.add("NCP");
 
-        Client.getInstance().getSetmgr().rSetting(new Setting("Mode", this, "AAC 1.9.10", mode));
+        Client.instance().getSetmgr().rSetting(new Setting("Mode", this, "AAC 1.9.10", mode));
     }
 
     @Override
     public void onUpdate() {
         if (getState()) {
-            if (Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString()
+            if (Client.instance().getSetmgr().getSettingByName("Mode", this).getMode()
                     .equalsIgnoreCase("AAC 1.9.10")) {
                 if (!this.mc.thePlayer.onGround) {
                     Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(true));
@@ -38,7 +38,7 @@ public class NoFall extends Module {
                     this.mc.thePlayer.onGround = false;
                     this.mc.thePlayer.onGround = true;
                 }
-            } else if (Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString()
+            } else if (Client.instance().getSetmgr().getSettingByName("Mode", this).getMode()
                     .equalsIgnoreCase("NCP")) {
             }
         }

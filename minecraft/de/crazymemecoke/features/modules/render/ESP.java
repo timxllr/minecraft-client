@@ -4,7 +4,6 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
-import de.crazymemecoke.utils.entity.EntityHelper;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -28,10 +27,10 @@ import java.util.Iterator;
 
 public class ESP extends Module {
 
-    SettingsManager sM = Client.getInstance().getSetmgr();
+    SettingsManager sM = Client.instance().getSetmgr();
 
     public ESP() {
-        super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER, Rainbow.rainbow(1, 1).hashCode());
+        super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER, -1);
 
         ArrayList<String> mode = new ArrayList<>();
 
@@ -49,7 +48,7 @@ public class ESP extends Module {
     @Override
     public void onRender() {
         if (getState()) {
-            if (sM.getSettingByName("Mode", this).getValString().equalsIgnoreCase("Box")) {
+            if (sM.getSettingByName("Mode", this).getMode().equalsIgnoreCase("Box")) {
                 Iterator var3 = mc.theWorld.loadedEntityList.iterator();
 
                 while (true) {
@@ -87,7 +86,7 @@ public class ESP extends Module {
                     GL11.glPopMatrix();
                 }
 
-            } else if (sM.getSettingByName("Mode", this).getValString().equalsIgnoreCase("Prophunt")) {
+            } else if (sM.getSettingByName("Mode", this).getMode().equalsIgnoreCase("Prophunt")) {
                 for (Object entity : mc.theWorld.loadedEntityList)
                     if (entity instanceof EntityLiving && ((Entity) entity).isInvisible()) {
                         double x = ((Entity) entity).posX;

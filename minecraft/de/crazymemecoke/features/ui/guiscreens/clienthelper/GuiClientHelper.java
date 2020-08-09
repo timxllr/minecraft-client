@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class GuiClientHelper extends GuiScreen {
 
-    FontManager fM = Client.getInstance().getFontManager();
+    FontManager fM = Client.instance().getFontManager();
 
     @Override
     public void initGui() {
@@ -58,15 +58,15 @@ public class GuiClientHelper extends GuiScreen {
         ScaledResolution sr = new ScaledResolution(mc);
         RenderUtils.drawRect(20, 20, width - 20, height - 25, new Color(0, 0, 0, 150).getRGB());
 
-        String title = Client.getInstance().getClientName() + " | Client Helper | Startseite";
+        String title = Client.instance().getClientName() + " | Client Helper | Startseite";
         fM.cabin23.drawString(title, width / 2 - fM.cabin23.getStringWidth(title) / 2, 25, Rainbow.rainbow(1, 1).getRGB());
 
         RenderUtils.drawRect(width / 2 - 100, height - 110, width / 2 + 100, height - 45, new Color(0, 0, 0, 150).getRGB());
 
         String subTitle = "Client Informationen";
-        String clientName = "Name: " + Client.getInstance().getClientName();
-        String clientVersion = "Version: " + Client.getInstance().getClientVersion();
-        String clientCoder = "Coder: " + Client.getInstance().getClientCoder();
+        String clientName = "Name: " + Client.instance().getClientName();
+        String clientVersion = "Version: " + Client.instance().getClientVersion();
+        String clientCoder = "Coder: " + Client.instance().getClientCoder();
 
         fM.cabin35.drawStringWithShadow(subTitle, width / 2 - fM.cabin35.getStringWidth(subTitle) / 2, height - 105, -1);
         fM.cabin23.drawStringWithShadow(clientName, width / 2 - fM.cabin23.getStringWidth(clientName) / 2, height - 85, -1);

@@ -1,16 +1,13 @@
 package de.crazymemecoke.features.ui.guiscreens.clienthelper;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.commandmanager.Command;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
@@ -18,7 +15,7 @@ import java.io.IOException;
 
 public class GuiModules extends GuiScreen {
 
-    FontManager fM = Client.getInstance().getFontManager();
+    FontManager fM = Client.instance().getFontManager();
 
     @Override
     public void initGui() {
@@ -50,14 +47,14 @@ public class GuiModules extends GuiScreen {
         ScaledResolution sr = new ScaledResolution(mc);
         RenderUtils.drawRect(20, 20, width - 20, height - 25, new Color(0, 0, 0, 150).getRGB());
 
-        String title = Client.getInstance().getClientName() + " | Client Helper | Alle Modules";
+        String title = Client.instance().getClientName() + " | Client Helper | Alle Modules";
         fM.cabin23.drawString(title, width / 2 - fM.cabin23.getStringWidth(title) / 2, 25, Rainbow.rainbow(1, 1).getRGB());
 
         fM.comfortaa22.drawString("Modules:", width / 2 - fM.comfortaa22.getStringWidth("Modules:") / 2, 45, -1);
 
         int yModPos = 60;
         int yModPos2 = 60;
-        for (Module mod : Client.getInstance().getModuleManager().getModules()) {
+        for (Module mod : Client.instance().modManager().getModules()) {
             if (yModPos < height - 35) {
                 fM.comfortaa20.drawCenteredString(mod.getName(), width / 2 - 50, yModPos, -1);
                 yModPos += 12;

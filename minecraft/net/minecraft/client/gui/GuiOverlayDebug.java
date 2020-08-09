@@ -90,7 +90,7 @@ public class GuiOverlayDebug extends Gui
             {
                 int j = this.fontRenderer.FONT_HEIGHT;
                 int k = this.fontRenderer.getStringWidth(s);
-                int l = p_175239_1_.getScaledWidth() - 2 - k;
+                int l = p_175239_1_.width() - 2 - k;
                 int i1 = 2 + j * i;
                 drawRect(l - 1, i1 - 1, l + k + 1, i1 + j - 1, -1873784752);
                 this.fontRenderer.drawString(s, l, i1, 14737632);
@@ -233,30 +233,30 @@ public class GuiOverlayDebug extends Gui
         ScaledResolution scaledresolution = new ScaledResolution(this.mc);
         int k = i;
         int l = 0;
-        drawRect(0, scaledresolution.getScaledHeight() - 60, 240, scaledresolution.getScaledHeight(), -1873784752);
+        drawRect(0, scaledresolution.height() - 60, 240, scaledresolution.height(), -1873784752);
 
         while (k != j)
         {
             int i1 = frametimer.func_181748_a(along[k], 30);
             int j1 = this.func_181552_c(MathHelper.clamp_int(i1, 0, 60), 0, 30, 60);
-            this.drawVerticalLine(l, scaledresolution.getScaledHeight(), scaledresolution.getScaledHeight() - i1, j1);
+            this.drawVerticalLine(l, scaledresolution.height(), scaledresolution.height() - i1, j1);
             ++l;
             k = frametimer.func_181751_b(k + 1);
         }
 
-        drawRect(1, scaledresolution.getScaledHeight() - 30 + 1, 14, scaledresolution.getScaledHeight() - 30 + 10, -1873784752);
-        this.fontRenderer.drawString("60", 2, scaledresolution.getScaledHeight() - 30 + 2, 14737632);
-        this.drawHorizontalLine(0, 239, scaledresolution.getScaledHeight() - 30, -1);
-        drawRect(1, scaledresolution.getScaledHeight() - 60 + 1, 14, scaledresolution.getScaledHeight() - 60 + 10, -1873784752);
-        this.fontRenderer.drawString("30", 2, scaledresolution.getScaledHeight() - 60 + 2, 14737632);
-        this.drawHorizontalLine(0, 239, scaledresolution.getScaledHeight() - 60, -1);
-        this.drawHorizontalLine(0, 239, scaledresolution.getScaledHeight() - 1, -1);
-        this.drawVerticalLine(0, scaledresolution.getScaledHeight() - 60, scaledresolution.getScaledHeight(), -1);
-        this.drawVerticalLine(239, scaledresolution.getScaledHeight() - 60, scaledresolution.getScaledHeight(), -1);
+        drawRect(1, scaledresolution.height() - 30 + 1, 14, scaledresolution.height() - 30 + 10, -1873784752);
+        this.fontRenderer.drawString("60", 2, scaledresolution.height() - 30 + 2, 14737632);
+        this.drawHorizontalLine(0, 239, scaledresolution.height() - 30, -1);
+        drawRect(1, scaledresolution.height() - 60 + 1, 14, scaledresolution.height() - 60 + 10, -1873784752);
+        this.fontRenderer.drawString("30", 2, scaledresolution.height() - 60 + 2, 14737632);
+        this.drawHorizontalLine(0, 239, scaledresolution.height() - 60, -1);
+        this.drawHorizontalLine(0, 239, scaledresolution.height() - 1, -1);
+        this.drawVerticalLine(0, scaledresolution.height() - 60, scaledresolution.height(), -1);
+        this.drawVerticalLine(239, scaledresolution.height() - 60, scaledresolution.height(), -1);
 
         if (this.mc.gameSettings.limitFramerate <= 120)
         {
-            this.drawHorizontalLine(0, 239, scaledresolution.getScaledHeight() - 60 + this.mc.gameSettings.limitFramerate / 2, -16711681);
+            this.drawHorizontalLine(0, 239, scaledresolution.height() - 60 + this.mc.gameSettings.limitFramerate / 2, -16711681);
         }
 
         GlStateManager.enableDepth();

@@ -80,7 +80,7 @@ public class GuiAnimationSettingsOF extends GuiScreen
             }
 
             ScaledResolution scaledresolution = new ScaledResolution(this.mc);
-            this.setWorldAndResolution(this.mc, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
+            this.setWorldAndResolution(this.mc, scaledresolution.width(), scaledresolution.height());
         }
     }
 

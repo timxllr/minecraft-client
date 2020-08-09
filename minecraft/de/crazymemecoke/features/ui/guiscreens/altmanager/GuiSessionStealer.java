@@ -15,7 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
 import org.lwjgl.input.Keyboard;
 
-import java.awt.*;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -138,18 +137,18 @@ public class GuiSessionStealer extends GuiScreen {
             mc.displayGuiScreen(parent);
         }
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
-                width, height, sr.getScaledWidth(), sr.getScaledHeight());
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
+                width, height, sr.width(), sr.height());
 
         int x = width / 2 - 150;
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.getInstance().getFontManager().comfortaa20.drawString("REDEEM SESSION TOKEN", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("REDEEM SESSION TOKEN") / 2, height / 2 - 140, Colors.GREY.c);
-        Client.getInstance().getFontManager().comfortaa20.drawString("SESSION ID", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("SESSION ID") / 2, height - 265, -1);
+        Client.instance().getFontManager().comfortaa20.drawString("REDEEM SESSION TOKEN", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("REDEEM SESSION TOKEN") / 2, height / 2 - 140, Colors.GREY.c);
+        Client.instance().getFontManager().comfortaa20.drawString("SESSION ID", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("SESSION ID") / 2, height - 265, -1);
 
-        UnicodeFontRenderer font = Client.getInstance().getFontManager().comfortaa18;
+        UnicodeFontRenderer font = Client.instance().getFontManager().comfortaa18;
         String t1 = "Session IDs kannst du in Minecraft Crash Reports finden.";
         String t2 = "Suche im Internet nach \"Minecraft Session ID is token\"";
         String t3 = "Die dort enthaltene ID sieht so aus:";

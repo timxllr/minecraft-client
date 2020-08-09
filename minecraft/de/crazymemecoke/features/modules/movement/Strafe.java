@@ -1,6 +1,6 @@
 package de.crazymemecoke.features.modules.movement;
 
-import com.darkmagician6.eventapi.EventTarget;
+import de.crazymemecoke.utils.events.eventapi.EventTarget;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.render.Rainbow;
@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 public class Strafe extends Module {
 
     public Strafe() {
-        super("Strafe", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
+        super("Strafe", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
     }
 
     @EventTarget

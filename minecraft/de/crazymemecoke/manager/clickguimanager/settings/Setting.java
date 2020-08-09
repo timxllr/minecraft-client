@@ -65,11 +65,11 @@ public class Setting {
         return parent;
     }
 
-    public String getValString() {
+    public String getMode() {
         return this.sval;
     }
 
-    public void setValString(String in) {
+    public void setMode(String in) {
         this.sval = in;
     }
 
@@ -77,30 +77,30 @@ public class Setting {
         return this.options;
     }
 
-    public boolean getValBoolean() {
+    public boolean getBool() {
         return this.bval;
     }
 
-    public void setValBoolean(boolean in) {
+    public void setBool(boolean in) {
         this.bval = in;
     }
 
-    public double getValDouble() {
+    public double getNum() {
         if (this.onlyint) {
             this.dval = (int) dval;
         }
         return this.dval;
     }
 
-    public void setValDouble(double in) {
+    public void setNum(double in) {
         this.dval = in;
     }
 
-    public double getMin() {
+    public double min() {
         return this.min;
     }
 
-    public double getMax() {
+    public double max() {
         return this.max;
     }
 

@@ -1,7 +1,6 @@
 package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.utils.Colors;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
@@ -88,18 +87,18 @@ public class GuiDirectLogin extends GuiScreen {
             mc.displayGuiScreen(parent);
         }
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.getInstance().getClientBackground()));
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.getScaledWidth(), sr.getScaledHeight(),
-                width, height, sr.getScaledWidth(), sr.getScaledHeight());
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
+                width, height, sr.width(), sr.height());
 
         int x = width / 2 - 150;
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.getInstance().getFontManager().comfortaa20.drawString("DIRECT LOGIN", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("DIRECT LOGIN") / 2, height / 2 - 140, Colors.GREY.c);
-        Client.getInstance().getFontManager().comfortaa20.drawString("MAIL", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
-        Client.getInstance().getFontManager().comfortaa20.drawString("PASSWORD", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
-        Client.getInstance().getFontManager().comfortaa20.drawString("MAIL : PASS", width / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth("MAIL : PASS") / 2, height - 265, -1);
+        Client.instance().getFontManager().comfortaa20.drawString("DIRECT LOGIN", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("DIRECT LOGIN") / 2, height / 2 - 140, Colors.GREY.c);
+        Client.instance().getFontManager().comfortaa20.drawString("MAIL", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
+        Client.instance().getFontManager().comfortaa20.drawString("PASSWORD", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
+        Client.instance().getFontManager().comfortaa20.drawString("MAIL : PASS", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("MAIL : PASS") / 2, height - 265, -1);
         usernameField.drawTextBox();
         passwordField.drawTextBox();
         usernamePasswordField.drawTextBox();

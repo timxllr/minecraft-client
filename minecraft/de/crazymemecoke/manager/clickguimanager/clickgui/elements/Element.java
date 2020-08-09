@@ -36,7 +36,7 @@ public class Element {
 		 */
 		x = parent.x + parent.width + 2;
 		y = parent.y + offset;
-		width = parent.width + 25;
+		width = parent.width + 66;
 		height = 15;
 		
 		/*
@@ -67,8 +67,8 @@ public class Element {
 			}
 		}else if(set.isSlider()){
 			setstrg = sname.substring(0, 1).toUpperCase() + sname.substring(1, sname.length());
-			String displayval = "" + Math.round(set.getValDouble() * 100D)/ 100D;
-			String displaymax = "" + Math.round(set.getMax() * 100D)/ 100D;
+			String displayval = "" + Math.round(set.getNum() * 100D)/ 100D;
+			String displaymax = "" + Math.round(set.max() * 100D)/ 100D;
 			double textx = x + width - FontUtil.getStringWidth(setstrg) - FontUtil.getStringWidth(displaymax) - 4;
 			if (textx < x) {
 				width += x - textx + 1;

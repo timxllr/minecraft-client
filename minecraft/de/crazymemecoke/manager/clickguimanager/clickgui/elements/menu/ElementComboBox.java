@@ -56,7 +56,7 @@ public class ElementComboBox extends Element {
                  * Ist das Element ausgew�hlt, wenn ja dann markiere
                  * das Element in der ComboBox
                  */
-                if (sld.equalsIgnoreCase(set.getValString())) {
+                if (sld.equalsIgnoreCase(set.getMode())) {
                     RenderUtils.drawRect(x, ay, x + 1.5, ay + FontUtil.getFontHeight() + 2, clr1);
                 }
                 /*
@@ -91,11 +91,11 @@ public class ElementComboBox extends Element {
             double ay = y + 15;
             for (String slcd : set.getOptions()) {
                 if (mouseX >= x && mouseX <= x + width && mouseY >= ay && mouseY <= ay + FontUtil.getFontHeight() + 2) {
-                    if (set.getValBoolean())
+                    if (set.getBool())
                         Minecraft.getMinecraft().thePlayer.playSound("tile.piston.in", 20.0F, 20.0F);
 
-                    if (clickgui != null && Client.getInstance().getSetmgr() != null)
-                        set.setValString(slcd.toLowerCase());
+                    if (clickgui != null && Client.instance().getSetmgr() != null)
+                        set.setMode(slcd.toLowerCase());
                     return true;
                 }
                 ay += FontUtil.getFontHeight() + 2;

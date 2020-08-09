@@ -2,7 +2,7 @@ package de.crazymemecoke.features.modules.combat;
 
 import org.lwjgl.input.Keyboard;
 
-import com.darkmagician6.eventapi.EventTarget;
+import de.crazymemecoke.utils.events.eventapi.EventTarget;
 
 import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.manager.modulemanager.Category;

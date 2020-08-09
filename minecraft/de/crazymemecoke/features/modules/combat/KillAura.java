@@ -1,7 +1,5 @@
 package de.crazymemecoke.features.modules.combat;
 
-import com.darkmagician6.eventapi.EventTarget;
-
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -12,8 +10,6 @@ import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.events.PostMotion;
-import de.crazymemecoke.utils.events.PreMotion;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -48,7 +44,7 @@ public class KillAura extends Module {
     private float curPitch = 0.0F;
     private int tick = 0;
 
-    SettingsManager sM = Client.getInstance().getSetmgr();
+    SettingsManager sM = Client.instance().getSetmgr();
 
     boolean autoBlock, randomAttacks, attackPlayers, attackAnimals, attackMobs, attackInvisibles, checkEntityID, attackWhileInv;
     double reach, auraDelay, entityID, switchTicks, maxTargets;
@@ -74,20 +70,20 @@ public class KillAura extends Module {
     @Override
     public void onUpdate() {
         if (getState()) {
-            autoBlock = sM.getSettingByName("Auto Block", this).getValBoolean();
-            randomAttacks = sM.getSettingByName("Random Attacks", this).getValBoolean();
-            attackPlayers = sM.getSettingByName("Attack Players", this).getValBoolean();
-            attackAnimals = sM.getSettingByName("Attack Animals", this).getValBoolean();
-            attackMobs = sM.getSettingByName("Attack Mobs", this).getValBoolean();
-            attackInvisibles = sM.getSettingByName("Attack Invisibles", this).getValBoolean();
+            autoBlock = sM.getSettingByName("Auto Block", this).getBool();
+            randomAttacks = sM.getSettingByName("Random Attacks", this).getBool();
+            attackPlayers = sM.getSettingByName("Attack Players", this).getBool();
+            attackAnimals = sM.getSettingByName("Attack Animals", this).getBool();
+            attackMobs = sM.getSettingByName("Attack Mobs", this).getBool();
+            attackInvisibles = sM.getSettingByName("Attack Invisibles", this).getBool();
             //checkEntityID = sM.getSettingByName("Check Entity ID", this).getValBoolean();
-            attackWhileInv = sM.getSettingByName("Attack while Inv", this).getValBoolean();
+            attackWhileInv = sM.getSettingByName("Attack while Inv", this).getBool();
 
-            reach = sM.getSettingByName("Reach", this).getValDouble();
-            auraDelay = sM.getSettingByName("Delay", this).getValDouble();
-            entityID = sM.getSettingByName("Entity ID", this).getValDouble();
+            reach = sM.getSettingByName("Reach", this).getNum();
+            auraDelay = sM.getSettingByName("Delay", this).getNum();
+            entityID = sM.getSettingByName("Entity ID", this).getNum();
             //switchTicks = sM.getSettingByName("Switch Ticks", this).getValDouble();
-            maxTargets = sM.getSettingByName("Max Targets", this).getValDouble();
+            maxTargets = sM.getSettingByName("Max Targets", this).getNum();
         }
     }
 

@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 public class NoSlowDown extends Module {
 
 	public NoSlowDown() {
-		super("NoSlowDown", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
+		super("NoSlowDown", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
 	}
 
 	@Override

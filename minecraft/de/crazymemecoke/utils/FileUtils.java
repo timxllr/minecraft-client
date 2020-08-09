@@ -3,7 +3,6 @@ package de.crazymemecoke.utils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -56,13 +55,13 @@ public abstract class FileUtils {
 
     public static void createFile(String name) {
         try {
-            File file = new File(Client.getInstance().getClientDir().getAbsolutePath(), name + ".txt");
+            File file = new File(Client.instance().getClientDir().getAbsolutePath(), name + ".txt");
             if (!file.exists()) {
                 PrintWriter printWriter = new PrintWriter(new FileWriter(file));
                 printWriter.println();
                 printWriter.close();
             }
-            System.out.println(Client.getInstance().getClientDir().getAbsolutePath());
+            System.out.println(Client.instance().getClientDir().getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }

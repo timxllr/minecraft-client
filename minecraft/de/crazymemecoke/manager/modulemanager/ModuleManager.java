@@ -10,9 +10,7 @@ import de.crazymemecoke.features.modules.gui.HUD;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.modules.movement.*;
 import de.crazymemecoke.features.modules.player.*;
-import de.crazymemecoke.features.modules.render.ESP;
-import de.crazymemecoke.features.modules.render.Fullbright;
-import de.crazymemecoke.features.modules.render.NoBob;
+import de.crazymemecoke.features.modules.render.*;
 import de.crazymemecoke.features.modules.world.*;
 import de.crazymemecoke.utils.FileUtils;
 
@@ -30,7 +28,7 @@ public class ModuleManager {
     public ModuleManager() {
 
         try {
-            modulesFile = new File(Client.getInstance().getClientDir() + "/modules.txt");
+            modulesFile = new File(Client.instance().getClientDir() + "/modules.txt");
             if (modulesFile.createNewFile()) {
                 System.out.println("File created: " + modulesFile.getName());
             } else {
@@ -42,7 +40,7 @@ public class ModuleManager {
         }
 
         try {
-            bindsFile = new File(Client.getInstance().getClientDir() + "/binds.txt");
+            bindsFile = new File(Client.instance().getClientDir() + "/binds.txt");
             if (bindsFile.createNewFile()) {
                 System.out.println("File created: " + bindsFile.getName());
             } else {
@@ -55,6 +53,7 @@ public class ModuleManager {
 
         modules.add(new InventoryMove());
         modules.add(new ChestStealer());
+        modules.add(new NoScoreboard());
         modules.add(new Fullbright());
         modules.add(new FastLadder());
         modules.add(new NoSlowDown());
@@ -93,6 +92,7 @@ public class ModuleManager {
         modules.add(new Phase());
         modules.add(new Eagle());
         modules.add(new Nuker());
+        modules.add(new NoEXP());
         modules.add(new Step());
         modules.add(new Zoot());
         modules.add(new Aura());
@@ -105,7 +105,7 @@ public class ModuleManager {
         return modules;
     }
 
-    public Module getModByName(String name) {
+    public Module getByName(String name) {
         for (Module mod : modules) {
             if ((mod.getName().trim().equalsIgnoreCase(name.trim()))
                     || (mod.toString().trim().equalsIgnoreCase(name.trim()))) {
@@ -137,7 +137,7 @@ public class ModuleManager {
         FileUtils.loadFile(modulesFile).forEach(line -> {
             final String[] args = line.split(":");
             if (args.length == 2) {
-                Module module = getModByName(args[0]);
+                Module module = getByName(args[0]);
                 boolean state = Boolean.valueOf(args[1]);
 
                 if (state)
@@ -158,7 +158,7 @@ public class ModuleManager {
         FileUtils.loadFile(bindsFile).forEach(line -> {
             final String[] args = line.split(":");
             if (args.length == 2) {
-                Module module = getModByName(args[0]);
+                Module module = getByName(args[0]);
                 int bind = Integer.valueOf(args[1]);
 
                 module.setBind(bind);

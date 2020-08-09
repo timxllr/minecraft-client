@@ -1,6 +1,6 @@
 package de.crazymemecoke.features.modules.movement;
 
-import com.darkmagician6.eventapi.EventTarget;
+import de.crazymemecoke.utils.events.eventapi.EventTarget;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
@@ -37,10 +37,10 @@ public class Speed extends Module {
     private int motionTicks;
     private final TimerUtil delayTimer = new TimerUtil();
 
-    SettingsManager sM = Client.getInstance().getSetmgr();
+    SettingsManager sM = Client.instance().getSetmgr();
 
     public Speed() {
-        super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
+        super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
         mode.add("Latest OnGround");
         mode.add("AAC 1.9.10");
         mode.add("Frames");
@@ -76,7 +76,7 @@ public class Speed extends Module {
 
     @Override
     public void onUpdate() {
-        speedMode = sM.getSettingByName("Mode", this).getValString();
+        speedMode = sM.getSettingByName("Mode", this).getMode();
         if (getState()) {
             if (speedMode.equalsIgnoreCase("AAC 1.9.10")) {
                 doAACSpeed();
@@ -85,7 +85,7 @@ public class Speed extends Module {
                     doLatestOnGroundSpeed();
                 } else {
                     if (speedMode.equalsIgnoreCase("Frames")) {
-                        doFrames(sM.getSettingByName("Frames Speed", this).getValDouble());
+                        doFrames(sM.getSettingByName("Frames Speed", this).getNum());
                     } else {
                         if (speedMode.equalsIgnoreCase("New")) {
                             doNewSpeed();
@@ -105,7 +105,7 @@ public class Speed extends Module {
     }
 
     private void doTimerSpeed() {
-        mc.timer.timerSpeed = (float) sM.getSettingByName("Timer Speed", this).getValDouble();
+        mc.timer.timerSpeed = (float) sM.getSettingByName("Timer Speed", this).getNum();
     }
 
     private void doJumpSpeed() {
@@ -113,7 +113,7 @@ public class Speed extends Module {
             return;
         }
         if (mc.thePlayer.moveForward > 0.0F) {
-            if (sM.getSettingByName("[Jump] Auto Jump", this).getValBoolean()) {
+            if (sM.getSettingByName("[Jump] Auto Jump", this).getBool()) {
                 mc.thePlayer.jump();
             }
             float var1 = mc.thePlayer.rotationYaw * 0.017453292F;

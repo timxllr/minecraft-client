@@ -1,7 +1,7 @@
 package de.crazymemecoke.features.modules.player;
 
 import org.lwjgl.input.Keyboard;
-import com.darkmagician6.eventapi.EventTarget;
+import de.crazymemecoke.utils.events.eventapi.EventTarget;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -15,7 +15,7 @@ import net.minecraft.potion.PotionEffect;
 public class Zoot extends Module {
 
 	public Zoot() {
-		super("Zoot", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).hashCode());
+		super("Zoot", Keyboard.KEY_NONE, Category.PLAYER, -1);
 	}
 
 	public boolean potion = true;

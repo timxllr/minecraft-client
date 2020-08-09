@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ClickGUI extends Module {
 
     public ClickGUI() {
-        super("ClickGUI", Keyboard.KEY_RSHIFT, Category.GUI, Rainbow.rainbow(1, 1).hashCode());
+        super("ClickGUI", Keyboard.KEY_RSHIFT, Category.GUI, -1);
     }
 
     @Override
@@ -21,20 +21,19 @@ public class ClickGUI extends Module {
 
         theme.add("JellyLike");
         theme.add("New");
-        theme.add("Experimental");
+        theme.add("Ambien");
 
-
-        Client.getInstance().getSetmgr().rSetting(new Setting("Design", this, "New", theme));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Sound", this, false));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Blur", this, true));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Red", this, 255, 0, 255, true));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Green", this, 26, 0, 255, true));
-        Client.getInstance().getSetmgr().rSetting(new Setting("Blue", this, 42, 0, 255, true));
+        Client.instance().getSetmgr().rSetting(new Setting("Design", this, "New", theme));
+        Client.instance().getSetmgr().rSetting(new Setting("Sound", this, false));
+        Client.instance().getSetmgr().rSetting(new Setting("Blur", this, true));
+        Client.instance().getSetmgr().rSetting(new Setting("Red", this, 255, 0, 255, true));
+        Client.instance().getSetmgr().rSetting(new Setting("Green", this, 26, 0, 255, true));
+        Client.instance().getSetmgr().rSetting(new Setting("Blue", this, 42, 0, 255, true));
     }
 
     @Override
     public void onEnable() {
-        mc.displayGuiScreen(Client.getInstance().getClickGui());
+        mc.displayGuiScreen(Client.instance().getClickGui());
         super.onDisable();
     }
 }

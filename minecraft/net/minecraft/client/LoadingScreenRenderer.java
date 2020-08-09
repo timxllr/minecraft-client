@@ -76,12 +76,12 @@ public class LoadingScreenRenderer implements IProgressUpdate
             if (OpenGlHelper.isFramebufferEnabled())
             {
                 int i = this.scaledResolution.getScaleFactor();
-                GlStateManager.ortho(0.0D, (double)(this.scaledResolution.getScaledWidth() * i), (double)(this.scaledResolution.getScaledHeight() * i), 0.0D, 100.0D, 300.0D);
+                GlStateManager.ortho(0.0D, (double)(this.scaledResolution.width() * i), (double)(this.scaledResolution.height() * i), 0.0D, 100.0D, 300.0D);
             }
             else
             {
                 ScaledResolution scaledresolution = new ScaledResolution(this.mc);
-                GlStateManager.ortho(0.0D, scaledresolution.getScaledWidth_double(), scaledresolution.getScaledHeight_double(), 0.0D, 100.0D, 300.0D);
+                GlStateManager.ortho(0.0D, scaledresolution.widthDouble(), scaledresolution.heightDouble(), 0.0D, 100.0D, 300.0D);
             }
 
             GlStateManager.matrixMode(5888);
@@ -132,8 +132,8 @@ public class LoadingScreenRenderer implements IProgressUpdate
                 this.systemTime = i;
                 ScaledResolution scaledresolution = new ScaledResolution(this.mc);
                 int j = scaledresolution.getScaleFactor();
-                int k = scaledresolution.getScaledWidth();
-                int l = scaledresolution.getScaledHeight();
+                int k = scaledresolution.width();
+                int l = scaledresolution.height();
 
                 if (OpenGlHelper.isFramebufferEnabled())
                 {
@@ -147,7 +147,7 @@ public class LoadingScreenRenderer implements IProgressUpdate
                 this.framebuffer.bindFramebuffer(false);
                 GlStateManager.matrixMode(5889);
                 GlStateManager.loadIdentity();
-                GlStateManager.ortho(0.0D, scaledresolution.getScaledWidth_double(), scaledresolution.getScaledHeight_double(), 0.0D, 100.0D, 300.0D);
+                GlStateManager.ortho(0.0D, scaledresolution.widthDouble(), scaledresolution.heightDouble(), 0.0D, 100.0D, 300.0D);
                 GlStateManager.matrixMode(5888);
                 GlStateManager.loadIdentity();
                 GlStateManager.translate(0.0F, 0.0F, -200.0F);

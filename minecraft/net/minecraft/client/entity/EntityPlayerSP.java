@@ -1,6 +1,6 @@
 package net.minecraft.client.entity;
 
-import com.darkmagician6.eventapi.EventManager;
+import de.crazymemecoke.utils.events.eventapi.EventManager;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.features.modules.movement.NoSlowDown;
@@ -179,7 +179,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      */
     public void onUpdate() {
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ))) {
-            for (Module m : Client.getInstance().getModuleManager().modules) {
+            for (Module m : Client.instance().modManager().modules) {
                 m.onUpdate();
             }
             super.onUpdate();
@@ -197,7 +197,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      * called every tick when the player is on foot. Performs all the things that normally happen during movement.
      */
     public void onUpdateWalkingPlayer() {
-        for (Module m : Client.getInstance().getModuleManager().getModules()) {
+        for (Module m : Client.instance().modManager().getModules()) {
             m.onPreMotionUpdate();
             EventManager.register(PreMotion.class);
         }
@@ -279,7 +279,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
                 this.lastReportedPitch = this.rotationPitch;
             }
 
-            for (Module m : Client.getInstance().getModuleManager().getModules()) {
+            for (Module m : Client.instance().modManager().getModules()) {
                 m.onPostMotionUpdate();
                 EventManager.register(PostMotion.class);
             }
@@ -305,10 +305,10 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      * Sends a chat message from the player. Args: chatMessage
      */
     public void sendChatMessage(String message) {
-        if (Client.getInstance().getCommandManager().execute(message)) {
+        if (Client.instance().getCommandManager().execute(message)) {
             return;
         }
-        if (message.startsWith(Client.getInstance().getClientPrefix())) {
+        if (message.startsWith(Client.instance().getClientPrefix())) {
             Notify.chat("Befehl nicht gefunden - versuche .help!");
             return;
         }
@@ -707,7 +707,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         this.movementInput.updatePlayerMoveState();
 
         if (this.isUsingItem() && !this.isRiding()) {
-            boolean noSlowdownEnabled = Client.getInstance().getModuleManager().getModule(NoSlowDown.class).getState();
+            boolean noSlowdownEnabled = Client.instance().modManager().getModule(NoSlowDown.class).getState();
             this.movementInput.moveStrafe *= 0.2F;
             this.movementInput.moveForward *= 0.2F;
             this.sprintToggleTimer = 0;

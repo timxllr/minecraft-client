@@ -42,7 +42,7 @@ public class ElementCheckBox extends Element {
          * Titel und Checkbox rendern.
          */
         FontUtil.drawString(setstrg, (int) (x + 13), (int) (y + FontUtil.getFontHeight() / 2 - 0.5), 0xffffffff);
-        RenderUtils.drawRect(x + 1, y + 2, x + 12, y + 13, set.getValBoolean() ? color : 0xff000000);
+        RenderUtils.drawRect(x + 1, y + 2, x + 12, y + 13, set.getBool() ? color : 0xff000000);
         if (isCheckHovered(mouseX, mouseY))
             RenderUtils.drawRect(x + 1, y + 2, x + 12, y + 13, 0x55111111);
     }
@@ -53,7 +53,7 @@ public class ElementCheckBox extends Element {
      */
     public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
         if (mouseButton == 0 && isCheckHovered(mouseX, mouseY)) {
-            set.setValBoolean(!set.getValBoolean());
+            set.setBool(!set.getBool());
             return true;
         }
 

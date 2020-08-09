@@ -44,7 +44,7 @@ public class AltSlot {
                 }
 
                 String text = this.username + ":******";
-                Client.getInstance().getFontManager().comfortaa20.drawString(text, res.getScaledWidth() / 2 - Client.getInstance().getFontManager().comfortaa20.getStringWidth(text) / 2, (this.y + 12 - Client.getInstance().getFontManager().comfortaa20.getStringHeight(text) / 2), RenderUtils.reAlpha(-4340793, this.opacity));
+                Client.instance().getFontManager().comfortaa20.drawString(text, res.width() / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth(text) / 2, (this.y + 12 - Client.instance().getFontManager().comfortaa20.getStringHeight(text) / 2), RenderUtils.reAlpha(-4340793, this.opacity));
             }
         }
     }

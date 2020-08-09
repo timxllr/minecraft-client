@@ -40,22 +40,22 @@ public class ScaledResolution
         this.scaledHeight = MathHelper.ceiling_double_int(this.scaledHeightD);
     }
 
-    public int getScaledWidth()
+    public int width()
     {
         return this.scaledWidth;
     }
 
-    public int getScaledHeight()
+    public int height()
     {
         return this.scaledHeight;
     }
 
-    public double getScaledWidth_double()
+    public double widthDouble()
     {
         return this.scaledWidthD;
     }
 
-    public double getScaledHeight_double()
+    public double heightDouble()
     {
         return this.scaledHeightD;
     }

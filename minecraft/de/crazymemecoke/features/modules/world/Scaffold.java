@@ -29,7 +29,7 @@ public class Scaffold extends Module {
     boolean kek;
 
     public Scaffold() {
-        super("Scaffold", Keyboard.KEY_NONE, Category.WORLD, Rainbow.rainbow(1, 1).hashCode());
+        super("Scaffold", Keyboard.KEY_NONE, Category.WORLD, -1);
     }
 
     public Queue<Consumer<EntityPlayerSP>> getPostponeActions() {

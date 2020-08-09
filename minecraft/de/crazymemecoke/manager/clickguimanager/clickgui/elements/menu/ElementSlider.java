@@ -32,7 +32,7 @@ public class ElementSlider extends Element {
 	 * Rendern des Elements
 	 */
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		String displayval = "" + Math.round(set.getValDouble() * 100D) / 100D;
+		String displayval = "" + Math.round(set.getNum() * 100D) / 100D;
 		boolean hoveredORdragged = isSliderHovered(mouseX, mouseY) || dragging;
 
 		Color temp = ColorUtil.getClickGUIColor();
@@ -40,7 +40,7 @@ public class ElementSlider extends Element {
 		int color2 = new Color(temp.getRed(), temp.getGreen(), temp.getBlue(), hoveredORdragged ? 255 : 230).getRGB();
 
 		// selected = iset.getValDouble() / iset.getMax();
-		double percentBar = (set.getValDouble() - set.getMin()) / (set.getMax() - set.getMin());
+		double percentBar = (set.getNum() - set.min()) / (set.max() - set.min());
 
 		/*
 		 * Die Box und Umrandung rendern
@@ -67,9 +67,9 @@ public class ElementSlider extends Element {
 		 * Neue Value berechnen, wenn dragging
 		 */
 		if (this.dragging) {
-			double diff = set.getMax() - set.getMin();
-			double val = set.getMin() + (MathHelper.clamp_double((mouseX - x) / width, 0, 1)) * diff;
-			set.setValDouble(val); // Die Value im Setting updaten
+			double diff = set.max() - set.min();
+			double val = set.min() + (MathHelper.clamp_double((mouseX - x) / width, 0, 1)) * diff;
+			set.setNum(val); // Die Value im Setting updaten
 		}
 
 	}

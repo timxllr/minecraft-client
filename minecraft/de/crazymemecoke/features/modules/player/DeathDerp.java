@@ -2,7 +2,7 @@ package de.crazymemecoke.features.modules.player;
 
 import org.lwjgl.input.Keyboard;
 
-import com.darkmagician6.eventapi.EventTarget;
+import de.crazymemecoke.utils.events.eventapi.EventTarget;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -11,7 +11,7 @@ import de.crazymemecoke.utils.events.UpdateEvent;
 
 public class DeathDerp extends Module {
 	public DeathDerp() {
-		super("DeathDerp", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).hashCode());
+		super("DeathDerp", Keyboard.KEY_NONE, Category.PLAYER, -1);
 	}
 
 	@EventTarget

@@ -1,6 +1,6 @@
 package de.crazymemecoke.utils.events;
 
-import com.darkmagician6.eventapi.events.callables.EventCancellable;
+import de.crazymemecoke.utils.events.eventapi.events.callables.EventCancellable;
 
 public class MoveEvent
         extends EventCancellable {

@@ -40,7 +40,7 @@ import javax.imageio.ImageIO;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.ui.guiscreens.GuiMainMenu;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.features.ui.GuiIngameHook;
+import de.crazymemecoke.features.ui.Interface;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -563,7 +563,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         GlStateManager.viewport(0, 0, this.displayWidth, this.displayHeight);
         this.effectRenderer = new EffectRenderer(this.theWorld, this.renderEngine);
         this.checkGLError("Post startup");
-        this.ingameGUI = new GuiIngameHook(this);
+        this.ingameGUI = new Interface(this);
 
         if (this.serverName != null) {
             this.displayGuiScreen(new GuiConnecting(new GuiMainMenu(), this, this.serverName, this.serverPort));
@@ -586,7 +586,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
             this.gameSettings.saveOptions();
         }
 
-        Client.getInstance().startClient();
+        Client.instance().startClient();
 
         this.renderGlobal.makeEntityOutlineShader();
     }
@@ -610,7 +610,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
     private void createDisplay() throws LWJGLException {
         Display.setResizable(true);
-        Display.setTitle(Client.getInstance().getClientName() + " " + Client.getInstance().getClientVersion() + " | made by " + Client.getInstance().getClientCoder());
+        Display.setTitle(Client.instance().getClientName() + " " + Client.instance().getClientVersion() + " | made by " + Client.instance().getClientCoder());
 
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
@@ -823,11 +823,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
     private void drawSplashScreen(TextureManager textureManagerInstance) throws LWJGLException {
         ScaledResolution scaledresolution = new ScaledResolution(this);
         int i = scaledresolution.getScaleFactor();
-        Framebuffer framebuffer = new Framebuffer(scaledresolution.getScaledWidth() * i, scaledresolution.getScaledHeight() * i, true);
+        Framebuffer framebuffer = new Framebuffer(scaledresolution.width() * i, scaledresolution.height() * i, true);
         framebuffer.bindFramebuffer(false);
         GlStateManager.matrixMode(5889);
         GlStateManager.loadIdentity();
-        GlStateManager.ortho(0.0D, (double) scaledresolution.getScaledWidth(), (double) scaledresolution.getScaledHeight(), 0.0D, 1000.0D, 3000.0D);
+        GlStateManager.ortho(0.0D, (double) scaledresolution.width(), (double) scaledresolution.height(), 0.0D, 1000.0D, 3000.0D);
         GlStateManager.matrixMode(5888);
         GlStateManager.loadIdentity();
         GlStateManager.translate(0.0F, 0.0F, -2000.0F);
@@ -858,11 +858,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         int j = 256;
         int k = 256;
-        this.func_181536_a((scaledresolution.getScaledWidth() - j) / 2, (scaledresolution.getScaledHeight() - k) / 2, 0, 0, j, k, 255, 255, 255, 255);
+        this.func_181536_a((scaledresolution.width() - j) / 2, (scaledresolution.height() - k) / 2, 0, 0, j, k, 255, 255, 255, 255);
         GlStateManager.disableLighting();
         GlStateManager.disableFog();
         framebuffer.unbindFramebuffer();
-        framebuffer.framebufferRender(scaledresolution.getScaledWidth() * i, scaledresolution.getScaledHeight() * i);
+        framebuffer.framebufferRender(scaledresolution.width() * i, scaledresolution.height() * i);
         GlStateManager.enableAlpha();
         GlStateManager.alphaFunc(516, 0.1F);
         this.updateDisplay();
@@ -911,8 +911,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
         if (guiScreenIn != null) {
             this.setIngameNotInFocus();
             ScaledResolution scaledresolution = new ScaledResolution(this);
-            int i = scaledresolution.getScaledWidth();
-            int j = scaledresolution.getScaledHeight();
+            int i = scaledresolution.width();
+            int j = scaledresolution.height();
             ((GuiScreen) guiScreenIn).setWorldAndResolution(this, i, j);
             this.skipRenderWorld = false;
         } else {
@@ -1485,7 +1485,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
         if (this.currentScreen != null) {
             ScaledResolution scaledresolution = new ScaledResolution(this);
-            this.currentScreen.onResize(this, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight());
+            this.currentScreen.onResize(this, scaledresolution.width(), scaledresolution.height());
         }
 
         this.loadingScreen = new LoadingScreenRenderer(this);
@@ -1657,7 +1657,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
                     if (this.currentScreen != null) {
                         this.currentScreen.handleKeyboardInput();
                     } else {
-                        for (Module n : Client.getInstance().getModuleManager().modules) {
+                        for (Module n : Client.instance().modManager().modules) {
                             if (k == n.getBind()) {
                                 n.toggleModule();
                             }

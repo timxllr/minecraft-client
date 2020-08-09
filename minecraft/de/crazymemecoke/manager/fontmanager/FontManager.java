@@ -35,22 +35,26 @@ public class FontManager {
     public UnicodeFontRenderer bigKeyFont;
     public UnicodeFontRenderer verdana17;
     public UnicodeFontRenderer rainbowVeins80;
+    public UnicodeFontRenderer bebasNeue20;
+    public UnicodeFontRenderer bebasNeue25;
+    public UnicodeFontRenderer bebasNeue28;
+    public UnicodeFontRenderer bebasNeue30;
+    public UnicodeFontRenderer bebasNeue35;
+    public UnicodeFontRenderer bebasNeue40;
+    public UnicodeFontRenderer bebasNeue45;
+    public UnicodeFontRenderer bebasNeue50;
 
     public void initFonts() {
+        bebasNeue20 = new UnicodeFontRenderer(getFont("BebasNeue", 20, FontExtension.OTF), true, 8);
+        bebasNeue25 = new UnicodeFontRenderer(getFont("BebasNeue", 25, FontExtension.OTF), true, 8);
+        bebasNeue28 = new UnicodeFontRenderer(getFont("BebasNeue", 28, FontExtension.OTF), true, 8);
+        bebasNeue30 = new UnicodeFontRenderer(getFont("BebasNeue", 30, FontExtension.OTF), true, 8);
+        bebasNeue35 = new UnicodeFontRenderer(getFont("BebasNeue", 35, FontExtension.OTF), true, 8);
+        bebasNeue40 = new UnicodeFontRenderer(getFont("BebasNeue", 40, FontExtension.OTF), true, 8);
+        bebasNeue45 = new UnicodeFontRenderer(getFont("BebasNeue", 45, FontExtension.OTF), true, 8);
+        bebasNeue50 = new UnicodeFontRenderer(getFont("BebasNeue", 50, FontExtension.OTF), true, 8);
         rainbowVeins50 = new UnicodeFontRenderer(getFont("Rainbow Veins", 50, FontExtension.TTF), true, 8);
         rainbowVeins80 = new UnicodeFontRenderer(getFont("Rainbow Veins", 80, FontExtension.TTF), true, 8);
-        verdana19 = new UnicodeFontRenderer(getFont("Verdana", 19, FontExtension.TTF), true, 8);
-        verdana17 = new UnicodeFontRenderer(getFont("Verdana", 17, FontExtension.TTF), true, 8);
-        arialBold15 = new UnicodeFontRenderer(getFont("Arial Bold", 15, FontExtension.TTF), true, 8);
-        verdana23 = new UnicodeFontRenderer(getFont("Verdana", 23, FontExtension.TTF), true, 8);
-        iconsSouthSt14 = new UnicodeFontRenderer(getFont("Icons South St", 14, FontExtension.TTF), true, 8);
-        modernpics22 = new UnicodeFontRenderer(getFont("modernpics", 22, FontExtension.OTF), true, 8);
-        glyphyxOneNF19 = new UnicodeFontRenderer(getFont("GlyphyxOneNF", 19, FontExtension.TTF), true, 8);
-        centuryGothic45 = new UnicodeFontRenderer(getFont("Century Gothic", 45, FontExtension.TTF), true, 8);
-        centuryGothic30 = new UnicodeFontRenderer(getFont("Century Gothic", 30, FontExtension.TTF), true, 8);
-        centuryGothic20 = new UnicodeFontRenderer(getFont("Century Gothic", 20, FontExtension.TTF), true, 8);
-        american100 = new UnicodeFontRenderer(getFont("American", 100, FontExtension.TTF), true, 8);
-        american66 = new UnicodeFontRenderer(getFont("American", 66, FontExtension.TTF), true, 8);
         comfortaa18 = new UnicodeFontRenderer(getFont("Comfortaa", 18, FontExtension.TTF), true, 8);
         comfortaa20 = new UnicodeFontRenderer(getFont("Comfortaa", 20, FontExtension.TTF), true, 8);
         comfortaa22 = new UnicodeFontRenderer(getFont("Comfortaa", 22, FontExtension.TTF), true, 8);

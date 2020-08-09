@@ -1163,8 +1163,8 @@ public class EntityRenderer implements IResourceManagerReloadListener {
         if (!this.mc.skipRenderWorld) {
             anaglyphEnable = this.mc.gameSettings.anaglyph;
             final ScaledResolution scaledresolution = new ScaledResolution(this.mc);
-            int l = scaledresolution.getScaledWidth();
-            int i1 = scaledresolution.getScaledHeight();
+            int l = scaledresolution.width();
+            int i1 = scaledresolution.height();
             final int j1 = Mouse.getX() * l / this.mc.displayWidth;
             final int k1 = i1 - Mouse.getY() * i1 / this.mc.displayHeight - 1;
             int l1 = this.mc.gameSettings.limitFramerate;
@@ -1243,7 +1243,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
                         private static final String __OBFID = "CL_00000951";
 
                         public String call() throws Exception {
-                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d). Scale factor of %d", new Object[]{Integer.valueOf(scaledresolution.getScaledWidth()), Integer.valueOf(scaledresolution.getScaledHeight()), Integer.valueOf(EntityRenderer.this.mc.displayWidth), Integer.valueOf(EntityRenderer.this.mc.displayHeight), Integer.valueOf(scaledresolution.getScaleFactor())});
+                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d). Scale factor of %d", new Object[]{Integer.valueOf(scaledresolution.width()), Integer.valueOf(scaledresolution.height()), Integer.valueOf(EntityRenderer.this.mc.displayWidth), Integer.valueOf(EntityRenderer.this.mc.displayHeight), Integer.valueOf(scaledresolution.getScaleFactor())});
                         }
                     });
                     throw new ReportedException(crashreport);
@@ -1919,7 +1919,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
         GlStateManager.clear(256);
         GlStateManager.matrixMode(5889);
         GlStateManager.loadIdentity();
-        GlStateManager.ortho(0.0D, scaledresolution.getScaledWidth_double(), scaledresolution.getScaledHeight_double(), 0.0D, 1000.0D, 3000.0D);
+        GlStateManager.ortho(0.0D, scaledresolution.widthDouble(), scaledresolution.heightDouble(), 0.0D, 1000.0D, 3000.0D);
         GlStateManager.matrixMode(5888);
         GlStateManager.loadIdentity();
         GlStateManager.translate(0.0F, 0.0F, -2000.0F);

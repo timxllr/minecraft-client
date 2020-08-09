@@ -21,16 +21,16 @@ import net.minecraft.util.EnumFacing;
 public class FastUse extends Module {
 
 	public FastUse() {
-		super("FastUse", Keyboard.KEY_NONE, Category.PLAYER, Rainbow.rainbow(1, 1).getRGB());
+		super("FastUse", Keyboard.KEY_NONE, Category.PLAYER, -1);
 
-		Client.getInstance().getSetmgr().rSetting(new Setting("Delay", this, 15, 0, 20, false));
+		Client.instance().getSetmgr().rSetting(new Setting("Delay", this, 15, 0, 20, false));
 	}
 
 	boolean NCP = true;
 
 	@Override
 	public void onUpdate() {
-		double delay = Client.getInstance().getSetmgr().getSettingByName("Delay", this).getValDouble();
+		double delay = Client.instance().getSetmgr().getSettingByName("Delay", this).getNum();
 
 		if (getState()) {
 			try {

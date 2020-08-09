@@ -12,7 +12,6 @@ import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.network.play.client.C03PacketPlayer;
-import net.minecraft.util.Timer;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class Fly extends Module {
     ArrayList<String> flyMode = new ArrayList<>();
     ArrayList<String> glideMode = new ArrayList<>();
     ArrayList<String> mode = new ArrayList<>();
-    SettingsManager sM = Client.getInstance().getSetmgr();
+    SettingsManager sM = Client.instance().getSetmgr();
     TimeHelper timer = new TimeHelper();
     private int delay = 0;
     public double motion;
@@ -64,8 +63,8 @@ public class Fly extends Module {
 
     @Override
     public void onEnable() {
-        if (Client.getInstance().getSetmgr().getSettingByName("Mode", this).getValString().equalsIgnoreCase("Glide")) {
-            if (Client.getInstance().getSetmgr().getSettingByName("Glide Mode", this).getValString().equalsIgnoreCase("New")) {
+        if (Client.instance().getSetmgr().getSettingByName("Mode", this).getMode().equalsIgnoreCase("Glide")) {
+            if (Client.instance().getSetmgr().getSettingByName("Glide Mode", this).getMode().equalsIgnoreCase("New")) {
                 time = 0;
                 dtime = 0;
                 mc.thePlayer.setSprinting(false);
@@ -85,9 +84,9 @@ public class Fly extends Module {
 
     @Override
     public void onUpdate() {
-        String flyMode = sM.getSettingByName("Fly Mode", this).getValString();
-        String glideMode = sM.getSettingByName("Glide Mode", this).getValString();
-        String mode = sM.getSettingByName("Mode", this).getValString();
+        String flyMode = sM.getSettingByName("Fly Mode", this).getMode();
+        String glideMode = sM.getSettingByName("Glide Mode", this).getMode();
+        String mode = sM.getSettingByName("Mode", this).getMode();
         if (getState()) {
             if (mode.equalsIgnoreCase("Fly")) {
                 if (flyMode.equalsIgnoreCase("Vanilla")) {

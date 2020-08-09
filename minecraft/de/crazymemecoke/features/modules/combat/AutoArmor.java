@@ -18,7 +18,7 @@ public class AutoArmor extends Module {
     public AutoArmor() {
         super("AutoArmor", Keyboard.KEY_NONE, Category.COMBAT, -1);
 
-        Client.getInstance().getSetmgr().rSetting(new Setting("Delay", this, 100, 0, 500, true));
+        Client.instance().getSetmgr().rSetting(new Setting("Delay", this, 100, 0, 500, true));
     }
 
     private int[] bestArmor;
@@ -26,7 +26,7 @@ public class AutoArmor extends Module {
 
     @Override
     public void onUpdate() {
-        double delay = Client.getInstance().getSetmgr().getSettingByName("Delay", this).getValDouble();
+        double delay = Client.instance().getSetmgr().getSettingByName("Delay", this).getNum();
         if (getState()) {
             if (mc.thePlayer.capabilities.isCreativeMode
                     || mc.currentScreen instanceof GuiContainer && !(mc.currentScreen instanceof GuiInventory))

@@ -7,8 +7,8 @@ import static org.lwjgl.opengl.GL11.glPopMatrix;
 import java.awt.Font;
 
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
+import de.crazymemecoke.utils.render.slick.UnicodeFont;
+import de.crazymemecoke.utils.render.slick.font.effects.ColorEffect;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.StringUtils;
@@ -97,7 +97,7 @@ public class FontUtil {
 				y += getHeight(Character.toString(c)) * 2.0F;
 			}
 			if (c != '\247' && (index == 0 || index == characters.length - 1 || characters[index - 1] != '\247')) {
-				unicodeFont.drawString(x, y, Character.toString(c), new org.newdawn.slick.Color(currentColor));
+				unicodeFont.drawString(x, y, Character.toString(c), new de.crazymemecoke.utils.render.slick.Color(currentColor));
 				x += (getWidth(Character.toString(c)) * 2.0F);
 			} else if (c == ' ') {
 				x += unicodeFont.getSpaceWidth();

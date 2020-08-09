@@ -1,13 +1,13 @@
 package de.crazymemecoke.manager.clickguimanager.clickgui;
 
-import java.awt.Color;
-import java.util.ArrayList;
-
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.clickgui.elements.ModuleButton;
 import de.crazymemecoke.manager.clickguimanager.clickgui.util.ColorUtil;
 import de.crazymemecoke.manager.clickguimanager.clickgui.util.FontUtil;
-import de.crazymemecoke.Client;
 import de.crazymemecoke.utils.render.RenderUtils;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Made by HeroCode it's free to use but you have to credit me
@@ -28,9 +28,6 @@ public class Panel {
     public ArrayList<ModuleButton> Elements = new ArrayList<>();
     public ClickGUI clickgui;
 
-    /*
-     * Konstrukor
-     */
     public Panel(String ititle, double ix, double iy, double iwidth, double iheight, boolean iextended,
                  ClickGUI parent) {
         this.title = ititle;
@@ -45,16 +42,9 @@ public class Panel {
         setup();
     }
 
-    /*
-     * Wird in ClickGUI �berschrieben, sodass auch ModuleButtons hinzugef�gt werden
-     * k�nnen :3
-     */
     public void setup() {
     }
 
-    /*
-     * Rendern des Elements.
-     */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         if (!this.visible)
             return;
@@ -67,27 +57,33 @@ public class Panel {
         Color temp = ColorUtil.getClickGUIColor().darker();
         int outlineColor = new Color(temp.getRed(), temp.getGreen(), temp.getBlue(), 170).getRGB();
 
+        // Closed Panel
         RenderUtils.drawRect(x, y, x + width, y + height, 0xff121212);
-        if (Client.getInstance().getSetmgr().getSettingByName("Design", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValString().equalsIgnoreCase("New")) {
+
+        if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New")) {
             RenderUtils.drawRect(x - 2, y, x, y + height, outlineColor);
             FontUtil.drawStringWithShadow(title, x + 2, y + height / 2 - FontUtil.getFontHeight() / 2, 0xffefefef);
-        } else if (Client.getInstance().getSetmgr().getSettingByName("Design", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValString().equalsIgnoreCase("JellyLike")) {
+        } else if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("JellyLike")) {
             RenderUtils.drawRect(x + 4, y + 2, x + 4.3, y + height - 2, 0xffaaaaaa);
             RenderUtils.drawRect(x - 4 + width, y + 2, x - 4.3 + width, y + height - 2, 0xffaaaaaa);
-            FontUtil.drawTotalCenteredStringWithShadow(title, x + width / 2, y + height / 2, 0xffefefef);
+            FontUtil.drawTotalCenteredStringWithShadow(title, x + width / 2, y + height / 2 + 1, 0xffefefef);
+        } else if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("Ambien")) {
+            RenderUtils.drawRect(x, y, x + width, y + height, new Color(92, 49, 135).getRGB());
+            FontUtil.drawAmbienStringWithShadow(title, x + 2, y + height / 2 - FontUtil.getFontHeight() / 2 - 2, 0xffefefef);
         }
 
         if (this.extended && !Elements.isEmpty()) {
             double startY = y + height;
-            int epanelcolor = Client.getInstance().getSetmgr().getSettingByName("Design", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValString().equalsIgnoreCase("New")
-                    ? 0xff232323
-                    : Client.getInstance().getSetmgr().getSettingByName("Design", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValString().equalsIgnoreCase("JellyLike") ? 0xbb151515
-                    : 0;
-            ;
+            int epanelcolor = Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New") ? 0xff232323 : Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("JellyLike") ? 0xbb151515 : 0;
+
             for (ModuleButton et : Elements) {
-                if (Client.getInstance().getSetmgr().getSettingByName("Design", Client.getInstance().getModuleManager().getModByName("ClickGUI")).getValString().equalsIgnoreCase("New")) {
+                if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New")) {
                     RenderUtils.drawRect(x - 2, startY, x + width, startY + et.height + 1, outlineColor);
                 }
+                if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("Ambien")) {
+                    RenderUtils.drawRect(x, startY, x + width, startY + et.height + 1, new Color(36, 35, 36).getRGB());
+                }
+
                 RenderUtils.drawRect(x, startY, x + width, startY + et.height + 1, epanelcolor);
                 et.x = x + 2;
                 et.y = startY;
@@ -95,14 +91,12 @@ public class Panel {
                 et.drawScreen(mouseX, mouseY, partialTicks);
                 startY += et.height + 1;
             }
+
             RenderUtils.drawRect(x, startY + 1, x + width, startY + 1, epanelcolor);
 
         }
     }
 
-    /*
-     * Zum Bewegen und Extenden des Panels usw.
-     */
     public boolean mouseClicked(int mouseX, int mouseY, int mouseButton) {
         if (!this.visible) {
             return false;
@@ -125,9 +119,6 @@ public class Panel {
         return false;
     }
 
-    /*
-     * Damit das Panel auch losgelassen werden kann
-     */
     public void mouseReleased(int mouseX, int mouseY, int state) {
         if (!this.visible) {
             return;
@@ -137,9 +128,6 @@ public class Panel {
         }
     }
 
-    /*
-     * HoverCheck
-     */
     public boolean isHovered(int mouseX, int mouseY) {
         return mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height;
     }

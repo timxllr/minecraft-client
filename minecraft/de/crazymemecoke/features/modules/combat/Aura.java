@@ -1,16 +1,12 @@
 package de.crazymemecoke.features.modules.combat;
 
-import com.darkmagician6.eventapi.EventManager;
-import com.darkmagician6.eventapi.EventTarget;
+import de.crazymemecoke.utils.events.eventapi.EventManager;
+import de.crazymemecoke.utils.events.eventapi.EventTarget;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.manager.notificationmanager.Notification;
-import de.crazymemecoke.manager.notificationmanager.NotificationManager;
-import de.crazymemecoke.manager.notificationmanager.NotificationType;
-import de.crazymemecoke.utils.Notify;
 import de.crazymemecoke.utils.events.MoveEvent;
 import de.crazymemecoke.utils.events.PacketSendEvent;
 import net.minecraft.client.Minecraft;
@@ -26,11 +22,10 @@ import net.minecraft.util.MathHelper;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Aura extends Module {
 
-    SettingsManager sM = Client.getInstance().getSetmgr();
+    SettingsManager sM = Client.instance().getSetmgr();
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
     double range, cps;
@@ -61,16 +56,16 @@ public class Aura extends Module {
     @Override
     public void onUpdate() {
         if (getState()) {
-            range = sM.getSettingByName("Range", this).getValDouble();
-            cps = sM.getSettingByName("CPS", this).getValDouble();
-            teams = sM.getSettingByName("Teams", this).getValBoolean();
-            players = sM.getSettingByName("Players", this).getValBoolean();
-            animals = sM.getSettingByName("Animals", this).getValBoolean();
-            mobs = sM.getSettingByName("Mobs", this).getValBoolean();
-            villager = sM.getSettingByName("Villager", this).getValBoolean();
-            invisibles = sM.getSettingByName("Invisibles", this).getValBoolean();
-            rotations = sM.getSettingByName("Rotations", this).getValBoolean();
-            auraMode = sM.getSettingByName("Mode", this).getValString();
+            range = sM.getSettingByName("Range", this).getNum();
+            cps = sM.getSettingByName("CPS", this).getNum();
+            teams = sM.getSettingByName("Teams", this).getBool();
+            players = sM.getSettingByName("Players", this).getBool();
+            animals = sM.getSettingByName("Animals", this).getBool();
+            mobs = sM.getSettingByName("Mobs", this).getBool();
+            villager = sM.getSettingByName("Villager", this).getBool();
+            invisibles = sM.getSettingByName("Invisibles", this).getBool();
+            rotations = sM.getSettingByName("Rotations", this).getBool();
+            auraMode = sM.getSettingByName("Mode", this).getMode();
         }
     }
 
@@ -79,8 +74,8 @@ public class Aura extends Module {
     public void onEnable() {
         EventManager.register(this);
 
-        if (sM.getSettingByName("Mode", this).getValString().equalsIgnoreCase("Multi")) {
-            Client.getInstance().getModuleManager().getModByName("Aura").setState(false);
+        if (sM.getSettingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
+            Client.instance().modManager().getByName("Aura").setState(false);
         }
     }
 

@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 public class FastLadder extends Module {
 
 	public FastLadder() {
-		super("FastLadder", Keyboard.KEY_NONE, Category.MOVEMENT, Rainbow.rainbow(1, 1).hashCode());
+		super("FastLadder", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package de.crazymemecoke.manager.modulemanager;
 
-import com.darkmagician6.eventapi.EventManager;
+import de.crazymemecoke.utils.events.eventapi.EventManager;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.notificationmanager.Notification;
 import de.crazymemecoke.manager.notificationmanager.NotificationManager;
@@ -50,9 +50,9 @@ public class Module {
         if (state) {
             this.onEnable();
             this.isEnabled = true;
-            if (!(Client.getInstance().getModuleManager().getModByName("Invis").getState())) {
+            if (!(Client.instance().modManager().getByName("Invis").getState())) {
                 if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
-                    if (Client.getInstance().getSetmgr().getSettingByName("Notifications", Client.getInstance().getModuleManager().getModByName("HUD")).getValBoolean()) {
+                    if (Client.instance().getSetmgr().getSettingByName("Notifications", Client.instance().modManager().getByName("HUD")).getBool()) {
                         NotificationManager.show(new Notification(NotificationType.INFO, "§7[§a+§7] §6" + getName(), "§6Module §aaktiviert", 2));
                     }
                 }
@@ -60,9 +60,9 @@ public class Module {
         } else {
             this.onDisable();
             this.isEnabled = false;
-            if (!(Client.getInstance().getModuleManager().getModByName("Invis").getState())) {
+            if (!(Client.instance().modManager().getByName("Invis").getState())) {
                 if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
-                    if (Client.getInstance().getSetmgr().getSettingByName("Notifications", Client.getInstance().getModuleManager().getModByName("HUD")).getValBoolean()) {
+                    if (Client.instance().getSetmgr().getSettingByName("Notifications", Client.instance().modManager().getByName("HUD")).getBool()) {
                         NotificationManager.show(new Notification(NotificationType.INFO, "§7[§c-§7] §6" + getName(), "§6Module §cdeaktiviert", 2));
                     }
                 }
