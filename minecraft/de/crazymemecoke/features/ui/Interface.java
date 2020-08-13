@@ -18,6 +18,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
@@ -73,8 +74,19 @@ public class Interface extends GuiIngame {
     private void renderKeyStrokes() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        if(Keyboard.isKeyDown(Keyboard.KEY_W)){
-            RenderUtils.drawBorderedCircle(30,30,15 , 10, 10);
+        RenderUtils.drawBorderedCircle(30, 30, 15, 10, 10);
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_S)){
+
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_D)){
+
         }
     }
 
