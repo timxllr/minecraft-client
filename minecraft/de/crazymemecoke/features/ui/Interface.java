@@ -2,8 +2,10 @@ package de.crazymemecoke.features.ui;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.combat.Aura;
+import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import de.crazymemecoke.features.ui.guiscreens.clienthelper.GuiClientHelper;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
+import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -18,7 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
@@ -51,22 +52,24 @@ public class Interface extends GuiIngame {
     }
 
     private void renderUI() {
-        if (Client.instance().getSetmgr().getSettingByName("Watermark", Client.instance().modManager().getByName("HUD")).getBool()) {
+        SettingsManager sM = Client.instance().getSetmgr();
+
+        if (sM.getSettingByName("Watermark", Client.instance().modManager().getByName("HUD")).getBool()) {
             renderWatermark();
         }
-        if (Client.instance().getSetmgr().getSettingByName("TabGUI", Client.instance().modManager().getByName("HUD")).getBool()) {
+        if (sM.getSettingByName("TabGUI", Client.instance().modManager().getByName("HUD")).getBool()) {
             renderTabGUI();
         }
-        if (Client.instance().getSetmgr().getSettingByName("ArrayList", Client.instance().modManager().getByName("HUD")).getBool()) {
+        if (sM.getSettingByName("ArrayList", Client.instance().modManager().getByName("HUD")).getBool()) {
             renderArrayList();
         }
-        if (Client.instance().getSetmgr().getSettingByName("Target HUD", Client.instance().modManager().getByName("HUD")).getBool()) {
+        if (sM.getSettingByName("Target HUD", Client.instance().modManager().getByName("HUD")).getBool()) {
             renderTargetHUD();
         }
-        if (Client.instance().getSetmgr().getSettingByName("KeyStrokes", Client.instance().modManager().getByName("HUD")).getBool()) {
+        if (sM.getSettingByName("KeyStrokes", Client.instance().modManager().getByName("HUD")).getBool()) {
             renderKeyStrokes();
         }
-        if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) && Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
             mc.displayGuiScreen(new GuiClientHelper());
         }
     }
@@ -74,7 +77,25 @@ public class Interface extends GuiIngame {
     private void renderKeyStrokes() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        RenderUtils.drawBorderedCircle(30, 30, 15, 10, 10);
+        /*
+        Key Order:
+        W, A, S, D
+         */
+
+        /*
+        This keys are always being rendered
+        It's the "neutral" state.
+         */
+
+        RenderUtils.drawBorderedCircle(s.height() - 50, s.width() - 50, 10, 10, 10);
+        RenderUtils.drawBorderedCircle(s.height() - 20, s.width() - 80, 10, 10, 10);
+        RenderUtils.drawBorderedCircle(s.height() - 20, s.width() - 50, 10, 10, 10);
+        RenderUtils.drawBorderedCircle(s.height() - 20, s.width() - 20, 10, 10, 10);
+
+        /*
+        This keys are only rendered when the key is pressed
+        It's rendered above the neutral key.
+         */
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
 
@@ -82,10 +103,10 @@ public class Interface extends GuiIngame {
         if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
 
         }
-        if(Keyboard.isKeyDown(Keyboard.KEY_S)){
+        if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
 
         }
-        if(Keyboard.isKeyDown(Keyboard.KEY_D)){
+        if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
 
         }
     }
@@ -94,7 +115,7 @@ public class Interface extends GuiIngame {
         ScaledResolution s = new ScaledResolution(mc);
 
         if (!(Aura.currentTarget == null) && Aura.currentTarget instanceof EntityPlayer && Client.instance().getSetmgr().getSettingByName("Target HUD", Client.instance().modManager().getByName("HUD")).getBool()) {
-            RenderUtils.drawRect(s.width() / 2 - 130, s.height() / 2 - 50, s.width() / 2 + 130, s.height() / 2 + 50, new Color(0, 0, 0, 110).getRGB());
+            RenderUtils.drawRect(s.width() / 2 - 130, s.height() / 2 - 50, s.width() / 2, s.height() / 2 + 50, new Color(0, 0, 0, 110).getRGB());
 
             EntityPlayer p = (EntityPlayer) Aura.currentTarget;
             Client.instance().getFontManager().cabin23.drawStringWithShadow("Spieler: " + p.getName(), s.width() / 2 - 125, s.height() / 2 - 45, -1);
@@ -106,10 +127,6 @@ public class Interface extends GuiIngame {
             } else {
                 Client.instance().getFontManager().cabin23.drawStringWithShadow("Item: " + i.getDisplayName(), s.width() / 2 - 125, s.height() / 2 - 25, -1);
             }
-
-            // TODO: Player Model fixen (current state: not working)
-            // GuiInventory.drawEntityOnScreen(51, 75, 30, (float) (51), (float) (75 - 50), p);
-
         }
     }
 
