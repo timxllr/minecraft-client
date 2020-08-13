@@ -40,6 +40,9 @@ public class GuiAddAlt extends GuiScreen {
         usernameField = new GuiTextField(0, fontRendererObj, width / 2 - 100, height - 350, 200, 20);
         passwordField = new GuiTextField(1, fontRendererObj, width / 2 - 100, height - 300, 200, 20);
         usernamePasswordField = new GuiTextField(2, fontRendererObj, width / 2 - 100, height - 250, 200, 20);
+        usernameField.setMaxStringLength(200);
+        passwordField.setMaxStringLength(200);
+        usernamePasswordField.setMaxStringLength(400);
     }
 
     public void onGuiClosed() {

@@ -37,10 +37,10 @@ public class Interface extends GuiIngame {
             Display.setTitle(Client.instance().getClientName() + " " + Client.instance().getClientVersion() + " | made by " + Client.instance().getClientCoder());
             if (Client.instance().modManager().getByName("HUD").getState()) {
                 if (Client.instance().getSetmgr().getSettingByName("Developer Mode", Client.instance().modManager().getByName("HUD")).getBool()) {
-                    doRenderStuff();
+                    renderUI();
                 } else {
                     if (mc.currentScreen == null && !mc.gameSettings.showDebugInfo) {
-                        doRenderStuff();
+                        renderUI();
                     }
                 }
             }
@@ -49,7 +49,7 @@ public class Interface extends GuiIngame {
         }
     }
 
-    private void doRenderStuff() {
+    private void renderUI() {
         if (Client.instance().getSetmgr().getSettingByName("Watermark", Client.instance().modManager().getByName("HUD")).getBool()) {
             renderWatermark();
         }
@@ -73,7 +73,9 @@ public class Interface extends GuiIngame {
     private void renderKeyStrokes() {
         ScaledResolution s = new ScaledResolution(mc);
 
-
+        if(Keyboard.isKeyDown(Keyboard.KEY_W)){
+            RenderUtils.drawBorderedCircle(30,30,15 , 10, 10);
+        }
     }
 
     private void renderTargetHUD() {

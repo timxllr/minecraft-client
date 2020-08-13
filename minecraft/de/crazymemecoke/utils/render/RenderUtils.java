@@ -19,6 +19,63 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class RenderUtils {
 
+    public static void enableDefaults() {
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_LINE_SMOOTH);
+        glDisable(GL_LIGHTING);
+
+        glDepthMask(false);
+    }
+
+    public static void disableDefaults() {
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_DEPTH_TEST);
+        glDisable(GL_LINE_SMOOTH);
+        glDepthMask(true);
+    }
+
+    public static void drawBorderedCircle(float x, float y, float radius, int outside, int inside) {
+        float scale = (float) 0.1;
+        enableDefaults();
+        glPushMatrix();
+        glScalef(scale, scale, scale);
+        x = (int) (x * (1 / scale));
+        y = (int) (y * (1 / scale));
+        radius *= 1 / scale;
+        drawCircle(x, y, radius, inside, 1, 1);
+        drawCircle(x, y, radius, outside, 1, 2);
+        glScalef(1 / scale, 1 / scale, 1 / scale);
+        glPopMatrix();
+        disableDefaults();
+    }
+
+    public static void drawCircle(double x, double y, double radius, int color, float line, int mode) {
+        //setColor(color);
+        enableDefaults();
+        glPushMatrix();
+        glLineWidth(line);
+        if (mode == 1) {
+            // full / filled
+            glBegin(GL_POLYGON);
+        } else if (mode == 2) {
+            // unfilled
+            glBegin(GL_LINE_LOOP);
+        }
+
+        for (int i = 0; i < 360; i++) {
+            // rotate
+            glVertex2d(x + Math.sin(i * Math.PI / 180) * radius, y + Math.cos(i * Math.PI / 180) * radius);
+        }
+
+        glEnd();
+        glPopMatrix();
+        disableDefaults();
+        glColor4f(1, 1, 1, 1);
+    }
+
     public static int reAlpha(int color, float alpha) {
         Color c = new Color(color);
         float r = 0.003921569F * (float) c.getRed();
