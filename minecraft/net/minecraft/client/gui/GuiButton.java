@@ -1,6 +1,7 @@
 package net.minecraft.client.gui;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -145,8 +146,8 @@ public class GuiButton extends Gui {
                 mouseDragged(mc, mouseX, mouseY);
                 int var6 = 14737632;
                 String text = StringUtils.stripControlCodes(displayString);
-                Client.instance().getFontManager().comfortaa22.drawString(text, xPosition - (Client.instance().getFontManager().comfortaa22.getStringWidth(text) / 2) + width / 2,
-                        yPosition + (height - 8) / 2, var6);
+                UnicodeFontRenderer fontRenderer = Client.instance().getFontManager().getFont("Comfortaa", 19, Font.PLAIN);
+                fontRenderer.drawStringWithShadow(text, xPosition - (fontRenderer.getStringWidth(text) / 2) + width / 2, yPosition + (height - 6) / 2, var6);
             }
         }
     }
