@@ -3,7 +3,6 @@ package de.crazymemecoke.features.ui.tabgui;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.RenderHelper;
-import de.crazymemecoke.utils.render.Rainbow;
 import net.minecraft.client.Minecraft;
 
 import java.awt.*;
@@ -39,14 +38,20 @@ public class Tab {
         countMenuSize();
         x += 2;
         y += 2;
-        RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, -1879048192);
+        // Background
+        RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, new Color(0, 0, 0).getRGB());
         for (int i = 0; i < hacks.size(); i++) {
 
             Module currentHack = hacks.get(i);
-            // Selected Tab Rect
-            RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 10, i == TabGUI.selectedItem ? new Color(255, 140, 59, 120) : new Color(0, 0, 0, 0));
-            // Selected Tab String
-            Client.instance().getFontManager().comfortaa20.drawString(currentHack.getName(), x, y + gui.tabHeight * i + 1, currentHack.getState() ? -1 : -1);
+            // Selected Tab Background & String
+            if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Ambien")) {
+                RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Client.instance().getAmbienBlueColor() : 0);
+                Client.instance().getFontManager().raleWay20.drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+            } else if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Vortex")) {
+                RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Client.instance().getVortexRedColor() : 0);
+                Client.instance().getFontManager().raleWay20.drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+            }
+
         }
     }
 }

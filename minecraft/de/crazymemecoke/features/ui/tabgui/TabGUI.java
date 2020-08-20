@@ -74,21 +74,27 @@ public class TabGUI {
         guiHeight = (tabHeight + tabsList.size() * tabHeight);
     }
 
-    public void drawGui(int posY, int posX, int width) {
-        int x = posY;
-        int y = posX;
+    public void drawGui(int posX, int posY, int width) {
+        int x = posX;
+        int y = posY;
         guiWidth = width;
         // Background
-        RenderHelper.drawRect(posY - 1, posX - 1, posY + guiWidth, posX + guiHeight - 13, new Color(0, 0, 0, 150).getRGB());
+        if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Ambien")) {
+            RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
+        } else if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Vortex")) {
+            RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
+        }
 
-        int yOff = posX;
+        int yOff = posY;
         for (int i = 0; i < tabsList.size(); i++) {
-            // Selected Category Background
-            RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11,
-                    i == selectedTab ? -55511 : 0);
-            // Selected Category String
-            Client.instance().getFontManager().comfortaa20.drawString((tabsList.get(i)).tabName, x, yOff + 1,
-                    -3);
+            // Selected Category Background & String
+            if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Ambien")) {
+                RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getAmbienBlueColor() : 0);
+                Client.instance().getFontManager().raleWay20.drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff + 1, -3);
+            } else if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Vortex")) {
+                RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getVortexRedColor() : 0);
+                Client.instance().getFontManager().raleWay20.drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff + 1, -3);
+            }
             if ((i == selectedTab) && (!mainMenu)) {
                 (tabsList.get(i)).drawTabMenu(x + guiWidth + 2, yOff - 2);
             }
