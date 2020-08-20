@@ -98,6 +98,7 @@ options.guiScale.tooltip.4=  4x à 10x - Disponible pour moniteur 4K
 options.guiScale.tooltip.5=Les valeurs impaires (1x, 3x, 5x ...) ne sont pas compatible avec l'Unicode.
 options.guiScale.tooltip.2=Un GUI petit serai plus rapide
 
+options.vbo=Utiliser les VBO
 options.vbo.tooltip.1=Objets de Mémoire Tampon 
 options.vbo.tooltip.2=Utilises des modèles de rendu qui sont habituellement 
 options.vbo.tooltip.3=plus rapides (5-10%%) que le rendu par défaut.
@@ -231,12 +232,12 @@ of.options.CLEAR_WATER.tooltip.1=Eau Claire
 of.options.CLEAR_WATER.tooltip.2=  ON - claire, eau transparente  
 of.options.CLEAR_WATER.tooltip.3=  OFF - eau par défaut
 
-of.options.RANDOM_MOBS=Mobs Aléatoires 
-of.options.RANDOM_MOBS.tooltip.1=Mobs Aléatoires 
-of.options.RANDOM_MOBS.tooltip.2=  OFF - aucun mob aléatoire (rapide) 
-of.options.RANDOM_MOBS.tooltip.3=  ON - avec mob aléatoire (lent) 
-of.options.RANDOM_MOBS.tooltip.4=Les Mobs utilisent des textures aléatoires 
-of.options.RANDOM_MOBS.tooltip.5=A besoin d'un pack de ressources avec plusieurs textures de mob
+of.options.RANDOM_ENTITIES=Mobs Aléatoires 
+of.options.RANDOM_ENTITIES.tooltip.1=Mobs Aléatoires 
+of.options.RANDOM_ENTITIES.tooltip.2=  OFF - aucun mob aléatoire (rapide) 
+of.options.RANDOM_ENTITIES.tooltip.3=  ON - avec mob aléatoire (lent) 
+of.options.RANDOM_ENTITIES.tooltip.4=Les Mobs utilisent des textures aléatoires 
+of.options.RANDOM_ENTITIES.tooltip.5=A besoin d'un pack de ressources avec plusieurs textures de mob
 
 of.options.BETTER_GRASS=Meilleur Gazon 
 of.options.BETTER_GRASS.tooltip.1=Meilleur Gazon 
