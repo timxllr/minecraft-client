@@ -1,13 +1,16 @@
 package de.crazymemecoke.manager.fontmanager;
 
+import de.crazymemecoke.utils.render.slick.UnicodeFont;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FontManager {
-
+    private static final Map<String, UnicodeFontRenderer> FONT_RENDERER_HASH_MAP = new HashMap<>();
     public UnicodeFontRenderer rainbowVeins50;
     public UnicodeFontRenderer verdana19;
     public UnicodeFontRenderer cabin19;
@@ -120,5 +123,19 @@ public class FontManager {
 
     public enum FontExtension {
         TTF, OTF;
+    }
+
+    /**
+     * @author Trol
+     *
+     * Gets the font, if absent creates a new one and puts it into a hashmap
+     * @param fontName font identifying name
+     * @param size the size of the font
+     * @param fontType Font.PLAIN, Font.BOLD, Font.ITALIC, Font.BOLD | Font.ITALIC (Bold and Italic)
+     * @return new font instance
+     */
+    public UnicodeFontRenderer getFont(String fontName, int size, int fontType) {
+        final String id = fontName + "-" + size + "-" + fontType;
+        return FONT_RENDERER_HASH_MAP.computeIfAbsent(id, (idx) -> new UnicodeFontRenderer(new Font(fontName, fontType, size), true, 8));
     }
 }
