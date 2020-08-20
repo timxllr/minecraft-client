@@ -333,17 +333,11 @@ public class GuiIngame extends Gui {
     }
 
     protected void renderTooltip(ScaledResolution sr, float partialTicks) {
-        Boolean devMode = Client.instance().getSetmgr().getSettingByName("Developer Mode", Client.instance().modManager().getByName("HUD")).getBool();
-
-        if (devMode) {
-            renderHotbar(partialTicks);
-        } else if (mc.currentScreen == null) {
-            renderHotbar(partialTicks);
-        }
+        renderHotbar(partialTicks);
     }
 
     private void renderHotbar(float partialTicks) {
-        Setting hotbar = Client.instance().getSetmgr().getSettingByName("Hotbar", Client.instance().modManager().getByName("HUD"));
+        Setting hotbar = Client.instance().setMgr().getSettingByName("Hotbar", Client.instance().modManager().getByName("HUD"));
         ScaledResolution s = new ScaledResolution(Wrapper.mc);
 
         if (!Client.instance().modManager().getByName("Invis").getState() && hotbar.getBool() && Client.instance().modManager().getByName("HUD").getState()) {
@@ -392,7 +386,6 @@ public class GuiIngame extends Gui {
                 RenderHelper.disableStandardItemLighting();
                 GlStateManager.disableRescaleNormal();
                 GlStateManager.disableBlend();
-
             }
         }
     }
