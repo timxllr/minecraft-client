@@ -44,7 +44,7 @@ public class KillAura extends Module {
     private float curPitch = 0.0F;
     private int tick = 0;
 
-    SettingsManager sM = Client.instance().getSetmgr();
+    SettingsManager sM = Client.instance().setMgr();
 
     boolean autoBlock, randomAttacks, attackPlayers, attackAnimals, attackMobs, attackInvisibles, checkEntityID, attackWhileInv;
     double reach, auraDelay, entityID, switchTicks, maxTargets;
@@ -52,19 +52,19 @@ public class KillAura extends Module {
     public KillAura() {
         super("KillAura", Keyboard.KEY_NONE, Category.COMBAT, -1);
 
-        sM.rSetting(new Setting("Auto Block", this, true));
-        sM.rSetting(new Setting("Random Attacks", this, true));
-        sM.rSetting(new Setting("Attack Players", this, true));
-        sM.rSetting(new Setting("Attack Animals", this, false));
-        sM.rSetting(new Setting("Attack Mobs", this, false));
-        sM.rSetting(new Setting("Attack Invisibles", this, false));
-        sM.rSetting(new Setting("Check Entity ID", this, true));
-        sM.rSetting(new Setting("Attack while Inv", this, true));
-        sM.rSetting(new Setting("Reach", this, 3.8, 1, 7.0, false));
-        sM.rSetting(new Setting("Delay", this, 120.0, 0.0, 1000.0, false));
-        sM.rSetting(new Setting("Entity ID", this, 2.0, 1.0, 5.0, false));
-        sM.rSetting(new Setting("Switch Ticks", this, 2.0, 0.0, 10.0, false));
-        sM.rSetting(new Setting("Max Targets", this, 2.0, 0.0, 10.0, false));
+        sM.newSetting(new Setting("Auto Block", this, true));
+        sM.newSetting(new Setting("Random Attacks", this, true));
+        sM.newSetting(new Setting("Attack Players", this, true));
+        sM.newSetting(new Setting("Attack Animals", this, false));
+        sM.newSetting(new Setting("Attack Mobs", this, false));
+        sM.newSetting(new Setting("Attack Invisibles", this, false));
+        sM.newSetting(new Setting("Check Entity ID", this, true));
+        sM.newSetting(new Setting("Attack while Inv", this, true));
+        sM.newSetting(new Setting("Reach", this, 3.8, 1, 7.0, false));
+        sM.newSetting(new Setting("Delay", this, 120.0, 0.0, 1000.0, false));
+        sM.newSetting(new Setting("Entity ID", this, 2.0, 1.0, 5.0, false));
+        sM.newSetting(new Setting("Switch Ticks", this, 2.0, 0.0, 10.0, false));
+        sM.newSetting(new Setting("Max Targets", this, 2.0, 0.0, 10.0, false));
     }
 
     @Override

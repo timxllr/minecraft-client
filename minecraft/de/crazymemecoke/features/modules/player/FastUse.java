@@ -6,7 +6,6 @@ import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.Rainbow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
@@ -23,14 +22,14 @@ public class FastUse extends Module {
 	public FastUse() {
 		super("FastUse", Keyboard.KEY_NONE, Category.PLAYER, -1);
 
-		Client.instance().getSetmgr().rSetting(new Setting("Delay", this, 15, 0, 20, false));
+		Client.instance().setMgr().newSetting(new Setting("Delay", this, 15, 0, 20, false));
 	}
 
 	boolean NCP = true;
 
 	@Override
 	public void onUpdate() {
-		double delay = Client.instance().getSetmgr().getSettingByName("Delay", this).getNum();
+		double delay = Client.instance().setMgr().getSettingByName("Delay", this).getNum();
 
 		if (getState()) {
 			try {

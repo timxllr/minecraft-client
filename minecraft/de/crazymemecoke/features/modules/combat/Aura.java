@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class Aura extends Module {
 
-    SettingsManager sM = Client.instance().getSetmgr();
+    SettingsManager sM = Client.instance().setMgr();
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
     double range, cps;
@@ -37,20 +37,20 @@ public class Aura extends Module {
     public Aura() {
         super("Aura", Keyboard.KEY_NONE, Category.COMBAT, -1);
 
-        sM.rSetting(new Setting("Range", this, 4, 3.5, 7, true));
-        sM.rSetting(new Setting("CPS", this, 10, 1, 20, true));
-        sM.rSetting(new Setting("Teams", this, false));
-        sM.rSetting(new Setting("Players", this, true));
-        sM.rSetting(new Setting("Animals", this, false));
-        sM.rSetting(new Setting("Mobs", this, false));
-        sM.rSetting(new Setting("Villager", this, false));
-        sM.rSetting(new Setting("Invisibles", this, false));
-        sM.rSetting(new Setting("Rotations", this, true));
+        sM.newSetting(new Setting("Range", this, 4, 3.5, 7, true));
+        sM.newSetting(new Setting("CPS", this, 10, 1, 20, true));
+        sM.newSetting(new Setting("Teams", this, false));
+        sM.newSetting(new Setting("Players", this, true));
+        sM.newSetting(new Setting("Animals", this, false));
+        sM.newSetting(new Setting("Mobs", this, false));
+        sM.newSetting(new Setting("Villager", this, false));
+        sM.newSetting(new Setting("Invisibles", this, false));
+        sM.newSetting(new Setting("Rotations", this, true));
 
         ArrayList<String> auraMode = new ArrayList<>();
         auraMode.add("Single");
         auraMode.add("Multi");
-        sM.rSetting(new Setting("Mode", this, "Single", auraMode));
+        sM.newSetting(new Setting("Mode", this, "Single", auraMode));
     }
 
     @Override

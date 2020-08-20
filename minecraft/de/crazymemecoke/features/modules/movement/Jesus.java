@@ -32,7 +32,7 @@ public class Jesus extends Module {
         mode.add("Normal");
         mode.add("Dolphin");
         mode.add("AAC");
-        Client.instance().getSetmgr().rSetting(new Setting("Mode", this, "Normal", mode));
+        Client.instance().setMgr().newSetting(new Setting("Mode", this, "Normal", mode));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Jesus extends Module {
     }
 
     public void onUpdate() {
-        String jesusMode = Client.instance().getSetmgr().getSettingByName("Mode", this).getMode();
+        String jesusMode = Client.instance().setMgr().getSettingByName("Mode", this).getMode();
         if (getState()) {
             if (jesusMode.equalsIgnoreCase("Normal")) {
                 doNormalJesus();

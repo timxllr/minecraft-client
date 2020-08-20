@@ -36,7 +36,7 @@ public class SettingsManager {
 
     }
 
-    public void rSetting(Setting in) {
+    public void newSetting(Setting in) {
         this.settings.add(in);
     }
 
@@ -73,7 +73,7 @@ public class SettingsManager {
 
     public void saveSettings() {
         List<String> formattedSettings = new ArrayList<String>();
-        for (final Setting set : Client.instance().getSetmgr().getSettings()) {
+        for (final Setting set : Client.instance().setMgr().getSettings()) {
             String yeet = set.getParentMod() != null ? set.getParentMod().getName() : "global";
             if (set.isSlider()) {
                 formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getNum());

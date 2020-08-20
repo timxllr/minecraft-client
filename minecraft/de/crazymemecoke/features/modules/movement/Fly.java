@@ -20,7 +20,7 @@ public class Fly extends Module {
     ArrayList<String> flyMode = new ArrayList<>();
     ArrayList<String> glideMode = new ArrayList<>();
     ArrayList<String> mode = new ArrayList<>();
-    SettingsManager sM = Client.instance().getSetmgr();
+    SettingsManager sM = Client.instance().setMgr();
     TimeHelper timer = new TimeHelper();
     private int delay = 0;
     public double motion;
@@ -48,9 +48,9 @@ public class Fly extends Module {
         glideMode.add("Old");
         glideMode.add("New");
 
-        sM.rSetting(new Setting("Mode", this, "Fly", mode));
-        sM.rSetting(new Setting("Fly Mode", this, "Jetpack", flyMode));
-        sM.rSetting(new Setting("Glide Mode", this, "New", glideMode));
+        sM.newSetting(new Setting("Mode", this, "Fly", mode));
+        sM.newSetting(new Setting("Fly Mode", this, "Jetpack", flyMode));
+        sM.newSetting(new Setting("Glide Mode", this, "New", glideMode));
     }
 
     @Override
@@ -63,8 +63,8 @@ public class Fly extends Module {
 
     @Override
     public void onEnable() {
-        if (Client.instance().getSetmgr().getSettingByName("Mode", this).getMode().equalsIgnoreCase("Glide")) {
-            if (Client.instance().getSetmgr().getSettingByName("Glide Mode", this).getMode().equalsIgnoreCase("New")) {
+        if (Client.instance().setMgr().getSettingByName("Mode", this).getMode().equalsIgnoreCase("Glide")) {
+            if (Client.instance().setMgr().getSettingByName("Glide Mode", this).getMode().equalsIgnoreCase("New")) {
                 time = 0;
                 dtime = 0;
                 mc.thePlayer.setSprinting(false);

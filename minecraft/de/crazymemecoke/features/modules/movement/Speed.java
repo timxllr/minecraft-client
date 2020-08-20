@@ -10,7 +10,6 @@ import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
 import de.crazymemecoke.utils.events.MoveEvent;
 import de.crazymemecoke.utils.events.UpdateEvent;
-import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.time.TickEvent;
 import de.crazymemecoke.utils.time.TimerUtil;
 import net.minecraft.block.Block;
@@ -37,7 +36,7 @@ public class Speed extends Module {
     private int motionTicks;
     private final TimerUtil delayTimer = new TimerUtil();
 
-    SettingsManager sM = Client.instance().getSetmgr();
+    SettingsManager sM = Client.instance().setMgr();
 
     public Speed() {
         super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
@@ -48,13 +47,13 @@ public class Speed extends Module {
         mode.add("Jump");
         mode.add("Timer");
 
-        sM.rSetting(new Setting("Mode", this, "Jump", mode));
-        sM.rSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
-        sM.rSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
-        sM.rSetting(new Setting("Wall Speed", this, 4.25, 0, 50, true));
-        sM.rSetting(new Setting("Water Speed", this, 4.25, 0, 50, true));
+        sM.newSetting(new Setting("Mode", this, "Jump", mode));
+        sM.newSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
+        sM.newSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
+        sM.newSetting(new Setting("Wall Speed", this, 4.25, 0, 50, true));
+        sM.newSetting(new Setting("Water Speed", this, 4.25, 0, 50, true));
 
-        sM.rSetting(new Setting("[Jump] Auto Jump", this, false));
+        sM.newSetting(new Setting("[Jump] Auto Jump", this, false));
     }
 
     public void onEnable() {

@@ -60,27 +60,27 @@ public class Panel {
         // Closed Panel
         RenderUtils.drawRect(x, y, x + width, y + height, 0xff121212);
 
-        if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New")) {
+        if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New")) {
             RenderUtils.drawRect(x - 2, y, x, y + height, outlineColor);
             FontUtil.drawStringWithShadow(title, x + 2, y + height / 2 - FontUtil.getFontHeight() / 2, 0xffefefef);
-        } else if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("JellyLike")) {
+        } else if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("JellyLike")) {
             RenderUtils.drawRect(x + 4, y + 2, x + 4.3, y + height - 2, 0xffaaaaaa);
             RenderUtils.drawRect(x - 4 + width, y + 2, x - 4.3 + width, y + height - 2, 0xffaaaaaa);
             FontUtil.drawTotalCenteredStringWithShadow(title, x + width / 2, y + height / 2 + 1, 0xffefefef);
-        } else if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("Ambien")) {
+        } else if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("Ambien")) {
             RenderUtils.drawRect(x, y, x + width, y + height, new Color(92, 49, 135).getRGB());
             FontUtil.drawAmbienStringWithShadow(title, x + 2, y + height / 2 - FontUtil.getFontHeight() / 2 - 2, 0xffefefef);
         }
 
         if (this.extended && !Elements.isEmpty()) {
             double startY = y + height;
-            int epanelcolor = Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New") ? 0xff232323 : Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("JellyLike") ? 0xbb151515 : 0;
+            int epanelcolor = Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New") ? 0xff232323 : Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("JellyLike") ? 0xbb151515 : 0;
 
             for (ModuleButton et : Elements) {
-                if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New")) {
+                if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("New")) {
                     RenderUtils.drawRect(x - 2, startY, x + width, startY + et.height + 1, outlineColor);
                 }
-                if (Client.instance().getSetmgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("Ambien")) {
+                if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode().equalsIgnoreCase("Ambien")) {
                     RenderUtils.drawRect(x, startY, x + width, startY + et.height + 1, new Color(36, 35, 36).getRGB());
                 }
 

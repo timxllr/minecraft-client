@@ -17,10 +17,10 @@ public class Step extends Module {
 
         mode.add("Vanilla");
 
-        Client.instance().getSetmgr().rSetting(new Setting("Mode", this, "Vanilla", mode));
+        Client.instance().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
     }
 
-    SettingsManager sM = Client.instance().getSetmgr();
+    SettingsManager sM = Client.instance().setMgr();
 
     public void onUpdate() {
         if (this.getState()) {

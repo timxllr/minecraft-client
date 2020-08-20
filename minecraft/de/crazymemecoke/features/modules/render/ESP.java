@@ -15,7 +15,6 @@ import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +26,7 @@ import java.util.Iterator;
 
 public class ESP extends Module {
 
-    SettingsManager sM = Client.instance().getSetmgr();
+    SettingsManager sM = Client.instance().setMgr();
 
     public ESP() {
         super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER, -1);
@@ -38,10 +37,10 @@ public class ESP extends Module {
         mode.add("Outline");
         mode.add("Prophunt");
 
-        sM.rSetting(new Setting("Mode", this, "Outline", mode));
-        sM.rSetting(new Setting("Players", this, true));
-        sM.rSetting(new Setting("Mobs", this, false));
-        sM.rSetting(new Setting("Animals", this, false));
+        sM.newSetting(new Setting("Mode", this, "Outline", mode));
+        sM.newSetting(new Setting("Players", this, true));
+        sM.newSetting(new Setting("Mobs", this, false));
+        sM.newSetting(new Setting("Animals", this, false));
 
     }
 
