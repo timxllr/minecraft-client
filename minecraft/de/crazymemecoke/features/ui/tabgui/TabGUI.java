@@ -4,7 +4,9 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.RenderHelper;
+import de.crazymemecoke.utils.render.Rainbow;
 import net.minecraft.client.Minecraft;
+import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,54 +24,20 @@ public class TabGUI {
     public TabGUI(Minecraft minecraft) {
         mc = minecraft;
         tabsList = new ArrayList<>();
-        Tab tabCombat = new Tab(this, "Combat");
-        for (Module module : Client.instance().modManager().getModules()) {
-            if (module.getCategory() == Category.COMBAT) {
-                tabCombat.hacks.add(module);
+        for (Category category : Category.values()) {
+            String capitalizedName = category.name().substring(0, 1).toUpperCase() + category.name().substring(1).toLowerCase();
+            final Tab tab = new Tab(this, capitalizedName);
+
+            for (Module module : Client.instance().modManager().getModules()) {
+                if (module.getCategory() == category) {
+                    tab.hacks.add(module);
+                }
+            }
+
+            if (!tab.tabName.equalsIgnoreCase("Gui")) {
+                tabsList.add(tab);
             }
         }
-
-        Tab tabRender = new Tab(this, "Render");
-        for (Module module : Client.instance().modManager().getModules()) {
-            if (module.getCategory() == Category.RENDER) {
-                tabRender.hacks.add(module);
-            }
-        }
-
-        Tab tabMovement = new Tab(this, "Movement");
-        for (Module module : Client.instance().modManager().getModules()) {
-            if (module.getCategory() == Category.MOVEMENT) {
-                tabMovement.hacks.add(module);
-            }
-        }
-
-        Tab tabPlayer = new Tab(this, "Player");
-        for (Module module : Client.instance().modManager().getModules()) {
-            if (module.getCategory() == Category.PLAYER) {
-                tabPlayer.hacks.add(module);
-            }
-        }
-
-        Tab tabWorld = new Tab(this, "World");
-        for (Module module : Client.instance().modManager().getModules()) {
-            if (module.getCategory() == Category.WORLD) {
-                tabWorld.hacks.add(module);
-            }
-        }
-
-        Tab tabExploits = new Tab(this, "Exploits");
-        for (Module module : Client.instance().modManager().getModules()) {
-            if (module.getCategory() == Category.EXPLOITS) {
-                tabExploits.hacks.add(module);
-            }
-        }
-
-        tabsList.add(tabCombat);
-        tabsList.add(tabRender);
-        tabsList.add(tabMovement);
-        tabsList.add(tabPlayer);
-        tabsList.add(tabWorld);
-        tabsList.add(tabExploits);
 
         guiHeight = (tabHeight + tabsList.size() * tabHeight);
     }
@@ -79,22 +47,44 @@ public class TabGUI {
         int y = posY;
         guiWidth = width;
         // Background
-        if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Ambien")) {
-            RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
-        } else if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Vortex")) {
-            RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
+        String mode = Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode();
+        switch (mode) {
+            case "ambien": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
+                break;
+            }
+            case "vortex": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
+                break;
+            }
+            case "suicide": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.instance().getSuicideBlueGreyColor());
+                break;
+            }
         }
 
         int yOff = posY;
         for (int i = 0; i < tabsList.size(); i++) {
-            // Selected Category Background & String
-            if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Ambien")) {
-                RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getAmbienBlueColor() : 0);
-                Client.instance().getFontManager().raleWay20.drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff + 1, -3);
-            } else if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode().equalsIgnoreCase("Vortex")) {
-                RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getVortexRedColor() : 0);
-                Client.instance().getFontManager().raleWay20.drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff + 1, -3);
+
+            switch (mode) {
+                case "ambien": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getAmbienBlueColor() : 0);
+                    Client.instance().getFontManager().getFont("Raleway Light", 20, Font.PLAIN).drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff, -1);
+                    break;
+                }
+                case "vortex": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getVortexRedColor() : 0);
+                    Client.instance().getFontManager().getFont("Raleway Light", 20, Font.PLAIN).drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff, -1);
+                    break;
+                }
+                case "suicide": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Rainbow.rainbow(1, 1f).getRGB() : 0);
+                    Client.instance().getFontManager().getFont("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
+                    break;
+                }
             }
+
+
             if ((i == selectedTab) && (!mainMenu)) {
                 (tabsList.get(i)).drawTabMenu(x + guiWidth + 2, yOff - 2);
             }
