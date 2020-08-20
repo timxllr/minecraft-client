@@ -68,11 +68,13 @@ public class GuiCredits extends GuiScreen {
         fM.cabin35.drawStringWithShadow(title, width / 2 - fM.cabin35.getStringWidth(title) / 2, 10, -1);
 
         String c1 = "HeroCode - ClickGUI API";
-        fM.cabin23.drawStringWithShadow(c1, width / 2 - fM.cabin23.getStringWidth(c1) / 2, height / 2 - 15, -1);
         String c2 = "Kriteax - Client Port from 1.8 to 1.8.8 | General Help";
-        fM.cabin23.drawStringWithShadow(c2, width / 2 - fM.cabin23.getStringWidth(c2) / 2, height / 2, -1);
         String c3 = "Sam - Font System | General Help";
-        fM.cabin23.drawStringWithShadow(c3, width / 2 - fM.cabin23.getStringWidth(c3) / 2, height / 2 + 15, -1);
+        String c4 = "Nero - Fonts | Crasher | Circle ESP";
+        fM.cabin23.drawStringWithShadow(c1, width / 2 - fM.cabin23.getStringWidth(c1) / 2, height / 2 - 30, -1);
+        fM.cabin23.drawStringWithShadow(c2, width / 2 - fM.cabin23.getStringWidth(c2) / 2, height / 2 - 10, -1);
+        fM.cabin23.drawStringWithShadow(c3, width / 2 - fM.cabin23.getStringWidth(c3) / 2, height / 2 + 10, -1);
+        fM.cabin23.drawStringWithShadow(c4, width / 2 - fM.cabin23.getStringWidth(c4) / 2, height / 2 + 30, -1);
 
         super.drawScreen(posX, posY, f);
     }
