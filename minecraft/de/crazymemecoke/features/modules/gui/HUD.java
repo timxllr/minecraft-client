@@ -10,10 +10,11 @@ import java.util.ArrayList;
 
 public class HUD extends Module {
 
+    ArrayList<String> design = new ArrayList<>();
+
     public HUD() {
         super("HUD", Keyboard.KEY_NONE, Category.GUI, -1);
         ArrayList<String> arrayListRectMode = new ArrayList<>();
-        ArrayList<String> design = new ArrayList<>();
 
         arrayListRectMode.add("Left");
         arrayListRectMode.add("Right");
@@ -21,6 +22,8 @@ public class HUD extends Module {
 
         design.add("Ambien");
         design.add("Vortex");
+        design.add("Suicide");
+        design.add("Apinity");
 
         Client.instance().setMgr().newSetting(new Setting("Design", this, "Ambien", design));
         Client.instance().setMgr().newSetting(new Setting("ArrayList Rect Mode", this, "Left", arrayListRectMode));
