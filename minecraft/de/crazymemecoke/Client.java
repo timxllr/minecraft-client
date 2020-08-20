@@ -12,6 +12,7 @@ import de.crazymemecoke.manager.notificationmanager.Notification;
 import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 
+import java.awt.*;
 import java.io.File;
 
 public class Client {
@@ -19,17 +20,17 @@ public class Client {
     private final static Client instance = new Client();
     private final Minecraft mc = Minecraft.getMinecraft();
 
-    // Naming Stuff
-    private final String clientName = "Lifetime";
-    private final String clientVersion = "b1";
+    private final String clientName = "Ambien";
+    private final String clientVersion = "5.2";
     private final String clientCoder = "CrazyMemeCoke";
     private final String clientPrefix = ".";
-
-    // Paths of Files
     private final String clientBackground = "textures/client/background.jpg";
     private final String clientIcon = "textures/client/icon.png";
     private final String shaderLoc = "textures/client/shader/";
     private final String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
+    private final int ambienBlueColor = new Color(32, 188, 240).getRGB();
+    private final int GreyColor = new Color(168, 167, 169).getRGB();
+    private final int vortexRedColor = new Color(0xE37974).getRGB();
 
     private ModuleManager moduleManager;
     private CommandManager commandManager;
@@ -101,7 +102,7 @@ public class Client {
         return mc;
     }
 
-    public SettingsManager getSetmgr() {
+    public SettingsManager setMgr() {
         return setmgr;
     }
 
@@ -147,5 +148,17 @@ public class Client {
 
     public Shader getShader() {
         return shader;
+    }
+
+    public int getAmbienBlueColor() {
+        return ambienBlueColor;
+    }
+
+    public int getGrey() {
+        return GreyColor;
+    }
+
+    public int getVortexRedColor() {
+        return vortexRedColor;
     }
 }
