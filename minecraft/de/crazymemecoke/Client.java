@@ -31,6 +31,9 @@ public class Client {
     private final int ambienBlueColor = new Color(32, 188, 240).getRGB();
     private final int GreyColor = new Color(168, 167, 169).getRGB();
     private final int vortexRedColor = new Color(0xE37974).getRGB();
+    private final int suicideBlueGreyColor = new Color(0x1c293a).getRGB();
+    private final int suicideBlueColor = new Color(0x0993b0).getRGB();
+    private final int suicideDarkBlueGreyColor = new Color(0x1a1f24).getRGB();
 
     private ModuleManager moduleManager;
     private CommandManager commandManager;
@@ -160,5 +163,17 @@ public class Client {
 
     public int getVortexRedColor() {
         return vortexRedColor;
+    }
+
+    public int getSuicideBlueGreyColor() {
+        return suicideBlueGreyColor;
+    }
+
+    public int getSuicideBlueColor() {
+        return suicideBlueColor;
+    }
+
+    public int getSuicideDarkBlueGreyColor() {
+        return suicideDarkBlueGreyColor;
     }
 }
