@@ -6,6 +6,7 @@ import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.RenderHelper;
 import net.minecraft.client.Minecraft;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class TabGUI {
@@ -78,12 +79,14 @@ public class TabGUI {
         int y = posX;
         guiWidth = width;
         // Background
-        RenderHelper.drawRect(posY - 1, posX - 1, posY + guiWidth, posX + guiHeight - 13, -1879048192);
+        RenderHelper.drawRect(posY - 1, posX - 1, posY + guiWidth, posX + guiHeight - 13, new Color(0, 0, 0, 150).getRGB());
 
         int yOff = posX;
         for (int i = 0; i < tabsList.size(); i++) {
+            // Selected Category Background
             RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11,
                     i == selectedTab ? -55511 : 0);
+            // Selected Category String
             Client.instance().getFontManager().comfortaa20.drawString((tabsList.get(i)).tabName, x, yOff + 1,
                     -3);
             if ((i == selectedTab) && (!mainMenu)) {
