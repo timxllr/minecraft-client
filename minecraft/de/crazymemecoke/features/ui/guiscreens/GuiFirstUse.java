@@ -1,7 +1,6 @@
 package de.crazymemecoke.features.ui.guiscreens;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,7 +13,7 @@ import java.io.IOException;
 public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
 
     public void initGui() {
-        buttonList.add(new GuiButton(0, width / 2 - 50, 250, width / 2, height - 20, "Ok, verstanden!"));
+        buttonList.add(new GuiButton(0, width / 2 - 50, 250, 120, 20, "Ok, verstanden!"));
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
@@ -24,9 +23,6 @@ public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        UnicodeFontRenderer c22 = Client.instance().getFontManager().comfortaa22;
-        UnicodeFontRenderer c50 = Client.instance().getFontManager().comfortaa50;
-
         GlStateManager.disableAlpha();
         GlStateManager.enableAlpha();
         drawGradientRect(0, 0, width, height, -2130706433, 16777215);
@@ -46,17 +42,11 @@ public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.scale(f, f, f);
         GlStateManager.popMatrix();
 
-        String s1 = "Willkommen!";
-        String s2 = "Folgende Sachen musst du dir unbedingt merken (!):";
-        String s3 = "RSHIFT - ClickGUI";
-        String s4 = "LSHIFT + RSHIFT - Info HUD";
-        String s5 = "Prefix: " + Client.instance().getClientPrefix();
-
-        c50.drawStringWithShadow(s1, width / 2 - c50.getStringWidth(s1) / 2, 40, -1);
-        c22.drawStringWithShadow(s2, width / 2 - c22.getStringWidth(s2) / 2, 80, -1);
-        c22.drawStringWithShadow(s3, width / 2 - c22.getStringWidth(s3) / 2, 100, -1);
-        c22.drawStringWithShadow(s4, width / 2 - c22.getStringWidth(s4) / 2, 110, -1);
-        c22.drawStringWithShadow(s5, width / 2 - c22.getStringWidth(s5) / 2, 120, -1);
+        Client.instance().getFontManager().comfortaa50.drawStringWithShadow("Willkommen!", width / 2 - 70, 40, -1);
+        Client.instance().getFontManager().comfortaa22.drawStringWithShadow("Wenn du den Client das 1. Mal verwendest:", width / 2 - 115, 80, -1);
+        Client.instance().getFontManager().comfortaa22.drawStringWithShadow("RSHIFT - ClickGUI", width / 2 - 40, 100, -1);
+        Client.instance().getFontManager().comfortaa22.drawStringWithShadow("RCONTROL - Info HUD", width / 2 - 55, 110, -1);
+        Client.instance().getFontManager().comfortaa22.drawStringWithShadow("Chat-Prefix - Punkt (.)", width / 2 - 50, 120, -1);
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);
