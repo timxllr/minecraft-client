@@ -65,6 +65,22 @@ public class TabGUI {
                 RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.instance().getApinityGreyColor());
                 break;
             }
+            case "huzuni": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.instance().getHuzuniGreyColor());
+                break;
+            }
+            case "saint": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.instance().getSaintDarkBlueColor());
+                break;
+            }
+            case "icarus old": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.instance().getIcarusOldGreyColor());
+                break;
+            }
+            case "icarus new": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.instance().getIcarusNewGreyColor());
+                break;
+            }
         }
 
         int yOff = posY;
@@ -89,6 +105,26 @@ public class TabGUI {
                 case "apinity": {
                     RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getApinityBlueColor() : 0);
                     Client.instance().getFontManager().getFont("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
+                    break;
+                }
+                case "huzuni": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getHuzuniBlueColor() : 0);
+                    Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
+                    break;
+                }
+                case "saint": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getSaintDarkTealColor() : 0);
+                    Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
+                    break;
+                }
+                case "icarus old": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getIcarusOldOrangeColor() : 0);
+                    Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
+                    break;
+                }
+                case "icarus new": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getIcarusNewBlueColor() : 0);
+                    Client.instance().getFontManager().getFont("BigNoodleTitling", 20, Font.BOLD).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff + 1, -1);
                     break;
                 }
             }

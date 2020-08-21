@@ -5,16 +5,19 @@ import de.crazymemecoke.features.modules.combat.Aura;
 import de.crazymemecoke.features.ui.guiscreens.clienthelper.GuiClientHelper;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import de.crazymemecoke.manager.fontmanager.FontManager;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -173,6 +176,7 @@ public class Interface extends GuiIngame {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
                 Client.instance().getFontManager().getFont("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(dtf.format(now), 32, 139, -1);
+                break;
             }
             case "apinity": {
                 RenderUtils.drawRect(0, 35, 40, 175, new Color(0, 0, 0, 150).getRGB());
@@ -193,22 +197,56 @@ public class Interface extends GuiIngame {
                 Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Z: " + mc.thePlayer.getPosition().getZ(), 2, 165, Client.instance().getApinityBlueColor());
                 break;
             }
+            case "huzuni": {
+                Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawStringWithShadow("Huzuni Dev " + Client.instance().getClientVersion(), 2, 2, -1);
+                break;
+            }
+            case "wurst": {
+                RenderUtils.drawRect(0, 10, 120, 28, new Color(255, 255, 255, 130).getRGB());
+
+                Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawString("v" + Client.instance().getClientVersion() + " MC1.8.8", 58, 15, new Color(0, 0, 0).getRGB());
+
+                int width = 55;
+                int height = 20;
+                int x = 0;
+                int y = 9;
+
+                mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getWurstWatermark()));
+                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
+                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
+                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
+                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
+                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
+                break;
+            }
+            case "nodus": {
+                mc.fontRendererObj.drawString("Nodus", 2, 2, Client.instance().getNodusPurpleColor());
+                mc.fontRendererObj.drawString("v" + Client.instance().getClientVersion(), 35, 2, Client.instance().getNodusTealColor());
+                break;
+            }
+            case "saint": {
+                UnicodeFontRenderer f1 = Client.instance().getFontManager().getFont("Verdana", 20, Font.PLAIN);
+                UnicodeFontRenderer f2 = Client.instance().getFontManager().getFont("Verdana", 17, Font.PLAIN);
+                String s1 = "Saint";
+                String s2 = "v" + Client.instance().getClientVersion();
+                f1.drawStringWithShadow(s1, s.width() / 2 - f1.getStringWidth(s1) / 2, 3, -1);
+                f2.drawStringWithShadow(s2, s.width() / 2 - f2.getStringWidth(s2) / 2, 13, new Color(0x4A4A4A).getRGB());
+
+                f2.drawStringWithShadow("FPS:", 2, 88, -1);
+                f2.drawStringWithShadow(String.valueOf(mc.debugFPS), 22, 88, new Color(0x4A4A4A).getRGB());
+                break;
+            }
+            case "icarus old": {
+                mc.fontRendererObj.drawString("Icarus (b" + Client.instance().getClientVersion() + ")", 2, 2, -1);
+                break;
+            }
+            case "icarus new": {
+                RenderUtils.drawRect(s.width() - 62, 0, s.width(), 20, Client.instance().getIcarusNewGreyColor());
+
+                Client.instance().getFontManager().getFont("BigNoodleTiltling", 40, Font.BOLD).drawStringWithShadow("Icarus", s.width() - 60, -2, -1);
+                break;
+            }
         }
-
-        /*
-        This is the old Watermark.
-        I don't use it for now.
-         */
-
-        /*int width = 65;
-        int height = 65;
-
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientIcon()));
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());*/
     }
 
     private void renderTabGUI() {
@@ -234,10 +272,23 @@ public class Interface extends GuiIngame {
                     gui.drawGui(5, 40, 55);
                     break;
                 }
+                case "huzuni": {
+                    gui.drawGui(3, 15, 95);
+                    break;
+                }
+                case "saint": {
+                    gui.drawGui(3, 15, 65);
+                    break;
+                }
+                case "icarus old": {
+                    gui.drawGui(3, 15, 65);
+                    break;
+                }
+                case "icarus new": {
+                    gui.drawGui(3, 15, 65);
+                    break;
+                }
             }
-
-        } else {
-            gui.drawGui(1, 0, 72);
         }
     }
 

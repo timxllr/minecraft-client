@@ -58,6 +58,22 @@ public class Tab {
                 RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Client.instance().getApinityGreyColor());
                 break;
             }
+            case "huzuni": {
+                RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Client.instance().getHuzuniGreyColor());
+                break;
+            }
+            case "saint": {
+                RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Client.instance().getSaintDarkBlueColor());
+                break;
+            }
+            case "icarus old": {
+                RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Client.instance().getIcarusOldGreyColor());
+                break;
+            }
+            case "icarus new": {
+                RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Client.instance().getIcarusNewGreyColor());
+                break;
+            }
         }
 
         for (int i = 0; i < hacks.size(); i++) {
@@ -84,6 +100,26 @@ public class Tab {
                 case "apinity": {
                     RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Client.instance().getApinityBlueColor() : 0);
                     Client.instance().getFontManager().raleWay20.drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+                    break;
+                }
+                case "huzuni": {
+                    RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Client.instance().getHuzuniBlueColor() : 0);
+                    Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+                    break;
+                }
+                case "saint": {
+                    RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Client.instance().getSaintDarkTealColor() : 0);
+                    Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? Client.instance().getSaintOrangeColor() : new Color(255, 255, 255).getRGB());
+                    break;
+                }
+                case "icarus old": {
+                    RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Client.instance().getIcarusOldOrangeColor() : 0);
+                    Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? Client.instance().getSaintOrangeColor() : new Color(255, 255, 255).getRGB());
+                    break;
+                }
+                case "icarus new": {
+                    RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Client.instance().getIcarusNewBlueColor() : 0);
+                    Client.instance().getFontManager().getFont("BigNoodleTitling", 20, Font.BOLD).drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? Client.instance().getSaintOrangeColor() : new Color(255, 255, 255).getRGB());
                     break;
                 }
             }

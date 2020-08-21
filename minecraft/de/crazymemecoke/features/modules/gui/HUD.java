@@ -24,6 +24,12 @@ public class HUD extends Module {
         design.add("Vortex");
         design.add("Suicide");
         design.add("Apinity");
+        design.add("Huzuni");
+        design.add("Wurst");
+        design.add("Nodus");
+        design.add("Saint");
+        design.add("Icarus Old");
+        design.add("Icarus New");
 
         Client.instance().setMgr().newSetting(new Setting("Design", this, "Ambien", design));
         Client.instance().setMgr().newSetting(new Setting("ArrayList Rect Mode", this, "Left", arrayListRectMode));
@@ -32,7 +38,6 @@ public class HUD extends Module {
         Client.instance().setMgr().newSetting(new Setting("ArrayList Background", this, true));
         Client.instance().setMgr().newSetting(new Setting("TabGUI", this, true));
         Client.instance().setMgr().newSetting(new Setting("Watermark", this, true));
-        Client.instance().setMgr().newSetting(new Setting("Notifications", this, true));
         Client.instance().setMgr().newSetting(new Setting("Target HUD", this, true));
         Client.instance().setMgr().newSetting(new Setting("KeyStrokes", this, true));
         Client.instance().setMgr().newSetting(new Setting("Developer Mode", this, false));
