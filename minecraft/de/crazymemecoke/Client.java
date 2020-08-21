@@ -25,6 +25,7 @@ public class Client {
     private final String clientPrefix = ".";
     private final String clientBackground = "textures/client/background.jpg";
     private final String clientIcon = "textures/client/icon.png";
+    private final String wurstWatermark = "textures/client/wurst.png";
     private final String shaderLoc = "textures/client/shader/";
     private final String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
 
@@ -36,17 +37,22 @@ public class Client {
     private final int suicideDarkBlueGreyColor = new Color(0x1a1f24).getRGB();
     private final int apinityBlueColor = new Color(0x4c80ee).getRGB();
     private final int apinityGreyColor = new Color(0x312e30).getRGB();
-
-    public int getGreyColor() {
-        return GreyColor;
-    }
-
-    public int getApinityGreyColor() {
-        return apinityGreyColor;
-    }
+    private final int huzuniBlueColor = new Color(0x00a5ff).getRGB();
+    private final int huzuniGreyColor = new Color(0x191923).getRGB();
+    private final int nodusPurpleColor = new Color(0x5a0454).getRGB();
+    private final int nodusTealColor = new Color(0x94d6ce).getRGB();
+    private final int saintDarkBlueColor = new Color(0x11274c).getRGB();
+    private final int saintDarkTealColor = new Color(0x13a4a1).getRGB();
+    private final int saintOrangeColor = new Color(0xE0B71F).getRGB();
+    private final int icarusOldOrangeColor = new Color(0xdb9615).getRGB();
+    private final int icarusOldGreyColor = new Color(0x4a586a).getRGB();
+    private final int icarusNewBlueColor = new Color(0x92c2cc).getRGB();
+    private final int icarusNewGreyColor = new Color(0, 0, 0, 100).getRGB();
 
     private ModuleManager moduleManager;
+
     private CommandManager commandManager;
+
     private SettingsManager setmgr;
     private ClickGUI clickgui;
     private FontManager fontManager;
@@ -182,7 +188,63 @@ public class Client {
         return suicideDarkBlueGreyColor;
     }
 
+    public int getGreyColor() {
+        return GreyColor;
+    }
+
+    public int getApinityGreyColor() {
+        return apinityGreyColor;
+    }
+
     public int getApinityBlueColor() {
         return apinityBlueColor;
+    }
+
+    public int getHuzuniBlueColor() {
+        return huzuniBlueColor;
+    }
+
+    public int getHuzuniGreyColor() {
+        return huzuniGreyColor;
+    }
+
+    public String getWurstWatermark() {
+        return wurstWatermark;
+    }
+
+    public int getNodusPurpleColor() {
+        return nodusPurpleColor;
+    }
+
+    public int getNodusTealColor() {
+        return nodusTealColor;
+    }
+
+    public int getSaintDarkBlueColor() {
+        return saintDarkBlueColor;
+    }
+
+    public int getSaintDarkTealColor() {
+        return saintDarkTealColor;
+    }
+
+    public int getSaintOrangeColor() {
+        return saintOrangeColor;
+    }
+
+    public int getIcarusNewBlueColor() {
+        return icarusNewBlueColor;
+    }
+
+    public int getIcarusNewGreyColor() {
+        return icarusNewGreyColor;
+    }
+
+    public int getIcarusOldGreyColor() {
+        return icarusOldGreyColor;
+    }
+
+    public int getIcarusOldOrangeColor() {
+        return icarusOldOrangeColor;
     }
 }
