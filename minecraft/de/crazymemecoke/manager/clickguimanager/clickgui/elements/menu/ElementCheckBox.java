@@ -1,13 +1,14 @@
 package de.crazymemecoke.manager.clickguimanager.clickgui.elements.menu;
 
-import java.awt.Color;
-
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.clickgui.elements.Element;
 import de.crazymemecoke.manager.clickguimanager.clickgui.elements.ModuleButton;
 import de.crazymemecoke.manager.clickguimanager.clickgui.util.ColorUtil;
 import de.crazymemecoke.manager.clickguimanager.clickgui.util.FontUtil;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.utils.render.RenderUtils;
+
+import java.awt.*;
 
 /**
  * Made by HeroCode
@@ -41,10 +42,19 @@ public class ElementCheckBox extends Element {
         /*
          * Titel und Checkbox rendern.
          */
-        FontUtil.drawString(setstrg, (int) (x + 13), (int) (y + FontUtil.getFontHeight() / 2 - 0.5), 0xffffffff);
-        RenderUtils.drawRect(x + 1, y + 2, x + 12, y + 13, set.getBool() ? color : 0xff000000);
-        if (isCheckHovered(mouseX, mouseY))
-            RenderUtils.drawRect(x + 1, y + 2, x + 12, y + 13, 0x55111111);
+        String mode = Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode();
+        switch (mode) {
+            case "ambien": {
+                FontUtil.drawString(setstrg, (int) (x + 15), (int) (y + FontUtil.getFontHeight() / 2 - 0.5), 0xffffffff);
+                RenderUtils.drawFilledCircle((int) x + 8, (int) y + 6, 6, set.getBool() ? color : 0xff000000);
+                break;
+            }
+            default: {
+                FontUtil.drawString(setstrg, (int) (x + 13), (int) (y + FontUtil.getFontHeight() / 2 - 0.5), 0xffffffff);
+                RenderUtils.drawRect(x + 1, y + 1, x + 12, y + 12, set.getBool() ? color : 0xff000000);
+                break;
+            }
+        }
     }
 
     /*
