@@ -22,7 +22,7 @@ public class ClickGUI extends Module {
         theme.add("New");
         theme.add("Ambien");
 
-        Client.instance().setMgr().newSetting(new Setting("Design", this, "New", theme));
+        Client.instance().setMgr().newSetting(new Setting("Design", this, "Ambien", theme));
         Client.instance().setMgr().newSetting(new Setting("Sound", this, false));
         Client.instance().setMgr().newSetting(new Setting("Blur", this, true));
         Client.instance().setMgr().newSetting(new Setting("Red", this, 255, 0, 255, true));
