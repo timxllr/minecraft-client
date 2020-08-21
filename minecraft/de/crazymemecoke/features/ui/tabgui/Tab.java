@@ -54,6 +54,10 @@ public class Tab {
                 RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Client.instance().getSuicideBlueGreyColor());
                 break;
             }
+            case "apinity": {
+                RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Client.instance().getApinityGreyColor());
+                break;
+            }
         }
 
         for (int i = 0; i < hacks.size(); i++) {
@@ -74,6 +78,11 @@ public class Tab {
                 }
                 case "suicide": {
                     RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Rainbow.rainbow(1, 1f).getRGB() : 0);
+                    Client.instance().getFontManager().raleWay20.drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+                    break;
+                }
+                case "apinity": {
+                    RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Client.instance().getApinityBlueColor() : 0);
                     Client.instance().getFontManager().raleWay20.drawStringWithShadow(currentHack.getName(), x + 1, y + gui.tabHeight * i + 1, currentHack.getState() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
                     break;
                 }

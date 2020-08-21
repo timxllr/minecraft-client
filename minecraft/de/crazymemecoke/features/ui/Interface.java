@@ -71,12 +71,12 @@ public class Interface extends GuiIngame {
         }
     }
 
+    /**
+     * Order of Rects, Strings & co. -> W, A, S, D
+     */
     private void renderKeyStrokes() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        /*
-        W, A, S, D
-         */
         RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 70, 13, new Color(0, 0, 0, 150).getRGB());
         RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 40, 13, new Color(0, 0, 0, 150).getRGB());
         RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 40, 13, new Color(0, 0, 0, 150).getRGB());
@@ -174,6 +174,25 @@ public class Interface extends GuiIngame {
                 LocalDateTime now = LocalDateTime.now();
                 Client.instance().getFontManager().getFont("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(dtf.format(now), 32, 139, -1);
             }
+            case "apinity": {
+                RenderUtils.drawRect(0, 35, 40, 175, new Color(0, 0, 0, 150).getRGB());
+
+                Client.instance().getFontManager().getFont("Raleway Light", 45, Font.PLAIN).drawStringWithShadow("Apinity", 1, 1, Client.instance().getApinityGreyColor());
+                Client.instance().getFontManager().getFont("Raleway Light", 30, Font.PLAIN).drawStringWithShadow(Client.instance().getClientVersion(), 72, 1, Client.instance().getApinityBlueColor());
+
+                try {
+                    Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: " + String.valueOf(mc.getCurrentServerData().pingToServer), 2, 116, Client.instance().getApinityBlueColor());
+                } catch (Exception ex) {
+                    Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: N/A", 1, 116, Client.instance().getApinityBlueColor());
+                }
+
+                Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("FPS: " + String.valueOf(mc.debugFPS), 2, 125, Client.instance().getApinityBlueColor());
+
+                Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("X: " + mc.thePlayer.getPosition().getX(), 2, 145, Client.instance().getApinityBlueColor());
+                Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Y: " + mc.thePlayer.getPosition().getY(), 2, 155, Client.instance().getApinityBlueColor());
+                Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Z: " + mc.thePlayer.getPosition().getZ(), 2, 165, Client.instance().getApinityBlueColor());
+                break;
+            }
         }
 
         /*
@@ -209,6 +228,10 @@ public class Interface extends GuiIngame {
                 }
                 case "suicide": {
                     gui.drawGui(1, 20, 72);
+                    break;
+                }
+                case "apinity": {
+                    gui.drawGui(5, 40, 55);
                     break;
                 }
             }

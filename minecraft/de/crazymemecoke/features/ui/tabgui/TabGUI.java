@@ -61,6 +61,10 @@ public class TabGUI {
                 RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.instance().getSuicideBlueGreyColor());
                 break;
             }
+            case "apinity": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.instance().getApinityGreyColor());
+                break;
+            }
         }
 
         int yOff = posY;
@@ -79,6 +83,11 @@ public class TabGUI {
                 }
                 case "suicide": {
                     RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Rainbow.rainbow(1, 1f).getRGB() : 0);
+                    Client.instance().getFontManager().getFont("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
+                    break;
+                }
+                case "apinity": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.instance().getApinityBlueColor() : 0);
                     Client.instance().getFontManager().getFont("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
