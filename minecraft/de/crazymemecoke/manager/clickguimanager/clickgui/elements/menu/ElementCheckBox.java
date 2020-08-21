@@ -45,8 +45,8 @@ public class ElementCheckBox extends Element {
         String mode = Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode();
         switch (mode) {
             case "ambien": {
-                FontUtil.drawString(setstrg, (int) (x + 15), (int) (y + FontUtil.getFontHeight() / 2 - 0.5), 0xffffffff);
-                RenderUtils.drawFilledCircle((int) x + 8, (int) y + 6, 6, set.getBool() ? color : 0xff000000);
+                FontUtil.drawString(setstrg, (int) (x + 15), (int) (y + FontUtil.getFontHeight() / 2), 0xffffffff);
+                RenderUtils.drawFilledCircle((int) x + 8, (int) y + 7, 6, set.getBool() ? color : 0xff000000);
                 break;
             }
             default: {
