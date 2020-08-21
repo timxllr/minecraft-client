@@ -20,7 +20,8 @@ public class HUD extends Module {
         arrayListRectMode.add("Right");
         arrayListRectMode.add("None");
 
-        design.add("Ambien");
+        design.add("Ambien Old");
+        design.add("Ambien New");
         design.add("Vortex");
         design.add("Suicide");
         design.add("Apinity");
@@ -30,6 +31,8 @@ public class HUD extends Module {
         design.add("Saint");
         design.add("Icarus Old");
         design.add("Icarus New");
+        design.add("Hero");
+        design.add("Klientus");
 
         Client.instance().setMgr().newSetting(new Setting("Design", this, "Ambien", design));
         Client.instance().setMgr().newSetting(new Setting("ArrayList Rect Mode", this, "Left", arrayListRectMode));

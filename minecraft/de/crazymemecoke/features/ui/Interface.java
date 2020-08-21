@@ -12,12 +12,12 @@ import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -74,9 +74,6 @@ public class Interface extends GuiIngame {
         }
     }
 
-    /**
-     * Order of Rects, Strings & co. -> W, A, S, D
-     */
     private void renderKeyStrokes() {
         ScaledResolution s = new ScaledResolution(mc);
 
@@ -86,16 +83,16 @@ public class Interface extends GuiIngame {
         RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 40, 13, new Color(0, 0, 0, 150).getRGB());
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 70, 13, Client.instance().getAmbienBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 70, 13, Client.instance().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-            RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 40, 13, Client.instance().getAmbienBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 40, 13, Client.instance().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 40, 13, Client.instance().getAmbienBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 40, 13, Client.instance().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-            RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 40, 13, Client.instance().getAmbienBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 40, 13, Client.instance().getAmbienOldBlueColor());
         }
 
         Client.instance().getFontManager().getFont("esp", 25, Font.PLAIN).drawStringWithShadow("W", s.width() - 66, s.height() - 73, -1);
@@ -107,7 +104,7 @@ public class Interface extends GuiIngame {
     private void renderTargetHUD() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        if (!(Aura.currentTarget == null) && Aura.currentTarget instanceof EntityPlayer && Client.instance().setMgr().getSettingByName("Target HUD", Client.instance().modManager().getByName("HUD")).getBool()) {
+        if (Aura.currentTarget instanceof EntityPlayer && Client.instance().setMgr().getSettingByName("Target HUD", Client.instance().modManager().getByName("HUD")).getBool()) {
             RenderUtils.drawRect(s.width() / 2 - 130, s.height() / 2 - 50, s.width() / 2 + 130, s.height() / 2 + 50, new Color(0, 0, 0, 110).getRGB());
 
             EntityPlayer p = (EntityPlayer) Aura.currentTarget;
@@ -121,8 +118,7 @@ public class Interface extends GuiIngame {
                 Client.instance().getFontManager().cabin23.drawStringWithShadow("Item: " + i.getDisplayName(), s.width() / 2 - 125, s.height() / 2 - 25, -1);
             }
 
-            // TODO: Player Model fixen (current state: not working)
-            // GuiInventory.drawEntityOnScreen(51, 75, 30, (float) (51), (float) (75 - 50), p);
+            GuiInventory.drawEntityOnScreen(51, 75, 30, (float) (51) - 50, (float) (75 - 50) - 20, (EntityLivingBase) Aura.currentTarget);
 
         }
     }
@@ -133,9 +129,9 @@ public class Interface extends GuiIngame {
         String mode = Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode();
 
         switch (mode) {
-            case "ambien": {
+            case "ambien old": {
                 RenderUtils.drawRect(0, 0, 73, 25, new Color(0, 0, 0).getRGB());
-                Client.instance().getFontManager().ambien45.drawStringWithShadow("A", 3, 1, Client.instance().getAmbienBlueColor());
+                Client.instance().getFontManager().ambien45.drawStringWithShadow("A", 3, 1, Client.instance().getAmbienOldBlueColor());
                 Client.instance().getFontManager().ambien45.drawStringWithShadow("mbien", 17, 1, Client.instance().getGrey());
                 Client.instance().getFontManager().ambien20.drawStringWithShadow(Client.instance().getClientVersion(), 55, 0, 0x349ac0);
                 break;
@@ -163,7 +159,7 @@ public class Interface extends GuiIngame {
                 RenderUtils.drawRect(0, 110, 73, 153, Client.instance().getSuicideBlueGreyColor());
 
                 Client.instance().getFontManager().getFont("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("FPS: ", 2, 115, Client.instance().getSuicideBlueColor());
-                Client.instance().getFontManager().getFont("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(mc.debugFPS), 26, 115, -1);
+                Client.instance().getFontManager().getFont("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(Minecraft.debugFPS), 26, 115, -1);
 
                 Client.instance().getFontManager().getFont("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("Ping: ", 2, 127, Client.instance().getSuicideBlueColor());
                 try {
@@ -185,12 +181,12 @@ public class Interface extends GuiIngame {
                 Client.instance().getFontManager().getFont("Raleway Light", 30, Font.PLAIN).drawStringWithShadow(Client.instance().getClientVersion(), 72, 1, Client.instance().getApinityBlueColor());
 
                 try {
-                    Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: " + String.valueOf(mc.getCurrentServerData().pingToServer), 2, 116, Client.instance().getApinityBlueColor());
+                    Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: " + mc.getCurrentServerData().pingToServer, 2, 116, Client.instance().getApinityBlueColor());
                 } catch (Exception ex) {
                     Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: N/A", 1, 116, Client.instance().getApinityBlueColor());
                 }
 
-                Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("FPS: " + String.valueOf(mc.debugFPS), 2, 125, Client.instance().getApinityBlueColor());
+                Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("FPS: " + Minecraft.debugFPS, 2, 125, Client.instance().getApinityBlueColor());
 
                 Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("X: " + mc.thePlayer.getPosition().getX(), 2, 145, Client.instance().getApinityBlueColor());
                 Client.instance().getFontManager().getFont("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Y: " + mc.thePlayer.getPosition().getY(), 2, 155, Client.instance().getApinityBlueColor());
@@ -202,21 +198,16 @@ public class Interface extends GuiIngame {
                 break;
             }
             case "wurst": {
-                RenderUtils.drawRect(0, 10, 120, 28, new Color(255, 255, 255, 130).getRGB());
+                RenderUtils.drawRect(0, 10, 145, 28, new Color(255, 255, 255, 130).getRGB());
 
-                Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawString("v" + Client.instance().getClientVersion() + " MC1.8.8", 58, 15, new Color(0, 0, 0).getRGB());
+                Client.instance().getFontManager().getFont("Arial", 20, Font.PLAIN).drawString("v" + Client.instance().getClientVersion() + " MC1.8.8", 80, 15, new Color(0, 0, 0).getRGB());
 
-                int width = 55;
+                int width = 75;
                 int height = 20;
                 int x = 0;
                 int y = 9;
 
-                mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getWurstWatermark()));
-                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
-                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
-                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
-                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
-                Gui.drawScaledCustomSizeModalRect(x, y, 0.0F, 0.0F, s.width(), s.height(), width, height, s.width(), s.height());
+                RenderUtils.drawImage(Client.instance().getWurstWatermark(), x, y, width, height);
                 break;
             }
             case "nodus": {
@@ -233,7 +224,7 @@ public class Interface extends GuiIngame {
                 f2.drawStringWithShadow(s2, s.width() / 2 - f2.getStringWidth(s2) / 2, 13, new Color(0x4A4A4A).getRGB());
 
                 f2.drawStringWithShadow("FPS:", 2, 88, -1);
-                f2.drawStringWithShadow(String.valueOf(mc.debugFPS), 22, 88, new Color(0x4A4A4A).getRGB());
+                f2.drawStringWithShadow(String.valueOf(Minecraft.debugFPS), 22, 88, new Color(0x4A4A4A).getRGB());
                 break;
             }
             case "icarus old": {
@@ -246,6 +237,33 @@ public class Interface extends GuiIngame {
                 Client.instance().getFontManager().getFont("BigNoodleTiltling", 40, Font.BOLD).drawStringWithShadow("Icarus", s.width() - 60, -2, -1);
                 break;
             }
+            case "ambien new": {
+                RenderUtils.drawRect(0, 10, 112, 40, Client.instance().getAmbienNewDarkGreyColor());
+
+                Client.instance().getFontManager().getFont("FIFA Welcome", 60, Font.PLAIN).drawStringWithShadow("A", 2, 7, Client.instance().getAmbienNewBlueColor());
+                Client.instance().getFontManager().getFont("FIFA Welcome", 60, Font.PLAIN).drawStringWithShadow("mbien", 20, 7, -1);
+                Client.instance().getFontManager().getFont("BigNoodleTiltling", 20, Font.PLAIN).drawStringWithShadow("V", 89, 24, Client.instance().getAmbienNewBlueColor());
+                Client.instance().getFontManager().getFont("BigNoodleTiltling", 20, Font.PLAIN).drawStringWithShadow(Client.instance().getClientVersion(), 96, 24, -1);
+                break;
+            }
+            case "hero": {
+                RenderUtils.drawRect(0, 0, 60, 21, new Color(0, 0, 0, 70).getRGB());
+
+                Client.instance().getFontManager().getFont("Raleway Light", 55, Font.PLAIN).drawStringWithShadow("Hero", -2, -4, Client.instance().getHeroGreenColor());
+                break;
+            }
+            case "klientus": {
+                Client.instance().getFontManager().getFont("Verdana", 50, Font.PLAIN).drawStringWithShadow("K", 1, 1, new Color(0x00659f).getRGB());
+                Client.instance().getFontManager().getFont("Verdana", 50, Font.PLAIN).drawStringWithShadow("lientus", 18, 1, -1);
+
+                RenderUtils.drawRect(3, 28, 105, 30, -1);
+
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+
+                Client.instance().getFontManager().getFont("Verdana", 18, Font.PLAIN).drawStringWithShadow(dtf.format(now), 32, 32, -1);
+                break;
+            }
         }
     }
 
@@ -256,7 +274,7 @@ public class Interface extends GuiIngame {
             String mode = Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode();
 
             switch (mode) {
-                case "ambien": {
+                case "ambien old": {
                     gui.drawGui(1, 30, 72);
                     break;
                 }
@@ -288,6 +306,18 @@ public class Interface extends GuiIngame {
                     gui.drawGui(3, 15, 65);
                     break;
                 }
+                case "ambien new": {
+                    gui.drawGui(1, 45, 65);
+                    break;
+                }
+                case "hero": {
+                    gui.drawGui(1, 22, 59);
+                    break;
+                }
+                case "vanta": {
+                    gui.drawGui(1, 20, 65);
+                    break;
+                }
             }
         }
     }
@@ -295,26 +325,66 @@ public class Interface extends GuiIngame {
     private void renderArrayList() {
         ScaledResolution s = new ScaledResolution(mc);
         String module;
+
         int stringY = 2;
         int rectY = 1;
 
         String mode = Client.instance().setMgr().getSettingByName("ArrayList Rect Mode", Client.instance().modManager().getByName("HUD")).getMode();
+        String design = Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("HUD")).getMode();
+
+        UnicodeFontRenderer comfortaa = Client.instance().getFontManager().getFont("Comfortaa", 20, Font.PLAIN);
+        UnicodeFontRenderer bigNoodleTilting = Client.instance().getFontManager().getFont("BigNoodleTilting", 20, Font.PLAIN);
 
         for (Module m : Client.instance().modManager().modules) {
             module = m.getName();
             if (m.getState() && !m.isCategory(Category.GUI)) {
                 if (Client.instance().setMgr().getSettingByName("ArrayList Background", Client.instance().modManager().getByName("HUD")).getBool()) {
                     if (mode.equalsIgnoreCase("Left")) {
-                        RenderUtils.drawRect(s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                        RenderUtils.drawRect(s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 5, (rectY - 2), s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 3, (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
-                        Client.instance().getFontManager().comfortaa20.drawString(module, s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 1, stringY, Rainbow.rainbow(1, 1).getRGB());
+                        switch (design) {
+                            case "ambien new":
+                            case "ambien old": {
+                                RenderUtils.drawRect(s.width() - bigNoodleTilting.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+                                RenderUtils.drawRect(s.width() - bigNoodleTilting.getStringWidth(module) - 5, (rectY - 2), s.width() - bigNoodleTilting.getStringWidth(module) - 3, (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
+                                bigNoodleTilting.drawStringWithShadow(module, s.width() - bigNoodleTilting.getStringWidth(module) - 2, stringY - 2, Rainbow.rainbow(1, 1).getRGB());
+                                break;
+                            }
+                            default: {
+                                RenderUtils.drawRect(s.width() - comfortaa.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+                                RenderUtils.drawRect(s.width() - comfortaa.getStringWidth(module) - 5, (rectY - 2), s.width() - comfortaa.getStringWidth(module) - 3, (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
+                                comfortaa.drawStringWithShadow(module, s.width() - comfortaa.getStringWidth(module) - 1, stringY, Rainbow.rainbow(1, 1).getRGB());
+                                break;
+                            }
+                        }
                     } else if (mode.equalsIgnoreCase("Right")) {
-                        RenderUtils.drawRect(s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 5, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                        RenderUtils.drawRect(s.width() - 3, (rectY - 2), s.width(), (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
-                        Client.instance().getFontManager().comfortaa20.drawString(module, s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 4, stringY, Rainbow.rainbow(1, 1).getRGB());
+                        switch (design) {
+                            case "ambien new":
+                            case "ambien old": {
+                                RenderUtils.drawRect(s.width() - bigNoodleTilting.getStringWidth(module) - 5, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+                                RenderUtils.drawRect(s.width() - 3, (rectY - 2), s.width(), (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
+                                bigNoodleTilting.drawStringWithShadow(module, s.width() - bigNoodleTilting.getStringWidth(module) - 4, stringY - 1, Rainbow.rainbow(1, 1).getRGB());
+                                break;
+                            }
+                            default: {
+                                RenderUtils.drawRect(s.width() - comfortaa.getStringWidth(module) - 5, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+                                RenderUtils.drawRect(s.width() - 3, (rectY - 2), s.width(), (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
+                                comfortaa.drawStringWithShadow(module, s.width() - comfortaa.getStringWidth(module) - 4, stringY, Rainbow.rainbow(1, 1).getRGB());
+                                break;
+                            }
+                        }
                     } else if (mode.equalsIgnoreCase("None")) {
-                        RenderUtils.drawRect(s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                        Client.instance().getFontManager().comfortaa20.drawString(module, s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 1, stringY, Rainbow.rainbow(1, 1).getRGB());
+                        switch (design) {
+                            case "ambien new":
+                            case "ambien old": {
+                                RenderUtils.drawRect(s.width() - bigNoodleTilting.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+                                bigNoodleTilting.drawStringWithShadow(module, s.width() - bigNoodleTilting.getStringWidth(module) - 1, stringY - 1, Rainbow.rainbow(1, 1).getRGB());
+                                break;
+                            }
+                            default: {
+                                RenderUtils.drawRect(s.width() - comfortaa.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+                                comfortaa.drawStringWithShadow(module, s.width() - comfortaa.getStringWidth(module) - 1, stringY, Rainbow.rainbow(1, 1).getRGB());
+                                break;
+                            }
+                        }
                     }
                 } else {
                     Client.instance().getFontManager().comfortaa20.drawString(module, s.width() - Client.instance().getFontManager().comfortaa20.getStringWidth(module) - 1, stringY, Rainbow.rainbow(1, 1).getRGB());
