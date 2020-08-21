@@ -29,8 +29,10 @@ public class Client {
     private final String shaderLoc = "textures/client/shader/";
     private final String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
 
-    private final int ambienBlueColor = new Color(32, 188, 240).getRGB();
-    private final int GreyColor = new Color(168, 167, 169).getRGB();
+    private final int ambienOldBlueColor = new Color(32, 188, 240).getRGB();
+    private final int ambienNewBlueColor = new Color(0x0090ff).getRGB();
+    private final int ambienNewDarkGreyColor = new Color(0x20252b).getRGB();
+    private final int greyColor = new Color(168, 167, 169).getRGB();
     private final int vortexRedColor = new Color(0xE37974).getRGB();
     private final int suicideBlueGreyColor = new Color(0x1c293a).getRGB();
     private final int suicideBlueColor = new Color(0x0993b0).getRGB();
@@ -48,6 +50,10 @@ public class Client {
     private final int icarusOldGreyColor = new Color(0x4a586a).getRGB();
     private final int icarusNewBlueColor = new Color(0x92c2cc).getRGB();
     private final int icarusNewGreyColor = new Color(0, 0, 0, 100).getRGB();
+    private final int heroGreenColor = new Color(0x1ab753).getRGB();
+    private final int heroGreyColor = new Color(0, 0, 0, 70).getRGB();
+    private final int vantaGreyColor = new Color(0x2e3b4a).getRGB();
+    private final int vantaBlueColor = new Color(0x0198d6).getRGB();
 
     private ModuleManager moduleManager;
 
@@ -60,6 +66,10 @@ public class Client {
     private Friend friend;
     private Shader shader;
     private AltManager altManager;
+
+    public static Client instance() {
+        return instance;
+    }
 
     public void startClient() {
         clientDir = new File(Minecraft.getMinecraft().mcDataDir + "/" + getClientName());
@@ -79,10 +89,6 @@ public class Client {
         AltManager.loadAlts();
         clickgui = new ClickGUI();
         Runtime.getRuntime().addShutdownHook(new Thread(this::onShutdown));
-    }
-
-    public static Client instance() {
-        return instance;
     }
 
     public File getClientDir() {
@@ -164,12 +170,12 @@ public class Client {
         return shader;
     }
 
-    public int getAmbienBlueColor() {
-        return ambienBlueColor;
+    public int getAmbienOldBlueColor() {
+        return ambienOldBlueColor;
     }
 
     public int getGrey() {
-        return GreyColor;
+        return greyColor;
     }
 
     public int getVortexRedColor() {
@@ -189,7 +195,7 @@ public class Client {
     }
 
     public int getGreyColor() {
-        return GreyColor;
+        return greyColor;
     }
 
     public int getApinityGreyColor() {
@@ -246,5 +252,29 @@ public class Client {
 
     public int getIcarusOldOrangeColor() {
         return icarusOldOrangeColor;
+    }
+
+    public int getAmbienNewBlueColor() {
+        return ambienNewBlueColor;
+    }
+
+    public int getAmbienNewDarkGreyColor() {
+        return ambienNewDarkGreyColor;
+    }
+
+    public int getHeroGreenColor() {
+        return heroGreenColor;
+    }
+
+    public int getHeroGreyColor() {
+        return heroGreyColor;
+    }
+
+    public int getVantaGreyColor() {
+        return vantaGreyColor;
+    }
+
+    public int getVantaBlueColor() {
+        return vantaBlueColor;
     }
 }
