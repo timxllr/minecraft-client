@@ -47,21 +47,9 @@ public class Module {
         if (state) {
             this.onEnable();
             this.isEnabled = true;
-            if (!(Client.instance().modManager().getByName("Invis").getState())) {
-                if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
-                    if (Client.instance().setMgr().getSettingByName("Notifications", Client.instance().modManager().getByName("HUD")).getBool()) {
-                    }
-                }
-            }
         } else {
             this.onDisable();
             this.isEnabled = false;
-            if (!(Client.instance().modManager().getByName("Invis").getState())) {
-                if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
-                    if (Client.instance().setMgr().getSettingByName("Notifications", Client.instance().modManager().getByName("HUD")).getBool()) {
-                    }
-                }
-            }
         }
     }
 
