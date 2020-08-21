@@ -1,23 +1,28 @@
 package de.crazymemecoke.utils.render;
 
-import java.awt.Color;
-
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import org.lwjgl.opengl.GL11;
-
+import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderGlobal;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class RenderUtils {
+
+    public static int enemy = 0;
+    public static int friend = 1;
+    public static int other = 2;
+    public static int target = 3;
+    public static int team = 4;
 
     public static int reAlpha(int color, float alpha) {
         Color c = new Color(color);
@@ -55,7 +60,6 @@ public class RenderUtils {
             GL11.glEnd();
         }
     }
-
 
     public static void drawRect(double x, double y, double x2, double y2, int color) {
         float red = (color >> 24 & 0xFF) / 255.0F;
@@ -167,6 +171,19 @@ public class RenderUtils {
         GlStateManager.disableBlend();
     }
 
+    public static void drawImage(final String image, final int x, final int y, final int width, final int height) {
+        GL11.glDisable(2929);
+        GL11.glEnable(3042);
+        GL11.glDepthMask(false);
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        Wrapper.mc.getTextureManager().bindTexture(new ResourceLocation(image));
+        Gui.drawModalRectWithCustomSizedTexture(x, y, 0.0f, 0.0f, width, height, (float) width, (float) height);
+        GL11.glDepthMask(true);
+        GL11.glDisable(3042);
+        GL11.glEnable(2929);
+    }
+
     public static void drawRoundedRect(double left, double top, double right, double bottom, float roundness, int color) {
         left = (float) (left + (roundness / 2.0F + 0.5D));
         top = (float) (top + (roundness / 2.0F + 0.5D));
@@ -225,12 +242,12 @@ public class RenderUtils {
     }
 
     public static void box(double x, double y, double z, double x2, double y2, double z2, Color color) {
-        x = x - Minecraft.getMinecraft().getRenderManager().renderPosX;
-        y = y - Minecraft.getMinecraft().getRenderManager().renderPosY;
-        z = z - Minecraft.getMinecraft().getRenderManager().renderPosZ;
-        x2 = x2 - Minecraft.getMinecraft().getRenderManager().renderPosX;
-        y2 = y2 - Minecraft.getMinecraft().getRenderManager().renderPosY;
-        z2 = z2 - Minecraft.getMinecraft().getRenderManager().renderPosZ;
+        x = x - RenderManager.renderPosX;
+        y = y - RenderManager.renderPosY;
+        z = z - RenderManager.renderPosZ;
+        x2 = x2 - RenderManager.renderPosX;
+        y2 = y2 - RenderManager.renderPosY;
+        z2 = z2 - RenderManager.renderPosZ;
         GL11.glBlendFunc(770, 771);
         GL11.glEnable(GL_BLEND);
         GL11.glLineWidth(2.0F);
@@ -258,12 +275,12 @@ public class RenderUtils {
      * @param color
      */
     public static void frame(double x, double y, double z, double x2, double y2, double z2, Color color) {
-        x = x - Minecraft.getMinecraft().getRenderManager().renderPosX;
-        y = y - Minecraft.getMinecraft().getRenderManager().renderPosY;
-        z = z - Minecraft.getMinecraft().getRenderManager().renderPosZ;
-        x2 = x2 - Minecraft.getMinecraft().getRenderManager().renderPosX;
-        y2 = y2 - Minecraft.getMinecraft().getRenderManager().renderPosY;
-        z2 = z2 - Minecraft.getMinecraft().getRenderManager().renderPosZ;
+        x = x - RenderManager.renderPosX;
+        y = y - RenderManager.renderPosY;
+        z = z - RenderManager.renderPosZ;
+        x2 = x2 - RenderManager.renderPosX;
+        y2 = y2 - RenderManager.renderPosY;
+        z2 = z2 - RenderManager.renderPosZ;
         GL11.glBlendFunc(770, 771);
         GL11.glEnable(GL_BLEND);
         GL11.glLineWidth(2.0F);
@@ -278,9 +295,9 @@ public class RenderUtils {
     }
 
     public static void framelessBlockESP(BlockPos blockPos, Color color) {
-        double x = blockPos.getX() - Minecraft.getMinecraft().getRenderManager().renderPosX;
-        double y = blockPos.getY() - Minecraft.getMinecraft().getRenderManager().renderPosY;
-        double z = blockPos.getZ() - Minecraft.getMinecraft().getRenderManager().renderPosZ;
+        double x = blockPos.getX() - RenderManager.renderPosX;
+        double y = blockPos.getY() - RenderManager.renderPosY;
+        double z = blockPos.getZ() - RenderManager.renderPosZ;
         GL11.glBlendFunc(770, 771);
         GL11.glEnable(GL_BLEND);
         GL11.glLineWidth(2.0F);
@@ -294,12 +311,6 @@ public class RenderUtils {
         GL11.glDepthMask(true);
         GL11.glDisable(GL_BLEND);
     }
-
-    public static int enemy = 0;
-    public static int friend = 1;
-    public static int other = 2;
-    public static int target = 3;
-    public static int team = 4;
 
     public static void drawColorBox(AxisAlignedBB axisalignedbb) {
         Tessellator ts = Tessellator.getInstance();
@@ -367,9 +378,9 @@ public class RenderUtils {
     }
 
     public static void tracerLine(Entity entity, int mode) {
-        double x = entity.posX - Minecraft.getMinecraft().getRenderManager().renderPosX;
-        double y = entity.posY + entity.height / 2 - Minecraft.getMinecraft().getRenderManager().renderPosY;
-        double z = entity.posZ - Minecraft.getMinecraft().getRenderManager().renderPosZ;
+        double x = entity.posX - RenderManager.renderPosX;
+        double y = entity.posY + entity.height / 2 - RenderManager.renderPosY;
+        double z = entity.posZ - RenderManager.renderPosZ;
         glBlendFunc(770, 771);
         glEnable(GL_BLEND);
         glLineWidth(2.0F);
@@ -400,9 +411,9 @@ public class RenderUtils {
     }
 
     public static void tracerLine(Entity entity, Color color) {
-        double x = entity.posX - Minecraft.getMinecraft().getRenderManager().renderPosX;
-        double y = entity.posY + entity.height / 2 - Minecraft.getMinecraft().getRenderManager().renderPosY;
-        double z = entity.posZ - Minecraft.getMinecraft().getRenderManager().renderPosZ;
+        double x = entity.posX - RenderManager.renderPosX;
+        double y = entity.posY + entity.height / 2 - RenderManager.renderPosY;
+        double z = entity.posZ - RenderManager.renderPosZ;
         glBlendFunc(770, 771);
         glEnable(GL_BLEND);
         glLineWidth(2.0F);
@@ -422,9 +433,9 @@ public class RenderUtils {
     }
 
     public static void tracerLine(int x, int y, int z, Color color) {
-        x += 0.5 - Minecraft.getMinecraft().getRenderManager().renderPosX;
-        y += 0.5 - Minecraft.getMinecraft().getRenderManager().renderPosY;
-        z += 0.5 - Minecraft.getMinecraft().getRenderManager().renderPosZ;
+        x += 0.5 - RenderManager.renderPosX;
+        y += 0.5 - RenderManager.renderPosY;
+        z += 0.5 - RenderManager.renderPosZ;
         glBlendFunc(770, 771);
         glEnable(GL_BLEND);
         glLineWidth(2.0F);
@@ -774,6 +785,41 @@ public class RenderUtils {
         tessellator.draw();
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
+    }
+
+    public void drawCircle(final int x, final int y, final float radius, final int color) {
+        final float alpha = (color >> 24 & 0xFF) / 255.0f;
+        final float red = (color >> 16 & 0xFF) / 255.0f;
+        final float green = (color >> 8 & 0xFF) / 255.0f;
+        final float blue = (color & 0xFF) / 255.0f;
+        final boolean blend = GL11.glIsEnabled(3042);
+        final boolean line = GL11.glIsEnabled(2848);
+        final boolean texture = GL11.glIsEnabled(3553);
+        if (!blend) {
+            GL11.glEnable(3042);
+        }
+        if (!line) {
+            GL11.glEnable(2848);
+        }
+        if (texture) {
+            GL11.glDisable(3553);
+        }
+        GL11.glBlendFunc(770, 771);
+        GL11.glColor4f(red, green, blue, alpha);
+        GL11.glBegin(9);
+        for (int i = 0; i <= 360; ++i) {
+            GL11.glVertex2d(x + Math.sin(i * 3.141526 / 180.0) * radius, y + Math.cos(i * 3.141526 / 180.0) * radius);
+        }
+        GL11.glEnd();
+        if (texture) {
+            GL11.glEnable(3553);
+        }
+        if (!line) {
+            GL11.glDisable(2848);
+        }
+        if (!blend) {
+            GL11.glDisable(3042);
+        }
     }
 
 }
