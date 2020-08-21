@@ -27,12 +27,23 @@ public class Client {
     private final String clientIcon = "textures/client/icon.png";
     private final String shaderLoc = "textures/client/shader/";
     private final String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
+
     private final int ambienBlueColor = new Color(32, 188, 240).getRGB();
     private final int GreyColor = new Color(168, 167, 169).getRGB();
     private final int vortexRedColor = new Color(0xE37974).getRGB();
     private final int suicideBlueGreyColor = new Color(0x1c293a).getRGB();
     private final int suicideBlueColor = new Color(0x0993b0).getRGB();
     private final int suicideDarkBlueGreyColor = new Color(0x1a1f24).getRGB();
+    private final int apinityBlueColor = new Color(0x4c80ee).getRGB();
+    private final int apinityGreyColor = new Color(0x312e30).getRGB();
+
+    public int getGreyColor() {
+        return GreyColor;
+    }
+
+    public int getApinityGreyColor() {
+        return apinityGreyColor;
+    }
 
     private ModuleManager moduleManager;
     private CommandManager commandManager;
@@ -169,5 +180,9 @@ public class Client {
 
     public int getSuicideDarkBlueGreyColor() {
         return suicideDarkBlueGreyColor;
+    }
+
+    public int getApinityBlueColor() {
+        return apinityBlueColor;
     }
 }
