@@ -2,9 +2,6 @@ package de.crazymemecoke.manager.modulemanager;
 
 import de.crazymemecoke.utils.events.eventapi.EventManager;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.notificationmanager.Notification;
-import de.crazymemecoke.manager.notificationmanager.NotificationManager;
-import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
@@ -53,7 +50,6 @@ public class Module {
             if (!(Client.instance().modManager().getByName("Invis").getState())) {
                 if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
                     if (Client.instance().setMgr().getSettingByName("Notifications", Client.instance().modManager().getByName("HUD")).getBool()) {
-                        NotificationManager.show(new Notification(NotificationType.INFO, "§7[§a+§7] §6" + getName(), "§6Module §aaktiviert", 2));
                     }
                 }
             }
@@ -63,7 +59,6 @@ public class Module {
             if (!(Client.instance().modManager().getByName("Invis").getState())) {
                 if (!(getName().equalsIgnoreCase("ClickGUI")) && !(getName().equalsIgnoreCase("Invis"))) {
                     if (Client.instance().setMgr().getSettingByName("Notifications", Client.instance().modManager().getByName("HUD")).getBool()) {
-                        NotificationManager.show(new Notification(NotificationType.INFO, "§7[§c-§7] §6" + getName(), "§6Module §cdeaktiviert", 2));
                     }
                 }
             }

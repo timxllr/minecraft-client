@@ -8,7 +8,6 @@ import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
-import de.crazymemecoke.manager.notificationmanager.Notification;
 import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 
@@ -44,7 +43,6 @@ public class Client {
     private Friend friend;
     private Shader shader;
     private AltManager altManager;
-    private Notification notification;
 
     public void startClient() {
         clientDir = new File(Minecraft.getMinecraft().mcDataDir + "/" + getClientName());
@@ -119,10 +117,6 @@ public class Client {
 
     public FontManager getFontManager() {
         return fontManager;
-    }
-
-    public Notification getNotification() {
-        return notification;
     }
 
     public String getClientChangelog() {
