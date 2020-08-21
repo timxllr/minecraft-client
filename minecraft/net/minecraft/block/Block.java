@@ -476,6 +476,10 @@ public class Block
         return worldIn.getBlockState(pos).getBlock().getMaterial().isSolid();
     }
 
+    public boolean isSolidFullCube() {
+        return this.blockMaterial.blocksMovement() && this.isFullCube();
+    }
+
     public AxisAlignedBB getSelectedBoundingBox(World worldIn, BlockPos pos)
     {
         return new AxisAlignedBB((double)pos.getX() + this.minX, (double)pos.getY() + this.minY, (double)pos.getZ() + this.minZ, (double)pos.getX() + this.maxX, (double)pos.getY() + this.maxY, (double)pos.getZ() + this.maxZ);
