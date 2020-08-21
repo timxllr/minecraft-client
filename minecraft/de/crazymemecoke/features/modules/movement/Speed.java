@@ -1,8 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
-import de.crazymemecoke.utils.events.eventapi.EventTarget;
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -10,6 +9,7 @@ import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
 import de.crazymemecoke.utils.events.MoveEvent;
 import de.crazymemecoke.utils.events.UpdateEvent;
+import de.crazymemecoke.utils.events.eventapi.EventTarget;
 import de.crazymemecoke.utils.time.TickEvent;
 import de.crazymemecoke.utils.time.TimerUtil;
 import net.minecraft.block.Block;
@@ -17,7 +17,10 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovementInput;
 import org.lwjgl.input.Keyboard;
 
 import java.math.BigDecimal;
@@ -25,19 +28,30 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class Speed extends Module {
-    ArrayList<String> mode = new ArrayList<>();
-
+    public static boolean canStep;
     private final TimerUtil framesDelay = new TimerUtil();
-
+    private final TimerUtil delayTimer = new TimerUtil();
+    public double speed;
+    public int stage;
+    public int tickse;
+    public double moveSpeed;
+    ArrayList<String> mode = new ArrayList<>();
     String speedMode;
     boolean move;
     boolean hop;
+    SettingsManager sM = Client.instance().setMgr();
     private double prevY;
     private int motionTicks;
-    private final TimerUtil delayTimer = new TimerUtil();
-
-    SettingsManager sM = Client.instance().setMgr();
-
+    private int ticks = 0;
+    private float prevYaw;
+    private boolean turnCancel;
+    private boolean prevStrafing;
+    private boolean wasTurning;
+    private int turnTicks;
+    private boolean speed2;
+    private boolean distShort;
+    private double lastDist;
+    private boolean timer = true;
     public Speed() {
         super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
         mode.add("Latest OnGround");
@@ -52,8 +66,14 @@ public class Speed extends Module {
         sM.newSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
         sM.newSetting(new Setting("Wall Speed", this, 4.25, 0, 50, true));
         sM.newSetting(new Setting("Water Speed", this, 4.25, 0, 50, true));
+    }
 
-        sM.newSetting(new Setting("[Jump] Auto Jump", this, false));
+    public static float getDistanceBetweenAngles(float angle1, float angle2) {
+        float angle = Math.abs(angle1 - angle2) % 360.0F;
+        if (angle > 180.0F) {
+            angle = 360.0F - angle;
+        }
+        return angle;
     }
 
     public void onEnable() {
@@ -112,9 +132,6 @@ public class Speed extends Module {
             return;
         }
         if (mc.thePlayer.moveForward > 0.0F) {
-            if (sM.getSettingByName("[Jump] Auto Jump", this).getBool()) {
-                mc.thePlayer.jump();
-            }
             float var1 = mc.thePlayer.rotationYaw * 0.017453292F;
             mc.thePlayer.motionX -= MathHelper.sin(var1) * 0.2D;
             mc.thePlayer.motionZ += MathHelper.cos(var1) * 0.2D;
@@ -186,14 +203,6 @@ public class Speed extends Module {
                 && (!PlayerUtil.isInLiquid());
     }
 
-    public static float getDistanceBetweenAngles(float angle1, float angle2) {
-        float angle = Math.abs(angle1 - angle2) % 360.0F;
-        if (angle > 180.0F) {
-            angle = 360.0F - angle;
-        }
-        return angle;
-    }
-
     private boolean isTurning() {
         return getDistanceBetweenAngles(mc.thePlayer.rotationYaw, prevYaw) > 0.8D;
     }
@@ -225,21 +234,6 @@ public class Speed extends Module {
         }
         return null;
     }
-
-    private int ticks = 0;
-    private float prevYaw;
-    private boolean turnCancel;
-    public double speed;
-    public int stage;
-    private boolean prevStrafing;
-    private boolean wasTurning;
-    private int turnTicks;
-    private boolean speed2;
-    private boolean distShort;
-    public int tickse;
-    public double moveSpeed;
-    private double lastDist;
-    public static boolean canStep;
 
     private void doFrames(double speed) {
         if ((mc.thePlayer.movementInput.moveForward > 0.0F)
@@ -543,8 +537,6 @@ public class Speed extends Module {
             }
         }
     }
-
-    private boolean timer = true;
 
     @EventTarget
     public void onTick(TickEvent e) {
