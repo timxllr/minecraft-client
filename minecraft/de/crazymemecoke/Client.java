@@ -1,6 +1,7 @@
 package de.crazymemecoke;
 
 import de.crazymemecoke.features.commands.Friend;
+import de.crazymemecoke.features.modules.exploits.Crasher;
 import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGUI;
@@ -100,6 +101,9 @@ public class Client {
         moduleManager.saveModules();
         moduleManager.saveBinds();
         AltManager.saveAlts();
+
+        Client.instance().modManager().getModule(Crasher.class).setState(false);
+        System.out.println("Disabled Crasher module");
     }
 
     public ModuleManager modManager() {
