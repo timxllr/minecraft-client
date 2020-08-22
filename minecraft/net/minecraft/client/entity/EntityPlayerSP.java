@@ -1,31 +1,18 @@
 package net.minecraft.client.entity;
 
-import de.crazymemecoke.utils.events.eventapi.EventManager;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.features.modules.movement.NoSlowDown;
+import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Notify;
 import de.crazymemecoke.utils.events.MoveEvent;
 import de.crazymemecoke.utils.events.PostMotion;
 import de.crazymemecoke.utils.events.PreMotion;
+import de.crazymemecoke.utils.events.eventapi.EventManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.GuiCommandBlock;
-import net.minecraft.client.gui.GuiEnchantment;
-import net.minecraft.client.gui.GuiHopper;
-import net.minecraft.client.gui.GuiMerchant;
-import net.minecraft.client.gui.GuiRepair;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiScreenBook;
-import net.minecraft.client.gui.inventory.GuiBeacon;
-import net.minecraft.client.gui.inventory.GuiBrewingStand;
-import net.minecraft.client.gui.inventory.GuiChest;
-import net.minecraft.client.gui.inventory.GuiCrafting;
-import net.minecraft.client.gui.inventory.GuiDispenser;
-import net.minecraft.client.gui.inventory.GuiEditSign;
-import net.minecraft.client.gui.inventory.GuiFurnace;
-import net.minecraft.client.gui.inventory.GuiScreenHorseInventory;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.command.server.CommandBlockLogic;
 import net.minecraft.entity.Entity;
@@ -37,90 +24,19 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.client.C01PacketChatMessage;
-import net.minecraft.network.play.client.C03PacketPlayer;
-import net.minecraft.network.play.client.C07PacketPlayerDigging;
-import net.minecraft.network.play.client.C0APacketAnimation;
-import net.minecraft.network.play.client.C0BPacketEntityAction;
-import net.minecraft.network.play.client.C0CPacketInput;
-import net.minecraft.network.play.client.C0DPacketCloseWindow;
-import net.minecraft.network.play.client.C13PacketPlayerAbilities;
-import net.minecraft.network.play.client.C16PacketClientStatus;
+import net.minecraft.network.play.client.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.tileentity.TileEntitySign;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.MovementInput;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
 public class EntityPlayerSP extends AbstractClientPlayer {
     public final NetHandlerPlayClient sendQueue;
     private final StatFileWriter statWriter;
-
-    /**
-     * The last X position which was transmitted to the server, used to determine when the X position changes and needs
-     * to be re-trasmitted
-     */
-    private double lastReportedPosX;
-
-    /**
-     * The last Y position which was transmitted to the server, used to determine when the Y position changes and needs
-     * to be re-transmitted
-     */
-    private double lastReportedPosY;
-
-    /**
-     * The last Z position which was transmitted to the server, used to determine when the Z position changes and needs
-     * to be re-transmitted
-     */
-    private double lastReportedPosZ;
-
-    /**
-     * The last yaw value which was transmitted to the server, used to determine when the yaw changes and needs to be
-     * re-transmitted
-     */
-    private float lastReportedYaw;
-
-    /**
-     * The last pitch value which was transmitted to the server, used to determine when the pitch changes and needs to
-     * be re-transmitted
-     */
-    private float lastReportedPitch;
-
-    /**
-     * the last sneaking state sent to the server
-     */
-    private boolean serverSneakState;
-
-    /**
-     * the last sprinting state sent to the server
-     */
-    private boolean serverSprintState;
-
-    /**
-     * Reset to 0 every time position is sent to the server, used to send periodic updates every 20 ticks even when the
-     * player is not moving.
-     */
-    private int positionUpdateTicks;
-    private boolean hasValidHealth;
-    private String clientBrand;
     public MovementInput movementInput;
-    protected Minecraft mc;
-
-    /**
-     * Used to tell if the player pressed forward twice. If this is at 0 and it's pressed (And they are allowed to
-     * sprint, aka enough food on the ground etc) it sets this to 7. If it's pressed and it's greater than 0 enable
-     * sprinting.
-     */
-    protected int sprintToggleTimer;
-
     /**
      * Ticks left before sprinting is disabled.
      */
@@ -129,18 +45,63 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     public float renderArmPitch;
     public float prevRenderArmYaw;
     public float prevRenderArmPitch;
-    private int horseJumpPowerCounter;
-    private float horseJumpPower;
-
     /**
      * The amount of time an entity has been in a Portal
      */
     public float timeInPortal;
-
     /**
      * The amount of time an entity has been in a Portal the previous tick
      */
     public float prevTimeInPortal;
+    protected Minecraft mc;
+    /**
+     * Used to tell if the player pressed forward twice. If this is at 0 and it's pressed (And they are allowed to
+     * sprint, aka enough food on the ground etc) it sets this to 7. If it's pressed and it's greater than 0 enable
+     * sprinting.
+     */
+    protected int sprintToggleTimer;
+    /**
+     * The last X position which was transmitted to the server, used to determine when the X position changes and needs
+     * to be re-trasmitted
+     */
+    private double lastReportedPosX;
+    /**
+     * The last Y position which was transmitted to the server, used to determine when the Y position changes and needs
+     * to be re-transmitted
+     */
+    private double lastReportedPosY;
+    /**
+     * The last Z position which was transmitted to the server, used to determine when the Z position changes and needs
+     * to be re-transmitted
+     */
+    private double lastReportedPosZ;
+    /**
+     * The last yaw value which was transmitted to the server, used to determine when the yaw changes and needs to be
+     * re-transmitted
+     */
+    private float lastReportedYaw;
+    /**
+     * The last pitch value which was transmitted to the server, used to determine when the pitch changes and needs to
+     * be re-transmitted
+     */
+    private float lastReportedPitch;
+    /**
+     * the last sneaking state sent to the server
+     */
+    private boolean serverSneakState;
+    /**
+     * the last sprinting state sent to the server
+     */
+    private boolean serverSprintState;
+    /**
+     * Reset to 0 every time position is sent to the server, used to send periodic updates every 20 ticks even when the
+     * player is not moving.
+     */
+    private int positionUpdateTicks;
+    private boolean hasValidHealth;
+    private String clientBrand;
+    private int horseJumpPowerCounter;
+    private float horseJumpPower;
 
     public EntityPlayerSP(Minecraft mcIn, World worldIn, NetHandlerPlayClient netHandler, StatFileWriter statFile) {
         super(worldIn, netHandler.getGameProfile());
@@ -309,7 +270,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             return;
         }
         if (message.startsWith(Client.instance().getClientPrefix())) {
-            Notify.chat("Befehl nicht gefunden - versuche .help!");
+            Notify.chat("Befehl nicht gefunden - versuche " + Client.instance().getClientPrefix() + "help!");
             return;
         }
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
@@ -410,12 +371,12 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         this.sendQueue.addToSendQueue(new C0BPacketEntityAction(this, C0BPacketEntityAction.Action.OPEN_INVENTORY));
     }
 
-    public void setClientBrand(String brand) {
-        this.clientBrand = brand;
-    }
-
     public String getClientBrand() {
         return this.clientBrand;
+    }
+
+    public void setClientBrand(String brand) {
+        this.clientBrand = brand;
     }
 
     public StatFileWriter getStatFileWriter() {
