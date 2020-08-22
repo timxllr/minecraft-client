@@ -24,6 +24,14 @@ public class RenderUtils {
     public static int target = 3;
     public static int team = 4;
 
+    public static void color(final int color) {
+        final float f = (color >> 24 & 0xFF) / 255.0f;
+        final float f2 = (color >> 16 & 0xFF) / 255.0f;
+        final float f3 = (color >> 8 & 0xFF) / 255.0f;
+        final float f4 = (color & 0xFF) / 255.0f;
+        GL11.glColor4f(f2, f3, f4, f);
+    }
+
     public static int reAlpha(int color, float alpha) {
         Color c = new Color(color);
         float r = 0.003921569F * (float) c.getRed();
