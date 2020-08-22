@@ -1,54 +1,58 @@
 package de.crazymemecoke.features.modules.render;
 
-import org.lwjgl.input.Keyboard;
-
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 
 public class Tracers extends Module {
 
-	public Tracers() {
-		super("Tracers", Keyboard.KEY_NUMPAD8, Category.RENDER, -1);
-	}
+    public Tracers() {
+        super("Tracers", Keyboard.KEY_NUMPAD8, Category.RENDER, -1);
+    }
 
-	public void onRender() {
-		if (!this.getState()) {
-			return;
-		}
-		for (Object theObject : mc.theWorld.loadedEntityList) {
-			if (!(theObject instanceof EntityLivingBase))
-				continue;
-			EntityLivingBase entity = (EntityLivingBase) theObject;
-			if (entity instanceof EntityPlayer) {
-				if (entity != mc.thePlayer)
-					player(entity);
-				continue;
-			}
-		}
-		super.onRender();
-	}
+    @Override
+    public void onUpdate() {
+        if (getState()) {
+            for (final EntityPlayer player : mc.theWorld.playerEntities) {
+                if (mc.thePlayer != player) {
+                    drawLine(player);
+                }
+            }
+        }
+    }
 
-	public void player(EntityLivingBase entity) {
-
-		float red = 1F;
-		float green = 0.5F;
-		float blue = 0.5F;
-
-		double xPos = (entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * mc.timer.renderPartialTicks)
-				- mc.getRenderManager().renderPosX;
-		double yPos = (entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * mc.timer.renderPartialTicks)
-				- mc.getRenderManager().renderPosY;
-		double zPos = (entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * mc.timer.renderPartialTicks)
-				- mc.getRenderManager().renderPosZ;
-
-		render(red, green, blue, xPos, yPos, zPos);
-	}
-
-	public void render(float red, float green, float blue, double x, double y, double z) {
-		RenderUtils.drawTracerLine(x, y, z, red, green, blue, 0.45F, 3F);
-	}
+    private void drawLine(final EntityPlayer player) {
+        final double x = player.lastTickPosX + (player.posX - player.lastTickPosX) * mc.timer.renderPartialTicks - RenderManager.renderPosX;
+        final double y = player.lastTickPosY + (player.posY - player.lastTickPosY) * mc.timer.renderPartialTicks - RenderManager.renderPosY;
+        final double z = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * mc.timer.renderPartialTicks - RenderManager.renderPosZ;
+        GL11.glPushMatrix();
+        GL11.glEnable(3042);
+        GL11.glEnable(2848);
+        GL11.glDisable(2929);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glLineWidth(0.85f);
+        RenderUtils.color(new Color(0xffcd22).getRGB());
+        GL11.glLoadIdentity();
+        final boolean bobbing = mc.gameSettings.viewBobbing;
+        mc.gameSettings.viewBobbing = false;
+        mc.entityRenderer.orientCamera(mc.timer.renderPartialTicks);
+        GL11.glBegin(3);
+        GL11.glVertex3d(0.0, mc.thePlayer.getEyeHeight(), 0.0);
+        GL11.glVertex3d(x, y, z);
+        GL11.glVertex3d(x, y + player.getEyeHeight(), z);
+        GL11.glEnd();
+        mc.gameSettings.viewBobbing = bobbing;
+        GL11.glEnable(3553);
+        GL11.glEnable(2929);
+        GL11.glDisable(2848);
+        GL11.glDisable(3042);
+        GL11.glPopMatrix();
+    }
 }
