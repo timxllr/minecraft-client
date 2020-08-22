@@ -75,6 +75,7 @@ public class ModuleManager {
         modules.add(new SafeWalk());
         modules.add(new Paralyze());
         modules.add(new ClickGUI());
+        modules.add(new HighJump());
         modules.add(new FastUse());
         modules.add(new AntiWeb());
         modules.add(new Trigger());
