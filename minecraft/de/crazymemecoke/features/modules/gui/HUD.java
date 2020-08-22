@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class HUD extends Module {
 
     ArrayList<String> design = new ArrayList<>();
+    ArrayList<String> chatMode = new ArrayList<>();
 
     public HUD() {
         super("HUD", Keyboard.KEY_NONE, Category.GUI, -1);
@@ -34,7 +35,11 @@ public class HUD extends Module {
         design.add("Hero");
         design.add("Klientus");
 
+        chatMode.add("Normal");
+        chatMode.add("Custom");
+
         Client.instance().setMgr().newSetting(new Setting("Design", this, "Ambien", design));
+        Client.instance().setMgr().newSetting(new Setting("Chat", this, "Custom", chatMode));
         Client.instance().setMgr().newSetting(new Setting("ArrayList Rect Mode", this, "Left", arrayListRectMode));
         Client.instance().setMgr().newSetting(new Setting("Hotbar", this, true));
         Client.instance().setMgr().newSetting(new Setting("ArrayList", this, true));
