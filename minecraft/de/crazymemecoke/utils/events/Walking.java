@@ -1,7 +1,5 @@
 package de.crazymemecoke.utils.events;
 
-import de.crazymemecoke.utils.events.Event;
-
 public class Walking implements Event {
 	
 	boolean walk = false;
