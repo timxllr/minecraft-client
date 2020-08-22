@@ -66,6 +66,7 @@ public class ModuleManager {
         modules.add(new DeathDerp());
         modules.add(new Criticals());
         modules.add(new AutoClimb());
+        modules.add(new SlimeJump());
         modules.add(new FastFall());
         modules.add(new Velocity());
         modules.add(new IceSpeed());
