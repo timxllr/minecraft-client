@@ -19,7 +19,6 @@ public class CommandManager {
         this.commands.add(new Toggle());
         this.commands.add(new Rename());
         this.commands.add(new Friend());
-        this.commands.add(new Crash());
         this.commands.add(new Panic());
         this.commands.add(new Allow());
         this.commands.add(new Bind());
