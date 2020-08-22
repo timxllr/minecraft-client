@@ -12,7 +12,10 @@ import de.crazymemecoke.utils.events.UpdateEvent;
 import de.crazymemecoke.utils.events.eventapi.EventTarget;
 import de.crazymemecoke.utils.time.TimerUtil;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -23,9 +26,25 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class Speed extends Module {
+    public Speed() {
+        super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+
+        mode.add("AAC 1.9.8");
+        mode.add("AAC 1.9.10");
+        mode.add("Motion");
+        mode.add("Jump");
+        mode.add("Frames");
+        mode.add("Ground");
+        mode.add("Timer");
+
+        sM.newSetting(new Setting("Mode", this, "Jump", mode));
+        sM.newSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
+        sM.newSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
+    }
+
     public static boolean canStep;
-    private final TimerUtil framesDelay = new TimerUtil();
-    private final TimerUtil delayTimer = new TimerUtil();
+    private TimerUtil framesDelay = new TimerUtil();
+    private TimerUtil delayTimer = new TimerUtil();
     public double speed;
     public int stage;
     public int tickse;
@@ -39,28 +58,6 @@ public class Speed extends Module {
     private int motionTicks;
     private int ticks = 0;
     private float prevYaw;
-
-    public Speed() {
-        super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
-        mode.add("Ground");
-        mode.add("AAC 1.9.10");
-        mode.add("Frames");
-        mode.add("Motion");
-        mode.add("Jump");
-        mode.add("Timer");
-
-        sM.newSetting(new Setting("Mode", this, "Jump", mode));
-        sM.newSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
-        sM.newSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
-    }
-
-    public static float getDistanceBetweenAngles(float angle1, float angle2) {
-        float angle = Math.abs(angle1 - angle2) % 360.0F;
-        if (angle > 180.0F) {
-            angle = 360.0F - angle;
-        }
-        return angle;
-    }
 
     public void onEnable() {
         framesDelay.setLastMS();
@@ -89,8 +86,9 @@ public class Speed extends Module {
                     doGround();
                     break;
                 }
-                case "aac 1.9.10": {
-                    doAAC1910();
+                case "aac 1.9.8": {
+                    doAAC198();
+                    break;
                 }
                 case "frames": {
                     doFrames(frames_speed);
@@ -108,7 +106,45 @@ public class Speed extends Module {
                     doTimer();
                     break;
                 }
+                case "ncp": {
+                    doNCP();
+                    break;
+                }
+                case "aac 1.9.10": {
+                    doAAC1910();
+                    break;
+                }
             }
+        }
+    }
+
+    private void doAAC1910() {
+        BlockPos bp = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY + 2.0, mc.thePlayer.posZ);
+        if (mc.gameSettings.keyBindForward.pressed && !mc.thePlayer.isInWater()) {
+            BlockPos below = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0, mc.thePlayer.posZ);
+            if (mc.theWorld.getBlockState(bp).getBlock() == Blocks.air) {
+                if (mc.thePlayer.isCollidedVertically) {
+                    mc.thePlayer.jump();
+                } else if (!(mc.theWorld.getBlockState(below).getBlock() instanceof BlockAir)) {
+                    mc.thePlayer.motionY = -0.2149999886751175;
+                }
+            } else {
+                EntityPlayerSP thePlayer = mc.thePlayer;
+                thePlayer.motionX *= 1.7;
+                EntityPlayerSP thePlayer2 = mc.thePlayer;
+                thePlayer2.motionZ *= 1.7;
+                mc.thePlayer.jump();
+                EntityPlayerSP thePlayer3 = mc.thePlayer;
+                --thePlayer3.motionY;
+            }
+        }
+    }
+
+    private void doNCP() {
+        if (mc.thePlayer.onGround) {
+            mc.thePlayer.jump();
+        } else {
+            mc.thePlayer.motionY = -0.42;
         }
     }
 
@@ -201,7 +237,7 @@ public class Speed extends Module {
         }
     }
 
-    private void doAAC1910() {
+    private void doAAC198() {
         if ((hop) && (mc.thePlayer.posY >= prevY + 0.399994D)) {
             mc.thePlayer.motionY = -0.9D;
             mc.thePlayer.posY = prevY;
@@ -269,6 +305,14 @@ public class Speed extends Module {
                 hop = false;
             }
         }
+    }
+
+    public static float getDistanceBetweenAngles(float angle1, float angle2) {
+        float angle = Math.abs(angle1 - angle2) % 360.0F;
+        if (angle > 180.0F) {
+            angle = 360.0F - angle;
+        }
+        return angle;
     }
 
     public boolean shouldSpeedUp() {
