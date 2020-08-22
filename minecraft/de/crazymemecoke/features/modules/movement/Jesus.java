@@ -1,7 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.time.TimeHelper;
@@ -20,18 +20,21 @@ import java.util.ArrayList;
 
 public class Jesus extends Module {
 
-    public TimeHelper time = new TimeHelper();
     ArrayList<String> mode = new ArrayList<>();
+    public TimeHelper timeHelper = new TimeHelper();
     private int stage;
     private boolean canjump;
     private int delay;
-    private int timer;
+    private int time;
 
     public Jesus() {
         super("Jesus", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
-        mode.add("Normal");
+
+        mode.add("Vanilla");
         mode.add("Dolphin");
         mode.add("AAC");
+        mode.add("NCP");
+
         Client.instance().setMgr().newSetting(new Setting("Mode", this, "Normal", mode));
     }
 
@@ -43,17 +46,40 @@ public class Jesus extends Module {
     public void onUpdate() {
         String jesusMode = Client.instance().setMgr().getSettingByName("Mode", this).getMode();
         if (getState()) {
-            if (jesusMode.equalsIgnoreCase("Normal")) {
-                doNormalJesus();
-            } else if (jesusMode.equalsIgnoreCase("Dolphin")) {
-                doDolphinJesus();
-            } else if (jesusMode.equalsIgnoreCase("AAC")) {
-                if (mc.thePlayer.isInWater()) {
-                    mc.thePlayer.motionY = 5.9D;
-                    mc.thePlayer.jumpMovementFactor *= 0.9F;
-                    mc.thePlayer.motionY = 0.2D;
+            switch (jesusMode) {
+                case "vanilla": {
+                    doVanilla();
+                    break;
+                }
+                case "dolphin": {
+                    doDolphin();
+                    break;
+                }
+                case "aac": {
+                    doAAC();
+                    break;
+                }
+                case "ncp": {
+                    doNCP();
+                    break;
                 }
             }
+        }
+    }
+
+    private void doNCP() {
+        final BlockPos bp = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0, mc.thePlayer.posZ);
+        if (mc.theWorld.getBlockState(bp).getBlock() == Blocks.water && timeHelper.isDelayComplete(377L)) {
+            mc.thePlayer.motionY = 0.2805;
+            timeHelper.reset();
+        }
+    }
+
+    private void doAAC() {
+        if (mc.thePlayer.isInWater()) {
+            mc.thePlayer.motionY = 5.9D;
+            mc.thePlayer.jumpMovementFactor *= 0.9F;
+            mc.thePlayer.motionY = 0.2D;
         }
     }
 
@@ -115,7 +141,7 @@ public class Jesus extends Module {
         return inLiquid;
     }
 
-    private void doDolphinJesus() {
+    private void doDolphin() {
         final BlockPos bp = new BlockPosM(mc.thePlayer.posX, mc.thePlayer.posY - 1.0, mc.thePlayer.posZ);
         if (!canjump && mc.theWorld.getBlockState(bp).getBlock() == Blocks.water) {
             ++delay;
@@ -317,37 +343,37 @@ public class Jesus extends Module {
         }
         if (mc.thePlayer.moveForward == 0.0f && mc.thePlayer.moveStrafing == 0.0f && !mc.thePlayer.isSneaking() && getColliding(0)) {
             final int delay = 40;
-            if (timer < delay) {
-                ++timer;
+            if (time < delay) {
+                ++time;
             } else {
-                ++timer;
-                if (timer < delay + 5) {
+                ++time;
+                if (time < delay + 5) {
                     mc.thePlayer.motionX = 0.1;
-                } else if (timer < delay + 20 && timer > delay + 10) {
+                } else if (time < delay + 20 && time > delay + 10) {
                     mc.thePlayer.motionZ = -0.1;
-                } else if (timer < delay + 30 && timer > delay + 20) {
+                } else if (time < delay + 30 && time > delay + 20) {
                     mc.thePlayer.motionX = -0.1;
-                } else if (timer < delay + 40 && timer > delay + 30) {
+                } else if (time < delay + 40 && time > delay + 30) {
                     mc.thePlayer.motionZ = 0.1;
                 }
-                if (timer > delay + 40) {
-                    timer = delay;
+                if (time > delay + 40) {
+                    time = delay;
                 }
             }
         } else {
-            timer = 0;
+            time = 0;
         }
     }
 
-    private void doNormalJesus() {
+    private void doVanilla() {
         if (mc.thePlayer == null) {
             return;
         }
         if ((isInLiquid()) && (mc.thePlayer.isInsideOfMaterial(Material.air)) && (!mc.thePlayer.isSneaking())) {
             try {
-                if (time.isDelayComplete(50L)) {
+                if (timeHelper.isDelayComplete(50L)) {
                     mc.thePlayer.motionY = 0.01D;
-                    time.setLastMS();
+                    timeHelper.setLastMS();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
