@@ -3,6 +3,7 @@ package de.crazymemecoke.manager.modulemanager;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.combat.*;
 import de.crazymemecoke.features.modules.exploits.Blink;
+import de.crazymemecoke.features.modules.exploits.Crasher;
 import de.crazymemecoke.features.modules.exploits.Paralyze;
 import de.crazymemecoke.features.modules.exploits.Phase;
 import de.crazymemecoke.features.modules.gui.ClickGUI;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ModuleManager {
 
@@ -78,6 +80,7 @@ public class ModuleManager {
         modules.add(new AirJump());
         modules.add(new FastBow());
         modules.add(new Parkour());
+        modules.add(new Crasher());
         modules.add(new Sprint());
         modules.add(new Aimbot());
         modules.add(new Strafe());
@@ -134,7 +137,7 @@ public class ModuleManager {
     }
 
     public void loadModules() {
-        FileUtils.loadFile(modulesFile).forEach(line -> {
+        Objects.requireNonNull(FileUtils.loadFile(modulesFile)).forEach(line -> {
             final String[] args = line.split(":");
             if (args.length == 2) {
                 Module module = getByName(args[0]);
