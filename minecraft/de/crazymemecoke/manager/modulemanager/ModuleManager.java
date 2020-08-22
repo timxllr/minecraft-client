@@ -56,6 +56,7 @@ public class ModuleManager {
         modules.add(new InventoryMove());
         modules.add(new ChestStealer());
         modules.add(new NoScoreboard());
+        modules.add(new AutoRespawn());
         modules.add(new Fullbright());
         modules.add(new FastLadder());
         modules.add(new NoSlowDown());
@@ -84,6 +85,7 @@ public class ModuleManager {
         modules.add(new FastBow());
         modules.add(new Parkour());
         modules.add(new Crasher());
+        modules.add(new Tracers());
         modules.add(new Sprint());
         modules.add(new Aimbot());
         modules.add(new Strafe());
