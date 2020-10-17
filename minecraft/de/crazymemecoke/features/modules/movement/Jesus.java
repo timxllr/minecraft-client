@@ -35,7 +35,7 @@ public class Jesus extends Module {
         mode.add("AAC");
         mode.add("NCP");
 
-        Client.instance().setMgr().newSetting(new Setting("Mode", this, "Normal", mode));
+        Client.main().setMgr().newSetting(new Setting("Mode", this, "Normal", mode));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Jesus extends Module {
     }
 
     public void onUpdate() {
-        String jesusMode = Client.instance().setMgr().getSettingByName("Mode", this).getMode();
+        String jesusMode = Client.main().setMgr().settingByName("Mode", this).getMode();
         if (getState()) {
             switch (jesusMode) {
                 case "vanilla": {

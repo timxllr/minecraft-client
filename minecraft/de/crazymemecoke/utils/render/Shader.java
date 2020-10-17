@@ -8,7 +8,6 @@ import org.lwjgl.input.Mouse;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -42,7 +41,7 @@ public class Shader {
 
     public void initShader(String vertexname, String fragmentname) {
         // setup shaders
-        ResourceLocation url = new ResourceLocation(Client.instance().getShaderLoc());
+        ResourceLocation url = new ResourceLocation(Client.main().getShaderLoc());
         String[] vfshader = new String[]{url + vertexname, url + fragmentname};
 
         // Vertex

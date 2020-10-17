@@ -43,8 +43,8 @@ public class ModuleButton {
         height = Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT + 2;
         parent = pl;
         menuelements = new ArrayList<>();
-        if (Client.instance().setMgr().getSettingsByMod(imod) != null)
-            for (Setting s : Client.instance().setMgr().getSettingsByMod(imod)) {
+        if (Client.main().setMgr().getSettingsByMod(imod) != null)
+            for (Setting s : Client.main().setMgr().getSettingsByMod(imod)) {
                 if (s.isCheck()) {
                     menuelements.add(new ElementCheckBox(this, s));
                 } else if (s.isSlider()) {
@@ -81,7 +81,7 @@ public class ModuleButton {
         if (mouseButton == 0) {
             mod.toggleModule();
 
-            if (Client.instance().setMgr().getSettingByName("Sound", Client.instance().modManager().getByName("ClickGUI")).getBool())
+            if (Client.main().setMgr().settingByName("Sound", Client.main().modMgr().getByName("ClickGUI")).getBool())
                 Minecraft.getMinecraft().thePlayer.playSound("random.click", 0.5f, 0.5f);
         } else if (mouseButton == 1) {
             /*
@@ -93,7 +93,7 @@ public class ModuleButton {
                 //Client.getInstance().getClickGui().closeAllSettings();
                 this.extended = b;
 
-                if (Client.instance().setMgr().getSettingByName("Sound", Client.instance().modManager().getByName("ClickGUI")).getBool())
+                if (Client.main().setMgr().settingByName("Sound", Client.main().modMgr().getByName("ClickGUI")).getBool())
                     if (extended)
                         Minecraft.getMinecraft().thePlayer.playSound("tile.piston.out", 1f, 1f);
                     else
@@ -112,7 +112,7 @@ public class ModuleButton {
          * f�r mod danach soll nicht mehr gewartet werden!
          */
         if (listening) {
-            ModuleManager moduleManager = Client.instance().modManager();
+            ModuleManager moduleManager = Client.main().modMgr();
             Module module = moduleManager.getByName(mod.getName());
             int bind = Keyboard.getKeyIndex(mod.getName());
             module.setBind(bind);

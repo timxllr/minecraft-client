@@ -18,13 +18,13 @@ public class Nuker extends Module {
     public Nuker() {
         super("Nuker", Keyboard.KEY_NONE, Category.WORLD, -1);
 
-        Client.instance().setMgr().newSetting(new Setting("Range", this, 3.5, 0, 5, false));
+        Client.main().setMgr().newSetting(new Setting("Range", this, 3.5, 0, 5, false));
     }
 
     @Override
     public void onUpdate() {
         if (getState()) {
-            nukerRange = (float) Client.instance().setMgr().getSettingByName("Range", this).getNum();
+            nukerRange = (float) Client.main().setMgr().settingByName("Range", this).getNum();
             if (mc.thePlayer.capabilities.isCreativeMode) {
                 for (int y = (int) nukerRange; y >= (int) (-nukerRange); --y) {
                     for (int z = (int) (-nukerRange); (float) z <= nukerRange; ++z) {

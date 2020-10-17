@@ -18,7 +18,7 @@ public class Tower extends Module {
     public Tower() {
         super("Tower", Keyboard.KEY_NONE, Category.WORLD, -1);
 
-        Client.instance().setMgr().newSetting(new Setting("Slow", this, false));
+        Client.main().setMgr().newSetting(new Setting("Slow", this, false));
     }
 
     private final TimeHelper time = new TimeHelper();
@@ -31,7 +31,7 @@ public class Tower extends Module {
             final BlockPos pos = new BlockPos(Tower.mc.thePlayer.posX, Tower.mc.thePlayer.posY - 1.0, Tower.mc.thePlayer.posZ);
             final EnumFacing face = getFacingDirection(pos);
             try {
-                boolean slow = Client.instance().setMgr().getSettingByName("Slow", this).getBool();
+                boolean slow = Client.main().setMgr().settingByName("Slow", this).getBool();
                 if (time.hasReached(slow ? 150 : 75) && Tower.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Tower.mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemBlock) {
                     Tower.mc.thePlayer.setPosition(Tower.mc.thePlayer.posX, Tower.mc.thePlayer.posY + 1.1, Tower.mc.thePlayer.posZ);
                     final float[] rotations = BlockHelper.getBlockRotations(Tower.mc.thePlayer.posX, Tower.mc.thePlayer.posY - 1.0, Tower.mc.thePlayer.posZ);

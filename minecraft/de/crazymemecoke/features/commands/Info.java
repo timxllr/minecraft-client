@@ -11,9 +11,9 @@ public class Info extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length == 0) {
-            Notify.chat("Client-Name: " + Client.instance().getClientName());
-            Notify.chat("Client-Version: " + Client.instance().getClientVersion());
-            Notify.chat("Client-Author: " + Client.instance().getClientCoder());
+            Notify.chat("Client-Name: " + Client.main().getClientName());
+            Notify.chat("Client-Version: " + Client.main().getClientVersion());
+            Notify.chat("Client-Author: " + Client.main().getClientCoder());
         } else {
             Notify.chat(syntax);
         }

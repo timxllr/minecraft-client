@@ -15,9 +15,9 @@ public class Bind extends Command {
 
     @Override
     public void execute(String[] args) {
-        ModuleManager moduleManager = Client.instance().modManager();
+        ModuleManager moduleManager = Client.main().modMgr();
         if (args.length == 2) {
-            if (Client.instance().modManager().getByName(args[0]) != null) {
+            if (Client.main().modMgr().getByName(args[0]) != null) {
                 Module mod = moduleManager.getByName(args[0]);
                 if (mod == null) {
                     Notify.chat("Module " + args[0] + " nicht gefunden.");
@@ -41,13 +41,13 @@ public class Bind extends Command {
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("list")) {
                 Notify.chat("Alle Keybinds (Format: MOD : KEY):");
-                for (Module mod : Client.instance().modManager().getModules()) {
+                for (Module mod : Client.main().modMgr().getModules()) {
                     if (!(mod.getBind() == 0)) {
                         Notify.chat(mod.getName() + " : " + Keyboard.getKeyName(mod.getBind()));
                     }
                 }
             } else if (args[0].equalsIgnoreCase("clear")) {
-                for (Module mod : Client.instance().modManager().getModules()) {
+                for (Module mod : Client.main().modMgr().getModules()) {
                     mod.setBind(0);
                 }
                 Notify.chat("Es wurden alle Keybinds gelöscht.");

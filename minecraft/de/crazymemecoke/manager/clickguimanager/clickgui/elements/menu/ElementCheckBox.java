@@ -42,7 +42,7 @@ public class ElementCheckBox extends Element {
         /*
          * Titel und Checkbox rendern.
          */
-        String mode = Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode();
+        String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("ClickGUI")).getMode();
         switch (mode) {
             case "ambien": {
                 FontUtil.drawString(setstrg, (int) (x + 15), (int) (y + FontUtil.getFontHeight() / 2), 0xffffffff);

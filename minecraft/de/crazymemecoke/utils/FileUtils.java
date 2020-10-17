@@ -55,13 +55,13 @@ public abstract class FileUtils {
 
     public static void createFile(String name) {
         try {
-            File file = new File(Client.instance().getClientDir().getAbsolutePath(), name + ".txt");
+            File file = new File(Client.main().getClientDir().getAbsolutePath(), name + ".txt");
             if (!file.exists()) {
                 PrintWriter printWriter = new PrintWriter(new FileWriter(file));
                 printWriter.println();
                 printWriter.close();
             }
-            System.out.println(Client.instance().getClientDir().getAbsolutePath());
+            System.out.println(Client.main().getClientDir().getAbsolutePath());
         } catch (Exception e) {
             e.printStackTrace();
         }

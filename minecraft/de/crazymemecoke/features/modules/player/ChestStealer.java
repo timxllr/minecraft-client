@@ -13,12 +13,12 @@ public class ChestStealer extends Module {
 
     public ChestStealer() {
         super("ChestStealer", Keyboard.KEY_NONE, Category.PLAYER, -1);
-        Client.instance().setMgr().newSetting(new Setting("Delay", this, 75, 0, 250, true));
+        Client.main().setMgr().newSetting(new Setting("Delay", this, 75, 0, 250, true));
     }
 
     @Override
     public void onUpdate() {
-        long delay = (long) Client.instance().setMgr().getSettingByName("Delay", this).getNum();
+        long delay = (long) Client.main().setMgr().settingByName("Delay", this).getNum();
         if (getState()) {
             if ((mc.thePlayer.openContainer != null)
                     && ((mc.thePlayer.openContainer instanceof ContainerChest))) {

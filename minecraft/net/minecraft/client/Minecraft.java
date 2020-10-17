@@ -586,7 +586,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
             this.gameSettings.saveOptions();
         }
 
-        Client.instance().startClient();
+        Client.main().startClient();
 
         this.renderGlobal.makeEntityOutlineShader();
     }
@@ -610,7 +610,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
     private void createDisplay() throws LWJGLException {
         Display.setResizable(true);
-        Display.setTitle(Client.instance().getClientName() + " " + Client.instance().getClientVersion() + " | made by " + Client.instance().getClientCoder());
+        Display.setTitle(Client.main().getClientName() + " " + Client.main().getClientVersion() + " | made by " + Client.main().getClientCoder());
 
         try {
             Display.create((new PixelFormat()).withDepthBits(24));
@@ -1657,7 +1657,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
                     if (this.currentScreen != null) {
                         this.currentScreen.handleKeyboardInput();
                     } else {
-                        for (Module n : Client.instance().modManager().modules) {
+                        for (Module n : Client.main().modMgr().modules) {
                             if (k == n.getBind()) {
                                 n.toggleModule();
                             }

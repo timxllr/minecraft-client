@@ -137,7 +137,7 @@ public class GuiSessionStealer extends GuiScreen {
             mc.displayGuiScreen(parent);
         }
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 
@@ -145,10 +145,10 @@ public class GuiSessionStealer extends GuiScreen {
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.instance().getFontManager().comfortaa20.drawString("REDEEM SESSION TOKEN", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("REDEEM SESSION TOKEN") / 2, height / 2 - 140, Colors.GREY.c);
-        Client.instance().getFontManager().comfortaa20.drawString("SESSION ID", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("SESSION ID") / 2, height - 265, -1);
+        Client.main().fontMgr().comfortaa20.drawString("REDEEM SESSION TOKEN", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("REDEEM SESSION TOKEN") / 2, height / 2 - 140, Colors.GREY.c);
+        Client.main().fontMgr().comfortaa20.drawString("SESSION ID", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("SESSION ID") / 2, height - 265, -1);
 
-        UnicodeFontRenderer font = Client.instance().getFontManager().comfortaa18;
+        UnicodeFontRenderer font = Client.main().fontMgr().comfortaa18;
         String t1 = "Session IDs kannst du in Minecraft Crash Reports finden.";
         String t2 = "Suche im Internet nach \"Minecraft Session ID is token\"";
         String t3 = "Die dort enthaltene ID sieht so aus:";

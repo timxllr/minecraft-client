@@ -30,7 +30,7 @@ public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         ScaledResolution sr = new ScaledResolution(mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 
@@ -42,11 +42,11 @@ public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.scale(f, f, f);
         GlStateManager.popMatrix();
 
-        Client.instance().getFontManager().comfortaa50.drawStringWithShadow("Willkommen!", width / 2 - 70, 40, -1);
-        Client.instance().getFontManager().comfortaa22.drawStringWithShadow("Wenn du den Client das 1. Mal verwendest:", width / 2 - 115, 80, -1);
-        Client.instance().getFontManager().comfortaa22.drawStringWithShadow("RSHIFT - ClickGUI", width / 2 - 40, 100, -1);
-        Client.instance().getFontManager().comfortaa22.drawStringWithShadow("RCONTROL - Info HUD", width / 2 - 55, 110, -1);
-        Client.instance().getFontManager().comfortaa22.drawStringWithShadow("Chat-Prefix - Punkt (.)", width / 2 - 50, 120, -1);
+        Client.main().fontMgr().comfortaa50.drawStringWithShadow("Willkommen!", width / 2 - 70, 40, -1);
+        Client.main().fontMgr().comfortaa22.drawStringWithShadow("Wenn du den Client das 1. Mal verwendest:", width / 2 - 115, 80, -1);
+        Client.main().fontMgr().comfortaa22.drawStringWithShadow("RSHIFT - ClickGUI", width / 2 - 40, 100, -1);
+        Client.main().fontMgr().comfortaa22.drawStringWithShadow("RCONTROL - Info HUD", width / 2 - 55, 110, -1);
+        Client.main().fontMgr().comfortaa22.drawStringWithShadow("Chat-Prefix - Punkt (.)", width / 2 - 50, 120, -1);
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);

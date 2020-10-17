@@ -334,10 +334,10 @@ public class GuiIngame extends Gui {
     }
 
     private void renderHotbar(float partialTicks) {
-        Setting hotbar = Client.instance().setMgr().getSettingByName("Hotbar", Client.instance().modManager().getByName("HUD"));
+        Setting hotbar = Client.main().setMgr().settingByName("Hotbar", Client.main().modMgr().getByName("HUD"));
         ScaledResolution s = new ScaledResolution(Wrapper.mc);
 
-        if (!Client.instance().modManager().getByName("Invis").getState() && hotbar.getBool() && Client.instance().modManager().getByName("HUD").getState()) {
+        if (!Client.main().modMgr().getByName("Invis").getState() && hotbar.getBool() && Client.main().modMgr().getByName("HUD").getState()) {
             RenderUtils.drawRect((s.width() / 2) - 91, s.height() - 23, (s.width() / 2) + 91, s.height(), new Color(12, 14, 13).getRGB());
 
             if (Wrapper.mc.thePlayer.inventory.currentItem == 0) {
@@ -404,7 +404,7 @@ public class GuiIngame extends Gui {
     }
 
     public void renderExpBar(ScaledResolution p_175176_1_, int p_175176_2_) {
-        if (!Client.instance().modManager().getByName("NoEXP").getState()) {
+        if (!Client.main().modMgr().getByName("NoEXP").getState()) {
             this.mc.mcProfiler.startSection("expBar");
             this.mc.getTextureManager().bindTexture(Gui.icons);
             int i = this.mc.thePlayer.xpBarCap();
@@ -522,7 +522,7 @@ public class GuiIngame extends Gui {
     }
 
     private void renderScoreboard(ScoreObjective p_180475_1_, ScaledResolution p_180475_2_) {
-        if (!Client.instance().modManager().getByName("NoScoreboard").getState()) {
+        if (!Client.main().modMgr().getByName("NoScoreboard").getState()) {
             Scoreboard scoreboard = p_180475_1_.getScoreboard();
             Collection collection = scoreboard.getSortedScores(p_180475_1_);
             ArrayList arraylist = Lists.newArrayList(Iterables.filter(collection, new Predicate() {

@@ -68,7 +68,7 @@ public class Client {
     private Shader shader;
     private AltManager altManager;
 
-    public static Client instance() {
+    public static Client main() {
         return instance;
     }
 
@@ -102,11 +102,11 @@ public class Client {
         moduleManager.saveBinds();
         AltManager.saveAlts();
 
-        Client.instance().modManager().getModule(Crasher.class).setState(false);
+        Client.main().modMgr().getModule(Crasher.class).setState(false);
         System.out.println("Disabled Crasher module");
     }
 
-    public ModuleManager modManager() {
+    public ModuleManager modMgr() {
         return moduleManager;
     }
 
@@ -142,7 +142,7 @@ public class Client {
         return clientPrefix;
     }
 
-    public FontManager getFontManager() {
+    public FontManager fontMgr() {
         return fontManager;
     }
 

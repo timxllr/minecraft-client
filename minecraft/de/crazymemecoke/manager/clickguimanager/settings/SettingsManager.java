@@ -23,7 +23,7 @@ public class SettingsManager {
         this.settings = new ArrayList<>();
 
         try {
-            settingsFile = new File(Client.instance().getClientDir() + "/config.txt");
+            settingsFile = new File(Client.main().getClientDir() + "/config.txt");
             if (settingsFile.createNewFile()) {
                 System.out.println("File created: " + settingsFile.getName());
             } else {
@@ -60,20 +60,20 @@ public class SettingsManager {
         return out;
     }
 
-    public Setting getSettingByName(String name, Module module) {
+    public Setting settingByName(String name, Module module) {
         for (Setting set : getSettings()) {
             if (set.getFullName().equalsIgnoreCase((module == null ? "global" : module.getName()) + "_" + name)) {
                 return set;
             }
         }
-        System.err.println("[" + Client.instance().getClientName() + "] Error Setting NOT found: '" + name + "'!");
+        System.err.println("[" + Client.main().getClientName() + "] Error Setting NOT found: '" + name + "'!");
         return null;
     }
 
 
     public void saveSettings() {
         List<String> formattedSettings = new ArrayList<String>();
-        for (final Setting set : Client.instance().setMgr().getSettings()) {
+        for (final Setting set : Client.main().setMgr().getSettings()) {
             String yeet = set.getParentMod() != null ? set.getParentMod().getName() : "global";
             if (set.isSlider()) {
                 formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getNum());
@@ -92,8 +92,8 @@ public class SettingsManager {
         FileUtils.loadFile(settingsFile).forEach(line -> {
             final String[] arguments = line.split(":");
             if (arguments.length == 3) {
-                Module parent = arguments[0].equalsIgnoreCase("global") ? null : Client.instance().modManager().getByName(arguments[0]);
-                Setting set = getSettingByName(arguments[1], parent);
+                Module parent = arguments[0].equalsIgnoreCase("global") ? null : Client.main().modMgr().getByName(arguments[0]);
+                Setting set = settingByName(arguments[1], parent);
 
                 if (set != null) {
                     if (set.isSlider())

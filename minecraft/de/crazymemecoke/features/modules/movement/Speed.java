@@ -53,7 +53,7 @@ public class Speed extends Module {
     String speedMode;
     boolean move;
     boolean hop;
-    SettingsManager sM = Client.instance().setMgr();
+    SettingsManager sM = Client.main().setMgr();
     private double prevY;
     private int motionTicks;
     private int ticks = 0;
@@ -77,8 +77,8 @@ public class Speed extends Module {
     }
 
     public void onUpdate() {
-        speedMode = sM.getSettingByName("Mode", this).getMode();
-        double frames_speed = sM.getSettingByName("Frames Speed", this).getNum();
+        speedMode = sM.settingByName("Mode", this).getMode();
+        double frames_speed = sM.settingByName("Frames Speed", this).getNum();
         if (getState()) {
 
             switch (speedMode) {
@@ -149,7 +149,7 @@ public class Speed extends Module {
     }
 
     private void doTimer() {
-        double timer_speed = sM.getSettingByName("Timer Speed", this).getNum();
+        double timer_speed = sM.settingByName("Timer Speed", this).getNum();
         mc.timer.timerSpeed = (float) timer_speed;
     }
 

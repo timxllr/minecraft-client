@@ -15,7 +15,7 @@ class FontUtils
     private boolean antiAlias;
     private int fontHeight;
     private int charOffset;
-    
+
     public FontUtils(final Font font, final boolean antiAlias, final int charOffset) {
         this.IMAGE_WIDTH = 1024;
         this.IMAGE_HEIGHT = 1024;
@@ -27,7 +27,7 @@ class FontUtils
         this.charOffset = charOffset;
         this.setupTexture(antiAlias);
     }
-    
+
     public FontUtils(final Font font, final boolean antiAlias) {
         this.IMAGE_WIDTH = 1024;
         this.IMAGE_HEIGHT = 1024;
@@ -39,7 +39,7 @@ class FontUtils
         this.charOffset = 8;
         this.setupTexture(antiAlias);
     }
-    
+
     private void setupTexture(final boolean antiAlias) {
         if (this.font.getSize() <= 15) {
             this.IMAGE_WIDTH = 256;
@@ -96,7 +96,7 @@ class FontUtils
             e.printStackTrace();
         }
     }
-    
+
     private BufferedImage getFontImage(final char ch, final boolean antiAlias) {
         final BufferedImage tempfontImage = new BufferedImage(1, 1, 2);
         final Graphics2D g = (Graphics2D)tempfontImage.getGraphics();
@@ -131,7 +131,7 @@ class FontUtils
         gt.drawString(String.valueOf(ch), 3, 1 + fontMetrics.getAscent());
         return fontImage;
     }
-    
+
     public void drawChar(final char c, final float x, final float y) throws ArrayIndexOutOfBoundsException {
         try {
             this.drawQuad(x, y, this.chars[c].width, this.chars[c].height, this.chars[c].storedX, this.chars[c].storedY, this.chars[c].width, this.chars[c].height);
@@ -140,7 +140,7 @@ class FontUtils
             e.printStackTrace();
         }
     }
-    
+
     private void drawQuad(final float x, final float y, final float width, final float height, final float srcX, final float srcY, final float srcWidth, final float srcHeight) {
         final float renderSRCX = srcX / this.IMAGE_WIDTH;
         final float renderSRCY = srcY / this.IMAGE_HEIGHT;
@@ -161,7 +161,7 @@ class FontUtils
         GL11.glVertex2d(x + width, y);
         GL11.glEnd();
     }
-    
+
     public void drawString(final String text, double x, double y, final Color color, final boolean shadow) {
         x *= 2.0;
         y = y * 2.0 - 6.0;
@@ -178,7 +178,7 @@ class FontUtils
         }
         GL11.glPopMatrix();
     }
-    
+
     public void glColor(final Color color) {
         final float red = color.getRed() / 255.0f;
         final float green = color.getGreen() / 255.0f;
@@ -186,7 +186,7 @@ class FontUtils
         final float alpha = color.getAlpha() / 255.0f;
         GL11.glColor4f(red, green, blue, alpha);
     }
-    
+
     public int getStringHeight(final String text) {
         int lines = 1;
         char[] charArray;
@@ -198,11 +198,11 @@ class FontUtils
         }
         return (this.fontHeight - this.charOffset) / 2 * lines;
     }
-    
+
     public int getHeight() {
         return (this.fontHeight - this.charOffset) / 2;
     }
-    
+
     public int getStringWidth(final String text) {
         int width = 0;
         char[] charArray;
@@ -214,21 +214,21 @@ class FontUtils
         }
         return width / 2;
     }
-    
+
     public boolean isAntiAlias() {
         return this.antiAlias;
     }
-    
+
     public void setAntiAlias(final boolean antiAlias) {
         if (this.antiAlias != antiAlias) {
             this.setupTexture(this.antiAlias = antiAlias);
         }
     }
-    
+
     public Font getFont() {
         return this.font;
     }
-    
+
     private class IntObject
     {
         public int width;
@@ -237,4 +237,3 @@ class FontUtils
         public int storedY;
     }
 }
-

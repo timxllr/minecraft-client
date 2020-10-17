@@ -87,7 +87,7 @@ public class GuiDirectLogin extends GuiScreen {
             mc.displayGuiScreen(parent);
         }
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 
@@ -95,10 +95,10 @@ public class GuiDirectLogin extends GuiScreen {
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.instance().getFontManager().comfortaa20.drawString("DIRECT LOGIN", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("DIRECT LOGIN") / 2, height / 2 - 140, Colors.GREY.c);
-        Client.instance().getFontManager().comfortaa20.drawString("MAIL", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
-        Client.instance().getFontManager().comfortaa20.drawString("PASSWORD", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
-        Client.instance().getFontManager().comfortaa20.drawString("MAIL : PASS", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("MAIL : PASS") / 2, height - 265, -1);
+        Client.main().fontMgr().comfortaa20.drawString("DIRECT LOGIN", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("DIRECT LOGIN") / 2, height / 2 - 140, Colors.GREY.c);
+        Client.main().fontMgr().comfortaa20.drawString("MAIL", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
+        Client.main().fontMgr().comfortaa20.drawString("PASSWORD", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
+        Client.main().fontMgr().comfortaa20.drawString("MAIL : PASS", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("MAIL : PASS") / 2, height - 265, -1);
         usernameField.drawTextBox();
         passwordField.drawTextBox();
         usernamePasswordField.drawTextBox();

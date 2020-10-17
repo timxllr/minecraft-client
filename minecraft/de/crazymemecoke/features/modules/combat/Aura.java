@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class Aura extends Module {
 
-    SettingsManager sM = Client.instance().setMgr();
+    SettingsManager sM = Client.main().setMgr();
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
     double range, cps;
@@ -56,16 +56,16 @@ public class Aura extends Module {
     @Override
     public void onUpdate() {
         if (getState()) {
-            range = sM.getSettingByName("Range", this).getNum();
-            cps = sM.getSettingByName("CPS", this).getNum();
-            teams = sM.getSettingByName("Teams", this).getBool();
-            players = sM.getSettingByName("Players", this).getBool();
-            animals = sM.getSettingByName("Animals", this).getBool();
-            mobs = sM.getSettingByName("Mobs", this).getBool();
-            villager = sM.getSettingByName("Villager", this).getBool();
-            invisibles = sM.getSettingByName("Invisibles", this).getBool();
-            rotations = sM.getSettingByName("Rotations", this).getBool();
-            auraMode = sM.getSettingByName("Mode", this).getMode();
+            range = sM.settingByName("Range", this).getNum();
+            cps = sM.settingByName("CPS", this).getNum();
+            teams = sM.settingByName("Teams", this).getBool();
+            players = sM.settingByName("Players", this).getBool();
+            animals = sM.settingByName("Animals", this).getBool();
+            mobs = sM.settingByName("Mobs", this).getBool();
+            villager = sM.settingByName("Villager", this).getBool();
+            invisibles = sM.settingByName("Invisibles", this).getBool();
+            rotations = sM.settingByName("Rotations", this).getBool();
+            auraMode = sM.settingByName("Mode", this).getMode();
         }
     }
 
@@ -74,8 +74,8 @@ public class Aura extends Module {
     public void onEnable() {
         EventManager.register(this);
 
-        if (sM.getSettingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
-            Client.instance().modManager().getByName("Aura").setState(false);
+        if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
+            Client.main().modMgr().getByName("Aura").setState(false);
         }
     }
 

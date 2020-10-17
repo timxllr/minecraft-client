@@ -18,14 +18,14 @@ public class FastLadder extends Module {
         mode.add("Vanilla");
         mode.add("AAC");
 
-        Client.instance().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
-        Client.instance().setMgr().newSetting(new Setting("Vanilla Speed", this, 0.4, 0.1, 1.0, false));
-        Client.instance().setMgr().newSetting(new Setting("AAC Speed", this, 0.2, 0.1, 1.0, false));
+        Client.main().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
+        Client.main().setMgr().newSetting(new Setting("Vanilla Speed", this, 0.4, 0.1, 1.0, false));
+        Client.main().setMgr().newSetting(new Setting("AAC Speed", this, 0.2, 0.1, 1.0, false));
     }
 
     @Override
     public void onUpdate() {
-        String mode = Client.instance().setMgr().getSettingByName("Mode", this).getMode();
+        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
 
         if (getState()) {
             switch (mode) {
@@ -42,7 +42,7 @@ public class FastLadder extends Module {
     }
 
     private void doAAC() {
-        double speed = Client.instance().setMgr().getSettingByName("AAC Speed", this).getNum();
+        double speed = Client.main().setMgr().settingByName("AAC Speed", this).getNum();
 
         if ((mc.thePlayer.isOnLadder()) && (mc.thePlayer.isCollidedHorizontally)) {
             mc.thePlayer.motionY = speed;
@@ -50,7 +50,7 @@ public class FastLadder extends Module {
     }
 
     private void doVanilla() {
-        double speed = Client.instance().setMgr().getSettingByName("Vanilla Speed", this).getNum();
+        double speed = Client.main().setMgr().settingByName("Vanilla Speed", this).getNum();
 
         if ((mc.thePlayer.isOnLadder()) && (mc.thePlayer.isCollidedHorizontally)) {
             mc.thePlayer.motionY = speed;

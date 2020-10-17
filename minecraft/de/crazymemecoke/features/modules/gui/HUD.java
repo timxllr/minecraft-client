@@ -38,17 +38,17 @@ public class HUD extends Module {
         chatMode.add("Normal");
         chatMode.add("Custom");
 
-        Client.instance().setMgr().newSetting(new Setting("Design", this, "Ambien", design));
-        Client.instance().setMgr().newSetting(new Setting("Chat", this, "Custom", chatMode));
-        Client.instance().setMgr().newSetting(new Setting("ArrayList Rect Mode", this, "Left", arrayListRectMode));
-        Client.instance().setMgr().newSetting(new Setting("Hotbar", this, true));
-        Client.instance().setMgr().newSetting(new Setting("ArrayList", this, true));
-        Client.instance().setMgr().newSetting(new Setting("ArrayList Background", this, true));
-        Client.instance().setMgr().newSetting(new Setting("TabGUI", this, true));
-        Client.instance().setMgr().newSetting(new Setting("Watermark", this, true));
-        Client.instance().setMgr().newSetting(new Setting("Target HUD", this, true));
-        Client.instance().setMgr().newSetting(new Setting("KeyStrokes", this, true));
-        Client.instance().setMgr().newSetting(new Setting("Developer Mode", this, false));
+        Client.main().setMgr().newSetting(new Setting("Design", this, "Ambien", design));
+        Client.main().setMgr().newSetting(new Setting("Chat", this, "Custom", chatMode));
+        Client.main().setMgr().newSetting(new Setting("ArrayList Rect Mode", this, "Left", arrayListRectMode));
+        Client.main().setMgr().newSetting(new Setting("Hotbar", this, true));
+        Client.main().setMgr().newSetting(new Setting("ArrayList", this, true));
+        Client.main().setMgr().newSetting(new Setting("ArrayList Background", this, true));
+        Client.main().setMgr().newSetting(new Setting("TabGUI", this, true));
+        Client.main().setMgr().newSetting(new Setting("Watermark", this, true));
+        Client.main().setMgr().newSetting(new Setting("Target HUD", this, true));
+        Client.main().setMgr().newSetting(new Setting("KeyStrokes", this, true));
+        Client.main().setMgr().newSetting(new Setting("Developer Mode", this, false));
     }
 
 }

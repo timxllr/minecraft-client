@@ -13,7 +13,7 @@ public class T extends Command {
 	public void execute(String[] args) {
 		if (args.length == 1) {
 			String modName = args[0];
-			for (Module m : Client.instance().modManager().getModules()) {
+			for (Module m : Client.main().modMgr().getModules()) {
 				if (m.getName().equalsIgnoreCase(modName)) {
 					if (m.getState()) {
 						m.setState(false);

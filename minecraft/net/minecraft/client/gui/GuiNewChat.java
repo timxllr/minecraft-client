@@ -77,7 +77,7 @@ public class GuiNewChat extends Gui {
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
 
-                                String mode = Client.instance().setMgr().getSettingByName("Chat", Client.instance().modManager().getModule(HUD.class)).getMode();
+                                String mode = Client.main().setMgr().settingByName("Chat", Client.main().modMgr().getModule(HUD.class)).getMode();
 
                                 switch (mode) {
                                     case "normal": {
@@ -85,7 +85,7 @@ public class GuiNewChat extends Gui {
                                         break;
                                     }
                                     case "custom": {
-                                        Client.instance().getFontManager().getFont("Raleway Light", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
+                                        Client.main().fontMgr().font("Raleway Light", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
                                         break;
                                     }
                                 }

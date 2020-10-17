@@ -19,8 +19,8 @@ public class Step extends Module {
         mode.add("Vanilla");
         mode.add("NCP");
 
-        Client.instance().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
-        Client.instance().setMgr().newSetting(new Setting("Step Height", this, 1.0, 1.0, 10.0, false));
+        Client.main().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
+        Client.main().setMgr().newSetting(new Setting("Step Height", this, 1.0, 1.0, 10.0, false));
     }
 
     @Override
@@ -29,7 +29,7 @@ public class Step extends Module {
     }
 
     public void onUpdate() {
-        String mode = Client.instance().setMgr().getSettingByName("Mode", this).getMode();
+        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
 
         if (getState()) {
             switch (mode) {
@@ -46,7 +46,7 @@ public class Step extends Module {
     }
 
     private void doNCP() {
-        double stepHeight = Client.instance().setMgr().getSettingByName("Step Height", this).getNum();
+        double stepHeight = Client.main().setMgr().settingByName("Step Height", this).getNum();
 
         final double posX = mc.thePlayer.posX;
         final double posY = mc.thePlayer.posY;

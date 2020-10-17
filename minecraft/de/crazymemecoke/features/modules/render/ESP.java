@@ -26,7 +26,7 @@ import java.util.Iterator;
 
 public class ESP extends Module {
 
-    SettingsManager sM = Client.instance().setMgr();
+    SettingsManager sM = Client.main().setMgr();
 
     public ESP() {
         super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER, -1);
@@ -47,7 +47,7 @@ public class ESP extends Module {
     @Override
     public void onRender() {
         if (getState()) {
-            if (sM.getSettingByName("Mode", this).getMode().equalsIgnoreCase("Box")) {
+            if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Box")) {
                 Iterator var3 = mc.theWorld.loadedEntityList.iterator();
 
                 while (true) {
@@ -85,7 +85,7 @@ public class ESP extends Module {
                     GL11.glPopMatrix();
                 }
 
-            } else if (sM.getSettingByName("Mode", this).getMode().equalsIgnoreCase("Prophunt")) {
+            } else if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Prophunt")) {
                 for (Object entity : mc.theWorld.loadedEntityList)
                     if (entity instanceof EntityLiving && ((Entity) entity).isInvisible()) {
                         double x = ((Entity) entity).posX;

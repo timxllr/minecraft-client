@@ -30,7 +30,7 @@ public class ModuleManager {
     public ModuleManager() {
 
         try {
-            modulesFile = new File(Client.instance().getClientDir() + "/modules.txt");
+            modulesFile = new File(Client.main().getClientDir() + "/modules.txt");
             if (modulesFile.createNewFile()) {
                 System.out.println("File created: " + modulesFile.getName());
             } else {
@@ -42,7 +42,7 @@ public class ModuleManager {
         }
 
         try {
-            bindsFile = new File(Client.instance().getClientDir() + "/binds.txt");
+            bindsFile = new File(Client.main().getClientDir() + "/binds.txt");
             if (bindsFile.createNewFile()) {
                 System.out.println("File created: " + bindsFile.getName());
             } else {

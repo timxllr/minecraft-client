@@ -5,5 +5,5 @@ import net.minecraft.client.Minecraft;
 
 public class Wrapper {
 
-    public static Minecraft mc = Client.instance().getMc();
+    public static Minecraft mc = Client.main().getMc();
 }

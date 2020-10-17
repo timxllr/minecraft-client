@@ -140,7 +140,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      */
     public void onUpdate() {
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ))) {
-            for (Module m : Client.instance().modManager().modules) {
+            for (Module m : Client.main().modMgr().modules) {
                 m.onUpdate();
             }
             super.onUpdate();
@@ -158,7 +158,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      * called every tick when the player is on foot. Performs all the things that normally happen during movement.
      */
     public void onUpdateWalkingPlayer() {
-        for (Module m : Client.instance().modManager().getModules()) {
+        for (Module m : Client.main().modMgr().getModules()) {
             m.onPreMotionUpdate();
             EventManager.register(PreMotion.class);
         }
@@ -240,7 +240,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
                 this.lastReportedPitch = this.rotationPitch;
             }
 
-            for (Module m : Client.instance().modManager().getModules()) {
+            for (Module m : Client.main().modMgr().getModules()) {
                 m.onPostMotionUpdate();
                 EventManager.register(PostMotion.class);
             }
@@ -266,11 +266,11 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      * Sends a chat message from the player. Args: chatMessage
      */
     public void sendChatMessage(String message) {
-        if (Client.instance().getCommandManager().execute(message)) {
+        if (Client.main().getCommandManager().execute(message)) {
             return;
         }
-        if (message.startsWith(Client.instance().getClientPrefix())) {
-            Notify.chat("Befehl nicht gefunden - versuche " + Client.instance().getClientPrefix() + "help!");
+        if (message.startsWith(Client.main().getClientPrefix())) {
+            Notify.chat("Befehl nicht gefunden - versuche " + Client.main().getClientPrefix() + "help!");
             return;
         }
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
@@ -668,7 +668,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         this.movementInput.updatePlayerMoveState();
 
         if (this.isUsingItem() && !this.isRiding()) {
-            boolean noSlowdownEnabled = Client.instance().modManager().getModule(NoSlowDown.class).getState();
+            boolean noSlowdownEnabled = Client.main().modMgr().getModule(NoSlowDown.class).getState();
             this.movementInput.moveStrafe *= 0.2F;
             this.movementInput.moveForward *= 0.2F;
             this.sprintToggleTimer = 0;

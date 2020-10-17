@@ -59,7 +59,7 @@ public class GuiEditAlt extends GuiScreen {
                 this.altToEdit.setUsername(this.usernameField.getText());
                 this.altToEdit.setPassword(this.passwordField.getText());
 
-                Client.instance().getAltManager().saveAlts();
+                Client.main().getAltManager().saveAlts();
                 mc.displayGuiScreen(parent);
             }
         }
@@ -84,7 +84,7 @@ public class GuiEditAlt extends GuiScreen {
             mc.displayGuiScreen(parent);
         }
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 
@@ -92,9 +92,9 @@ public class GuiEditAlt extends GuiScreen {
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.instance().getFontManager().comfortaa20.drawString("EDIT ALT", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("EDIT ALT") / 2, height / 2 - 140, Colors.GREY.c);
-        Client.instance().getFontManager().comfortaa20.drawString("MAIL", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
-        Client.instance().getFontManager().comfortaa20.drawString("PASSWORD", width / 2 - Client.instance().getFontManager().comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
+        Client.main().fontMgr().comfortaa20.drawString("EDIT ALT", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("EDIT ALT") / 2, height / 2 - 140, Colors.GREY.c);
+        Client.main().fontMgr().comfortaa20.drawString("MAIL", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
+        Client.main().fontMgr().comfortaa20.drawString("PASSWORD", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
         usernameField.drawTextBox();
         passwordField.drawTextBox();
 

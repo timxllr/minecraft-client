@@ -22,14 +22,14 @@ public class FastUse extends Module {
 	public FastUse() {
 		super("FastUse", Keyboard.KEY_NONE, Category.PLAYER, -1);
 
-		Client.instance().setMgr().newSetting(new Setting("Delay", this, 15, 0, 20, false));
+		Client.main().setMgr().newSetting(new Setting("Delay", this, 15, 0, 20, false));
 	}
 
 	boolean NCP = true;
 
 	@Override
 	public void onUpdate() {
-		double delay = Client.instance().setMgr().getSettingByName("Delay", this).getNum();
+		double delay = Client.main().setMgr().settingByName("Delay", this).getNum();
 
 		if (getState()) {
 			try {

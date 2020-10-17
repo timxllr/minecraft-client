@@ -26,12 +26,12 @@ public class Fucker extends Module {
         options.add("Cores");
         options.add("Eggs");
         options.add("Cakes");
-        Client.instance().setMgr().newSetting(new Setting("Mode", this, "Beds", options));
+        Client.main().setMgr().newSetting(new Setting("Mode", this, "Beds", options));
     }
 
     @Override
     public void onUpdate() {
-        String mode = Client.instance().setMgr().getSettingByName("Mode", this).getMode();
+        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
         if (getState()) {
             for (this.xOffset = -5; this.xOffset < 6; ++this.xOffset) {
                 for (this.zOffset = -5; this.zOffset < 6; ++this.zOffset) {

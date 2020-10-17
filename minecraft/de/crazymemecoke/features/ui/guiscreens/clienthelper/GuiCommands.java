@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class GuiCommands extends GuiScreen {
 
-    FontManager fM = Client.instance().getFontManager();
+    FontManager fM = Client.main().fontMgr();
 
     @Override
     public void initGui() {
@@ -47,14 +47,14 @@ public class GuiCommands extends GuiScreen {
         ScaledResolution sr = new ScaledResolution(mc);
         RenderUtils.drawRect(20, 20, width - 20, height - 25, new Color(0, 0, 0, 150).getRGB());
 
-        String title = Client.instance().getClientName() + " | Client Helper | Alle Commands";
+        String title = Client.main().getClientName() + " | Client Helper | Alle Commands";
         fM.cabin23.drawString(title, width / 2 - fM.cabin23.getStringWidth(title) / 2, 25, Rainbow.rainbow(1, 1).getRGB());
 
         fM.comfortaa22.drawString("Commands:", width / 2 - fM.comfortaa22.getStringWidth("Commands:") / 2, 45, -1);
 
         int yCmdPos = 60;
         int yCmdPos2 = 60;
-        for (Command cmd : Client.instance().getCommandManager().getCommands()) {
+        for (Command cmd : Client.main().getCommandManager().getCommands()) {
             if (yCmdPos < height - 35) {
                 fM.comfortaa20.drawCenteredString(cmd.getName(), width / 2 - 50, yCmdPos, -1);
                 yCmdPos += 12;

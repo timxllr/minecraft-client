@@ -3,7 +3,6 @@ package de.crazymemecoke.features.ui.guiscreens;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.ui.guiscreens.altmanager.GuiAltManager;
 import de.crazymemecoke.utils.render.RenderUtils;
-import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
@@ -52,17 +51,13 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         GlStateManager.disableAlpha();
         GlStateManager.enableAlpha();
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         int i = 274;
-        int j = width / 2 - i / 2;
-        int k = 30;
         drawGradientRect(0, 0, width, height, -2130706433, 16777215);
         drawGradientRect(0, 0, width, height, 0, Integer.MIN_VALUE);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         ScaledResolution sr = new ScaledResolution(mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 
@@ -75,14 +70,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.popMatrix();
 
         RenderUtils.drawRect(width / 2 - 130, height / 2 - 70, width / 2 + 140, height / 2 + 30, new Color(55, 55, 55, 150).getRGB());
-
-        String header = Client.instance().getClientName() + " " + Client.instance().getClientVersion() + " by " + Client.instance().getClientCoder();
-        RenderUtils.drawRect(0, 0, Client.instance().getFontManager().bebasNeue50.getStringWidth(header) + 8, Client.instance().getFontManager().rainbowVeins50.getStringHeight(header) + 5, new Color(55, 55, 55, 150).getRGB());
-        Client.instance().getFontManager().bebasNeue50.drawString(header, 2, 2, -1);
-
-        String s1 = "Username: " + mc.session.getUsername();
-        RenderUtils.drawRect(15, height - 15, Client.instance().getFontManager().bebasNeue30.getStringWidth(s1) + 25, height - 35, new Color(55, 55, 55, 150).getRGB());
-        Client.instance().getFontManager().bebasNeue30.drawString(s1, 20, height - 31, -1);
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);

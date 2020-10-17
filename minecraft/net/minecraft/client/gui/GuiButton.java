@@ -92,7 +92,7 @@ public class GuiButton extends Gui {
      * Draws this button to the screen.
      */
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-        if (Client.instance().modManager().getByName("Invis").getState()) {
+        if (Client.main().modMgr().getByName("Invis").getState()) {
             if (visible) {
                 FontRenderer fontrenderer = mc.fontRendererObj;
                 mc.getTextureManager().bindTexture(buttonTextures);
@@ -146,7 +146,7 @@ public class GuiButton extends Gui {
                 mouseDragged(mc, mouseX, mouseY);
                 int var6 = 14737632;
                 String text = StringUtils.stripControlCodes(displayString);
-                UnicodeFontRenderer fontRenderer = Client.instance().getFontManager().getFont("Comfortaa", 19, Font.PLAIN);
+                UnicodeFontRenderer fontRenderer = Client.main().fontMgr().comfortaa18;
                 fontRenderer.drawStringWithShadow(text, xPosition - (fontRenderer.getStringWidth(text) / 2) + width / 2, yPosition + (height - 6) / 2, var6);
             }
         }

@@ -20,7 +20,7 @@ public class GuiCredits extends GuiScreen {
     public static ArrayList guiSlotList = new ArrayList();
     public static File altFile;
 
-    FontManager fM = Client.instance().getFontManager();
+    FontManager fM = Client.main().fontMgr();
 
     private GuiScreen parentScreen;
 
@@ -55,7 +55,7 @@ public class GuiCredits extends GuiScreen {
             mc.displayGuiScreen(parent);
         }
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.instance().getClientBackground()));
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 

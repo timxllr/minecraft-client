@@ -21,13 +21,13 @@ public class NoFall extends Module {
         mode.add("AAC 1.9.10");
         mode.add("NCP");
 
-        Client.instance().setMgr().newSetting(new Setting("Mode", this, "AAC 1.9.10", mode));
+        Client.main().setMgr().newSetting(new Setting("Mode", this, "AAC 1.9.10", mode));
     }
 
     @Override
     public void onUpdate() {
         if (getState()) {
-            if (Client.instance().setMgr().getSettingByName("Mode", this).getMode()
+            if (Client.main().setMgr().settingByName("Mode", this).getMode()
                     .equalsIgnoreCase("AAC 1.9.10")) {
                 if (!this.mc.thePlayer.onGround) {
                     Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(true));
@@ -37,7 +37,7 @@ public class NoFall extends Module {
                     this.mc.thePlayer.onGround = false;
                     this.mc.thePlayer.onGround = true;
                 }
-            } else if (Client.instance().setMgr().getSettingByName("Mode", this).getMode()
+            } else if (Client.main().setMgr().settingByName("Mode", this).getMode()
                     .equalsIgnoreCase("NCP")) {
             }
         }

@@ -20,7 +20,7 @@ public class Fly extends Module {
     ArrayList<String> flyMode = new ArrayList<>();
     ArrayList<String> glideMode = new ArrayList<>();
     ArrayList<String> mode = new ArrayList<>();
-    SettingsManager sM = Client.instance().setMgr();
+    SettingsManager sM = Client.main().setMgr();
     TimeHelper timer = new TimeHelper();
     private int delay = 0;
     public double motion;
@@ -63,8 +63,8 @@ public class Fly extends Module {
 
     @Override
     public void onEnable() {
-        if (Client.instance().setMgr().getSettingByName("Mode", this).getMode().equalsIgnoreCase("Glide")) {
-            if (Client.instance().setMgr().getSettingByName("Glide Mode", this).getMode().equalsIgnoreCase("New")) {
+        if (Client.main().setMgr().settingByName("Mode", this).getMode().equalsIgnoreCase("Glide")) {
+            if (Client.main().setMgr().settingByName("Glide Mode", this).getMode().equalsIgnoreCase("New")) {
                 time = 0;
                 dtime = 0;
                 mc.thePlayer.setSprinting(false);
@@ -84,9 +84,9 @@ public class Fly extends Module {
 
     @Override
     public void onUpdate() {
-        String flyMode = sM.getSettingByName("Fly Mode", this).getMode();
-        String glideMode = sM.getSettingByName("Glide Mode", this).getMode();
-        String mode = sM.getSettingByName("Mode", this).getMode();
+        String flyMode = sM.settingByName("Fly Mode", this).getMode();
+        String glideMode = sM.settingByName("Glide Mode", this).getMode();
+        String mode = sM.settingByName("Mode", this).getMode();
         if (getState()) {
             if (mode.equalsIgnoreCase("Fly")) {
                 if (flyMode.equalsIgnoreCase("Vanilla")) {

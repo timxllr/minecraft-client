@@ -7,7 +7,7 @@ import de.crazymemecoke.manager.modulemanager.Module;
 public class Panic extends Command {
     @Override
     public void execute(String[] args) {
-        for (Module mod : Client.instance().modManager().getModules()) {
+        for (Module mod : Client.main().modMgr().getModules()) {
             if (!(mod.getName().equalsIgnoreCase("HUD") || mod.getName().equalsIgnoreCase("ClickGUI"))) {
                 if (mod.getState()) {
                     mod.toggleModule();

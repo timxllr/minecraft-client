@@ -13,8 +13,8 @@ public class Help extends Command {
         if (args.length == 0) {
             Notify.chat("Alle Befehle:");
 
-            for (Command c : Client.instance().getCommandManager().getCommands()) {
-                Notify.chat(Client.instance().getClientPrefix() + c.getName().toLowerCase());
+            for (Command c : Client.main().getCommandManager().getCommands()) {
+                Notify.chat(Client.main().getClientPrefix() + c.getName().toLowerCase());
             }
         } else {
             Notify.chat(syntax);

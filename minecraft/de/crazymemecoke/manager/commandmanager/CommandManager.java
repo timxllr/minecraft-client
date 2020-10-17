@@ -29,7 +29,7 @@ public class CommandManager {
     }
 
     public boolean execute(String text) {
-        if (!text.startsWith(Client.instance().getClientPrefix())) {
+        if (!text.startsWith(Client.main().getClientPrefix())) {
             return false;
         }
 

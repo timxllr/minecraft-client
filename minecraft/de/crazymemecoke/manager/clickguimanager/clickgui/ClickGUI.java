@@ -45,7 +45,7 @@ public class ClickGUI extends GuiScreen {
         double pyplus = pheight + 10;
 
         try {
-            guiFile = new File(Client.instance().getClientDir() + "/gui.txt");
+            guiFile = new File(Client.main().getClientDir() + "/gui.txt");
             if (guiFile.createNewFile()) {
                 System.out.println("File created: " + guiFile.getName());
             } else {
@@ -91,7 +91,7 @@ public class ClickGUI extends GuiScreen {
             ClickGUI.panels.add(new Panel(title, categoryX, categoryY, pwidth, pheight, expanded, this) {
                 @Override
                 public void setup() {
-                    for (Module m : Client.instance().modManager().getModules()) {
+                    for (Module m : Client.main().modMgr().getModules()) {
                         if (!m.getCategory().equals(c))
                             continue;
                         this.Elements.add(new ModuleButton(m, this));
@@ -141,7 +141,7 @@ public class ClickGUI extends GuiScreen {
                         for (Element e : b.menuelements) {
                             e.offset = off;
                             e.update();
-                            if (Client.instance().setMgr().getSettingByName("Design", Client.instance().modManager().getByName("ClickGUI")).getMode()
+                            if (Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("ClickGUI")).getMode()
                                     .equalsIgnoreCase("New")) {
                                 RenderUtils.drawRect(e.x, e.y, e.x + e.width + 2, e.y + e.height, outlineColor);
                             }
@@ -252,7 +252,7 @@ public class ClickGUI extends GuiScreen {
             if (mc.entityRenderer.theShaderGroup != null) {
                 mc.entityRenderer.theShaderGroup.deleteShaderGroup();
             }
-            if (Client.instance().setMgr().getSettingByName("Blur", Client.instance().modManager().getByName("ClickGUI")).getBool()) {
+            if (Client.main().setMgr().settingByName("Blur", Client.main().modMgr().getByName("ClickGUI")).getBool()) {
                 mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
             }
         }
@@ -284,7 +284,7 @@ public class ClickGUI extends GuiScreen {
 
         FileUtils.saveFile(guiFile, lines);
 
-        Client.instance().modManager().getByName("ClickGUI").setState(false);
+        Client.main().modMgr().getByName("ClickGUI").setState(false);
     }
 
     public void closeAllSettings() {

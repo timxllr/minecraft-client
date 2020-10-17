@@ -585,7 +585,7 @@ public abstract class Entity implements ICommandSender {
             double d5 = z;
             boolean flag = this.onGround && this.isSneaking() && this instanceof EntityPlayer;
 
-            boolean sneak = Client.instance().modManager().getModule(SafeWalk.class).getState() && this instanceof EntityPlayer;
+            boolean sneak = Client.main().modMgr().getModule(SafeWalk.class).getState() && this instanceof EntityPlayer;
 
             if (flag || sneak) {
                 double d6;

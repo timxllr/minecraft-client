@@ -44,7 +44,7 @@ public class KillAura extends Module {
     private float curPitch = 0.0F;
     private int tick = 0;
 
-    SettingsManager sM = Client.instance().setMgr();
+    SettingsManager sM = Client.main().setMgr();
 
     boolean autoBlock, randomAttacks, attackPlayers, attackAnimals, attackMobs, attackInvisibles, checkEntityID, attackWhileInv;
     double reach, auraDelay, entityID, switchTicks, maxTargets;
@@ -70,20 +70,20 @@ public class KillAura extends Module {
     @Override
     public void onUpdate() {
         if (getState()) {
-            autoBlock = sM.getSettingByName("Auto Block", this).getBool();
-            randomAttacks = sM.getSettingByName("Random Attacks", this).getBool();
-            attackPlayers = sM.getSettingByName("Attack Players", this).getBool();
-            attackAnimals = sM.getSettingByName("Attack Animals", this).getBool();
-            attackMobs = sM.getSettingByName("Attack Mobs", this).getBool();
-            attackInvisibles = sM.getSettingByName("Attack Invisibles", this).getBool();
+            autoBlock = sM.settingByName("Auto Block", this).getBool();
+            randomAttacks = sM.settingByName("Random Attacks", this).getBool();
+            attackPlayers = sM.settingByName("Attack Players", this).getBool();
+            attackAnimals = sM.settingByName("Attack Animals", this).getBool();
+            attackMobs = sM.settingByName("Attack Mobs", this).getBool();
+            attackInvisibles = sM.settingByName("Attack Invisibles", this).getBool();
             //checkEntityID = sM.getSettingByName("Check Entity ID", this).getValBoolean();
-            attackWhileInv = sM.getSettingByName("Attack while Inv", this).getBool();
+            attackWhileInv = sM.settingByName("Attack while Inv", this).getBool();
 
-            reach = sM.getSettingByName("Reach", this).getNum();
-            auraDelay = sM.getSettingByName("Delay", this).getNum();
-            entityID = sM.getSettingByName("Entity ID", this).getNum();
+            reach = sM.settingByName("Reach", this).getNum();
+            auraDelay = sM.settingByName("Delay", this).getNum();
+            entityID = sM.settingByName("Entity ID", this).getNum();
             //switchTicks = sM.getSettingByName("Switch Ticks", this).getValDouble();
-            maxTargets = sM.getSettingByName("Max Targets", this).getNum();
+            maxTargets = sM.settingByName("Max Targets", this).getNum();
         }
     }
 

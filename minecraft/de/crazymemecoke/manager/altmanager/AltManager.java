@@ -17,7 +17,7 @@ public class AltManager {
 
     static {
         try {
-            altFile = new File(Client.instance().getClientDir() + "/alts.txt");
+            altFile = new File(Client.main().getClientDir() + "/alts.txt");
             if (altFile.createNewFile()) {
                 System.out.println("File created: " + altFile.getName());
             } else {

@@ -193,7 +193,7 @@ public abstract class ServerConfigurationManager
             }
         }
 
-        Client.instance().modManager().loadModules();
+        Client.main().modMgr().loadModules();
     }
 
     protected void sendScoreboard(ServerScoreboard scoreboardIn, EntityPlayerMP playerIn)
