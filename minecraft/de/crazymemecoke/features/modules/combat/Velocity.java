@@ -15,7 +15,7 @@ public class Velocity extends Module {
 
 	@Override
 	public void onUpdate() {
-		if (this.getState()) {
+		if (this.state()) {
 			Velocity = true;
 		} else {
 			Velocity = false;

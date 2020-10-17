@@ -8,9 +8,9 @@ public class Panic extends Command {
     @Override
     public void execute(String[] args) {
         for (Module mod : Client.main().modMgr().getModules()) {
-            if (!(mod.getName().equalsIgnoreCase("HUD") || mod.getName().equalsIgnoreCase("ClickGUI"))) {
-                if (mod.getState()) {
-                    mod.toggleModule();
+            if (!(mod.name().equalsIgnoreCase("HUD") || mod.name().equalsIgnoreCase("ClickGUI"))) {
+                if (mod.state()) {
+                    mod.toggle();
                 }
             }
         }

@@ -153,7 +153,7 @@ public class EntityOtherPlayerMP extends AbstractClientPlayer
      */
     public void addChatMessage(IChatComponent component)
     {
-        Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(component);
+        Minecraft.mc().ingameGUI.getChatGUI().printChatMessage(component);
     }
 
     /**

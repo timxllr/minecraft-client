@@ -32,7 +32,7 @@ public class Fucker extends Module {
     @Override
     public void onUpdate() {
         String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
-        if (getState()) {
+        if (state()) {
             for (this.xOffset = -5; this.xOffset < 6; ++this.xOffset) {
                 for (this.zOffset = -5; this.zOffset < 6; ++this.zOffset) {
                     for (this.yOffset = 5; this.yOffset > -5; --this.yOffset) {

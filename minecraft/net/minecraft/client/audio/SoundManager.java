@@ -476,7 +476,7 @@ public class SoundManager
                     }
                     public InputStream getInputStream() throws IOException
                     {
-                        return Minecraft.getMinecraft().getResourceManager().getResource(p_148612_0_).getInputStream();
+                        return Minecraft.mc().getResourceManager().getResource(p_148612_0_).getInputStream();
                     }
                 };
             }

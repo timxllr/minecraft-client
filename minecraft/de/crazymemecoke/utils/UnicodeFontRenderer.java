@@ -14,8 +14,8 @@ public class UnicodeFontRenderer extends FontRenderer {
 	private final UnicodeFont font;
 
 	public UnicodeFontRenderer(Font awtFont) {
-		super(Minecraft.getMinecraft().gameSettings, new ResourceLocation("textures/font/ascii.png"),
-				Minecraft.getMinecraft().renderEngine, false);
+		super(Minecraft.mc().gameSettings, new ResourceLocation("textures/font/ascii.png"),
+				Minecraft.mc().renderEngine, false);
 		this.font = new UnicodeFont(awtFont);
 		this.font.addAsciiGlyphs();
 		this.font.getEffects().add(new ColorEffect(java.awt.Color.WHITE));

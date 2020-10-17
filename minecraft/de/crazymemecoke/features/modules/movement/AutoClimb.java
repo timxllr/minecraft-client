@@ -11,7 +11,7 @@ public class AutoClimb extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             if (mc.thePlayer.isOnLadder()) {
                 mc.thePlayer.motionY += 0.1D;
             }

@@ -26,11 +26,11 @@ public class NoFall extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             if (Client.main().setMgr().settingByName("Mode", this).getMode()
                     .equalsIgnoreCase("AAC 1.9.10")) {
                 if (!this.mc.thePlayer.onGround) {
-                    Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(true));
+                    Minecraft.mc().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(true));
                     this.mc.thePlayer.onGround = true;
                     this.mc.thePlayer.fallDistance = 0.0F;
                 } else {

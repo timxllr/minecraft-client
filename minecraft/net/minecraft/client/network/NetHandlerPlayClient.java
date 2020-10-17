@@ -1760,7 +1760,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
                         {
                             public void confirmClicked(boolean result, int id)
                             {
-                                NetHandlerPlayClient.this.gameController = Minecraft.getMinecraft();
+                                NetHandlerPlayClient.this.gameController = Minecraft.mc();
 
                                 if (result)
                                 {

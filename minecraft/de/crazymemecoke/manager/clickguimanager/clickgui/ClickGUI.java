@@ -92,7 +92,7 @@ public class ClickGUI extends GuiScreen {
                 @Override
                 public void setup() {
                     for (Module m : Client.main().modMgr().getModules()) {
-                        if (!m.getCategory().equals(c))
+                        if (!m.category().equals(c))
                             continue;
                         this.Elements.add(new ModuleButton(m, this));
                     }

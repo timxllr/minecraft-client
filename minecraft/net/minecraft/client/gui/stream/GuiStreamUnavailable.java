@@ -155,7 +155,7 @@ public class GuiStreamUnavailable extends GuiScreen
 
     public static void func_152321_a(GuiScreen p_152321_0_)
     {
-        Minecraft minecraft = Minecraft.getMinecraft();
+        Minecraft minecraft = Minecraft.mc();
         IStream istream = minecraft.getTwitchStream();
 
         if (!OpenGlHelper.framebufferSupported)

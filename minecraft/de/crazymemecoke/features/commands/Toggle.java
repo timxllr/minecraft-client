@@ -14,11 +14,11 @@ public class Toggle extends Command {
 		if (args.length == 1) {
 			String modName = args[0];
 			for (Module m : Client.main().modMgr().getModules()) {
-				if (m.getName().equalsIgnoreCase(modName)) {
-					if (m.getState()) {
+				if (m.name().equalsIgnoreCase(modName)) {
+					if (m.state()) {
 						m.setState(false);
 					} else {
-						if (!m.getState()) {
+						if (!m.state()) {
 							m.setState(true);
 						}
 					}

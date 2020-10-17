@@ -87,7 +87,7 @@ public class Fly extends Module {
         String flyMode = sM.settingByName("Fly Mode", this).getMode();
         String glideMode = sM.settingByName("Glide Mode", this).getMode();
         String mode = sM.settingByName("Mode", this).getMode();
-        if (getState()) {
+        if (state()) {
             if (mode.equalsIgnoreCase("Fly")) {
                 if (flyMode.equalsIgnoreCase("Vanilla")) {
                     mc.thePlayer.capabilities.isFlying = true;

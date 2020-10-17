@@ -15,6 +15,6 @@ class EntityRenderer2 implements Callable
 
     public String call() throws Exception
     {
-        return Minecraft.getMinecraft().currentScreen.getClass().getCanonicalName();
+        return Minecraft.mc().currentScreen.getClass().getCanonicalName();
     }
 }

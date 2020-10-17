@@ -4,7 +4,6 @@ import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.Wrapper;
 
 public class Fullbright extends Module {
@@ -14,7 +13,7 @@ public class Fullbright extends Module {
 	}
 
 	public void onUpdate() {
-		if (this.getState()) {
+		if (this.state()) {
 			Wrapper.mc.gameSettings.gammaSetting = 100f;
 		} else {
 			Wrapper.mc.gameSettings.gammaSetting = 1f;

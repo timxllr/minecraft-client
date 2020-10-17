@@ -69,7 +69,7 @@ public class KillAura extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             autoBlock = sM.settingByName("Auto Block", this).getBool();
             randomAttacks = sM.settingByName("Random Attacks", this).getBool();
             attackPlayers = sM.settingByName("Attack Players", this).getBool();
@@ -89,7 +89,7 @@ public class KillAura extends Module {
 
     @Override
     public void onPreMotionUpdate() {
-        if (getState()) {
+        if (state()) {
             if (attackWhileInv && mc.currentScreen != null) {
                 lastMs = System.currentTimeMillis() + 1000L;
             } else {
@@ -127,7 +127,7 @@ public class KillAura extends Module {
 
     @Override
     public void onPostMotionUpdate() {
-        if (getState()) {
+        if (state()) {
             if (curTarget != null && (mc.thePlayer.getHeldItem() != null && mc.thePlayer.getHeldItem().getItem() instanceof ItemSword && autoBlock || mc.thePlayer.isBlocking()) && doBlock) {
                 mc.thePlayer.setItemInUseCount(mc.thePlayer.getHeldItem().getMaxItemUseDuration());
                 mc.getNetHandler().addToSendQueue(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255, mc.thePlayer.inventory.getCurrentItem(), 0.0F, 0.0F, 0.0F));
@@ -138,9 +138,9 @@ public class KillAura extends Module {
     }
 
     public static float[] getRotations(Entity entity) {
-        double pX = Minecraft.getMinecraft().thePlayer.posX;
-        double pY = Minecraft.getMinecraft().thePlayer.posY + (double) Minecraft.getMinecraft().thePlayer.getEyeHeight();
-        double pZ = Minecraft.getMinecraft().thePlayer.posZ;
+        double pX = Minecraft.mc().thePlayer.posX;
+        double pY = Minecraft.mc().thePlayer.posY + (double) Minecraft.mc().thePlayer.getEyeHeight();
+        double pZ = Minecraft.mc().thePlayer.posZ;
         double eX = entity.posX;
         double eY = entity.posY + (double) (entity.height / 2.0F);
         double eZ = entity.posZ;

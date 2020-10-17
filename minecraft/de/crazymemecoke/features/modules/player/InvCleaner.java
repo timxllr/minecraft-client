@@ -21,7 +21,7 @@ public class InvCleaner extends Module {
     }
 
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             uselessItems.clear();
 
             findUselessItems();

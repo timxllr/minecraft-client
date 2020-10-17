@@ -27,7 +27,7 @@ public class Tower extends Module {
     public void onPreMotionUpdate() {
         super.onPreMotionUpdate();
 
-        if (getState()) {
+        if (state()) {
             final BlockPos pos = new BlockPos(Tower.mc.thePlayer.posX, Tower.mc.thePlayer.posY - 1.0, Tower.mc.thePlayer.posZ);
             final EnumFacing face = getFacingDirection(pos);
             try {
@@ -48,7 +48,7 @@ public class Tower extends Module {
 
     @EventTarget
     public void onPacket(PacketSendEvent e) {
-        if (getState()) {
+        if (state()) {
             if (e.getPacket() instanceof C03PacketPlayer) {
                 final C03PacketPlayer player = (C03PacketPlayer) e.getPacket();
                 final float[] rotations = BlockHelper.getBlockRotations(Tower.mc.thePlayer.posX, Tower.mc.thePlayer.posY - 1.0, Tower.mc.thePlayer.posZ);

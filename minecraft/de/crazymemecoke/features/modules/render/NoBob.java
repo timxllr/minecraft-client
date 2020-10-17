@@ -11,7 +11,7 @@ public class NoBob extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             mc.thePlayer.distanceWalkedModified = 0.0f;
         }
     }

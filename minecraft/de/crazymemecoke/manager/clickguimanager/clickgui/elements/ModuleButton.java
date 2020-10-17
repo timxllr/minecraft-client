@@ -40,7 +40,7 @@ public class ModuleButton {
      */
     public ModuleButton(Module imod, Panel pl) {
         mod = imod;
-        height = Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT + 2;
+        height = Minecraft.mc().fontRendererObj.FONT_HEIGHT + 2;
         parent = pl;
         menuelements = new ArrayList<>();
         if (Client.main().setMgr().getSettingsByMod(imod) != null)
@@ -65,9 +65,9 @@ public class ModuleButton {
         }
 
         if (mod.isEnabled()) {
-            FontUtil.drawTotalCenteredStringWithShadow(mod.getName(), x + width / 2, y + 1 + height / 2, Rainbow.rainbow(1, 1).getRGB());
+            FontUtil.drawTotalCenteredStringWithShadow(mod.name(), x + width / 2, y + 1 + height / 2, Rainbow.rainbow(1, 1).getRGB());
         } else {
-            FontUtil.drawTotalCenteredStringWithShadow(mod.getName(), x + width / 2, y + 1 + height / 2, 0xffafafaf);
+            FontUtil.drawTotalCenteredStringWithShadow(mod.name(), x + width / 2, y + 1 + height / 2, 0xffafafaf);
         }
     }
 
@@ -79,10 +79,10 @@ public class ModuleButton {
          * Rechtsklick, wenn ja dann Module togglen,
          */
         if (mouseButton == 0) {
-            mod.toggleModule();
+            mod.toggle();
 
             if (Client.main().setMgr().settingByName("Sound", Client.main().modMgr().getByName("ClickGUI")).getBool())
-                Minecraft.getMinecraft().thePlayer.playSound("random.click", 0.5f, 0.5f);
+                Minecraft.mc().thePlayer.playSound("random.click", 0.5f, 0.5f);
         } else if (mouseButton == 1) {
             /*
              * Wenn ein Settingsmenu existiert dann sollen alle Settingsmenus geschlossen
@@ -95,9 +95,9 @@ public class ModuleButton {
 
                 if (Client.main().setMgr().settingByName("Sound", Client.main().modMgr().getByName("ClickGUI")).getBool())
                     if (extended)
-                        Minecraft.getMinecraft().thePlayer.playSound("tile.piston.out", 1f, 1f);
+                        Minecraft.mc().thePlayer.playSound("tile.piston.out", 1f, 1f);
                     else
-                        Minecraft.getMinecraft().thePlayer.playSound("tile.piston.in", 1f, 1f);
+                        Minecraft.mc().thePlayer.playSound("tile.piston.in", 1f, 1f);
             }
         }
 		/*} else if (mouseButton == 2) {
@@ -113,8 +113,8 @@ public class ModuleButton {
          */
         if (listening) {
             ModuleManager moduleManager = Client.main().modMgr();
-            Module module = moduleManager.getByName(mod.getName());
-            int bind = Keyboard.getKeyIndex(mod.getName());
+            Module module = moduleManager.getByName(mod.name());
+            int bind = Keyboard.getKeyIndex(mod.name());
             module.setBind(bind);
             listening = false;
             return true;

@@ -115,7 +115,7 @@ public class ModuleManager {
 
     public Module getByName(String name) {
         for (Module mod : modules) {
-            if ((mod.getName().trim().equalsIgnoreCase(name.trim()))
+            if ((mod.name().trim().equalsIgnoreCase(name.trim()))
                     || (mod.toString().trim().equalsIgnoreCase(name.trim()))) {
                 return mod;
             }
@@ -136,7 +136,7 @@ public class ModuleManager {
     public void saveModules() {
         List<String> formattedModules = new ArrayList<String>();
         modules.forEach(module -> {
-            formattedModules.add(module.getName() + ":" + module.getState());
+            formattedModules.add(module.name() + ":" + module.state());
         });
         FileUtils.saveFile(modulesFile, formattedModules);
     }
@@ -157,7 +157,7 @@ public class ModuleManager {
     public void saveBinds() {
         List<String> formattedBinds = new ArrayList<String>();
         modules.forEach(module -> {
-            formattedBinds.add(module.getName() + ":" + module.getBind());
+            formattedBinds.add(module.name() + ":" + module.bind());
         });
         FileUtils.saveFile(bindsFile, formattedBinds);
     }

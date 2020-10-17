@@ -23,7 +23,7 @@ public class Nuker extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             nukerRange = (float) Client.main().setMgr().settingByName("Range", this).getNum();
             if (mc.thePlayer.capabilities.isCreativeMode) {
                 for (int y = (int) nukerRange; y >= (int) (-nukerRange); --y) {

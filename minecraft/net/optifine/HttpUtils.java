@@ -23,7 +23,7 @@ public class HttpUtils
         try
         {
             URL url = new URL(p_get_0_);
-            httpurlconnection = (HttpURLConnection)url.openConnection(Minecraft.getMinecraft().getProxy());
+            httpurlconnection = (HttpURLConnection)url.openConnection(Minecraft.mc().getProxy());
             httpurlconnection.setDoInput(true);
             httpurlconnection.setDoOutput(false);
             httpurlconnection.connect();
@@ -80,7 +80,7 @@ public class HttpUtils
         try
         {
             URL url = new URL(p_post_0_);
-            httpurlconnection = (HttpURLConnection)url.openConnection(Minecraft.getMinecraft().getProxy());
+            httpurlconnection = (HttpURLConnection)url.openConnection(Minecraft.mc().getProxy());
             httpurlconnection.setRequestMethod("POST");
 
             if (p_post_1_ != null)

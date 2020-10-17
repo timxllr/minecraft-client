@@ -26,7 +26,7 @@ public class AutoSoup extends Module {
 	}
 
 	public void onUpdate() {
-		if (this.getState()) {
+		if (this.state()) {
 			if (this.mc.thePlayer.getHealth() < 14.0F) {
 				eatSoup();
 			}

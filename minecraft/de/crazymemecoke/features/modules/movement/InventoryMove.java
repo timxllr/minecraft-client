@@ -14,7 +14,7 @@ public class InventoryMove extends Module {
 	}
 
 	public void onUpdate() {
-		if (this.getState()) {
+		if (this.state()) {
 			if (mc.currentScreen != null && (!(mc.currentScreen instanceof GuiChat))) {
 				KeyBinding[] moveKeys = { mc.gameSettings.keyBindForward, mc.gameSettings.keyBindSprint,
 						mc.gameSettings.keyBindBack, mc.gameSettings.keyBindLeft, mc.gameSettings.keyBindRight,

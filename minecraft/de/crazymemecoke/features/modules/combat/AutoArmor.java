@@ -27,7 +27,7 @@ public class AutoArmor extends Module {
     @Override
     public void onUpdate() {
         double delay = Client.main().setMgr().settingByName("Delay", this).getNum();
-        if (getState()) {
+        if (state()) {
             if (mc.thePlayer.capabilities.isCreativeMode
                     || mc.currentScreen instanceof GuiContainer && !(mc.currentScreen instanceof GuiInventory))
                 return;
@@ -63,7 +63,7 @@ public class AutoArmor extends Module {
                             mc.playerController.windowClick(0, 8 - i, 0, 1, mc.thePlayer);
                             mc.playerController.windowClick(0,
                                     this.bestArmor[i] < 9 ? 36 + this.bestArmor[i] : this.bestArmor[i], 0, 1,
-                                    Minecraft.getMinecraft().thePlayer);
+                                    Minecraft.mc().thePlayer);
                             time.reset();
                         }
                     }

@@ -593,7 +593,7 @@ public class ConnectedProperties
 
     private static TextureAtlasSprite getIcon(String p_getIcon_0_)
     {
-        TextureMap texturemap = Minecraft.getMinecraft().getTextureMapBlocks();
+        TextureMap texturemap = Minecraft.mc().getTextureMapBlocks();
         TextureAtlasSprite textureatlassprite = texturemap.getSpriteSafe(p_getIcon_0_);
 
         if (textureatlassprite != null)

@@ -16,7 +16,7 @@ public class AutoWalk extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             mc.gameSettings.keyBindForward.pressed = true;
         }
     }

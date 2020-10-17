@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Util {
     private static final ArrayList<TimeScheduledPacket> packetQueue = new ArrayList();
-    public static Minecraft mc = Minecraft.getMinecraft();
+    public static Minecraft mc = Minecraft.mc();
     private static final AtomicInteger CONNECTION_ID = new AtomicInteger(0);
     private static final Logger logger = LogManager.getLogger();
     private NetworkManager networkManager;
@@ -140,18 +140,18 @@ public class Util {
 
     public static void damagePlayer(int amount) {
         for (int i = 0; i < 4; i++) {
-            Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
-                    Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY + 1.01D,
-                    Minecraft.getMinecraft().thePlayer.posZ, false));
+            Minecraft.mc().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
+                    Minecraft.mc().thePlayer.posX, Minecraft.mc().thePlayer.posY + 1.01D,
+                    Minecraft.mc().thePlayer.posZ, false));
 
-            Minecraft.getMinecraft().thePlayer.sendQueue
-                    .addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(Minecraft.getMinecraft().thePlayer.posX,
-                            Minecraft.getMinecraft().thePlayer.posY, Minecraft.getMinecraft().thePlayer.posZ, false));
+            Minecraft.mc().thePlayer.sendQueue
+                    .addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(Minecraft.mc().thePlayer.posX,
+                            Minecraft.mc().thePlayer.posY, Minecraft.mc().thePlayer.posZ, false));
         }
 
-        Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
-                Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY + 0.4D,
-                Minecraft.getMinecraft().thePlayer.posZ, false));
+        Minecraft.mc().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
+                Minecraft.mc().thePlayer.posX, Minecraft.mc().thePlayer.posY + 0.4D,
+                Minecraft.mc().thePlayer.posZ, false));
     }
 
     public static Integer getRandomColor() {
@@ -162,7 +162,7 @@ public class Util {
 
     public static int getDistanceToGround() {
         int i2 = -1;
-        Minecraft mc = Minecraft.getMinecraft();
+        Minecraft mc = Minecraft.mc();
         for (int dist = 0; dist < 256; dist++) {
             BlockPos bpos = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - dist, mc.thePlayer.posZ);
             Block block = mc.theWorld.getBlockState(bpos).getBlock();
@@ -175,7 +175,7 @@ public class Util {
     }
 
     public static int getNextStandableBlockHeight() {
-        Minecraft mc = Minecraft.getMinecraft();
+        Minecraft mc = Minecraft.mc();
         int y = (int) mc.thePlayer.posY;
         int dist = 0;
         int result = -1;
@@ -197,14 +197,14 @@ public class Util {
         auth.setPassword(password);
         try {
             auth.logIn();
-            Minecraft.getMinecraft().session = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(), auth.getAuthenticatedToken(), "legacy");
+            Minecraft.mc().session = new Session(auth.getSelectedProfile().getName(), auth.getSelectedProfile().getId().toString(), auth.getAuthenticatedToken(), "legacy");
             return true;
         } catch (AuthenticationException e) {
             if (((e instanceof UserMigratedException)) || ((e instanceof InvalidCredentialsException))) {
-                Minecraft.getMinecraft().session = new Session(username, UUID.randomUUID().toString(), "-", "legacy");
+                Minecraft.mc().session = new Session(username, UUID.randomUUID().toString(), "-", "legacy");
                 return false;
             }
-            Minecraft.getMinecraft().session = new Session(username, UUID.randomUUID().toString(), "-", "legacy");
+            Minecraft.mc().session = new Session(username, UUID.randomUUID().toString(), "-", "legacy");
             sendInfo("Couldn't login, is mojang down?");
         }
         return true;
@@ -238,7 +238,7 @@ public class Util {
                     .floor_double(mc.thePlayer.boundingBox.maxY) + 1; y++)
                 for (int z = MathHelper.floor_double(mc.thePlayer.boundingBox.minZ); z < MathHelper
                         .floor_double(mc.thePlayer.boundingBox.maxZ) + 1; z++) {
-                    Block block = Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
+                    Block block = Minecraft.mc().theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
                     if ((block != null) && (!(block instanceof BlockAir))) {
                         AxisAlignedBB boundingBox = block.getCollisionBoundingBox(mc.theWorld, new BlockPos(x, y, z),
                                 mc.theWorld.getBlockState(new BlockPos(x, y, z)));
@@ -251,7 +251,7 @@ public class Util {
     }
 
     public static EntityPlayerSP getPlayer() {
-        return Minecraft.getMinecraft().thePlayer;
+        return Minecraft.mc().thePlayer;
     }
 
     private static class TimeScheduledPacket {

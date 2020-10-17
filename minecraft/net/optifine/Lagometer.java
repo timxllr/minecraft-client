@@ -88,7 +88,7 @@ public class Lagometer
     {
         if (mc == null)
         {
-            mc = Minecraft.getMinecraft();
+            mc = Minecraft.mc();
             gameSettings = mc.gameSettings;
             profiler = mc.mcProfiler;
         }

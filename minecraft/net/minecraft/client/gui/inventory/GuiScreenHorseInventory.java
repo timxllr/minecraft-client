@@ -28,7 +28,7 @@ public class GuiScreenHorseInventory extends GuiContainer
 
     public GuiScreenHorseInventory(IInventory playerInv, IInventory horseInv, EntityHorse horse)
     {
-        super(new ContainerHorseInventory(playerInv, horseInv, horse, Minecraft.getMinecraft().thePlayer));
+        super(new ContainerHorseInventory(playerInv, horseInv, horse, Minecraft.mc().thePlayer));
         this.playerInventory = playerInv;
         this.horseInventory = horseInv;
         this.horseEntity = horse;

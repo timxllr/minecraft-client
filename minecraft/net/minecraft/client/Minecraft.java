@@ -712,7 +712,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
      * Wrapper around displayCrashReportInternal
      */
     public void displayCrashReport(CrashReport crashReportIn) {
-        File file1 = new File(getMinecraft().mcDataDir, "crash-reports");
+        File file1 = new File(mc().mcDataDir, "crash-reports");
         File file2 = new File(file1, "crash-" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-client.txt");
         Bootstrap.printToSYSOUT(crashReportIn.getCompleteReport());
 
@@ -1658,8 +1658,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
                         this.currentScreen.handleKeyboardInput();
                     } else {
                         for (Module n : Client.main().modMgr().modules) {
-                            if (k == n.getBind()) {
-                                n.toggleModule();
+                            if (k == n.bind()) {
+                                n.toggle();
                             }
                         }
 
@@ -2339,7 +2339,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
     /**
      * Return the singleton Minecraft instance for the game
      */
-    public static Minecraft getMinecraft() {
+    public static Minecraft mc() {
         return theMinecraft;
     }
 
@@ -2755,8 +2755,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 
     public static Map<String, String> getSessionInfo() {
         Map<String, String> map = Maps.<String, String>newHashMap();
-        map.put("X-Minecraft-Username", getMinecraft().getSession().getUsername());
-        map.put("X-Minecraft-UUID", getMinecraft().getSession().getPlayerID());
+        map.put("X-Minecraft-Username", mc().getSession().getUsername());
+        map.put("X-Minecraft-UUID", mc().getSession().getPlayerID());
         map.put("X-Minecraft-Version", "1.8.8");
         return map;
     }

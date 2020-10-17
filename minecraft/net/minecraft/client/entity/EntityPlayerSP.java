@@ -668,7 +668,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         this.movementInput.updatePlayerMoveState();
 
         if (this.isUsingItem() && !this.isRiding()) {
-            boolean noSlowdownEnabled = Client.main().modMgr().getModule(NoSlowDown.class).getState();
+            boolean noSlowdownEnabled = Client.main().modMgr().getModule(NoSlowDown.class).state();
             this.movementInput.moveStrafe *= 0.2F;
             this.movementInput.moveForward *= 0.2F;
             this.sprintToggleTimer = 0;

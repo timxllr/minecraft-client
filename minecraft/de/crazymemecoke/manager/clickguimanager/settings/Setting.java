@@ -29,7 +29,7 @@ public class Setting {
 
 
     public Setting(String name, Module parent, String sval, ArrayList<String> options) {
-        this.name = (parent == null ? "global" : parent.getName()) + "_" + name;
+        this.name = (parent == null ? "global" : parent.name()) + "_" + name;
         this.parent = parent;
         this.sval = sval;
         this.options = options;
@@ -37,14 +37,14 @@ public class Setting {
     }
 
     public Setting(String name, Module parent, boolean bval) {
-        this.name = (parent == null ? "global" : parent.getName()) + "_" + name;
+        this.name = (parent == null ? "global" : parent.name()) + "_" + name;
         this.parent = parent;
         this.bval = bval;
         this.mode = "Check";
     }
 
     public Setting(String name, Module parent, double dval, double min, double max, boolean onlyint) {
-        this.name = (parent == null ? "global" : parent.getName()) + "_" + name;
+        this.name = (parent == null ? "global" : parent.name()) + "_" + name;
         this.parent = parent;
         this.dval = dval;
         this.min = min;

@@ -9,7 +9,7 @@ public class GuiSlotRealmsProxy extends GuiSlot
 
     public GuiSlotRealmsProxy(RealmsScrolledSelectionList selectionListIn, int widthIn, int heightIn, int topIn, int bottomIn, int slotHeightIn)
     {
-        super(Minecraft.getMinecraft(), widthIn, heightIn, topIn, bottomIn, slotHeightIn);
+        super(Minecraft.mc(), widthIn, heightIn, topIn, bottomIn, slotHeightIn);
         this.selectionList = selectionListIn;
     }
 

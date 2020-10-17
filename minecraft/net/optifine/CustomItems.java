@@ -230,7 +230,7 @@ public class CustomItems
 
                         if (customitemproperties != null && customitemproperties.type == 1)
                         {
-                            TextureMap texturemap = Minecraft.getMinecraft().getTextureMapBlocks();
+                            TextureMap texturemap = Minecraft.mc().getTextureMapBlocks();
                             customitemproperties.updateModel(texturemap, itemModelGenerator);
                         }
                     }

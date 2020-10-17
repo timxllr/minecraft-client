@@ -396,8 +396,8 @@ public class RenderUtils {
         glDisable(GL_DEPTH_TEST);
         glDepthMask(false);
         if (mode == 0)// Enemy
-            GL11.glColor4d(1 - Minecraft.getMinecraft().thePlayer.getDistanceToEntity(entity) / 40,
-                    Minecraft.getMinecraft().thePlayer.getDistanceToEntity(entity) / 40, 0, 0.5F);
+            GL11.glColor4d(1 - Minecraft.mc().thePlayer.getDistanceToEntity(entity) / 40,
+                    Minecraft.mc().thePlayer.getDistanceToEntity(entity) / 40, 0, 0.5F);
         else if (mode == 1)// Friend
             GL11.glColor4d(0, 0, 1, 0.5F);
         else if (mode == 2)// Other
@@ -408,7 +408,7 @@ public class RenderUtils {
             GL11.glColor4d(0, 1, 0, 0.5F);
         glBegin(GL_LINES);
         {
-            glVertex3d(0, Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0);
+            glVertex3d(0, Minecraft.mc().thePlayer.getEyeHeight(), 0);
             glVertex3d(x, y, z);
         }
         glEnd();
@@ -430,7 +430,7 @@ public class RenderUtils {
         glDepthMask(false);
         glBegin(GL_LINES);
         {
-            glVertex3d(0, Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0);
+            glVertex3d(0, Minecraft.mc().thePlayer.getEyeHeight(), 0);
             glVertex3d(x, y, z);
         }
         glEnd();
@@ -452,7 +452,7 @@ public class RenderUtils {
         glDepthMask(false);
         glBegin(GL_LINES);
         {
-            glVertex3d(0, Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0);
+            glVertex3d(0, Minecraft.mc().thePlayer.getEyeHeight(), 0);
             glVertex3d(x, y, z);
         }
         glEnd();
@@ -702,7 +702,7 @@ public class RenderUtils {
         GL11.glLineWidth(lineWdith);
         glColor4f(red, green, blue, alpha);
         GL11.glBegin(2);
-        GL11.glVertex3d(0.0D, 0.0D + Minecraft.getMinecraft().thePlayer.getEyeHeight(), 0.0D);
+        GL11.glVertex3d(0.0D, 0.0D + Minecraft.mc().thePlayer.getEyeHeight(), 0.0D);
         GL11.glVertex3d(x, y, z);
         GL11.glEnd();
         GL11.glDisable(GL11.GL_BLEND);

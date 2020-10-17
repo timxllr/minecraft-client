@@ -79,7 +79,7 @@ public class Speed extends Module {
     public void onUpdate() {
         speedMode = sM.settingByName("Mode", this).getMode();
         double frames_speed = sM.settingByName("Frames Speed", this).getNum();
-        if (getState()) {
+        if (state()) {
 
             switch (speedMode) {
                 case "ground": {

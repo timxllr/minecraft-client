@@ -13,7 +13,7 @@ public class Eagle extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             BlockPos bp = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0D, mc.thePlayer.posZ);
             if (mc.thePlayer.fallDistance <= 4.0F) {
                 mc.gameSettings.keyBindSneak.pressed = mc.theWorld.getBlockState(bp).getBlock() == Blocks.air;

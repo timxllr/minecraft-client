@@ -1,7 +1,5 @@
 package de.crazymemecoke.manager.modulemanager;
 
-import de.crazymemecoke.utils.events.eventapi.EventManager;
-import de.crazymemecoke.Client;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
@@ -11,7 +9,7 @@ public class Module {
     private int bind;
     private final Category category;
     private boolean isEnabled;
-    public static Minecraft mc = Minecraft.getMinecraft();
+    public static Minecraft mc = Minecraft.mc();
     public boolean enabled;
     private String displayName;
 
@@ -22,19 +20,19 @@ public class Module {
         setup();
     }
 
-    public String getName() {
+    public String name() {
         return name;
     }
 
-    public int getBind() {
+    public int bind() {
         return bind;
     }
 
-    public Category getCategory() {
+    public Category category() {
         return category;
     }
 
-    public boolean getState() {
+    public boolean state() {
         return isEnabled;
     }
 
@@ -53,12 +51,8 @@ public class Module {
         }
     }
 
-    public void toggleModule() {
-        this.setState(!this.getState());
-    }
-
-    public void onEnable1() {
-        EventManager.register(this);
+    public void toggle() {
+        this.setState(!this.state());
     }
 
     public void onToggle() {
@@ -84,7 +78,7 @@ public class Module {
 
     public void setBind(int bind) {
         if (!(bind == 0)) {
-            System.out.println("Keybind of " + getName() + " was set to: " + Keyboard.getKeyName(bind));
+            System.out.println("Keybind of " + name() + " was set to: " + Keyboard.getKeyName(bind));
         }
         this.bind = bind;
     }

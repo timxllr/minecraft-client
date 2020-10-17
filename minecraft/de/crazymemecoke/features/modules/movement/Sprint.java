@@ -4,7 +4,6 @@ import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.Wrapper;
 
 public class Sprint extends Module {
@@ -15,7 +14,7 @@ public class Sprint extends Module {
 	}
 
 	public void onUpdate() {
-		if (getState()) {
+		if (state()) {
 			if (!(Wrapper.mc.thePlayer.isCollidedHorizontally) && Wrapper.mc.thePlayer.moveForward > 0.0f) {
 				Wrapper.mc.thePlayer.setSprinting(true);
 			} else {

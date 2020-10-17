@@ -3,7 +3,6 @@ package de.crazymemecoke.features.modules.movement;
 import de.crazymemecoke.utils.events.eventapi.EventTarget;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.Rainbow;
 import org.lwjgl.input.Keyboard;
 
 public class Strafe extends Module {
@@ -14,7 +13,7 @@ public class Strafe extends Module {
 
     @EventTarget
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             if (!(mc.thePlayer.hurtTime > 0)) {
                 if ((mc.thePlayer.onGround) || (mc.thePlayer.isAirBorne) && (!mc.thePlayer.isInWater())) {
                     float dir = mc.thePlayer.rotationYaw;

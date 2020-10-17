@@ -168,7 +168,7 @@ public class RenderChunk
         {
             ++renderChunksUpdated;
             boolean[] aboolean = new boolean[ENUM_WORLD_BLOCK_LAYERS.length];
-            BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+            BlockRendererDispatcher blockrendererdispatcher = Minecraft.mc().getBlockRendererDispatcher();
             Iterator iterator = BlockPosM.getAllInBoxMutable(blockpos, blockpos1).iterator();
             boolean flag1 = Reflector.ForgeBlock_hasTileEntity.exists();
             boolean flag2 = Reflector.ForgeBlock_canRenderInLayer.exists();

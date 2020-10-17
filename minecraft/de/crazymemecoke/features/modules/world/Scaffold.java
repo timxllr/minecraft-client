@@ -3,7 +3,6 @@ package de.crazymemecoke.features.modules.world;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;
-import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.state.IBlockState;
@@ -37,7 +36,7 @@ public class Scaffold extends Module {
     }
 
     public void onUpdate() {
-        if (!this.getState()) {
+        if (!this.state()) {
             return;
         }
 
@@ -133,7 +132,7 @@ public class Scaffold extends Module {
     }
 
     public void onRender() {
-        if (!this.getState()) {
+        if (!this.state()) {
             return;
         }
         EntityPlayer p = mc.thePlayer;

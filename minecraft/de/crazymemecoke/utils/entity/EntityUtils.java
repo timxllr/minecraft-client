@@ -18,12 +18,12 @@ import net.minecraft.network.play.client.C0BPacketEntityAction;
 import net.minecraft.util.MathHelper;
 
 public class EntityUtils {
-    private static final Minecraft MINECRAFT = Minecraft.getMinecraft();
+    private static final Minecraft MINECRAFT = Minecraft.mc();
     private static boolean set = false;
     private static EntityPlayer reference;
 
     public static double[] interpolate(Entity entity) {
-        double partialTicks = (double) Minecraft.getMinecraft().timer.renderPartialTicks;
+        double partialTicks = (double) Minecraft.mc().timer.renderPartialTicks;
         double[] pos = new double[]{entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * partialTicks, entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * partialTicks, entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * partialTicks};
         return pos;
     }

@@ -3,7 +3,6 @@ package de.crazymemecoke.features.modules.movement;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;
-import de.crazymemecoke.utils.render.Rainbow;
 import org.lwjgl.input.Keyboard;
 
 public class FastFall extends Module {
@@ -14,7 +13,7 @@ public class FastFall extends Module {
 
 	@Override
 	public void onUpdate() {
-		if (getState()) {
+		if (state()) {
 			Wrapper.mc.thePlayer.motionY = -30;
 		}
 	}

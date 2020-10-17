@@ -31,7 +31,7 @@ public class Step extends Module {
     public void onUpdate() {
         String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
 
-        if (getState()) {
+        if (state()) {
             switch (mode) {
                 case "vanilla": {
                     doVanilla();

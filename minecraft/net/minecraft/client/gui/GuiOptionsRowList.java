@@ -65,7 +65,7 @@ public class GuiOptionsRowList extends GuiListExtended
 
     public static class Row implements GuiListExtended.IGuiListEntry
     {
-        private final Minecraft field_148325_a = Minecraft.getMinecraft();
+        private final Minecraft field_148325_a = Minecraft.mc();
         private final GuiButton field_148323_b;
         private final GuiButton field_148324_c;
 

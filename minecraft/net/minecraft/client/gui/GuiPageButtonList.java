@@ -388,7 +388,7 @@ public class GuiPageButtonList extends GuiListExtended
 
     public static class GuiEntry implements GuiListExtended.IGuiListEntry
     {
-        private final Minecraft field_178031_a = Minecraft.getMinecraft();
+        private final Minecraft field_178031_a = Minecraft.mc();
         private final Gui field_178029_b;
         private final Gui field_178030_c;
         private Gui field_178028_d;

@@ -11,7 +11,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 
 public class PlayerUtil {
-    private static final Minecraft mc = Minecraft.getMinecraft();
+    private static final Minecraft mc = Minecraft.mc();
 
     public static void toFwd(double speed) {
         float f = mc.thePlayer.rotationYaw * 0.017453292F;
@@ -20,7 +20,7 @@ public class PlayerUtil {
     }
 
     public static double getSpeed() {
-        return Math.sqrt(Minecraft.getMinecraft().thePlayer.motionX * Minecraft.getMinecraft().thePlayer.motionX + Minecraft.getMinecraft().thePlayer.motionZ * Minecraft.getMinecraft().thePlayer.motionZ);
+        return Math.sqrt(Minecraft.mc().thePlayer.motionX * Minecraft.mc().thePlayer.motionX + Minecraft.mc().thePlayer.motionZ * Minecraft.mc().thePlayer.motionZ);
     }
 
     public static float getDirection() {
@@ -58,11 +58,11 @@ public class PlayerUtil {
         if (mode.equalsIgnoreCase("old")) {
             for (int i = 0; i < 60; i++) {
                 mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
-                        Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY + 0.2D,
-                        Minecraft.getMinecraft().thePlayer.posZ, false));
+                        Minecraft.mc().thePlayer.posX, Minecraft.mc().thePlayer.posY + 0.2D,
+                        Minecraft.mc().thePlayer.posZ, false));
                 mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
-                        Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY + 0.26D,
-                        Minecraft.getMinecraft().thePlayer.posZ, false));
+                        Minecraft.mc().thePlayer.posX, Minecraft.mc().thePlayer.posY + 0.26D,
+                        Minecraft.mc().thePlayer.posZ, false));
             }
         } else if (mode.equalsIgnoreCase("new")) {
             for (int i = 0; i < 32; i++) {
@@ -94,11 +94,11 @@ public class PlayerUtil {
             for (int x = 0; x < 21; x++) {
                 for (int i = 0; i < 60; i++) {
                     mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
-                            Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY + 0.2D,
-                            Minecraft.getMinecraft().thePlayer.posZ, false));
+                            Minecraft.mc().thePlayer.posX, Minecraft.mc().thePlayer.posY + 0.2D,
+                            Minecraft.mc().thePlayer.posZ, false));
                     mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
-                            Minecraft.getMinecraft().thePlayer.posX, Minecraft.getMinecraft().thePlayer.posY + 0.26D,
-                            Minecraft.getMinecraft().thePlayer.posZ, false));
+                            Minecraft.mc().thePlayer.posX, Minecraft.mc().thePlayer.posY + 0.26D,
+                            Minecraft.mc().thePlayer.posZ, false));
                 }
             }
         } else {

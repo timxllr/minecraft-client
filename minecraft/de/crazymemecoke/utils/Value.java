@@ -53,7 +53,7 @@ public final class Value<T>
 			return 0;
 		}
 	    });
-	    Minecraft.getMinecraft().displayGuiScreen(new GuiMainMenu());
+	    Minecraft.mc().displayGuiScreen(new GuiMainMenu());
 	  }
 	  
 	  public final String getValueName()

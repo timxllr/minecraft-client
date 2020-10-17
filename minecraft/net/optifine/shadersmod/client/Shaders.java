@@ -1288,7 +1288,7 @@ public class Shaders
     private static void saveOptionProperties(IShaderPack sp, Properties props) throws IOException
     {
         String s = shaderpacksdirname + "/" + sp.getName() + ".txt";
-        File file1 = new File(Minecraft.getMinecraft().mcDataDir, s);
+        File file1 = new File(Minecraft.mc().mcDataDir, s);
 
         if (props.isEmpty())
         {
@@ -1340,7 +1340,7 @@ public class Shaders
     {
         Properties properties = new Properties();
         String s = shaderpacksdirname + "/" + sp.getName() + ".txt";
-        File file1 = new File(Minecraft.getMinecraft().mcDataDir, s);
+        File file1 = new File(Minecraft.mc().mcDataDir, s);
 
         if (file1.exists() && file1.isFile() && file1.canRead())
         {
@@ -1541,7 +1541,7 @@ public class Shaders
     {
         checkShadersModInstalled();
         Shaders.mc = mc;
-        mc = Minecraft.getMinecraft();
+        mc = Minecraft.mc();
         capabilities = GLContext.getCapabilities();
         glVersionString = GL11.glGetString(GL11.GL_VERSION);
         glVendorString = GL11.glGetString(GL11.GL_VENDOR);
@@ -4900,9 +4900,9 @@ public class Shaders
 
     static
     {
-        shadersdir = new File(Minecraft.getMinecraft().mcDataDir, "shaders");
-        shaderpacksdir = new File(Minecraft.getMinecraft().mcDataDir, shaderpacksdirname);
-        configFile = new File(Minecraft.getMinecraft().mcDataDir, optionsfilename);
+        shadersdir = new File(Minecraft.mc().mcDataDir, "shaders");
+        shaderpacksdir = new File(Minecraft.mc().mcDataDir, shaderpacksdirname);
+        configFile = new File(Minecraft.mc().mcDataDir, optionsfilename);
         drawBuffersNone.limit(0);
         drawBuffersColorAtt0.put(36064).position(0).limit(1);
     }

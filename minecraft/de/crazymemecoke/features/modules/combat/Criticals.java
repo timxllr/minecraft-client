@@ -11,7 +11,7 @@ public class Criticals extends Module {
     }
 
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             if (!mc.thePlayer.isInWater() && !mc.thePlayer.isInsideOfMaterial(Material.lava) && mc.thePlayer.onGround) {
                 mc.thePlayer.motionY = 0.2D;
                 mc.thePlayer.onGround = false;

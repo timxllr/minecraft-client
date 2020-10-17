@@ -13,7 +13,7 @@ public class AntiWeb extends Module {
 
     @EventTarget
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             mc.thePlayer.isInWeb = false;
         }
     }

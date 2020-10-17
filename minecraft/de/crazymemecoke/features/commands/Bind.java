@@ -42,8 +42,8 @@ public class Bind extends Command {
             if (args[0].equalsIgnoreCase("list")) {
                 Notify.chat("Alle Keybinds (Format: MOD : KEY):");
                 for (Module mod : Client.main().modMgr().getModules()) {
-                    if (!(mod.getBind() == 0)) {
-                        Notify.chat(mod.getName() + " : " + Keyboard.getKeyName(mod.getBind()));
+                    if (!(mod.bind() == 0)) {
+                        Notify.chat(mod.name() + " : " + Keyboard.getKeyName(mod.bind()));
                     }
                 }
             } else if (args[0].equalsIgnoreCase("clear")) {

@@ -18,7 +18,7 @@ public class Aimbot extends Module {
 	}
 
 	public void onUpdate() {
-		if (getState()) {
+		if (state()) {
 			List list = Wrapper.mc.theWorld.playerEntities;
 
 			for (int k = 0; k < list.size(); k++) {

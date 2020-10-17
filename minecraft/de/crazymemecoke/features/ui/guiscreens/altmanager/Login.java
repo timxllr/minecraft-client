@@ -16,9 +16,9 @@ public class Login {
 
         try {
             authentication.logIn();
-            Minecraft.getMinecraft().session = new Session(authentication.getSelectedProfile().getName(), authentication.getSelectedProfile().getId().toString(), authentication.getAuthenticatedToken(), "mojang");
+            Minecraft.mc().session = new Session(authentication.getSelectedProfile().getName(), authentication.getSelectedProfile().getId().toString(), authentication.getAuthenticatedToken(), "mojang");
         } catch (Exception var5) {
-            Minecraft.getMinecraft().session = new Session(username, "", "", "mojang");
+            Minecraft.mc().session = new Session(username, "", "", "mojang");
         }
 
     }

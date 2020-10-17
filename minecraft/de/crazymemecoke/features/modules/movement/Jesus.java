@@ -45,7 +45,7 @@ public class Jesus extends Module {
 
     public void onUpdate() {
         String jesusMode = Client.main().setMgr().settingByName("Mode", this).getMode();
-        if (getState()) {
+        if (state()) {
             switch (jesusMode) {
                 case "vanilla": {
                     doVanilla();
@@ -84,7 +84,7 @@ public class Jesus extends Module {
     }
 
     public static boolean getColliding(final int i) {
-        final Minecraft mc = Minecraft.getMinecraft();
+        final Minecraft mc = Minecraft.mc();
         int mx = i;
         int mz = i;
         int max = i;
@@ -119,7 +119,7 @@ public class Jesus extends Module {
     }
 
     public static Block getBlock(final BlockPos pos) {
-        return Minecraft.getMinecraft().theWorld.getBlockState(pos).getBlock();
+        return Minecraft.mc().theWorld.getBlockState(pos).getBlock();
     }
 
     public static boolean isInLiquid() {

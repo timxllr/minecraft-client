@@ -4,7 +4,6 @@ import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.Rainbow;
 import net.minecraft.init.Blocks;
 
 public class IceSpeed extends Module {
@@ -14,7 +13,7 @@ public class IceSpeed extends Module {
 	}
 
 	public void onUpdate() {
-		if (this.getState()) {
+		if (this.state()) {
 			Blocks.ice.slipperiness = 0.39F;
 			Blocks.packed_ice.slipperiness = 0.39F;
 		} else {

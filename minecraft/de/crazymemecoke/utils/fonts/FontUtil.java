@@ -15,7 +15,7 @@ import net.minecraft.util.StringUtils;
 
 public class FontUtil {
 
-	private Minecraft mc = Minecraft.getMinecraft();
+	private Minecraft mc = Minecraft.mc();
 
 	private final UnicodeFont unicodeFont;
 	private final int[] colorCodes = new int[32];

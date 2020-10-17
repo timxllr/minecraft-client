@@ -56,11 +56,11 @@ public class GuiModules extends GuiScreen {
         int yModPos2 = 60;
         for (Module mod : Client.main().modMgr().getModules()) {
             if (yModPos < height - 35) {
-                fM.comfortaa20.drawCenteredString(mod.getName(), width / 2 - 50, yModPos, -1);
+                fM.comfortaa20.drawCenteredString(mod.name(), width / 2 - 50, yModPos, -1);
                 yModPos += 12;
             }
             if (yModPos > height - 35) {
-                fM.comfortaa20.drawCenteredString(mod.getName(), width / 2 + 50, yModPos2, -1);
+                fM.comfortaa20.drawCenteredString(mod.name(), width / 2 + 50, yModPos2, -1);
                 yModPos2 += 12;
             }
         }

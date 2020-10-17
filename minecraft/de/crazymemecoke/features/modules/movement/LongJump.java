@@ -17,7 +17,7 @@ public class LongJump extends Module {
 
     @Override
     public void onUpdate() {
-        if(getState()){
+        if(state()){
             this.mc.gameSettings.keyBindForward.pressed = false;
             if(this.mc.thePlayer.onGround) {
                 this.jump = true;

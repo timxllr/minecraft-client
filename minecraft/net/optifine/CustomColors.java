@@ -1397,7 +1397,7 @@ public class CustomColors
                 break;
 
             case 0:
-                Minecraft minecraft = Minecraft.getMinecraft();
+                Minecraft minecraft = Minecraft.mc();
                 p_getWorldFogColor_0_ = getFogColor(p_getWorldFogColor_0_, minecraft.theWorld, p_getWorldFogColor_2_.posX, p_getWorldFogColor_2_.posY + 1.0D, p_getWorldFogColor_2_.posZ);
                 break;
 
@@ -1415,7 +1415,7 @@ public class CustomColors
         switch (i)
         {
             case 0:
-                Minecraft minecraft = Minecraft.getMinecraft();
+                Minecraft minecraft = Minecraft.mc();
                 p_getWorldSkyColor_0_ = getSkyColor(p_getWorldSkyColor_0_, minecraft.theWorld, p_getWorldSkyColor_2_.posX, p_getWorldSkyColor_2_.posY + 1.0D, p_getWorldSkyColor_2_.posZ);
                 break;
 
@@ -1814,7 +1814,7 @@ public class CustomColors
 
             if (flag)
             {
-                Minecraft.getMinecraft().getTextureManager().reloadBannerTextures();
+                Minecraft.mc().getTextureManager().reloadBannerTextures();
             }
         }
     }

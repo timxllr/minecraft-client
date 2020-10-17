@@ -11,7 +11,7 @@ public class AutoRespawn extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             if (!(mc.thePlayer.isEntityAlive())) {
                 mc.thePlayer.respawnPlayer();
             }

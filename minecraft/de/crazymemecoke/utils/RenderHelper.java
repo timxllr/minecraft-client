@@ -21,11 +21,11 @@ public class RenderHelper
   private static final Vec3 field_82885_c = new Vec3(-0.20000000298023224D, 1.0D, 0.699999988079071D).normalize();
   
   private static final String __OBFID = "CL_00000629";
-  private static final ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+  private static final ScaledResolution sr = new ScaledResolution(Minecraft.mc());
   
   public static final ScaledResolution getScaledRes()
   {
-    ScaledResolution scaledRes = new ScaledResolution(Minecraft.getMinecraft());
+    ScaledResolution scaledRes = new ScaledResolution(Minecraft.mc());
     return scaledRes;
   }
   
@@ -60,7 +60,7 @@ public class RenderHelper
     
     GlStateManager.enableBlend();
     
-    Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+    Minecraft.mc().getTextureManager().bindTexture(texture);
     
     screen.drawTexturedModalRect(x, y, 0, 0, width, height);
     

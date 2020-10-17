@@ -19,7 +19,7 @@ public class ChestStealer extends Module {
     @Override
     public void onUpdate() {
         long delay = (long) Client.main().setMgr().settingByName("Delay", this).getNum();
-        if (getState()) {
+        if (state()) {
             if ((mc.thePlayer.openContainer != null)
                     && ((mc.thePlayer.openContainer instanceof ContainerChest))) {
                 ContainerChest container = (ContainerChest) mc.thePlayer.openContainer;

@@ -134,7 +134,7 @@ public class ThreadDownloadImageData extends SimpleTexture
                 {
                     try
                     {
-                        httpurlconnection = (HttpURLConnection)(new URL(ThreadDownloadImageData.this.imageUrl)).openConnection(Minecraft.getMinecraft().getProxy());
+                        httpurlconnection = (HttpURLConnection)(new URL(ThreadDownloadImageData.this.imageUrl)).openConnection(Minecraft.mc().getProxy());
                         httpurlconnection.setDoInput(true);
                         httpurlconnection.setDoOutput(false);
                         httpurlconnection.connect();
@@ -197,7 +197,7 @@ public class ThreadDownloadImageData extends SimpleTexture
         }
         else
         {
-            Proxy proxy = Minecraft.getMinecraft().getProxy();
+            Proxy proxy = Minecraft.mc().getProxy();
             return proxy.type() != Type.DIRECT && proxy.type() != Type.SOCKS ? false : this.imageUrl.startsWith("http://");
         }
     }
@@ -206,7 +206,7 @@ public class ThreadDownloadImageData extends SimpleTexture
     {
         try
         {
-            HttpRequest httprequest = HttpPipeline.makeRequest(this.imageUrl, Minecraft.getMinecraft().getProxy());
+            HttpRequest httprequest = HttpPipeline.makeRequest(this.imageUrl, Minecraft.mc().getProxy());
             HttpResponse httpresponse = HttpPipeline.executeRequest(httprequest);
 
             if (httpresponse.getStatus() / 100 != 2)

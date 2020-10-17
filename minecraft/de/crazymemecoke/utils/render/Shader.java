@@ -24,7 +24,7 @@ public class Shader {
     private String[] glsl = new String[]{"time", "mouse", "resolution", "vec2 resolution", "vec2 mouse", "main",
             "gl_FragCoord.xy", "gl_FragColor"};
 
-    private Minecraft mc = Minecraft.getMinecraft();
+    private Minecraft mc = Minecraft.mc();
 
     private long startTime;
     private int program;

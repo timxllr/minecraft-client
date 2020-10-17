@@ -18,7 +18,7 @@ public class Tracers extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             for (final EntityPlayer player : mc.theWorld.playerEntities) {
                 if (mc.thePlayer != player) {
                     drawLine(player);

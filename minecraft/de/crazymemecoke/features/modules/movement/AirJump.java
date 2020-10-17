@@ -11,7 +11,7 @@ public class AirJump extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             mc.thePlayer.onGround = true;
         }
     }

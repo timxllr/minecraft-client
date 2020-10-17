@@ -18,7 +18,7 @@ import java.io.File;
 public class Client {
 
     private final static Client instance = new Client();
-    private final Minecraft mc = Minecraft.getMinecraft();
+    private final Minecraft mc = Minecraft.mc();
 
     private final String clientName = "Ambien";
     private final String clientVersion = "5.2";
@@ -73,7 +73,7 @@ public class Client {
     }
 
     public void startClient() {
-        clientDir = new File(Minecraft.getMinecraft().mcDataDir + "/" + getClientName());
+        clientDir = new File(Minecraft.mc().mcDataDir + "/" + getClientName());
         if (!clientDir.exists()) {
             clientDir.mkdir();
             mc.displayGuiScreen(new GuiFirstUse());

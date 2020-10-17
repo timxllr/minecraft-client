@@ -21,7 +21,7 @@ public class GuiHopper extends GuiContainer
 
     public GuiHopper(InventoryPlayer playerInv, IInventory hopperInv)
     {
-        super(new ContainerHopper(playerInv, hopperInv, Minecraft.getMinecraft().thePlayer));
+        super(new ContainerHopper(playerInv, hopperInv, Minecraft.mc().thePlayer));
         this.playerInventory = playerInv;
         this.hopperInventory = hopperInv;
         this.allowUserInput = false;

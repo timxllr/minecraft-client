@@ -31,7 +31,7 @@ public class FastUse extends Module {
 	public void onUpdate() {
 		double delay = Client.main().setMgr().settingByName("Delay", this).getNum();
 
-		if (getState()) {
+		if (state()) {
 			try {
 				if (isSword(mc.thePlayer.inventory.getCurrentItem().getItem())) {
 					return;
@@ -41,7 +41,7 @@ public class FastUse extends Module {
 			}
 			if (mc.thePlayer.getItemInUseDuration() > delay) {
 				for (int i = 0; i < 20; i++) {
-					Minecraft.getMinecraft().thePlayer.sendQueue
+					Minecraft.mc().thePlayer.sendQueue
 							.addToSendQueue(new C03PacketPlayer(mc.thePlayer.onGround));
 				}
 				if ((mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemBow)) {

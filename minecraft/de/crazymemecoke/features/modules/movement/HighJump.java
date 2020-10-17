@@ -16,7 +16,7 @@ public class HighJump extends Module {
     @Override
     public void onUpdate() {
         double boost = Client.main().setMgr().settingByName("Boost", this).getNum();
-        if (getState()) {
+        if (state()) {
             if (mc.gameSettings.keyBindJump.pressed && mc.gameSettings.keyBindForward.pressed) {
                 mc.thePlayer.motionY = boost;
             }

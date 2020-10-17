@@ -37,9 +37,9 @@ public class Interface extends GuiIngame {
 
     public void renderGameOverlay(float p_175180_1_) {
         super.renderGameOverlay(p_175180_1_);
-        if (!(Client.main().modMgr().getByName("Invis").getState())) {
+        if (!(Client.main().modMgr().getByName("Invis").state())) {
             Display.setTitle(Client.main().getClientName() + " " + Client.main().getClientVersion() + " | made by " + Client.main().getClientCoder());
-            if (Client.main().modMgr().getByName("HUD").getState()) {
+            if (Client.main().modMgr().getByName("HUD").state()) {
                 if (Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).getBool()) {
                     doRenderStuff();
                 } else {
@@ -335,8 +335,8 @@ public class Interface extends GuiIngame {
         UnicodeFontRenderer bigNoodleTilting = Client.main().fontMgr().font("BigNoodleTilting", 20, Font.PLAIN);
 
         for (Module m : Client.main().modMgr().modules) {
-            module = m.getName();
-            if (m.getState() && !m.isCategory(Category.GUI)) {
+            module = m.name();
+            if (m.state() && !m.isCategory(Category.GUI)) {
                 if (Client.main().setMgr().settingByName("ArrayList Background", Client.main().modMgr().getByName("HUD")).getBool()) {
                     if (mode.equalsIgnoreCase("Left")) {
                         switch (design) {

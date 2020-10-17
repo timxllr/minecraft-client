@@ -14,7 +14,7 @@ public class SlimeJump extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
                 BlockPos BlockPos = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0, mc.thePlayer.posZ);
                 if (mc.theWorld.getBlockState(BlockPos).getBlock() == Blocks.slime_block) {

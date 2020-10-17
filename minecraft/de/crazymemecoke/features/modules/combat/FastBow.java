@@ -17,7 +17,7 @@ public class FastBow extends Module {
     }
 
     public void onUpdate() {
-        if (this.getState()) {
+        if (this.state()) {
             if (mc.thePlayer.inventory.getCurrentItem() != null) {
                 if (mc.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemBow && mc.gameSettings.keyBindUseItem.pressed) {
                     mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.inventory.getCurrentItem());

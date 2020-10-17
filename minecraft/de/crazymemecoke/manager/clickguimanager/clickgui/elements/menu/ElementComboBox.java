@@ -92,7 +92,7 @@ public class ElementComboBox extends Element {
             for (String slcd : set.getOptions()) {
                 if (mouseX >= x && mouseX <= x + width && mouseY >= ay && mouseY <= ay + FontUtil.getFontHeight() + 2) {
                     if (set.getBool())
-                        Minecraft.getMinecraft().thePlayer.playSound("tile.piston.in", 20.0F, 20.0F);
+                        Minecraft.mc().thePlayer.playSound("tile.piston.in", 20.0F, 20.0F);
 
                     if (clickgui != null && Client.main().setMgr() != null)
                         set.setMode(slcd.toLowerCase());

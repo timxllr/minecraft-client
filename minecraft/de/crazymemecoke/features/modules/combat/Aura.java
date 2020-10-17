@@ -55,7 +55,7 @@ public class Aura extends Module {
 
     @Override
     public void onUpdate() {
-        if (getState()) {
+        if (state()) {
             range = sM.settingByName("Range", this).getNum();
             cps = sM.settingByName("CPS", this).getNum();
             teams = sM.settingByName("Teams", this).getBool();
@@ -88,7 +88,7 @@ public class Aura extends Module {
 
     @Override
     public void onPreMotionUpdate() {
-        if (getState()) {
+        if (state()) {
             if (auraMode.equalsIgnoreCase("Single")) {
                 currentTarget = getClosest(mc.playerController.getBlockReachDistance());
 
@@ -114,7 +114,7 @@ public class Aura extends Module {
 
     @Override
     public void onPostMotionUpdate() {
-        if (getState()) {
+        if (state()) {
             if (auraMode.equalsIgnoreCase("Single")) {
                 if (currentTarget == null)
                     return;
@@ -151,7 +151,7 @@ public class Aura extends Module {
 
         yaw = -MathHelper.wrapAngleTo180_float((float) Math.toDegrees(Math.atan2(xDiff, zDiff)));
         pitch = MathHelper.wrapAngleTo180_float((float) -Math.toDegrees(Math.atan2(yDiff, Math.sqrt(xDiff * xDiff + zDiff * zDiff))));*/
-        EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
+        EntityPlayerSP player = Minecraft.mc().thePlayer;
         double xDiff = target.posX - player.posX;
         double zDiff = target.posZ - player.posZ;
         double yDiff;
@@ -206,7 +206,7 @@ public class Aura extends Module {
 
     @EventTarget
     public void onPacket(PacketSendEvent e) {
-        if (getState()) {
+        if (state()) {
             if (rotations)
                 return;
 

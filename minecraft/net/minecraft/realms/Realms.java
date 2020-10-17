@@ -12,23 +12,23 @@ public class Realms
 {
     public static boolean isTouchScreen()
     {
-        return Minecraft.getMinecraft().gameSettings.touchscreen;
+        return Minecraft.mc().gameSettings.touchscreen;
     }
 
     public static Proxy getProxy()
     {
-        return Minecraft.getMinecraft().getProxy();
+        return Minecraft.mc().getProxy();
     }
 
     public static String sessionId()
     {
-        Session session = Minecraft.getMinecraft().getSession();
+        Session session = Minecraft.mc().getSession();
         return session == null ? null : session.getSessionID();
     }
 
     public static String userName()
     {
-        Session session = Minecraft.getMinecraft().getSession();
+        Session session = Minecraft.mc().getSession();
         return session == null ? null : session.getUsername();
     }
 
@@ -39,32 +39,32 @@ public class Realms
 
     public static String getSessionId()
     {
-        return Minecraft.getMinecraft().getSession().getSessionID();
+        return Minecraft.mc().getSession().getSessionID();
     }
 
     public static String getUUID()
     {
-        return Minecraft.getMinecraft().getSession().getPlayerID();
+        return Minecraft.mc().getSession().getPlayerID();
     }
 
     public static String getName()
     {
-        return Minecraft.getMinecraft().getSession().getUsername();
+        return Minecraft.mc().getSession().getUsername();
     }
 
     public static String uuidToName(String p_uuidToName_0_)
     {
-        return Minecraft.getMinecraft().getSessionService().fillProfileProperties(new GameProfile(UUIDTypeAdapter.fromString(p_uuidToName_0_), (String)null), false).getName();
+        return Minecraft.mc().getSessionService().fillProfileProperties(new GameProfile(UUIDTypeAdapter.fromString(p_uuidToName_0_), (String)null), false).getName();
     }
 
     public static void setScreen(RealmsScreen p_setScreen_0_)
     {
-        Minecraft.getMinecraft().displayGuiScreen(p_setScreen_0_.getProxy());
+        Minecraft.mc().displayGuiScreen(p_setScreen_0_.getProxy());
     }
 
     public static String getGameDirectoryPath()
     {
-        return Minecraft.getMinecraft().mcDataDir.getAbsolutePath();
+        return Minecraft.mc().mcDataDir.getAbsolutePath();
     }
 
     public static int survivalId()
@@ -89,17 +89,17 @@ public class Realms
 
     public static void setConnectedToRealms(boolean p_setConnectedToRealms_0_)
     {
-        Minecraft.getMinecraft().func_181537_a(p_setConnectedToRealms_0_);
+        Minecraft.mc().func_181537_a(p_setConnectedToRealms_0_);
     }
 
     public static ListenableFuture<Object> downloadResourcePack(String p_downloadResourcePack_0_, String p_downloadResourcePack_1_)
     {
-        ListenableFuture<Object> listenablefuture = Minecraft.getMinecraft().getResourcePackRepository().downloadResourcePack(p_downloadResourcePack_0_, p_downloadResourcePack_1_);
+        ListenableFuture<Object> listenablefuture = Minecraft.mc().getResourcePackRepository().downloadResourcePack(p_downloadResourcePack_0_, p_downloadResourcePack_1_);
         return listenablefuture;
     }
 
     public static void clearResourcePack()
     {
-        Minecraft.getMinecraft().getResourcePackRepository().func_148529_f();
+        Minecraft.mc().getResourcePackRepository().func_148529_f();
     }
 }

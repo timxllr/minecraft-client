@@ -108,7 +108,7 @@ public class FontManager {
     private static Font font(String name, int size, FontExtension fe) {
         Font font = null;
         try {
-            InputStream ex = Minecraft.getMinecraft().getResourceManager()
+            InputStream ex = Minecraft.mc().getResourceManager()
                     .getResource(new ResourceLocation("client/fonts/" + name + "." + fe.name().toLowerCase())).getInputStream();
             font = Font.createFont(0, ex);
             font = font.deriveFont(0, size);

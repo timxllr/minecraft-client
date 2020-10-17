@@ -48,7 +48,7 @@ public class PlayerItemModel
             if (this.texture == null && this.textureImage != null)
             {
                 this.texture = new DynamicTexture(this.textureImage);
-                Minecraft.getMinecraft().getTextureManager().loadTexture(this.textureLocation, this.texture);
+                Minecraft.mc().getTextureManager().loadTexture(this.textureLocation, this.texture);
             }
 
             texturemanager.bindTexture(this.textureLocation);

@@ -46,7 +46,7 @@ public class ESP extends Module {
 
     @Override
     public void onRender() {
-        if (getState()) {
+        if (state()) {
             if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Box")) {
                 Iterator var3 = mc.theWorld.loadedEntityList.iterator();
 

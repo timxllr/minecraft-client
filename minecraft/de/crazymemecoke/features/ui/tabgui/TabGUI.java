@@ -29,7 +29,7 @@ public class TabGUI {
             final Tab tab = new Tab(this, capitalizedName);
 
             for (Module module : Client.main().modMgr().getModules()) {
-                if (module.getCategory() == category) {
+                if (module.category() == category) {
                     tab.hacks.add(module);
                 }
             }
@@ -86,7 +86,7 @@ public class TabGUI {
     public static void parseKeyToggle() {
         if (!mainMenu) {
             int sel = selectedItem;
-            (tabsList.get(selectedTab)).hacks.get(sel).toggleModule();
+            (tabsList.get(selectedTab)).hacks.get(sel).toggle();
         }
     }
 

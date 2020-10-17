@@ -62,7 +62,7 @@ public class SettingsManager {
 
     public Setting settingByName(String name, Module module) {
         for (Setting set : getSettings()) {
-            if (set.getFullName().equalsIgnoreCase((module == null ? "global" : module.getName()) + "_" + name)) {
+            if (set.getFullName().equalsIgnoreCase((module == null ? "global" : module.name()) + "_" + name)) {
                 return set;
             }
         }
@@ -74,7 +74,7 @@ public class SettingsManager {
     public void saveSettings() {
         List<String> formattedSettings = new ArrayList<String>();
         for (final Setting set : Client.main().setMgr().getSettings()) {
-            String yeet = set.getParentMod() != null ? set.getParentMod().getName() : "global";
+            String yeet = set.getParentMod() != null ? set.getParentMod().name() : "global";
             if (set.isSlider()) {
                 formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getNum());
             }

@@ -92,7 +92,7 @@ public class GuiButton extends Gui {
      * Draws this button to the screen.
      */
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-        if (Client.main().modMgr().getByName("Invis").getState()) {
+        if (Client.main().modMgr().getByName("Invis").state()) {
             if (visible) {
                 FontRenderer fontrenderer = mc.fontRendererObj;
                 mc.getTextureManager().bindTexture(buttonTextures);

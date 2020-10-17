@@ -633,7 +633,7 @@ public class OpenGlHelper
 
     public static boolean useVbo()
     {
-        return Config.isMultiTexture() ? false : vboSupported && Minecraft.getMinecraft().gameSettings.useVbo;
+        return Config.isMultiTexture() ? false : vboSupported && Minecraft.mc().gameSettings.useVbo;
     }
 
     public static void glBindFramebuffer(int target, int framebufferIn)
@@ -926,7 +926,7 @@ public class OpenGlHelper
 
     public static boolean isFramebufferEnabled()
     {
-        return Config.isFastRender() ? false : (Config.isAntialiasing() ? false : framebufferSupported && Minecraft.getMinecraft().gameSettings.fboEnable);
+        return Config.isFastRender() ? false : (Config.isAntialiasing() ? false : framebufferSupported && Minecraft.mc().gameSettings.fboEnable);
     }
 
     public static String func_183029_j()

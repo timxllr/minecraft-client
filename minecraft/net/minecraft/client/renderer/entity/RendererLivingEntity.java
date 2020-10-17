@@ -240,7 +240,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
      */
     protected void renderModel(T entitylivingbaseIn, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float p_77036_7_) {
         boolean flag = !entitylivingbaseIn.isInvisible();
-        boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer);
+        boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.mc().thePlayer);
 
         if (flag || flag1) {
             if (!this.bindEntityTexture(entitylivingbaseIn)) {
@@ -256,7 +256,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
                 GlStateManager.alphaFunc(516, 0.003921569F);
             }
 
-            if (Client.main().modMgr().getByName("ESP").getState()) {
+            if (Client.main().modMgr().getByName("ESP").state()) {
                 if (Client.main().setMgr().settingByName("Mode", Client.main().modMgr().getByName("ESP")).getMode().equalsIgnoreCase("Outline")) {
                     if (entitylivingbaseIn instanceof EntityPlayer && Client.main().setMgr().settingByName("Players", Client.main().modMgr().getByName("ESP")).getBool()) {
                         GL11.glPushMatrix();
@@ -595,7 +595,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
     }
 
     protected boolean canRenderName(T entity) {
-        EntityPlayerSP entityplayersp = Minecraft.getMinecraft().thePlayer;
+        EntityPlayerSP entityplayersp = Minecraft.mc().thePlayer;
 
         if (entity instanceof EntityPlayer && entity != entityplayersp) {
             Team team = entity.getTeam();

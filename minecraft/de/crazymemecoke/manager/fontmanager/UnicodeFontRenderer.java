@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 public class UnicodeFontRenderer extends FontRenderer {
-	private Minecraft mc = Minecraft.getMinecraft();
+	private Minecraft mc = Minecraft.mc();
 	private final Random fontRandom;
 	private final Color[] customColorCodes;
 	private final int[] colorCode;
@@ -27,8 +27,8 @@ public class UnicodeFontRenderer extends FontRenderer {
 	private boolean bidi;
 
 	UnicodeFontRenderer(final Font font, final boolean antiAlias, final int charOffset) {
-		super(Minecraft.getMinecraft().gameSettings, new ResourceLocation("textures/font/ascii.png"),
-				Minecraft.getMinecraft().getTextureManager(), false);
+		super(Minecraft.mc().gameSettings, new ResourceLocation("textures/font/ascii.png"),
+				Minecraft.mc().getTextureManager(), false);
 		this.fontRandom = new Random();
 		this.customColorCodes = new Color[256];
 		this.colorCode = new int[32];
