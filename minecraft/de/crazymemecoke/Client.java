@@ -22,7 +22,7 @@ public class Client {
     private final Minecraft mc = Minecraft.mc();
 
     private final String clientName = "Splash";
-    private final String clientVersion = "1.0";
+    private final double clientVersion = 1.0;
     private final String clientCoder = "CrazyMemeCoke";
     private final String clientPrefix = ".";
     private final String clientBackground = "textures/client/background.jpg";
@@ -87,7 +87,7 @@ public class Client {
         return clientName;
     }
 
-    public String getClientVersion() {
+    public double getClientVersion() {
         return clientVersion;
     }
 
