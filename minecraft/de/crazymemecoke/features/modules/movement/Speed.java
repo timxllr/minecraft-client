@@ -31,6 +31,7 @@ public class Speed extends Module {
 
         mode.add("AAC 1.9.8");
         mode.add("AAC 1.9.10");
+        mode.add("AAC 3.3.10");
         mode.add("Motion");
         mode.add("Jump");
         mode.add("Frames");
@@ -58,6 +59,7 @@ public class Speed extends Module {
     private int motionTicks;
     private int ticks = 0;
     private float prevYaw;
+    private boolean legitHop = false;
 
     public void onEnable() {
         framesDelay.setLastMS();
@@ -114,7 +116,46 @@ public class Speed extends Module {
                     doAAC1910();
                     break;
                 }
+                case "aac 3.3.10": {
+                    doAAC3310();
+                    break;
+                }
             }
+        }
+    }
+
+    private void doAAC3310() {
+        if(!mc.thePlayer.isBlocking()){
+            if (this.mc.thePlayer.hurtTime == 0) {
+                if (EntityUtils.isMoving()) {
+                    if (this.legitHop) {
+                        if (this.mc.thePlayer.onGround) {
+                            this.mc.thePlayer.jump();
+                            this.mc.thePlayer.onGround = false;
+                            this.legitHop = false;
+                        }
+
+                        return;
+                    }
+
+                    if (this.mc.thePlayer.onGround) {
+                        this.mc.thePlayer.onGround = false;
+                        PlayerUtil.setSpeed(0.375D);
+                        this.mc.thePlayer.jump();
+                        this.mc.thePlayer.motionY = 0.41D;
+                    } else {
+                        this.mc.thePlayer.speedInAir = 0.0211F;
+                    }
+                } else {
+                    this.mc.thePlayer.motionX = this.mc.thePlayer.motionZ = 0.0D;
+                    this.legitHop = true;
+                }
+
+                if (this.mc.thePlayer.isAirBorne) {
+                    PlayerUtil.setSpeed(PlayerUtil.getSpeed());
+                }
+            }
+
         }
     }
 
