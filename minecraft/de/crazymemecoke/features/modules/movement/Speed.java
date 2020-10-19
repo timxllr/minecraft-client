@@ -123,23 +123,26 @@ public class Speed extends Module {
                     break;
                 }
                 case "hive skygiants": {
-                    double d, blocks;
-                    if (EntityUtils.isMoving()) {
-                        if (this.mc.thePlayer.onGround) {
-                            this.mc.timer.timerSpeed = 2.0F;
-                            this.mc.thePlayer.jump();
-                        } else {
-                            this.mc.timer.timerSpeed = 1.0F;
-                            this.mc.thePlayer.jumpMovementFactor = 0.026F;
-                            d = 1.0157D;
-                            blocks = PlayerUtil.getSpeed();
-                            this.mc.thePlayer.motionX = -Math.sin((double) PlayerUtil.getDirection()) * d * blocks;
-                            this.mc.thePlayer.motionZ = Math.cos((double) PlayerUtil.getDirection()) * d * blocks;
-                        }
-                    }
-
+                    doHiveSkyGiants();
                     break;
                 }
+            }
+        }
+    }
+
+    private void doHiveSkyGiants() {
+        double d, blocks;
+        if (EntityUtils.isMoving()) {
+            if (this.mc.thePlayer.onGround) {
+                this.mc.timer.timerSpeed = 2.0F;
+                this.mc.thePlayer.jump();
+            } else {
+                this.mc.timer.timerSpeed = 1.0F;
+                this.mc.thePlayer.jumpMovementFactor = 0.026F;
+                d = 1.0157D;
+                blocks = PlayerUtil.getSpeed();
+                this.mc.thePlayer.motionX = -Math.sin((double) PlayerUtil.getDirection()) * d * blocks;
+                this.mc.thePlayer.motionZ = Math.cos((double) PlayerUtil.getDirection()) * d * blocks;
             }
         }
     }
