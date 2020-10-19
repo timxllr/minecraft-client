@@ -2,6 +2,7 @@ package de.crazymemecoke.features.ui.guiscreens;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.ui.guiscreens.altmanager.GuiAltManager;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
@@ -49,7 +50,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         GlStateManager.disableAlpha();
         GlStateManager.enableAlpha();
-        int i = 274;
         drawGradientRect(0, 0, width, height, -2130706433, 16777215);
         drawGradientRect(0, 0, width, height, 0, Integer.MIN_VALUE);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -67,7 +67,37 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.scale(f, f, f);
         GlStateManager.popMatrix();
 
+        /**
+         * START OF DRAWING STUFF
+         *
+         * ORDER:
+         * - Background for Buttons
+         * - Background for Informations
+         * - Client Name
+         * - Current Playername
+         * - Client Version
+         * - Version Check [latest or not?] (soon)
+         */
+
+        UnicodeFontRenderer font1 = Client.main().fontMgr().font("esp", 50, Font.BOLD);
+        UnicodeFontRenderer font2 = Client.main().fontMgr().font("esp", 20, Font.PLAIN);
+
         RenderUtils.drawRect(width / 2 - 130, height / 2 - 70, width / 2 + 140, height / 2 + 30, new Color(55, 55, 55, 150).getRGB());
+
+        RenderUtils.drawRect(0, 0, width, 26, new Color(0, 0, 0, 100).getRGB());
+
+        String name = Client.main().getClientName();
+        font1.drawStringWithShadow(name, sr.width() / 2 - font1.getStringWidth(name) / 2, 5, -1);
+
+        String playerName = "Name: " + mc.session.getUsername();
+        font2.drawStringWithShadow(playerName, 2, 5, -1);
+
+        String version = "Version: " + Client.main().getClientVersion();
+        font2.drawStringWithShadow(version, 2, 16, -1);
+
+        /**
+         * END OF DRAWING STUFF
+         */
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);
