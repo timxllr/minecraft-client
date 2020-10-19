@@ -33,6 +33,7 @@ public class Speed extends Module {
         mode.add("AAC 1.9.8");
         mode.add("AAC 1.9.10");
         mode.add("AAC 3.3.10");
+        mode.add("NCP");
         mode.add("Motion");
         mode.add("Jump");
         mode.add("Frames");
