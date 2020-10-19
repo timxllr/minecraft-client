@@ -5,7 +5,6 @@ import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.Notify;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
 import de.crazymemecoke.utils.events.MoveEvent;
@@ -17,6 +16,7 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.init.Blocks;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -33,7 +33,8 @@ public class Speed extends Module {
         mode.add("AAC 1.9.8");
         mode.add("AAC 1.9.10");
         mode.add("AAC 3.3.10");
-        mode.add("NCP");
+        mode.add("NCP Y-Port Slow");
+        mode.add("NCP Y-Port Fast");
         mode.add("Motion");
         mode.add("Jump");
         mode.add("Frames");
@@ -111,8 +112,8 @@ public class Speed extends Module {
                     doTimer();
                     break;
                 }
-                case "ncp": {
-                    doNCP();
+                case "ncp y-port slow": {
+                    doNCPYPortSlow();
                     break;
                 }
                 case "aac 1.9.10": {
@@ -127,8 +128,39 @@ public class Speed extends Module {
                     doHiveSkyGiants();
                     break;
                 }
+                case "ncp y-port fast": {
+                    doNCPYPortFast();
+                    break;
+                }
             }
         }
+    }
+
+    private double getBaseMoveSpeed() {
+        double baseSpeed = 0.2873D;
+        if (this.mc.thePlayer.isPotionActive(Potion.moveSpeed)) {
+            int amplifier = this.mc.thePlayer.getActivePotionEffect(Potion.moveSpeed).getAmplifier();
+            baseSpeed *= 1.0D + 0.2D * (double) (amplifier + 1);
+        }
+
+        return baseSpeed;
+    }
+
+    private void doNCPYPortFast() {
+        if (EntityUtils.isMoving()) {
+            this.mc.thePlayer.motionY = 0.399399995003033D;
+            this.moveSpeed = 1.35D * this.getBaseMoveSpeed() - 1.0E-4D;
+            if (this.mc.thePlayer.onGround) {
+                this.mc.thePlayer.jump();
+            }
+
+            this.mc.timer.timerSpeed = 1.5F;
+        }
+
+        if (!this.mc.thePlayer.onGround) {
+            this.mc.thePlayer.motionY = -0.5D;
+        }
+
     }
 
     private void doHiveSkyGiants() {
@@ -205,7 +237,7 @@ public class Speed extends Module {
         }
     }
 
-    private void doNCP() {
+    private void doNCPYPortSlow() {
         if (mc.thePlayer.onGround) {
             mc.thePlayer.jump();
         } else {
