@@ -1,5 +1,6 @@
 package de.crazymemecoke;
 
+import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.features.modules.exploits.Crasher;
 import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import de.crazymemecoke.manager.altmanager.AltManager;
@@ -9,8 +10,10 @@ import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
 import de.crazymemecoke.utils.render.Colors;
+import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 
+import java.awt.*;
 import java.io.File;
 
 public class Client {
@@ -18,8 +21,8 @@ public class Client {
     private final static Client instance = new Client();
     private final Minecraft mc = Minecraft.mc();
 
-    private final String clientName = "Ambien";
-    private final String clientVersion = "5.2";
+    private final String clientName = "Splash";
+    private final String clientVersion = "1.0";
     private final String clientCoder = "CrazyMemeCoke";
     private final String clientPrefix = ".";
     private final String clientBackground = "textures/client/background.jpg";
@@ -30,10 +33,13 @@ public class Client {
 
     private ModuleManager moduleManager;
     private CommandManager commandManager;
-    private SettingsManager setMgr;
+    private SettingsManager setmgr;
     private ClickGUI clickgui;
     private FontManager fontManager;
     private File clientDir;
+    private Friend friend;
+    private Shader shader;
+    private AltManager altManager;
 
     public static Client main() {
         return instance;
@@ -48,9 +54,9 @@ public class Client {
 
         fontManager = new FontManager();
         fontManager.initFonts();
-        setMgr = new SettingsManager();
+        setmgr = new SettingsManager();
         moduleManager = new ModuleManager();
-        setMgr.loadSettings();
+        setmgr.loadSettings();
         moduleManager.loadModules();
         moduleManager.loadBinds();
         commandManager = new CommandManager();
@@ -64,7 +70,7 @@ public class Client {
     }
 
     public void onShutdown() {
-        setMgr.saveSettings();
+        setmgr.saveSettings();
         moduleManager.saveModules();
         moduleManager.saveBinds();
         AltManager.saveAlts();
@@ -98,7 +104,7 @@ public class Client {
     }
 
     public SettingsManager setMgr() {
-        return setMgr;
+        return setmgr;
     }
 
     public ClickGUI getClickGui() {
@@ -121,12 +127,24 @@ public class Client {
         return clientBackground;
     }
 
+    public Friend getFriend() {
+        return friend;
+    }
+
+    public AltManager getAltManager() {
+        return altManager;
+    }
+
     public String getClientIcon() {
         return clientIcon;
     }
 
     public String getShaderLoc() {
         return shaderLoc;
+    }
+
+    public Shader getShader() {
+        return shader;
     }
 
     public int getAmbienOldBlueColor() {
@@ -225,4 +243,15 @@ public class Client {
         return Colors.heroGreenColor;
     }
 
+    public int getHeroGreyColor() {
+        return Colors.heroGreyColor;
+    }
+
+    public int getVantaGreyColor() {
+        return Colors.vantaGreyColor;
+    }
+
+    public int getVantaBlueColor() {
+        return Colors.vantaBlueColor;
+    }
 }

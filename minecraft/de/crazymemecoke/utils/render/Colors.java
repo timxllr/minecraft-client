@@ -44,6 +44,9 @@ public enum Colors {
     public static final int icarusNewBlueColor = new Color(0x92c2cc).getRGB();
     public static final int icarusNewGreyColor = new Color(0, 0, 0, 100).getRGB();
     public static final int heroGreenColor = new Color(0x1ab753).getRGB();
+    public static final int heroGreyColor = new Color(0, 0, 0, 70).getRGB();
+    public static final int vantaGreyColor = new Color(0x2e3b4a).getRGB();
+    public static final int vantaBlueColor = new Color(0x0198d6).getRGB();
 
     public int c;
 
