@@ -33,6 +33,7 @@ public class Speed extends Module {
         mode.add("AAC 1.9.8");
         mode.add("AAC 1.9.10");
         mode.add("AAC 3.3.10");
+        mode.add("AAC Y-Port 3.3.1");
         mode.add("NCP Y-Port Slow");
         mode.add("NCP Y-Port Fast");
         mode.add("Motion");
@@ -132,7 +133,19 @@ public class Speed extends Module {
                     doNCPYPortFast();
                     break;
                 }
+                case "aac y-port 3.3.1": {
+                    doAACYPort331();
+                    break;
+                }
             }
+        }
+    }
+
+    private void doAACYPort331() {
+        if (this.mc.thePlayer.onGround && EntityUtils.isMoving()) {
+            this.mc.thePlayer.jump();
+        } else {
+            this.mc.thePlayer.motionY = -0.21D;
         }
     }
 
