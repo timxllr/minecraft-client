@@ -1,6 +1,5 @@
 package de.crazymemecoke;
 
-import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.features.modules.exploits.Crasher;
 import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import de.crazymemecoke.manager.altmanager.AltManager;
@@ -9,10 +8,9 @@ import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
-import de.crazymemecoke.utils.render.Shader;
+import de.crazymemecoke.utils.render.Colors;
 import net.minecraft.client.Minecraft;
 
-import java.awt.*;
 import java.io.File;
 
 public class Client {
@@ -30,43 +28,12 @@ public class Client {
     private final String shaderLoc = "textures/client/shader/";
     private final String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
 
-    private final int ambienOldBlueColor = new Color(32, 188, 240).getRGB();
-    private final int ambienNewBlueColor = new Color(0x0090ff).getRGB();
-    private final int ambienNewDarkGreyColor = new Color(0x20252b).getRGB();
-    private final int greyColor = new Color(168, 167, 169).getRGB();
-    private final int vortexRedColor = new Color(0xE37974).getRGB();
-    private final int suicideBlueGreyColor = new Color(0x1c293a).getRGB();
-    private final int suicideBlueColor = new Color(0x0993b0).getRGB();
-    private final int suicideDarkBlueGreyColor = new Color(0x1a1f24).getRGB();
-    private final int apinityBlueColor = new Color(0x4c80ee).getRGB();
-    private final int apinityGreyColor = new Color(0x312e30).getRGB();
-    private final int huzuniBlueColor = new Color(0x00a5ff).getRGB();
-    private final int huzuniGreyColor = new Color(0x191923).getRGB();
-    private final int nodusPurpleColor = new Color(0x5a0454).getRGB();
-    private final int nodusTealColor = new Color(0x94d6ce).getRGB();
-    private final int saintDarkBlueColor = new Color(0x11274c).getRGB();
-    private final int saintDarkTealColor = new Color(0x13a4a1).getRGB();
-    private final int saintOrangeColor = new Color(0xE0B71F).getRGB();
-    private final int icarusOldOrangeColor = new Color(0xdb9615).getRGB();
-    private final int icarusOldGreyColor = new Color(0x4a586a).getRGB();
-    private final int icarusNewBlueColor = new Color(0x92c2cc).getRGB();
-    private final int icarusNewGreyColor = new Color(0, 0, 0, 100).getRGB();
-    private final int heroGreenColor = new Color(0x1ab753).getRGB();
-    private final int heroGreyColor = new Color(0, 0, 0, 70).getRGB();
-    private final int vantaGreyColor = new Color(0x2e3b4a).getRGB();
-    private final int vantaBlueColor = new Color(0x0198d6).getRGB();
-
     private ModuleManager moduleManager;
-
     private CommandManager commandManager;
-
-    private SettingsManager setmgr;
+    private SettingsManager setMgr;
     private ClickGUI clickgui;
     private FontManager fontManager;
     private File clientDir;
-    private Friend friend;
-    private Shader shader;
-    private AltManager altManager;
 
     public static Client main() {
         return instance;
@@ -81,9 +48,9 @@ public class Client {
 
         fontManager = new FontManager();
         fontManager.initFonts();
-        setmgr = new SettingsManager();
+        setMgr = new SettingsManager();
         moduleManager = new ModuleManager();
-        setmgr.loadSettings();
+        setMgr.loadSettings();
         moduleManager.loadModules();
         moduleManager.loadBinds();
         commandManager = new CommandManager();
@@ -97,7 +64,7 @@ public class Client {
     }
 
     public void onShutdown() {
-        setmgr.saveSettings();
+        setMgr.saveSettings();
         moduleManager.saveModules();
         moduleManager.saveBinds();
         AltManager.saveAlts();
@@ -131,7 +98,7 @@ public class Client {
     }
 
     public SettingsManager setMgr() {
-        return setmgr;
+        return setMgr;
     }
 
     public ClickGUI getClickGui() {
@@ -154,14 +121,6 @@ public class Client {
         return clientBackground;
     }
 
-    public Friend getFriend() {
-        return friend;
-    }
-
-    public AltManager getAltManager() {
-        return altManager;
-    }
-
     public String getClientIcon() {
         return clientIcon;
     }
@@ -170,52 +129,48 @@ public class Client {
         return shaderLoc;
     }
 
-    public Shader getShader() {
-        return shader;
-    }
-
     public int getAmbienOldBlueColor() {
-        return ambienOldBlueColor;
+        return Colors.ambienOldBlueColor;
     }
 
     public int getGrey() {
-        return greyColor;
+        return Colors.greyColor;
     }
 
     public int getVortexRedColor() {
-        return vortexRedColor;
+        return Colors.vortexRedColor;
     }
 
     public int getSuicideBlueGreyColor() {
-        return suicideBlueGreyColor;
+        return Colors.suicideBlueGreyColor;
     }
 
     public int getSuicideBlueColor() {
-        return suicideBlueColor;
+        return Colors.suicideBlueColor;
     }
 
     public int getSuicideDarkBlueGreyColor() {
-        return suicideDarkBlueGreyColor;
+        return Colors.suicideDarkBlueGreyColor;
     }
 
     public int getGreyColor() {
-        return greyColor;
+        return Colors.greyColor;
     }
 
     public int getApinityGreyColor() {
-        return apinityGreyColor;
+        return Colors.apinityGreyColor;
     }
 
     public int getApinityBlueColor() {
-        return apinityBlueColor;
+        return Colors.apinityBlueColor;
     }
 
     public int getHuzuniBlueColor() {
-        return huzuniBlueColor;
+        return Colors.huzuniBlueColor;
     }
 
     public int getHuzuniGreyColor() {
-        return huzuniGreyColor;
+        return Colors.huzuniGreyColor;
     }
 
     public String getWurstWatermark() {
@@ -223,62 +178,51 @@ public class Client {
     }
 
     public int getNodusPurpleColor() {
-        return nodusPurpleColor;
+        return Colors.nodusPurpleColor;
     }
 
     public int getNodusTealColor() {
-        return nodusTealColor;
+        return Colors.nodusTealColor;
     }
 
     public int getSaintDarkBlueColor() {
-        return saintDarkBlueColor;
+        return Colors.saintDarkBlueColor;
     }
 
     public int getSaintDarkTealColor() {
-        return saintDarkTealColor;
+        return Colors.saintDarkTealColor;
     }
 
     public int getSaintOrangeColor() {
-        return saintOrangeColor;
+        return Colors.saintOrangeColor;
     }
 
     public int getIcarusNewBlueColor() {
-        return icarusNewBlueColor;
+        return Colors.icarusNewBlueColor;
     }
 
     public int getIcarusNewGreyColor() {
-        return icarusNewGreyColor;
+        return Colors.icarusNewGreyColor;
     }
 
     public int getIcarusOldGreyColor() {
-        return icarusOldGreyColor;
+        return Colors.icarusOldGreyColor;
     }
 
     public int getIcarusOldOrangeColor() {
-        return icarusOldOrangeColor;
+        return Colors.icarusOldOrangeColor;
     }
 
     public int getAmbienNewBlueColor() {
-        return ambienNewBlueColor;
+        return Colors.ambienNewBlueColor;
     }
 
     public int getAmbienNewDarkGreyColor() {
-        return ambienNewDarkGreyColor;
+        return Colors.ambienNewDarkGreyColor;
     }
 
     public int getHeroGreenColor() {
-        return heroGreenColor;
+        return Colors.heroGreenColor;
     }
 
-    public int getHeroGreyColor() {
-        return heroGreyColor;
-    }
-
-    public int getVantaGreyColor() {
-        return vantaGreyColor;
-    }
-
-    public int getVantaBlueColor() {
-        return vantaBlueColor;
-    }
 }
