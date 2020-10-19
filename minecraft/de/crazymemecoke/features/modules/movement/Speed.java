@@ -16,6 +16,7 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -30,44 +31,42 @@ public class Speed extends Module {
     public Speed() {
         super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
 
-        mode.add("AAC 1.9.8");
-        mode.add("AAC 1.9.10");
-        mode.add("AAC 3.3.10");
-        mode.add("AAC Y-Port 3.3.1");
-        mode.add("AAC LowHop 3.3.9");
-        mode.add("NCP Y-Port Slow");
-        mode.add("NCP Y-Port Fast");
-        mode.add("MineSecure");
+        mode.add("[Y-Port] AAC 1.9.8");
+        mode.add("[Y-Port] AAC 1.9.10");
+        mode.add("[Y-Port] AAC 3.3.1");
+        mode.add("[Y-Port] NCP Slow");
+        mode.add("[Y-Port] NCP Fast");
+        mode.add("[B-Hop] AAC 3.3.10");
+        mode.add("[B-Hop] MineSecure");
+        mode.add("[B-Hop] Hive SkyGiants");
+        mode.add("[L-Hop] AAC 3.3.9");
         mode.add("Motion");
         mode.add("Jump");
         mode.add("Frames");
         mode.add("Ground");
         mode.add("Timer");
-        mode.add("Hive SkyGiants");
 
         sM.newSetting(new Setting("Mode", this, "Jump", mode));
         sM.newSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
         sM.newSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
     }
 
-    public static boolean canStep;
     private TimerUtil framesDelay = new TimerUtil();
     private TimerUtil delayTimer = new TimerUtil();
-    public double speed;
-    public int stage;
-    public int tickse;
-    public double moveSpeed;
     ArrayList<String> mode = new ArrayList<>();
-    String speedMode;
-    boolean move;
-    boolean hop;
     SettingsManager sM = Client.main().setMgr();
+    String speedMode;
+    public static boolean canStep;
+    private boolean legitHop = false;
+    private boolean move;
+    private boolean hop;
+    public double speed;
+    public double moveSpeed;
     private double prevY;
+    private float prevYaw;
+    public int stage;
     private int motionTicks;
     private int ticks = 0;
-    private float prevYaw;
-    private boolean legitHop = false;
-    private int tick;
 
     public void onEnable() {
         framesDelay.setLastMS();
@@ -96,7 +95,7 @@ public class Speed extends Module {
                     doGround();
                     break;
                 }
-                case "aac 1.9.8": {
+                case "[y-port] aac 1.9.8": {
                     doAAC198();
                     break;
                 }
@@ -116,35 +115,35 @@ public class Speed extends Module {
                     doTimer();
                     break;
                 }
-                case "ncp y-port slow": {
+                case "[y-port] ncp slow": {
                     doNCPYPortSlow();
                     break;
                 }
-                case "aac 1.9.10": {
+                case "[y-port] aac 1.9.10": {
                     doAAC1910();
                     break;
                 }
-                case "aac 3.3.10": {
+                case "[b-hop] aac 3.3.10": {
                     doAAC3310();
                     break;
                 }
-                case "hive skygiants": {
+                case "[b-hop] hive skygiants": {
                     doHiveSkyGiants();
                     break;
                 }
-                case "ncp y-port fast": {
+                case "[y-port] ncp fast": {
                     doNCPYPortFast();
                     break;
                 }
-                case "aac y-port 3.3.1": {
+                case "[y-port] aac 3.3.1": {
                     doAACYPort331();
                     break;
                 }
-                case "minesecure": {
+                case "[b-hop] minesecure": {
                     doMineSecure();
                     break;
                 }
-                case "aac lowhop 3.3.9": {
+                case "[l-hop] aac 3.3.9": {
                     doAACLowHop339();
                     break;
                 }
@@ -165,7 +164,8 @@ public class Speed extends Module {
                 PlayerUtil.toFwd(0.00149D);
             }
         } else {
-            this.mc.thePlayer.motionX = this.mc.thePlayer.motionZ = this.tick = 0;
+            int tick;
+            this.mc.thePlayer.motionX = this.mc.thePlayer.motionZ = tick = 0;
         }
     }
 
