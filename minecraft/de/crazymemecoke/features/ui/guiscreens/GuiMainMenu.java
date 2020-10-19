@@ -13,9 +13,17 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
+
+    double onlineVer;
+    double localVer = Client.main().getClientVersion();
 
     public void initGui() {
         buttonList.add(new GuiButton(0, width / 2 - 120, height / 2 - 60, 120, 20, I18n.format("menu.singleplayer")));
@@ -24,6 +32,22 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         buttonList.add(new GuiButton(3, width / 2 + 10, height / 2, 120, 20, I18n.format("menu.quit")));
         buttonList.add(new GuiButton(4, width / 2 - 120, height / 2 - 30, 120, 20, "AltManager"));
         buttonList.add(new GuiButton(5, width / 2 + 10, height / 2 - 30, 120, 20, "Credits"));
+
+        try {
+            String versionCheck = "https://pastebin.com/raw/tcuBTU3x";
+            URL url = new URL(versionCheck);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+
+            onlineVer = Double.parseDouble(reader.readLine());
+
+            reader.close();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
@@ -81,6 +105,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         UnicodeFontRenderer font1 = Client.main().fontMgr().font("esp", 50, Font.BOLD);
         UnicodeFontRenderer font2 = Client.main().fontMgr().font("esp", 20, Font.PLAIN);
+        UnicodeFontRenderer font3 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
 
         RenderUtils.drawRect(width / 2 - 130, height / 2 - 70, width / 2 + 140, height / 2 + 30, new Color(55, 55, 55, 150).getRGB());
 
@@ -89,11 +114,26 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         String name = Client.main().getClientName();
         font1.drawStringWithShadow(name, sr.width() / 2 - font1.getStringWidth(name) / 2, 5, -1);
 
-        String playerName = "Name: " + mc.session.getUsername();
-        font2.drawStringWithShadow(playerName, 2, 5, -1);
+        String version = "Version: " + Client.main().getClientVersion() + " / Latest: " + onlineVer;
+        font2.drawStringWithShadow(version, 2, 5, -1);
 
-        String version = "Version: " + Client.main().getClientVersion();
-        font2.drawStringWithShadow(version, 2, 16, -1);
+        String playerName = "Name: " + mc.session.getUsername();
+        font2.drawStringWithShadow(playerName, 2, 16, -1);
+
+        String outdatedVer = "Du benutzt eine veraltete Version! Update noch jetzt um die neusten Features zu erhalten!";
+        String latestVer = "Du benutzt die neuste Version!";
+        String newerVer = "Du benutzt eine neuere Version als erschienen ist - Zeitreisender?";
+
+        if (onlineVer > localVer) {
+            font3.drawStringWithShadow(outdatedVer, 2, sr.height() - 10, -1);
+        }
+        if (onlineVer == localVer) {
+            font3.drawStringWithShadow(latestVer, 2, sr.height() - 10, -1);
+        }
+        if(onlineVer < localVer){
+            font3.drawStringWithShadow(newerVer, 2, sr.height() - 10, -1);
+        }
+
 
         /**
          * END OF DRAWING STUFF
