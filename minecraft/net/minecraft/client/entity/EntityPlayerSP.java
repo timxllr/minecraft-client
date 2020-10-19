@@ -3,7 +3,7 @@ package net.minecraft.client.entity;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.movement.NoSlowDown;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.events.MoveEvent;
 import de.crazymemecoke.utils.events.PostMotion;
 import de.crazymemecoke.utils.events.PreMotion;
@@ -270,7 +270,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             return;
         }
         if (message.startsWith(Client.main().getClientPrefix())) {
-            Notify.chat("Befehl nicht gefunden - versuche " + Client.main().getClientPrefix() + "help!");
+            NotifyUtil.chat("Befehl nicht gefunden - versuche " + Client.main().getClientPrefix() + "help!");
             return;
         }
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));

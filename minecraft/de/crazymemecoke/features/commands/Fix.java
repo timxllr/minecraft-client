@@ -1,7 +1,7 @@
 package de.crazymemecoke.features.commands;
 
 import de.crazymemecoke.manager.commandmanager.Command;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.Wrapper;
 
 public class Fix extends Command {
@@ -12,9 +12,9 @@ public class Fix extends Command {
     public void execute(String[] args) {
         if (args.length == 0) {
             Wrapper.mc.thePlayer.motionY = 0.1;
-            Notify.chat("Deine PlayerPos wurde gefixed");
+            NotifyUtil.chat("Deine PlayerPos wurde gefixed");
         } else {
-            Notify.chat(syntax);
+            NotifyUtil.chat(syntax);
         }
     }
 

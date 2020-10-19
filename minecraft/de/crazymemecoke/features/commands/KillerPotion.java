@@ -1,7 +1,7 @@
 package de.crazymemecoke.features.commands;
 
 import de.crazymemecoke.manager.commandmanager.Command;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -18,10 +18,10 @@ public class KillerPotion extends Command {
     public void execute(String[] args) {
         if (args.length == 0) {
             if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
-                Notify.chat("Bitte leere den ersten Slot in der Hotbar!");
+                NotifyUtil.chat("Bitte leere den ersten Slot in der Hotbar!");
                 return;
             } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
-                Notify.chat("Nur in Kreativmodus verfügbar!");
+                NotifyUtil.chat("Nur in Kreativmodus verfügbar!");
                 return;
             }
             ItemStack stack = new ItemStack(Items.potionitem);
@@ -35,9 +35,9 @@ public class KillerPotion extends Command {
             stack.setTagInfo("CustomPotionEffects", effects);
             stack.setStackDisplayName(itemName);
             Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, stack));
-            Notify.chat("Du hast eine KillerPotion erhalten!");
+            NotifyUtil.chat("Du hast eine KillerPotion erhalten!");
         } else {
-            Notify.chat(syntax);
+            NotifyUtil.chat(syntax);
         }
     }
 

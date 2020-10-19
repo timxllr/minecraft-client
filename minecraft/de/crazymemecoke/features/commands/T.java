@@ -3,7 +3,7 @@ package de.crazymemecoke.features.commands;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 
 public class T extends Command {
 	
@@ -25,7 +25,7 @@ public class T extends Command {
 				}
 			}
 		} else {
-			Notify.chat(syntax);
+			NotifyUtil.chat(syntax);
 		}
 	}
 

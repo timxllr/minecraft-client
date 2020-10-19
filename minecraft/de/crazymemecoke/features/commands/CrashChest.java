@@ -1,7 +1,7 @@
 package de.crazymemecoke.features.commands;
 
 import de.crazymemecoke.manager.commandmanager.Command;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -19,12 +19,12 @@ public class CrashChest extends Command {
             if (Wrapper.mc.thePlayer.inventory.getStackInSlot(36) != null) {
                 if (Wrapper.mc.thePlayer.inventory.getStackInSlot(36).getDisplayName()
                         .equals(itemName))
-                    Notify.chat("Du hast bereits eine CrashChest");
+                    NotifyUtil.chat("Du hast bereits eine CrashChest");
                 else
-                    Notify.chat("Ziehe deine Schuhe aus, um die CrashChest zu erhalten!");
+                    NotifyUtil.chat("Ziehe deine Schuhe aus, um die CrashChest zu erhalten!");
                 return;
             } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
-                Notify.chat("Nur im Kreativmodus verfügbar!");
+                NotifyUtil.chat("Nur im Kreativmodus verfügbar!");
                 return;
             }
             ItemStack stack = new ItemStack(Blocks.chest);
@@ -36,9 +36,9 @@ public class CrashChest extends Command {
             stack.setTagInfo("www.masterof13fps.com", nbtTagCompound);
             Wrapper.mc.thePlayer.getInventory()[0] = stack;
             stack.setStackDisplayName(itemName);
-            Notify.chat("Du hast eine CrashChest erhalten!");
+            NotifyUtil.chat("Du hast eine CrashChest erhalten!");
         } else {
-            Notify.chat(syntax);
+            NotifyUtil.chat(syntax);
         }
     }
 

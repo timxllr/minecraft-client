@@ -3,7 +3,7 @@ package de.crazymemecoke.utils;
 import de.crazymemecoke.Client;
 import net.minecraft.util.ChatComponentText;
 
-public class Notify {
+public class NotifyUtil {
 
     public static void debug(String msg) {
         System.out.println(Client.main().getClientName() + " >> " + msg);

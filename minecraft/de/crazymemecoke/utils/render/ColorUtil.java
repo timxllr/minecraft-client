@@ -1,4 +1,4 @@
-package de.crazymemecoke.utils;
+package de.crazymemecoke.utils.render;
 
 import java.awt.Color;
 import java.util.HashMap;

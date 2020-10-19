@@ -1,7 +1,7 @@
 package de.crazymemecoke.features.commands;
 
 import de.crazymemecoke.manager.commandmanager.Command;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.item.ItemStack;
 
@@ -12,13 +12,13 @@ public class Rename extends Command {
     @Override
     public void execute(String[] args) {
         if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
-            Notify.chat("Nur im Kreativmodus verfügbar!");
+            NotifyUtil.chat("Nur im Kreativmodus verfügbar!");
         }
         if (args.length == 0) {
-            Notify.chat(syntax);
+            NotifyUtil.chat(syntax);
         } else {
             if (Wrapper.mc.thePlayer.getHeldItem() == null) {
-                Notify.chat("Halte ein Item in der Hand!");
+                NotifyUtil.chat("Halte ein Item in der Hand!");
                 return;
             }
             String message = args[0];
@@ -27,7 +27,7 @@ public class Rename extends Command {
             message = message.replace("&", "§").replace("&", "§");
             ItemStack item = Wrapper.mc.thePlayer.inventory.getCurrentItem();
             item.setStackDisplayName(message);
-            Notify.chat("Item umbenannt zu: \"" + message + "\".");
+            NotifyUtil.chat("Item umbenannt zu: \"" + message + "\".");
         }
     }
 

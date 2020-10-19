@@ -2,7 +2,7 @@ package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.altmanager.AltManager;
-import de.crazymemecoke.utils.Colors;
+import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import de.crazymemecoke.utils.time.TimerUtil;

@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.utils.Colors;
+import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.JSONUtil;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;

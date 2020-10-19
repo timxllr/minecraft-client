@@ -2,7 +2,7 @@ package de.crazymemecoke.features.commands;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 
 public class Help extends Command {
 
@@ -11,13 +11,13 @@ public class Help extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length == 0) {
-            Notify.chat("Alle Befehle:");
+            NotifyUtil.chat("Alle Befehle:");
 
             for (Command c : Client.main().getCommandManager().getCommands()) {
-                Notify.chat(Client.main().getClientPrefix() + c.getName().toLowerCase());
+                NotifyUtil.chat(Client.main().getClientPrefix() + c.getName().toLowerCase());
             }
         } else {
-            Notify.chat(syntax);
+            NotifyUtil.chat(syntax);
         }
     }
 

@@ -3,6 +3,7 @@ package de.crazymemecoke.utils;
 import java.awt.Color;
 import java.nio.FloatBuffer;
 
+import de.crazymemecoke.utils.render.ColorUtil;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;

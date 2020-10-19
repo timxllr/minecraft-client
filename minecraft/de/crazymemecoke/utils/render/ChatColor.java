@@ -1,4 +1,4 @@
-package de.crazymemecoke.utils;
+package de.crazymemecoke.utils.render;
 
 import com.google.common.collect.Maps;
 

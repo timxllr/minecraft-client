@@ -1,4 +1,4 @@
-package de.crazymemecoke.utils;
+package de.crazymemecoke.utils.render;
 
 public enum Colors {
     BLACK(-16711423),

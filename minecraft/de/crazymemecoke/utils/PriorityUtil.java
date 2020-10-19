@@ -1,6 +1,6 @@
 package de.crazymemecoke.utils;
 
-public final class Priority {
+public final class PriorityUtil {
     public static final byte HIGHEST = 0;
     public static final byte HIGH = 1;
     public static final byte MEDIUM = 2;
@@ -10,10 +10,11 @@ public final class Priority {
 
     static {
         VALUE_ARRAY = new byte[]{
-
-                0, 1,
+                0,
+                1,
                 2,
                 3,
-                4};
+                4,
+        };
     }
 }

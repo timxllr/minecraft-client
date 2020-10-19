@@ -1,7 +1,7 @@
 package de.crazymemecoke.features.commands;
 
 import de.crazymemecoke.manager.commandmanager.Command;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
@@ -14,13 +14,13 @@ public class Enchant extends Command {
     public void execute(String[] args) {
 
         if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode)
-            Notify.chat("Nur im Kreativmodus verfügbar!");
+            NotifyUtil.chat("Nur im Kreativmodus verfügbar!");
 
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("hand")) {
                 ItemStack currentItem = Wrapper.mc.thePlayer.inventory.getCurrentItem();
                 if (currentItem == null)
-                    Notify.chat("Halte ein Item in der Hand!");
+                    NotifyUtil.chat("Halte ein Item in der Hand!");
                 for (Enchantment enchantment : Enchantment.enchantmentsList)
                     try {
                         if (enchantment == Enchantment.silkTouch)
@@ -46,12 +46,12 @@ public class Enchant extends Command {
 
                         }
                 }
-                Notify.chat("Erfolgreich alle Items verzaubert!");
+                NotifyUtil.chat("Erfolgreich alle Items verzaubert!");
             } else {
-                Notify.chat(syntax);
+                NotifyUtil.chat(syntax);
             }
         } else {
-            Notify.chat(syntax);
+            NotifyUtil.chat(syntax);
         }
     }
 

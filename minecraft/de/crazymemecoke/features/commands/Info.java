@@ -2,7 +2,7 @@ package de.crazymemecoke.features.commands;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
-import de.crazymemecoke.utils.Notify;
+import de.crazymemecoke.utils.NotifyUtil;
 
 public class Info extends Command {
 
@@ -11,11 +11,11 @@ public class Info extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length == 0) {
-            Notify.chat("Client-Name: " + Client.main().getClientName());
-            Notify.chat("Client-Version: " + Client.main().getClientVersion());
-            Notify.chat("Client-Author: " + Client.main().getClientCoder());
+            NotifyUtil.chat("Client-Name: " + Client.main().getClientName());
+            NotifyUtil.chat("Client-Version: " + Client.main().getClientVersion());
+            NotifyUtil.chat("Client-Author: " + Client.main().getClientCoder());
         } else {
-            Notify.chat(syntax);
+            NotifyUtil.chat(syntax);
         }
     }
 
