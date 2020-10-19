@@ -277,10 +277,7 @@ public class Interface extends GuiIngame {
                     gui.drawGui(1, 30, 72);
                     break;
                 }
-                case "vortex": {
-                    gui.drawGui(1, 20, 72);
-                    break;
-                }
+                case "vortex":
                 case "suicide": {
                     gui.drawGui(1, 20, 72);
                     break;
@@ -293,14 +290,8 @@ public class Interface extends GuiIngame {
                     gui.drawGui(3, 15, 95);
                     break;
                 }
-                case "saint": {
-                    gui.drawGui(3, 15, 65);
-                    break;
-                }
-                case "icarus old": {
-                    gui.drawGui(3, 15, 65);
-                    break;
-                }
+                case "saint":
+                case "icarus old":
                 case "icarus new": {
                     gui.drawGui(3, 15, 65);
                     break;
