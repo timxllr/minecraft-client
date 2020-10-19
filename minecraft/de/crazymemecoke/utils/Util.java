@@ -11,118 +11,20 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.GuiConnecting;
-import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Session;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Util {
     private static final ArrayList<TimeScheduledPacket> packetQueue = new ArrayList();
     public static Minecraft mc = Minecraft.mc();
-    private static final AtomicInteger CONNECTION_ID = new AtomicInteger(0);
-    private static final Logger logger = LogManager.getLogger();
-    private NetworkManager networkManager;
-
-    public static double eval(String str) {
-        return new Object() {
-            final int pos = -1;
-            int c;
-
-            void eatSpace() {
-                while (Character.isWhitespace(this.c)) {
-
-                }
-            }
-
-            double parse() {
-
-                double v = parseExpression();
-                if (this.c != -1)
-                    throw new RuntimeException("Unexpected: " + (char) this.c);
-                return v;
-            }
-
-            double parseExpression() {
-                double v = parseTerm();
-                while (true) {
-                    eatSpace();
-                    if (this.c == 43) {
-                        //
-                        v += parseTerm();
-                    } else {
-                        if (this.c != 45)
-                            break;
-                        //
-                        v -= parseTerm();
-                    }
-                }
-                return v;
-            }
-
-            double parseTerm() {
-                double v = parseFactor();
-                while (true) {
-                    eatSpace();
-                    if (this.c == 47) {
-                        //
-                        v /= parseFactor();
-                    } else {
-                        if ((this.c != 42) && (this.c != 40))
-                            break;
-                        if (this.c == 42) //
-                            v *= parseFactor();
-                    }
-                }
-                return v;
-            }
-
-            double parseFactor() {
-                boolean negate = false;
-                eatSpace();
-                double v = 0;
-                if (this.c == 40) {
-
-                    double v1 = parseExpression();
-                    if (this.c == 41) {
-
-                    }
-                } else {
-                    if ((this.c == 43) || (this.c == 45)) {
-                        negate = this.c == 45;
-
-                        eatSpace();
-                    }
-                    StringBuilder sb = new StringBuilder();
-                    while (((this.c >= 48) && (this.c <= 57)) || (this.c == 46)) {
-                        sb.append((char) this.c);
-
-                    }
-                    if (sb.length() == 0)
-                        throw new RuntimeException("Unexpected: " + (char) this.c);
-                    v = Double.parseDouble(sb.toString());
-                }
-                eatSpace();
-                if (this.c == 94) {
-
-                    v = Math.pow(v, parseFactor());
-                }
-                if (negate)
-                    v = -v;
-                return v;
-            }
-        }.parse();
-    }
 
     protected int charAt(int pos) {
         // TODO Auto-generated method stub
