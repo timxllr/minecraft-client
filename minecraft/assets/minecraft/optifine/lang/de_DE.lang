@@ -5,6 +5,10 @@
 #   TheHADILP 2016-5-20 ---- 2019-02-18
 #   Nerdyyy 2018-1-6
 #   OfficialCRUGG / CRUGG 2019-03-17
+#   CrazyMemeCoke / Dev of the Client / Starting from 10/19/2020
+
+# Gui Screens
+menu.options=Optionen
 
 # General
 of.general.ambiguous=Unklar
@@ -70,7 +74,7 @@ of.message.capeOF.reloadCape=Der Umhang wird in 15 Sekunden neu geladen.
 
 of.message.capeOF.error1=Mojang Authentifizierung fehlgeschlagen.
 of.message.capeOF.error2=Fehler: %s
- 
+
 # Video settings
 
 options.graphics.tooltip.1=Grafikmodus
@@ -176,7 +180,7 @@ of.options.CHUNK_LOADING.tooltip.8=die FPS erhöhen, indem es einen zweiten CPU-
 of.options.chunkLoading.smooth=Weich
 of.options.chunkLoading.multiCore=Multi-Core
 
-of.options.shaders=Shader...
+of.options.shaders=Shader
 of.options.shadersTitle=Shader
 
 of.options.shaders.packNone=Aus
