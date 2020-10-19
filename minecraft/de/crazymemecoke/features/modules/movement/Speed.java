@@ -5,6 +5,7 @@ import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.utils.Notify;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
 import de.crazymemecoke.utils.events.MoveEvent;
@@ -37,6 +38,7 @@ public class Speed extends Module {
         mode.add("Frames");
         mode.add("Ground");
         mode.add("Timer");
+        mode.add("Hive SkyGiants");
 
         sM.newSetting(new Setting("Mode", this, "Jump", mode));
         sM.newSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
@@ -120,12 +122,30 @@ public class Speed extends Module {
                     doAAC3310();
                     break;
                 }
+                case "hive skygiants": {
+                    double d, blocks;
+                    if (EntityUtils.isMoving()) {
+                        if (this.mc.thePlayer.onGround) {
+                            this.mc.timer.timerSpeed = 2.0F;
+                            this.mc.thePlayer.jump();
+                        } else {
+                            this.mc.timer.timerSpeed = 1.0F;
+                            this.mc.thePlayer.jumpMovementFactor = 0.026F;
+                            d = 1.0157D;
+                            blocks = PlayerUtil.getSpeed();
+                            this.mc.thePlayer.motionX = -Math.sin((double) PlayerUtil.getDirection()) * d * blocks;
+                            this.mc.thePlayer.motionZ = Math.cos((double) PlayerUtil.getDirection()) * d * blocks;
+                        }
+                    }
+
+                    break;
+                }
             }
         }
     }
 
     private void doAAC3310() {
-        if(!mc.thePlayer.isBlocking()){
+        if (!mc.thePlayer.isBlocking()) {
             if (this.mc.thePlayer.hurtTime == 0) {
                 if (EntityUtils.isMoving()) {
                     if (this.legitHop) {
