@@ -34,8 +34,10 @@ public class Speed extends Module {
         mode.add("AAC 1.9.10");
         mode.add("AAC 3.3.10");
         mode.add("AAC Y-Port 3.3.1");
+        mode.add("AAC LowHop 3.3.9");
         mode.add("NCP Y-Port Slow");
         mode.add("NCP Y-Port Fast");
+        mode.add("MineSecure");
         mode.add("Motion");
         mode.add("Jump");
         mode.add("Frames");
@@ -65,6 +67,7 @@ public class Speed extends Module {
     private int ticks = 0;
     private float prevYaw;
     private boolean legitHop = false;
+    private int tick;
 
     public void onEnable() {
         framesDelay.setLastMS();
@@ -137,7 +140,23 @@ public class Speed extends Module {
                     doAACYPort331();
                     break;
                 }
+                case "minesecure": {
+                    doMineSecure();
+                    break;
+                }
             }
+        }
+    }
+
+    private void doMineSecure() {
+        if (this.mc.thePlayer.onGround && EntityUtils.isMoving() && !this.mc.thePlayer.isInWater()) {
+            this.mc.thePlayer.jump();
+        } else if (EntityUtils.isMoving() && !this.mc.thePlayer.isInWater()) {
+            PlayerUtil.setSpeed(1.0D);
+        }
+
+        if (!EntityUtils.isMoving()) {
+            this.mc.thePlayer.motionX = this.mc.thePlayer.motionZ = 0.0D;
         }
     }
 
