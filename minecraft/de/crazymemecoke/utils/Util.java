@@ -26,7 +26,7 @@ public class Util {
     private static final ArrayList<TimeScheduledPacket> packetQueue = new ArrayList();
     public static Minecraft mc = Minecraft.mc();
 
-    protected int charAt(int pos) {
+    protected int charAt() {
         // TODO Auto-generated method stub
         return 0;
     }
@@ -40,7 +40,7 @@ public class Util {
         packetQueue.add(new TimeScheduledPacket(p, delayInMilliseconds));
     }
 
-    public static void damagePlayer(int amount) {
+    public static void damagePlayer() {
         for (int i = 0; i < 4; i++) {
             Minecraft.mc().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(
                     Minecraft.mc().thePlayer.posX, Minecraft.mc().thePlayer.posY + 1.01D,
@@ -117,7 +117,7 @@ public class Util {
     }
 
     public static Double distance(double x1, double y1, double z1, double x2, double y2, double z2) {
-        Double distance = null;
+        Double distance;
         distance = Double.valueOf(Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2)));
         return distance;
     }
