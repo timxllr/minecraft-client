@@ -144,7 +144,28 @@ public class Speed extends Module {
                     doMineSecure();
                     break;
                 }
+                case "aac lowhop 3.3.9": {
+                    doAACLowHop339();
+                    break;
+                }
             }
+        }
+    }
+
+    private void doAACLowHop339() {
+        if (EntityUtils.isMoving()) {
+            if (this.mc.thePlayer.hurtTime == 0) {
+                if (this.mc.thePlayer.onGround) {
+                    this.mc.thePlayer.jump();
+                    this.mc.thePlayer.motionY = 0.3875D;
+                } else {
+                    mc.thePlayer.motionY -= 0.0145D;
+                }
+
+                PlayerUtil.toFwd(0.00149D);
+            }
+        } else {
+            this.mc.thePlayer.motionX = this.mc.thePlayer.motionZ = this.tick = 0;
         }
     }
 
