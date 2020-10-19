@@ -18,11 +18,11 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
     public void initGui() {
         buttonList.add(new GuiButton(0, width / 2 - 120, height / 2 - 60, 120, 20, I18n.format("menu.singleplayer")));
-        buttonList.add(new GuiButton(1, width / 2 - 120, height / 2 - 30, 120, 20, I18n.format("menu.multiplayer")));
-        buttonList.add(new GuiButton(2, width / 2 + 10, height / 2 - 60, 120, 20, I18n.format("menu.options")));
-        buttonList.add(new GuiButton(3, width / 2 + 10, height / 2 - 30, 120, 20, I18n.format("menu.quit")));
-        buttonList.add(new GuiButton(4, width / 2 - 120, height / 2, 120, 20, "AltManager"));
-        buttonList.add(new GuiButton(5, width / 2 + 10, height / 2, 120, 20, "Credits"));
+        buttonList.add(new GuiButton(1, width / 2 + 10, height / 2 - 60, 120, 20, I18n.format("menu.multiplayer")));
+        buttonList.add(new GuiButton(2, width / 2 - 120, height / 2, 120, 20, I18n.format("menu.options")));
+        buttonList.add(new GuiButton(3, width / 2 + 10, height / 2, 120, 20, I18n.format("menu.quit")));
+        buttonList.add(new GuiButton(4, width / 2 - 120, height / 2 - 30, 120, 20, "AltManager"));
+        buttonList.add(new GuiButton(5, width / 2 + 10, height / 2 - 30, 120, 20, "Credits"));
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
