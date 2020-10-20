@@ -4,6 +4,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.RenderHelper;
+import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.Rainbow;
 import net.minecraft.client.Minecraft;
 import org.apache.commons.lang3.StringUtils;
@@ -101,40 +102,44 @@ public class TabGUI {
                 RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
                 break;
             }
+            case "ambien newest": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getAmbienNewestGreyMainColor());
+                break;
+            }
             case "vortex": {
                 RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
                 break;
             }
             case "suicide": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.main().getSuicideBlueGreyColor());
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getSuicideBlueGreyColor());
                 break;
             }
             case "apinity": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.main().getApinityGreyColor());
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getApinityGreyColor());
                 break;
             }
             case "huzuni": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.main().getHuzuniGreyColor());
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getHuzuniGreyColor());
                 break;
             }
             case "saint": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.main().getSaintDarkBlueColor());
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getSaintDarkBlueColor());
                 break;
             }
             case "icarus old": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.main().getIcarusOldGreyColor());
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getIcarusOldGreyColor());
                 break;
             }
             case "icarus new": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.main().getIcarusNewGreyColor());
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getIcarusNewGreyColor());
                 break;
             }
             case "ambien new": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.main().getAmbienNewDarkGreyColor());
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getAmbienNewDarkGreyColor());
                 break;
             }
             case "hero": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Client.main().getHeroGreyColor());
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getHeroGreyColor());
                 break;
             }
         }
@@ -144,12 +149,17 @@ public class TabGUI {
 
             switch (mode) {
                 case "ambien old": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getAmbienOldBlueColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getAmbienOldBlueColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff, -1);
                     break;
                 }
+                case "ambien newest": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getAmbienNewestBlueColor() : 0);
+                    Client.main().fontMgr().font("BebasNeue", 20, Font.PLAIN).drawCenteredString((tabsList.get(i)).tabName.toUpperCase(), x + 40, yOff + 2, -1);
+                    break;
+                }
                 case "vortex": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getVortexRedColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getVortexRedColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff, -1);
                     break;
                 }
@@ -159,37 +169,37 @@ public class TabGUI {
                     break;
                 }
                 case "apinity": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getApinityBlueColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getApinityBlueColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
                 case "huzuni": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getHuzuniBlueColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getHuzuniBlueColor() : 0);
                     Client.main().fontMgr().font("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
                 case "saint": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getSaintDarkTealColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getSaintDarkTealColor() : 0);
                     Client.main().fontMgr().font("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
                 case "icarus old": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getIcarusOldOrangeColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getIcarusOldOrangeColor() : 0);
                     Client.main().fontMgr().font("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
                 case "icarus new": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getIcarusNewBlueColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getIcarusNewBlueColor() : 0);
                     Client.main().fontMgr().font("BigNoodleTitling", 20, Font.BOLD).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff + 1, -1);
                     break;
                 }
                 case "ambien new": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getAmbienNewBlueColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getAmbienNewBlueColor() : 0);
                     Client.main().fontMgr().font("BigNoodleTitling", 20, Font.PLAIN).drawCenteredString(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 30, yOff + 1, -1);
                     break;
                 }
                 case "hero": {
-                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Client.main().getHeroGreenColor() : 0);
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getHeroGreenColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x, yOff + 1, -1);
                     break;
                 }

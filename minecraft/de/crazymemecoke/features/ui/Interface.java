@@ -9,6 +9,7 @@ import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -83,16 +84,16 @@ public class Interface extends GuiIngame {
         RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 40, 13, new Color(0, 0, 0, 150).getRGB());
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 70, 13, Client.main().getAmbienOldBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 70, 13, Colors.main().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-            RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 40, 13, Client.main().getAmbienOldBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 40, 13, Colors.main().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 40, 13, Client.main().getAmbienOldBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 40, 13, Colors.main().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-            RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 40, 13, Client.main().getAmbienOldBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 40, 13, Colors.main().getAmbienOldBlueColor());
         }
 
         Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("W", s.width() - 66, s.height() - 73, -1);
@@ -131,19 +132,19 @@ public class Interface extends GuiIngame {
         switch (mode) {
             case "ambien old": {
                 RenderUtils.drawRect(0, 0, 73, 25, new Color(0, 0, 0).getRGB());
-                Client.main().fontMgr().ambien45.drawStringWithShadow("A", 3, 1, Client.main().getAmbienOldBlueColor());
-                Client.main().fontMgr().ambien45.drawStringWithShadow("mbien", 17, 1, Client.main().getGrey());
+                Client.main().fontMgr().ambien45.drawStringWithShadow("A", 3, 1, Colors.main().getAmbienOldBlueColor());
+                Client.main().fontMgr().ambien45.drawStringWithShadow("mbien", 17, 1, Colors.main().getGrey());
                 Client.main().fontMgr().ambien20.drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 55, 0, 0x349ac0);
                 break;
             }
             case "vortex": {
                 GL11.glPushMatrix();
                 GL11.glScalef(2f, 2f, 2f);
-                Client.main().fontMgr().vortex20.drawString("V", 0, -2, Client.main().getVortexRedColor());
+                Client.main().fontMgr().vortex20.drawString("V", 0, -2, Colors.main().getVortexRedColor());
                 GL11.glScalef(2f / 4, 2f / 4, 2f / 4);
                 GL11.glPopMatrix();
 
-                Client.main().fontMgr().vortex20.drawString("ortex", 18, 6, Client.main().getGrey());
+                Client.main().fontMgr().vortex20.drawString("ortex", 18, 6, Colors.main().getGrey());
 
                 GL11.glPushMatrix();
                 GL11.glScalef(0.8f, 0.8f, 0.8f);
@@ -152,23 +153,23 @@ public class Interface extends GuiIngame {
                 break;
             }
             case "suicide": {
-                Client.main().fontMgr().font("Comfortaa", 30, Font.PLAIN).drawStringWithShadow("SUICIDE", 2, 3, Client.main().getSuicideBlueColor());
-                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 68, 4, Client.main().getSuicideBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 30, Font.PLAIN).drawStringWithShadow("SUICIDE", 2, 3, Colors.main().getSuicideBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 68, 4, Colors.main().getSuicideBlueColor());
 
-                RenderUtils.drawRect(0, 110, 75, 151, Client.main().getSuicideDarkBlueGreyColor());
-                RenderUtils.drawRect(0, 110, 73, 153, Client.main().getSuicideBlueGreyColor());
+                RenderUtils.drawRect(0, 110, 75, 151, Colors.main().getSuicideDarkBlueGreyColor());
+                RenderUtils.drawRect(0, 110, 73, 153, Colors.main().getSuicideBlueGreyColor());
 
-                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("FPS: ", 2, 115, Client.main().getSuicideBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("FPS: ", 2, 115, Colors.main().getSuicideBlueColor());
                 Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(Minecraft.debugFPS), 26, 115, -1);
 
-                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("Ping: ", 2, 127, Client.main().getSuicideBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("Ping: ", 2, 127, Colors.main().getSuicideBlueColor());
                 try {
                     Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(mc.getCurrentServerData().pingToServer), 30, 127, -1);
                 } catch (Exception ex) {
                     Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("N/A", 30, 127, -1);
                 }
 
-                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("Time: ", 2, 139, Client.main().getSuicideBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("Time: ", 2, 139, Colors.main().getSuicideBlueColor());
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
                 Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(dtf.format(now), 32, 139, -1);
@@ -177,19 +178,19 @@ public class Interface extends GuiIngame {
             case "apinity": {
                 RenderUtils.drawRect(0, 35, 40, 175, new Color(0, 0, 0, 150).getRGB());
 
-                Client.main().fontMgr().font("Raleway Light", 45, Font.PLAIN).drawStringWithShadow("Apinity", 1, 1, Client.main().getApinityGreyColor());
-                Client.main().fontMgr().font("Raleway Light", 30, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 72, 1, Client.main().getApinityBlueColor());
+                Client.main().fontMgr().font("Raleway Light", 45, Font.PLAIN).drawStringWithShadow("Apinity", 1, 1, Colors.main().getApinityGreyColor());
+                Client.main().fontMgr().font("Raleway Light", 30, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 72, 1, Colors.main().getApinityBlueColor());
                 try {
-                    Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: " + mc.getCurrentServerData().pingToServer, 2, 116, Client.main().getApinityBlueColor());
+                    Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: " + mc.getCurrentServerData().pingToServer, 2, 116, Colors.main().getApinityBlueColor());
                 } catch (Exception ex) {
-                    Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: N/A", 1, 116, Client.main().getApinityBlueColor());
+                    Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: N/A", 1, 116, Colors.main().getApinityBlueColor());
                 }
 
-                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("FPS: " + Minecraft.debugFPS, 2, 125, Client.main().getApinityBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("FPS: " + Minecraft.debugFPS, 2, 125, Colors.main().getApinityBlueColor());
 
-                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("X: " + mc.thePlayer.getPosition().getX(), 2, 145, Client.main().getApinityBlueColor());
-                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Y: " + mc.thePlayer.getPosition().getY(), 2, 155, Client.main().getApinityBlueColor());
-                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Z: " + mc.thePlayer.getPosition().getZ(), 2, 165, Client.main().getApinityBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("X: " + mc.thePlayer.getPosition().getX(), 2, 145, Colors.main().getApinityBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Y: " + mc.thePlayer.getPosition().getY(), 2, 155, Colors.main().getApinityBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Z: " + mc.thePlayer.getPosition().getZ(), 2, 165, Colors.main().getApinityBlueColor());
                 break;
             }
             case "huzuni": {
@@ -210,8 +211,8 @@ public class Interface extends GuiIngame {
                 break;
             }
             case "nodus": {
-                mc.fontRendererObj.drawString("Nodus", 2, 2, Client.main().getNodusPurpleColor());
-                mc.fontRendererObj.drawString("v" + Client.main().getClientVersion(), 35, 2, Client.main().getNodusTealColor());
+                mc.fontRendererObj.drawString("Nodus", 2, 2, Colors.main().getNodusPurpleColor());
+                mc.fontRendererObj.drawString("v" + Client.main().getClientVersion(), 35, 2, Colors.main().getNodusTealColor());
                 break;
             }
             case "saint": {
@@ -231,24 +232,24 @@ public class Interface extends GuiIngame {
                 break;
             }
             case "icarus new": {
-                RenderUtils.drawRect(s.width() - 62, 0, s.width(), 20, Client.main().getIcarusNewGreyColor());
+                RenderUtils.drawRect(s.width() - 62, 0, s.width(), 20, Colors.main().getIcarusNewGreyColor());
 
                 Client.main().fontMgr().font("BigNoodleTiltling", 40, Font.BOLD).drawStringWithShadow("Icarus", s.width() - 60, -2, -1);
                 break;
             }
             case "ambien new": {
-                RenderUtils.drawRect(0, 10, 112, 40, Client.main().getAmbienNewDarkGreyColor());
+                RenderUtils.drawRect(0, 10, 112, 40, Colors.main().getAmbienNewDarkGreyColor());
 
-                Client.main().fontMgr().font("FIFA Welcome", 60, Font.PLAIN).drawStringWithShadow("A", 2, 7, Client.main().getAmbienNewBlueColor());
+                Client.main().fontMgr().font("FIFA Welcome", 60, Font.PLAIN).drawStringWithShadow("A", 2, 7, Colors.main().getAmbienNewBlueColor());
                 Client.main().fontMgr().font("FIFA Welcome", 60, Font.PLAIN).drawStringWithShadow("mbien", 20, 7, -1);
-                Client.main().fontMgr().font("BigNoodleTiltling", 20, Font.PLAIN).drawStringWithShadow("V", 89, 24, Client.main().getAmbienNewBlueColor());
+                Client.main().fontMgr().font("BigNoodleTiltling", 20, Font.PLAIN).drawStringWithShadow("V", 89, 24, Colors.main().getAmbienNewBlueColor());
                 Client.main().fontMgr().font("BigNoodleTiltling", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 96, 24, -1);
                 break;
             }
             case "hero": {
                 RenderUtils.drawRect(0, 0, 60, 21, new Color(0, 0, 0, 70).getRGB());
 
-                Client.main().fontMgr().font("Raleway Light", 55, Font.PLAIN).drawStringWithShadow("Hero", -2, -4, Client.main().getHeroGreenColor());
+                Client.main().fontMgr().font("Raleway Light", 55, Font.PLAIN).drawStringWithShadow("Hero", -2, -4, Colors.main().getHeroGreenColor());
                 break;
             }
             case "klientus": {
@@ -263,6 +264,23 @@ public class Interface extends GuiIngame {
                 Client.main().fontMgr().font("Verdana", 18, Font.PLAIN).drawStringWithShadow(dtf.format(now), 32, 32, -1);
                 break;
             }
+            case "ambien newest": {
+                int width = 110;
+                int height = 110;
+                int x = -5;
+                int y = -15;
+
+                int x2 = 15;
+                int y2 = 65;
+
+                int x3 = 10;
+                int y3 = 70;
+
+                RenderUtils.drawRect(x2, y2, x2 + 79, y2 + 10, Colors.main().getAmbienNewestGreyMainColor());
+                RenderUtils.drawRect(x3, y3, x3 + 84, y3 + 10, Colors.main().getAmbienNewestGreyMainColor());
+                RenderUtils.drawImage(Client.main().getAmbienWatermark(), x, y, width, height);
+                break;
+            }
         }
     }
 
@@ -275,6 +293,10 @@ public class Interface extends GuiIngame {
             switch (mode) {
                 case "ambien old": {
                     gui.drawGui(1, 30, 72);
+                    break;
+                }
+                case "ambien newest": {
+                    gui.drawGui(11, 75, 83);
                     break;
                 }
                 case "vortex":

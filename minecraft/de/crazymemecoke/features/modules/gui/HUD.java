@@ -23,6 +23,7 @@ public class HUD extends Module {
 
         design.add("Ambien Old");
         design.add("Ambien New");
+        design.add("Ambien Newest");
         design.add("Vortex");
         design.add("Suicide");
         design.add("Apinity");
