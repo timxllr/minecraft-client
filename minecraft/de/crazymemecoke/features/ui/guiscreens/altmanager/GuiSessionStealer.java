@@ -145,7 +145,7 @@ public class GuiSessionStealer extends GuiScreen {
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.main().fontMgr().comfortaa20.drawString("REDEEM SESSION TOKEN", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("REDEEM SESSION TOKEN") / 2, height / 2 - 140, Colors.GREY.c);
+        Client.main().fontMgr().comfortaa20.drawString("REDEEM SESSION TOKEN", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("REDEEM SESSION TOKEN") / 2, height / 2 - 140, Colors.main().getGrey());
         Client.main().fontMgr().comfortaa20.drawString("SESSION ID", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("SESSION ID") / 2, height - 265, -1);
 
         UnicodeFontRenderer font = Client.main().fontMgr().comfortaa18;

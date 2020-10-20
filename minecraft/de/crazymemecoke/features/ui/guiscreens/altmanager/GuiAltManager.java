@@ -170,7 +170,7 @@ public class GuiAltManager extends GuiScreen {
         int y2 = (int) (sliderY + height - radius);
         boolean yAdd = height < 2;
         boolean hover = mouseX >= x && mouseX <= x2 && mouseY >= y - (yAdd ? 2 : 0) && mouseY <= y2 + (yAdd ? 2 : 0);
-        int color = !hover && !clickedSlider ? Colors.GREEN.c : Colors.DARKGREEN.c;
+        int color = !hover && !clickedSlider ? Colors.main().getHeroGreenColor() : Colors.main().getHeroGreenColor();
         if (Mouse.isButtonDown(0)) {
             if (!clickedSlider && hover) {
                 clickedSlider = true;
@@ -280,18 +280,18 @@ public class GuiAltManager extends GuiScreen {
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
         byte y = 0;
-        Client.main().fontMgr().comfortaa20.drawString("AltManager", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("AltManager") / 2, 21, RenderUtils.reAlpha(Colors.DARKGREY.c, opacity));
+        Client.main().fontMgr().comfortaa20.drawString("AltManager", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("AltManager") / 2, 21, RenderUtils.reAlpha(Colors.main().getGrey(), opacity));
         Client.main().fontMgr().comfortaa20.drawString("AltManager", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("AltManager") / 2, 20, RenderUtils.reAlpha(-1, opacity));
         Gui.drawRect(10, 50, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(darkGray, opacity));
         Gui.drawRect(sr.width() - 150, 50, sr.width() - 5, sr.height() - 10, RenderUtils.reAlpha(-16119286, 0.75F * opacity));
-        Client.main().fontMgr().comfortaa20.drawString("Status:", (sr.width() - 145), 55, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
+        Client.main().fontMgr().comfortaa20.drawString("Status:", (sr.width() - 145), 55, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
         boolean premium = mc.session.getProfile().isComplete();
         String strPremium = premium ? "Premium" : "Cracked";
-        Client.main().fontMgr().comfortaa20.drawString(strPremium, (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(strPremium) - 8), 55, premium ? RenderUtils.reAlpha(Colors.YELLOW.c, opacity) : RenderUtils.reAlpha(Colors.DARKRED.c, opacity));
-        Client.main().fontMgr().comfortaa20.drawString("Username:", (sr.width() - 145), 70, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
-        Client.main().fontMgr().comfortaa20.drawString(mc.session.getUsername(), (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(mc.session.getUsername()) - 8), 70, RenderUtils.reAlpha(Colors.MAGENTA.c, opacity));
-        Client.main().fontMgr().comfortaa20.drawString("Alts:", (sr.width() - 145), 85, RenderUtils.reAlpha(Colors.GREEN.c, opacity));
-        Client.main().fontMgr().comfortaa20.drawString(String.valueOf(AltManager.slotList.size()), (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(String.valueOf(AltManager.slotList.size())) - 8), 85, RenderUtils.reAlpha(Colors.WHITE.c, opacity));
+        Client.main().fontMgr().comfortaa20.drawString(strPremium, (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(strPremium) - 8), 55, premium ? RenderUtils.reAlpha(Colors.main().getSaintOrangeColor(), opacity) : RenderUtils.reAlpha(Colors.main().getVortexRedColor(), opacity));
+        Client.main().fontMgr().comfortaa20.drawString("Username:", (sr.width() - 145), 70, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
+        Client.main().fontMgr().comfortaa20.drawString(mc.session.getUsername(), (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(mc.session.getUsername()) - 8), 70, RenderUtils.reAlpha(Colors.main().getNodusPurpleColor(), opacity));
+        Client.main().fontMgr().comfortaa20.drawString("Alts:", (sr.width() - 145), 85, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
+        Client.main().fontMgr().comfortaa20.drawString(String.valueOf(AltManager.slotList.size()), (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(String.valueOf(AltManager.slotList.size())) - 8), 85, RenderUtils.reAlpha(-1, opacity));
 
         byte MIN_HEIGHT = 75;
         int MAX_HEIGHT = sr.height() - 35;

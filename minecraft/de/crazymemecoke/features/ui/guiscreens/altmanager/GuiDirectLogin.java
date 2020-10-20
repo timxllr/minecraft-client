@@ -95,7 +95,7 @@ public class GuiDirectLogin extends GuiScreen {
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.main().fontMgr().comfortaa20.drawString("DIRECT LOGIN", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("DIRECT LOGIN") / 2, height / 2 - 140, Colors.GREY.c);
+        Client.main().fontMgr().comfortaa20.drawString("DIRECT LOGIN", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("DIRECT LOGIN") / 2, height / 2 - 140, Colors.main().getGrey());
         Client.main().fontMgr().comfortaa20.drawString("MAIL", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
         Client.main().fontMgr().comfortaa20.drawString("PASSWORD", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
         Client.main().fontMgr().comfortaa20.drawString("MAIL : PASS", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("MAIL : PASS") / 2, height - 265, -1);
