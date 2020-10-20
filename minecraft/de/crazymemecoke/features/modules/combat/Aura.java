@@ -28,7 +28,7 @@ public class Aura extends Module {
     SettingsManager sM = Client.main().setMgr();
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
-    double range, cps;
+    double range, cps, ticksExisted;
     float yaw, pitch;
     long current, last;
     boolean teams, players, animals, mobs, villager, invisibles, rotations;
@@ -37,6 +37,7 @@ public class Aura extends Module {
     public Aura() {
         super("Aura", Keyboard.KEY_NONE, Category.COMBAT, -1);
 
+        sM.newSetting(new Setting("Ticks Existed", this, 30, 0, 100, true));
         sM.newSetting(new Setting("Range", this, 4, 3.5, 7, true));
         sM.newSetting(new Setting("CPS", this, 10, 1, 20, true));
         sM.newSetting(new Setting("Teams", this, false));
@@ -56,6 +57,7 @@ public class Aura extends Module {
     @Override
     public void onUpdate() {
         if (state()) {
+            ticksExisted = sM.settingByName("Ticks Existed", this).getNum();
             range = sM.settingByName("Range", this).getNum();
             cps = sM.settingByName("CPS", this).getNum();
             teams = sM.settingByName("Teams", this).getBool();
@@ -201,7 +203,7 @@ public class Aura extends Module {
     }
 
     private boolean canAttack(Entity entity) {
-        return entity != mc.thePlayer && entity.isEntityAlive() && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > 30;
+        return entity != mc.thePlayer && entity.isEntityAlive() && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted;
     }
 
     @EventTarget
