@@ -2,25 +2,13 @@ package de.crazymemecoke.utils.render;
 
 import java.awt.*;
 
-public enum Colors {
-    BLACK(-16711423),
-    BLUE(-16723258),
-    DARKBLUE(-15698006),
-    GREEN(-9581017),
-    DARKGREEN(-11231458),
-    WHITE(-65794),
-    AQUA(-14163205),
-    DARKAQUA(-16548724),
-    GREY(-6710887),
-    DARKGREY(-12303292),
-    RED(-43691),
-    DARKRED(-7864320),
-    ORANGE(-21931),
-    DARKORANGE(-7846912),
-    YELLOW(-171),
-    DARKYELLOW(-7829504),
-    MAGENTA(-43521),
-    DARKMAGENTA(-7864184);
+public class Colors {
+
+    private final static Colors instance = new Colors();
+
+    public static Colors main() {
+        return instance;
+    }
 
     public static final int ambienOldBlueColor = new Color(32, 188, 240).getRGB();
     public static final int ambienNewBlueColor = new Color(0x0090ff).getRGB();
@@ -47,10 +35,130 @@ public enum Colors {
     public static final int heroGreyColor = new Color(0, 0, 0, 70).getRGB();
     public static final int vantaGreyColor = new Color(0x2e3b4a).getRGB();
     public static final int vantaBlueColor = new Color(0x0198d6).getRGB();
+    public static final int ambienNewestBlueColor = new Color(0x00a5d1).getRGB();
+    public static final int ambienNewestGreyMainColor = new Color(0x121110).getRGB();
+    public static final int ambienNewestGreySecondColor = new Color(0x212022).getRGB();
+    public static final int ambienNewestLightGreyColor = new Color(0xaaa6a8).getRGB();
 
     public int c;
 
-    Colors(int co) {
-        this.c = co;
+    public int getNodusPurpleColor() {
+        return nodusPurpleColor;
+    }
+
+    public int getNodusTealColor() {
+        return nodusTealColor;
+    }
+
+    public int getSaintDarkBlueColor() {
+        return saintDarkBlueColor;
+    }
+
+    public int getSaintDarkTealColor() {
+        return saintDarkTealColor;
+    }
+
+    public int getSaintOrangeColor() {
+        return saintOrangeColor;
+    }
+
+    public int getIcarusNewBlueColor() {
+        return icarusNewBlueColor;
+    }
+
+    public int getIcarusNewGreyColor() {
+        return icarusNewGreyColor;
+    }
+
+    public int getIcarusOldGreyColor() {
+        return icarusOldGreyColor;
+    }
+
+    public int getIcarusOldOrangeColor() {
+        return icarusOldOrangeColor;
+    }
+
+    public int getAmbienNewBlueColor() {
+        return ambienNewBlueColor;
+    }
+
+    public int getAmbienNewDarkGreyColor() {
+        return ambienNewDarkGreyColor;
+    }
+
+    public int getHeroGreenColor() {
+        return heroGreenColor;
+    }
+
+    public int getHeroGreyColor() {
+        return heroGreyColor;
+    }
+
+    public int getVantaGreyColor() {
+        return vantaGreyColor;
+    }
+
+    public int getVantaBlueColor() {
+        return vantaBlueColor;
+    }
+
+    public int getAmbienOldBlueColor() {
+        return ambienOldBlueColor;
+    }
+
+    public int getGrey() {
+        return greyColor;
+    }
+
+    public int getVortexRedColor() {
+        return vortexRedColor;
+    }
+
+    public int getSuicideBlueGreyColor() {
+        return suicideBlueGreyColor;
+    }
+
+    public int getSuicideBlueColor() {
+        return suicideBlueColor;
+    }
+
+    public int getSuicideDarkBlueGreyColor() {
+        return suicideDarkBlueGreyColor;
+    }
+
+    public int getGreyColor() {
+        return greyColor;
+    }
+
+    public int getApinityGreyColor() {
+        return apinityGreyColor;
+    }
+
+    public int getApinityBlueColor() {
+        return apinityBlueColor;
+    }
+
+    public int getHuzuniBlueColor() {
+        return huzuniBlueColor;
+    }
+
+    public int getHuzuniGreyColor() {
+        return huzuniGreyColor;
+    }
+
+    public int getAmbienNewestBlueColor() {
+        return ambienNewestBlueColor;
+    }
+
+    public int getAmbienNewestGreyMainColor() {
+        return ambienNewestGreyMainColor;
+    }
+
+    public int getAmbienNewestGreySecondColor() {
+        return ambienNewestGreySecondColor;
+    }
+
+    public int getAmbienNewestLightGreyColor() {
+        return ambienNewestLightGreyColor;
     }
 }
