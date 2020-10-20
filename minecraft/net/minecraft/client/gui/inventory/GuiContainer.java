@@ -1,6 +1,8 @@
 package net.minecraft.client.gui.inventory;
 
 import com.google.common.collect.Sets;
+import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.gui.HUD;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -93,6 +95,7 @@ public abstract class GuiContainer extends GuiScreen {
         this.ignoreMouseUp = true;
     }
 
+    // TODO: InventoryOpen AnimationCurve
     public static double animationCurve(double x) {
         return x == 1 ? 1 : 1 - pow(2, -10 * x);
     }
@@ -125,8 +128,10 @@ public abstract class GuiContainer extends GuiScreen {
 
         float newzoom = (float) (animationCurve(zoom / maxZoom) * maxZoom);
 
-        GlStateManager.translate(left, top, 0);
-        GL11.glScaled(newzoom, newzoom, newzoom);
+        if (Client.main().setMgr().settingByName("GUI Animation", Client.main().modMgr().getModule(HUD.class)).getBool()) {
+            GlStateManager.translate(left, top, 0);
+            GL11.glScaled(newzoom, newzoom, newzoom);
+        }
 
         int i = this.guiLeft;
         int j = this.guiTop;
