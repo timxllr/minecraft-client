@@ -25,47 +25,50 @@ import java.util.ArrayList;
 
 public class Aura extends Module {
 
-    SettingsManager sM = Client.main().setMgr();
+    SettingsManager s = Client.main().setMgr();
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
-    double range, cps;
+    double range, cps, ticksExisted;
     float yaw, pitch;
     long current, last;
-    boolean teams, players, animals, mobs, villager, invisibles, rotations;
+    boolean teams, players, animals, mobs, villager, invisibles, rotations, isAlive;
     String auraMode;
 
     public Aura() {
         super("Aura", Keyboard.KEY_NONE, Category.COMBAT, -1);
 
-        sM.newSetting(new Setting("Range", this, 4, 3.5, 7, true));
-        sM.newSetting(new Setting("CPS", this, 10, 1, 20, true));
-        sM.newSetting(new Setting("Teams", this, false));
-        sM.newSetting(new Setting("Players", this, true));
-        sM.newSetting(new Setting("Animals", this, false));
-        sM.newSetting(new Setting("Mobs", this, false));
-        sM.newSetting(new Setting("Villager", this, false));
-        sM.newSetting(new Setting("Invisibles", this, false));
-        sM.newSetting(new Setting("Rotations", this, true));
+        s.newSetting(new Setting("Range", this, 4, 3.5, 7, true));
+        s.newSetting(new Setting("CPS", this, 10, 1, 20, true));
+        s.newSetting(new Setting("Teams", this, false));
+        s.newSetting(new Setting("Players", this, true));
+        s.newSetting(new Setting("Animals", this, false));
+        s.newSetting(new Setting("Mobs", this, false));
+        s.newSetting(new Setting("Villager", this, false));
+        s.newSetting(new Setting("Invisibles", this, false));
+        s.newSetting(new Setting("Rotations", this, true));
 
         ArrayList<String> auraMode = new ArrayList<>();
         auraMode.add("Single");
         auraMode.add("Multi");
-        sM.newSetting(new Setting("Mode", this, "Single", auraMode));
+        s.newSetting(new Setting("Mode", this, "Single", auraMode));
     }
 
     @Override
     public void onUpdate() {
         if (state()) {
-            range = sM.settingByName("Range", this).getNum();
-            cps = sM.settingByName("CPS", this).getNum();
-            teams = sM.settingByName("Teams", this).getBool();
-            players = sM.settingByName("Players", this).getBool();
-            animals = sM.settingByName("Animals", this).getBool();
-            mobs = sM.settingByName("Mobs", this).getBool();
-            villager = sM.settingByName("Villager", this).getBool();
-            invisibles = sM.settingByName("Invisibles", this).getBool();
-            rotations = sM.settingByName("Rotations", this).getBool();
-            auraMode = sM.settingByName("Mode", this).getMode();
+            range = s.settingByName("Range", this).getNum();
+            cps = s.settingByName("CPS", this).getNum();
+            teams = s.settingByName("Teams", this).getBool();
+            players = s.settingByName("Players", this).getBool();
+            animals = s.settingByName("Animals", this).getBool();
+            mobs = s.settingByName("Mobs", this).getBool();
+            villager = s.settingByName("Villager", this).getBool();
+            invisibles = s.settingByName("Invisibles", this).getBool();
+            rotations = s.settingByName("Rotations", this).getBool();
+            auraMode = s.settingByName("Mode", this).getMode();
+
+            ticksExisted = s.settingByName("Ticks Existed", Client.main().modMgr().getModule(AntiBot.class)).getNum();
+            isAlive = s.settingByName("Is Alive?", Client.main().modMgr().getModule(AntiBot.class)).getBool();
         }
     }
 
@@ -74,7 +77,7 @@ public class Aura extends Module {
     public void onEnable() {
         EventManager.register(this);
 
-        if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
+        if (s.settingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
             Client.main().modMgr().getByName("Aura").setState(false);
         }
     }
@@ -201,7 +204,7 @@ public class Aura extends Module {
     }
 
     private boolean canAttack(Entity entity) {
-        return entity != mc.thePlayer && entity.isEntityAlive() && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > 30;
+        return entity != mc.thePlayer && (entity.isEntityAlive() && isAlive) && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted;
     }
 
     @EventTarget

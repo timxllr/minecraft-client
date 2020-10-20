@@ -86,6 +86,7 @@ public class ModuleManager {
         modules.add(new Parkour());
         modules.add(new Crasher());
         modules.add(new Tracers());
+        modules.add(new AntiBot());
         modules.add(new Sprint());
         modules.add(new Aimbot());
         modules.add(new Strafe());
