@@ -44,15 +44,15 @@ public class Scaffold extends Module {
 
         BlockPos var1 = new BlockPos(p.getEntityBoundingBox().minX + 0.1D, p.getEntityBoundingBox().minY - 0.001D,
                 p.getEntityBoundingBox().minZ + 0.1D);
-        BlockPos var2 = new BlockPos(p.getEntityBoundingBox().maxX - 0.1D, p.getEntityBoundingBox().maxY + 0.001D,
+        BlockPos x = new BlockPos(p.getEntityBoundingBox().maxX - 0.1D, p.getEntityBoundingBox().maxY + 0.001D,
                 p.getEntityBoundingBox().maxZ - 0.1D);
-        for (int var3 = var1.getX(); var3 <= var2.getX(); var3++) {
-            for (int var4 = var1.getY(); var4 <= var2.getY(); var4++) {
-                for (int var5 = var1.getZ(); var5 <= var2.getZ(); var5++) {
-                    BlockPos blockPos = new BlockPos(var3, var4, var5);
+        for (int x2 = var1.getX(); x2 <= x.getX(); x2++) {
+            for (int y = var1.getY(); y <= x.getY(); y++) {
+                for (int z = var1.getZ(); z <= x.getZ(); z++) {
+                    BlockPos blockPos = new BlockPos(x2, y, z);
                     IBlockState var7 = p.worldObj.getBlockState(blockPos);
                     try {
-                        if ((var4 > p.posY - 2.0D) && (var4 <= p.posY - 1.0D)) {
+                        if ((y > p.posY - 2.0D) && (y <= p.posY - 1.0D)) {
                             collisionBlocks.add(blockPos);
                         }
                     } catch (Throwable localThrowable) {
@@ -87,11 +87,11 @@ public class Scaffold extends Module {
     @Override
     public void onEvent(Event event) {
         if(event instanceof EventUpdate) {
-            if (time.hasReached(500) && mc.gameSettings.keyBindForward.pressed == true) {
+            if (time.hasReached(500) && mc.gameSettings.keyBindForward.pressed) {
                 mc.gameSettings.keyBindBack.pressed = true;
             }
             if (time.hasReached(630)) {
-                if (mc.gameSettings.keyBindBack.pressed == true) {
+                if (mc.gameSettings.keyBindBack.pressed) {
                     mc.gameSettings.keyBindBack.pressed = false;
                     time.reset();
                 }
