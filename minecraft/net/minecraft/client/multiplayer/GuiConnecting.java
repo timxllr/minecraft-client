@@ -38,7 +38,7 @@ public class GuiConnecting extends GuiScreen {
 
     public GuiConnecting(GuiScreen previousScreen, Minecraft mcIn, ServerData p_i1181_3_) {
         try {
-            shader = new GLSLSandboxShader("/assets/minecraft/client/shader/main.fsh");
+            shader = new GLSLSandboxShader("/assets/minecraft/client/shader/connecting.fsh");
         } catch (IOException e) {
             throw new IllegalStateException("Failed to load the Shader");
         }
