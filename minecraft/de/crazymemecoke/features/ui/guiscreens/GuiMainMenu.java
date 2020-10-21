@@ -3,27 +3,38 @@ package de.crazymemecoke.features.ui.guiscreens;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.ui.guiscreens.altmanager.GuiAltManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
+import de.crazymemecoke.utils.render.GLSLSandboxShader;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
+    private final GLSLSandboxShader shader;
+
     double onlineVer;
     double localVer = Client.main().getClientVersion();
+
+    public GuiMainMenu() {
+        try {
+            shader = new GLSLSandboxShader("/assets/minecraft/client/shader/main.fsh");
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to load the Shader");
+        }
+    }
 
     public void initGui() {
         buttonList.add(new GuiButton(0, width / 2 - 120, height / 2 - 60, 120, 20, I18n.format("menu.singleplayer")));
@@ -43,8 +54,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
             reader.close();
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,17 +81,31 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        GlStateManager.disableAlpha();
         GlStateManager.enableAlpha();
-        drawGradientRect(0, 0, width, height, -2130706433, 16777215);
-        drawGradientRect(0, 0, width, height, 0, Integer.MIN_VALUE);
+        GlStateManager.disableCull();
+
+        shader.useShader(width, height, mouseX, mouseY, (System.currentTimeMillis() - Client.main().getInitTime()) / 1000F);
+
+        GL11.glBegin(GL11.GL_QUADS);
+
+        GL11.glVertex2f(-1f, -1f);
+        GL11.glVertex2f(-1f, 1f);
+        GL11.glVertex2f(1f, 1f);
+        GL11.glVertex2f(1f, -1f);
+
+        GL11.glEnd();
+
+        GL20.glUseProgram(0);
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         ScaledResolution sr = new ScaledResolution(mc);
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
-                width, height, sr.width(), sr.height());
-
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) (width / 2 + 90), 70.0F, 0.0F);
         GlStateManager.rotate(-20.0F, 0.0F, 0.0F, 1.0F);
@@ -100,7 +123,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
          * - Client Name
          * - Current Playername
          * - Client Version
-         * - Version Check [latest or not?] (soon)
+         * - Version Check [latest or not?]
          */
 
         UnicodeFontRenderer font1 = Client.main().fontMgr().font("esp", 50, Font.BOLD);

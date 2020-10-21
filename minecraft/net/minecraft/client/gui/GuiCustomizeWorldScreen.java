@@ -4,6 +4,9 @@ import com.google.common.base.Predicate;
 import com.google.common.primitives.Floats;
 import java.io.IOException;
 import java.util.Random;
+
+import de.crazymemecoke.Client;
+import de.crazymemecoke.utils.render.GLSLSandboxShader;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -12,9 +15,13 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.ChunkProviderSettings;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 public class GuiCustomizeWorldScreen extends GuiScreen implements GuiSlider.FormatHelper, GuiPageButtonList.GuiResponder
 {
+    private GLSLSandboxShader shader;
+
     private GuiCreateWorld field_175343_i;
     protected String field_175341_a = "Customize World Settings";
     protected String field_175333_f = "Page 1 of 3";
@@ -48,6 +55,12 @@ public class GuiCustomizeWorldScreen extends GuiScreen implements GuiSlider.Form
 
     public GuiCustomizeWorldScreen(GuiScreen p_i45521_1_, String p_i45521_2_)
     {
+        try {
+            shader = new GLSLSandboxShader("/assets/minecraft/client/shader/main.fsh");
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to load the Shader");
+        }
+
         this.field_175343_i = (GuiCreateWorld)p_i45521_1_;
         this.func_175324_a(p_i45521_2_);
     }
@@ -966,7 +979,30 @@ public class GuiCustomizeWorldScreen extends GuiScreen implements GuiSlider.Form
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
-        this.drawDefaultBackground();
+        GlStateManager.enableAlpha();
+        GlStateManager.disableCull();
+
+        shader.useShader(width, height, mouseX, mouseY, (System.currentTimeMillis() - Client.main().getInitTime()) / 1000F);
+
+        GL11.glBegin(GL11.GL_QUADS);
+
+        GL11.glVertex2f(-1f, -1f);
+        GL11.glVertex2f(-1f, 1f);
+        GL11.glVertex2f(1f, 1f);
+        GL11.glVertex2f(1f, -1f);
+
+        GL11.glEnd();
+
+        GL20.glUseProgram(0);
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
         this.field_175349_r.drawScreen(mouseX, mouseY, partialTicks);
         this.drawCenteredString(this.fontRendererObj, this.field_175341_a, this.width / 2, 2, 16777215);
         this.drawCenteredString(this.fontRendererObj, this.field_175333_f, this.width / 2, 12, 16777215);
@@ -984,8 +1020,6 @@ public class GuiCustomizeWorldScreen extends GuiScreen implements GuiSlider.Form
             float f1 = 180.0F;
             GlStateManager.disableLighting();
             GlStateManager.disableFog();
-            Tessellator tessellator = Tessellator.getInstance();
-            WorldRenderer worldrenderer = tessellator.getWorldRenderer();
             this.mc.getTextureManager().bindTexture(optionsBackground);
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             float f2 = 32.0F;

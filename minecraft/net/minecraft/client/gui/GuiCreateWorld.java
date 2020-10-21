@@ -2,6 +2,12 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 import java.util.Random;
+
+import de.crazymemecoke.Client;
+import de.crazymemecoke.utils.render.GLSLSandboxShader;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.world.WorldSettings;
@@ -10,9 +16,12 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.WorldInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 public class GuiCreateWorld extends GuiScreen
 {
+    private GLSLSandboxShader shader;
     private GuiScreen parentScreen;
     private GuiTextField field_146333_g;
     private GuiTextField field_146335_h;
@@ -47,6 +56,12 @@ public class GuiCreateWorld extends GuiScreen
 
     public GuiCreateWorld(GuiScreen p_i46320_1_)
     {
+        try {
+            shader = new GLSLSandboxShader("/assets/minecraft/client/shader/main.fsh");
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to load the Shader");
+        }
+
         this.parentScreen = p_i46320_1_;
         this.field_146329_I = "";
         this.field_146330_J = I18n.format("selectWorld.newWorld", new Object[0]);
@@ -448,7 +463,30 @@ public class GuiCreateWorld extends GuiScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
-        this.drawDefaultBackground();
+        GlStateManager.enableAlpha();
+        GlStateManager.disableCull();
+
+        shader.useShader(width, height, mouseX, mouseY, (System.currentTimeMillis() - Client.main().getInitTime()) / 1000F);
+
+        GL11.glBegin(GL11.GL_QUADS);
+
+        GL11.glVertex2f(-1f, -1f);
+        GL11.glVertex2f(-1f, 1f);
+        GL11.glVertex2f(1f, 1f);
+        GL11.glVertex2f(1f, -1f);
+
+        GL11.glEnd();
+
+        GL20.glUseProgram(0);
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
         this.drawCenteredString(this.fontRendererObj, I18n.format("selectWorld.create", new Object[0]), this.width / 2, 20, -1);
 
         if (this.field_146344_y)

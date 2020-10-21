@@ -1,18 +1,34 @@
 package net.minecraft.client.gui;
 
 import java.io.IOException;
+
+import de.crazymemecoke.Client;
+import de.crazymemecoke.utils.render.GLSLSandboxShader;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.resources.I18n;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 public class GuiScreenServerList extends GuiScreen
 {
+    private GLSLSandboxShader shader;
+
     private final GuiScreen field_146303_a;
     private final ServerData field_146301_f;
     private GuiTextField field_146302_g;
 
     public GuiScreenServerList(GuiScreen p_i1031_1_, ServerData p_i1031_2_)
     {
+        try {
+            shader = new GLSLSandboxShader("/assets/minecraft/client/shader/main.fsh");
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to load the Shader");
+        }
+
         this.field_146303_a = p_i1031_1_;
         this.field_146301_f = p_i1031_2_;
     }
@@ -101,7 +117,30 @@ public class GuiScreenServerList extends GuiScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
-        this.drawDefaultBackground();
+        GlStateManager.enableAlpha();
+        GlStateManager.disableCull();
+
+        shader.useShader(width, height, mouseX, mouseY, (System.currentTimeMillis() - Client.main().getInitTime()) / 1000F);
+
+        GL11.glBegin(GL11.GL_QUADS);
+
+        GL11.glVertex2f(-1f, -1f);
+        GL11.glVertex2f(-1f, 1f);
+        GL11.glVertex2f(1f, 1f);
+        GL11.glVertex2f(1f, -1f);
+
+        GL11.glEnd();
+
+        GL20.glUseProgram(0);
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
         this.drawCenteredString(this.fontRendererObj, I18n.format("selectServer.direct", new Object[0]), this.width / 2, 20, 16777215);
         this.drawString(this.fontRendererObj, I18n.format("addServer.enterIp", new Object[0]), this.width / 2 - 100, 100, 10526880);
         this.field_146302_g.drawTextBox();

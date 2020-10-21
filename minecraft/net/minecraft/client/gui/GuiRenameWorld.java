@@ -1,19 +1,35 @@
 package net.minecraft.client.gui;
 
 import java.io.IOException;
+
+import de.crazymemecoke.Client;
+import de.crazymemecoke.utils.render.GLSLSandboxShader;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.WorldInfo;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 public class GuiRenameWorld extends GuiScreen
 {
+    private GLSLSandboxShader shader;
+
     private GuiScreen parentScreen;
     private GuiTextField field_146583_f;
     private final String saveName;
 
     public GuiRenameWorld(GuiScreen parentScreenIn, String saveNameIn)
     {
+        try {
+            shader = new GLSLSandboxShader("/assets/minecraft/client/shader/main.fsh");
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to load the Shader");
+        }
+
         this.parentScreen = parentScreenIn;
         this.saveName = saveNameIn;
     }
@@ -101,7 +117,30 @@ public class GuiRenameWorld extends GuiScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
-        this.drawDefaultBackground();
+        GlStateManager.enableAlpha();
+        GlStateManager.disableCull();
+
+        shader.useShader(width, height, mouseX, mouseY, (System.currentTimeMillis() - Client.main().getInitTime()) / 1000F);
+
+        GL11.glBegin(GL11.GL_QUADS);
+
+        GL11.glVertex2f(-1f, -1f);
+        GL11.glVertex2f(-1f, 1f);
+        GL11.glVertex2f(1f, 1f);
+        GL11.glVertex2f(1f, -1f);
+
+        GL11.glEnd();
+
+        GL20.glUseProgram(0);
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
         this.drawCenteredString(this.fontRendererObj, I18n.format("selectWorld.renameTitle", new Object[0]), this.width / 2, 20, 16777215);
         this.drawString(this.fontRendererObj, I18n.format("selectWorld.enterName", new Object[0]), this.width / 2 - 100, 47, 10526880);
         this.field_146583_f.drawTextBox();

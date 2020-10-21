@@ -43,6 +43,9 @@ public class Client {
     private Friend friend;
     private Shader shader;
     private AltManager altManager;
+
+    public long initTime = System.currentTimeMillis();
+
     public static Client main() {
         return instance;
     }
@@ -157,4 +160,7 @@ public class Client {
         return ambienWatermark;
     }
 
+    public long getInitTime() {
+        return initTime;
+    }
 }

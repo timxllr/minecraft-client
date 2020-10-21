@@ -22,7 +22,7 @@ public class GuiNewChat extends Gui {
     private final Minecraft mc;
     private final List<String> sentMessages = Lists.<String>newArrayList();
     private final List<ChatLine> chatLines = Lists.<ChatLine>newArrayList();
-    private final List<ChatLine> field_146253_i = Lists.<ChatLine>newArrayList();
+    private final List<ChatLine> field_146253_i = Lists.newArrayList();
     private int scrollPos;
     private boolean isScrolled;
 
@@ -50,7 +50,7 @@ public class GuiNewChat extends Gui {
                 GlStateManager.scale(f1, f1, 1.0F);
 
                 for (int i1 = 0; i1 + this.scrollPos < this.field_146253_i.size() && i1 < i; ++i1) {
-                    ChatLine chatline = (ChatLine) this.field_146253_i.get(i1 + this.scrollPos);
+                    ChatLine chatline = this.field_146253_i.get(i1 + this.scrollPos);
 
                     if (chatline != null) {
                         int j1 = p_146230_1_ - chatline.getUpdatedCounter();
@@ -85,7 +85,7 @@ public class GuiNewChat extends Gui {
                                         break;
                                     }
                                     case "custom": {
-                                        Client.main().fontMgr().font("Raleway Light", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
+                                        Client.main().fontMgr().font("Comfortaa", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
                                         break;
                                     }
                                 }
