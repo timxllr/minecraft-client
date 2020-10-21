@@ -43,7 +43,7 @@ public class Step extends Module {
                 doReverse();
             }
 
-            if(mc.thePlayer.isCollidedHorizontally){
+            if (mc.thePlayer.isCollidedHorizontally) {
                 switch (mode) {
                     case "vanilla": {
                         doVanilla();
