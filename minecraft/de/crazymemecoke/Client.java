@@ -80,7 +80,7 @@ public class Client {
         setmgr.saveSettings();
         moduleManager.saveModules();
         moduleManager.saveBinds();
-        AltManager.saveAlts();
+        Client.main().getAltManager().saveAlts();
 
         Client.main().modMgr().getModule(Crasher.class).setState(false);
         System.out.println("Disabled Crasher module");
