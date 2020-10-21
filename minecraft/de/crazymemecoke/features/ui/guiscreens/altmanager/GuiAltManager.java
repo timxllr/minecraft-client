@@ -77,10 +77,10 @@ public class GuiAltManager extends GuiScreen {
     }
 
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        Iterator var5 = AltManager.slotList.iterator();
+        Iterator slotList = AltManager.slotList.iterator();
 
-        while (var5.hasNext()) {
-            AltSlot slot = (AltSlot) var5.next();
+        while (slotList.hasNext()) {
+            AltSlot slot = (AltSlot) slotList.next();
             if (slot.isHovering(mouseX, mouseY) && selected != slot) {
                 selected = slot;
                 timer.setLastMs(-1900);
@@ -288,7 +288,7 @@ public class GuiAltManager extends GuiScreen {
         boolean premium = mc.session.getProfile().isComplete();
         String strPremium = premium ? "Premium" : "Cracked";
         Client.main().fontMgr().comfortaa20.drawString(strPremium, (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(strPremium) - 8), 55, premium ? RenderUtils.reAlpha(Colors.main().getSaintOrangeColor(), opacity) : RenderUtils.reAlpha(Colors.main().getVortexRedColor(), opacity));
-        Client.main().fontMgr().comfortaa20.drawString("Username:", (sr.width() - 145), 70, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
+        Client.main().fontMgr().comfortaa20.drawString("Name:", (sr.width() - 145), 70, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
         Client.main().fontMgr().comfortaa20.drawString(mc.session.getUsername(), (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(mc.session.getUsername()) - 8), 70, RenderUtils.reAlpha(Colors.main().getNodusPurpleColor(), opacity));
         Client.main().fontMgr().comfortaa20.drawString("Alts:", (sr.width() - 145), 85, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
         Client.main().fontMgr().comfortaa20.drawString(String.valueOf(AltManager.slotList.size()), (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(String.valueOf(AltManager.slotList.size())) - 8), 85, RenderUtils.reAlpha(-1, opacity));
