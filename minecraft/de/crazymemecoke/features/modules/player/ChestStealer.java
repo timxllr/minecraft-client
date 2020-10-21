@@ -2,6 +2,8 @@ package de.crazymemecoke.features.modules.player;
 
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.time.TimeHelper;
@@ -17,9 +19,9 @@ public class ChestStealer extends Module {
     }
 
     @Override
-    public void onUpdate() {
-        long delay = (long) Client.main().setMgr().settingByName("Delay", this).getNum();
-        if (state()) {
+    public void onEvent(Event event) {
+        if (event instanceof EventUpdate) {
+            long delay = (long) Client.main().setMgr().settingByName("Delay", this).getNum();
             if ((mc.thePlayer.openContainer != null)
                     && ((mc.thePlayer.openContainer instanceof ContainerChest))) {
                 ContainerChest container = (ContainerChest) mc.thePlayer.openContainer;

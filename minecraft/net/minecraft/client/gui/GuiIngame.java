@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.events.impl.EventRender;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.material.Material;
@@ -160,6 +161,10 @@ public class GuiIngame extends Gui {
         } else {
             this.renderTooltip(scaledresolution, partialTicks);
         }
+
+
+        EventRender eventRender = new EventRender(EventRender.Type.twoD);
+        Client.main().getEventManager().onEvent(eventRender);
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(icons);

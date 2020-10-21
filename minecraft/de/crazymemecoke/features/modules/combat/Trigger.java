@@ -1,15 +1,12 @@
 package de.crazymemecoke.features.modules.combat;
 
+import de.crazymemecoke.manager.events.Event;
 import org.lwjgl.input.Keyboard;
-
-import de.crazymemecoke.utils.events.eventapi.EventTarget;
 
 import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.events.Op;
 import de.crazymemecoke.utils.time.TimerUtil;
-import de.crazymemecoke.utils.events.UpdateEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +23,7 @@ public class Trigger extends Module {
 	}
 
 	public static int cps = 12;
-	@Op
+	
 	public static boolean hurttime = false;
 	private boolean isCritting;
 	private TimerUtil delay = new TimerUtil();
@@ -35,8 +32,8 @@ public class Trigger extends Module {
 		this.delay.setLastMS();
 	}
 
-	@EventTarget
-	public void onUpdate(UpdateEvent e) {
+	@Override
+	public void onEvent(Event event) {
 		boolean sprint = this.mc.thePlayer.isSprinting();
 		try {
 			if (this.mc.objectMouseOver.typeOfHit == null) {

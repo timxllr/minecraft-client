@@ -3,6 +3,8 @@ package de.crazymemecoke.features.modules.movement;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Values;
@@ -62,32 +64,12 @@ public class Fly extends Module {
     }
 
     @Override
-    public void onEnable() {
-        if (Client.main().setMgr().settingByName("Mode", this).getMode().equalsIgnoreCase("Glide")) {
-            if (Client.main().setMgr().settingByName("Glide Mode", this).getMode().equalsIgnoreCase("New")) {
-                time = 0;
-                dtime = 0;
-                mc.thePlayer.setSprinting(false);
-                double x = mc.thePlayer.posX;
-                double y = mc.thePlayer.posY;
-                double z = mc.thePlayer.posZ;
-                double[] d = {0.2D, 0.24D};
-                for (int a = 0; a < 100; a++) {
-                    for (int i = 0; i < d.length; i++) {
-                        mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX,
-                                mc.thePlayer.posY + d[i], mc.thePlayer.posZ, false));
-                    }
-                }
-            }
-        }
-    }
+    public void onEvent(Event event) {
+        if (event instanceof EventUpdate) {
+            String flyMode = sM.settingByName("Fly Mode", this).getMode();
+            String glideMode = sM.settingByName("Glide Mode", this).getMode();
+            String mode = sM.settingByName("Mode", this).getMode();
 
-    @Override
-    public void onUpdate() {
-        String flyMode = sM.settingByName("Fly Mode", this).getMode();
-        String glideMode = sM.settingByName("Glide Mode", this).getMode();
-        String mode = sM.settingByName("Mode", this).getMode();
-        if (state()) {
             if (mode.equalsIgnoreCase("Fly")) {
                 if (flyMode.equalsIgnoreCase("Vanilla")) {
                     mc.thePlayer.capabilities.isFlying = true;
@@ -182,27 +164,48 @@ public class Fly extends Module {
                     }
                     mc.thePlayer.motionY = -0.01;
                 }
-            }
-        } else if (mode.equalsIgnoreCase("Glide")) {
-            if (glideMode.equalsIgnoreCase("New")) {
-                motion = 0f;
-                motion = 0.0;
-                speed = true;
-                if (mc.thePlayer.isSneaking()) {
-                    mc.thePlayer.motionY = -0.5;
-                } else {
-                    if ((mc.thePlayer.motionY < 0.0D) && (mc.thePlayer.isAirBorne) && (!mc.thePlayer.isInWater())
-                            && (!mc.thePlayer.isOnLadder()) && (!mc.thePlayer.isInsideOfMaterial(Material.lava))) {
-                        mc.thePlayer.setSprinting(false);
-                        mc.thePlayer.motionY = -motion;
-                        mc.thePlayer.jumpMovementFactor *= 1.21337F;
+            } else if (mode.equalsIgnoreCase("Glide")) {
+                if (glideMode.equalsIgnoreCase("New")) {
+                    motion = 0f;
+                    motion = 0.0;
+                    speed = true;
+                    if (mc.thePlayer.isSneaking()) {
+                        mc.thePlayer.motionY = -0.5;
+                    } else {
+                        if ((mc.thePlayer.motionY < 0.0D) && (mc.thePlayer.isAirBorne) && (!mc.thePlayer.isInWater())
+                                && (!mc.thePlayer.isOnLadder()) && (!mc.thePlayer.isInsideOfMaterial(Material.lava))) {
+                            mc.thePlayer.setSprinting(false);
+                            mc.thePlayer.motionY = -motion;
+                            mc.thePlayer.jumpMovementFactor *= 1.21337F;
+                        }
+                    }
+                } else if (glideMode.equalsIgnoreCase("Old")) {
+                    EntityUtils.damagePlayer(1);
+                    if ((mc.thePlayer.motionY <= -Values.getValues().glidespeed) && (!mc.thePlayer.isInWater())
+                            && (!mc.thePlayer.onGround) && (!mc.thePlayer.isOnLadder())) {
+                        mc.thePlayer.motionY = (-Values.getValues().glidespeed);
                     }
                 }
-            } else if (glideMode.equalsIgnoreCase("Old")) {
-                EntityUtils.damagePlayer(1);
-                if ((mc.thePlayer.motionY <= -Values.getValues().glidespeed) && (!mc.thePlayer.isInWater())
-                        && (!mc.thePlayer.onGround) && (!mc.thePlayer.isOnLadder())) {
-                    mc.thePlayer.motionY = (-Values.getValues().glidespeed);
+            }
+        }
+    }
+
+    @Override
+    public void onEnable() {
+        if (Client.main().setMgr().settingByName("Mode", this).getMode().equalsIgnoreCase("Glide")) {
+            if (Client.main().setMgr().settingByName("Glide Mode", this).getMode().equalsIgnoreCase("New")) {
+                time = 0;
+                dtime = 0;
+                mc.thePlayer.setSprinting(false);
+                double x = mc.thePlayer.posX;
+                double y = mc.thePlayer.posY;
+                double z = mc.thePlayer.posZ;
+                double[] d = {0.2D, 0.24D};
+                for (int a = 0; a < 100; a++) {
+                    for (int i = 0; i < d.length; i++) {
+                        mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX,
+                                mc.thePlayer.posY + d[i], mc.thePlayer.posZ, false));
+                    }
                 }
             }
         }

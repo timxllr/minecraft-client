@@ -1,5 +1,6 @@
 package de.crazymemecoke.features.modules.movement;
 
+import de.crazymemecoke.manager.events.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;
@@ -12,9 +13,7 @@ public class FastFall extends Module {
 	}
 
 	@Override
-	public void onUpdate() {
-		if (state()) {
-			Wrapper.mc.thePlayer.motionY = -30;
-		}
+	public void onEvent(Event event) {
+		Wrapper.mc.thePlayer.motionY = -30;
 	}
 }

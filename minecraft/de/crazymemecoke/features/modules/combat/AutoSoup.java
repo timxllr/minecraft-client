@@ -1,5 +1,7 @@
 package de.crazymemecoke.features.modules.combat;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -23,16 +25,6 @@ public class AutoSoup extends Module {
 
 	public AutoSoup() {
 		super("AutoSoup", Keyboard.KEY_NONE, Category.COMBAT, -1);
-	}
-
-	public void onUpdate() {
-		if (this.state()) {
-			if (this.mc.thePlayer.getHealth() < 14.0F) {
-				eatSoup();
-			}
-		} else {
-
-		}
 	}
 
 	private void eatSoup() {
@@ -69,4 +61,12 @@ public class AutoSoup extends Module {
 		return this.currentMS - this.lastSoup >= l;
 	}
 
+	@Override
+	public void onEvent(Event event) {
+		if(event instanceof EventUpdate) {
+			if (this.mc.thePlayer.getHealth() < 14.0F) {
+				eatSoup();
+			}
+		}
+	}
 }

@@ -2,6 +2,8 @@ package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import org.lwjgl.input.Keyboard;
@@ -14,9 +16,9 @@ public class HighJump extends Module {
     }
 
     @Override
-    public void onUpdate() {
-        double boost = Client.main().setMgr().settingByName("Boost", this).getNum();
-        if (state()) {
+    public void onEvent(Event event) {
+        if(event instanceof EventUpdate) {
+            double boost = Client.main().setMgr().settingByName("Boost", this).getNum();
             if (mc.gameSettings.keyBindJump.pressed && mc.gameSettings.keyBindForward.pressed) {
                 mc.thePlayer.motionY = boost;
             }

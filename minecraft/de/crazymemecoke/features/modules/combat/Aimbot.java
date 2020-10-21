@@ -2,6 +2,8 @@ package de.crazymemecoke.features.modules.combat;
 
 import java.util.List;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -17,8 +19,9 @@ public class Aimbot extends Module {
 		super("Aimbot", Keyboard.KEY_NONE, Category.COMBAT, -1);
 	}
 
-	public void onUpdate() {
-		if (state()) {
+	@Override
+	public void onEvent(Event event) {
+		if(event instanceof EventUpdate) {
 			List list = Wrapper.mc.theWorld.playerEntities;
 
 			for (int k = 0; k < list.size(); k++) {

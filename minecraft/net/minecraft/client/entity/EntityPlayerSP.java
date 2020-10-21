@@ -2,12 +2,9 @@ package net.minecraft.client.entity;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.movement.NoSlowDown;
-import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.events.impl.EventMotion;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.utils.NotifyUtil;
-import de.crazymemecoke.utils.events.MoveEvent;
-import de.crazymemecoke.utils.events.PostMotion;
-import de.crazymemecoke.utils.events.PreMotion;
-import de.crazymemecoke.utils.events.eventapi.EventManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -103,7 +100,8 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     private int horseJumpPowerCounter;
     private float horseJumpPower;
 
-    public EntityPlayerSP(Minecraft mcIn, World worldIn, NetHandlerPlayClient netHandler, StatFileWriter statFile) {
+    public EntityPlayerSP(Minecraft mcIn, World worldIn, NetHandlerPlayClient netHandler, StatFileWriter statFile)
+    {
         super(worldIn, netHandler.getGameProfile());
         this.sendQueue = netHandler;
         this.statWriter = statFile;
@@ -138,11 +136,18 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     /**
      * Called to update the entity's position/logic.
      */
+
+    public EventMotion eventMotion;
+
     public void onUpdate() {
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ))) {
-            for (Module m : Client.main().modMgr().modules) {
-                m.onUpdate();
-            }
+            EventUpdate eventUpdate = new EventUpdate();
+            Client.main().getEventManager().onEvent(eventUpdate);
+
+            EventMotion eventMotion = new EventMotion(EventMotion.Type.PRE, this.rotationYaw, this.rotationPitch);
+            Client.main().getEventManager().onEvent(eventMotion);
+            this.eventMotion = eventMotion;
+
             super.onUpdate();
 
             if (this.isRiding()) {
@@ -158,12 +163,6 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      * called every tick when the player is on foot. Performs all the things that normally happen during movement.
      */
     public void onUpdateWalkingPlayer() {
-        for (Module m : Client.main().modMgr().getModules()) {
-            m.onPreMotionUpdate();
-            EventManager.register(PreMotion.class);
-        }
-        MoveEvent e = new MoveEvent(this.mc.thePlayer.posX, this.getEntityBoundingBox().minY, this.mc.thePlayer.posZ, this.mc.thePlayer.rotationYaw, this.mc.thePlayer.rotationPitch, this.mc.thePlayer.onGround);
-        EventManager.call(e);
         boolean flag = this.isSprinting();
 
         if (flag != this.serverSprintState) {
@@ -189,40 +188,28 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         }
 
         if (this.isCurrentViewEntity()) {
-
-            double x = this.posX - this.lastReportedPosX;
-            double y = this.getEntityBoundingBox().minY - this.lastReportedPosY;
-            double z = this.posZ - this.lastReportedPosZ;
-            double yaw = (double) (this.rotationYaw - this.lastReportedYaw);
-            double pitch = (double) (this.rotationPitch - this.lastReportedPitch);
-
-
-            boolean flag2 = x * x + y * y + z * z > 9.0E-4D || this.positionUpdateTicks >= 20;
-            boolean flag3 = yaw != 0.0D || pitch != 0.0D;
-
-            if (e.isCancelled())
-                return;
-
-            x = e.getX();
-            y = e.getY();
-            z = e.getZ();
-            yaw = e.getYaw();
-            pitch = e.getPitch();
-            onGround = e.isOnGround();
-
+            double d0 = this.posX - this.lastReportedPosX;
+            double d1 = this.getEntityBoundingBox().minY - this.lastReportedPosY;
+            double d2 = this.posZ - this.lastReportedPosZ;
+            double d3 = this.eventMotion.getYaw() - this.lastReportedYaw;
+            double d4 = this.eventMotion.getPitch() - this.lastReportedPitch;
+            double d31 = this.rotationYaw - this.lastReportedYaw;
+            double d41 = this.rotationPitch - this.lastReportedPitch;
+            boolean flag2 = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D || this.positionUpdateTicks >= 20;
+            boolean flag3 = d3 != 0.0D || d4 != 0.0D || d31 != 0.0D || d41 != 0.0D;
 
             if (this.ridingEntity == null) {
                 if (flag2 && flag3) {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(x, y, z, (float) yaw, (float) pitch, onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.eventMotion.getYaw(), this.eventMotion.getPitch(), this.onGround));
                 } else if (flag2) {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(x, y, z, onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.onGround));
                 } else if (flag3) {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook((float) yaw, (float) pitch, onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(this.eventMotion.getYaw(), this.eventMotion.getPitch(), this.onGround));
                 } else {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer(onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer(this.onGround));
                 }
             } else {
-                this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999.0D, this.motionZ, (float) yaw, (float) pitch, onGround));
+                this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999.0D, this.motionZ, this.eventMotion.getYaw(), this.eventMotion.getPitch(), this.onGround));
                 flag2 = false;
             }
 
@@ -236,15 +223,12 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             }
 
             if (flag3) {
-                this.lastReportedYaw = this.rotationYaw;
-                this.lastReportedPitch = this.rotationPitch;
-            }
-
-            for (Module m : Client.main().modMgr().getModules()) {
-                m.onPostMotionUpdate();
-                EventManager.register(PostMotion.class);
+                this.lastReportedYaw = this.eventMotion.getYaw();
+                this.lastReportedPitch = this.eventMotion.getPitch();
             }
         }
+        EventMotion eventMotion = new EventMotion(EventMotion.Type.POST,this.eventMotion.getYaw(),this.eventMotion.getPitch());
+        Client.main().getEventManager().onEvent(eventMotion);
     }
 
     /**

@@ -4,6 +4,8 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventRender;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -44,68 +46,6 @@ public class ESP extends Module {
 
     }
 
-    @Override
-    public void onRender() {
-        if (state()) {
-            if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Box")) {
-                Iterator var3 = mc.theWorld.loadedEntityList.iterator();
-
-                while (true) {
-                    EntityPlayer player;
-                    do {
-                        do {
-                            Object object;
-                            do {
-                                if (!var3.hasNext()) {
-                                    return;
-                                }
-
-                                object = var3.next();
-                            } while (!(object instanceof EntityPlayer));
-
-                            player = (EntityPlayer) object;
-                        } while (player == mc.thePlayer);
-                    } while (player.rotationPitch != 0.0F);
-
-                    double[] pos = EntityUtils.interpolate(player);
-                    double x = pos[0] - RenderManager.renderPosX;
-                    double y = pos[1] - RenderManager.renderPosY;
-                    double z = pos[2] - RenderManager.renderPosZ;
-                    GL11.glPushMatrix();
-                    GL11.glTranslated(x, y, z);
-                    GL11.glRotatef(-player.rotationYaw, 0.0F, 1.0F, 0.0F);
-                    int color;
-                    if (Friend.friends.contains(player)) {
-                        color = 65280;
-                    } else {
-                        color = 68029;
-                    }
-
-                    RenderUtils.drawOutlinedBox(new AxisAlignedBB((double) player.width / 2.0D, 0.0D, -((double) player.width / 2.0D), (double) (-player.width) / 2.0D, (double) player.height + 0.1D, (double) player.width / 2.0D), color);
-                    GL11.glPopMatrix();
-                }
-
-            } else if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Prophunt")) {
-                for (Object entity : mc.theWorld.loadedEntityList)
-                    if (entity instanceof EntityLiving && ((Entity) entity).isInvisible()) {
-                        double x = ((Entity) entity).posX;
-                        double y = ((Entity) entity).posY;
-                        double z = ((Entity) entity).posZ;
-                        Color color;
-                        if (mc.thePlayer.getDistanceToEntity((Entity) entity) >= 0.5)
-                            color = new Color(1F, 0F, 0F,
-                                    0.5F - MathHelper.abs(
-                                            MathHelper.sin(Minecraft.getSystemTime() % 1000L / 1000.0F * (float) Math.PI * 1.0F)
-                                                    * 0.3F));
-                        else
-                            color = new Color(0, 0, 0, 0);
-                        RenderUtils.box(x - 0.5, y - 0.1, z - 0.5, x + 0.5, y + 0.9, z + 0.5, color);
-                    }
-            }
-        }
-        super.onRender();
-    }
-
     public void player(EntityLivingBase entity) {
         float red = 0.5F;
         float green = 0.5F;
@@ -125,4 +65,66 @@ public class ESP extends Module {
         RenderUtils.drawEntityESP(x, y, z, width, height, red, green, blue, 0.45F, 0F, 0F, 0F, 1F, 1F);
     }
 
+    @Override
+    public void onEvent(Event event) {
+        if(event instanceof EventRender) {
+            if(((EventRender) event).getType() == EventRender.Type.threeD) {
+                if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Box")) {
+                    Iterator var3 = mc.theWorld.loadedEntityList.iterator();
+
+                    while (true) {
+                        EntityPlayer player;
+                        do {
+                            do {
+                                Object object;
+                                do {
+                                    if (!var3.hasNext()) {
+                                        return;
+                                    }
+
+                                    object = var3.next();
+                                } while (!(object instanceof EntityPlayer));
+
+                                player = (EntityPlayer) object;
+                            } while (player == mc.thePlayer);
+                        } while (player.rotationPitch != 0.0F);
+
+                        double[] pos = EntityUtils.interpolate(player);
+                        double x = pos[0] - RenderManager.renderPosX;
+                        double y = pos[1] - RenderManager.renderPosY;
+                        double z = pos[2] - RenderManager.renderPosZ;
+                        GL11.glPushMatrix();
+                        GL11.glTranslated(x, y, z);
+                        GL11.glRotatef(-player.rotationYaw, 0.0F, 1.0F, 0.0F);
+                        int color;
+                        if (Friend.friends.contains(player)) {
+                            color = 65280;
+                        } else {
+                            color = 68029;
+                        }
+
+                        RenderUtils.drawOutlinedBox(new AxisAlignedBB((double) player.width / 2.0D, 0.0D, -((double) player.width / 2.0D), (double) (-player.width) / 2.0D, (double) player.height + 0.1D, (double) player.width / 2.0D), color);
+                        GL11.glPopMatrix();
+                    }
+
+                } else if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Prophunt")) {
+                    for (Object entity : mc.theWorld.loadedEntityList)
+                        if (entity instanceof EntityLiving && ((Entity) entity).isInvisible()) {
+                            double x = ((Entity) entity).posX;
+                            double y = ((Entity) entity).posY;
+                            double z = ((Entity) entity).posZ;
+                            Color color;
+                            if (mc.thePlayer.getDistanceToEntity((Entity) entity) >= 0.5)
+                                color = new Color(1F, 0F, 0F,
+                                        0.5F - MathHelper.abs(
+                                                MathHelper.sin(Minecraft.getSystemTime() % 1000L / 1000.0F * (float) Math.PI * 1.0F)
+                                                        * 0.3F));
+                            else
+                                color = new Color(0, 0, 0, 0);
+                            RenderUtils.box(x - 0.5, y - 0.1, z - 0.5, x + 0.5, y + 0.9, z + 0.5, color);
+                        }
+                }
+            }
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package de.crazymemecoke.features.modules.player;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import net.minecraft.item.*;
@@ -18,19 +20,6 @@ public class InvCleaner extends Module {
     private void clean(final int i) {
         mc.playerController.windowClick(0, i, 0, 0, mc.thePlayer);
         mc.playerController.windowClick(0, -999, 0, 0, mc.thePlayer);
-    }
-
-    public void onUpdate() {
-        if (state()) {
-            uselessItems.clear();
-
-            findUselessItems();
-            if (!uselessItems.isEmpty()) {
-                for (int i : uselessItems) {
-                    clean(i);
-                }
-            }
-        }
     }
 
     /**
@@ -82,5 +71,19 @@ public class InvCleaner extends Module {
         if (itemStack.getItem() instanceof ItemPotion) return true;
         if (itemStack.getItem() instanceof ItemFlintAndSteel) return true;
         return itemStack.getItem() instanceof ItemEnderPearl;
+    }
+
+    @Override
+    public void onEvent(Event event) {
+        if(event instanceof EventUpdate) {
+            uselessItems.clear();
+
+            findUselessItems();
+            if (!uselessItems.isEmpty()) {
+                for (int i : uselessItems) {
+                    clean(i);
+                }
+            }
+        }
     }
 }

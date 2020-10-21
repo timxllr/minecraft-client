@@ -1,5 +1,6 @@
 package de.crazymemecoke.features.modules.player;
 
+import de.crazymemecoke.manager.events.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;
@@ -14,9 +15,8 @@ public class FastPlace extends Module {
 		Wrapper.mc.rightClickDelayTimer = 6;
 	}
 
-	public void onUpdate() {
-		if (this.state()) {
-			Wrapper.mc.rightClickDelayTimer = 0;
-		}
+	@Override
+	public void onEvent(Event event) {
+		Wrapper.mc.rightClickDelayTimer = 0;
 	}
 }

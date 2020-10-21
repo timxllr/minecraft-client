@@ -1,5 +1,7 @@
 package de.crazymemecoke.features.modules.world;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import net.minecraft.init.Blocks;
@@ -12,13 +14,12 @@ public class Eagle extends Module {
     }
 
     @Override
-    public void onUpdate() {
-        if (state()) {
+    public void onEvent(Event event) {
+        if(event instanceof EventUpdate) {
             BlockPos bp = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0D, mc.thePlayer.posZ);
             if (mc.thePlayer.fallDistance <= 4.0F) {
                 mc.gameSettings.keyBindSneak.pressed = mc.theWorld.getBlockState(bp).getBlock() == Blocks.air;
             }
-
         }
     }
 }

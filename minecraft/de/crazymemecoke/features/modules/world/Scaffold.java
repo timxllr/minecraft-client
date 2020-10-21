@@ -1,5 +1,8 @@
 package de.crazymemecoke.features.modules.world;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventRender;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;
@@ -33,56 +36,6 @@ public class Scaffold extends Module {
 
     public Queue<Consumer<EntityPlayerSP>> getPostponeActions() {
         return this.postponeActions;
-    }
-
-    public void onUpdate() {
-        if (!this.state()) {
-            return;
-        }
-
-        if (time.hasReached(500) && mc.gameSettings.keyBindForward.pressed == true) {
-            mc.gameSettings.keyBindBack.pressed = true;
-        }
-        if (time.hasReached(630)) {
-            if (mc.gameSettings.keyBindBack.pressed == true) {
-                mc.gameSettings.keyBindBack.pressed = false;
-                time.reset();
-            }
-        }
-        EntityPlayerSP p = mc.thePlayer;
-        ArrayList<BlockPos> blockStandOn = getSurroundingBlocks();
-        if (!mc.thePlayer.onGround) {
-            mc.rightClickDelayTimer = 0;
-            mc.rightClickMouse();
-
-        }
-        ArrayList<BlockPos> collisionBlocks = getCollisionBlocks();
-        for (BlockPos posCollision : collisionBlocks) {
-            IBlockState blockOnCollision = p.worldObj.getBlockState(posCollision);
-            if ((blockOnCollision.getBlock() instanceof BlockAir)) {
-                for (BlockPos posStandOn : blockStandOn) {
-                    IBlockState blockInReach = p.worldObj.getBlockState(posStandOn);
-                    if (!(blockInReach.getBlock() instanceof BlockAir)) {
-                        if (!posStandOn.equals(posCollision)) {
-                            if (posStandOn.offset(p.getHorizontalFacing()).equals(posCollision)) {
-                                Wrapper.mc.thePlayer.sendQueue.addToSendQueue(
-                                        new C03PacketPlayer.C05PacketPlayerLook(mc.thePlayer.rotationYaw, 90.0F, true));
-                                if (mc.playerController.onPlayerRightClick(mc.thePlayer, mc.theWorld,
-                                        p.inventory.getCurrentItem(), posStandOn.add(0, 0, 0), p.getHorizontalFacing(),
-                                        new Vec3(posStandOn.getX(), posStandOn.getY(), posStandOn.getZ()))) {
-
-                                    mc.rightClickDelayTimer = 0;
-                                    p.swingItem();
-
-                                    break;
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private ArrayList<BlockPos> getCollisionBlocks() {
@@ -131,20 +84,67 @@ public class Scaffold extends Module {
         return blocksStandOn;
     }
 
-    public void onRender() {
-        if (!this.state()) {
-            return;
-        }
-        EntityPlayer p = mc.thePlayer;
-        ArrayList<BlockPos> blockStandOn = getSurroundingBlocks();
-        IBlockState state;
-        for (BlockPos pos : blockStandOn) {
-            state = p.worldObj.getBlockState(pos);
+    @Override
+    public void onEvent(Event event) {
+        if(event instanceof EventUpdate) {
+            if (time.hasReached(500) && mc.gameSettings.keyBindForward.pressed == true) {
+                mc.gameSettings.keyBindBack.pressed = true;
+            }
+            if (time.hasReached(630)) {
+                if (mc.gameSettings.keyBindBack.pressed == true) {
+                    mc.gameSettings.keyBindBack.pressed = false;
+                    time.reset();
+                }
+            }
+            EntityPlayerSP p = mc.thePlayer;
+            ArrayList<BlockPos> blockStandOn = getSurroundingBlocks();
+            if (!mc.thePlayer.onGround) {
+                mc.rightClickDelayTimer = 0;
+                mc.rightClickMouse();
 
-        }
-        ArrayList<BlockPos> collisionBlocks = getCollisionBlocks();
-        for (BlockPos pos : collisionBlocks) {
+            }
+            ArrayList<BlockPos> collisionBlocks = getCollisionBlocks();
+            for (BlockPos posCollision : collisionBlocks) {
+                IBlockState blockOnCollision = p.worldObj.getBlockState(posCollision);
+                if ((blockOnCollision.getBlock() instanceof BlockAir)) {
+                    for (BlockPos posStandOn : blockStandOn) {
+                        IBlockState blockInReach = p.worldObj.getBlockState(posStandOn);
+                        if (!(blockInReach.getBlock() instanceof BlockAir)) {
+                            if (!posStandOn.equals(posCollision)) {
+                                if (posStandOn.offset(p.getHorizontalFacing()).equals(posCollision)) {
+                                    Wrapper.mc.thePlayer.sendQueue.addToSendQueue(
+                                            new C03PacketPlayer.C05PacketPlayerLook(mc.thePlayer.rotationYaw, 90.0F, true));
+                                    if (mc.playerController.onPlayerRightClick(mc.thePlayer, mc.theWorld,
+                                            p.inventory.getCurrentItem(), posStandOn.add(0, 0, 0), p.getHorizontalFacing(),
+                                            new Vec3(posStandOn.getX(), posStandOn.getY(), posStandOn.getZ()))) {
 
+                                        mc.rightClickDelayTimer = 0;
+                                        p.swingItem();
+
+                                        break;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(event instanceof EventRender) {
+            if(((EventRender) event).getType() == EventRender.Type.threeD) {
+                EntityPlayer p = mc.thePlayer;
+                ArrayList<BlockPos> blockStandOn = getSurroundingBlocks();
+                IBlockState state;
+                for (BlockPos pos : blockStandOn) {
+                    state = p.worldObj.getBlockState(pos);
+
+                }
+                ArrayList<BlockPos> collisionBlocks = getCollisionBlocks();
+                for (BlockPos pos : collisionBlocks) {
+
+                }
+            }
         }
     }
 

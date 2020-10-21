@@ -2,6 +2,8 @@ package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import org.lwjgl.input.Keyboard;
@@ -28,10 +30,10 @@ public class Step extends Module {
         mc.thePlayer.stepHeight = 0.5f;
     }
 
-    public void onUpdate() {
-        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
-
-        if (state()) {
+    @Override
+    public void onEvent(Event event) {
+        if (event instanceof EventUpdate) {
+            String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
             switch (mode) {
                 case "vanilla": {
                     doVanilla();

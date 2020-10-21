@@ -39,6 +39,7 @@ import javax.imageio.ImageIO;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.ui.guiscreens.GuiMainMenu;
+import de.crazymemecoke.manager.events.impl.EventTick;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.features.ui.Interface;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
@@ -1508,6 +1509,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
      * Runs the current tick.
      */
     public void runTick() throws IOException {
+
+        EventTick eventTick = new EventTick();
+        Client.main().getEventManager().onEvent(eventTick);
+
         if (this.rightClickDelayTimer > 0) {
             --this.rightClickDelayTimer;
         }

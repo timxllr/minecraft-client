@@ -1,5 +1,7 @@
 package de.crazymemecoke.features.modules.combat;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import net.minecraft.block.material.Material;
@@ -10,8 +12,9 @@ public class Criticals extends Module {
         super("Criticals", Keyboard.KEY_NONE, Category.COMBAT, -1);
     }
 
-    public void onUpdate() {
-        if (state()) {
+    @Override
+    public void onEvent(Event event) {
+        if (event instanceof EventUpdate) {
             if (!mc.thePlayer.isInWater() && !mc.thePlayer.isInsideOfMaterial(Material.lava) && mc.thePlayer.onGround) {
                 mc.thePlayer.motionY = 0.2D;
                 mc.thePlayer.onGround = false;
@@ -19,5 +22,4 @@ public class Criticals extends Module {
             mc.thePlayer.motionY = -0.2D;
         }
     }
-
 }

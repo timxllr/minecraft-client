@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.events.impl.EventRender;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
@@ -1647,6 +1649,9 @@ public class EntityRenderer implements IResourceManagerReloadListener {
             this.mc.mcProfiler.endStartSection("forge_render_last");
             Reflector.callVoid(Reflector.ForgeHooksClient_dispatchRenderLast, new Object[]{renderglobal, Float.valueOf(partialTicks)});
         }
+
+        EventRender eventRender = new EventRender(EventRender.Type.threeD);
+        Client.main().getEventManager().onEvent(eventRender);
 
         this.mc.mcProfiler.endStartSection("hand");
         boolean flag2 = ReflectorForge.renderFirstPersonHand(this.mc.renderGlobal, partialTicks, pass);

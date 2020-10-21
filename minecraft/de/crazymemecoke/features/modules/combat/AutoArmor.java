@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.combat;
 
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.events.Event;
 import de.crazymemecoke.utils.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 
@@ -25,7 +26,7 @@ public class AutoArmor extends Module {
     TimeHelper time = new TimeHelper();
 
     @Override
-    public void onUpdate() {
+    public void onEvent(Event event) {
         double delay = Client.main().setMgr().settingByName("Delay", this).getNum();
         if (state()) {
             if (mc.thePlayer.capabilities.isCreativeMode

@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.events.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import org.lwjgl.input.Keyboard;
@@ -23,24 +24,6 @@ public class FastLadder extends Module {
         Client.main().setMgr().newSetting(new Setting("AAC Speed", this, 0.2, 0.1, 1.0, false));
     }
 
-    @Override
-    public void onUpdate() {
-        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
-
-        if (state()) {
-            switch (mode) {
-                case "vanilla": {
-                    doVanilla();
-                    break;
-                }
-                case "aac": {
-                    doAAC();
-                    break;
-                }
-            }
-        }
-    }
-
     private void doAAC() {
         double speed = Client.main().setMgr().settingByName("AAC Speed", this).getNum();
 
@@ -54,6 +37,22 @@ public class FastLadder extends Module {
 
         if ((mc.thePlayer.isOnLadder()) && (mc.thePlayer.isCollidedHorizontally)) {
             mc.thePlayer.motionY = speed;
+        }
+    }
+
+    @Override
+    public void onEvent(Event event) {
+        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
+
+        switch (mode) {
+            case "vanilla": {
+                doVanilla();
+                break;
+            }
+            case "aac": {
+                doAAC();
+                break;
+            }
         }
     }
 }

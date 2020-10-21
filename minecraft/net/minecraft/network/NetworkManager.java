@@ -1,9 +1,9 @@
 package net.minecraft.network;
 
-import de.crazymemecoke.utils.events.eventapi.EventManager;
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.events.impl.EventPacket;
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import de.crazymemecoke.utils.events.PacketSendEvent;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelException;
@@ -141,14 +141,11 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
     }
 
     protected void channelRead0(ChannelHandlerContext p_channelRead0_1_, Packet p_channelRead0_2_) throws Exception {
-        PacketSendEvent pse = new PacketSendEvent(p_channelRead0_2_);
-        EventManager.call(pse);
+        EventPacket eventPacket = new EventPacket(EventPacket.Type.RECEIVE, p_channelRead0_2_);
+        Client.main().getEventManager().onEvent(eventPacket);
 
-        if (pse.isCancelled()) {
-            return;
-        }
+        if(eventPacket.isCanceled())return;
 
-        p_channelRead0_2_ = pse.getPacket();
         if (this.channel.isOpen()) {
             try {
                 p_channelRead0_2_.processPacket(this.packetListener);
@@ -170,15 +167,6 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
     public void sendPacket(Packet packetIn) {
 
-        PacketSendEvent pse = new PacketSendEvent(packetIn);
-        EventManager.call(pse);
-
-        if (pse.isCancelled()) {
-            return;
-        }
-
-        packetIn = pse.getPacket();
-
         if (this.isChannelOpen()) {
             this.flushOutboundQueue();
             this.dispatchPacket(packetIn, (GenericFutureListener<? extends Future<? super Void>>[]) null);
@@ -194,6 +182,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
     }
 
     public void sendPacket(Packet packetIn, GenericFutureListener<? extends Future<? super Void>> listener, GenericFutureListener<? extends Future<? super Void>>... listeners) {
+
         if (this.isChannelOpen()) {
             this.flushOutboundQueue();
             this.dispatchPacket(packetIn, (GenericFutureListener[]) ArrayUtils.add(listeners, 0, listener));

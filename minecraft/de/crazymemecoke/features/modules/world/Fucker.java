@@ -2,6 +2,8 @@ package de.crazymemecoke.features.modules.world;
 
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.time.TimeHelper;
@@ -29,10 +31,17 @@ public class Fucker extends Module {
         Client.main().setMgr().newSetting(new Setting("Mode", this, "Beds", options));
     }
 
+    public void smashBlock(BlockPos pos) {
+        mc.thePlayer.sendQueue.addToSendQueue(
+                new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK, pos, EnumFacing.UP));
+        mc.thePlayer.sendQueue.addToSendQueue(
+                new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, pos, EnumFacing.UP));
+    }
+
     @Override
-    public void onUpdate() {
-        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
-        if (state()) {
+    public void onEvent(Event event) {
+        if (event instanceof EventUpdate) {
+            String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
             for (this.xOffset = -5; this.xOffset < 6; ++this.xOffset) {
                 for (this.zOffset = -5; this.zOffset < 6; ++this.zOffset) {
                     for (this.yOffset = 5; this.yOffset > -5; --this.yOffset) {
@@ -69,12 +78,4 @@ public class Fucker extends Module {
             }
         }
     }
-
-    public void smashBlock(BlockPos pos) {
-        mc.thePlayer.sendQueue.addToSendQueue(
-                new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK, pos, EnumFacing.UP));
-        mc.thePlayer.sendQueue.addToSendQueue(
-                new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.STOP_DESTROY_BLOCK, pos, EnumFacing.UP));
-    }
-
 }

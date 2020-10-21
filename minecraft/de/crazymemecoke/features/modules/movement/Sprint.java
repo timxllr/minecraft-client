@@ -1,5 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -13,13 +15,10 @@ public class Sprint extends Module {
 
 	}
 
-	public void onUpdate() {
-		if (state()) {
-			if (!(Wrapper.mc.thePlayer.isCollidedHorizontally) && Wrapper.mc.thePlayer.moveForward > 0.0f) {
-				Wrapper.mc.thePlayer.setSprinting(true);
-			} else {
-				Wrapper.mc.thePlayer.setSprinting(false);
-			}
+	@Override
+	public void onEvent(Event event) {
+		if(event instanceof EventUpdate) {
+			Wrapper.mc.thePlayer.setSprinting(true);
 		}
 	}
 }

@@ -1,14 +1,15 @@
 package de.crazymemecoke.features.modules.combat;
 
-import de.crazymemecoke.utils.events.eventapi.EventManager;
-import de.crazymemecoke.utils.events.eventapi.EventTarget;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventMotion;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
+import de.crazymemecoke.manager.events.impl.EventMoveFlying;
+import de.crazymemecoke.manager.events.impl.EventPacket;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.events.MoveEvent;
-import de.crazymemecoke.utils.events.PacketSendEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
@@ -54,9 +55,25 @@ public class Aura extends Module {
         sM.newSetting(new Setting("Mode", this, "Single", auraMode));
     }
 
+
     @Override
-    public void onUpdate() {
-        if (state()) {
+    public void onEnable() {
+        if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
+            Client.main().modMgr().getByName("Aura").setState(false);
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        currentTarget = null;
+        targets = null;
+    }
+
+    @Override
+    public void onEvent(Event event) {
+
+        if (event instanceof EventUpdate) {
+
             ticksExisted = sM.settingByName("Ticks Existed", this).getNum();
             range = sM.settingByName("Range", this).getNum();
             cps = sM.settingByName("CPS", this).getNum();
@@ -68,29 +85,7 @@ public class Aura extends Module {
             invisibles = sM.settingByName("Invisibles", this).getBool();
             rotations = sM.settingByName("Rotations", this).getBool();
             auraMode = sM.settingByName("Mode", this).getMode();
-        }
-    }
 
-
-    @Override
-    public void onEnable() {
-        EventManager.register(this);
-
-        if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
-            Client.main().modMgr().getByName("Aura").setState(false);
-        }
-    }
-
-    @Override
-    public void onDisable() {
-        EventManager.unregister(this);
-        currentTarget = null;
-        targets = null;
-    }
-
-    @Override
-    public void onPreMotionUpdate() {
-        if (state()) {
             if (auraMode.equalsIgnoreCase("Single")) {
                 currentTarget = getClosest(mc.playerController.getBlockReachDistance());
 
@@ -112,37 +107,51 @@ public class Aura extends Module {
                 }
             }
         }
-    }
 
-    @Override
-    public void onPostMotionUpdate() {
-        if (state()) {
-            if (auraMode.equalsIgnoreCase("Single")) {
-                if (currentTarget == null)
+        if (event instanceof EventMotion) {
+            if (((EventMotion) event).getType() == EventMotion.Type.PRE) {
+
+                if (rotations)
                     return;
 
-                if (rotations) {
-                    mc.thePlayer.rotationYaw = yaw;
-                    mc.thePlayer.rotationPitch = pitch;
+                ((EventMotion) event).setYaw(yaw);
+                ((EventMotion) event).setPitch(pitch);
+
+            } else if (((EventMotion) event).getType() == EventMotion.Type.POST) {
+                if (auraMode.equalsIgnoreCase("Single")) {
+                    if (currentTarget == null)
+                        return;
+
+                    if (rotations) {
+                        mc.thePlayer.rotationYaw = yaw;
+                        mc.thePlayer.rotationPitch = pitch;
+                    }
+                }
+            }
+        }
+        if (event instanceof EventMoveFlying) {
+            ((EventMoveFlying) event).setYaw(yaw);
+        }
+        if (event instanceof EventPacket) {
+            if (((EventPacket) event).getType() == EventPacket.Type.SEND) {
+                if (rotations)
+                    return;
+
+                if (((EventPacket) event).getPacket() instanceof C03PacketPlayer) {
+                    C03PacketPlayer orig = (C03PacketPlayer) ((EventPacket) event).getPacket();
+                    orig.yaw = yaw;
+                    orig.pitch = pitch;
+                    orig.rotating = true;
+                    ((EventPacket) event).setPacket(orig);
                 }
             }
         }
     }
 
-    @EventTarget
-    public void onMove(MoveEvent e) {
-        if (rotations)
-            return;
-
-        e.setYaw(yaw);
-        e.setPitch(pitch);
-    }
-
     public void calcRotation(Entity target) {
         if (target == null || mc.thePlayer == null)
             return;
-/*
-        Vec3 eyePosition = new Vec3(player.posX, player.getEntityBoundingBox().minY + player.getEyeHeight(), player.posZ);
+/*      Vec3 eyePosition = new Vec3(player.posX, player.getEntityBoundingBox().minY + player.getEyeHeight(), player.posZ);
 
         AxisAlignedBB tbb = target.getEntityBoundingBox();
         Vec3 targetVector = new Vec3(tbb.minX + (tbb.maxX - tbb.minX), tbb.minY + (tbb.maxY - tbb.minY), tbb.minZ + (tbb.maxZ - tbb.minZ));
@@ -166,8 +175,6 @@ public class Aura extends Module {
         final double xzDiff = MathHelper.sqrt_double(xDiff * xDiff + zDiff * zDiff);
         yaw = (float) (Math.atan2(zDiff, xDiff) * 180.0 / Math.PI) - 90.0f;
         pitch = (float) (-(Math.atan2(yDiff, xzDiff) * 180.0 / Math.PI));
-
-
     }
 
 
@@ -204,21 +211,5 @@ public class Aura extends Module {
 
     private boolean canAttack(Entity entity) {
         return entity != mc.thePlayer && entity.isEntityAlive() && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted;
-    }
-
-    @EventTarget
-    public void onPacket(PacketSendEvent e) {
-        if (state()) {
-            if (rotations)
-                return;
-
-            if (e.getPacket() instanceof C03PacketPlayer) {
-                C03PacketPlayer orig = (C03PacketPlayer) e.getPacket();
-                orig.yaw = yaw;
-                orig.pitch = pitch;
-                orig.rotating = true;
-                e.setPacket(orig);
-            }
-        }
     }
 }

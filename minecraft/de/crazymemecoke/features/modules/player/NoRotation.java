@@ -1,33 +1,40 @@
 package de.crazymemecoke.features.modules.player;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventPacket;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.play.client.C03PacketPlayer;
 import org.lwjgl.input.Keyboard;
-
-import de.crazymemecoke.utils.events.eventapi.EventTarget;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.events.PacketReceiveEvent;
-import de.crazymemecoke.utils.render.Rainbow;
-import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 
 public class NoRotation extends Module{
 
 	public NoRotation(){
 		super("NoRotation", Keyboard.KEY_NONE, Category.PLAYER, -1);
 	}
-	
-	@EventTarget
-	  public void onPacketReceive(PacketReceiveEvent e)
-	  {
-	    if ((e.getPacket() instanceof S08PacketPlayerPosLook))
-	    {
-	      S08PacketPlayerPosLook p = (S08PacketPlayerPosLook)e.getPacket();
-	      if ((p.getYaw() != this.mc.thePlayer.rotationYaw) || (p.getPitch() != this.mc.thePlayer.rotationPitch))
-	      {
-	        ((S08PacketPlayerPosLook)e.getPacket()).setYaw(mc.thePlayer.rotationYaw);
-	        ((S08PacketPlayerPosLook)e.getPacket()).setPitch(mc.thePlayer.rotationPitch);
-	      }
-	    }
-	  }
 
+
+	@Override
+	public void onEvent(Event event) {
+		if(event instanceof EventPacket) {
+			if(((EventPacket) event).getType() == EventPacket.Type.RECEIVE) {
+				if (Client.main().setMgr().settingByName("Mode", this).getMode()
+						.equalsIgnoreCase("AAC 1.9.10")) {
+					if (!this.mc.thePlayer.onGround) {
+						Minecraft.mc().thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer(true));
+						this.mc.thePlayer.onGround = true;
+						this.mc.thePlayer.fallDistance = 0.0F;
+					} else {
+						this.mc.thePlayer.onGround = false;
+						this.mc.thePlayer.onGround = true;
+					}
+				} else if (Client.main().setMgr().settingByName("Mode", this).getMode()
+						.equalsIgnoreCase("NCP")) {
+				}
+			}
+		}
+	}
 }

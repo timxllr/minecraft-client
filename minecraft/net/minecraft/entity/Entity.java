@@ -2,10 +2,12 @@ package net.minecraft.entity;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.movement.SafeWalk;
+import de.crazymemecoke.manager.events.impl.EventMoveFlying;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.crash.CrashReport;
@@ -585,9 +587,9 @@ public abstract class Entity implements ICommandSender {
             double d5 = z;
             boolean flag = this.onGround && this.isSneaking() && this instanceof EntityPlayer;
 
-            boolean sneak = Client.main().modMgr().getModule(SafeWalk.class).state() && this instanceof EntityPlayer;
+            //boolean sneak = Client.main().modMgr().getModule(SafeWalk.class).state() && this instanceof EntityPlayer;
 
-            if (flag || sneak) {
+            if (flag) {
                 double d6;
 
                 for (d6 = 0.05D; x != 0.0D && this.worldObj.getCollidingBoundingBoxes(this, this.getEntityBoundingBox().offset(x, -1.0D, 0.0D)).isEmpty(); d3 = x) {
@@ -1083,8 +1085,15 @@ public abstract class Entity implements ICommandSender {
             f = friction / f;
             strafe = strafe * f;
             forward = forward * f;
-            float f1 = MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F);
-            float f2 = MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F);
+
+            EventMoveFlying moveFlying = new EventMoveFlying(this.rotationYaw);
+            Client.main().getEventManager().onEvent(moveFlying);
+
+            float yaw = this.rotationYaw;
+
+            float f1 = MathHelper.sin(yaw * (float) Math.PI / 180.0F);
+            float f2 = MathHelper.cos(yaw * (float) Math.PI / 180.0F);
+
             this.motionX += (double) (strafe * f2 - forward * f1);
             this.motionZ += (double) (forward * f2 + strafe * f1);
         }

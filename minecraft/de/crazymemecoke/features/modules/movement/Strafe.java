@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
-import de.crazymemecoke.utils.events.eventapi.EventTarget;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import org.lwjgl.input.Keyboard;
@@ -11,9 +12,10 @@ public class Strafe extends Module {
         super("Strafe", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
     }
 
-    @EventTarget
-    public void onUpdate() {
-        if (state()) {
+
+    @Override
+    public void onEvent(Event event) {
+        if(event instanceof EventUpdate) {
             if (!(mc.thePlayer.hurtTime > 0)) {
                 if ((mc.thePlayer.onGround) || (mc.thePlayer.isAirBorne) && (!mc.thePlayer.isInWater())) {
                     float dir = mc.thePlayer.rotationYaw;

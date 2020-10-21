@@ -4,6 +4,8 @@ import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.mojang.authlib.GameProfile;
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.events.impl.EventPacket;
 import io.netty.buffer.Unpooled;
 import java.io.File;
 import java.io.IOException;
@@ -813,6 +815,11 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
     public void addToSendQueue(Packet p_147297_1_)
     {
+        EventPacket eventPacket = new EventPacket(EventPacket.Type.SEND, p_147297_1_);
+        Client.main().getEventManager().onEvent(eventPacket);
+
+        if(eventPacket.isCanceled())return;
+
         this.netManager.sendPacket(p_147297_1_);
     }
 

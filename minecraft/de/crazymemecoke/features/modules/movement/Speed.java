@@ -3,20 +3,17 @@ package de.crazymemecoke.features.modules.movement;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
-import de.crazymemecoke.utils.events.MoveEvent;
-import de.crazymemecoke.utils.events.UpdateEvent;
-import de.crazymemecoke.utils.events.eventapi.EventTarget;
 import de.crazymemecoke.utils.time.TimerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.init.Blocks;
-import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -85,67 +82,71 @@ public class Speed extends Module {
         mc.thePlayer.setVelocity(0.0D, 0.0D, 0.0D);
     }
 
-    public void onUpdate() {
-        speedMode = sM.settingByName("Mode", this).getMode();
-        double frames_speed = sM.settingByName("Frames Speed", this).getNum();
-        if (state()) {
+    @Override
+    public void onEvent(Event event) {
+        if (event instanceof EventUpdate) {
 
-            switch (speedMode) {
-                case "ground": {
-                    doGround();
-                    break;
-                }
-                case "[y-port] aac 1.9.8": {
-                    doAAC198();
-                    break;
-                }
-                case "frames": {
-                    doFrames(frames_speed);
-                    break;
-                }
-                case "motion": {
-                    doMotion();
-                    break;
-                }
-                case "jump": {
-                    doJump();
-                    break;
-                }
-                case "timer": {
-                    doTimer();
-                    break;
-                }
-                case "[y-port] ncp slow": {
-                    doNCPYPortSlow();
-                    break;
-                }
-                case "[y-port] aac 1.9.10": {
-                    doAAC1910();
-                    break;
-                }
-                case "[b-hop] aac 3.3.10": {
-                    doAAC3310();
-                    break;
-                }
-                case "[b-hop] hive skygiants": {
-                    doHiveSkyGiants();
-                    break;
-                }
-                case "[y-port] ncp fast": {
-                    doNCPYPortFast();
-                    break;
-                }
-                case "[y-port] aac 3.3.1": {
-                    doAACYPort331();
-                    break;
-                }
-                case "[b-hop] minesecure": {
-                    doMineSecure();
-                    break;
-                }
-                case "[l-hop] aac 3.3.9": {
-                    doAACLowHop339();
-                    break;
+            speedMode = sM.settingByName("Mode", this).getMode();
+            double frames_speed = sM.settingByName("Frames Speed", this).getNum();
+            if (state()) {
+
+                switch (speedMode) {
+                    case "ground": {
+                        doGround();
+                        break;
+                    }
+                    case "[y-port] aac 1.9.8": {
+                        doAAC198();
+                        break;
+                    }
+                    case "frames": {
+                        doFrames(frames_speed);
+                        break;
+                    }
+                    case "motion": {
+                        doMotion();
+                        break;
+                    }
+                    case "jump": {
+                        doJump();
+                        break;
+                    }
+                    case "timer": {
+                        doTimer();
+                        break;
+                    }
+                    case "[y-port] ncp slow": {
+                        doNCPYPortSlow();
+                        break;
+                    }
+                    case "[y-port] aac 1.9.10": {
+                        doAAC1910();
+                        break;
+                    }
+                    case "[b-hop] aac 3.3.10": {
+                        doAAC3310();
+                        break;
+                    }
+                    case "[b-hop] hive skygiants": {
+                        doHiveSkyGiants();
+                        break;
+                    }
+                    case "[y-port] ncp fast": {
+                        doNCPYPortFast();
+                        break;
+                    }
+                    case "[y-port] aac 3.3.1": {
+                        doAACYPort331();
+                        break;
+                    }
+                    case "[b-hop] minesecure": {
+                        doMineSecure();
+                        break;
+                    }
+                    case "[l-hop] aac 3.3.9": {
+                        doAACLowHop339();
+                        break;
+                    }
                 }
             }
         }
@@ -490,25 +491,25 @@ public class Speed extends Module {
         return null;
     }
 
-    @EventTarget
-    public void onNewMove(MoveEvent e) {
+    public void onNewMove() {
         if (!speedMode.equalsIgnoreCase("Jump")) {
             return;
         }
-        e.setX(e.getX() * 0.4D);
-        e.setZ(e.getZ() * 0.4D);
+        if (mc.gameSettings.keyBindForward.pressed || mc.gameSettings.keyBindBack.pressed || mc.gameSettings.keyBindLeft.pressed || mc.gameSettings.keyBindRight.pressed) {
+
+            mc.thePlayer.motionX *= 0.4;
+            mc.thePlayer.motionZ *= 0.4;
+        }
     }
 
     public boolean checks() {
         return !mc.thePlayer.isSneaking() && !mc.thePlayer.isCollidedHorizontally && (mc.thePlayer.moveForward != 0.0F || mc.thePlayer.moveStrafing != 0.0F) && !mc.gameSettings.keyBindJump.isPressed() && !PlayerUtil.isOnLiquid() && !PlayerUtil.isInLiquid();
     }
 
-    @EventTarget
-    public void onJumpUpdate(UpdateEvent e) {
+    public void onJumpUpdate() {
         if (!speedMode.equalsIgnoreCase("Jump")) {
             return;
         }
-        if (e.getState() == WorldRenderer.State.PRE) {
             if (((mc.thePlayer.moveForward == 0.0F) && (mc.thePlayer.moveStrafing == 0.0F))
                     || (mc.thePlayer.isCollidedHorizontally)) {
                 return;
@@ -521,15 +522,12 @@ public class Speed extends Module {
                 mc.thePlayer.motionX -= MathHelper.sin(var1) * 0.2D;
                 mc.thePlayer.motionZ += MathHelper.cos(var1) * 0.2D;
             }
-        }
     }
 
-    @EventTarget
-    public void onNewUpdate(UpdateEvent e) {
+    public void onNewUpdate() {
         if (!speedMode.equalsIgnoreCase("New")) {
             return;
         }
-        if (e.getState() == WorldRenderer.State.PRE) {
             double speed = 3.15D;
             double slow = 1.49D;
             double offset = 4.9D;
@@ -574,7 +572,6 @@ public class Speed extends Module {
                 }
             }
         }
-    }
 
     public double round(double value, int places) {
         if (places < 0) {

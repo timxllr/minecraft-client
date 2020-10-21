@@ -7,6 +7,7 @@ import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGUI;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.commandmanager.CommandManager;
+import de.crazymemecoke.manager.events.EventManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
 import de.crazymemecoke.utils.render.Colors;
@@ -43,6 +44,7 @@ public class Client {
     private Friend friend;
     private Shader shader;
     private AltManager altManager;
+    private EventManager eventManager;
 
     public long initTime = System.currentTimeMillis();
 
@@ -56,7 +58,7 @@ public class Client {
             clientDir.mkdir();
             mc.displayGuiScreen(new GuiFirstUse());
         }
-
+        eventManager = new EventManager();
         fontManager = new FontManager();
         fontManager.initFonts();
         setmgr = new SettingsManager();
@@ -82,6 +84,10 @@ public class Client {
 
         Client.main().modMgr().getModule(Crasher.class).setState(false);
         System.out.println("Disabled Crasher module");
+    }
+
+    public EventManager getEventManager() {
+        return eventManager;
     }
 
     public ModuleManager modMgr() {

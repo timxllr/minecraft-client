@@ -2,6 +2,8 @@ package de.crazymemecoke.features.modules.player;
 
 import java.util.ArrayList;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
@@ -25,8 +27,8 @@ public class NoFall extends Module {
     }
 
     @Override
-    public void onUpdate() {
-        if (state()) {
+    public void onEvent(Event event) {
+        if(event instanceof EventUpdate) {
             if (Client.main().setMgr().settingByName("Mode", this).getMode()
                     .equalsIgnoreCase("AAC 1.9.10")) {
                 if (!this.mc.thePlayer.onGround) {
@@ -42,5 +44,4 @@ public class NoFall extends Module {
             }
         }
     }
-
 }

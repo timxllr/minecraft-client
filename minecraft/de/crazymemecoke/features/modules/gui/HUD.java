@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.gui;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.events.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import org.lwjgl.input.Keyboard;
@@ -53,4 +54,8 @@ public class HUD extends Module {
         Client.main().setMgr().newSetting(new Setting("Developer Mode", this, false));
     }
 
+    @Override
+    public void onEvent(Event event) {
+
+    }
 }

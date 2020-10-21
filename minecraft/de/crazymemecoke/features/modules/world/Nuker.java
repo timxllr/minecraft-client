@@ -2,6 +2,8 @@ package de.crazymemecoke.features.modules.world;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import net.minecraft.block.material.Material;
@@ -22,8 +24,8 @@ public class Nuker extends Module {
     }
 
     @Override
-    public void onUpdate() {
-        if (state()) {
+    public void onEvent(Event event) {
+        if(event instanceof EventUpdate) {
             nukerRange = (float) Client.main().setMgr().settingByName("Range", this).getNum();
             if (mc.thePlayer.capabilities.isCreativeMode) {
                 for (int y = (int) nukerRange; y >= (int) (-nukerRange); --y) {

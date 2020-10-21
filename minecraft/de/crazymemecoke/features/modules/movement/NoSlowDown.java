@@ -1,5 +1,6 @@
 package de.crazymemecoke.features.modules.movement;
 
+import de.crazymemecoke.manager.events.Event;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -16,11 +17,10 @@ public class NoSlowDown extends Module {
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onEvent(Event event) {
 		if (mc.thePlayer.isBlocking()) {
 			this.mc.thePlayer.sendQueue.addToSendQueue(new C07PacketPlayerDigging(
 					C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, new BlockPos(0, 0, 0), EnumFacing.DOWN));
 		}
 	}
-
 }

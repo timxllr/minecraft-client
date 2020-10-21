@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
-import de.crazymemecoke.utils.events.eventapi.EventTarget;
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import org.lwjgl.input.Keyboard;
@@ -11,11 +12,10 @@ public class AntiWeb extends Module {
         super("AntiWeb", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
     }
 
-    @EventTarget
-    public void onUpdate() {
-        if (state()) {
+    @Override
+    public void onEvent(Event event) {
+        if(event instanceof EventUpdate) {
             mc.thePlayer.isInWeb = false;
         }
     }
-
 }

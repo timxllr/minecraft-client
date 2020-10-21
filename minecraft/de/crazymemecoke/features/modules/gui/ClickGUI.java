@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.gui;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.events.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import org.lwjgl.input.Keyboard;
@@ -34,5 +35,10 @@ public class ClickGUI extends Module {
     public void onEnable() {
         mc.displayGuiScreen(Client.main().getClickGui());
         super.onDisable();
+    }
+
+    @Override
+    public void onEvent(Event event) {
+
     }
 }

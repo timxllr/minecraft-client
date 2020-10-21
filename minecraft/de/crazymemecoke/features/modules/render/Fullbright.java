@@ -1,5 +1,6 @@
 package de.crazymemecoke.features.modules.render;
 
+import de.crazymemecoke.manager.events.Event;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -12,11 +13,20 @@ public class Fullbright extends Module {
 		super("Fullbright", Keyboard.KEY_NONE, Category.RENDER, -1);
 	}
 
-	public void onUpdate() {
-		if (this.state()) {
-			Wrapper.mc.gameSettings.gammaSetting = 100f;
-		} else {
-			Wrapper.mc.gameSettings.gammaSetting = 1f;
-		}
+	@Override
+	public void onEnable() {
+		Wrapper.mc.gameSettings.gammaSetting = 100f;
+		super.onEnable();
+	}
+
+	@Override
+	public void onDisable() {
+		Wrapper.mc.gameSettings.gammaSetting = 1f;
+		super.onDisable();
+	}
+
+	@Override
+	public void onEvent(Event event) {
+
 	}
 }

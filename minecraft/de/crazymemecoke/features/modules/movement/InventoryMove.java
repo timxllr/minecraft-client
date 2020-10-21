@@ -1,5 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventUpdate;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -13,8 +15,10 @@ public class InventoryMove extends Module {
 		super("InventoryMove", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
 	}
 
-	public void onUpdate() {
-		if (this.state()) {
+
+	@Override
+	public void onEvent(Event event) {
+		if(event instanceof EventUpdate) {
 			if (mc.currentScreen != null && (!(mc.currentScreen instanceof GuiChat))) {
 				KeyBinding[] moveKeys = { mc.gameSettings.keyBindForward, mc.gameSettings.keyBindSprint,
 						mc.gameSettings.keyBindBack, mc.gameSettings.keyBindLeft, mc.gameSettings.keyBindRight,

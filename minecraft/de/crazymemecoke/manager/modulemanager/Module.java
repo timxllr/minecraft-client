@@ -1,14 +1,14 @@
 package de.crazymemecoke.manager.modulemanager;
 
+import de.crazymemecoke.manager.events.Event;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
-public class Module {
+public abstract class Module {
 
     private final String name;
     private int bind;
     private final Category category;
-    private boolean isEnabled;
     public static Minecraft mc = Minecraft.mc();
     public boolean enabled;
     private String displayName;
@@ -33,7 +33,7 @@ public class Module {
     }
 
     public boolean state() {
-        return isEnabled;
+        return enabled;
     }
 
     public boolean isEnabled() {
@@ -44,10 +44,10 @@ public class Module {
         this.onToggle();
         if (state) {
             this.onEnable();
-            this.isEnabled = true;
+            this.enabled = true;
         } else {
             this.onDisable();
-            this.isEnabled = false;
+            this.enabled = false;
         }
     }
 
@@ -64,16 +64,9 @@ public class Module {
     public void onDisable() {
     }
 
-    public void onUpdate() {
-    }
-
-    public void onRender() {
-    }
+    public abstract void onEvent(Event event);
 
     public void setup() {
-    }
-
-    public void onPreMotionUpdate() {
     }
 
     public void setBind(int bind) {
@@ -83,8 +76,6 @@ public class Module {
         this.bind = bind;
     }
 
-    public void onPostMotionUpdate() {
-    }
 
     public final boolean isCategory(Category s) {
         return s == category;

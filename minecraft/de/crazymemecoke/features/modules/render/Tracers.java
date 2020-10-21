@@ -1,5 +1,7 @@
 package de.crazymemecoke.features.modules.render;
 
+import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.events.impl.EventRender;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.render.RenderUtils;
@@ -14,17 +16,6 @@ public class Tracers extends Module {
 
     public Tracers() {
         super("Tracers", Keyboard.KEY_NUMPAD8, Category.RENDER, -1);
-    }
-
-    @Override
-    public void onUpdate() {
-        if (state()) {
-            for (final EntityPlayer player : mc.theWorld.playerEntities) {
-                if (mc.thePlayer != player) {
-                    drawLine(player);
-                }
-            }
-        }
     }
 
     private void drawLine(final EntityPlayer player) {
@@ -54,5 +45,18 @@ public class Tracers extends Module {
         GL11.glDisable(2848);
         GL11.glDisable(3042);
         GL11.glPopMatrix();
+    }
+
+    @Override
+    public void onEvent(Event event) {
+        if(event instanceof EventRender) {
+            if(((EventRender) event).getType() == EventRender.Type.threeD) {
+                for (final EntityPlayer player : mc.theWorld.playerEntities) {
+                    if (mc.thePlayer != player) {
+                        drawLine(player);
+                    }
+                }
+            }
+        }
     }
 }
