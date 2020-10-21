@@ -43,17 +43,14 @@ public class Tab {
         // Background
         String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
         switch (mode) {
-            case "ambien old": {
+            case "ambien old":
+            case "vortex": {
                 RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, new Color(0, 0, 0).getRGB());
                 break;
             }
             case "ambien newest": {
                 RenderHelper.drawRect(x + 2, y + 2, x + menuWidth + 3, y + menuHeight + 2, Colors.main().getAmbienNewestGreyMainColor());
                 RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Colors.main().getAmbienNewestGreySecondColor());
-                break;
-            }
-            case "vortex": {
-                RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, new Color(0, 0, 0).getRGB());
                 break;
             }
             case "suicide": {
