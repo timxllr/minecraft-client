@@ -6,6 +6,9 @@ import de.crazymemecoke.manager.events.Event;
 import de.crazymemecoke.manager.events.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import net.minecraft.block.BlockAir;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -21,8 +24,9 @@ public class Step extends Module {
         mode.add("Vanilla");
         mode.add("NCP");
 
-        Client.main().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
         Client.main().setMgr().newSetting(new Setting("Step Height", this, 1.0, 1.0, 10.0, false));
+        Client.main().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
+        Client.main().setMgr().newSetting(new Setting("Reverse", this, false));
     }
 
     @Override
@@ -34,14 +38,21 @@ public class Step extends Module {
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
             String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
-            switch (mode) {
-                case "vanilla": {
-                    doVanilla();
-                    break;
-                }
-                case "ncp": {
-                    doNCP();
-                    break;
+
+            if (Client.main().setMgr().settingByName("Reverse", this).getBool()) {
+                doReverse();
+            }
+
+            if(mc.thePlayer.isCollidedHorizontally){
+                switch (mode) {
+                    case "vanilla": {
+                        doVanilla();
+                        break;
+                    }
+                    case "ncp": {
+                        doNCP();
+                        break;
+                    }
                 }
             }
         }
@@ -60,5 +71,14 @@ public class Step extends Module {
 
     private void doVanilla() {
         mc.thePlayer.jump();
+    }
+
+    private void doReverse() {
+        BlockPos underPlayer = new BlockPos(mc.thePlayer.getPosition().getX(), mc.thePlayer.getPosition().getY() - 1, mc.thePlayer.getPosition().getZ());
+        IBlockState blockUnderPlayer = mc.thePlayer.worldObj.getBlockState(underPlayer);
+
+        if (blockUnderPlayer.getBlock() instanceof BlockAir) {
+            mc.thePlayer.motionY = -1;
+        }
     }
 }
