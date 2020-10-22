@@ -2,7 +2,8 @@ package net.minecraft.entity;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.movement.SafeWalk;
-import de.crazymemecoke.manager.events.impl.EventMoveFlying;
+import de.crazymemecoke.manager.eventmanager.impl.EventMoveFlying;
+import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -1073,6 +1074,10 @@ public abstract class Entity implements ICommandSender {
      * Used in both water and by flying objects
      */
     public void moveFlying(float strafe, float forward, float friction) {
+
+        EventMoveFlying moveFlying = new EventMoveFlying(this.rotationYaw);
+        Client.main().eventMgr().onEvent(moveFlying);
+
         float f = strafe * strafe + forward * forward;
 
         if (f >= 1.0E-4F) {
@@ -1086,10 +1091,7 @@ public abstract class Entity implements ICommandSender {
             strafe = strafe * f;
             forward = forward * f;
 
-            EventMoveFlying moveFlying = new EventMoveFlying(this.rotationYaw);
-            Client.main().getEventManager().onEvent(moveFlying);
-
-            float yaw = this.rotationYaw;
+            float yaw = this instanceof EntityPlayerSP ? moveFlying.getYaw() : this.rotationYaw;
 
             float f1 = MathHelper.sin(yaw * (float) Math.PI / 180.0F);
             float f2 = MathHelper.cos(yaw * (float) Math.PI / 180.0F);
