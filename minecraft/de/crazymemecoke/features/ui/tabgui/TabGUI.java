@@ -98,16 +98,13 @@ public class TabGUI {
         // Background
         String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
         switch (mode) {
-            case "ambien old": {
+            case "ambien old":
+            case "vortex": {
                 RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
                 break;
             }
             case "ambien newest": {
                 RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getAmbienNewestGreyMainColor());
-                break;
-            }
-            case "vortex": {
-                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
                 break;
             }
             case "suicide": {
@@ -140,6 +137,10 @@ public class TabGUI {
             }
             case "hero": {
                 RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getHeroGreyColor());
+                break;
+            }
+            case "koks": {
+                RenderHelper.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0,0,0,220).getRGB());
                 break;
             }
         }
@@ -200,6 +201,11 @@ public class TabGUI {
                 }
                 case "hero": {
                     RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getHeroGreenColor() : 0);
+                    Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x, yOff + 1, -1);
+                    break;
+                }
+                case "koks": {
+                    RenderHelper.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getKoksGreenColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x, yOff + 1, -1);
                     break;
                 }

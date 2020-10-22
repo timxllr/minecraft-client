@@ -10,37 +10,36 @@ public class Colors {
         return instance;
     }
 
-    public static final int ambienOldBlueColor = new Color(32, 188, 240).getRGB();
-    public static final int ambienNewBlueColor = new Color(0x0090ff).getRGB();
-    public static final int ambienNewDarkGreyColor = new Color(0x20252b).getRGB();
-    public static final int greyColor = new Color(168, 167, 169).getRGB();
-    public static final int vortexRedColor = new Color(0xE37974).getRGB();
-    public static final int suicideBlueGreyColor = new Color(0x1c293a).getRGB();
-    public static final int suicideBlueColor = new Color(0x0993b0).getRGB();
-    public static final int suicideDarkBlueGreyColor = new Color(0x1a1f24).getRGB();
-    public static final int apinityBlueColor = new Color(0x4c80ee).getRGB();
-    public static final int apinityGreyColor = new Color(0x312e30).getRGB();
-    public static final int huzuniBlueColor = new Color(0x00a5ff).getRGB();
-    public static final int huzuniGreyColor = new Color(0x191923).getRGB();
-    public static final int nodusPurpleColor = new Color(0x5a0454).getRGB();
-    public static final int nodusTealColor = new Color(0x94d6ce).getRGB();
-    public static final int saintDarkBlueColor = new Color(0x11274c).getRGB();
-    public static final int saintDarkTealColor = new Color(0x13a4a1).getRGB();
-    public static final int saintOrangeColor = new Color(0xE0B71F).getRGB();
-    public static final int icarusOldOrangeColor = new Color(0xdb9615).getRGB();
-    public static final int icarusOldGreyColor = new Color(0x4a586a).getRGB();
-    public static final int icarusNewBlueColor = new Color(0x92c2cc).getRGB();
-    public static final int icarusNewGreyColor = new Color(0, 0, 0, 100).getRGB();
-    public static final int heroGreenColor = new Color(0x1ab753).getRGB();
-    public static final int heroGreyColor = new Color(0, 0, 0, 70).getRGB();
-    public static final int vantaGreyColor = new Color(0x2e3b4a).getRGB();
-    public static final int vantaBlueColor = new Color(0x0198d6).getRGB();
-    public static final int ambienNewestBlueColor = new Color(0x00a5d1).getRGB();
-    public static final int ambienNewestGreyMainColor = new Color(0x121110).getRGB();
-    public static final int ambienNewestGreySecondColor = new Color(0x212022).getRGB();
-    public static final int ambienNewestLightGreyColor = new Color(0xaaa6a8).getRGB();
-
-    public int c;
+    public int ambienOldBlueColor = new Color(32, 188, 240).getRGB();
+    public int ambienNewBlueColor = new Color(0x0090ff).getRGB();
+    public int ambienNewDarkGreyColor = new Color(0x20252b).getRGB();
+    public int greyColor = new Color(168, 167, 169).getRGB();
+    public int vortexRedColor = new Color(0xE37974).getRGB();
+    public int suicideBlueGreyColor = new Color(0x1c293a).getRGB();
+    public int suicideBlueColor = new Color(0x0993b0).getRGB();
+    public int suicideDarkBlueGreyColor = new Color(0x1a1f24).getRGB();
+    public int apinityBlueColor = new Color(0x4c80ee).getRGB();
+    public int apinityGreyColor = new Color(0x312e30).getRGB();
+    public int huzuniBlueColor = new Color(0x00a5ff).getRGB();
+    public int huzuniGreyColor = new Color(0x191923).getRGB();
+    public int nodusPurpleColor = new Color(0x5a0454).getRGB();
+    public int nodusTealColor = new Color(0x94d6ce).getRGB();
+    public int saintDarkBlueColor = new Color(0x11274c).getRGB();
+    public int saintDarkTealColor = new Color(0x13a4a1).getRGB();
+    public int saintOrangeColor = new Color(0xE0B71F).getRGB();
+    public int icarusOldOrangeColor = new Color(0xdb9615).getRGB();
+    public int icarusOldGreyColor = new Color(0x4a586a).getRGB();
+    public int icarusNewBlueColor = new Color(0x92c2cc).getRGB();
+    public int icarusNewGreyColor = new Color(0, 0, 0, 100).getRGB();
+    public int heroGreenColor = new Color(0x1ab753).getRGB();
+    public int heroGreyColor = new Color(0, 0, 0, 70).getRGB();
+    public int vantaGreyColor = new Color(0x2e3b4a).getRGB();
+    public int vantaBlueColor = new Color(0x0198d6).getRGB();
+    public int ambienNewestBlueColor = new Color(0x00a5d1).getRGB();
+    public int ambienNewestGreyMainColor = new Color(0x121110).getRGB();
+    public int ambienNewestGreySecondColor = new Color(0x212022).getRGB();
+    public int ambienNewestLightGreyColor = new Color(0xaaa6a8).getRGB();
+    public int koksGreenColor = new Color(0x40e912).getRGB();
 
     public int getNodusPurpleColor() {
         return nodusPurpleColor;
@@ -160,5 +159,9 @@ public class Colors {
 
     public int getAmbienNewestLightGreyColor() {
         return ambienNewestLightGreyColor;
+    }
+
+    public int getKoksGreenColor() {
+        return koksGreenColor;
     }
 }

@@ -85,6 +85,10 @@ public class Tab {
                 RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, Colors.main().getHeroGreyColor());
                 break;
             }
+            case "koks": {
+                RenderHelper.drawRect(x - 1, y - 1, x + menuWidth, y + menuHeight - 1, new Color(0, 0, 0, 220).getRGB());
+                break;
+            }
         }
 
         for (int i = 0; i < hacks.size(); i++) {
@@ -146,6 +150,11 @@ public class Tab {
                 case "hero": {
                     RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Colors.main().getHeroGreenColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? Colors.main().getHeroGreenColor() : new Color(255, 255, 255).getRGB());
+                    break;
+                }
+                case "koks": {
+                    RenderHelper.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Colors.main().getKoksGreenColor() : 0);
+                    Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? Colors.main().getKoksGreenColor() : new Color(255, 255, 255).getRGB());
                     break;
                 }
             }
