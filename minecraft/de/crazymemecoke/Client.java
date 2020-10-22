@@ -7,14 +7,12 @@ import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGUI;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.commandmanager.CommandManager;
-import de.crazymemecoke.manager.events.EventManager;
+import de.crazymemecoke.manager.eventmanager.EventManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
-import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 
-import java.awt.*;
 import java.io.File;
 
 public class Client {
@@ -86,7 +84,7 @@ public class Client {
         System.out.println("Disabled Crasher module");
     }
 
-    public EventManager getEventManager() {
+    public EventManager eventMgr() {
         return eventManager;
     }
 
