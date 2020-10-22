@@ -77,7 +77,8 @@ public class GuiNewChat extends Gui {
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
 
-                                String mode = Client.main().setMgr().settingByName("Chat", Client.main().modMgr().getModule(HUD.class)).getMode();
+                                String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getMode();
+                                String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
 
                                 switch (mode) {
                                     case "normal": {
@@ -85,7 +86,22 @@ public class GuiNewChat extends Gui {
                                         break;
                                     }
                                     case "custom": {
-                                        Client.main().fontMgr().font("Comfortaa", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
+
+                                        switch (font){
+                                            case "comfortaa": {
+                                                Client.main().fontMgr().font("Comfortaa", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
+                                                break;
+                                            }
+                                            case "bauhaus": {
+                                                Client.main().fontMgr().font("Bauhaus Regular", 18, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
+                                                break;
+                                            }
+                                            case "exo": {
+                                                Client.main().fontMgr().font("Exo Regular", 17, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
+                                                break;
+                                            }
+                                        }
+
                                         break;
                                     }
                                 }

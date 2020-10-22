@@ -58,7 +58,8 @@ public class GuiChat extends GuiScreen
      */
     public void initGui()
     {
-        String mode = Client.main().setMgr().settingByName("Chat", Client.main().modMgr().getModule(HUD.class)).getMode();
+        String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getMode();
+        String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
 
         switch (mode){
             case "normal": {
@@ -75,7 +76,22 @@ public class GuiChat extends GuiScreen
             case "custom": {
                 Keyboard.enableRepeatEvents(true);
                 sentHistoryCursor = mc.ingameGUI.getChatGUI().getSentMessages().size();
-                inputField = new GuiTextField(0, Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN), 3, height - 11, width - 4, 12);
+
+                switch (font){
+                    case "comfortaa": {
+                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN), 3, height - 11, width - 4, 12);
+                        break;
+                    }
+                    case "bauhaus": {
+                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
+                        break;
+                    }
+                    case "exo": {
+                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
+                        break;
+                    }
+                }
+
                 inputField.setMaxStringLength(100);
                 inputField.setEnableBackgroundDrawing(false);
                 inputField.setFocused(true);
@@ -323,7 +339,37 @@ public class GuiChat extends GuiScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
-        drawRect(2, height - 14, width - 2, height - 2, Integer.MIN_VALUE);
+        String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getMode();
+        String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
+
+        int width2;
+
+        switch (mode){
+            case "normal": {
+                drawRect(2, height - 14, width - 2, height - 2, Integer.MIN_VALUE);
+                break;
+            }
+            case "custom": {
+                switch (font){
+                    case "comfortaa": {
+                        width2 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).getStringWidth(inputField.getText());
+                        drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        break;
+                    }
+                    case "bauhaus": {
+                        width2 = Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN).getStringWidth(inputField.getText());
+                        drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        break;
+                    }
+                    case "exo": {
+                        width2 = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN).getStringWidth(inputField.getText());
+                        drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
         inputField.drawTextBox();
         IChatComponent ichatcomponent = mc.ingameGUI.getChatGUI().getChatComponent(Mouse.getX(), Mouse.getY());
 
