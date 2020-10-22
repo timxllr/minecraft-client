@@ -2,8 +2,8 @@ package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventUpdate;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import net.minecraft.block.BlockAir;
@@ -74,10 +74,10 @@ public class Step extends Module {
     }
 
     private void doReverse() {
-        BlockPos underPlayer = new BlockPos(mc.thePlayer.getPosition().getX(), mc.thePlayer.getPosition().getY() - 1, mc.thePlayer.getPosition().getZ());
+        BlockPos underPlayer = new BlockPos(mc.thePlayer.getPosition().getX(), mc.thePlayer.getPosition().getY() - 2, mc.thePlayer.getPosition().getZ());
         IBlockState blockUnderPlayer = mc.thePlayer.worldObj.getBlockState(underPlayer);
 
-        if (blockUnderPlayer.getBlock() instanceof BlockAir) {
+        if (blockUnderPlayer.getBlock() instanceof BlockAir && !mc.thePlayer.capabilities.isFlying) {
             mc.thePlayer.motionY = -1;
         }
     }
