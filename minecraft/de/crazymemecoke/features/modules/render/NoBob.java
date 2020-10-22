@@ -1,7 +1,6 @@
 package de.crazymemecoke.features.modules.render;
 
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventUpdate;
+import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import org.lwjgl.input.Keyboard;
@@ -13,8 +12,5 @@ public class NoBob extends Module {
 
     @Override
     public void onEvent(Event event) {
-        if(event instanceof EventUpdate) {
-            mc.thePlayer.distanceWalkedModified = 0.0f;
-        }
     }
 }

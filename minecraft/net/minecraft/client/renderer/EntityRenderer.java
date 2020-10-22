@@ -13,7 +13,8 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.events.impl.EventRender;
+import de.crazymemecoke.features.modules.render.NoBob;
+import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
@@ -898,7 +899,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
                 GlStateManager.pushMatrix();
                 this.hurtCameraEffect(p_renderHand_1_);
 
-                if (this.mc.gameSettings.viewBobbing) {
+                if (this.mc.gameSettings.viewBobbing && !(Client.main().modMgr().getModule(NoBob.class)).state()) {
                     this.setupViewBobbing(p_renderHand_1_);
                 }
 
@@ -1651,7 +1652,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
         }
 
         EventRender eventRender = new EventRender(EventRender.Type.threeD);
-        Client.main().getEventManager().onEvent(eventRender);
+        Client.main().eventMgr().onEvent(eventRender);
 
         this.mc.mcProfiler.endStartSection("hand");
         boolean flag2 = ReflectorForge.renderFirstPersonHand(this.mc.renderGlobal, partialTicks, pass);
