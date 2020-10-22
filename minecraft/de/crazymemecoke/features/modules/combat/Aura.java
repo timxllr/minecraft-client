@@ -1,13 +1,13 @@
 package de.crazymemecoke.features.modules.combat;
 
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventMotion;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
-import de.crazymemecoke.manager.events.impl.EventMoveFlying;
-import de.crazymemecoke.manager.events.impl.EventPacket;
-import de.crazymemecoke.manager.events.impl.EventUpdate;
+import de.crazymemecoke.manager.eventmanager.impl.EventMoveFlying;
+import de.crazymemecoke.manager.eventmanager.impl.EventPacket;
+import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import net.minecraft.client.Minecraft;
@@ -20,6 +20,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class Aura extends Module {
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
     double range, cps, ticksExisted;
-    float yaw, pitch;
+    float yaw, pitch, curYaw, curPitch;
     long current, last;
     boolean teams, players, animals, mobs, villager, invisibles, rotations;
     String auraMode;
@@ -48,6 +49,9 @@ public class Aura extends Module {
         sM.newSetting(new Setting("Villager", this, false));
         sM.newSetting(new Setting("Invisibles", this, false));
         sM.newSetting(new Setting("Rotations", this, true));
+        sM.newSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
+        sM.newSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
+        sM.newSetting(new Setting("Prediction Multiplier", this, 0.4F, 0F, 1F, false));
 
         ArrayList<String> auraMode = new ArrayList<>();
         auraMode.add("Single");
@@ -61,6 +65,10 @@ public class Aura extends Module {
         if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
             Client.main().modMgr().getByName("Aura").setState(false);
         }
+
+        curYaw = mc.thePlayer.rotationYaw;
+        curPitch = mc.thePlayer.rotationPitch;
+
     }
 
     @Override
@@ -94,11 +102,20 @@ public class Aura extends Module {
 
                 updateTime();
 
-                if (rotations) {
+                if (!rotations) {
                     yaw = mc.thePlayer.rotationYaw;
                     pitch = mc.thePlayer.rotationPitch;
                 } else {
-                    calcRotation(currentTarget);
+
+                    float precision = (float) sM.settingByName("Precision", this).getNum();
+                    float accuracy = (float) sM.settingByName("Accuracy", this).getNum();
+                    float predictionMultiplier = (float) sM.settingByName("Prediction Multiplier", this).getNum();
+
+                    float[] rots = faceEntity(currentTarget, curYaw, curPitch, precision, accuracy, predictionMultiplier);
+                    yaw = rots[0];
+                    pitch = rots[1];
+                    curYaw = yaw;
+                    curPitch = pitch;
                 }
 
                 if (current - last > 1000 / cps) {
@@ -110,13 +127,8 @@ public class Aura extends Module {
 
         if (event instanceof EventMotion) {
             if (((EventMotion) event).getType() == EventMotion.Type.PRE) {
-
-                if (rotations)
-                    return;
-
-                ((EventMotion) event).setYaw(yaw);
-                ((EventMotion) event).setPitch(pitch);
-
+                    ((EventMotion) event).setYaw(yaw);
+                    ((EventMotion) event).setPitch(pitch);
             } else if (((EventMotion) event).getType() == EventMotion.Type.POST) {
                 if (auraMode.equalsIgnoreCase("Single")) {
                     if (currentTarget == null)
@@ -130,7 +142,9 @@ public class Aura extends Module {
             }
         }
         if (event instanceof EventMoveFlying) {
-            ((EventMoveFlying) event).setYaw(yaw);
+            if(currentTarget != null || !targets.isEmpty()) {
+                ((EventMoveFlying) event).setYaw(yaw);
+            }
         }
         if (event instanceof EventPacket) {
             if (((EventPacket) event).getType() == EventPacket.Type.SEND) {
@@ -148,33 +162,95 @@ public class Aura extends Module {
         }
     }
 
-    public void calcRotation(Entity target) {
-        if (target == null || mc.thePlayer == null)
-            return;
-/*      Vec3 eyePosition = new Vec3(player.posX, player.getEntityBoundingBox().minY + player.getEyeHeight(), player.posZ);
+    public float updateRotation(float curRot, float destination, float speed)
+    {
+        float f = MathHelper.wrapAngleTo180_float(destination - curRot);
 
-        AxisAlignedBB tbb = target.getEntityBoundingBox();
-        Vec3 targetVector = new Vec3(tbb.minX + (tbb.maxX - tbb.minX), tbb.minY + (tbb.maxY - tbb.minY), tbb.minZ + (tbb.maxZ - tbb.minZ));
-
-        double xDiff = targetVector.xCoord - eyePosition.xCoord;
-        double yDiff = targetVector.yCoord - eyePosition.yCoord;
-        double zDiff = targetVector.zCoord - eyePosition.zCoord;
-
-        yaw = -MathHelper.wrapAngleTo180_float((float) Math.toDegrees(Math.atan2(xDiff, zDiff)));
-        pitch = MathHelper.wrapAngleTo180_float((float) -Math.toDegrees(Math.atan2(yDiff, Math.sqrt(xDiff * xDiff + zDiff * zDiff))));*/
-        EntityPlayerSP player = Minecraft.mc().thePlayer;
-        double xDiff = target.posX - player.posX;
-        double zDiff = target.posZ - player.posZ;
-        double yDiff;
-        if (target instanceof EntityLivingBase) {
-            final EntityLivingBase targetEntity = (EntityLivingBase) target;
-            yDiff = targetEntity.posY + targetEntity.getEyeHeight() - (player.posY + player.getEyeHeight());
-        } else {
-            yDiff = (target.getEntityBoundingBox().minY + target.getEntityBoundingBox().maxY) / 2.0 - (player.posY + player.getEyeHeight());
+        if (f > speed)
+        {
+            f = speed;
         }
-        final double xzDiff = MathHelper.sqrt_double(xDiff * xDiff + zDiff * zDiff);
-        yaw = (float) (Math.atan2(zDiff, xDiff) * 180.0 / Math.PI) - 90.0f;
-        pitch = (float) (-(Math.atan2(yDiff, xzDiff) * 180.0 / Math.PI));
+
+        if (f < -speed)
+        {
+            f = -speed;
+        }
+
+        return curRot + f;
+    }
+
+    public final Vec3 getVectorForRotation(float pitch, float yaw) {
+        float f = MathHelper.cos(-yaw * 0.017453292F - (float) Math.PI);
+        float f1 = MathHelper.sin(-yaw * 0.017453292F - (float) Math.PI);
+        float f2 = -MathHelper.cos(-pitch * 0.017453292F);
+        float f3 = MathHelper.sin(-pitch * 0.017453292F);
+        return new Vec3((double) (f1 * f2), (double) f3, (double) (f * f2));
+    }
+
+    public Vec3 getLook(float yaw, float pitch) {
+            return getVectorForRotation(pitch, yaw);
+    }
+
+    public Vec3 getBestVector(Entity entity, float accuracy, float precision) {
+        try {
+            Vec3 playerVector = mc.thePlayer.getPositionEyes(1.0F);
+            Vec3 nearestVector = new Vec3(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
+
+            float height = entity.height;
+            float width = entity.width * accuracy;
+
+            for (float y = 0; y < height; y += precision) {
+                for (float x = -width; x < width; x += precision) {
+                    for (float z = -width; z < width; z += precision) {
+                        Vec3 currentVector = new Vec3(entity.posX + x * width, entity.posY + (entity.getEyeHeight() / height) * y, entity.posZ + z * width);
+
+                        if (playerVector.distanceTo(currentVector) < playerVector.distanceTo(nearestVector))
+                            nearestVector = currentVector;
+                    }
+                }
+            }
+            return nearestVector;
+        } catch (Exception e) {
+            return entity.getPositionVector();
+        }
+    }
+
+    public float[] faceEntity(Entity entity, float currentYaw, float currentPitch, float accuracy, float precision, float predictionMultiplier) {
+        Vec3 rotations = getBestVector(entity, accuracy, precision);
+
+        double x = rotations.xCoord - mc.thePlayer.posX;
+        double y = rotations.yCoord - (mc.thePlayer.posY + (double) mc.thePlayer.getEyeHeight());
+        double z = rotations.zCoord - mc.thePlayer.posZ;
+
+        double xDiff = (entity.posX - entity.prevPosX) * predictionMultiplier;
+        double zDiff = (entity.posZ - entity.prevPosZ) * predictionMultiplier;
+
+        double distance = mc.thePlayer.getDistanceToEntity(entity);
+
+        if (distance < 0.05)
+            return new float[]{currentYaw, currentPitch};
+
+        double angle = MathHelper.sqrt_double(x * x + z * z);
+        float yawAngle = (float) (MathHelper.func_181159_b(z + zDiff, x + xDiff) * 180.0D / Math.PI) - 90.0F;
+        float pitchAngle = (float) (-(MathHelper.func_181159_b(y, angle) * 180.0D / Math.PI));
+        float finalPitch = pitchAngle >= 90 ? 90 : pitchAngle;
+        //lmao thx
+        float f = mc.gameSettings.mouseSensitivity * 0.8F + 0.2F;
+        float f1 = f * f * f * 1.5F;
+
+        float f2 = (float) ((yawAngle - currentYaw) * f1);
+        float f3 = (float) ((finalPitch - currentPitch) * f1);
+
+        float difYaw = yawAngle - currentYaw;
+        float difPitch = finalPitch - currentPitch;
+
+        float yaw = updateRotation(currentYaw + f2, yawAngle, Math.abs(MathHelper.wrapAngleTo180_float(difYaw * 0.1F)));
+        float pitch = updateRotation(currentPitch + f3, finalPitch, Math.abs(MathHelper.wrapAngleTo180_float(difPitch * 0.1F)));
+
+        yaw -= yaw % f1;
+        pitch -= pitch % f1;
+
+        return new float[]{yaw, pitch};
     }
 
 
