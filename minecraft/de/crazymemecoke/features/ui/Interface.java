@@ -281,6 +281,16 @@ public class Interface extends GuiIngame {
                 RenderUtils.drawImage(Client.main().getAmbienWatermark(), x, y, width, height);
                 break;
             }
+            case "koks": {
+                GL11.glPushMatrix();
+                GL11.glScalef(2f, 2f, 2f);
+                mc.fontRendererObj.drawString("Koks", 3, 4, Colors.main().getKoksGreenColor());
+                GL11.glScalef(2f / 4, 2f / 4, 2f / 4);
+                GL11.glPopMatrix();
+
+                mc.fontRendererObj.drawString("v" + Client.main().getClientVersion(), 55, 15, Colors.main().getGrey());
+                break;
+            }
         }
     }
 
@@ -328,6 +338,10 @@ public class Interface extends GuiIngame {
                 }
                 case "vanta": {
                     gui.drawGui(1, 20, 65);
+                    break;
+                }
+                case "koks": {
+                    gui.drawGui(6, 28, 70);
                     break;
                 }
             }
