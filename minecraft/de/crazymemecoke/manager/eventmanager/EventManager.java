@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.events;
+package de.crazymemecoke.manager.eventmanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.modulemanager.Module;

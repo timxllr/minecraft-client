@@ -1,8 +1,8 @@
 package de.crazymemecoke.features.modules.world;
 
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventRender;
-import de.crazymemecoke.manager.events.impl.EventUpdate;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventRender;
+import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;

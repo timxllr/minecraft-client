@@ -2,8 +2,8 @@ package de.crazymemecoke.features.modules.combat;
 
 import java.util.List;
 
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventUpdate;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;

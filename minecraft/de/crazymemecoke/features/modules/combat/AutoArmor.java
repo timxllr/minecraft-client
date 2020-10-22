@@ -2,7 +2,7 @@ package de.crazymemecoke.features.modules.combat;
 
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.utils.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 

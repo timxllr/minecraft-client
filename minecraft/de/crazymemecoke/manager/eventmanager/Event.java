@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.events;
+package de.crazymemecoke.manager.eventmanager;
 
 public class Event {
 

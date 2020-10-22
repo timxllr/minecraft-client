@@ -1,6 +1,6 @@
-package de.crazymemecoke.manager.events.impl;
+package de.crazymemecoke.manager.eventmanager.impl;
 
-import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.eventmanager.Event;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
 

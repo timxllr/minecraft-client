@@ -1,8 +1,8 @@
 package de.crazymemecoke.features.modules.player;
 
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventMotion;
-import de.crazymemecoke.manager.events.impl.EventPacket;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
+import de.crazymemecoke.manager.eventmanager.impl.EventPacket;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;

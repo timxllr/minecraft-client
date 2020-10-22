@@ -2,8 +2,8 @@ package de.crazymemecoke.features.modules.player;
 
 import java.util.ArrayList;
 
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventUpdate;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;

@@ -1,8 +1,8 @@
 package de.crazymemecoke.features.modules.player;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventPacket;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import org.lwjgl.input.Keyboard;

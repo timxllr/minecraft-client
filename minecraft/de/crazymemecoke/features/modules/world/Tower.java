@@ -2,9 +2,9 @@ package de.crazymemecoke.features.modules.world;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventMotion;
-import de.crazymemecoke.manager.events.impl.EventPacket;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
+import de.crazymemecoke.manager.eventmanager.impl.EventPacket;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.time.TimeHelper;

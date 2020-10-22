@@ -1,6 +1,6 @@
 package de.crazymemecoke.manager.modulemanager;
 
-import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.eventmanager.Event;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 

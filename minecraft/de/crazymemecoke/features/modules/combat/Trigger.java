@@ -1,6 +1,6 @@
 package de.crazymemecoke.features.modules.combat;
 
-import de.crazymemecoke.manager.events.Event;
+import de.crazymemecoke.manager.eventmanager.Event;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.features.commands.Friend;

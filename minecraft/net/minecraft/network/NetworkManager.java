@@ -1,7 +1,7 @@
 package net.minecraft.network;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.events.impl.EventPacket;
+import de.crazymemecoke.manager.eventmanager.impl.EventPacket;
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.Bootstrap;
@@ -142,7 +142,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
 
     protected void channelRead0(ChannelHandlerContext p_channelRead0_1_, Packet p_channelRead0_2_) throws Exception {
         EventPacket eventPacket = new EventPacket(EventPacket.Type.RECEIVE, p_channelRead0_2_);
-        Client.main().getEventManager().onEvent(eventPacket);
+        Client.main().eventMgr().onEvent(eventPacket);
 
         if(eventPacket.isCanceled())return;
 
