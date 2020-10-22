@@ -4,8 +4,9 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
-import de.crazymemecoke.manager.events.Event;
-import de.crazymemecoke.manager.events.impl.EventRender;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventOutline;
+import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -35,15 +36,15 @@ public class ESP extends Module {
 
         ArrayList<String> mode = new ArrayList<>();
 
-        mode.add("Box");
+        mode.add("Shader");
         mode.add("Outline");
-        mode.add("Prophunt");
 
-        sM.newSetting(new Setting("Mode", this, "Outline", mode));
+        sM.newSetting(new Setting("Mode", this, "Shader", mode));
         sM.newSetting(new Setting("Players", this, true));
         sM.newSetting(new Setting("Mobs", this, false));
         sM.newSetting(new Setting("Animals", this, false));
-
+        sM.newSetting(new Setting("Villager", this, false));
+        sM.newSetting(new Setting("Items", this, false));
     }
 
     public void player(EntityLivingBase entity) {
@@ -52,11 +53,11 @@ public class ESP extends Module {
         float blue = 1F;
 
         double xPos = (entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * mc.timer.renderPartialTicks)
-                - mc.getRenderManager().renderPosX;
+                - RenderManager.renderPosX;
         double yPos = (entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * mc.timer.renderPartialTicks)
-                - mc.getRenderManager().renderPosY;
+                - RenderManager.renderPosY;
         double zPos = (entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * mc.timer.renderPartialTicks)
-                - mc.getRenderManager().renderPosZ;
+                - RenderManager.renderPosZ;
 
         render(red, green, blue, xPos, yPos, zPos, entity.width, entity.height);
     }
@@ -67,9 +68,11 @@ public class ESP extends Module {
 
     @Override
     public void onEvent(Event event) {
-        if(event instanceof EventRender) {
-            if(((EventRender) event).getType() == EventRender.Type.threeD) {
-                if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Box")) {
+        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
+
+        if (event instanceof EventRender) {
+            if (((EventRender) event).getType() == EventRender.Type.threeD) {
+                if (mode.equalsIgnoreCase("Box")) {
                     Iterator var3 = mc.theWorld.loadedEntityList.iterator();
 
                     while (true) {
@@ -124,6 +127,11 @@ public class ESP extends Module {
                             RenderUtils.box(x - 0.5, y - 0.1, z - 0.5, x + 0.5, y + 0.9, z + 0.5, color);
                         }
                 }
+            }
+        }
+        if (event instanceof EventOutline) {
+            if (mode.equalsIgnoreCase("Shader")) {
+                ((EventOutline) event).setOutline(true);
             }
         }
     }
