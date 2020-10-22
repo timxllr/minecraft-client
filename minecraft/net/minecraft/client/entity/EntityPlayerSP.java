@@ -2,8 +2,8 @@ package net.minecraft.client.entity;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.movement.NoSlowDown;
-import de.crazymemecoke.manager.events.impl.EventMotion;
-import de.crazymemecoke.manager.events.impl.EventUpdate;
+import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
+import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.utils.NotifyUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
@@ -142,10 +142,10 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     public void onUpdate() {
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ))) {
             EventUpdate eventUpdate = new EventUpdate();
-            Client.main().getEventManager().onEvent(eventUpdate);
+            Client.main().eventMgr().onEvent(eventUpdate);
 
             EventMotion eventMotion = new EventMotion(EventMotion.Type.PRE, this.rotationYaw, this.rotationPitch);
-            Client.main().getEventManager().onEvent(eventMotion);
+            Client.main().eventMgr().onEvent(eventMotion);
             this.eventMotion = eventMotion;
 
             super.onUpdate();
@@ -228,7 +228,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             }
         }
         EventMotion eventMotion = new EventMotion(EventMotion.Type.POST,this.eventMotion.getYaw(),this.eventMotion.getPitch());
-        Client.main().getEventManager().onEvent(eventMotion);
+        Client.main().eventMgr().onEvent(eventMotion);
     }
 
     /**
