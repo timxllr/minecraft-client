@@ -184,7 +184,7 @@ public class Aura extends Module {
         float f1 = MathHelper.sin(-yaw * 0.017453292F - (float) Math.PI);
         float f2 = -MathHelper.cos(-pitch * 0.017453292F);
         float f3 = MathHelper.sin(-pitch * 0.017453292F);
-        return new Vec3((double) (f1 * f2), (double) f3, (double) (f * f2));
+        return new Vec3(f1 * f2, f3, f * f2);
     }
 
     public Vec3 getLook(float yaw, float pitch) {
@@ -234,12 +234,11 @@ public class Aura extends Module {
         float yawAngle = (float) (MathHelper.func_181159_b(z + zDiff, x + xDiff) * 180.0D / Math.PI) - 90.0F;
         float pitchAngle = (float) (-(MathHelper.func_181159_b(y, angle) * 180.0D / Math.PI));
         float finalPitch = pitchAngle >= 90 ? 90 : pitchAngle;
-        //lmao thx
         float f = mc.gameSettings.mouseSensitivity * 0.8F + 0.2F;
         float f1 = f * f * f * 1.5F;
 
-        float f2 = (float) ((yawAngle - currentYaw) * f1);
-        float f3 = (float) ((finalPitch - currentPitch) * f1);
+        float f2 = (yawAngle - currentYaw) * f1;
+        float f3 = (finalPitch - currentPitch) * f1;
 
         float difYaw = yawAngle - currentYaw;
         float difPitch = finalPitch - currentPitch;
