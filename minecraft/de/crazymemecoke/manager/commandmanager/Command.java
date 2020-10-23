@@ -1,6 +1,10 @@
 package de.crazymemecoke.manager.commandmanager;
 
+import net.minecraft.client.Minecraft;
+
 public abstract class Command {
+
+	public static Minecraft mc = Minecraft.mc();
 	
 	public abstract void execute(String[] args);
 	
