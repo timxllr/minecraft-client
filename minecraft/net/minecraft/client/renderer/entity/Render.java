@@ -339,6 +339,7 @@ public abstract class Render<T extends Entity>
     /**
      * Renders an entity's name above its head
      */
+    //TODO: NameTags / Tag Rendering
     protected void renderLivingLabel(T entityIn, String str, double x, double y, double z, int maxDistance)
     {
         double d0 = entityIn.getDistanceSqToEntity(this.renderManager.livingPlayer);
