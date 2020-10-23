@@ -1,16 +1,21 @@
 package net.minecraft.client.multiplayer;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.gui.Invis;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.GLSLSandboxShader;
+import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiDisconnected;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.network.NetHandlerLoginClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -148,6 +153,8 @@ public class GuiConnecting extends GuiScreen {
      * Draws the screen and all the components in it. Args : mouseX, mouseY, renderPartialTicks
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        ScaledResolution s = new ScaledResolution(mc);
+
         GlStateManager.enableAlpha();
         GlStateManager.disableCull();
 
@@ -168,14 +175,27 @@ public class GuiConnecting extends GuiScreen {
         GL11.glEnable(GL11.GL_ALPHA_TEST);
 
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        if (this.networkManager == null) {
-            this.drawCenteredString(this.fontRendererObj, I18n.format("connect.connecting", new Object[0]), this.width / 2, this.height / 2 - 50, 16777215);
+        RenderUtils.drawRect(s.width() / 2 - 120, s.height() / 2 - 50, s.width() / 2 + 120, s.height() / 2 + 30, new Color(0, 0, 0, 140).getRGB());
+
+        if (!(Client.main().modMgr().getModule(Invis.class)).state()) {
+            UnicodeFontRenderer font1 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
+            String connecting = I18n.format("connect.connecting");
+            String authorizing = I18n.format("connect.authorizing");
+
+            if (this.networkManager == null) {
+                font1.drawStringWithShadow(connecting, width / 2 - font1.getStringWidth(connecting) / 2, height / 2 - 30, 16777215);
+            } else {
+                font1.drawStringWithShadow(authorizing, width / 2 - font1.getStringWidth(authorizing) / 2, height / 2 - 30, 16777215);
+            }
         } else {
-            this.drawCenteredString(this.fontRendererObj, I18n.format("connect.authorizing", new Object[0]), this.width / 2, this.height / 2 - 50, 16777215);
+            if (this.networkManager == null) {
+                this.drawCenteredString(this.fontRendererObj, I18n.format("connect.connecting"), width / 2, height / 2 - 50, 16777215);
+            } else {
+                this.drawCenteredString(this.fontRendererObj, I18n.format("connect.authorizing"), width / 2, height / 2 - 50, 16777215);
+            }
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
