@@ -2,7 +2,6 @@ package de.crazymemecoke.features.ui;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.combat.Aura;
-import de.crazymemecoke.features.ui.guiscreens.clienthelper.GuiClientHelper;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
@@ -69,9 +68,6 @@ public class Interface extends GuiIngame {
         }
         if (Client.main().setMgr().settingByName("KeyStrokes", Client.main().modMgr().getByName("HUD")).getBool()) {
             renderKeyStrokes();
-        }
-        if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL)) {
-            mc.displayGuiScreen(new GuiClientHelper());
         }
     }
 
