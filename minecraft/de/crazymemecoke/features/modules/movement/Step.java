@@ -70,7 +70,9 @@ public class Step extends Module {
     }
 
     private void doVanilla() {
-        mc.thePlayer.jump();
+        if (mc.thePlayer.onGround) {
+            mc.thePlayer.jump();
+        }
     }
 
     private void doReverse() {
