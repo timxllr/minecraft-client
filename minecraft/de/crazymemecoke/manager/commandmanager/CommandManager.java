@@ -12,20 +12,21 @@ public class CommandManager {
     public List<Command> commands = new ArrayList<Command>();
 
     public CommandManager() {
-        this.commands.add(new KillerPotion());
-        this.commands.add(new TrollPotion());
-        this.commands.add(new CrashChest());
-        this.commands.add(new Enchant());
-        this.commands.add(new Toggle());
-        this.commands.add(new Rename());
-        this.commands.add(new Friend());
-        this.commands.add(new Panic());
-        this.commands.add(new Allow());
-        this.commands.add(new Bind());
-        this.commands.add(new Help());
-        this.commands.add(new Info());
-        this.commands.add(new Fix());
-        this.commands.add(new T());
+        commands.add(new KillerPotion());
+        commands.add(new TrollPotion());
+        commands.add(new CrashChest());
+        commands.add(new Enchant());
+        commands.add(new Toggle());
+        commands.add(new Rename());
+        commands.add(new Friend());
+        commands.add(new Panic());
+        commands.add(new Allow());
+        commands.add(new Items());
+        commands.add(new Bind());
+        commands.add(new Help());
+        commands.add(new Info());
+        commands.add(new Fix());
+        commands.add(new T());
     }
 
     public boolean execute(String text) {
@@ -35,7 +36,7 @@ public class CommandManager {
 
         text = text.substring(1);
         String[] arguments = text.split(" ");
-        for (Command cmd : this.commands) {
+        for (Command cmd : commands) {
             if (cmd.getName().equalsIgnoreCase(arguments[0])) {
                 String[] args = Arrays.copyOfRange(arguments, 1, arguments.length);
                 cmd.execute(args);
