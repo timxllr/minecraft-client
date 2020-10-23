@@ -52,11 +52,6 @@ public class Aura extends Module {
         sM.newSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
         sM.newSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
         sM.newSetting(new Setting("Prediction Multiplier", this, 0.4F, 0F, 1F, false));
-
-        ArrayList<String> auraMode = new ArrayList<>();
-        auraMode.add("Single");
-        auraMode.add("Multi");
-        sM.newSetting(new Setting("Mode", this, "Single", auraMode));
     }
 
 
@@ -94,41 +89,40 @@ public class Aura extends Module {
             rotations = sM.settingByName("Rotations", this).getBool();
             auraMode = sM.settingByName("Mode", this).getMode();
 
-            if (auraMode.equalsIgnoreCase("Single")) {
-                currentTarget = getClosest(mc.playerController.getBlockReachDistance());
+            currentTarget = getClosest(mc.playerController.getBlockReachDistance());
 
-                if (currentTarget == null)
-                    return;
+            if (currentTarget == null)
+                return;
 
-                updateTime();
+            updateTime();
 
-                if (!rotations) {
-                    yaw = mc.thePlayer.rotationYaw;
-                    pitch = mc.thePlayer.rotationPitch;
-                } else {
+            if (rotations) {
+                float precision = (float) sM.settingByName("Precision", this).getNum();
+                float accuracy = (float) sM.settingByName("Accuracy", this).getNum();
+                float predictionMultiplier = (float) sM.settingByName("Prediction Multiplier", this).getNum();
 
-                    float precision = (float) sM.settingByName("Precision", this).getNum();
-                    float accuracy = (float) sM.settingByName("Accuracy", this).getNum();
-                    float predictionMultiplier = (float) sM.settingByName("Prediction Multiplier", this).getNum();
-
+                if (shouldAttack()) {
                     float[] rots = faceEntity(currentTarget, curYaw, curPitch, precision, accuracy, predictionMultiplier);
                     yaw = rots[0];
                     pitch = rots[1];
                     curYaw = yaw;
                     curPitch = pitch;
                 }
+            } else {
+                yaw = mc.thePlayer.rotationYaw;
+                pitch = mc.thePlayer.rotationPitch;
+            }
 
-                if (current - last > 1000 / cps) {
-                    attack(currentTarget);
-                    resetTime();
-                }
+            if (current - last > 1000 / cps) {
+                attack(currentTarget);
+                resetTime();
             }
         }
 
         if (event instanceof EventMotion) {
             if (((EventMotion) event).getType() == EventMotion.Type.PRE) {
-                    ((EventMotion) event).setYaw(yaw);
-                    ((EventMotion) event).setPitch(pitch);
+                ((EventMotion) event).setYaw(yaw);
+                ((EventMotion) event).setPitch(pitch);
             } else if (((EventMotion) event).getType() == EventMotion.Type.POST) {
                 if (auraMode.equalsIgnoreCase("Single")) {
                     if (currentTarget == null)
@@ -142,7 +136,7 @@ public class Aura extends Module {
             }
         }
         if (event instanceof EventMoveFlying) {
-            if(currentTarget != null || !targets.isEmpty()) {
+            if (currentTarget != null || !targets.isEmpty()) {
                 ((EventMoveFlying) event).setYaw(yaw);
             }
         }
@@ -162,17 +156,18 @@ public class Aura extends Module {
         }
     }
 
-    public float updateRotation(float curRot, float destination, float speed)
-    {
+    public boolean shouldAttack() {
+        return (currentTarget instanceof EntityPlayer && sM.settingByName("Players", this).getBool()) || (currentTarget instanceof EntityAnimal && sM.settingByName("Animals", this).getBool()) || (currentTarget instanceof EntityMob && sM.settingByName("Mobs", this).getBool()) || (currentTarget instanceof EntityVillager && sM.settingByName("Villager", this).getBool());
+    }
+
+    public float updateRotation(float curRot, float destination, float speed) {
         float f = MathHelper.wrapAngleTo180_float(destination - curRot);
 
-        if (f > speed)
-        {
+        if (f > speed) {
             f = speed;
         }
 
-        if (f < -speed)
-        {
+        if (f < -speed) {
             f = -speed;
         }
 
@@ -188,7 +183,7 @@ public class Aura extends Module {
     }
 
     public Vec3 getLook(float yaw, float pitch) {
-            return getVectorForRotation(pitch, yaw);
+        return getVectorForRotation(pitch, yaw);
     }
 
     public Vec3 getBestVector(Entity entity, float accuracy, float precision) {
