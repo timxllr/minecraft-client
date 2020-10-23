@@ -33,8 +33,10 @@ public class ClickGUI extends Module {
 
     @Override
     public void onEnable() {
-        mc.displayGuiScreen(Client.main().getClickGui());
-        super.onDisable();
+        if (!(Client.main().modMgr().getModule(Invis.class)).state()) {
+            mc.displayGuiScreen(Client.main().getClickGui());
+            Client.main().modMgr().getModule(ClickGUI.class).setState(false);
+        }
     }
 
     @Override

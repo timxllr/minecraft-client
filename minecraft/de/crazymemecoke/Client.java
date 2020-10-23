@@ -17,21 +17,22 @@ import java.io.File;
 
 public class Client {
 
-    private final static Client instance = new Client();
-    private final Minecraft mc = Minecraft.mc();
+    private static Client instance = new Client();
+    private Minecraft mc = Minecraft.mc();
 
-    private final String clientName = "Splash";
-    private final double clientVersion = 1.0;
-    private final String clientCoder = "CrazyMemeCoke";
-    private final String clientPrefix = ".";
-    private final String clientBackground = "textures/client/background.jpg";
-    private final String clientIcon = "textures/client/icon.png";
-    private final String wurstWatermark = "textures/client/wurst.png";
+    private String clientName = "Splash";
+    private double clientVersion = 1.0;
+    private String clientCoder = "CrazyMemeCoke";
+    private String clientPrefix = ".";
+    private String fakeVer = "OptiFine 1.8.8 HD_I7";
+    private String clientBackground = "textures/client/background.jpg";
+    private String clientIcon = "textures/client/icon.png";
+    private String wurstWatermark = "textures/client/wurst.png";
 
-    private final String ambienWatermark = "textures/client/ambien-logo.png";
+    private String ambienWatermark = "textures/client/ambien-logo.png";
 
-    private final String shaderLoc = "textures/client/shader/";
-    private final String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
+    private String shaderLoc = "textures/client/shader/";
+    private String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
     private ModuleManager moduleManager;
 
     private CommandManager commandManager;
@@ -166,5 +167,9 @@ public class Client {
 
     public long getInitTime() {
         return initTime;
+    }
+
+    public String getFakeVer() {
+        return fakeVer;
     }
 }

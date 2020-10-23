@@ -1,6 +1,7 @@
 package net.minecraft.client.entity;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.modules.movement.NoSlowDown;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
@@ -30,6 +31,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
+@SuppressWarnings("EntityConstructor")
 public class EntityPlayerSP extends AbstractClientPlayer {
     public final NetHandlerPlayClient sendQueue;
     private final StatFileWriter statWriter;
@@ -100,8 +102,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     private int horseJumpPowerCounter;
     private float horseJumpPower;
 
-    public EntityPlayerSP(Minecraft mcIn, World worldIn, NetHandlerPlayClient netHandler, StatFileWriter statFile)
-    {
+    public EntityPlayerSP(Minecraft mcIn, World worldIn, NetHandlerPlayClient netHandler, StatFileWriter statFile) {
         super(worldIn, netHandler.getGameProfile());
         this.sendQueue = netHandler;
         this.statWriter = statFile;
@@ -227,7 +228,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
                 this.lastReportedPitch = this.eventMotion.getPitch();
             }
         }
-        EventMotion eventMotion = new EventMotion(EventMotion.Type.POST,this.eventMotion.getYaw(),this.eventMotion.getPitch());
+        EventMotion eventMotion = new EventMotion(EventMotion.Type.POST, this.eventMotion.getYaw(), this.eventMotion.getPitch());
         Client.main().eventMgr().onEvent(eventMotion);
     }
 
@@ -250,12 +251,22 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      * Sends a chat message from the player. Args: chatMessage
      */
     public void sendChatMessage(String message) {
-        if (Client.main().getCommandManager().execute(message)) {
+        String prefix = Client.main().getClientPrefix();
+        if (message.equalsIgnoreCase(prefix + "invis")) {
+            if (Client.main().modMgr().getModule(Invis.class).state()) {
+                Client.main().modMgr().getModule(Invis.class).setState(false);
+                NotifyUtil.chat("Invis-Mode deaktiviert");
+            }
             return;
         }
-        if (message.startsWith(Client.main().getClientPrefix())) {
-            NotifyUtil.chat("Befehl nicht gefunden - versuche " + Client.main().getClientPrefix() + "help!");
-            return;
+        if (!(Client.main().modMgr().getModule(Invis.class).state())) {
+            if (Client.main().getCommandManager().execute(message)) {
+                return;
+            }
+            if (message.startsWith(Client.main().getClientPrefix())) {
+                NotifyUtil.chat("Befehl nicht gefunden - versuche " + Client.main().getClientPrefix() + "help!");
+                return;
+            }
         }
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
     }
