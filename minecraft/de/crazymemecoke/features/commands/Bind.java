@@ -11,7 +11,7 @@ import de.crazymemecoke.utils.Wrapper;
 
 public class Bind extends Command {
 
-    String syntax = ".bind <module> <key> | .bind list | .bind clear";
+    String syntax = ".bind <module> <key> | .bind <module> none | .bind list | .bind clear";
 
     @Override
     public void execute(String[] args) {
@@ -20,20 +20,27 @@ public class Bind extends Command {
             if (Client.main().modMgr().getByName(args[0]) != null) {
                 Module mod = moduleManager.getByName(args[0]);
                 if (mod == null) {
-                    NotifyUtil.chat("Module " + args[0] + " nicht gefunden.");
+                    NotifyUtil.chat("Module §c" + args[0] + "§a nicht gefunden.");
+                    return;
+                }
+
+                if(args[1].equalsIgnoreCase("none")){
+                    mod.setBind(0);
+                    NotifyUtil.chat("Module §c" + args[0] + "§a wurde entbunden.");
+                    Wrapper.mc.thePlayer.playSound("random.anvil_use", 1f, 1f);
                     return;
                 }
 
                 int bind = Keyboard.getKeyIndex(args[1]);
 
                 if (bind == 0) {
-                    NotifyUtil.chat("Key " + args[1] + " nicht gefunden.");
+                    NotifyUtil.chat("Key §c" + args[1] + "§a nicht gefunden.");
                     return;
                 }
 
                 mod.setBind(bind);
                 moduleManager.saveBinds();
-                NotifyUtil.chat("Module " + args[0] + " wurde auf " + args[1] + " gebunden.");
+                NotifyUtil.chat("Module §c" + args[0] + "§a wurde auf §c" + args[1] + "§a gebunden.");
                 Wrapper.mc.thePlayer.playSound("random.anvil_use", 1f, 1f);
             } else {
                 NotifyUtil.chat(syntax);
@@ -43,7 +50,7 @@ public class Bind extends Command {
                 NotifyUtil.chat("Alle Keybinds (Format: MOD : KEY):");
                 for (Module mod : Client.main().modMgr().getModules()) {
                     if (!(mod.bind() == 0)) {
-                        NotifyUtil.chat(mod.name() + " : " + Keyboard.getKeyName(mod.bind()));
+                        NotifyUtil.chat(mod.name() + " §8:§a " + Keyboard.getKeyName(mod.bind()));
                     }
                 }
             } else if (args[0].equalsIgnoreCase("clear")) {
