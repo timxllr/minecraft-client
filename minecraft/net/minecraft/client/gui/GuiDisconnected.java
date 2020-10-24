@@ -2,11 +2,19 @@ package net.minecraft.client.gui;
 
 import java.io.IOException;
 import java.util.List;
+
+import de.crazymemecoke.Client;
+import de.crazymemecoke.utils.render.GLSLSandboxShader;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IChatComponent;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 public class GuiDisconnected extends GuiScreen
 {
+    private GLSLSandboxShader shader;
+
     private String reason;
     private IChatComponent message;
     private List<String> multilineMessage;
@@ -15,6 +23,12 @@ public class GuiDisconnected extends GuiScreen
 
     public GuiDisconnected(GuiScreen screen, String reasonLocalizationKey, IChatComponent chatComp)
     {
+        try {
+            shader = new GLSLSandboxShader("/assets/minecraft/client/shader/connecting.fsh");
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to load the Shader");
+        }
+
         this.parentScreen = screen;
         this.reason = I18n.format(reasonLocalizationKey, new Object[0]);
         this.message = chatComp;
@@ -56,7 +70,26 @@ public class GuiDisconnected extends GuiScreen
      */
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
-        this.drawDefaultBackground();
+        GlStateManager.enableAlpha();
+        GlStateManager.disableCull();
+
+        shader.useShader(width, height, mouseX, mouseY, (System.currentTimeMillis() - Client.main().getInitTime()) / 1000F);
+
+        GL11.glBegin(GL11.GL_QUADS);
+
+        GL11.glVertex2f(-1f, -1f);
+        GL11.glVertex2f(-1f, 1f);
+        GL11.glVertex2f(1f, 1f);
+        GL11.glVertex2f(1f, -1f);
+
+        GL11.glEnd();
+
+        GL20.glUseProgram(0);
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.drawCenteredString(this.fontRendererObj, this.reason, this.width / 2, this.height / 2 - this.field_175353_i / 2 - this.fontRendererObj.FONT_HEIGHT * 2, 11184810);
         int i = this.height / 2 - this.field_175353_i / 2;
 
