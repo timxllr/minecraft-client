@@ -2,6 +2,8 @@ package net.minecraft.client.gui.inventory;
 
 import java.io.IOException;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.gui.HUD;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.achievement.GuiAchievements;
@@ -14,6 +16,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiInventory extends InventoryEffectRenderer {
     /**
@@ -47,12 +50,29 @@ public class GuiInventory extends InventoryEffectRenderer {
      * window resizes, the buttonList is cleared beforehand.
      */
     public void initGui() {
+        if (OpenGlHelper.shadersSupported && mc.getRenderViewEntity() instanceof EntityPlayer) {
+            if (mc.entityRenderer.theShaderGroup != null) {
+                mc.entityRenderer.theShaderGroup.deleteShaderGroup();
+            }
+            if (Client.main().setMgr().settingByName("GUI Blur", Client.main().modMgr().getModule(HUD.class)).getBool()) {
+                mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
+            }
+        }
+
         this.buttonList.clear();
 
         if (this.mc.playerController.isInCreativeMode()) {
             this.mc.displayGuiScreen(new GuiContainerCreative(this.mc.thePlayer));
         } else {
             super.initGui();
+        }
+    }
+
+    @Override
+    public void onGuiClosed() {
+        if (mc.entityRenderer.theShaderGroup != null) {
+            mc.entityRenderer.theShaderGroup.deleteShaderGroup();
+            mc.entityRenderer.theShaderGroup = null;
         }
     }
 

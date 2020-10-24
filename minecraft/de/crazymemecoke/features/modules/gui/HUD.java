@@ -64,6 +64,7 @@ public class HUD extends Module {
         Client.main().setMgr().newSetting(new Setting("Target HUD", this, true));
         Client.main().setMgr().newSetting(new Setting("KeyStrokes", this, true));
         Client.main().setMgr().newSetting(new Setting("GUI Animation", this, true));
+        Client.main().setMgr().newSetting(new Setting("GUI Blur", this, true));
         Client.main().setMgr().newSetting(new Setting("Blockhit Animation", this, true));
         Client.main().setMgr().newSetting(new Setting("Developer Mode", this, false));
     }
