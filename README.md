@@ -2,18 +2,10 @@
 Hallo,
 
 dies ist mein Minecraft Client für die Version 1.8.8.
+Es handelt sich um einen Recode meines alten 1.8.0 Clients aus 2015.
 
-Es handelt sich um einen Recode der Version 1.8.0, welche jedoch nicht mehr weiter entwickelt wird.
-
-## Setup
-
- 1. Downloade dir das Mod Coder Pack für die Version 1.8.8 (mcp918)
- 2. Starte Minecraft 1.8.8 im normalen Minecraft Launcher
- 3. Entpacke das eben heruntergeladene MCP
- 4. Öffne den entpackten Ordner und führe die `decompile.bat` aus
- 5. Warte, bis alles fertig dekompiliert ist
- 6. Schiebe den SRC aus dieser GitHub Repository in den `src/`-Ordner
- 7. Ersetze alle doppelten Dateien (**WICHTIG**)
+Noch nicht alle Klassen sind recodet, deshalb nehmt manchen Code bitte nicht ganz so ernst.
+Ich wusste es damals halt einfach nicht besser ... so schön jung und naiv war Ich :D
 
 ## Kontaktmöglichkeiten
 Falls du noch Fragen zu dem Projekt hast, kannst du mich auf folgenden Social-Media Plattformen kontaktieren:
@@ -21,3 +13,4 @@ Falls du noch Fragen zu dem Projekt hast, kannst du mich auf folgenden Social-Me
  - Telegram (@crazymemecoke)
  - Instagram (@crazymemecoke)
  - Twitter (@crazybackupcoke)
+ - MasterOf13FPS (@crazymemecoke)
