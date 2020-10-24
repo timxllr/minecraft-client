@@ -29,7 +29,7 @@ public class EntityUtils {
     }
 
     public static boolean isMoving() {
-        return (Wrapper.mc.thePlayer.moveForward > 0F || Wrapper.mc.thePlayer.moveStrafing > 0F) && Wrapper.mc.thePlayer != null;
+        return Wrapper.mc.thePlayer.moveForward != 0 || Wrapper.mc.thePlayer    .moveStrafing != 0;
     }
 
     public static boolean isReferenceSet() {
