@@ -48,8 +48,7 @@ public class TrailESP extends Module {
                         points.add(new Vec4(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, System.currentTimeMillis()));
                     }
                 }
-            } catch (NullPointerException ex) {
-                ex.printStackTrace();
+            } catch (NullPointerException ignored) {
             }
             for (int i = 0; i < points.size(); i++) {
                 if (System.currentTimeMillis() - points.get(i).getW() > trailLength) {
