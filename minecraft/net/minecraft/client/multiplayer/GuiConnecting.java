@@ -174,8 +174,6 @@ public class GuiConnecting extends GuiScreen {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
 
-        Tessellator tessellator = Tessellator.getInstance();
-
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         RenderUtils.drawRect(s.width() / 2 - 120, s.height() / 2 - 50, s.width() / 2 + 120, s.height() / 2 + 30, new Color(0, 0, 0, 140).getRGB());
