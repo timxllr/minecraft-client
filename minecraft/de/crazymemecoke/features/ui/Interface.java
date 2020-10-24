@@ -63,9 +63,6 @@ public class Interface extends GuiIngame {
         if (Client.main().setMgr().settingByName("ArrayList", Client.main().modMgr().getByName("HUD")).getBool()) {
             renderArrayList();
         }
-        if (Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).getBool()) {
-            renderTargetHUD();
-        }
         if (Client.main().setMgr().settingByName("KeyStrokes", Client.main().modMgr().getByName("HUD")).getBool()) {
             renderKeyStrokes();
         }
@@ -96,28 +93,6 @@ public class Interface extends GuiIngame {
         Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("A", s.width() - 95, s.height() - 43, -1);
         Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("S", s.width() - 65, s.height() - 43, -1);
         Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("D", s.width() - 34, s.height() - 43, -1);
-    }
-
-    private void renderTargetHUD() {
-        ScaledResolution s = new ScaledResolution(mc);
-
-        if (Aura.currentTarget instanceof EntityPlayer && Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).getBool()) {
-            RenderUtils.drawRect(s.width() / 2 - 130, s.height() / 2 - 60, s.width() / 2 + 90, s.height() / 2 + 20, new Color(0, 0, 0, 110).getRGB());
-
-            EntityPlayer p = (EntityPlayer) Aura.currentTarget;
-            Client.main().fontMgr().cabin23.drawStringWithShadow("Spieler: " + p.getName(), s.width() / 2 - 125, s.height() / 2 - 45, -1);
-            Client.main().fontMgr().cabin23.drawStringWithShadow("Leben: " + p.getHealth() + " / " + p.getMaxHealth(), s.width() / 2 - 125, s.height() / 2 - 35, -1);
-
-            ItemStack i = p.getCurrentEquippedItem();
-            if (i == null) {
-                Client.main().fontMgr().cabin23.drawStringWithShadow("Item: Kein Item", s.width() / 2 - 125, s.height() / 2 - 25, -1);
-            } else {
-                Client.main().fontMgr().cabin23.drawStringWithShadow("Item: " + i.getDisplayName(), s.width() / 2 - 125, s.height() / 2 - 25, -1);
-            }
-
-            GuiInventory.drawEntityOnScreen(s.width() / 2 + 30, s.height() / 2 + 15, 30, (float) (51) - 50, (float) (75 - 50) - 20, (EntityLivingBase) Aura.currentTarget);
-
-        }
     }
 
     private void renderWatermark() {

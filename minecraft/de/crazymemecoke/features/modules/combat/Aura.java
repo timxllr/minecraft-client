@@ -10,19 +10,24 @@ import de.crazymemecoke.manager.eventmanager.impl.EventPacket;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import org.lwjgl.input.Keyboard;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Aura extends Module {
@@ -57,13 +62,8 @@ public class Aura extends Module {
 
     @Override
     public void onEnable() {
-        if (sM.settingByName("Mode", this).getMode().equalsIgnoreCase("Multi")) {
-            Client.main().modMgr().getByName("Aura").setState(false);
-        }
-
         curYaw = mc.thePlayer.rotationYaw;
         curPitch = mc.thePlayer.rotationPitch;
-
     }
 
     @Override
@@ -74,9 +74,7 @@ public class Aura extends Module {
 
     @Override
     public void onEvent(Event event) {
-
         if (event instanceof EventUpdate) {
-
             ticksExisted = sM.settingByName("Ticks Existed", this).getNum();
             range = sM.settingByName("Range", this).getNum();
             cps = sM.settingByName("CPS", this).getNum();
@@ -87,7 +85,6 @@ public class Aura extends Module {
             villager = sM.settingByName("Villager", this).getBool();
             invisibles = sM.settingByName("Invisibles", this).getBool();
             rotations = sM.settingByName("Rotations", this).getBool();
-            auraMode = sM.settingByName("Mode", this).getMode();
 
             currentTarget = getClosest(mc.playerController.getBlockReachDistance());
 
@@ -101,13 +98,11 @@ public class Aura extends Module {
                 float accuracy = (float) sM.settingByName("Accuracy", this).getNum();
                 float predictionMultiplier = (float) sM.settingByName("Prediction Multiplier", this).getNum();
 
-                if (shouldAttack()) {
-                    float[] rots = faceEntity(currentTarget, curYaw, curPitch, precision, accuracy, predictionMultiplier);
-                    yaw = rots[0];
-                    pitch = rots[1];
-                    curYaw = yaw;
-                    curPitch = pitch;
-                }
+                float[] rots = faceEntity(currentTarget, curYaw, curPitch, precision, accuracy, predictionMultiplier);
+                yaw = rots[0];
+                pitch = rots[1];
+                curYaw = yaw;
+                curPitch = pitch;
             } else {
                 yaw = mc.thePlayer.rotationYaw;
                 pitch = mc.thePlayer.rotationPitch;
@@ -121,14 +116,16 @@ public class Aura extends Module {
 
         if (event instanceof EventMotion) {
             if (((EventMotion) event).getType() == EventMotion.Type.PRE) {
-                ((EventMotion) event).setYaw(yaw);
-                ((EventMotion) event).setPitch(pitch);
+                if (shouldAttack()) {
+                    ((EventMotion) event).setYaw(yaw);
+                    ((EventMotion) event).setPitch(pitch);
+                }
             } else if (((EventMotion) event).getType() == EventMotion.Type.POST) {
-                if (auraMode.equalsIgnoreCase("Single")) {
-                    if (currentTarget == null)
-                        return;
+                if (currentTarget == null)
+                    return;
 
-                    if (rotations) {
+                if (rotations) {
+                    if (shouldAttack()) {
                         mc.thePlayer.rotationYaw = yaw;
                         mc.thePlayer.rotationPitch = pitch;
                     }
@@ -137,7 +134,9 @@ public class Aura extends Module {
         }
         if (event instanceof EventMoveFlying) {
             if (currentTarget != null || !targets.isEmpty()) {
-                ((EventMoveFlying) event).setYaw(yaw);
+                if (shouldAttack()) {
+                    ((EventMoveFlying) event).setYaw(yaw);
+                }
             }
         }
         if (event instanceof EventPacket) {
@@ -252,6 +251,32 @@ public class Aura extends Module {
         if ((entity instanceof EntityPlayer && players) || (entity instanceof EntityMob && mobs) || (entity instanceof EntityAnimal && animals) || (entity instanceof EntityVillager && villager) || (invisibles)) {
             mc.thePlayer.swingItem();
             mc.playerController.attackEntity(mc.thePlayer, entity);
+
+            if (Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).getBool()) {
+                renderTargetHUD();
+            }
+        }
+    }
+
+    private void renderTargetHUD() {
+        ScaledResolution s = new ScaledResolution(mc);
+
+        if (Aura.currentTarget instanceof EntityPlayer && Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).getBool()) {
+            RenderUtils.drawRect(s.width() / 2 - 130, s.height() / 2 - 60, s.width() / 2 + 90, s.height() / 2 + 20, new Color(0, 0, 0, 110).getRGB());
+
+            EntityPlayer p = (EntityPlayer) Aura.currentTarget;
+            Client.main().fontMgr().cabin23.drawStringWithShadow("Spieler: " + p.getName(), s.width() / 2 - 125, s.height() / 2 - 45, -1);
+            Client.main().fontMgr().cabin23.drawStringWithShadow("Leben: " + p.getHealth() + " / " + p.getMaxHealth(), s.width() / 2 - 125, s.height() / 2 - 35, -1);
+
+            ItemStack i = p.getCurrentEquippedItem();
+            if (i == null) {
+                Client.main().fontMgr().cabin23.drawStringWithShadow("Item: Kein Item", s.width() / 2 - 125, s.height() / 2 - 25, -1);
+            } else {
+                Client.main().fontMgr().cabin23.drawStringWithShadow("Item: " + i.getDisplayName(), s.width() / 2 - 125, s.height() / 2 - 25, -1);
+            }
+
+            GuiInventory.drawEntityOnScreen(s.width() / 2 + 30, s.height() / 2 + 15, 30, (float) (51) - 50, (float) (75 - 50) - 20, (EntityLivingBase) Aura.currentTarget);
+
         }
     }
 
