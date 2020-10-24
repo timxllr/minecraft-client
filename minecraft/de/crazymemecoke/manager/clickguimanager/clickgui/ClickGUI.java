@@ -59,18 +59,15 @@ public class ClickGUI extends GuiScreen {
         List<String> lines = FileUtils.loadFile(guiFile);
         HashMap<Category, String> guiLocations = new HashMap<>();
 
+        assert lines != null;
         lines.forEach(line -> {
             // CATEGORY_X_Y
 
             String[] data = line.split("_");
 
             Category cat = Category.valueOf(data[0]);
-            if (cat != null) {
-                guiLocations.put(Category.valueOf(data[0]),
-                        data[1] + ":" + data[2] + ":" + (data.length == 4 ? data[3] : "false"));
-            } else {
-                System.out.println("Error reading gui config (Category not found) line " + lines.indexOf(line));
-            }
+            guiLocations.put(Category.valueOf(data[0]),
+                    data[1] + ":" + data[2] + ":" + (data.length == 4 ? data[3] : "false"));
         });
 
         for (Category c : Category.values()) {
@@ -151,7 +148,6 @@ public class ClickGUI extends GuiScreen {
                     }
                 }
             }
-
         }
 
 		/*if (mb != null) {
