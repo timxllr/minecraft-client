@@ -61,7 +61,7 @@ public class ModuleManager {
         modules.add(new MotionGraph());
         modules.add(new Fullbright());
         modules.add(new FastLadder());
-        modules.add(new NoSlowDown());
+        modules.add(new NoSlow());
         modules.add(new NoRotation());
         modules.add(new InvCleaner());
         modules.add(new FastPlace());

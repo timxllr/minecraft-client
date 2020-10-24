@@ -2,7 +2,7 @@ package net.minecraft.client.entity;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.Invis;
-import de.crazymemecoke.features.modules.movement.NoSlowDown;
+import de.crazymemecoke.features.modules.movement.NoSlow;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.utils.NotifyUtil;
@@ -663,7 +663,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         this.movementInput.updatePlayerMoveState();
 
         if (this.isUsingItem() && !this.isRiding()) {
-            boolean noSlowdownEnabled = Client.main().modMgr().getModule(NoSlowDown.class).state();
+            boolean noSlowdownEnabled = Client.main().modMgr().getModule(NoSlow.class).state();
             this.movementInput.moveStrafe *= 0.2F;
             this.movementInput.moveForward *= 0.2F;
             this.sprintToggleTimer = 0;
