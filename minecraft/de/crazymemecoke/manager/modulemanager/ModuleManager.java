@@ -58,6 +58,7 @@ public class ModuleManager {
         modules.add(new NoScoreboard());
         modules.add(new AutoRespawn());
         modules.add(new CustomSpeed());
+        modules.add(new MotionGraph());
         modules.add(new Fullbright());
         modules.add(new FastLadder());
         modules.add(new NoSlowDown());
@@ -80,6 +81,7 @@ public class ModuleManager {
         modules.add(new ClickGUI());
         modules.add(new HighJump());
         modules.add(new AutoWalk());
+        modules.add(new TrailESP());
         modules.add(new FastUse());
         modules.add(new AntiWeb());
         modules.add(new Trigger());
