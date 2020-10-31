@@ -304,7 +304,7 @@ public class GuiChat extends GuiScreen {
 
         switch (mode) {
             case "normal": {
-                drawRect(2, height - 14, width - 2, height - 2, Integer.MIN_VALUE);
+                RenderUtils.drawRect(2, height - 14, width - 2, height - 2, Integer.MIN_VALUE);
                 break;
             }
             case "custom": {
@@ -313,17 +313,17 @@ public class GuiChat extends GuiScreen {
                 switch (font) {
                     case "comfortaa": {
                         width2 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                        drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
                         break;
                     }
                     case "bauhaus": {
                         width2 = Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                        drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
                         break;
                     }
                     case "exo": {
                         width2 = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                        drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
                         break;
                     }
                 }
