@@ -56,7 +56,10 @@ public class GuiAltManager extends GuiScreen {
 
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
-        Client.main().getAltManager().loadAlts();
+
+        Thread loadAltsThread = new Thread(AltManager::loadAlts);
+        loadAltsThread.start();
+
         selected = null;
         scroll = 0;
         int c = -15698006;
