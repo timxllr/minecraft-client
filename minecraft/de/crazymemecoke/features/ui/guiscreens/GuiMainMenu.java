@@ -44,19 +44,22 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         buttonList.add(new GuiButton(4, width / 2 - 120, height / 2 - 30, 120, 20, "AltManager"));
         buttonList.add(new GuiButton(5, width / 2 + 10, height / 2 - 30, 120, 20, "Credits"));
 
-        try {
-            String versionCheck = "https://pastebin.com/raw/tcuBTU3x";
-            URL url = new URL(versionCheck);
+        Thread versionCheckThread = new Thread(() -> {
+            try {
+                String versionCheck = "https://pastebin.com/raw/tcuBTU3x";
+                URL url = new URL(versionCheck);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 
-            onlineVer = Double.parseDouble(reader.readLine());
+                onlineVer = Double.parseDouble(reader.readLine());
 
-            reader.close();
+                reader.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        versionCheckThread.start();
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
