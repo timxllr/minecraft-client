@@ -2,6 +2,7 @@ package net.minecraft.entity;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.movement.SafeWalk;
+import de.crazymemecoke.features.modules.world.Scaffold;
 import de.crazymemecoke.manager.eventmanager.impl.EventMoveFlying;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.block.*;
@@ -588,9 +589,10 @@ public abstract class Entity implements ICommandSender {
             double d5 = z;
             boolean flag = this.onGround && this.isSneaking() && this instanceof EntityPlayer;
 
-            boolean sneak = Client.main().modMgr().getModule(SafeWalk.class).state() && this instanceof EntityPlayer;
+            boolean safewalk = Client.main().modMgr().getModule(SafeWalk.class).state();
+            boolean scaffold = Client.main().setMgr().settingByName("SafeWalk", Client.main().modMgr().getModule(Scaffold.class)).getBool() && Client.main().modMgr().getModule(Scaffold.class).state();
 
-            if (flag || sneak) {
+            if (flag || safewalk || scaffold) {
                 double d6;
 
                 for (d6 = 0.05D; x != 0.0D && this.worldObj.getCollidingBoundingBoxes(this, this.getEntityBoundingBox().offset(x, -1.0D, 0.0D)).isEmpty(); d3 = x) {

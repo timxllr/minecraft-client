@@ -1,5 +1,7 @@
 package de.crazymemecoke.features.modules.world;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
@@ -34,6 +36,8 @@ public class Scaffold extends Module {
 
     public Scaffold() {
         super("Scaffold", Keyboard.KEY_NONE, Category.WORLD, -1);
+
+        Client.main().setMgr().newSetting(new Setting("SafeWalk", this, true));
     }
 
     public Queue<Consumer<EntityPlayerSP>> getPostponeActions() {
