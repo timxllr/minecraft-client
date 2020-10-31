@@ -9,6 +9,7 @@ import de.crazymemecoke.features.modules.exploits.Phase;
 import de.crazymemecoke.features.modules.gui.ClickGUI;
 import de.crazymemecoke.features.modules.gui.HUD;
 import de.crazymemecoke.features.modules.gui.Invis;
+import de.crazymemecoke.features.modules.misc.LagDetector;
 import de.crazymemecoke.features.modules.movement.*;
 import de.crazymemecoke.features.modules.player.*;
 import de.crazymemecoke.features.modules.render.*;
@@ -59,9 +60,9 @@ public class ModuleManager {
         modules.add(new AutoRespawn());
         modules.add(new CustomSpeed());
         modules.add(new MotionGraph());
+        modules.add(new LagDetector());
         modules.add(new Fullbright());
         modules.add(new FastLadder());
-        modules.add(new NoSlow());
         modules.add(new NoRotation());
         modules.add(new InvCleaner());
         modules.add(new FastPlace());
@@ -71,6 +72,7 @@ public class ModuleManager {
         modules.add(new AutoClimb());
         modules.add(new SlimeJump());
         modules.add(new BowAimbot());
+        modules.add(new BlockInfo());
         modules.add(new FastFall());
         modules.add(new Velocity());
         modules.add(new IceSpeed());
@@ -96,6 +98,7 @@ public class ModuleManager {
         modules.add(new Strafe());
         modules.add(new NoFall());
         modules.add(new Fucker());
+        modules.add(new NoSlow());
         modules.add(new Speed());
         modules.add(new Jesus());
         modules.add(new Tower());
