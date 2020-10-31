@@ -2,6 +2,7 @@ package de.crazymemecoke.features.ui;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.combat.Aura;
+import de.crazymemecoke.features.modules.render.BlockInfo;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
@@ -54,6 +55,8 @@ public class Interface extends GuiIngame {
     }
 
     private void doRenderStuff() {
+        ScaledResolution s = new ScaledResolution(mc);
+
         if (Client.main().setMgr().settingByName("Watermark", Client.main().modMgr().getByName("HUD")).getBool()) {
             renderWatermark();
         }
