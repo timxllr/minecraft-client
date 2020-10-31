@@ -38,8 +38,7 @@ public class Aura extends Module {
     double range, cps, ticksExisted;
     float yaw, pitch, curYaw, curPitch;
     long current, last;
-    boolean teams, players, animals, mobs, villager, invisibles, rotations;
-    String auraMode;
+    boolean teams, players, animals, mobs, villager, rotations;
 
     public Aura() {
         super("Aura", Keyboard.KEY_NONE, Category.COMBAT, -1);
@@ -52,7 +51,6 @@ public class Aura extends Module {
         sM.newSetting(new Setting("Animals", this, false));
         sM.newSetting(new Setting("Mobs", this, false));
         sM.newSetting(new Setting("Villager", this, false));
-        sM.newSetting(new Setting("Invisibles", this, false));
         sM.newSetting(new Setting("Rotations", this, true));
         sM.newSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
         sM.newSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
@@ -83,7 +81,6 @@ public class Aura extends Module {
             animals = sM.settingByName("Animals", this).getBool();
             mobs = sM.settingByName("Mobs", this).getBool();
             villager = sM.settingByName("Villager", this).getBool();
-            invisibles = sM.settingByName("Invisibles", this).getBool();
             rotations = sM.settingByName("Rotations", this).getBool();
 
             currentTarget = getClosest(mc.playerController.getBlockReachDistance());
@@ -124,7 +121,7 @@ public class Aura extends Module {
                 if (currentTarget == null)
                     return;
 
-                if (rotations) {
+                if (!rotations) {
                     if (shouldAttack()) {
                         mc.thePlayer.rotationYaw = yaw;
                         mc.thePlayer.rotationPitch = pitch;
@@ -141,7 +138,7 @@ public class Aura extends Module {
         }
         if (event instanceof EventPacket) {
             if (((EventPacket) event).getType() == EventPacket.Type.SEND) {
-                if (rotations)
+                if (!rotations)
                     return;
 
                 if (((EventPacket) event).getPacket() instanceof C03PacketPlayer) {
@@ -248,7 +245,7 @@ public class Aura extends Module {
 
 
     private void attack(Entity entity) {
-        if ((entity instanceof EntityPlayer && players) || (entity instanceof EntityMob && mobs) || (entity instanceof EntityAnimal && animals) || (entity instanceof EntityVillager && villager) || (invisibles)) {
+        if ((entity instanceof EntityPlayer && players) || (entity instanceof EntityMob && mobs) || (entity instanceof EntityAnimal && animals) || (entity instanceof EntityVillager && villager)) {
             mc.thePlayer.swingItem();
             mc.playerController.attackEntity(mc.thePlayer, entity);
 
