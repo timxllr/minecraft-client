@@ -1,5 +1,7 @@
 package de.crazymemecoke.manager.notificationmanager;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.Colors;
 import net.minecraft.client.Minecraft;
@@ -11,7 +13,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
-import java.awt.Color;
+import java.awt.*;
 
 import org.lwjgl.opengl.GL11;
 
@@ -49,8 +51,11 @@ public class Notification {
     }
 
     public void render() {
+        UnicodeFontRenderer titleFont = Client.main().fontMgr().font("Comfortaa", 24, Font.PLAIN);
+        UnicodeFontRenderer messageFont = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
+
         double offset = 0;
-        int width = 150;
+        int width = messageFont.getStringWidth(messsage) + 20;
         int height = 30;
         long time = getTime();
 
@@ -72,16 +77,14 @@ public class Notification {
         else {
             color1 = Colors.main().notificationError;
             int i = Math.max(0, Math.min(255, (int) (Math.sin(time / 100.0) * 255.0 / 2 + 127.5)));
-            color = Colors.main().notificationError;
+            color = new Color(i, 0, 0, 220);
         }
-
-        FontRenderer fontRenderer = Wrapper.mc.fontRendererObj;
 
         drawRect(GuiScreen.width - offset, GuiScreen.height - 5 - height, GuiScreen.width, GuiScreen.height - 5, color.getRGB());
         drawRect(GuiScreen.width - offset, GuiScreen.height - 5 - height, GuiScreen.width - offset + 4, GuiScreen.height - 5, color1.getRGB());
 
-        fontRenderer.drawString(title, (int) (GuiScreen.width - offset + 8), GuiScreen.height - 2 - height, -1);
-        fontRenderer.drawString(messsage, (int) (GuiScreen.width - offset + 8), GuiScreen.height - 15, -1);
+        titleFont.drawString(title, (int) (GuiScreen.width - offset + 7), GuiScreen.height - 2 - height, -1);
+        messageFont.drawString(messsage, (int) (GuiScreen.width - offset + 7), GuiScreen.height - 15, -1);
     }
 
     public static void drawRect(double left, double top, double right, double bottom, int color) {
