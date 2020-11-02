@@ -74,28 +74,28 @@ public class Interface extends GuiIngame {
     private void renderKeyStrokes() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 70, 13, new Color(0, 0, 0, 150).getRGB());
-        RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 40, 13, new Color(0, 0, 0, 150).getRGB());
-        RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 40, 13, new Color(0, 0, 0, 150).getRGB());
-        RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 40, 13, new Color(0, 0, 0, 150).getRGB());
+        RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 80, 13, new Color(0, 0, 0, 150).getRGB());
+        RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 50, 13, new Color(0, 0, 0, 150).getRGB());
+        RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 50, 13, new Color(0, 0, 0, 150).getRGB());
+        RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 50, 13, new Color(0, 0, 0, 150).getRGB());
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 70, 13, Colors.main().getAmbienOldBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 80, 13, Colors.main().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-            RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 40, 13, Colors.main().getAmbienOldBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 90, s.height() - 50, 13, Colors.main().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 40, 13, Colors.main().getAmbienOldBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 60, s.height() - 50, 13, Colors.main().getAmbienOldBlueColor());
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-            RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 40, 13, Colors.main().getAmbienOldBlueColor());
+            RenderUtils.drawFilledCircle(s.width() - 30, s.height() - 50, 13, Colors.main().getAmbienOldBlueColor());
         }
 
-        Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("W", s.width() - 66, s.height() - 73, -1);
-        Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("A", s.width() - 95, s.height() - 43, -1);
-        Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("S", s.width() - 65, s.height() - 43, -1);
-        Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("D", s.width() - 34, s.height() - 43, -1);
+        Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("W", s.width() - 66, s.height() - 83, -1);
+        Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("A", s.width() - 95, s.height() - 53, -1);
+        Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("S", s.width() - 65, s.height() - 53, -1);
+        Client.main().fontMgr().font("esp", 25, Font.PLAIN).drawStringWithShadow("D", s.width() - 34, s.height() - 53, -1);
     }
 
     private void renderWatermark() {
