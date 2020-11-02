@@ -10,6 +10,7 @@ import de.crazymemecoke.features.modules.gui.ClickGUI;
 import de.crazymemecoke.features.modules.gui.HUD;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.modules.misc.LagDetector;
+import de.crazymemecoke.features.modules.misc.MemoryCleaner;
 import de.crazymemecoke.features.modules.movement.*;
 import de.crazymemecoke.features.modules.player.*;
 import de.crazymemecoke.features.modules.render.*;
@@ -55,6 +56,7 @@ public class ModuleManager {
         }
 
         modules.add(new InventoryMove());
+        modules.add(new MemoryCleaner());
         modules.add(new ChestStealer());
         modules.add(new NoScoreboard());
         modules.add(new AutoRespawn());
