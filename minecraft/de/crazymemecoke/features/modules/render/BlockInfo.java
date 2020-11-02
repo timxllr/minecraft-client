@@ -37,15 +37,13 @@ public class BlockInfo extends Module {
 
                     ScaledResolution s = new ScaledResolution(mc);
 
-                    UnicodeFontRenderer font = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
+                    UnicodeFontRenderer font = Client.main().fontMgr().font("BigNoodleTitling", 20, Font.PLAIN);
 
-                    String line1 = "Block: " + block.getLocalizedName();
-                    String line2 = "ID: " + Block.getIdFromBlock(block);
+                    String text = block.getLocalizedName() + " ID: " + Block.getIdFromBlock(block);
 
-                    RenderUtils.drawRect(s.width() / 2 - font.getStringWidth(line1) / 2 - 5, s.height() / 2 - 35, s.width() / 2 + font.getStringWidth(line1) / 2 + 5, s.height() / 2, new Color(0, 0, 0, 120).getRGB());
+                    RenderUtils.drawRect(s.width() / 2 + 10, s.height() / 2 - 8, s.width() / 2 + font.getStringWidth(text) + 15, s.height() / 2 + 8, new Color(0, 0, 0).getRGB());
 
-                    font.drawStringWithShadow(line1, s.width() / 2 - font.getStringWidth(line1) / 2, s.height() / 2 - 27, -1);
-                    font.drawStringWithShadow(line2, s.width() / 2 - font.getStringWidth(line2) / 2, s.height() / 2 - 16, -1);
+                    font.drawStringWithShadow(text, s.width() / 2 + 12, s.height() / 2 - 4, -1);
                 }
             }
         }
