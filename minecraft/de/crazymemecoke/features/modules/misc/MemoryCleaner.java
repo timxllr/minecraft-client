@@ -26,10 +26,13 @@ public class MemoryCleaner extends Module {
     @Override
     public void onEvent(Event event) {
         if(event instanceof EventTick){
-            if(timeHelper.hasReached(1000L)){
-                System.gc();
-                NotificationManager.show(new Notification(NotificationType.INFO, "MemoryCleaner", "Cleaned your Memory", 5));
-                timeHelper.reset();
+            if(timeHelper.hasReached(60000L)){
+                Thread cleanThread = new Thread(() -> {
+                    System.gc();
+                    NotificationManager.show(new Notification(NotificationType.INFO, "MemoryCleaner", "Cleaned your Memory", 5));
+                    timeHelper.reset();
+                });
+                cleanThread.start();
             }
         }
     }
