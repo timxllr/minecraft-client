@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
+import net.minecraft.client.gui.inventory.GuiEditSign;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -19,7 +20,7 @@ public class InventoryMove extends Module {
 	@Override
 	public void onEvent(Event event) {
 		if(event instanceof EventUpdate) {
-			if (mc.currentScreen != null && (!(mc.currentScreen instanceof GuiChat))) {
+			if (mc.currentScreen != null && !(mc.currentScreen instanceof GuiChat) && !(mc.currentScreen instanceof GuiEditSign)) {
 				KeyBinding[] moveKeys = { mc.gameSettings.keyBindForward, mc.gameSettings.keyBindSprint,
 						mc.gameSettings.keyBindBack, mc.gameSettings.keyBindLeft, mc.gameSettings.keyBindRight,
 						mc.gameSettings.keyBindJump };
