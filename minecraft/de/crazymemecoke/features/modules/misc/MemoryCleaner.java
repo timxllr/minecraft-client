@@ -1,12 +1,9 @@
 package de.crazymemecoke.features.modules.misc;
 
-import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventTick;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.manager.notificationmanager.Notification;
-import de.crazymemecoke.manager.notificationmanager.NotificationManager;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.time.TimeHelper;

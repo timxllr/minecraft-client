@@ -2,11 +2,7 @@ package de.crazymemecoke.manager.notificationmanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.Colors;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
