@@ -20,8 +20,8 @@ public class Client {
     private static Client instance = new Client();
     private Minecraft mc = Minecraft.mc();
 
-    private String clientName = "Splash";
-    private double clientVersion = 1.0;
+    private String clientName = "Vitality";
+    private double clientVersion = 1.1;
     private String clientCoder = "CrazyMemeCoke";
     private String clientPrefix = ".";
     private String fakeVer = "OptiFine 1.8.8 HD_I7";
