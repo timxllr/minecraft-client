@@ -10,6 +10,10 @@ public class Colors {
         return instance;
     }
 
+    public Color notificationInfo = new Color(0, 233, 255, 255);
+    public Color notificationWarning = new Color(255, 216, 0, 255);
+    public Color notificationError = new Color(255, 0, 0, 255);
+
     public int ambienOldBlueColor = new Color(32, 188, 240).getRGB();
     public int ambienNewBlueColor = new Color(0x0090ff).getRGB();
     public int ambienNewDarkGreyColor = new Color(0x20252b).getRGB();
