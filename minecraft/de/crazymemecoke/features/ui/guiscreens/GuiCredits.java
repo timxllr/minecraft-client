@@ -67,7 +67,7 @@ public class GuiCredits extends GuiScreen {
                 "Kroko - Event System | ShaderESP | Aura Rotations | General Help\n\n" +
                 "W4z3d - Hit Animations | General Help\n\n" +
                 "Deleteboys - TrailESP | MotionGraph | Rainbow Method\n\n" +
-                "superblaubeere27 - Shader System";
+                "superblaubeere27 - Shader System | Notification System";
         fM.font("Cabin", 23, Font.PLAIN).drawStringWithShadow(credits, 10, 40, -1);
 
         super.drawScreen(posX, posY, f);
