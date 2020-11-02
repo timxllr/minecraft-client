@@ -8,6 +8,7 @@ import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.manager.notificationmanager.Notification;
 import de.crazymemecoke.manager.notificationmanager.NotificationManager;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
+import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 
@@ -25,11 +26,11 @@ public class MemoryCleaner extends Module {
 
     @Override
     public void onEvent(Event event) {
-        if(event instanceof EventTick){
+        if(event instanceof EventTick && !(mc.theWorld == null)){
             if(timeHelper.hasReached(60000L)){
                 Thread cleanThread = new Thread(() -> {
                     System.gc();
-                    NotificationManager.show(new Notification(NotificationType.INFO, "MemoryCleaner", "Cleaned your Memory", 5));
+                    NotifyUtil.notification("MemoryCleaner", "Zwischenspeicher geleert!", NotificationType.INFO, 5);
                     timeHelper.reset();
                 });
                 cleanThread.start();

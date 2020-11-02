@@ -1,6 +1,8 @@
 package de.crazymemecoke.manager.modulemanager;
 
 import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
+import de.crazymemecoke.utils.NotifyUtil;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
@@ -45,9 +47,11 @@ public abstract class Module {
         if (state) {
             this.onEnable();
             this.enabled = true;
+            NotifyUtil.notification("Modul aktiviert", "§c" + this.name + "§r wurde aktiviert!", NotificationType.INFO, 2);
         } else {
             this.onDisable();
             this.enabled = false;
+            NotifyUtil.notification("Modul deaktiviert", "§c" + this.name + "§r wurde deaktiviert!", NotificationType.INFO, 2);
         }
     }
 

@@ -1,5 +1,6 @@
 package de.crazymemecoke.features.commands;
 
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.Client;
@@ -20,13 +21,13 @@ public class Bind extends Command {
             if (Client.main().modMgr().getByName(args[0]) != null) {
                 Module mod = moduleManager.getByName(args[0]);
                 if (mod == null) {
-                    NotifyUtil.chat("Module §c" + args[0] + "§a nicht gefunden.");
+                    NotifyUtil.notification("Modul nicht gefunden!", "Modul §c" + args[0] + "§r wurde nicht gefunden!", NotificationType.ERROR, 5);
                     return;
                 }
 
                 if(args[1].equalsIgnoreCase("none")){
                     mod.setBind(0);
-                    NotifyUtil.chat("Module §c" + args[0] + "§a wurde entbunden.");
+                    NotifyUtil.notification("Modul entbunden!", "§c" + args[0] + "§r wurde entbunden!", NotificationType.INFO, 5);
                     Wrapper.mc.thePlayer.playSound("random.anvil_use", 1f, 1f);
                     return;
                 }
@@ -34,13 +35,13 @@ public class Bind extends Command {
                 int bind = Keyboard.getKeyIndex(args[1]);
 
                 if (bind == 0) {
-                    NotifyUtil.chat("Key §c" + args[1] + "§a nicht gefunden.");
+                    NotifyUtil.notification("Key nicht gefunden!", "Key §c" + args[1] + "§r wurde nicht gefunden!", NotificationType.ERROR, 5);
                     return;
                 }
 
                 mod.setBind(bind);
                 moduleManager.saveBinds();
-                NotifyUtil.chat("Module §c" + args[0] + "§a wurde auf §c" + args[1] + "§a gebunden.");
+                NotifyUtil.notification("Modul gebunden!", "§c" + args[0] + "§r wurde auf §c" + args[1] + "§r gebunden!", NotificationType.INFO, 5);
                 Wrapper.mc.thePlayer.playSound("random.anvil_use", 1f, 1f);
             } else {
                 NotifyUtil.chat(syntax);
@@ -57,7 +58,7 @@ public class Bind extends Command {
                 for (Module mod : Client.main().modMgr().getModules()) {
                     mod.setBind(0);
                 }
-                NotifyUtil.chat("Es wurden alle Keybinds gelöscht.");
+                NotifyUtil.notification("Keybinds gelöscht!", "Alle Keybinds wurden gelöscht!", NotificationType.INFO, 5);
             } else {
                 NotifyUtil.chat(syntax);
             }
