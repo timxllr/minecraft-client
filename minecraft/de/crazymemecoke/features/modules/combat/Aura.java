@@ -38,23 +38,24 @@ public class Aura extends Module {
     double range, cps, ticksExisted;
     float yaw, pitch, curYaw, curPitch;
     long current, last;
-    boolean teams, players, animals, mobs, villager, rotations;
+    boolean teams, players, animals, mobs, villager, rotations, ignoreDead;
 
     public Aura() {
         super("Aura", Keyboard.KEY_NONE, Category.COMBAT, -1);
 
+        sM.newSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
+        sM.newSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
+        sM.newSetting(new Setting("Prediction Multiplier", this, 0.4F, 0F, 1F, false));
         sM.newSetting(new Setting("Ticks Existed", this, 30, 0, 100, true));
         sM.newSetting(new Setting("Range", this, 4, 3.5, 7, true));
         sM.newSetting(new Setting("CPS", this, 10, 1, 20, true));
-        sM.newSetting(new Setting("Teams", this, false));
         sM.newSetting(new Setting("Players", this, true));
         sM.newSetting(new Setting("Animals", this, false));
         sM.newSetting(new Setting("Mobs", this, false));
         sM.newSetting(new Setting("Villager", this, false));
+        sM.newSetting(new Setting("Teams", this, false));
         sM.newSetting(new Setting("Rotations", this, true));
-        sM.newSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
-        sM.newSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
-        sM.newSetting(new Setting("Prediction Multiplier", this, 0.4F, 0F, 1F, false));
+        sM.newSetting(new Setting("Ignore Dead", this, false));
     }
 
 
@@ -82,6 +83,7 @@ public class Aura extends Module {
             mobs = sM.settingByName("Mobs", this).getBool();
             villager = sM.settingByName("Villager", this).getBool();
             rotations = sM.settingByName("Rotations", this).getBool();
+            ignoreDead = sM.settingByName("Ignore Dead", this).getBool();
 
             currentTarget = getClosest(mc.playerController.getBlockReachDistance());
 
@@ -302,6 +304,6 @@ public class Aura extends Module {
     }
 
     private boolean canAttack(Entity entity) {
-        return entity != mc.thePlayer && entity.isEntityAlive() && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted;
+        return entity != mc.thePlayer && (ignoreDead && !entity.isDead) && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted;
     }
 }
