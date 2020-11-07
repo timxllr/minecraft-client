@@ -13,7 +13,6 @@ public abstract class Module {
     private final Category category;
     public static Minecraft mc = Minecraft.mc();
     public boolean enabled;
-    private String displayName;
 
     public Module(String name, int bind, Category category, int color) {
         this.name = name;
@@ -47,11 +46,15 @@ public abstract class Module {
         if (state) {
             this.onEnable();
             this.enabled = true;
-            NotifyUtil.notification("Modul aktiviert", "§c" + this.name + "§r wurde aktiviert!", NotificationType.INFO, 2);
+            if (!(this.isCategory(Category.GUI))) {
+                NotifyUtil.notification("Modul aktiviert", "§c" + this.name + "§r wurde aktiviert!", NotificationType.INFO, 2);
+            }
         } else {
             this.onDisable();
             this.enabled = false;
-            NotifyUtil.notification("Modul deaktiviert", "§c" + this.name + "§r wurde deaktiviert!", NotificationType.INFO, 2);
+            if (!(this.isCategory(Category.GUI))) {
+                NotifyUtil.notification("Modul deaktiviert", "§c" + this.name + "§r wurde deaktiviert!", NotificationType.INFO, 2);
+            }
         }
     }
 
@@ -86,7 +89,6 @@ public abstract class Module {
     }
 
     public void setDisplayName(String displayName) {
-        this.displayName = displayName;
     }
 
 
