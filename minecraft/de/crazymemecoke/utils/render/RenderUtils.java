@@ -936,22 +936,6 @@ public class RenderUtils {
         GL11.glEnable(2929);
     }
 
-    public static void drawRoundedRect(double left, double top, double right, double bottom, float roundness, int color) {
-        left = (float) (left + (roundness / 2.0F + 0.5D));
-        top = (float) (top + (roundness / 2.0F + 0.5D));
-        right = (float) (right - (roundness / 2.0F + 0.5D));
-        bottom = (float) (bottom - (roundness / 2.0F + 0.5D));
-        drawRect(left, top, right, bottom, color);
-        circle(right - roundness / 2.0F, top + roundness / 2.0F, roundness, color);
-        circle(left + roundness / 2.0F, bottom - roundness / 2.0F, roundness, color);
-        circle(left + roundness / 2.0F, top + roundness / 2.0F, roundness, color);
-        circle(right - roundness / 2.0F, bottom - roundness / 2.0F, roundness, color);
-        drawRect(left - roundness / 2.0F - 0.5F, top + roundness / 2.0F, right, bottom - roundness / 2.0F, color);
-        drawRect(left, top + roundness / 2.0F, right + roundness / 2.0F + 0.5F, bottom - roundness / 2.0F, color);
-        drawRect(left + roundness / 2.0F, top - roundness / 2.0F - 0.5F, right - roundness / 2.0F, bottom - roundness / 2.0F, color);
-        drawRect(left + roundness / 2.0F, top, right - roundness / 2.0F, bottom + roundness / 2.0F + 0.5F, color);
-    }
-
     public static void drawBorderedRect(double left, double top, double right, double bottom, float borderWidth,
                                         int borderColor, int color) {
         float alpha = (borderColor >> 24 & 0xFF) / 255.0f;
