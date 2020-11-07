@@ -3,6 +3,8 @@ package de.crazymemecoke.utils.render;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -10,13 +12,194 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
+import java.nio.FloatBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class RenderUtils {
+
+    /**
+     * Defines a rectangle (scissorBox) in window coordinates not GL's: from
+     * https://vinii.de/github/LWJGLUtil/scissorBoxGL.png to
+     * https://vinii.de/github/LWJGLUtil/scissorBoxWindow.png
+     */
+    public static void scissorBox(final int x, final int y, final int width, final int height) {
+        final ScaledResolution scaledResolution = new ScaledResolution(Wrapper.mc);
+        final int factor = scaledResolution.getScaleFactor();
+
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+
+        GL11.glScissor(x * factor, (scaledResolution.height() - (y + height)) * factor,
+                ((x + width) - x) * factor, ((y + height) - y) * factor);
+
+        // disable GL_SCISSOR_TEST after bounding
+    }
+
+    /**
+     * Draws rect with rounded corners, how it's made:
+     * https://vinii.de/github/LWJGLUtil/roundedRect.png
+     */
+    public static void drawRoundedRect(final float x, final float y, final float width, final float height,
+                                       final float radius, final int color) {
+        float x2 = x + ((radius / 2f) + 0.5f);
+        float y2 = y + ((radius / 2f) + 0.5f);
+        float calcWidth = (width - ((radius / 2f) + 0.5f));
+        float calcHeight = (height - ((radius / 2f) + 0.5f));
+        // top (pink)
+        relativeRect(x2 + radius / 2f, y2 - radius / 2f - 0.5f, x2 + calcWidth - radius / 2f, y + calcHeight - radius / 2f,
+                color);
+        // bottom (yellow)
+        relativeRect(x2 + radius / 2f, y2, x2 + calcWidth - radius / 2f, y2 + calcHeight + radius / 2f + 0.5f, color);
+        // left (red)
+        relativeRect((x2 - radius / 2f - 0.5f), y2 + radius / 2f, x2 + calcWidth, y2 + calcHeight - radius / 2f, color);
+        // right (green)
+        relativeRect(x2, y2 + radius / 2f + 0.5f, x2 + calcWidth + radius / 2f + 0.5f, y2 + calcHeight - radius / 2f,
+                color);
+
+        // left top circle
+        polygonCircle(x, y - 0.15, radius * 2, 360, color);
+        // right top circle
+        polygonCircle(x + calcWidth - radius + 1.0, y - 0.15, radius * 2, 360, color);
+        // left bottom circle
+        polygonCircle(x, y + calcHeight - radius + 1, radius * 2, 360, color);
+        // right bottom circle
+        polygonCircle(x + calcWidth - radius + 1, y + calcHeight - radius + 1, radius * 2, 360, color);
+    }
+
+    /**
+     * Draws a rect, as in {@link Gui}#drawRect.
+     */
+    public static void relativeRect(final float left, final float top, final float right, final float bottom,
+                                    final int color) {
+
+        final Tessellator tessellator = Tessellator.getInstance();
+        final WorldRenderer worldRenderer = tessellator.getWorldRenderer();
+
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        glColor(color);
+
+        worldRenderer.begin(7, DefaultVertexFormats.POSITION);
+        worldRenderer.pos(left, bottom, 0).endVertex();
+        worldRenderer.pos(right, bottom, 0).endVertex();
+        worldRenderer.pos(right, top, 0).endVertex();
+        worldRenderer.pos(left, top, 0).endVertex();
+
+        tessellator.draw();
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
+    /**
+     * Draws a polygon circle
+     */
+    public static final void polygonCircle(final double x, final double y, double sideLength, final double degree,
+                                           final int color) {
+        sideLength *= 0.5;
+
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_CULL_FACE);
+
+        GlStateManager.disableAlpha();
+
+        glColor(color);
+
+        GL11.glLineWidth(1);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        // since its filled, otherwise GL_LINE_STRIP
+        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
+        for (double i = 0; i <= degree; i++) {
+            final double angle = i * (Math.PI * 2) / degree;
+
+            GL11.glVertex2d(x + (sideLength * Math.cos(angle)) + sideLength,
+                    y + (sideLength * Math.sin(angle)) + sideLength);
+        }
+
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glEnd();
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+
+        GlStateManager.enableAlpha();
+
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_BLEND);
+    }
+
+    /**
+     *
+     * Draws a horizontal gradient rect
+     */
+    public static void drawHorizontalGradient(final float x, final float y, final float width, final float height,
+                                              final int leftColor, final int rightColor) {
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+        GL11.glShadeModel(7425);
+
+        GL11.glPushMatrix();
+        GL11.glBegin(7);
+
+        glColor(leftColor);
+
+        GL11.glVertex2d(x, y);
+        GL11.glVertex2d(x, y + height);
+
+        glColor(rightColor);
+
+        GL11.glVertex2f(x + width, y + height);
+        GL11.glVertex2f(x + width, y);
+
+        GL11.glEnd();
+        GL11.glPopMatrix();
+
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
+        GL11.glShadeModel(7424);
+    }
+
+    /**
+     * Draws a vertical gradient rect
+     */
+    public static void drawVerticalGradient(final float x, final float y, final float width, final float height,
+                                            final int topColor, final int bottomColor) {
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+        GL11.glShadeModel(7425);
+
+        GL11.glPushMatrix();
+        GL11.glBegin(7);
+
+        glColor(topColor);
+
+        GL11.glVertex2f(x, y + height);
+        GL11.glVertex2f(x + width, y + height);
+
+        glColor(bottomColor);
+
+        GL11.glVertex2f(x + width, y);
+        GL11.glVertex2f(x, y);
+
+        GL11.glEnd();
+        GL11.glPopMatrix();
+
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
+        GL11.glShadeModel(7424);
+    }
 
     public static int enemy = 0;
     public static int friend = 1;
@@ -38,6 +221,567 @@ public class RenderUtils {
         float g = 0.003921569F * (float) c.getGreen();
         float b = 0.003921569F * (float) c.getBlue();
         return (new Color(r, g, b, alpha)).getRGB();
+    }
+
+    private static FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
+    private static final Vec3 field_82884_b = new Vec3(0.20000000298023224D, 1.0D, -0.699999988079071D).normalize();
+    private static final Vec3 field_82885_c = new Vec3(-0.20000000298023224D, 1.0D, 0.699999988079071D).normalize();
+
+    private static final String __OBFID = "CL_00000629";
+    private static final ScaledResolution sr = new ScaledResolution(Minecraft.mc());
+
+    public static final ScaledResolution getScaledRes()
+    {
+        ScaledResolution scaledRes = new ScaledResolution(Minecraft.mc());
+        return scaledRes;
+    }
+
+    public static void enableStandardItemLighting()
+    {
+        GlStateManager.enableLighting();
+        GlStateManager.enableLight(0);
+        GlStateManager.enableLight(1);
+        GlStateManager.enableColorMaterial();
+        GlStateManager.colorMaterial(1032, 5634);
+        float var0 = 0.4F;
+        float var1 = 0.6F;
+        float var2 = 0.0F;
+        GL11.glLight(16384, 4611, setColorBuffer(field_82884_b.xCoord, field_82884_b.yCoord, field_82884_b.zCoord, 0.0D));
+        GL11.glLight(16384, 4609, setColorBuffer(var1, var1, var1, 1.0D));
+        GL11.glLight(16384, 4608, setColorBuffer(0.0D, 0.0D, 0.0D, 1.0D));
+        GL11.glLight(16384, 4610, setColorBuffer(var2, var2, var2, 1.0D));
+        GL11.glLight(16385, 4611, setColorBuffer(field_82885_c.xCoord, field_82885_c.yCoord, field_82885_c.zCoord, 0.0D));
+        GL11.glLight(16385, 4609, setColorBuffer(var1, var1, var1, 1.0D));
+        GL11.glLight(16385, 4608, setColorBuffer(0.0D, 0.0D, 0.0D, 1.0D));
+        GL11.glLight(16385, 4610, setColorBuffer(var2, var2, var2, 1.0D));
+        GlStateManager.shadeModel(7424);
+        GL11.glLightModel(2899, setColorBuffer(var0, var0, var0, 1.0D));
+    }
+
+    private static FloatBuffer setColorBuffer(double p_74517_0_, double p_74517_2_, double p_74517_4_, double p_74517_6_) {
+        return setColorBuffer((float)p_74517_0_, (float)p_74517_2_, (float)p_74517_4_, (float)p_74517_6_);
+    }
+
+    public static void drawTexturedRect(int x, int y, int width, int height, GuiIngame screen, ResourceLocation texture) {
+        GlStateManager.pushMatrix();
+
+        GlStateManager.enableBlend();
+
+        Minecraft.mc().getTextureManager().bindTexture(texture);
+
+        screen.drawTexturedModalRect(x, y, 0, 0, width, height);
+
+        GlStateManager.disableBlend();
+
+        GlStateManager.popMatrix();
+    }
+
+    public static void drawHollowRect(float posX, float posY, float posX2, float posY2, float width, int color, boolean center)
+    {
+        float corners = width / 2.0F;
+        float side = width / 2.0F;
+        if (center)
+        {
+            drawRect(posX - side, posY - corners, posX + side, posY2 + corners, color);
+            drawRect(posX2 - side, posY - corners, posX2 + side, posY2 + corners, color);
+            drawRect(posX - corners, posY - side, posX2 + corners, posY + side, color);
+            drawRect(posX - corners, posY2 - side, posX2 + corners, posY2 + side, color);
+        }
+        else
+        {
+            drawRect(posX - width, posY - corners, posX, posY2 + corners, color);
+            drawRect(posX2, posY - corners, posX2 + width, posY2 + corners, color);
+            drawRect(posX - corners, posY - width, posX2 + corners, posY, color);
+            drawRect(posX - corners, posY2, posX2 + corners, posY2 + width, color);
+        }
+    }
+
+    public static void drawGradientBorderedRect(float posX, float posY, float posX2, float posY2, float width, int color, int startColor, int endColor, boolean center)
+    {
+        drawGradientRect(posX, posY, posX2, posY2, startColor, endColor);
+        drawHollowRect(posX, posY, posX2, posY2, width, color, center);
+    }
+
+    public static void drawCoolLines(AxisAlignedBB mask)
+    {
+        GL11.glPushMatrix();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.minX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.maxX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.maxZ);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.minZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.minY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.maxY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+    }
+
+    public static void drawBorderedRect(float x, float y, float x2, float y2, float l1, int col1, int col2)
+    {
+        drawRect(x, y, x2, y2, col2);
+
+        float f = (col1 >> 24 & 0xFF) / 255.0F;
+        float f1 = (col1 >> 16 & 0xFF) / 255.0F;
+        float f2 = (col1 >> 8 & 0xFF) / 255.0F;
+        float f3 = (col1 & 0xFF) / 255.0F;
+
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+
+        GL11.glPushMatrix();
+        GL11.glColor4f(f1, f2, f3, f);
+        GL11.glLineWidth(l1);
+        GL11.glBegin(1);
+        GL11.glVertex2d(x, y);
+        GL11.glVertex2d(x, y2);
+        GL11.glVertex2d(x2, y2);
+        GL11.glVertex2d(x2, y);
+        GL11.glVertex2d(x, y);
+        GL11.glVertex2d(x2, y);
+        GL11.glVertex2d(x, y2);
+        GL11.glVertex2d(x2, y2);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
+    }
+
+    public static void drawBorderedCorneredRect(float x, float y, float x2, float y2, float lineWidth, int lineColor, int bgColor)
+    {
+        drawRect(x, y, x2, y2, bgColor);
+
+        float f = (lineColor >> 24 & 0xFF) / 255.0F;
+        float f1 = (lineColor >> 16 & 0xFF) / 255.0F;
+        float f2 = (lineColor >> 8 & 0xFF) / 255.0F;
+        float f3 = (lineColor & 0xFF) / 255.0F;
+
+        GL11.glEnable(3042);
+        GL11.glEnable(3553);
+        drawRect(x - 1.0F, y, x2 + 1.0F, y - lineWidth, lineColor);
+        drawRect(x, y, x - lineWidth, y2, lineColor);
+        drawRect(x - 1.0F, y2, x2 + 1.0F, y2 + lineWidth, lineColor);
+        drawRect(x2, y, x2 + lineWidth, y2, lineColor);
+        GL11.glDisable(3553);
+        GL11.glDisable(3042);
+    }
+
+    public static double interp(double from, double to, double pct)
+    {
+        return from + (to - from) * pct;
+    }
+
+  /*public static void drawFilledBox(AxisAlignedBB mask)
+  {
+    WorldRenderer worldRenderer = Tessellator.instance.getWorldRenderer();
+    Tessellator tessellator = Tessellator.instance;
+    worldRenderer.startDrawingQuads();
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.maxZ);
+    tessellator.draw();
+    worldRenderer.startDrawingQuads();
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.maxZ);
+    tessellator.draw();
+    worldRenderer.startDrawingQuads();
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.minZ);
+    tessellator.draw();
+    worldRenderer.startDrawingQuads();
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.minZ);
+    tessellator.draw();
+    worldRenderer.startDrawingQuads();
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.minZ);
+    tessellator.draw();
+    worldRenderer.startDrawingQuads();
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.minZ);
+    worldRenderer.addVertex(mask.maxX, mask.maxY,
+      mask.maxZ);
+    worldRenderer.addVertex(mask.maxX, mask.minY,
+      mask.maxZ);
+    tessellator.draw();
+  }*/
+
+    public static void glColor(Color color)
+    {
+        GL11.glColor4f(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F);
+    }
+
+    public static void glColor(int hex)
+    {
+        float alpha = (hex >> 24 & 0xFF) / 255.0F;
+        float red = (hex >> 16 & 0xFF) / 255.0F;
+        float green = (hex >> 8 & 0xFF) / 255.0F;
+        float blue = (hex & 0xFF) / 255.0F;
+        GL11.glColor4f(red, green, blue, alpha);
+    }
+
+    public static void drawGradientRect(float x, float y, float x1, float y1, int topColor, int bottomColor)
+    {
+        GL11.glEnable(1536);
+        GL11.glShadeModel(7425);
+        GL11.glBegin(7);
+        glColor(topColor);
+        GL11.glVertex2f(x, y1);
+        GL11.glVertex2f(x1, y1);
+        glColor(bottomColor);
+        GL11.glVertex2f(x1, y);
+        GL11.glVertex2f(x, y);
+        GL11.glEnd();
+        GL11.glShadeModel(7424);
+        GL11.glDisable(1536);
+    }
+
+    public static void drawLines(AxisAlignedBB mask)
+    {
+        GL11.glPushMatrix();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.minX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.minY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.maxX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.maxY,
+                mask.minZ);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.maxZ);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.maxY,
+                mask.maxZ);
+        GL11.glVertex3d(mask.minX, mask.minY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.minZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.maxY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.minY,
+                mask.minZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.minZ);
+        GL11.glVertex3d(mask.maxX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.maxY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.maxY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.minX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glBegin(2);
+        GL11.glVertex3d(mask.maxX, mask.minY,
+                mask.minZ);
+        GL11.glVertex3d(mask.minX, mask.minY,
+                mask.maxZ);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+    }
+
+  /*public static void drawOutlinedBoundingBox(AxisAlignedBB mask)
+  {
+    WorldRenderer var2 = Tessellator.instance.getWorldRenderer();
+    Tessellator var1 = Tessellator.instance;
+    var2.startDrawing(3);
+    var2.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    var2.addVertex(mask.maxX, mask.minY,
+      mask.minZ);
+    var2.addVertex(mask.maxX, mask.minY,
+      mask.maxZ);
+    var2.addVertex(mask.minX, mask.minY,
+      mask.maxZ);
+    var2.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    var1.draw();
+    var2.startDrawing(3);
+    var2.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    var2.addVertex(mask.maxX, mask.maxY,
+      mask.minZ);
+    var2.addVertex(mask.maxX, mask.maxY,
+      mask.maxZ);
+    var2.addVertex(mask.minX, mask.maxY,
+      mask.maxZ);
+    var2.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    var1.draw();
+    var2.startDrawing(1);
+    var2.addVertex(mask.minX, mask.minY,
+      mask.minZ);
+    var2.addVertex(mask.minX, mask.maxY,
+      mask.minZ);
+    var2.addVertex(mask.maxX, mask.minY,
+      mask.minZ);
+    var2.addVertex(mask.maxX, mask.maxY,
+      mask.minZ);
+    var2.addVertex(mask.maxX, mask.minY,
+      mask.maxZ);
+    var2.addVertex(mask.maxX, mask.maxY,
+      mask.maxZ);
+    var2.addVertex(mask.minX, mask.minY,
+      mask.maxZ);
+    var2.addVertex(mask.minX, mask.maxY,
+      mask.maxZ);
+    var1.draw();
+  }*/
+
+    public static void drawRect(float g, float h, float i, float j, int col1)
+    {
+        float f = (col1 >> 24 & 0xFF) / 255.0F;
+        float f1 = (col1 >> 16 & 0xFF) / 255.0F;
+        float f2 = (col1 >> 8 & 0xFF) / 255.0F;
+        float f3 = (col1 & 0xFF) / 255.0F;
+
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+
+        GL11.glPushMatrix();
+        GL11.glColor4f(f1, f2, f3, f);
+        GL11.glBegin(7);
+        GL11.glVertex2d(i, h);
+        GL11.glVertex2d(g, h);
+        GL11.glVertex2d(g, j);
+        GL11.glVertex2d(i, j);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
+    }
+
+    public static void drawRect(float g, float h, float i, float j, Color col2)
+    {
+        ColorUtil.setColor(col2);
+
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+
+        GL11.glPushMatrix();
+        GL11.glBegin(7);
+        GL11.glVertex2d(i, h);
+        GL11.glVertex2d(g, h);
+        GL11.glVertex2d(g, j);
+        GL11.glVertex2d(i, j);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
+    }
+
+    public static void drawButtonBorderedRect(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, Color innerColor, Color outerColor, float lineWidhth)
+    {
+        drawButtonRect(x1, y1, x2, y2, x3, y3, x4, y4, innerColor);
+
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+
+        GL11.glPushMatrix();
+        ColorUtil.setColor(outerColor);
+        GL11.glLineWidth(lineWidhth);
+        GL11.glBegin(2);
+        GL11.glVertex2d(x1, y1);
+        GL11.glVertex2d(x3, y3);
+        GL11.glVertex2d(x4, y4);
+        GL11.glVertex2d(x2, y2);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
+        GL11.glColor4f(0.0F, 0.0F, 0.0F, 0.0F);
+    }
+
+    public static void drawButtonRect(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, Color col)
+    {
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+
+        GL11.glPushMatrix();
+        ColorUtil.setColor(col);
+        GL11.glBegin(7);
+        GL11.glVertex2d(x4, y4);
+        GL11.glVertex2d(x3, y3);
+        GL11.glVertex2d(x2, y2);
+        GL11.glVertex2d(x1, y1);
+        GL11.glEnd();
+
+        GL11.glBegin(7);
+        GL11.glVertex2d(x1, y1);
+        GL11.glVertex2d(x2, y2);
+        GL11.glVertex2d(x3, y3);
+        GL11.glVertex2d(x4, y4);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
+    }
+
+    public static void disableStandardItemLighting() {
+        GlStateManager.disableLighting();
+        GlStateManager.disableLight(0);
+        GlStateManager.disableLight(1);
+        GlStateManager.disableColorMaterial();
     }
 
     public static void drawOutlinedBox(AxisAlignedBB boundingBox, int color) {
