@@ -4,6 +4,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.combat.Aura;
 import de.crazymemecoke.features.modules.render.BlockInfo;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
+import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -13,7 +14,9 @@ import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.EntityLivingBase;
@@ -57,17 +60,59 @@ public class Interface extends GuiIngame {
     private void doRenderStuff() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        if (Client.main().setMgr().settingByName("Watermark", Client.main().modMgr().getByName("HUD")).getBool()) {
+        SettingsManager setMgr = Client.main().setMgr();
+        if (setMgr.settingByName("Watermark", Client.main().modMgr().getByName("HUD")).getBool()) {
             renderWatermark();
         }
-        if (Client.main().setMgr().settingByName("TabGUI", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (setMgr.settingByName("TabGUI", Client.main().modMgr().getByName("HUD")).getBool()) {
             renderTabGUI();
         }
-        if (Client.main().setMgr().settingByName("ArrayList", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (setMgr.settingByName("ArrayList", Client.main().modMgr().getByName("HUD")).getBool()) {
             renderArrayList();
         }
-        if (Client.main().setMgr().settingByName("KeyStrokes", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (setMgr.settingByName("KeyStrokes", Client.main().modMgr().getByName("HUD")).getBool()) {
             renderKeyStrokes();
+        }
+        if (setMgr.settingByName("Hotbar", Client.main().modMgr().getByName("HUD")).getBool()) {
+            renderHotbar();
+        }
+    }
+
+    private void renderHotbar() {
+        if (mc.currentScreen == null || Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).getBool()) {
+            ScaledResolution s = new ScaledResolution(mc);
+            UnicodeFontRenderer bigNoodleTitling22 = Client.main().fontMgr().font("BigNoodleTitling", 22, Font.PLAIN);
+            UnicodeFontRenderer comfortaa22 = Client.main().fontMgr().font("Comfortaa", 22, Font.PLAIN);
+
+            String ping;
+
+            try {
+                ping = String.valueOf(mc.getCurrentServerData().pingToServer);
+            } catch (Exception e) {
+                ping = "N/A";
+            }
+            String s1 = "§7FPS: §8" + Minecraft.debugFPS + " §7| PING: §8" + ping;
+            String s2 = "§7CORDS: X §8" + (int) mc.thePlayer.posX + " §7Y §8" + (int) mc.thePlayer.posY + " §7Z §8" + (int) mc.thePlayer.posZ;
+
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            LocalDateTime localTime = LocalDateTime.now();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDateTime localDate = LocalDateTime.now();
+
+            String s3 = timeFormatter.format(localTime);
+            String s4 = dateFormatter.format(localDate);
+
+            RenderUtils.drawRect(0, s.height() - 22, 4, s.height(), Colors.main().ambienBlueTop);
+            RenderUtils.drawRect(4, s.height() - 22, bigNoodleTitling22.getStringWidth(s2) + 8, s.height(), new Color(0, 0, 0, 180).getRGB());
+
+            RenderUtils.drawRect(s.width() - 4, s.height() - 22, s.width(), s.height(), Colors.main().ambienBlueTop);
+            RenderUtils.drawRect(s.width() - comfortaa22.getStringWidth(s4) - 8, s.height() - 22, s.width() - 4, s.height(), new Color(0, 0, 0, 180).getRGB());
+
+            bigNoodleTitling22.drawStringWithShadow(s1, 5, s.height() - 20, -1);
+            bigNoodleTitling22.drawStringWithShadow(s2, 5, s.height() - 10, -1);
+
+            comfortaa22.drawStringWithShadow(s3, s.width() - 55, s.height() - 20, -1);
+            comfortaa22.drawStringWithShadow(s4, s.width() - 63, s.height() - 10, -1);
         }
     }
 
