@@ -2,6 +2,7 @@ package de.crazymemecoke.features.ui.guiscreens;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.fontmanager.FontManager;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.*;
@@ -55,8 +56,11 @@ public class GuiCredits extends GuiScreen {
 
         RenderUtils.drawRect(5, 5, width - 5, height - 5, new Color(0, 0, 0, 155).getRGB());
 
+        UnicodeFontRenderer cabin35 = fM.font("Cabin", 35, Font.PLAIN);
+        UnicodeFontRenderer cabin23 = fM.font("Cabin", 23, Font.PLAIN);
+
         String title = "Credits";
-        fM.font("Cabin", 35, Font.PLAIN).drawStringWithShadow(title, width / 2 - fM.cabin35.getStringWidth(title) / 2, 10, -1);
+        cabin35.drawStringWithShadow(title, width / 2 - cabin35.getStringWidth(title) / 2, 10, -1);
 
         String credits = "HeroCode - ClickGUI API\n\n" +
                 "Kriteax - Client Port from 1.8 to 1.8.8 | General Help\n\n" +
@@ -65,8 +69,9 @@ public class GuiCredits extends GuiScreen {
                 "Kroko - Event System | ShaderESP | Aura Rotations | General Help\n\n" +
                 "W4z3d - Hit Animations | General Help\n\n" +
                 "Deleteboys - TrailESP | MotionGraph | Rainbow Method\n\n" +
-                "superblaubeere27 - Shader System | Notification System";
-        fM.font("Cabin", 23, Font.PLAIN).drawStringWithShadow(credits, 10, 40, -1);
+                "superblaubeere27 - Shader System | Notification System\n\n" +
+                "Vinii - Render Methods (roundedRect, gradientRect) | General Help";
+        cabin23.drawStringWithShadow(credits, 10, 40, -1);
 
         super.drawScreen(posX, posY, f);
     }
