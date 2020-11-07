@@ -36,11 +36,11 @@ public class AltSlot {
                 this.update();
                 int lightGray = -15066598;
                 if (this == GuiAltManager.selected) {
-                    Gui.drawRect(this.x, this.y + 1, this.WIDTH - 2, this.y + 25 - 1, RenderUtils.reAlpha(lightGray, this.opacity));
+                    Gui.drawRect(this.x, this.y + 1, this.WIDTH + 7, this.y + 25 - 1, RenderUtils.reAlpha(lightGray, this.opacity));
                 }
 
                 if (this.isHovering(mouseX, mouseY)) {
-                    Gui.drawRect(this.x, this.y + 1, this.WIDTH - 2, this.y + 25 - 1, RenderUtils.reAlpha(251658240, 0.2F * this.opacity));
+                    Gui.drawRect(this.x, this.y + 1, this.WIDTH + 7, this.y + 25 - 1, RenderUtils.reAlpha(251658240, 0.2F * this.opacity));
                 }
 
                 String text = this.username + ":******";
