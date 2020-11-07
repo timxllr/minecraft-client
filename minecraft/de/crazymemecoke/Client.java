@@ -10,6 +10,7 @@ import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.eventmanager.EventManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
+import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 
@@ -20,7 +21,7 @@ public class Client {
     private static Client instance = new Client();
     private Minecraft mc = Minecraft.mc();
 
-    private String clientName = "Vitality";
+    private String clientName = "Vanity";
     private double clientVersion = 1.1;
     private String clientCoder = "CrazyMemeCoke";
     private String clientPrefix = ".";
@@ -32,14 +33,14 @@ public class Client {
     private String ambienWatermark = "textures/client/ambien-logo.png";
 
     private String shaderLoc = "textures/client/shader/";
-    private String clientChangelog = "https://github.com/RealFantaCoke/minecraft_client_1.8.8/commits/master";
+    private String clientChangelog = "https://github.com/RealFantaCoke/minecraft-client/commits/master";
     private ModuleManager moduleManager;
 
     private CommandManager commandManager;
     private SettingsManager setmgr;
     private ClickGUI clickgui;
     private FontManager fontManager;
-    private File clientDir;
+    private File clientDir = new File(Minecraft.mc().mcDataDir + "/" + getClientName());
     private Friend friend;
     private Shader shader;
     private AltManager altManager;
@@ -52,7 +53,6 @@ public class Client {
     }
 
     public void startClient() {
-        clientDir = new File(Minecraft.mc().mcDataDir + "/" + getClientName());
         if (!clientDir.exists()) {
             clientDir.mkdir();
             mc.displayGuiScreen(new GuiFirstUse());
@@ -71,18 +71,18 @@ public class Client {
         Runtime.getRuntime().addShutdownHook(new Thread(this::onShutdown));
     }
 
-    public File getClientDir() {
-        return clientDir;
-    }
-
     public void onShutdown() {
         setmgr.saveSettings();
         moduleManager.saveModules();
         moduleManager.saveBinds();
-        Client.main().getAltManager().saveAlts();
+        AltManager.saveAlts();
 
         Client.main().modMgr().getModule(Crasher.class).setState(false);
-        System.out.println("Disabled Crasher module");
+        NotifyUtil.debug("Disabled Crasher module");
+    }
+
+    public File getClientDir() {
+        return clientDir;
     }
 
     public EventManager eventMgr() {
@@ -172,4 +172,5 @@ public class Client {
     public String getFakeVer() {
         return fakeVer;
     }
+
 }
