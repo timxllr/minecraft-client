@@ -52,7 +52,8 @@ public class Notification {
 
         double offset = 0;
         int width = messageFont.getStringWidth(messsage) + 20;
-        int height = 30;
+        int height = 130;
+        int heightBottom = 95;
         long time = getTime();
 
         if (time < fadedIn) {
@@ -76,11 +77,11 @@ public class Notification {
             color = new Color(i, 0, 0, 220);
         }
 
-        drawRect(GuiScreen.width - offset, GuiScreen.height - 5 - height, GuiScreen.width, GuiScreen.height - 5, color.getRGB());
-        drawRect(GuiScreen.width - offset, GuiScreen.height - 5 - height, GuiScreen.width - offset + 4, GuiScreen.height - 5, color1.getRGB());
+        drawRect(GuiScreen.width - offset, GuiScreen.height - 5 - height, GuiScreen.width, GuiScreen.height - 5 - heightBottom, color.getRGB());
+        drawRect(GuiScreen.width - offset, GuiScreen.height - 5 - height, GuiScreen.width - offset + 4, GuiScreen.height - 5 - heightBottom, color1.getRGB());
 
-        titleFont.drawString(title, (int) (GuiScreen.width - offset + 7), GuiScreen.height - 2 - height, -1);
-        messageFont.drawString(messsage, (int) (GuiScreen.width - offset + 7), GuiScreen.height - 15, -1);
+        titleFont.drawString(title, (int) (GuiScreen.width - offset + 7), GuiScreen.height - height, -1);
+        messageFont.drawString(messsage, (int) (GuiScreen.width - offset + 7), GuiScreen.height - heightBottom - 18, -1);
     }
 
     public static void drawRect(double left, double top, double right, double bottom, int color) {
