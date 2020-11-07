@@ -106,7 +106,7 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
         this.buttonList.add(new GuiButton(3, this.width / 2 + 4 + 50, this.height - 52, 100, 20, I18n.format("selectServer.add", new Object[0])));
         this.buttonList.add(new GuiButton(8, this.width / 2 + 4, this.height - 28, 70, 20, I18n.format("selectServer.refresh", new Object[0])));
         this.buttonList.add(new GuiButton(0, this.width / 2 + 4 + 76, this.height - 28, 75, 20, I18n.format("gui.cancel", new Object[0])));
-        buttonList.add(new GuiButton(9, 2, 2, 120, 20, "Alt Manager"));
+        buttonList.add(new GuiButton(9, 0, 0, 120, 20, "Alt Manager"));
         this.selectServer(this.serverListSelector.func_148193_k());
     }
 
