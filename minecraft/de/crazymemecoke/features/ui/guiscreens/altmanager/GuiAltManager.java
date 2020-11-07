@@ -2,20 +2,19 @@ package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.altmanager.AltManager;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import de.crazymemecoke.utils.time.TimerUtil;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.*;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -64,14 +63,16 @@ public class GuiAltManager extends GuiScreen {
         scroll = 0;
         int c = -15698006;
         buttonList.clear();
-        buttonList.add(new GuiButton(0, width - 150 - 130, height - 32, 60, 20, "Login"));
-        buttonList.add(new GuiButton(1, width - 150 - 65, height - 32, 60, 20, "Add Alt"));
-        buttonList.add(new GuiButton(2, width - 75, height - 32, 65, 20, "Edit Alt"));
-        buttonList.add(new GuiButton(3, width - 145, height - 32, 65, 20, "Delete Alt"));
-        buttonList.add(new GuiButton(4, 15, height - 32, 65, 20, "Back"));
-        buttonList.add(new GuiButton(5, width - 145, height - 55, 135, 20, "Import Alts"));
+        buttonList.add(new GuiButton(0, width - 150 - 130, height - 32, 60, 20, "Einloggen"));
+        buttonList.add(new GuiButton(1, width - 150 - 65, height - 32, 60, 20, "Hinzufügen"));
+        buttonList.add(new GuiButton(2, width - 75, height - 32, 65, 20, "Bearbeiten"));
+        buttonList.add(new GuiButton(3, width - 145, height - 32, 65, 20, "Löschen"));
+        buttonList.add(new GuiButton(4, 15, height - 32, 65, 20, "Zurück"));
+        buttonList.add(new GuiButton(5, width - 145, height - 55, 135, 20, "Importieren"));
         buttonList.add(new GuiButton(6, width - 145, height - 78, 135, 20, "Session Stealer"));
-        buttonList.add(new GuiButton(7, width - 375, height - 32, 90, 20, "Direct Login"));
+        buttonList.add(new GuiButton(8, width - 145, height - 100, 135, 20, "Proxy"));
+        buttonList.add(new GuiButton(7, width - 375, height - 32, 90, 20, "Direkt einloggen"));
+        buttonList.add(new GuiButton(9, 85, height - 32, 65, 20, "Serverliste"));
         opacity = 0;
     }
 
@@ -96,47 +97,66 @@ public class GuiAltManager extends GuiScreen {
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
-        // Login into selected alt
-        if (button.id == 0 && selected != null) {
-            Login.login(selected.getUsername(), selected.getPassword());
-        }
+        switch (button.id) {
+            case 0: {
+                if (selected != null) {
+                    Login.login(selected.getUsername(), selected.getPassword());
+                }
+                break;
+            }
 
-        // Add new alt
-        if (button.id == 1) {
-            mc.displayGuiScreen(new GuiAddAlt(this));
-        }
+            case 1: {
+                mc.displayGuiScreen(new GuiAddAlt(this));
+                break;
+            }
 
-        // Edit selected alt
-        if (button.id == 2 && selected != null) {
-            mc.displayGuiScreen(new GuiEditAlt(this, selected));
-        }
+            case 2: {
+                if (selected != null) {
+                    mc.displayGuiScreen(new GuiEditAlt(this, selected));
+                }
+                break;
+            }
 
-        // Remove selected alt
-        if (button.id == 3 && selected != null) {
-            AltManager.slotList.remove(selected);
-            Client.main().getAltManager().saveAlts();
-        }
+            case 3: {
+                if (selected != null) {
+                    AltManager.slotList.remove(selected);
+                    AltManager.saveAlts();
+                }
+                break;
+            }
 
-        // Back with save
-        if (button.id == 4) {
-            Client.main().getAltManager().saveAlts();
-            mc.displayGuiScreen(parent);
-        }
+            case 4: {
+                AltManager.saveAlts();
+                mc.displayGuiScreen(parent);
+                break;
+            }
 
-        // Import alts from file
-        if (button.id == 5) {
-            Runnable run = this::importAlts;
-            (new Thread(run)).start();
-        }
+            case 5: {
+                mc.gameSettings.fullScreen = false;
+                Thread importAlts = new Thread(this::importAlts);
+                importAlts.start();
+                break;
+            }
 
-        // Open Session Stealer
-        if (button.id == 6) {
-            mc.displayGuiScreen(new GuiSessionStealer(this));
-        }
+            case 6: {
+                mc.displayGuiScreen(new GuiSessionStealer(this));
+                break;
+            }
 
-        // Direct login
-        if (button.id == 7) {
-            mc.displayGuiScreen(new GuiDirectLogin(this));
+            case 7: {
+                mc.displayGuiScreen(new GuiDirectLogin(this));
+                break;
+            }
+
+            case 8: {
+                mc.displayGuiScreen(new GuiProxy(this));
+                break;
+            }
+
+            case 9: {
+                mc.displayGuiScreen(new GuiMultiplayer(this));
+                break;
+            }
         }
     }
 
@@ -213,18 +233,25 @@ public class GuiAltManager extends GuiScreen {
     }
 
     private void importAlts() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }catch(ClassNotFoundException|InstantiationException|IllegalAccessException|UnsupportedLookAndFeelException e2) {
+            e2.printStackTrace();
+        }
+
         File fromFile = null;
-        fc.setFileFilter(new FileNameExtensionFilter("Text Files", "txt"));
+        fc.setFileFilter(new FileNameExtensionFilter("Alt-List (.txt)", "txt"));
+        fc.setDialogTitle("Wähle deine Alts aus!");
         int returnVal = fc.showOpenDialog(null);
         fc.requestFocus();
         if (returnVal == 0) {
             fromFile = fc.getSelectedFile();
-            ArrayList altsToImport = new ArrayList();
+            ArrayList<String> altsToImport = new ArrayList<String>();
 
             try {
                 BufferedReader e = new BufferedReader(new FileReader(fromFile));
-
                 String writer;
+
                 while ((writer = e.readLine()) != null) {
                     String[] s = writer.split(":");
                     if (s.length > 0) {
@@ -238,10 +265,10 @@ public class GuiAltManager extends GuiScreen {
             try {
                 FileWriter e1 = new FileWriter(AltManager.altFile, true);
                 PrintWriter writer1 = new PrintWriter(e1);
-                Iterator var7 = altsToImport.iterator();
+                Iterator<String> var7 = altsToImport.iterator();
 
                 while (var7.hasNext()) {
-                    String s1 = (String) var7.next();
+                    String s1 = var7.next();
                     writer1.write(s1 + "\n");
                 }
 
@@ -279,22 +306,23 @@ public class GuiAltManager extends GuiScreen {
             opacity = 1;
         }
 
+        UnicodeFontRenderer comfortaa20 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
         mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
         byte y = 0;
-        Client.main().fontMgr().comfortaa20.drawString("AltManager", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("AltManager") / 2, 21, RenderUtils.reAlpha(Colors.main().getGrey(), opacity));
-        Client.main().fontMgr().comfortaa20.drawString("AltManager", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("AltManager") / 2, 20, RenderUtils.reAlpha(-1, opacity));
+        comfortaa20.drawString("AltManager", width / 2 - comfortaa20.getStringWidth("AltManager") / 2, 21, RenderUtils.reAlpha(Colors.main().getGrey(), opacity));
+        comfortaa20.drawString("AltManager", width / 2 - comfortaa20.getStringWidth("AltManager") / 2, 20, RenderUtils.reAlpha(-1, opacity));
         Gui.drawRect(10, 50, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(darkGray, opacity));
         Gui.drawRect(sr.width() - 150, 50, sr.width() - 5, sr.height() - 10, RenderUtils.reAlpha(-16119286, 0.75F * opacity));
-        Client.main().fontMgr().comfortaa20.drawString("Status:", (sr.width() - 145), 55, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
-        boolean premium = mc.session.getProfile().isComplete();
-        String strPremium = premium ? "Premium" : "Cracked";
-        Client.main().fontMgr().comfortaa20.drawString(strPremium, (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(strPremium) - 8), 55, premium ? RenderUtils.reAlpha(Colors.main().getSaintOrangeColor(), opacity) : RenderUtils.reAlpha(Colors.main().getVortexRedColor(), opacity));
-        Client.main().fontMgr().comfortaa20.drawString("Name:", (sr.width() - 145), 70, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
-        Client.main().fontMgr().comfortaa20.drawString(mc.session.getUsername(), (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(mc.session.getUsername()) - 8), 70, RenderUtils.reAlpha(Colors.main().getNodusPurpleColor(), opacity));
-        Client.main().fontMgr().comfortaa20.drawString("Alts:", (sr.width() - 145), 85, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
-        Client.main().fontMgr().comfortaa20.drawString(String.valueOf(AltManager.slotList.size()), (sr.width() - Client.main().fontMgr().comfortaa20.getStringWidth(String.valueOf(AltManager.slotList.size())) - 8), 85, RenderUtils.reAlpha(-1, opacity));
+        comfortaa20.drawString("Status:", (sr.width() - 145), 55, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
+        boolean isOnline = mc.session.getProfile().isComplete();
+        String strType = isOnline ? "Online" : "Offline";
+        comfortaa20.drawString(strType, (sr.width() - comfortaa20.getStringWidth(strType) - 8), 55, isOnline ? RenderUtils.reAlpha(Colors.main().getSaintOrangeColor(), opacity) : RenderUtils.reAlpha(Colors.main().getVortexRedColor(), opacity));
+        comfortaa20.drawString("Name:", (sr.width() - 145), 70, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
+        comfortaa20.drawString(mc.session.getUsername(), (sr.width() - comfortaa20.getStringWidth(mc.session.getUsername()) - 8), 70, RenderUtils.reAlpha(Colors.main().getApinityBlueColor(), opacity));
+        comfortaa20.drawString("Alts:", (sr.width() - 145), 85, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
+        comfortaa20.drawString(String.valueOf(AltManager.slotList.size()), (sr.width() - comfortaa20.getStringWidth(String.valueOf(AltManager.slotList.size())) - 8), 85, RenderUtils.reAlpha(-1, opacity));
 
         byte MIN_HEIGHT = 75;
         int MAX_HEIGHT = sr.height() - 35;
@@ -333,7 +361,7 @@ public class GuiAltManager extends GuiScreen {
 
         drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
         Gui.drawRect(10, 50, sr.width() - 150, 75, RenderUtils.reAlpha(lightGray, opacity));
-        Client.main().fontMgr().comfortaa20.drawString("EMAIL:PASS", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("EMAIL:PASS") / 2, 59, RenderUtils.reAlpha(-1, opacity));
+        comfortaa20.drawString("EMAIL:PASS", width / 2 - comfortaa20.getStringWidth("EMAIL:PASS") / 2, 59, RenderUtils.reAlpha(-1, opacity));
         drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
         Gui.drawRect(10, sr.height() - 35, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(lightGray, opacity));
         super.drawScreen(posX, posY, f);
