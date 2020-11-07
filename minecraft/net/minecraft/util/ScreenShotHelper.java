@@ -7,6 +7,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
+
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
+import de.crazymemecoke.utils.NotifyUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.TextureUtil;
@@ -114,15 +117,14 @@ public class ScreenShotHelper
             }
 
             ImageIO.write(bufferedimage, "png", (File)file2);
-            IChatComponent ichatcomponent = new ChatComponentText(file2.getName());
-            ichatcomponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, file2.getAbsolutePath()));
-            ichatcomponent.getChatStyle().setUnderlined(Boolean.valueOf(true));
-            return new ChatComponentTranslation("screenshot.success", new Object[] {ichatcomponent});
+            NotifyUtil.notification("Screenshot erstellt", "Screenshot (" + file2.getName() + ") wurde erstellt!", NotificationType.INFO, 5);
+            return new ChatComponentTranslation("screenshot.success", file2.getName());
         }
         catch (Exception exception)
         {
             logger.warn((String)"Couldn\'t save screenshot", (Throwable)exception);
-            return new ChatComponentTranslation("screenshot.failure", new Object[] {exception.getMessage()});
+            NotifyUtil.notification("Screenshot Fehler", "Screenshot konnte nicht erstellt werden!", NotificationType.ERROR, 5);
+            return new ChatComponentTranslation("screenshot.failure", exception.getMessage());
         }
     }
 
