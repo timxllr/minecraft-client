@@ -9,6 +9,7 @@ import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.FileUtils;
 import de.crazymemecoke.utils.render.RenderUtils;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -35,8 +36,6 @@ public class ClickGUI extends GuiScreen {
     private File guiFile;
 
     public ClickGUI() {
-
-        //FontUtil.setupFontUtils();
         panels = new ArrayList<>();
         double pwidth = 80;
         double pheight = 15;
@@ -61,8 +60,6 @@ public class ClickGUI extends GuiScreen {
 
         assert lines != null;
         lines.forEach(line -> {
-            // CATEGORY_X_Y
-
             String[] data = line.split("_");
 
             Category cat = Category.valueOf(data[0]);
@@ -243,6 +240,20 @@ public class ClickGUI extends GuiScreen {
     }
 
     @Override
+    protected void actionPerformed(GuiButton button) throws IOException {
+        switch (button.id) {
+            case 1: {
+                closeAllSettings();
+                break;
+            }
+            case 2: {
+                openAllSettings();
+                break;
+            }
+        }
+    }
+
+    @Override
     public void initGui() {
         if (OpenGlHelper.shadersSupported && mc.getRenderViewEntity() instanceof EntityPlayer) {
             if (mc.entityRenderer.theShaderGroup != null) {
@@ -252,6 +263,8 @@ public class ClickGUI extends GuiScreen {
                 mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
             }
         }
+        buttonList.add(new GuiButton(1, width - 105, height - 25, 100, 20, "Alle einklappen"));
+        buttonList.add(new GuiButton(2, width - 210, height - 25, 100, 20, "Alle ausklappen"));
     }
 
     @Override
@@ -287,7 +300,17 @@ public class ClickGUI extends GuiScreen {
         for (Panel p : rpanels) {
             if (p != null && p.visible && p.extended && p.Elements != null && p.Elements.size() > 0) {
                 for (ModuleButton e : p.Elements) {
-                    // e.extended = false;
+                    e.extended = false;
+                }
+            }
+        }
+    }
+
+    public void openAllSettings() {
+        for (Panel p : rpanels) {
+            if (p != null && p.visible && p.Elements != null && p.Elements.size() > 0) {
+                for (ModuleButton e : p.Elements) {
+                    e.extended = true;
                 }
             }
         }
