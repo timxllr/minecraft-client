@@ -4,6 +4,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 import org.lwjgl.input.Keyboard;
 
@@ -14,8 +15,13 @@ public class Invis extends Module {
 
     @Override
     public void onEnable() {
-        NotifyUtil.chat("Benutze \"" + Client.main().getClientPrefix() + "invis\" um");
-        NotifyUtil.chat("den Invis-Mode zu deaktivieren!");
+        mc.displayGuiScreen(null);
+        NotifyUtil.notification("Invis aktiviert", "Benutze §c.invis§r um den §6Invis-Modus§r zu §6deaktivieren§r!", NotificationType.INFO, 5);
+    }
+
+    @Override
+    public void onDisable() {
+        NotifyUtil.notification("Invis deaktiviert", "Alle Funktionen sind nun wieder verfügbar!", NotificationType.INFO, 5);
     }
 
     @Override
