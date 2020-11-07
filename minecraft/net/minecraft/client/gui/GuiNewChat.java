@@ -3,6 +3,7 @@ package net.minecraft.client.gui;
 import com.google.common.collect.Lists;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.HUD;
+import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -86,22 +87,22 @@ public class GuiNewChat extends Gui {
                                         break;
                                     }
                                     case "custom": {
-
-                                        switch (font){
-                                            case "comfortaa": {
-                                                Client.main().fontMgr().font("Comfortaa", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
-                                                break;
-                                            }
-                                            case "bauhaus": {
-                                                Client.main().fontMgr().font("Bauhaus Regular", 18, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
-                                                break;
-                                            }
-                                            case "exo": {
-                                                Client.main().fontMgr().font("Exo Regular", 17, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
-                                                break;
+                                        if (!(Client.main().modMgr().getModule(Invis.class).state())) {
+                                            switch (font) {
+                                                case "comfortaa": {
+                                                    Client.main().fontMgr().font("Comfortaa", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
+                                                    break;
+                                                }
+                                                case "bauhaus": {
+                                                    Client.main().fontMgr().font("Bauhaus Regular", 18, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
+                                                    break;
+                                                }
+                                                case "exo": {
+                                                    Client.main().fontMgr().font("Exo Regular", 17, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
+                                                    break;
+                                                }
                                             }
                                         }
-
                                         break;
                                     }
                                 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.HUD;
+import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.network.play.client.C14PacketTabComplete;
@@ -74,29 +75,31 @@ public class GuiChat extends GuiScreen {
                 break;
             }
             case "custom": {
-                Keyboard.enableRepeatEvents(true);
-                sentHistoryCursor = mc.ingameGUI.getChatGUI().getSentMessages().size();
+                if (!(Client.main().modMgr().getModule(Invis.class).state())) {
+                    Keyboard.enableRepeatEvents(true);
+                    sentHistoryCursor = mc.ingameGUI.getChatGUI().getSentMessages().size();
 
-                switch (font) {
-                    case "comfortaa": {
-                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN), 3, height - 11, width - 4, 12);
-                        break;
+                    switch (font) {
+                        case "comfortaa": {
+                            inputField = new GuiTextField(0, Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN), 3, height - 11, width - 4, 12);
+                            break;
+                        }
+                        case "bauhaus": {
+                            inputField = new GuiTextField(0, Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
+                            break;
+                        }
+                        case "exo": {
+                            inputField = new GuiTextField(0, Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
+                            break;
+                        }
                     }
-                    case "bauhaus": {
-                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
-                        break;
-                    }
-                    case "exo": {
-                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
-                        break;
-                    }
+
+                    inputField.setMaxStringLength(100);
+                    inputField.setEnableBackgroundDrawing(false);
+                    inputField.setFocused(true);
+                    inputField.setText(defaultInputFieldText);
+                    inputField.setCanLoseFocus(false);
                 }
-
-                inputField.setMaxStringLength(100);
-                inputField.setEnableBackgroundDrawing(false);
-                inputField.setFocused(true);
-                inputField.setText(defaultInputFieldText);
-                inputField.setCanLoseFocus(false);
                 break;
             }
         }
@@ -289,12 +292,7 @@ public class GuiChat extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         ScaledResolution s = new ScaledResolution(mc);
 
-        String chatOpen = "Der Chat ist offen!";
         UnicodeFontRenderer font1 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
-
-        RenderUtils.drawRect(s.width() - font1.getStringWidth(chatOpen) - 3, s.height() - 15, s.width(), s.height(), new Color(0, 0, 0, 120).getRGB());
-        RenderUtils.drawRect(s.width() - font1.getStringWidth(chatOpen) - 3, s.height() - 15, s.width(), s.height() - 12, new Color(0, 96, 255, 255).getRGB());
-        font1.drawStringWithShadow("§c" + chatOpen, s.width() - (font1.getStringWidth(chatOpen) + 2), s.height() - 10, -1);
 
         String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getMode();
         String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
@@ -308,23 +306,25 @@ public class GuiChat extends GuiScreen {
                 break;
             }
             case "custom": {
-                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("§a" + String.valueOf(inputField.getText().length()) + " §8/ §c" + inputField.getMaxStringLength(), 2, s.height() - 25, -1);
+                if (!(Client.main().modMgr().getModule(Invis.class).state())) {
+                    Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("§a" + String.valueOf(inputField.getText().length()) + " §8/ §c" + inputField.getMaxStringLength(), 2, s.height() - 25, -1);
 
-                switch (font) {
-                    case "comfortaa": {
-                        width2 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
-                        break;
-                    }
-                    case "bauhaus": {
-                        width2 = Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
-                        break;
-                    }
-                    case "exo": {
-                        width2 = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
-                        break;
+                    switch (font) {
+                        case "comfortaa": {
+                            width2 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
+                            RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                            break;
+                        }
+                        case "bauhaus": {
+                            width2 = Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
+                            RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                            break;
+                        }
+                        case "exo": {
+                            width2 = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
+                            RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                            break;
+                        }
                     }
                 }
                 break;
