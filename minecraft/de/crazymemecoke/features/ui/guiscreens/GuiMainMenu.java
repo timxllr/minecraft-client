@@ -129,7 +129,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         font1.drawStringWithShadow(name, 2, 2, -1);
 
         String outdatedVer = "Du benutzt eine veraltete Version (§4" + Client.main().getClientVersion() + " §8/ §6" + onlineVer + "§r) - Update noch jetzt um die neusten Features zu erhalten!";
-        String latestVer = "Du benutzt die neuste Version (§c" + Client.main().getClientVersion() + " §8/ §6" + onlineVer + "§r) - du brauchst nichts tun!";
+        String latestVer = "Du benutzt die neuste Version (§c" + Client.main().getClientVersion() + " §8/ §6" + onlineVer + "§r)";
         String newerVer = "Du benutzt eine neuere Version als erschienen ist (§a" + Client.main().getClientVersion() + " §8/ §6" + onlineVer + "§r) - Zeitreisender?";
 
         if (onlineVer > localVer) {
