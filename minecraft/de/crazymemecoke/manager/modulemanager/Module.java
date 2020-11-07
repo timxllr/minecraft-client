@@ -1,5 +1,7 @@
 package de.crazymemecoke.manager.modulemanager;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
@@ -46,13 +48,13 @@ public abstract class Module {
         if (state) {
             this.onEnable();
             this.enabled = true;
-            if (!(this.isCategory(Category.GUI))) {
+            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state()) {
                 NotifyUtil.notification("Modul aktiviert", "§c" + this.name + "§r wurde aktiviert!", NotificationType.INFO, 2);
             }
         } else {
             this.onDisable();
             this.enabled = false;
-            if (!(this.isCategory(Category.GUI))) {
+            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state()) {
                 NotifyUtil.notification("Modul deaktiviert", "§c" + this.name + "§r wurde deaktiviert!", NotificationType.INFO, 2);
             }
         }
