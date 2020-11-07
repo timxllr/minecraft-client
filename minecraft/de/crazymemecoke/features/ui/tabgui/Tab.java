@@ -103,7 +103,8 @@ public class Tab {
                     break;
                 }
                 case "ambien newest": {
-                    RenderUtils.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Colors.main().getAmbienNewestBlueColor() : 0);
+                    RenderUtils.drawVerticalGradient(x - 1, y + gui.tabHeight * i - 1 , menuWidth, gui.tabHeight,
+                            i == TabGUI.selectedItem ? Colors.main().ambienBlueBottom.getRGB() : 0, i == TabGUI.selectedItem ? Colors.main().ambienBlueTop.getRGB() : 0);
                     Client.main().fontMgr().font("BebasNeue", 20, Font.PLAIN).drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : Colors.main().getAmbienNewestLightGreyColor());
                     break;
                 }

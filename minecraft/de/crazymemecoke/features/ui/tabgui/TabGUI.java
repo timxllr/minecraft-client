@@ -140,7 +140,7 @@ public class TabGUI {
                 break;
             }
             case "koks": {
-                RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0,0,0,220).getRGB());
+                RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0, 220).getRGB());
                 break;
             }
         }
@@ -155,7 +155,8 @@ public class TabGUI {
                     break;
                 }
                 case "ambien newest": {
-                    RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getAmbienNewestBlueColor() : 0);
+                    RenderUtils.drawVerticalGradient(x - 1, yOff - 1, guiWidth + 1, tabHeight, i == selectedTab ? Colors.main().ambienBlueBottom.getRGB() : 0,
+                            i == selectedTab ? Colors.main().ambienBlueTop.getRGB() : 0);
                     Client.main().fontMgr().font("BebasNeue", 20, Font.PLAIN).drawCenteredString((tabsList.get(i)).tabName.toUpperCase(), x + 40, yOff + 2, -1);
                     break;
                 }
