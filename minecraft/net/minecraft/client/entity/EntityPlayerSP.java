@@ -255,7 +255,8 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         if (message.equalsIgnoreCase(prefix + "invis")) {
             if (Client.main().modMgr().getModule(Invis.class).state()) {
                 Client.main().modMgr().getModule(Invis.class).setState(false);
-                NotifyUtil.chat("Invis-Mode deaktiviert");
+            } else {
+                Client.main().modMgr().getModule(Invis.class).setState(true);
             }
             return;
         }
