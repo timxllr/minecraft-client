@@ -41,8 +41,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         buttonList.add(new GuiButton(1, width / 2 + 10, height / 2 - 60, 120, 20, I18n.format("menu.multiplayer")));
         buttonList.add(new GuiButton(2, width / 2 - 120, height / 2, 120, 20, I18n.format("menu.options")));
         buttonList.add(new GuiButton(3, width / 2 + 10, height / 2, 120, 20, I18n.format("menu.quit")));
-        buttonList.add(new GuiButton(4, width / 2 - 120, height / 2 - 30, 120, 20, "AltManager"));
-        buttonList.add(new GuiButton(5, width / 2 + 10, height / 2 - 30, 120, 20, "Credits"));
+        buttonList.add(new GuiButton(4, width / 2 - 120, height / 2 - 30, 250, 20, "Client"));
 
         Thread versionCheckThread = new Thread(() -> {
             try {
@@ -74,10 +73,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
             mc.shutdown();
         }
         if (button.id == 4) {
-            mc.displayGuiScreen(new GuiAltManager(this));
-        }
-        if (button.id == 5) {
-            mc.displayGuiScreen(new GuiCredits(this));
+            mc.displayGuiScreen(new GuiClient(this));
         }
     }
 
@@ -142,7 +138,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         if (onlineVer == localVer) {
             font2.drawStringWithShadow(latestVer, 2, sr.height() - 10, -1);
         }
-        if(onlineVer < localVer){
+        if (onlineVer < localVer) {
             font2.drawStringWithShadow(newerVer, 2, sr.height() - 10, -1);
         }
 

@@ -47,8 +47,6 @@ public class GuiCredits extends GuiScreen {
     }
 
     public void drawScreen(int posX, int posY, float f) {
-        drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
-
         ScaledResolution sr = new ScaledResolution(Wrapper.mc);
 
         mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
