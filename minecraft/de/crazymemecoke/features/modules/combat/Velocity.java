@@ -15,6 +15,5 @@ public class Velocity extends Module {
 
 	@Override
 	public void onEvent(Event event) {
-
 	}
 }
