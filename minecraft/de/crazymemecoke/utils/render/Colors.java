@@ -13,6 +13,8 @@ public class Colors {
     public Color notificationInfo = new Color(0, 233, 255, 255);
     public Color notificationWarning = new Color(255, 216, 0, 255);
     public Color notificationError = new Color(255, 0, 0, 255);
+    public Color ambienBlueTop = new Color(0x22b4e6);
+    public Color ambienBlueBottom = new Color(0x0065b4);
 
     public int ambienOldBlueColor = new Color(32, 188, 240).getRGB();
     public int ambienNewBlueColor = new Color(0x0090ff).getRGB();
