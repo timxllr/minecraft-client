@@ -2,6 +2,7 @@ package de.crazymemecoke.manager.modulemanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.Invis;
+import de.crazymemecoke.features.ui.Interface;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
@@ -10,14 +11,16 @@ import org.lwjgl.input.Keyboard;
 
 public abstract class Module {
 
-    private final String name;
+    private String name;
+    private String visualName;
     private int bind;
     private final Category category;
     public static Minecraft mc = Minecraft.mc();
     public boolean enabled;
 
-    public Module(String name, int bind, Category category, int color) {
+    public Module(String name, int bind, Category category) {
         this.name = name;
+        this.visualName = name;
         this.bind = bind;
         this.category = category;
         setup();
@@ -25,6 +28,10 @@ public abstract class Module {
 
     public String name() {
         return name;
+    }
+
+    public String visualName() {
+        return visualName;
     }
 
     public int bind() {
@@ -79,8 +86,8 @@ public abstract class Module {
     }
 
     public void setBind(int bind) {
-        if (!(bind == 0)) {
-            System.out.println("Keybind of " + name() + " was set to: " + Keyboard.getKeyName(bind));
+        if (bind != 0) {
+            System.out.println("Keybind of " + name() + " was set to " + Keyboard.getKeyName(bind));
         }
         this.bind = bind;
     }
@@ -91,6 +98,7 @@ public abstract class Module {
     }
 
     public void setDisplayName(String displayName) {
+        visualName = displayName;
     }
 
 
