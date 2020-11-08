@@ -67,6 +67,7 @@ public class ModuleManager {
         modules.add(new FastLadder());
         modules.add(new NoRotation());
         modules.add(new InvCleaner());
+        modules.add(new DamageCalc());
         modules.add(new FastPlace());
         modules.add(new AutoArmor());
         modules.add(new DeathDerp());
@@ -86,6 +87,7 @@ public class ModuleManager {
         modules.add(new HighJump());
         modules.add(new AutoWalk());
         modules.add(new TrailESP());
+        modules.add(new NameTags());
         modules.add(new FastUse());
         modules.add(new AntiWeb());
         modules.add(new Trigger());
