@@ -16,7 +16,7 @@ import net.minecraft.util.MathHelper;
 
 public class Aimbot extends Module {
 	public Aimbot() {
-		super("Aimbot", Keyboard.KEY_NONE, Category.COMBAT, -1);
+		super("Aimbot", Keyboard.KEY_NONE, Category.COMBAT);
 	}
 
 	@Override

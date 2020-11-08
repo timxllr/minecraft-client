@@ -22,7 +22,7 @@ import net.minecraft.util.EnumFacing;
 public class FastUse extends Module {
 
     public FastUse() {
-        super("FastUse", Keyboard.KEY_NONE, Category.PLAYER, -1);
+        super("FastUse", Keyboard.KEY_NONE, Category.PLAYER);
 
         Client.main().setMgr().newSetting(new Setting("Delay", this, 15, 0, 20, false));
     }

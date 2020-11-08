@@ -18,7 +18,7 @@ import static net.minecraft.network.play.client.C03PacketPlayer.C04PacketPlayerP
 public class Step extends Module {
 
     public Step() {
-        super("Step", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("Step", Keyboard.KEY_NONE, Category.MOVEMENT);
         ArrayList<String> mode = new ArrayList<>();
 
         mode.add("Vanilla");

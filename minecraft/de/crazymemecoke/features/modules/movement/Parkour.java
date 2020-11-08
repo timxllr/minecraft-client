@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 
 public class Parkour extends Module {
     public Parkour() {
-        super("Parkour", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("Parkour", Keyboard.KEY_NONE, Category.MOVEMENT);
     }
 
     @Override

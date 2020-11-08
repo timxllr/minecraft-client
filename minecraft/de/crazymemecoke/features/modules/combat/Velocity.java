@@ -9,7 +9,7 @@ import de.crazymemecoke.manager.modulemanager.Module;
 public class Velocity extends Module {
 
 	public Velocity() {
-		super("Velocity", Keyboard.KEY_NONE, Category.COMBAT, -1);
+		super("Velocity", Keyboard.KEY_NONE, Category.COMBAT);
 	}
 
 

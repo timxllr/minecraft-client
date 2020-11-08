@@ -15,7 +15,7 @@ public class ChestStealer extends Module {
     TimeHelper time = new TimeHelper();
 
     public ChestStealer() {
-        super("ChestStealer", Keyboard.KEY_NONE, Category.PLAYER, -1);
+        super("ChestStealer", Keyboard.KEY_NONE, Category.PLAYER);
         Client.main().setMgr().newSetting(new Setting("Delay", this, 75, 0, 250, true));
         Client.main().setMgr().newSetting(new Setting("Auto Close", this, true));
     }

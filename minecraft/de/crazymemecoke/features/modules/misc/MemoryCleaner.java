@@ -11,7 +11,7 @@ import org.lwjgl.input.Keyboard;
 
 public class MemoryCleaner extends Module {
     public MemoryCleaner() {
-        super("MemoryCleaner", Keyboard.KEY_NONE, Category.MISC, -1);
+        super("MemoryCleaner", Keyboard.KEY_NONE, Category.MISC);
     }
 
     TimeHelper timeHelper = new TimeHelper();

@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 
 public class AutoWalk extends Module {
     public AutoWalk() {
-        super("AutoWalk", Keyboard.KEY_NONE, Category.PLAYER, -1);
+        super("AutoWalk", Keyboard.KEY_NONE, Category.PLAYER);
     }
 
     @Override

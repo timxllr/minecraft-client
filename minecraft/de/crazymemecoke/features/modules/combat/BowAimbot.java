@@ -2,7 +2,6 @@ package de.crazymemecoke.features.modules.combat;
 
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
-import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import net.minecraft.entity.Entity;
@@ -15,7 +14,7 @@ import java.util.Iterator;
 
 public class BowAimbot extends Module {
     public BowAimbot() {
-        super("BowAimbot", Keyboard.KEY_NONE, Category.COMBAT, -1);
+        super("BowAimbot", Keyboard.KEY_NONE, Category.COMBAT);
     }
 
     @Override

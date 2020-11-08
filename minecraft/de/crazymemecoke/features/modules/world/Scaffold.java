@@ -4,18 +4,14 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
-import de.crazymemecoke.manager.eventmanager.impl.EventRender;
-import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
@@ -35,7 +31,7 @@ public class Scaffold extends Module {
     boolean kek;
 
     public Scaffold() {
-        super("Scaffold", Keyboard.KEY_NONE, Category.WORLD, -1);
+        super("Scaffold", Keyboard.KEY_NONE, Category.WORLD);
 
         Client.main().setMgr().newSetting(new Setting("SafeWalk", this, true));
     }

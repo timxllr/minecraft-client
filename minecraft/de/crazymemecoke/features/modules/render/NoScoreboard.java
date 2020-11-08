@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 
 public class NoScoreboard extends Module {
     public NoScoreboard() {
-        super("NoScoreboard", Keyboard.KEY_NONE, Category.RENDER, -1);
+        super("NoScoreboard", Keyboard.KEY_NONE, Category.RENDER);
     }
 
     @Override

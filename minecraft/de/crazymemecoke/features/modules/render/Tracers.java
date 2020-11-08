@@ -15,7 +15,7 @@ import java.awt.*;
 public class Tracers extends Module {
 
     public Tracers() {
-        super("Tracers", Keyboard.KEY_NUMPAD8, Category.RENDER, -1);
+        super("Tracers", Keyboard.KEY_NUMPAD8, Category.RENDER);
     }
 
     private void drawLine(final EntityPlayer player) {

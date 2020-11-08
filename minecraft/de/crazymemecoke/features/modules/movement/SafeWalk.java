@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 public class SafeWalk extends Module {
 
     public SafeWalk() {
-        super("SafeWalk", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("SafeWalk", Keyboard.KEY_NONE, Category.MOVEMENT);
     }
 
     @Override

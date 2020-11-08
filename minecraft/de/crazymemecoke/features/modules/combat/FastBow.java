@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 public class FastBow extends Module {
     public FastBow() {
-        super("FastBow", Keyboard.KEY_NONE, Category.COMBAT, -1);
+        super("FastBow", Keyboard.KEY_NONE, Category.COMBAT);
     }
 
 

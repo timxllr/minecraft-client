@@ -18,7 +18,7 @@ public class Nuker extends Module {
     float nukerRange;
 
     public Nuker() {
-        super("Nuker", Keyboard.KEY_NONE, Category.WORLD, -1);
+        super("Nuker", Keyboard.KEY_NONE, Category.WORLD);
 
         Client.main().setMgr().newSetting(new Setting("Range", this, 3.5, 0, 5, false));
     }

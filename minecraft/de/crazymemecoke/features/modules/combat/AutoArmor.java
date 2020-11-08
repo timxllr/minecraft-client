@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 public class AutoArmor extends Module {
 
     public AutoArmor() {
-        super("AutoArmor", Keyboard.KEY_NONE, Category.COMBAT, -1);
+        super("AutoArmor", Keyboard.KEY_NONE, Category.COMBAT);
 
         Client.main().setMgr().newSetting(new Setting("Delay", this, 100, 0, 500, true));
     }

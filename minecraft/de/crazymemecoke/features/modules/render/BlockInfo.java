@@ -10,7 +10,6 @@ import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockHelper;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.BlockPos;
 import org.lwjgl.input.Keyboard;
@@ -20,7 +19,7 @@ import java.util.Objects;
 
 public class BlockInfo extends Module {
     public BlockInfo() {
-        super("BlockInfo", Keyboard.KEY_NONE, Category.RENDER, -1);
+        super("BlockInfo", Keyboard.KEY_NONE, Category.RENDER);
     }
 
     @Override

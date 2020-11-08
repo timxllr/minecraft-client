@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 public class Criticals extends Module {
     public Criticals() {
-        super("Criticals", Keyboard.KEY_NONE, Category.COMBAT, -1);
+        super("Criticals", Keyboard.KEY_NONE, Category.COMBAT);
     }
 
     @Override

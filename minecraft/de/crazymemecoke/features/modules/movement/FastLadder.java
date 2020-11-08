@@ -14,7 +14,7 @@ public class FastLadder extends Module {
     ArrayList<String> mode = new ArrayList<>();
 
     public FastLadder() {
-        super("FastLadder", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("FastLadder", Keyboard.KEY_NONE, Category.MOVEMENT);
 
         mode.add("Vanilla");
         mode.add("AAC");

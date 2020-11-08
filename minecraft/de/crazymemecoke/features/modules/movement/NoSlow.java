@@ -2,7 +2,6 @@ package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
-import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import org.lwjgl.input.Keyboard;
 
@@ -15,7 +14,7 @@ import net.minecraft.util.EnumFacing;
 public class NoSlow extends Module {
 
     public NoSlow() {
-        super("NoSlow", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("NoSlow", Keyboard.KEY_NONE, Category.MOVEMENT);
     }
 
     @Override

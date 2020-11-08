@@ -24,7 +24,7 @@ public class AutoSoup extends Module {
 	private int oldslot = -1;
 
 	public AutoSoup() {
-		super("AutoSoup", Keyboard.KEY_NONE, Category.COMBAT, -1);
+		super("AutoSoup", Keyboard.KEY_NONE, Category.COMBAT);
 	}
 
 	private void eatSoup() {

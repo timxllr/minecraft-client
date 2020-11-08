@@ -29,7 +29,7 @@ import java.math.RoundingMode;
 
 public class NameTags extends Module {
     public NameTags() {
-        super("NameTags", Keyboard.KEY_NONE, Category.RENDER, -1);
+        super("NameTags", Keyboard.KEY_NONE, Category.RENDER);
 
         Client.main().setMgr().newSetting(new Setting("Show Armor", this, true));
     }

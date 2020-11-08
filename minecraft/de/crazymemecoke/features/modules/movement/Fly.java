@@ -31,7 +31,7 @@ public class Fly extends Module {
     public int dtime = 0;
 
     public Fly() {
-        super("Fly", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("Fly", Keyboard.KEY_NONE, Category.MOVEMENT);
 
         mode.add("Fly");
         mode.add("Glide");

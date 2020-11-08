@@ -17,7 +17,7 @@ public class NoFall extends Module {
     ArrayList<String> mode = new ArrayList<>();
 
     public NoFall() {
-        super("NoFall", Keyboard.KEY_NONE, Category.PLAYER, -1);
+        super("NoFall", Keyboard.KEY_NONE, Category.PLAYER);
 
         mode.add("AAC 3.3.11");
         mode.add("AAC 3.3.8");

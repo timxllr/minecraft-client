@@ -10,7 +10,7 @@ import org.lwjgl.input.Keyboard;
 
 public class HighJump extends Module {
     public HighJump() {
-        super("HighJump", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("HighJump", Keyboard.KEY_NONE, Category.MOVEMENT);
 
         Client.main().setMgr().newSetting(new Setting("Boost", this, 0.5, 0.1, 5.0, false));
     }

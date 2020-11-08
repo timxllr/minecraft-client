@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 public class AntiBot extends Module {
     public AntiBot() {
-        super("AntiBot", Keyboard.KEY_NONE, Category.COMBAT, -1);
+        super("AntiBot", Keyboard.KEY_NONE, Category.COMBAT);
 
         SettingsManager s = new SettingsManager();
 

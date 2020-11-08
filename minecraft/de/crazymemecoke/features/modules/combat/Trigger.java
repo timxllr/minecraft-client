@@ -19,7 +19,7 @@ import net.minecraft.util.Vec3;
 
 public class Trigger extends Module {
 	public Trigger() {
-		super("Trigger", Keyboard.KEY_NONE, Category.COMBAT, -1);
+		super("Trigger", Keyboard.KEY_NONE, Category.COMBAT);
 	}
 
 	public static int cps = 12;

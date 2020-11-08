@@ -17,7 +17,7 @@ import org.lwjgl.input.Keyboard;
 
 public class Tower extends Module {
     public Tower() {
-        super("Tower", Keyboard.KEY_NONE, Category.WORLD, -1);
+        super("Tower", Keyboard.KEY_NONE, Category.WORLD);
 
         Client.main().setMgr().newSetting(new Setting("Slow", this, false));
     }

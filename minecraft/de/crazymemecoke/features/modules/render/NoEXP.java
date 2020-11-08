@@ -7,7 +7,7 @@ import org.lwjgl.input.Keyboard;
 
 public class NoEXP extends Module {
     public NoEXP() {
-        super("NoEXP", Keyboard.KEY_NONE, Category.RENDER, -1);
+        super("NoEXP", Keyboard.KEY_NONE, Category.RENDER);
     }
 
     @Override

@@ -4,7 +4,6 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.GlStateManager;
@@ -19,7 +18,7 @@ import java.awt.*;
 
 public class DamageCalc extends Module {
     public DamageCalc() {
-        super("DamageCalc", Keyboard.KEY_NONE, Category.RENDER, -1);
+        super("DamageCalc", Keyboard.KEY_NONE, Category.RENDER);
     }
 
     @Override

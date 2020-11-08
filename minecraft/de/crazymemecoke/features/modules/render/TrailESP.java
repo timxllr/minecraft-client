@@ -26,7 +26,7 @@ public class TrailESP extends Module {
     private final TimeHelper timer = new TimeHelper();
 
     public TrailESP() {
-        super("TrailESP", Keyboard.KEY_NONE, Category.RENDER, -1);
+        super("TrailESP", Keyboard.KEY_NONE, Category.RENDER);
 
         Client.main().setMgr().newSetting(new Setting("Point Counter", this, 100, 10, 1000, true));
         Client.main().setMgr().newSetting(new Setting("Trail Length", this, 1000, 100, 10000, true));

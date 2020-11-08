@@ -11,7 +11,7 @@ import net.minecraft.init.Blocks;
 public class IceSpeed extends Module {
 
 	public IceSpeed() {
-		super("IceSpeed", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+		super("IceSpeed", Keyboard.KEY_NONE, Category.MOVEMENT);
 	}
 
 	@Override

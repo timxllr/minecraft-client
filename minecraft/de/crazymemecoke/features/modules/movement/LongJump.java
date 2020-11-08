@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 public class LongJump extends Module {
     public LongJump() {
-        super("LongJump", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("LongJump", Keyboard.KEY_NONE, Category.MOVEMENT);
     }
 
     private TimeHelper timer = new TimeHelper();

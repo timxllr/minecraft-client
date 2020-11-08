@@ -10,7 +10,7 @@ import org.lwjgl.input.Keyboard;
 
 public class Eagle extends Module {
     public Eagle() {
-        super("Eagle", Keyboard.KEY_NONE, Category.WORLD, -1);
+        super("Eagle", Keyboard.KEY_NONE, Category.WORLD);
     }
 
     @Override

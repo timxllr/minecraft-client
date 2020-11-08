@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 
 public class AutoClimb extends Module {
     public AutoClimb() {
-        super("AutoClimb", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("AutoClimb", Keyboard.KEY_NONE, Category.MOVEMENT);
     }
 
     @Override

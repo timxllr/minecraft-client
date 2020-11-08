@@ -7,7 +7,6 @@ import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.render.RenderUtils;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.network.play.server.S02PacketChat;
@@ -20,7 +19,7 @@ public class LagDetector extends Module {
     TimeHelper timeHelper = new TimeHelper();
 
     public LagDetector() {
-        super("LagDetector", Keyboard.KEY_NONE, Category.MISC, -1);
+        super("LagDetector", Keyboard.KEY_NONE, Category.MISC);
     }
 
     @Override

@@ -11,7 +11,7 @@ import de.crazymemecoke.utils.Wrapper;
 public class Sprint extends Module {
 
 	public Sprint() {
-		super("Sprint", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+		super("Sprint", Keyboard.KEY_NONE, Category.MOVEMENT);
 
 	}
 

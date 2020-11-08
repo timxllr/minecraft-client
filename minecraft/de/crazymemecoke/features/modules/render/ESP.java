@@ -32,7 +32,7 @@ public class ESP extends Module {
     SettingsManager sM = Client.main().setMgr();
 
     public ESP() {
-        super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER, -1);
+        super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER);
 
         ArrayList<String> mode = new ArrayList<>();
 

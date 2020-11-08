@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 public class Strafe extends Module {
 
     public Strafe() {
-        super("Strafe", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("Strafe", Keyboard.KEY_NONE, Category.MOVEMENT);
     }
 
 

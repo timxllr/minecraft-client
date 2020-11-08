@@ -9,7 +9,7 @@ import de.crazymemecoke.manager.modulemanager.Module;
 
 public class DeathDerp extends Module {
 	public DeathDerp() {
-		super("DeathDerp", Keyboard.KEY_NONE, Category.PLAYER, -1);
+		super("DeathDerp", Keyboard.KEY_NONE, Category.PLAYER);
 	}
 
 	@Override

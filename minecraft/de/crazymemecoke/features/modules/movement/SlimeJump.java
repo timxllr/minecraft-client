@@ -16,7 +16,7 @@ public class SlimeJump extends Module {
     double jumpHeight;
 
     public SlimeJump() {
-        super("SlimeJump", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("SlimeJump", Keyboard.KEY_NONE, Category.MOVEMENT);
 
         Client.main().setMgr().newSetting(new Setting("Height", this, 1.5, 1.1, 10, false));
     }

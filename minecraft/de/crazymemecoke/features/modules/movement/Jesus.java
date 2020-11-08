@@ -30,7 +30,7 @@ public class Jesus extends Module {
     private int time;
 
     public Jesus() {
-        super("Jesus", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("Jesus", Keyboard.KEY_NONE, Category.MOVEMENT);
 
         mode.add("Vanilla");
         mode.add("Dolphin");

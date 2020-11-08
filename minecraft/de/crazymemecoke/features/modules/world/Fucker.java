@@ -22,7 +22,7 @@ public class Fucker extends Module {
     private int yOffset;
 
     public Fucker() {
-        super("Fucker", Keyboard.KEY_NONE, Category.WORLD, -1);
+        super("Fucker", Keyboard.KEY_NONE, Category.WORLD);
         ArrayList<String> options = new ArrayList<>();
         options.add("Beds");
         options.add("Cores");

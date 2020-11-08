@@ -8,7 +8,7 @@ import org.lwjgl.input.Keyboard;
 
 public class FastPlace extends Module {
 	public FastPlace() {
-		super("FastPlace", Keyboard.KEY_NONE, Category.PLAYER, -1);
+		super("FastPlace", Keyboard.KEY_NONE, Category.PLAYER);
 	}
 
 	public void onDisable() {

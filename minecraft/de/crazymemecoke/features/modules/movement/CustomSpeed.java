@@ -13,7 +13,7 @@ public class CustomSpeed extends Module {
     double motionX, motionY, motionZ, timerSpeed;
 
     public CustomSpeed() {
-        super("CustomSpeed", Keyboard.KEY_NONE, Category.MOVEMENT, -1);
+        super("CustomSpeed", Keyboard.KEY_NONE, Category.MOVEMENT);
 
         Client.main().setMgr().newSetting(new Setting("Motion X", this, 0, 0, 50, false));
         Client.main().setMgr().newSetting(new Setting("Motion Y", this, 0, 0, 50, false));

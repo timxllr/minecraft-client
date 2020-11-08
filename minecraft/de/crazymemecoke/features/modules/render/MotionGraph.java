@@ -7,12 +7,8 @@ import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.eventmanager.impl.EventTick;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.render.Rainbow;
-import de.crazymemecoke.utils.render.Vec4;
-import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -25,7 +21,7 @@ public class MotionGraph extends Module {
     private final List<Double> motionSpeed = new ArrayList<>();
 
     public MotionGraph() {
-        super("MotionGraph", Keyboard.KEY_NONE, Category.RENDER, -1);
+        super("MotionGraph", Keyboard.KEY_NONE, Category.RENDER);
 
         Client.main().setMgr().newSetting(new Setting("Outline", this, true));
         Client.main().setMgr().newSetting(new Setting("Rainbow", this, true));

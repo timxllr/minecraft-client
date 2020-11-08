@@ -14,7 +14,7 @@ public class InvCleaner extends Module {
     private final ArrayList<Integer> uselessItems = new ArrayList<>();
 
     public InvCleaner() {
-        super("InvCleaner", Keyboard.KEY_NONE, Category.PLAYER, -1);
+        super("InvCleaner", Keyboard.KEY_NONE, Category.PLAYER);
     }
 
     private void clean(final int i) {
