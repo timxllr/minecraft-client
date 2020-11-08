@@ -2,6 +2,7 @@ package de.crazymemecoke.utils.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C03PacketPlayer;
@@ -21,6 +22,11 @@ public class PlayerUtil {
 
     public static double getSpeed() {
         return Math.sqrt(Minecraft.mc().thePlayer.motionX * Minecraft.mc().thePlayer.motionX + Minecraft.mc().thePlayer.motionZ * Minecraft.mc().thePlayer.motionZ);
+    }
+
+    public static void setSpeed(double speed) {
+        mc.thePlayer.motionX = -(Math.sin(getDirection()) * speed);
+        mc.thePlayer.motionZ = Math.cos(getDirection()) * speed;
     }
 
     public static float getDirection() {
@@ -47,12 +53,6 @@ public class PlayerUtil {
         var1 *= 0.017453292F;
         return var1;
     }
-
-    public static void setSpeed(double speed) {
-        mc.thePlayer.motionX = -(Math.sin(getDirection()) * speed);
-        mc.thePlayer.motionZ = Math.cos(getDirection()) * speed;
-    }
-
 
     public static void damagePlayer(String mode) {
         if (mode.equalsIgnoreCase("old")) {
@@ -148,6 +148,44 @@ public class PlayerUtil {
                 }
             }
         }
+        return false;
+    }
+
+    public static boolean getColliding(int i) {
+        int mx = i;
+        int mz = i;
+        int max = i;
+        int maz = i;
+        if (mc.thePlayer.motionX > 0.01D) {
+            mx = 0;
+        } else if (mc.thePlayer.motionX < -0.01D) {
+            max = 0;
+        }
+
+        if (mc.thePlayer.motionZ > 0.01D) {
+            mz = 0;
+        } else if (mc.thePlayer.motionZ < -0.01D) {
+            maz = 0;
+        }
+
+        int xmin = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minX - (double) mx);
+        int ymin = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minY - 1.0D);
+        int zmin = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minZ - (double) mz);
+        int xmax = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minX + (double) max);
+        int ymax = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minY + 1.0D);
+        int zmax = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minZ + (double) maz);
+
+        for (int x = xmin; x <= xmax; ++x) {
+            for (int y = ymin; y <= ymax; ++y) {
+                for (int z = zmin; z <= zmax; ++z) {
+                    Block block = mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
+                    if (block instanceof BlockLiquid && !mc.thePlayer.isInsideOfMaterial(Material.lava) && !mc.thePlayer.isInsideOfMaterial(Material.water)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
         return false;
     }
 }
