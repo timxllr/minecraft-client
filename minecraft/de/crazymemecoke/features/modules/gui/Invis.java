@@ -1,6 +1,5 @@
 package de.crazymemecoke.features.modules.gui;
 
-import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -10,13 +9,13 @@ import org.lwjgl.input.Keyboard;
 
 public class Invis extends Module {
     public Invis() {
-        super("Invis", Keyboard.KEY_NONE, Category.GUI, -1);
+        super("Invis", Keyboard.KEY_NONE, Category.GUI);
     }
 
     @Override
     public void onEnable() {
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Invis aktiviert", "Benutze §c.invis§r um den §6Invis-Modus§r zu §6deaktivieren§r!", NotificationType.INFO, 5);
+        NotifyUtil.notification("Invis aktiviert", "Drücke §cSHIFT + RCONTROL§r um den §6Invis-Modus§r zu §6deaktivieren§r!", NotificationType.INFO, 5);
     }
 
     @Override
