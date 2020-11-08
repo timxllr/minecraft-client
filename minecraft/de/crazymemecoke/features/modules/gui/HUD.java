@@ -18,11 +18,7 @@ public class HUD extends Module {
     ArrayList<String> hitAnimation = new ArrayList<>();
 
     public HUD() {
-        super("HUD", Keyboard.KEY_NONE, Category.GUI, -1);
-
-        arrayListRectMode.add("Left");
-        arrayListRectMode.add("Right");
-        arrayListRectMode.add("None");
+        super("HUD", Keyboard.KEY_NONE, Category.GUI);
 
         design.add("Ambien Old");
         design.add("Ambien New");
@@ -51,7 +47,6 @@ public class HUD extends Module {
         hitAnimation.add("Stoned");
 
         Client.main().setMgr().newSetting(new Setting("Design", this, "Ambien", design));
-        Client.main().setMgr().newSetting(new Setting("ArrayList Rect Mode", this, "Left", arrayListRectMode));
         Client.main().setMgr().newSetting(new Setting("Chat Mode", this, "Custom", chatMode));
         Client.main().setMgr().newSetting(new Setting("Chat Font", this, "Custom", chatFont));
         Client.main().setMgr().newSetting(new Setting("Hit Animation", this, "Stoned", hitAnimation));
