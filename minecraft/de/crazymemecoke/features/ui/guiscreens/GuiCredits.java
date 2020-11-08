@@ -5,18 +5,20 @@ import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class GuiCredits extends GuiScreen {
-    public GuiScreen parent;
 
+    public GuiScreen parent;
     FontManager fM = Client.main().fontMgr();
 
     private GuiScreen parentScreen;
@@ -54,7 +56,7 @@ public class GuiCredits extends GuiScreen {
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 
-        RenderUtils.drawRect(5, 5, width - 5, height - 5, new Color(0, 0, 0, 155).getRGB());
+        RenderUtils.drawRect(5, 0, width - 5, height, new Color(0, 0, 0, 155).getRGB());
 
         UnicodeFontRenderer cabin35 = fM.font("Cabin", 35, Font.PLAIN);
         UnicodeFontRenderer cabin23 = fM.font("Cabin", 23, Font.PLAIN);
