@@ -53,7 +53,6 @@ public class HUD extends Module {
         Client.main().setMgr().newSetting(new Setting("Item Height", this, 0.0F, -0.35F, 1.5F, false));
         Client.main().setMgr().newSetting(new Setting("Hotbar", this, true));
         Client.main().setMgr().newSetting(new Setting("ArrayList", this, true));
-        Client.main().setMgr().newSetting(new Setting("ArrayList Background", this, true));
         Client.main().setMgr().newSetting(new Setting("TabGUI", this, true));
         Client.main().setMgr().newSetting(new Setting("Watermark", this, true));
         Client.main().setMgr().newSetting(new Setting("Target HUD", this, true));
