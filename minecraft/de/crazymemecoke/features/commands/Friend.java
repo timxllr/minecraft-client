@@ -2,12 +2,14 @@ package de.crazymemecoke.features.commands;
 
 import java.util.ArrayList;
 
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 
 public class Friend extends Command {
 
-    String syntax = ".friend add <name> | .friend remove <name> | .friend list";
+    String syntax = Client.main().getClientPrefix() + "friend add <name> / remove <name> / list";
     public static ArrayList<String> friends = new ArrayList<String>();
 
     @Override
@@ -17,7 +19,7 @@ public class Friend extends Command {
                 NotifyUtil.chat("Deine Freunde:");
                 NotifyUtil.chat(friends.toString());
             } else {
-                NotifyUtil.chat(syntax);
+                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         } else {
             if (args.length == 2) {
@@ -40,10 +42,10 @@ public class Friend extends Command {
                         }
                     }
                 } else {
-                    NotifyUtil.chat(syntax);
+                    NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
                 }
             } else {
-                NotifyUtil.chat(syntax);
+                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         }
     }

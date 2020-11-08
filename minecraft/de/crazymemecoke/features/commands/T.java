@@ -3,11 +3,12 @@ package de.crazymemecoke.features.commands;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 
 public class T extends Command {
 	
-	String syntax = ".t <Module>";
+	String syntax = Client.main().getClientPrefix() + "t <Module>";
 
 	@Override
 	public void execute(String[] args) {
@@ -25,7 +26,7 @@ public class T extends Command {
 				}
 			}
 		} else {
-			NotifyUtil.chat(syntax);
+			NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
 		}
 	}
 

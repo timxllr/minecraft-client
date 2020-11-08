@@ -12,7 +12,7 @@ import de.crazymemecoke.utils.Wrapper;
 
 public class Bind extends Command {
 
-    String syntax = ".bind <module> <key> | .bind <module> none | .bind list | .bind clear";
+    String syntax = Client.main().getClientPrefix() + "bind <module> <key> | .bind <module> none | .bind list | .bind clear";
 
     @Override
     public void execute(String[] args) {
@@ -44,7 +44,7 @@ public class Bind extends Command {
                 NotifyUtil.notification("Modul gebunden!", "§c" + args[0] + "§r wurde auf §c" + args[1] + "§r gebunden!", NotificationType.INFO, 5);
                 Wrapper.mc.thePlayer.playSound("random.anvil_use", 1f, 1f);
             } else {
-                NotifyUtil.chat(syntax);
+                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("list")) {
@@ -60,10 +60,10 @@ public class Bind extends Command {
                 }
                 NotifyUtil.notification("Keybinds gelöscht!", "Alle Keybinds wurden gelöscht!", NotificationType.INFO, 5);
             } else {
-                NotifyUtil.chat(syntax);
+                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         } else {
-            NotifyUtil.chat(syntax);
+            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
 
     }

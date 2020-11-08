@@ -1,11 +1,13 @@
 package de.crazymemecoke.features.commands;
 
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.Wrapper;
 
 public class Allow extends Command {
-    String syntax = ".allow <flight/edit> <true/false>";
+    String syntax = Client.main().getClientPrefix() + "allow <flight/edit> <true/false>";
 
     @Override
     public void execute(String[] args) {
@@ -16,7 +18,7 @@ public class Allow extends Command {
                 } else if (args[1].equalsIgnoreCase("false")) {
                     Wrapper.mc.thePlayer.capabilities.allowFlying = false;
                 } else {
-                    NotifyUtil.chat(syntax);
+                    NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
                 }
             } else if (args[0].equalsIgnoreCase("edit")) {
                 if (args[1].equalsIgnoreCase("true")) {
@@ -24,13 +26,13 @@ public class Allow extends Command {
                 } else if (args[1].equalsIgnoreCase("false")) {
                     Wrapper.mc.thePlayer.capabilities.allowEdit = false;
                 } else {
-                    NotifyUtil.chat(syntax);
+                    NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
                 }
             } else {
-                NotifyUtil.chat(syntax);
+                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         } else {
-            NotifyUtil.chat(syntax);
+            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

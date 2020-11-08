@@ -51,7 +51,13 @@ public class Notification {
         UnicodeFontRenderer messageFont = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
 
         double offset = 0;
-        int width = messageFont.getStringWidth(messsage) + 20;
+        int width;
+
+        if(titleFont.getStringWidth(title) < messageFont.getStringWidth(messsage)){
+            width = messageFont.getStringWidth(messsage) + 20;
+        }else{
+            width = titleFont.getStringWidth(title) + 20;
+        }
         int height = 130;
         int heightBottom = 95;
         long time = getTime();

@@ -1,6 +1,8 @@
 package de.crazymemecoke.features.commands;
 
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.enchantment.Enchantment;
@@ -8,7 +10,7 @@ import net.minecraft.item.ItemStack;
 
 public class Enchant extends Command {
 
-    String syntax = ".enchant <all/hand>";
+    String syntax = Client.main().getClientPrefix() + "enchant <all/hand>";
 
     @Override
     public void execute(String[] args) {
@@ -48,10 +50,10 @@ public class Enchant extends Command {
                 }
                 NotifyUtil.chat("Erfolgreich alle Items verzaubert!");
             } else {
-                NotifyUtil.chat(syntax);
+                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         } else {
-            NotifyUtil.chat(syntax);
+            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

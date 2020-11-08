@@ -2,11 +2,12 @@ package de.crazymemecoke.features.commands;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 
 public class Info extends Command {
 
-    String syntax = ".info";
+    String syntax = Client.main().getClientPrefix() + "info";
 
     @Override
     public void execute(String[] args) {
@@ -15,7 +16,7 @@ public class Info extends Command {
             NotifyUtil.chat("Client-Version: " + Client.main().getClientVersion());
             NotifyUtil.chat("Client-Author: " + Client.main().getClientCoder());
         } else {
-            NotifyUtil.chat(syntax);
+            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

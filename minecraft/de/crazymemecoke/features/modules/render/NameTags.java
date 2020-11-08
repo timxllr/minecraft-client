@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.render;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
@@ -37,9 +38,14 @@ public class NameTags extends Module {
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventRender) {
-            for (EntityPlayer entity : this.mc.theWorld.playerEntities) {
-                if ((entity != this.mc.thePlayer) && (!entity.isInvisible())) {
-                    String name = RenderUtils.removeColorCode(entity.getDisplayName().getFormattedText());
+            for (EntityPlayer entity : mc.theWorld.playerEntities) {
+                if ((entity != mc.thePlayer) && (!entity.isInvisible()) && !(Client.main().modMgr().getModule(Invis.class).state())) {
+                    String name;
+                    if (!(Client.main().modMgr().getModule(NameProtect.class).state())) {
+                        name = entity.getName();
+                    }else{
+                        name = "Protected";
+                    }
 
                     GL11.glPushMatrix();
                     GL11.glEnable(3042);
@@ -50,7 +56,7 @@ public class NameTags extends Module {
                     GL11.glBlendFunc(770, 771);
                     GL11.glDisable(3553);
 
-                    float partialTicks = this.mc.timer.renderPartialTicks;
+                    float partialTicks = mc.timer.renderPartialTicks;
 
                     double x = entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * partialTicks -
                             RenderManager.renderPosX;
@@ -58,7 +64,7 @@ public class NameTags extends Module {
                             RenderManager.renderPosY;
                     double z = entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * partialTicks -
                             RenderManager.renderPosZ;
-                    y += this.mc.thePlayer.getDistanceToEntity(entity) * 0.02F;
+                    y += mc.thePlayer.getDistanceToEntity(entity) * 0.02F;
                     if ((Double.isNaN(entity.getHealth())) || (Double.isInfinite(entity.getHealth()))) {
                         entity.setHealth(20.0F);
                     }
@@ -67,20 +73,16 @@ public class NameTags extends Module {
 
                     String USERNAME = name;
                     double HEALTH = bigDecimal.doubleValue();
-                    int COLOR = -1;
-                    String alias = "";
                     USERNAME = USERNAME + " " + String.valueOf(HEALTH);
 
-                    String FRIEND_NAME = USERNAME;
-
-                    float DISTANCE = this.mc.thePlayer.getDistanceToEntity(entity);
+                    float DISTANCE = mc.thePlayer.getDistanceToEntity(entity);
                     float SCALE = Math.min(Math.max(1.2F * (DISTANCE * 0.15F), 1.25F), 6.0F) * 0.02F;
 
                     GlStateManager.translate((float) x,
                             (float) y + entity.height + 0.5F - (entity.isChild() ? entity.height / 2.0F : 0.0F), (float) z);
                     GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                    GlStateManager.rotate(-this.mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
-                    GlStateManager.rotate(this.mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
+                    GlStateManager.rotate(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
+                    GlStateManager.rotate(mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
 
                     GL11.glScalef(-SCALE, -SCALE, SCALE);
                     Tessellator tesselator = Tessellator.getInstance();
@@ -88,19 +90,18 @@ public class NameTags extends Module {
 
                     UnicodeFontRenderer fontRenderer = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
 
-                    String CLIENT_USER = "Slowly Gang Member";
-
                     int STRING_WIDTH = fontRenderer.getStringWidth(USERNAME) / 2;
-                    int STRING_WIDTH_CLIENTUSER = fontRenderer.getStringWidth(CLIENT_USER) / 2;
                     int i = 0;
                     RenderUtils.drawBorderedRect(-STRING_WIDTH - 1.0F, -2.0F, STRING_WIDTH + 2.0F, 9.0F, 1.0F,
                             new Color(0, 0, 0).getRGB(), RenderUtils.reAlpha(new Color(0, 0, 0).getRGB(), 0.5F));
 
                     GL11.glEnable(3553);
 
-                    String s = RenderUtils.removeColorCode(entity.getDisplayName().getFormattedText());
-
-                    fontRenderer.drawString(s, -fontRenderer.getStringWidth(USERNAME) / 2, -fontRenderer.getStringHeight(name) / 32, Colors.main().grey.getRGB());
+                    if (!(Client.main().modMgr().getModule(NameProtect.class).state())) {
+                        fontRenderer.drawString(name, -fontRenderer.getStringWidth(name) / 2 - 12, -fontRenderer.getStringHeight(name) / 32, Colors.main().aqua.getRGB());
+                    } else {
+                        fontRenderer.drawString(name, -fontRenderer.getStringWidth(name) / 2 - 12, -fontRenderer.getStringHeight(name) / 32, Colors.main().red.getRGB());
+                    }
 
                     fontRenderer.drawString(String.valueOf(HEALTH), fontRenderer.getStringWidth(USERNAME) / 2 - fontRenderer.getStringWidth(String.valueOf(HEALTH)), -fontRenderer.getStringHeight(name) / 32 + 0.5F, Colors.main().green.getRGB());
                     if (Client.main().setMgr().settingByName("Show Armor", this).getBool()) {

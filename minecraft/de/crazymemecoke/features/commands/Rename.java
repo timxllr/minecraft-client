@@ -1,13 +1,15 @@
 package de.crazymemecoke.features.commands;
 
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.commandmanager.Command;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.item.ItemStack;
 
 public class Rename extends Command {
 
-    String syntax = ".rename <name>";
+    String syntax = Client.main().getClientPrefix() + "rename <name>";
 
     @Override
     public void execute(String[] args) {
@@ -15,7 +17,7 @@ public class Rename extends Command {
             NotifyUtil.chat("Nur im Kreativmodus verfügbar!");
         }
         if (args.length == 0) {
-            NotifyUtil.chat(syntax);
+            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         } else {
             if (Wrapper.mc.thePlayer.getHeldItem() == null) {
                 NotifyUtil.chat("Halte ein Item in der Hand!");
