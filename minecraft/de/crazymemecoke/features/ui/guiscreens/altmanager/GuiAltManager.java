@@ -71,6 +71,8 @@ public class GuiAltManager extends GuiScreen {
         buttonList.add(new GuiButton(5, width - 145, height - 55, 135, 20, "Importieren"));
         buttonList.add(new GuiButton(6, width - 145, height - 78, 135, 20, "Session Stealer"));
         buttonList.add(new GuiButton(8, width - 145, height - 100, 135, 20, "Proxy"));
+        buttonList.add(new GuiButton(10, width - 145, height - 130, 135, 20, "TheAltening"));
+        buttonList.add(new GuiButton(11, width - 145, height - 152, 135, 20, "MCLeaks"));
         buttonList.add(new GuiButton(7, width - 375, height - 32, 90, 20, "Direkt einloggen"));
         buttonList.add(new GuiButton(9, 85, height - 32, 65, 20, "Serverliste"));
         opacity = 0;
@@ -157,6 +159,14 @@ public class GuiAltManager extends GuiScreen {
                 mc.displayGuiScreen(new GuiMultiplayer(this));
                 break;
             }
+            case 10: {
+                mc.displayGuiScreen(new GuiTheAltening(this));
+                break;
+            }
+            case 11: {
+                mc.displayGuiScreen(new GuiMCLeaks(this));
+                break;
+            }
         }
     }
 
@@ -235,7 +245,7 @@ public class GuiAltManager extends GuiScreen {
     private void importAlts() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }catch(ClassNotFoundException|InstantiationException|IllegalAccessException|UnsupportedLookAndFeelException e2) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e2) {
             e2.printStackTrace();
         }
 
