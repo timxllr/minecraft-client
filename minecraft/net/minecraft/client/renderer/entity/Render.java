@@ -1,5 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.render.NameTags;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -342,50 +344,52 @@ public abstract class Render<T extends Entity>
     //TODO: NameTags / Tag Rendering
     protected void renderLivingLabel(T entityIn, String str, double x, double y, double z, int maxDistance)
     {
-        double d0 = entityIn.getDistanceSqToEntity(this.renderManager.livingPlayer);
+        if(!(Client.main().modMgr().getModule(NameTags.class).state())){
+            double d0 = entityIn.getDistanceSqToEntity(this.renderManager.livingPlayer);
 
-        if (d0 <= (double)(maxDistance * maxDistance))
-        {
-            FontRenderer fontrenderer = this.getFontRendererFromRenderManager();
-            float f = 1.6F;
-            float f1 = 0.016666668F * f;
-            GlStateManager.pushMatrix();
-            GlStateManager.translate((float)x + 0.0F, (float)y + entityIn.height + 0.5F, (float)z);
-            GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-            GlStateManager.scale(-f1, -f1, f1);
-            GlStateManager.disableLighting();
-            GlStateManager.depthMask(false);
-            GlStateManager.disableDepth();
-            GlStateManager.enableBlend();
-            GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-            Tessellator tessellator = Tessellator.getInstance();
-            WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-            byte b0 = 0;
-
-            if (str.equals("deadmau5"))
+            if (d0 <= (double)(maxDistance * maxDistance))
             {
-                b0 = -10;
-            }
+                FontRenderer fontrenderer = this.getFontRendererFromRenderManager();
+                float f = 1.6F;
+                float f1 = 0.016666668F * f;
+                GlStateManager.pushMatrix();
+                GlStateManager.translate((float)x + 0.0F, (float)y + entityIn.height + 0.5F, (float)z);
+                GL11.glNormal3f(0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+                GlStateManager.scale(-f1, -f1, f1);
+                GlStateManager.disableLighting();
+                GlStateManager.depthMask(false);
+                GlStateManager.disableDepth();
+                GlStateManager.enableBlend();
+                GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+                Tessellator tessellator = Tessellator.getInstance();
+                WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+                byte b0 = 0;
 
-            int i = fontrenderer.getStringWidth(str) / 2;
-            GlStateManager.disableTexture2D();
-            worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
-            worldrenderer.pos((double)(-i - 1), (double)(-1 + b0), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-            worldrenderer.pos((double)(-i - 1), (double)(8 + b0), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-            worldrenderer.pos((double)(i + 1), (double)(8 + b0), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-            worldrenderer.pos((double)(i + 1), (double)(-1 + b0), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-            tessellator.draw();
-            GlStateManager.enableTexture2D();
-            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, b0, 553648127);
-            GlStateManager.enableDepth();
-            GlStateManager.depthMask(true);
-            fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, b0, -1);
-            GlStateManager.enableLighting();
-            GlStateManager.disableBlend();
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            GlStateManager.popMatrix();
+                if (str.equals("deadmau5"))
+                {
+                    b0 = -10;
+                }
+
+                int i = fontrenderer.getStringWidth(str) / 2;
+                GlStateManager.disableTexture2D();
+                worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
+                worldrenderer.pos((double)(-i - 1), (double)(-1 + b0), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+                worldrenderer.pos((double)(-i - 1), (double)(8 + b0), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+                worldrenderer.pos((double)(i + 1), (double)(8 + b0), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+                worldrenderer.pos((double)(i + 1), (double)(-1 + b0), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+                tessellator.draw();
+                GlStateManager.enableTexture2D();
+                fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, b0, 553648127);
+                GlStateManager.enableDepth();
+                GlStateManager.depthMask(true);
+                fontrenderer.drawString(str, -fontrenderer.getStringWidth(str) / 2, b0, -1);
+                GlStateManager.enableLighting();
+                GlStateManager.disableBlend();
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.popMatrix();
+            }
         }
     }
 
