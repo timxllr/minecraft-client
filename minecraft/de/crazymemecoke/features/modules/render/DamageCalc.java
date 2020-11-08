@@ -37,8 +37,8 @@ public class DamageCalc extends Module {
                 for (double x = -dist[y]; x <= dist[y]; x += 1.0D) {
                     for (double z = -dist[y]; z <= dist[y]; z += 1.0D)
                     {
-                        BlockPos pos = new BlockPos(this.mc.thePlayer.posX + x, this.mc.thePlayer.posY - y, this.mc.thePlayer.posZ + z);
-                        Block block = this.mc.theWorld.getBlockState(pos).getBlock();
+                        BlockPos pos = new BlockPos(mc.thePlayer.posX + x, mc.thePlayer.posY - y, mc.thePlayer.posZ + z);
+                        Block block = mc.theWorld.getBlockState(pos).getBlock();
                         if (block.isFullBlock())
                         {
                             double xRender = pos.getX() - RenderManager.renderPosX;double yRender = pos.getY() - RenderManager.renderPosY;double zRender = pos.getZ() - RenderManager.renderPosZ;double distBlock = Math.sqrt(x * x + z * z);
@@ -76,16 +76,16 @@ public class DamageCalc extends Module {
                             float SCALE = (float)(Math.min(Math.max(1.2000000476837158D * (distBlock * 0.15000000596046448D), 1.25D), 6.0D) * 0.019999999552965164D);
                             GlStateManager.translate((float)xRender + 0.5D, (float)yRender + 1.5D, (float)zRender + 0.5D);
                             GL11.glNormal3f(0.0F, 1.0F, 0.0F);
-                            GlStateManager.rotate(-this.mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
-                            GlStateManager.rotate(this.mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
+                            GlStateManager.rotate(-mc.getRenderManager().playerViewY, 0.0F, 1.0F, 0.0F);
+                            GlStateManager.rotate(mc.getRenderManager().playerViewX, 1.0F, 0.0F, 0.0F);
 
                             GL11.glScalef(-SCALE, -SCALE, SCALE);
                             GL11.glEnable(3553);
                             String s = String.valueOf(y - 1) + "m";
-                            this.mc.fontRendererObj.drawStringWithShadow(s, -this.mc.fontRendererObj.getStringWidth(s) / 2, 0.0F, -1);
+                            mc.fontRendererObj.drawStringWithShadow(s, -mc.fontRendererObj.getStringWidth(s) / 2, 0.0F, -1);
                             GlStateManager.translate(0.0F, 10.0F, 0.0F);
                             s = "Dmg : " + damage[y];
-                            this.mc.fontRendererObj.drawStringWithShadow(s, -this.mc.fontRendererObj.getStringWidth(s) / 2, 0.0F, new Color(red, green, blue).getRGB());
+                            mc.fontRendererObj.drawStringWithShadow(s, -mc.fontRendererObj.getStringWidth(s) / 2, 0.0F, new Color(red, green, blue).getRGB());
 
                             GlStateManager.disableBlend();
                             GL11.glDisable(3042);
