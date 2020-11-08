@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.ui.guiscreens;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
@@ -42,11 +43,15 @@ public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.scale(f, f, f);
         GlStateManager.popMatrix();
 
-        Client.main().fontMgr().comfortaa50.drawStringWithShadow("Willkommen!", width / 2 - 70, 40, -1);
-        Client.main().fontMgr().comfortaa22.drawStringWithShadow("Wenn du den Client das 1. Mal verwendest:", width / 2 - 115, 80, -1);
-        Client.main().fontMgr().comfortaa22.drawStringWithShadow("RSHIFT - ClickGUI", width / 2 - 40, 100, -1);
-        Client.main().fontMgr().comfortaa22.drawStringWithShadow("RCONTROL - Info HUD", width / 2 - 55, 110, -1);
-        Client.main().fontMgr().comfortaa22.drawStringWithShadow("Chat-Prefix - Punkt (.)", width / 2 - 50, 120, -1);
+        UnicodeFontRenderer comfortaa50 = Client.main().fontMgr().comfortaa50;
+        comfortaa50.drawStringWithShadow("Willkommen!", width / 2 - 70, 40, -1);
+        UnicodeFontRenderer comfortaa22 = Client.main().fontMgr().comfortaa22;
+        comfortaa22.drawStringWithShadow("Wenn du den Client das 1. Mal verwendest:\n" +
+                "RSHIFT - ClickGUI\n" +
+                "LCONTROL + RCONTROL - Invis Mode aktivieren\n" +
+                "SHIFT + RCONTROL - Invis Mode deaktivieren\n" +
+                "END - Item GUI\n" +
+                "Chat-Prefix: " + Client.main().getClientPrefix(), width / 2 - 115, 80, -1);
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);
