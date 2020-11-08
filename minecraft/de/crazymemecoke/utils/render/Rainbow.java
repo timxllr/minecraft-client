@@ -13,4 +13,9 @@ public class Rainbow {
                 c.getAlpha() / 255.0F);
     }
 
+    public static Color getRainbow(int offset, int speed, float saturation, float brightness) {
+        float hue = ((System.currentTimeMillis() + offset) % speed) / (float) speed;
+        return Color.getHSBColor(hue, saturation, brightness);
+    }
+
 }
