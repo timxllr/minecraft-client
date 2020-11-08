@@ -252,14 +252,6 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      */
     public void sendChatMessage(String message) {
         String prefix = Client.main().getClientPrefix();
-        if (message.equalsIgnoreCase(prefix + "invis")) {
-            if (Client.main().modMgr().getModule(Invis.class).state()) {
-                Client.main().modMgr().getModule(Invis.class).setState(false);
-            } else {
-                Client.main().modMgr().getModule(Invis.class).setState(true);
-            }
-            return;
-        }
         if (!(Client.main().modMgr().getModule(Invis.class).state())) {
             if (Client.main().getCommandManager().execute(message)) {
                 return;
