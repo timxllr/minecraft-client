@@ -63,6 +63,7 @@ public class ModuleManager {
         modules.add(new CustomSpeed());
         modules.add(new MotionGraph());
         modules.add(new LagDetector());
+        modules.add(new NameProtect());
         modules.add(new Fullbright());
         modules.add(new FastLadder());
         modules.add(new NoRotation());
@@ -146,44 +147,56 @@ public class ModuleManager {
     }
 
     public void saveModules() {
-        List<String> formattedModules = new ArrayList<String>();
-        modules.forEach(module -> {
-            formattedModules.add(module.name() + ":" + module.state());
-        });
-        FileUtils.saveFile(modulesFile, formattedModules);
+        try {
+            List<String> formattedModules = new ArrayList<String>();
+            modules.forEach(module -> {
+                formattedModules.add(module.name() + ":" + module.state());
+            });
+            FileUtils.saveFile(modulesFile, formattedModules);
+        } catch (Exception ignored) {
+        }
     }
 
     public void loadModules() {
-        Objects.requireNonNull(FileUtils.loadFile(modulesFile)).forEach(line -> {
-            final String[] args = line.split(":");
-            if (args.length == 2) {
-                Module module = getByName(args[0]);
-                boolean state = Boolean.valueOf(args[1]);
+        try {
+            Objects.requireNonNull(FileUtils.loadFile(modulesFile)).forEach(line -> {
+                final String[] args = line.split(":");
+                if (args.length == 2) {
+                    Module module = getByName(args[0]);
+                    boolean state = Boolean.valueOf(args[1]);
 
-                if (state)
-                    module.setState(true);
-            }
-        });
+                    if (state)
+                        module.setState(true);
+                }
+            });
+        } catch (Exception ignored) {
+        }
     }
 
     public void saveBinds() {
-        List<String> formattedBinds = new ArrayList<String>();
-        modules.forEach(module -> {
-            formattedBinds.add(module.name() + ":" + module.bind());
-        });
-        FileUtils.saveFile(bindsFile, formattedBinds);
+        try {
+            List<String> formattedBinds = new ArrayList<String>();
+            modules.forEach(module -> {
+                formattedBinds.add(module.name() + ":" + module.bind());
+            });
+            FileUtils.saveFile(bindsFile, formattedBinds);
+        } catch (Exception ignored) {
+        }
     }
 
     public void loadBinds() {
-        FileUtils.loadFile(bindsFile).forEach(line -> {
-            final String[] args = line.split(":");
-            if (args.length == 2) {
-                Module module = getByName(args[0]);
-                int bind = Integer.valueOf(args[1]);
+        try {
+            FileUtils.loadFile(bindsFile).forEach(line -> {
+                final String[] args = line.split(":");
+                if (args.length == 2) {
+                    Module module = getByName(args[0]);
+                    int bind = Integer.valueOf(args[1]);
 
-                module.setBind(bind);
-            }
-        });
+                    module.setBind(bind);
+                }
+            });
+        } catch (Exception ignored) {
+        }
     }
 
     public File getModulesFile() {
