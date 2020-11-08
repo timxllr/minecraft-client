@@ -12,20 +12,17 @@ public class CommandManager {
     public List<Command> commands = new ArrayList<Command>();
 
     public CommandManager() {
-        commands.add(new KillerPotion());
-        commands.add(new TrollPotion());
-        commands.add(new CrashChest());
         commands.add(new Enchant());
         commands.add(new Toggle());
         commands.add(new Rename());
         commands.add(new Friend());
         commands.add(new Panic());
         commands.add(new Allow());
-        commands.add(new Items());
         commands.add(new Bind());
         commands.add(new Help());
         commands.add(new Info());
         commands.add(new Fix());
+        commands.add(new Say());
         commands.add(new T());
     }
 
