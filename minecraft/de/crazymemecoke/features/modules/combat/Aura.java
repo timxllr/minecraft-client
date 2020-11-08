@@ -1,18 +1,16 @@
 package de.crazymemecoke.features.modules.combat;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
-import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.eventmanager.impl.EventMoveFlying;
 import de.crazymemecoke.manager.eventmanager.impl.EventPacket;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.render.RenderUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.Entity;
@@ -32,16 +30,16 @@ import java.util.ArrayList;
 
 public class Aura extends Module {
 
-    SettingsManager sM = Client.main().setMgr();
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
+    SettingsManager sM = Client.main().setMgr();
     double range, cps, ticksExisted;
     float yaw, pitch, curYaw, curPitch;
     long current, last;
     boolean teams, players, animals, mobs, villager, rotations, ignoreDead;
 
     public Aura() {
-        super("Aura", Keyboard.KEY_NONE, Category.COMBAT, -1);
+        super("Aura", Keyboard.KEY_NONE, Category.COMBAT);
 
         sM.newSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
         sM.newSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
@@ -90,6 +88,12 @@ public class Aura extends Module {
             if (currentTarget == null)
                 return;
 
+            if (currentTarget instanceof EntityPlayer) {
+
+            } else {
+                setDisplayName("Aura");
+            }
+
             updateTime();
 
             if (rotations) {
@@ -132,10 +136,13 @@ public class Aura extends Module {
             }
         }
         if (event instanceof EventMoveFlying) {
-            if (currentTarget != null || !targets.isEmpty()) {
-                if (shouldAttack()) {
-                    ((EventMoveFlying) event).setYaw(yaw);
+            try {
+                if (currentTarget != null || !targets.isEmpty()) {
+                    if (shouldAttack()) {
+                        ((EventMoveFlying) event).setYaw(yaw);
+                    }
                 }
+            } catch (NullPointerException ignored) {
             }
         }
         if (event instanceof EventPacket) {
