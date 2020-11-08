@@ -1,8 +1,8 @@
 package de.crazymemecoke.features.ui;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.combat.Aura;
-import de.crazymemecoke.features.modules.render.BlockInfo;
+import de.crazymemecoke.features.modules.gui.Invis;
+import de.crazymemecoke.features.ui.guiscreens.GuiItems;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
@@ -14,14 +14,8 @@ import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiIngame;
-import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -29,9 +23,13 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Interface extends GuiIngame {
 
+    private final static Interface instance = new Interface(Minecraft.mc());
+    String modName;
     Minecraft mc = Wrapper.mc;
     FontManager font = Client.main().fontMgr();
 
@@ -39,10 +37,23 @@ public class Interface extends GuiIngame {
         super(mcIn);
     }
 
+    public static Interface main() {
+        return instance;
+    }
+
     public void renderGameOverlay(float p_175180_1_) {
         super.renderGameOverlay(p_175180_1_);
         if (!(Client.main().modMgr().getByName("Invis").state())) {
             Display.setTitle(Client.main().getClientName() + " " + Client.main().getClientVersion() + " | made by " + Client.main().getClientCoder());
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL) && Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+                Client.main().modMgr().getModule(Invis.class).setState(true);
+            }
+
+            if (Keyboard.isKeyDown(Keyboard.KEY_END) && mc.currentScreen == null) {
+                mc.displayGuiScreen(new GuiItems(null));
+            }
+
             if (Client.main().modMgr().getByName("HUD").state()) {
                 if (Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).getBool()) {
                     doRenderStuff();
@@ -54,6 +65,9 @@ public class Interface extends GuiIngame {
             }
         } else {
             Display.setTitle("Minecraft 1.8.8");
+            if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL) && (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))) {
+                Client.main().modMgr().getModule(Invis.class).setState(false);
+            }
         }
     }
 
@@ -369,74 +383,42 @@ public class Interface extends GuiIngame {
 
     private void renderArrayList() {
         ScaledResolution s = new ScaledResolution(mc);
-        String module;
 
-        int stringY = 2;
+        UnicodeFontRenderer font = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN);
+
+        ArrayList<Module> activeModuleNames = this.getActiveModuleNames();
+        activeModuleNames.sort((m1, m2) -> {
+            final int diff = font.getStringWidth(m2.visualName())
+                    - font.getStringWidth(m1.visualName());
+            return (diff != 0) ? diff : m2.visualName().compareTo(m1.visualName());
+        });
+        int yDist = 2;
         int rectY = 1;
+        int stringY = 1;
 
-        String mode = Client.main().setMgr().settingByName("ArrayList Rect Mode", Client.main().modMgr().getByName("HUD")).getMode();
-        String design = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
-
-        UnicodeFontRenderer comfortaa = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
-        UnicodeFontRenderer bigNoodleTilting = Client.main().fontMgr().font("BigNoodleTilting", 20, Font.PLAIN);
-
-        for (Module m : Client.main().modMgr().modules) {
-            module = m.name();
-            if (m.state() && !m.isCategory(Category.GUI)) {
-                if (Client.main().setMgr().settingByName("ArrayList Background", Client.main().modMgr().getByName("HUD")).getBool()) {
-                    if (mode.equalsIgnoreCase("Left")) {
-                        switch (design) {
-                            case "ambien new":
-                            case "ambien old": {
-                                RenderUtils.drawRect(s.width() - bigNoodleTilting.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                                RenderUtils.drawRect(s.width() - bigNoodleTilting.getStringWidth(module) - 5, (rectY - 2), s.width() - bigNoodleTilting.getStringWidth(module) - 3, (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
-                                bigNoodleTilting.drawStringWithShadow(module, s.width() - bigNoodleTilting.getStringWidth(module) - 2, stringY - 2, Rainbow.rainbow(1, 1).getRGB());
-                                break;
-                            }
-                            default: {
-                                RenderUtils.drawRect(s.width() - comfortaa.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                                RenderUtils.drawRect(s.width() - comfortaa.getStringWidth(module) - 5, (rectY - 2), s.width() - comfortaa.getStringWidth(module) - 3, (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
-                                comfortaa.drawStringWithShadow(module, s.width() - comfortaa.getStringWidth(module) - 1, stringY, Rainbow.rainbow(1, 1).getRGB());
-                                break;
-                            }
-                        }
-                    } else if (mode.equalsIgnoreCase("Right")) {
-                        switch (design) {
-                            case "ambien new":
-                            case "ambien old": {
-                                RenderUtils.drawRect(s.width() - bigNoodleTilting.getStringWidth(module) - 5, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                                RenderUtils.drawRect(s.width() - 3, (rectY - 2), s.width(), (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
-                                bigNoodleTilting.drawStringWithShadow(module, s.width() - bigNoodleTilting.getStringWidth(module) - 4, stringY - 1, Rainbow.rainbow(1, 1).getRGB());
-                                break;
-                            }
-                            default: {
-                                RenderUtils.drawRect(s.width() - comfortaa.getStringWidth(module) - 5, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                                RenderUtils.drawRect(s.width() - 3, (rectY - 2), s.width(), (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
-                                comfortaa.drawStringWithShadow(module, s.width() - comfortaa.getStringWidth(module) - 4, stringY, Rainbow.rainbow(1, 1).getRGB());
-                                break;
-                            }
-                        }
-                    } else if (mode.equalsIgnoreCase("None")) {
-                        switch (design) {
-                            case "ambien new":
-                            case "ambien old": {
-                                RenderUtils.drawRect(s.width() - bigNoodleTilting.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                                bigNoodleTilting.drawStringWithShadow(module, s.width() - bigNoodleTilting.getStringWidth(module) - 1, stringY - 1, Rainbow.rainbow(1, 1).getRGB());
-                                break;
-                            }
-                            default: {
-                                RenderUtils.drawRect(s.width() - comfortaa.getStringWidth(module) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-                                comfortaa.drawStringWithShadow(module, s.width() - comfortaa.getStringWidth(module) - 1, stringY, Rainbow.rainbow(1, 1).getRGB());
-                                break;
-                            }
-                        }
-                    }
-                } else {
-                    Client.main().fontMgr().comfortaa20.drawString(module, s.width() - Client.main().fontMgr().comfortaa20.getStringWidth(module) - 1, stringY, Rainbow.rainbow(1, 1).getRGB());
-                }
-                rectY += 12;
-                stringY += 12;
-            }
+        for (Iterator moduleIterator = activeModuleNames.iterator(); moduleIterator.hasNext();) {
+            Module m = (Module) moduleIterator.next();
+            int xDist = s.width() - font.getStringWidth(m.visualName()) - 4;
+            RenderUtils.drawRect(s.width() - font.getStringWidth(m.visualName()) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+            RenderUtils.drawRect(s.width() - font.getStringWidth(m.visualName()) - 5, (rectY - 2), s.width() - font.getStringWidth(m.visualName()) - 3, (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
+            font.drawString(m.visualName(), xDist + 3, stringY, Color.RED.getRGB());
+            rectY += 12;
+            stringY += 12;
         }
     }
+
+    protected ArrayList<Module> getActiveModuleNames() {
+        ArrayList<Module> list = new ArrayList<Module>();
+        Iterator<Module> moduleIterator = Client.main().modMgr().modules.iterator();
+
+        while (moduleIterator.hasNext()) {
+            Module m = moduleIterator.next();
+            if (m.state() && !m.isCategory(Category.GUI)) {
+                list.add(m);
+            }
+        }
+
+        return list;
+    }
+
 }
