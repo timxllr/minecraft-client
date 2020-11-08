@@ -84,10 +84,6 @@ public class DamageCalc extends Module {
                             String s = String.valueOf(y - 1) + "m";
                             this.mc.fontRendererObj.drawStringWithShadow(s, -this.mc.fontRendererObj.getStringWidth(s) / 2, 0.0F, -1);
                             GlStateManager.translate(0.0F, 10.0F, 0.0F);
-                            if (y >= 3) {
-                            }
-                            if (y >= 6) {
-                            }
                             s = "Dmg : " + damage[y];
                             this.mc.fontRendererObj.drawStringWithShadow(s, -this.mc.fontRendererObj.getStringWidth(s) / 2, 0.0F, new Color(red, green, blue).getRGB());
 
