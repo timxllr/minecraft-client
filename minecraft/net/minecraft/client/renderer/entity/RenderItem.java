@@ -73,7 +73,7 @@ public class RenderItem implements IResourceManagerReloadListener
     /** Defines the zLevel of rendering of item on GUI. */
     public float zLevel;
     private final ItemModelMesher itemModelMesher;
-    private final TextureManager textureManager;
+    public final TextureManager textureManager;
     private static final String __OBFID = "CL_00001003";
     private ModelResourceLocation modelLocation = null;
     private boolean renderItemGui = false;
@@ -136,7 +136,7 @@ public class RenderItem implements IResourceManagerReloadListener
         this.renderModel(model, color, (ItemStack)null);
     }
 
-    private void renderModel(IBakedModel model, int color, ItemStack stack)
+    public void renderModel(IBakedModel model, int color, ItemStack stack)
     {
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
