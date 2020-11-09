@@ -90,7 +90,7 @@ public class GuiClient extends GuiScreen {
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 
-        RenderUtils.drawRect(width / 2 - 130, height / 2 - 70, width / 2 + 140, height / 2 + 30, new Color(55, 55, 55, 150).getRGB());
+        RenderUtils.drawRoundedRect(width / 2 - 130, height / 2 - 70, 265, 95, 10, new Color(45,45,45).getRGB());
 
         super.drawScreen(posX, posY, f);
     }

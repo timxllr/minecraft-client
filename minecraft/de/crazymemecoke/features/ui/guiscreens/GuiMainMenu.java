@@ -123,7 +123,7 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
         UnicodeFontRenderer font1 = Client.main().fontMgr().font("BigNoodleTitling", 60, Font.BOLD);
         UnicodeFontRenderer font2 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
 
-        RenderUtils.drawRect(width / 2 - 130, height / 2 - 70, width / 2 + 140, height / 2 + 30, new Color(55, 55, 55, 150).getRGB());
+        RenderUtils.drawRoundedRect(width / 2 - 130, height / 2 - 70, 265, 95, 10, new Color(45,45,45).getRGB());
 
         String name = Client.main().getClientName();
         font1.drawStringWithShadow(name, 2, 2, -1);
