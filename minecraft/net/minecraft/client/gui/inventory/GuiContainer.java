@@ -306,7 +306,10 @@ public abstract class GuiContainer extends GuiScreen {
             }
 
             GlStateManager.enableDepth();
-            this.itemRender.renderItemAndEffectIntoGUI(itemstack, i, j);
+            try {
+                this.itemRender.renderItemAndEffectIntoGUI(itemstack, i, j);
+            } catch (IllegalArgumentException ignored) {
+            }
             this.itemRender.renderItemOverlayIntoGUI(this.fontRendererObj, itemstack, i, j, s);
         }
 
