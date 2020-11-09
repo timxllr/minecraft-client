@@ -136,11 +136,9 @@ public class GuiButton extends Gui {
                 int col1 = color1.getRGB();
 
                 if (enabled) {
-                    RenderUtils.drawRect(xPosition + cs, yPosition, xPosition + width - cs,
-                            yPosition + height, col1);
+                    RenderUtils.drawRoundedRect((float) (xPosition + cs), yPosition, (float) ((float) width - cs - 5), height - 5, 9, new Color(16, 16, 16).getRGB());
                 } else {
-                    RenderUtils.drawRect(xPosition, yPosition, xPosition + width,
-                            yPosition + height, new Color(0.5F, 0.5F, 0.5F, 0.5F).hashCode());
+                    RenderUtils.drawRoundedRect((float) (xPosition + cs), yPosition, (float) ((float) width - cs - 5), height - 5, 9, new Color(103, 103, 103).getRGB());
                 }
 
                 mouseDragged(mc, mouseX, mouseY);
