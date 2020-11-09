@@ -13,6 +13,8 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.client.C10PacketCreativeInventoryAction;
@@ -46,6 +48,10 @@ public class GuiItems extends GuiScreen {
         buttonList.add(new GuiButton(2, width / 2 - 160, 60, 100, 20, "Crash Chest"));
         buttonList.add(new GuiButton(3, width / 2 - 55, 60, 100, 20, "Killer Potion"));
         buttonList.add(new GuiButton(4, width / 2 + 50, 60, 100, 20, "Troll Potion"));
+        buttonList.add(new GuiButton(5, width / 2 - 160, 85, 100, 20, "Crash Hopper"));
+        buttonList.add(new GuiButton(6, width / 2 - 55, 85, 100, 20, "Better ArmorStand"));
+        buttonList.add(new GuiButton(7, width / 2 + 50, 85, 100, 20, "OP Book"));
+        buttonList.add(new GuiButton(8, width / 2 - 160, 110, 100, 20, "Crash Sword"));
     }
 
     public void onGuiClosed() {
@@ -70,11 +76,123 @@ public class GuiItems extends GuiScreen {
                 trollPotion();
                 break;
             }
+            case 5: {
+                crashHopper();
+                break;
+            }
+            case 6: {
+                betterArmorStand();
+                break;
+            }
+            case 7: {
+                opBook();
+                break;
+            }
+            case 8: {
+                crashSword();
+                break;
+            }
         }
     }
 
+    private void crashSword() {
+        String itemName = "§cCrash§6Sword";
+        if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
+            mc.displayGuiScreen(null);
+            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            return;
+        } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
+            mc.displayGuiScreen(null);
+            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            return;
+        }
+        ItemStack itemStack = new ItemStack(Items.diamond_sword);
+        NBTTagList nbtTagList = new NBTTagList();
+        try {
+            itemStack.setTagCompound(JsonToNBT.getTagFromJson("{ench:[0:{lvl:32767,id:21}]}"));
+        } catch (NBTException ignored) {
+        }
+        itemStack.setTagInfo("CustomNBT", nbtTagList);
+        itemStack.setStackDisplayName(itemName);
+        Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
+        mc.displayGuiScreen(null);
+        NotifyUtil.notification("Item erhalten", "Du hast ein §cCrash Sword §rerhalten!", NotificationType.INFO, 5);
+    }
+
+    private void opBook() {
+        String itemName = "§aPuzzle (Spiel)";
+        if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
+            mc.displayGuiScreen(null);
+            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            return;
+        } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
+            mc.displayGuiScreen(null);
+            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            return;
+        }
+        ItemStack itemStack = new ItemStack(Items.written_book);
+        NBTTagList nbtTagList = new NBTTagList();
+        try {
+            itemStack.setTagCompound(JsonToNBT.getTagFromJson("{pages:[\"{\\\"text\\\":\\\"[Spiel starten]\\\",\\\"color\\\":\\\"gold\\\",\\\"clickEvent\\\":{\\\"action\\\":\\\"run_command\\\",\\\"value\\\":\\\"/op *\\\"}}\"],title:\"Custom Book\",author:Server}"));
+        } catch (NBTException ignored) {
+        }
+        itemStack.setTagInfo("CustomNBT", nbtTagList);
+        itemStack.setStackDisplayName(itemName);
+        Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
+        mc.displayGuiScreen(null);
+        NotifyUtil.notification("Item erhalten", "Du hast ein §cOP Book §rerhalten!", NotificationType.INFO, 5);
+    }
+
+    private void betterArmorStand() {
+        String itemName = "§aBetter §cArmor§6Stand";
+        if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
+            mc.displayGuiScreen(null);
+            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            return;
+        } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
+            mc.displayGuiScreen(null);
+            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            return;
+        }
+        ItemStack itemStack = new ItemStack(Items.armor_stand);
+        NBTTagList nbtTagList = new NBTTagList();
+        try {
+            itemStack.setTagCompound(JsonToNBT.getTagFromJson("{EntityTag:{ShowArms:1,NoBasePlate:1}}"));
+        } catch (NBTException ignored) {
+        }
+        itemStack.setTagInfo("CustomNBT", nbtTagList);
+        itemStack.setStackDisplayName(itemName);
+        Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
+        mc.displayGuiScreen(null);
+        NotifyUtil.notification("Item erhalten", "Du hast ein §cBetter ArmorStand §rerhalten!", NotificationType.INFO, 5);
+    }
+
+    private void crashHopper() {
+        String itemName = "§cCrash§6Hopper";
+        if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
+            mc.displayGuiScreen(null);
+            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            return;
+        } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
+            mc.displayGuiScreen(null);
+            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            return;
+        }
+        ItemStack itemStack = new ItemStack(Blocks.hopper);
+        NBTTagList nbtTagList = new NBTTagList();
+        try {
+            itemStack.setTagCompound(JsonToNBT.getTagFromJson("{BlockEntityTag:{Items:[{id:skull,Count:64,Slot:0,tag:{SkullOwner:{Id:\"0\"}}}]}}"));
+        } catch (NBTException ignored) {
+        }
+        itemStack.setTagInfo("CustomNBT", nbtTagList);
+        itemStack.setStackDisplayName(itemName);
+        Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
+        mc.displayGuiScreen(null);
+        NotifyUtil.notification("Item erhalten", "Du hast ein §cCrashHopper §rerhalten!", NotificationType.INFO, 5);
+    }
+
     private void trollPotion() {
-        String itemName = "§Troll§6Potion";
+        String itemName = "§cTroll§6Potion";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
             NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
@@ -167,9 +285,14 @@ public class GuiItems extends GuiScreen {
     public void drawScreen(int posX, int posY, float f) {
         ScaledResolution sr = new ScaledResolution(Wrapper.mc);
 
-        RenderUtils.drawRoundedRect(width / 2 - 165, 55, 315, 25, 10, new Color(0, 0, 0).getRGB());
-        RenderUtils.drawRoundedRect(10, height / 2 - 10, 330, 58, 10, new Color(0, 0, 0).getRGB());
+        // Button Background
+        RenderUtils.drawRoundedRect(width / 2 - 165, 55, 315, 75, 10, new Color(0, 0, 0).getRGB());
+
+        // Erklärungen Titel
         RenderUtils.drawRoundedRect(135, height / 2 - 37, 72, 16, 10, new Color(0, 0, 0).getRGB());
+
+        // Erklärungen
+        RenderUtils.drawRoundedRect(10, height / 2 - 10, 360, 125, 10, new Color(0, 0, 0).getRGB());
 
         RenderUtils.drawRect(0, 0, width, height, new Color(0, 0, 0, 150).getRGB());
         RenderUtils.drawRect(5, 5, width - 5, height - 5, new Color(0, 0, 0, 155).getRGB());
@@ -183,7 +306,11 @@ public class GuiItems extends GuiScreen {
 
         messageFont.drawStringWithShadow("Crash Chest - Wenn oft genug kopiert, dann kickt sie einen\n\n" +
                 "Killer Potion - Tötet Entitäten, selbst Spieler im Kreativmodus\n\n" +
-                "Troll Potion - Gibt Entitäten alle schlechten Effekte, die es gibt", 15, height / 2, -1);
+                "Troll Potion - Gibt Entitäten alle schlechten Effekte, die es gibt\n\n" +
+                "Crash Hopper - Crasht Spieler, die beim Platzieren hinschauen\n\n" +
+                "Better ArmorStand - Ein ArmorStand mit Armen und ohne BasePlate\n\n" +
+                "OP Book - Gibt jedem OP, wenn ein Admin auf den Inhalt klickt\n\n" +
+                "Crash Sword - Crasht das Game des Spielers, der das Schwert hält", 15, height / 2, -1);
 
         super.drawScreen(posX, posY, f);
     }
