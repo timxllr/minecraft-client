@@ -64,15 +64,16 @@ public class GuiCredits extends GuiScreen {
         String title = "Credits";
         cabin35.drawStringWithShadow(title, width / 2 - cabin35.getStringWidth(title) / 2, 10, -1);
 
-        String credits = "HeroCode - ClickGUI API\n\n" +
+        String credits = "HeroCode - SettingsManager API\n\n" +
                 "Kriteax - Client Port from 1.8 to 1.8.8 | General Help\n\n" +
-                "Sam - Font System | General Help\n\n" +
-                "Nero - Fonts | Crasher | Shaders | General, fresh SRC\n\n" +
-                "Kroko - Event System | ShaderESP | Aura Rotations | General Help\n\n" +
-                "W4z3d - Hit Animations | General Help\n\n" +
-                "Deleteboys - TrailESP | MotionGraph | Rainbow Method\n\n" +
+                "MinecraftGEMA / Sam - Font System | General Help\n\n" +
+                "Nero - Fonts | Crasher | Shaders | Design Ideas from Ambien\n\n" +
+                "Kroko - Event System | ESP (Shader) | Aura Rotations | General Help\n\n" +
+                "W4z3d - Hit Animations (Build / BlockHit) | PlayerModel Fixes | General Help\n\n" +
+                "Deleteboys - TrailESP | MotionGraph | Advanced RainbowColor Method\n\n" +
                 "superblaubeere27 - Shader System | Notification System\n\n" +
-                "Vinii - Render Methods (roundedRect, gradientRect) | General Help";
+                "Vinii - Render Methods | ClickGUI API | General Help\n\n" +
+                "EcstasyCode - General Help (with ParticleSystem)";
         cabin23.drawStringWithShadow(credits, 10, 40, -1);
 
         super.drawScreen(posX, posY, f);
