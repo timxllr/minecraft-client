@@ -11,6 +11,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+
+import de.crazymemecoke.manager.particlemanager.FBP;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.block.BlockLiquid;
@@ -1173,6 +1175,7 @@ public abstract class World implements IBlockAccess
             this.getChunkFromChunkCoords(i, j).addEntity(entityIn);
             this.loadedEntityList.add(entityIn);
             this.onEntityAdded(entityIn);
+            FBP.INSTANCE.eventHandler.onEntityJoinWorldEvent(entityIn,this);
             return true;
         }
     }

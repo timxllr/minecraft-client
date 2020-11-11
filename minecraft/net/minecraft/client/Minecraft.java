@@ -43,6 +43,7 @@ import de.crazymemecoke.manager.eventmanager.impl.EventTick;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.features.ui.Interface;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
+import de.crazymemecoke.manager.particlemanager.FBP;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -2060,6 +2061,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
             this.thePlayer.movementInput = new MovementInputFromOptions(this.gameSettings);
             this.playerController.setPlayerCapabilities(this.thePlayer);
             this.renderViewEntity = this.thePlayer;
+            FBP.INSTANCE.eventHandler.onWorldLoadEvent();
         } else {
             this.saveLoader.flushCache();
             this.thePlayer = null;
@@ -2345,6 +2347,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
      * Return the singleton Minecraft instance for the game
      */
     public static Minecraft mc() {
+        return theMinecraft;
+    }
+
+    public static Minecraft getInstance() {
         return theMinecraft;
     }
 
