@@ -10,6 +10,7 @@ import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.eventmanager.EventManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
+import de.crazymemecoke.manager.particlemanager.FBP;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
@@ -22,7 +23,7 @@ public class Client {
     private Minecraft mc = Minecraft.mc();
 
     private String clientName = "Vanity";
-    private double clientVersion = 1.1;
+    private double clientVersion = 1.2;
     private String clientCoder = "CrazyMemeCoke";
     private String clientPrefix = ".";
     private String fakeVer = "OptiFine 1.8.8 HD_I7";
@@ -68,6 +69,7 @@ public class Client {
         commandManager = new CommandManager();
         AltManager.loadAlts();
         clickgui = new ClickGUI();
+        new FBP().onStart();
         Runtime.getRuntime().addShutdownHook(new Thread(this::onShutdown));
     }
 
