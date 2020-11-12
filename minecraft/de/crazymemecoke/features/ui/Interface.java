@@ -120,7 +120,7 @@ public class Interface extends GuiIngame {
             RenderUtils.drawRect(4, s.height() - 22, bigNoodleTitling22.getStringWidth(s2) + 8, s.height(), new Color(0, 0, 0, 180).getRGB());
 
             RenderUtils.drawRect(s.width() - 4, s.height() - 22, s.width(), s.height(), Colors.main().ambienBlueTop);
-            RenderUtils.drawRect(s.width() - comfortaa22.getStringWidth(s4) - 8, s.height() - 22, s.width() - 4, s.height(), new Color(0, 0, 0, 180).getRGB());
+            RenderUtils.drawRect(s.width() - comfortaa22.getStringWidth(s4) - 12, s.height() - 22, s.width() - 4, s.height(), new Color(0, 0, 0, 180).getRGB());
 
             bigNoodleTitling22.drawStringWithShadow(s1, 5, s.height() - 20, -1);
             bigNoodleTitling22.drawStringWithShadow(s2, 5, s.height() - 10, -1);
