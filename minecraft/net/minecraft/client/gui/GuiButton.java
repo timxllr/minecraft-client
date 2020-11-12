@@ -42,6 +42,7 @@ public class GuiButton extends Gui {
      * The string displayed on this control.
      */
     public String displayString;
+    public String[] buttonDesc;
     public int id;
 
     /**
@@ -70,6 +71,20 @@ public class GuiButton extends Gui {
         this.width = widthIn;
         this.height = heightIn;
         this.displayString = buttonText;
+    }
+
+    public GuiButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, String[] buttonDesc) {
+        this.width = 200;
+        this.height = 20;
+        this.enabled = true;
+        this.visible = true;
+        this.id = buttonId;
+        this.xPosition = x;
+        this.yPosition = y;
+        this.width = widthIn;
+        this.height = heightIn;
+        this.displayString = buttonText;
+        this.buttonDesc = buttonDesc;
     }
 
     /**
