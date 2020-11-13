@@ -1,5 +1,6 @@
 package de.crazymemecoke.manager.clickguimanager.clickgui.util;
 
+import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.Gui;
 
 /**
@@ -12,7 +13,8 @@ import net.minecraft.client.gui.Gui;
 public final class RenderUtil {
 
 	public static void drawRect(int left, int top, int right, int bottom, int color) {
-		Gui.drawRect(left, top, right, bottom, color);
+		//Gui.drawRect(left, top, right, bottom, color);
+		RenderUtils.drawRect(left, top, right, bottom, color);
 	}
 
 	public static void drawHorizontalLine(int startX, int endX, int y, int color) {
