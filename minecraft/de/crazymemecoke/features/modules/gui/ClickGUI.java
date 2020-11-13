@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.gui;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -19,11 +20,9 @@ public class ClickGUI extends Module {
     public void setup() {
         ArrayList<String> theme = new ArrayList<>();
 
-        theme.add("JellyLike");
-        theme.add("New");
-        theme.add("Ambien");
+        theme.add("Caesium");
 
-        Client.main().setMgr().newSetting(new Setting("Design", this, "Ambien", theme));
+        Client.main().setMgr().newSetting(new Setting("Design", this, "Caesium", theme));
         Client.main().setMgr().newSetting(new Setting("Sound", this, false));
         Client.main().setMgr().newSetting(new Setting("Blur", this, true));
         Client.main().setMgr().newSetting(new Setting("Red", this, 255, 0, 255, true));
@@ -34,7 +33,7 @@ public class ClickGUI extends Module {
     @Override
     public void onEnable() {
         if (!(Client.main().modMgr().getModule(Invis.class)).state()) {
-            mc.displayGuiScreen(Client.main().getClickGui());
+            mc.displayGuiScreen(new Panel(Client.main().setMgr().settingByName("Design", this).getMode(), 22));
             Client.main().modMgr().getModule(ClickGUI.class).setState(false);
         }
     }

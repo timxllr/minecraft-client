@@ -1,8 +1,8 @@
 package de.crazymemecoke.manager.clickguimanager.settings;
 
-import java.util.ArrayList;
-
 import de.crazymemecoke.manager.modulemanager.Module;
+
+import java.util.ArrayList;
 
 /**
  * Made by HeroCode
@@ -13,9 +13,9 @@ import de.crazymemecoke.manager.modulemanager.Module;
  */
 public class Setting {
 
-    private String name;
-    private Module parent;
-    private String mode;
+    private final String name;
+    private final Module parent;
+    private final String mode;
 
     private String sval;
     private ArrayList<String> options;
@@ -27,30 +27,35 @@ public class Setting {
     private double max;
     private boolean onlyint = false;
 
+    private SettingType settingType;
 
-    public Setting(String name, Module parent, String sval, ArrayList<String> options) {
+
+    public Setting(String name, Module parent, String modeValue, ArrayList<String> options) {
         this.name = (parent == null ? "global" : parent.name()) + "_" + name;
         this.parent = parent;
-        this.sval = sval;
+        this.sval = modeValue;
         this.options = options;
         this.mode = "Combo";
+        settingType = SettingType.COMBO;
     }
 
-    public Setting(String name, Module parent, boolean bval) {
+    public Setting(String name, Module parent, boolean booleanValue) {
         this.name = (parent == null ? "global" : parent.name()) + "_" + name;
         this.parent = parent;
-        this.bval = bval;
+        this.bval = booleanValue;
         this.mode = "Check";
+        settingType = SettingType.BOOLEAN;
     }
 
-    public Setting(String name, Module parent, double dval, double min, double max, boolean onlyint) {
+    public Setting(String name, Module parent, double dval, double min, double max, boolean onlyInt) {
         this.name = (parent == null ? "global" : parent.name()) + "_" + name;
         this.parent = parent;
         this.dval = dval;
         this.min = min;
         this.max = max;
-        this.onlyint = onlyint;
+        this.onlyint = onlyInt;
         this.mode = "Slider";
+        settingType = SettingType.VALUE;
     }
 
     public String getName() {
@@ -105,18 +110,26 @@ public class Setting {
     }
 
     public boolean isCombo() {
-        return this.mode.equalsIgnoreCase("Combo") ? true : false;
+        return this.mode.equalsIgnoreCase("Combo");
     }
 
     public boolean isCheck() {
-        return this.mode.equalsIgnoreCase("Check") ? true : false;
+        return this.mode.equalsIgnoreCase("Check");
     }
 
     public boolean isSlider() {
-        return this.mode.equalsIgnoreCase("Slider") ? true : false;
+        return this.mode.equalsIgnoreCase("Slider");
     }
 
     public boolean onlyInt() {
         return this.onlyint;
+    }
+
+    public SettingType getSettingType() {
+        return settingType;
+    }
+
+    public void setSettingType(SettingType settingType) {
+        this.settingType = settingType;
     }
 }

@@ -4,7 +4,7 @@ import de.crazymemecoke.features.commands.Friend;
 import de.crazymemecoke.features.modules.exploits.Crasher;
 import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import de.crazymemecoke.manager.altmanager.AltManager;
-import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGUI;
+import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGui;
 import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.eventmanager.EventManager;
@@ -39,7 +39,7 @@ public class Client {
 
     private CommandManager commandManager;
     private SettingsManager setmgr;
-    private ClickGUI clickgui;
+    private ClickGui clickgui;
     private FontManager fontManager;
     private File clientDir = new File(Minecraft.mc().mcDataDir + "/" + getClientName());
     private Friend friend;
@@ -68,7 +68,7 @@ public class Client {
         moduleManager.loadBinds();
         commandManager = new CommandManager();
         AltManager.loadAlts();
-        clickgui = new ClickGUI();
+        clickgui = new ClickGui();
         new FBP().onStart();
         Runtime.getRuntime().addShutdownHook(new Thread(this::onShutdown));
     }
@@ -119,7 +119,7 @@ public class Client {
         return setmgr;
     }
 
-    public ClickGUI getClickGui() {
+    public ClickGui getClickGui() {
         return clickgui;
     }
 
