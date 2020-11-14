@@ -50,6 +50,7 @@ public class GuiResetClient extends GuiScreen {
     protected void actionPerformed(GuiButton button) throws IOException {
         switch (button.id) {
             case 0: {
+                Client.main().getClientDir().delete();
                 Client.main().getClientDir().deleteOnExit();
                 NotifyUtil.debug("Deleted all settings (Client Reset!)");
                 mc.displayGuiScreen(new GuiMainMenu());
