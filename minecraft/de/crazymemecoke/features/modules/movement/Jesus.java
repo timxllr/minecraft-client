@@ -50,19 +50,19 @@ public class Jesus extends Module {
         if (event instanceof EventUpdate) {
             String jesusMode = Client.main().setMgr().settingByName("Mode", this).getMode();
             switch (jesusMode) {
-                case "vanilla": {
+                case "Vanilla": {
                     doVanilla();
                     break;
                 }
-                case "dolphin": {
+                case "Dolphin": {
                     doDolphin();
                     break;
                 }
-                case "aac": {
+                case "AAC": {
                     doAAC();
                     break;
                 }
-                case "ncp": {
+                case "NCP": {
                     doNCP();
                     break;
                 }

@@ -71,6 +71,8 @@ public class Fly extends Module {
             String mode = sM.settingByName("Mode", this).getMode();
 
             if (mode.equalsIgnoreCase("Fly")) {
+                setDisplayName("Fly [" + mode + " / " + flyMode + "]");
+
                 if (flyMode.equalsIgnoreCase("Vanilla")) {
                     mc.thePlayer.capabilities.isFlying = true;
                 } else if (flyMode.equalsIgnoreCase("Motion")) {
@@ -165,6 +167,8 @@ public class Fly extends Module {
                     mc.thePlayer.motionY = -0.01;
                 }
             } else if (mode.equalsIgnoreCase("Glide")) {
+                setDisplayName("Fly [" + mode + " / " + glideMode + "]");
+
                 if (glideMode.equalsIgnoreCase("New")) {
                     motion = 0f;
                     motion = 0.0;

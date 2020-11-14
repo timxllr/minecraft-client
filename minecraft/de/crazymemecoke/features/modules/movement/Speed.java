@@ -67,6 +67,7 @@ public class Speed extends Module {
         mode.add("Rewinside");
         mode.add("CubeCraft");
         mode.add("Hive SkyGiants");
+        mode.add("MiniHop");
         mode.add("Race");
         mode.add("Motion");
         mode.add("Jump");
@@ -112,93 +113,97 @@ public class Speed extends Module {
             speedMode = sM.settingByName("Mode", this).getMode();
             double frames_speed = sM.settingByName("Frames Speed", this).getNum();
 
-            setDisplayName("Speed [" + speedMode.toUpperCase() + "]");
+            setDisplayName("Speed [" + speedMode + "]");
 
             if (state()) {
 
                 switch (speedMode) {
-                    case "ground": {
+                    case "Ground": {
                         doGround();
                         break;
                     }
-                    case "aac 1.9.8": {
+                    case "AAC 1.9.8": {
                         doAAC198();
                         break;
                     }
-                    case "frames": {
+                    case "Frames": {
                         doFrames(frames_speed);
                         break;
                     }
-                    case "motion": {
+                    case "Motion": {
                         doMotion();
                         break;
                     }
-                    case "jump": {
+                    case "Jump": {
                         doJump();
                         break;
                     }
-                    case "timer": {
+                    case "Timer": {
                         doTimer();
                         break;
                     }
-                    case "ncp slow": {
+                    case "NCP Slow": {
                         doNCPYPortSlow();
                         break;
                     }
-                    case "aac 1.9.10": {
+                    case "AAC 1.9.10": {
                         doAAC1910();
                         break;
                     }
-                    case "aac 3.3.10": {
+                    case "AAC 3.3.10": {
                         doAAC3310();
                         break;
                     }
-                    case "hive skygiants": {
+                    case "Hive SkyGiants": {
                         doHiveSkyGiants();
                         break;
                     }
-                    case "ncp fast": {
+                    case "NCP Fast": {
                         doNCPYPortFast();
                         break;
                     }
-                    case "aac 3.3.1": {
+                    case "AAC 3.3.1": {
                         doAACYPort331();
                         break;
                     }
-                    case "minesecure": {
+                    case "MineSecure": {
                         doMineSecure();
                         break;
                     }
-                    case "aac 3.3.9": {
+                    case "AAC 3.3.9": {
                         doAACLowHop339();
                         break;
                     }
-                    case "aac 3.3.11": {
+                    case "AAC 3.3.11": {
                         doAAC3311();
                         break;
                     }
-                    case "minesucht": {
+                    case "MineSucht": {
                         doMineSucht();
                         break;
                     }
-                    case "ncp bhop": {
+                    case "NCP BHop": {
                         doNCPBHop();
                         break;
                     }
-                    case "rewinside": {
+                    case "Rewinside": {
                         doRewinside();
                         break;
                     }
-                    case "cubecraft": {
+                    case "CubeCraft": {
                         doCubeCraft();
                         break;
                     }
-                    case "race": {
+                    case "Race": {
                         doRace();
                         break;
                     }
-                    case "aac packet": {
+                    case "AAC Packet": {
                         doAACPacket();
+                        break;
+                    }
+                    case "MiniHop": {
+                        doMiniHop();
                         break;
                     }
                 }
@@ -583,9 +588,17 @@ public class Speed extends Module {
     }
 
     private void doMiniHop() {
-        hop = true;
-        prevY = mc.thePlayer.posY;
-        mc.thePlayer.jump();
+        if (EntityUtils.isMoving()) {
+            if (mc.thePlayer.onGround) {
+                speedTick += 1;
+                mc.thePlayer.jump();
+                mc.thePlayer.motionY = 0.01D;
+            }
+            if (speedTick > 25) {
+                speedTick = 25;
+            }
+            PlayerUtil.setSpeed(speedTick * 0.05D);
+        }
     }
 
     private void doGround() {

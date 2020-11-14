@@ -1,51 +1,67 @@
 package de.crazymemecoke.features.modules.movement;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.clickguimanager.settings.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
-import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
+import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.utils.entity.EntityUtils;
+import de.crazymemecoke.utils.entity.PlayerUtil;
 import org.lwjgl.input.Keyboard;
+
+import java.util.ArrayList;
 
 public class Strafe extends Module {
 
     public Strafe() {
         super("Strafe", Keyboard.KEY_NONE, Category.MOVEMENT);
+
+        ArrayList<String> mode = new ArrayList<>();
+
+        mode.add("NCP");
+        mode.add("AAC");
+
+        Client.main().setMgr().newSetting(new Setting("Mode", this, "NCP", mode));
     }
 
 
     @Override
     public void onEvent(Event event) {
-        if(event instanceof EventUpdate) {
-            if (!(mc.thePlayer.hurtTime > 0)) {
-                if ((mc.thePlayer.onGround) || (mc.thePlayer.isAirBorne) && (!mc.thePlayer.isInWater())) {
-                    float dir = mc.thePlayer.rotationYaw;
-                    if (mc.thePlayer.moveForward < 0.0F) {
-                        dir += 180.0F;
-                    }
-                    if (mc.thePlayer.moveStrafing > 0.0F) {
-                        dir -= 90.0F * (mc.thePlayer.moveForward < 0.0F ? -0.5F
-                                : mc.thePlayer.moveForward > 0.0F ? 0.8F : 1.0F);
-                    }
-                    if (mc.thePlayer.moveStrafing < 0.0F) {
-                        dir += 90.0F * (mc.thePlayer.moveForward < 0.0F ? -0.5F
-                                : mc.thePlayer.moveForward > 0.0F ? 0.8F : 1.0F);
-                    }
-                    double hOff = 0.221D;
-                    if (mc.thePlayer.isSprinting()) {
-                        hOff *= 1.3190000119209289D;
-                    }
-                    if (mc.thePlayer.isSneaking()) {
-                        hOff *= 0.3D;
-                    }
+        if (event instanceof EventMotion) {
+            String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
 
-                    float var9 = (float) ((float) Math.cos((dir + 90.0F) * 3.141592653589793D / 180.0D) * hOff);
-                    float zD = (float) ((float) Math.sin((dir + 90.0F) * 3.141592653589793D / 180.0D) * hOff);
-                    if ((mc.gameSettings.keyBindForward.pressed) || (mc.gameSettings.keyBindLeft.pressed)
-                            || (mc.gameSettings.keyBindRight.pressed) || (mc.gameSettings.keyBindBack.pressed)) {
-                        mc.thePlayer.posX = (var9);
-                        mc.thePlayer.posZ = (zD);
-                    }
+            setDisplayName("Strafe [" + mode + "]");
+
+            switch (mode) {
+                case "NCP": {
+                    doNCP();
+                    break;
                 }
+                case "AAC": {
+                    doAAC();
+                    break;
+                }
+            }
+        }
+    }
+
+    private void doAAC() {
+        if (EntityUtils.isMoving()) {
+            if (mc.gameSettings.keyBindJump.pressed) {
+                PlayerUtil.setSpeed(0.23D);
+            } else {
+                PlayerUtil.setSpeed(0.135D);
+            }
+        }
+    }
+
+    private void doNCP() {
+        if (EntityUtils.isMoving()) {
+            if (mc.gameSettings.keyBindJump.pressed) {
+                PlayerUtil.setSpeed(0.26D);
+            } else {
+                PlayerUtil.setSpeed(0.17D);
             }
         }
     }

@@ -163,14 +163,14 @@ public class Interface extends GuiIngame {
         String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
 
         switch (mode) {
-            case "ambien old": {
+            case "Ambien Old": {
                 RenderUtils.drawRect(0, 0, 73, 25, new Color(0, 0, 0).getRGB());
                 Client.main().fontMgr().ambien45.drawStringWithShadow("A", 3, 1, Colors.main().getAmbienOldBlueColor());
                 Client.main().fontMgr().ambien45.drawStringWithShadow("mbien", 17, 1, Colors.main().getGrey());
                 Client.main().fontMgr().ambien20.drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 55, 0, 0x349ac0);
                 break;
             }
-            case "vortex": {
+            case "Vortex": {
                 GL11.glPushMatrix();
                 GL11.glScalef(2f, 2f, 2f);
                 Client.main().fontMgr().vortex20.drawString("V", 0, -2, Colors.main().getVortexRedColor());
@@ -185,7 +185,7 @@ public class Interface extends GuiIngame {
                 GL11.glPopMatrix();
                 break;
             }
-            case "suicide": {
+            case "Suicide": {
                 Client.main().fontMgr().font("Comfortaa", 30, Font.PLAIN).drawStringWithShadow("SUICIDE", 2, 3, Colors.main().getSuicideBlueColor());
                 Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 68, 4, Colors.main().getSuicideBlueColor());
 
@@ -208,7 +208,7 @@ public class Interface extends GuiIngame {
                 Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow(dtf.format(now), 32, 139, -1);
                 break;
             }
-            case "apinity": {
+            case "Apinity": {
                 RenderUtils.drawRect(0, 35, 40, 175, new Color(0, 0, 0, 150).getRGB());
 
                 Client.main().fontMgr().font("Raleway Light", 45, Font.PLAIN).drawStringWithShadow("Apinity", 1, 1, Colors.main().getApinityGreyColor());
@@ -226,11 +226,11 @@ public class Interface extends GuiIngame {
                 Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Z: " + mc.thePlayer.getPosition().getZ(), 2, 165, Colors.main().getApinityBlueColor());
                 break;
             }
-            case "huzuni": {
+            case "Huzuni": {
                 Client.main().fontMgr().font("Arial", 20, Font.PLAIN).drawStringWithShadow("Huzuni Dev " + Client.main().getClientVersion(), 2, 2, -1);
                 break;
             }
-            case "wurst": {
+            case "Wurst": {
                 RenderUtils.drawRect(0, 10, 145, 28, new Color(255, 255, 255, 130).getRGB());
 
                 Client.main().fontMgr().font("Arial", 20, Font.PLAIN).drawString("v" + Client.main().getClientVersion() + " MC1.8.8", 80, 15, new Color(0, 0, 0).getRGB());
@@ -243,12 +243,12 @@ public class Interface extends GuiIngame {
                 RenderUtils.drawImage(Client.main().getWurstWatermark(), x, y, width, height);
                 break;
             }
-            case "nodus": {
+            case "Nodus": {
                 mc.fontRendererObj.drawString("Nodus", 2, 2, Colors.main().getNodusPurpleColor());
                 mc.fontRendererObj.drawString("v" + Client.main().getClientVersion(), 35, 2, Colors.main().getNodusTealColor());
                 break;
             }
-            case "saint": {
+            case "Saint": {
                 UnicodeFontRenderer f1 = Client.main().fontMgr().font("Verdana", 20, Font.PLAIN);
                 UnicodeFontRenderer f2 = Client.main().fontMgr().font("Verdana", 17, Font.PLAIN);
                 String s1 = "Saint";
@@ -260,17 +260,17 @@ public class Interface extends GuiIngame {
                 f2.drawStringWithShadow(String.valueOf(Minecraft.debugFPS), 22, 88, new Color(0x4A4A4A).getRGB());
                 break;
             }
-            case "icarus old": {
+            case "Icarus Old": {
                 mc.fontRendererObj.drawString("Icarus (b" + Client.main().getClientVersion() + ")", 2, 2, -1);
                 break;
             }
-            case "icarus new": {
+            case "Icarus New": {
                 RenderUtils.drawRect(s.width() - 62, 0, s.width(), 20, Colors.main().getIcarusNewGreyColor());
 
                 Client.main().fontMgr().font("BigNoodleTiltling", 40, Font.BOLD).drawStringWithShadow("Icarus", s.width() - 60, -2, -1);
                 break;
             }
-            case "ambien new": {
+            case "Ambien New": {
                 RenderUtils.drawRect(0, 10, 112, 40, Colors.main().getAmbienNewDarkGreyColor());
 
                 Client.main().fontMgr().font("FIFA Welcome", 60, Font.PLAIN).drawStringWithShadow("A", 2, 7, Colors.main().getAmbienNewBlueColor());
@@ -279,13 +279,13 @@ public class Interface extends GuiIngame {
                 Client.main().fontMgr().font("BigNoodleTiltling", 20, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 96, 24, -1);
                 break;
             }
-            case "hero": {
+            case "Hero": {
                 RenderUtils.drawRect(0, 0, 60, 21, new Color(0, 0, 0, 70).getRGB());
 
                 Client.main().fontMgr().font("Raleway Light", 55, Font.PLAIN).drawStringWithShadow("Hero", -2, -4, Colors.main().getHeroGreenColor());
                 break;
             }
-            case "klientus": {
+            case "Klientus": {
                 Client.main().fontMgr().font("Verdana", 50, Font.PLAIN).drawStringWithShadow("K", 1, 1, new Color(0x00659f).getRGB());
                 Client.main().fontMgr().font("Verdana", 50, Font.PLAIN).drawStringWithShadow("lientus", 18, 1, -1);
 
@@ -297,7 +297,7 @@ public class Interface extends GuiIngame {
                 Client.main().fontMgr().font("Verdana", 18, Font.PLAIN).drawStringWithShadow(dtf.format(now), 32, 32, -1);
                 break;
             }
-            case "ambien newest": {
+            case "Ambien Newest": {
                 int width = 110;
                 int height = 110;
                 int x = -5;
@@ -314,7 +314,7 @@ public class Interface extends GuiIngame {
                 RenderUtils.drawImage(Client.main().getAmbienWatermark(), x, y, width, height);
                 break;
             }
-            case "koks": {
+            case "Koks": {
                 GL11.glPushMatrix();
                 GL11.glScalef(2f, 2f, 2f);
                 mc.fontRendererObj.drawString("Koks", 3, 4, Colors.main().getKoksGreenColor());
@@ -334,46 +334,46 @@ public class Interface extends GuiIngame {
             String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
 
             switch (mode) {
-                case "ambien old": {
+                case "Ambien Old": {
                     gui.drawGui(1, 30, 72);
                     break;
                 }
-                case "ambien newest": {
+                case "Ambien Newest": {
                     gui.drawGui(11, 75, 83);
                     break;
                 }
-                case "vortex":
-                case "suicide": {
+                case "Vortex":
+                case "Suicide": {
                     gui.drawGui(1, 20, 72);
                     break;
                 }
-                case "apinity": {
+                case "Apinity": {
                     gui.drawGui(5, 40, 55);
                     break;
                 }
-                case "huzuni": {
+                case "Huzuni": {
                     gui.drawGui(3, 15, 95);
                     break;
                 }
-                case "saint":
-                case "icarus old":
-                case "icarus new": {
+                case "Saint":
+                case "Icarus Old":
+                case "Icarus New": {
                     gui.drawGui(3, 15, 65);
                     break;
                 }
-                case "ambien new": {
+                case "Ambien New": {
                     gui.drawGui(1, 45, 65);
                     break;
                 }
-                case "hero": {
+                case "Hero": {
                     gui.drawGui(1, 22, 59);
                     break;
                 }
-                case "vanta": {
+                case "Vanta": {
                     gui.drawGui(1, 20, 65);
                     break;
                 }
-                case "koks": {
+                case "Koks": {
                     gui.drawGui(6, 28, 70);
                     break;
                 }

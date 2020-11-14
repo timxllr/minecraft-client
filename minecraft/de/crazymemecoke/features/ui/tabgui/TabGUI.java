@@ -98,48 +98,48 @@ public class TabGUI {
         // Background
         String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
         switch (mode) {
-            case "ambien old":
-            case "vortex": {
+            case "Ambien Old":
+            case "Vortex": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0).getRGB());
                 break;
             }
-            case "ambien newest": {
+            case "Ambien Newest": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getAmbienNewestGreyMainColor());
                 break;
             }
-            case "suicide": {
+            case "Suicide": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getSuicideBlueGreyColor());
                 break;
             }
-            case "apinity": {
+            case "Apinity": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getApinityGreyColor());
                 break;
             }
-            case "huzuni": {
+            case "Huzuni": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getHuzuniGreyColor());
                 break;
             }
-            case "saint": {
+            case "Saint": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getSaintDarkBlueColor());
                 break;
             }
-            case "icarus old": {
+            case "Icarus Old": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getIcarusOldGreyColor());
                 break;
             }
-            case "icarus new": {
+            case "Icarus New": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getIcarusNewGreyColor());
                 break;
             }
-            case "ambien new": {
+            case "Ambien New": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getAmbienNewDarkGreyColor());
                 break;
             }
-            case "hero": {
+            case "Hero": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, Colors.main().getHeroGreyColor());
                 break;
             }
-            case "koks": {
+            case "Koks": {
                 RenderUtils.drawRect(posX - 1, posY - 1, posX + guiWidth, posY + guiHeight - 13, new Color(0, 0, 0, 220).getRGB());
                 break;
             }
@@ -149,63 +149,63 @@ public class TabGUI {
         for (int i = 0; i < tabsList.size(); i++) {
 
             switch (mode) {
-                case "ambien old": {
+                case "Ambien Old": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getAmbienOldBlueColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff, -1);
                     break;
                 }
-                case "ambien newest": {
+                case "Ambien Newest": {
                     RenderUtils.drawVerticalGradient(x - 1, yOff - 1, guiWidth + 1, tabHeight, i == selectedTab ? Colors.main().ambienBlueBottom.getRGB() : 0,
                             i == selectedTab ? Colors.main().ambienBlueTop.getRGB() : 0);
                     Client.main().fontMgr().font("BebasNeue", 20, Font.PLAIN).drawCenteredString((tabsList.get(i)).tabName.toUpperCase(), x + 40, yOff + 2, -1);
                     break;
                 }
-                case "vortex": {
+                case "Vortex": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getVortexRedColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow((tabsList.get(i)).tabName, x + 1, yOff, -1);
                     break;
                 }
-                case "suicide": {
+                case "Suicide": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Rainbow.rainbow(1, 1f).getRGB() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
-                case "apinity": {
+                case "Apinity": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getApinityBlueColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
-                case "huzuni": {
+                case "Huzuni": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getHuzuniBlueColor() : 0);
                     Client.main().fontMgr().font("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
-                case "saint": {
+                case "Saint": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getSaintDarkTealColor() : 0);
                     Client.main().fontMgr().font("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
-                case "icarus old": {
+                case "Icarus Old": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getIcarusOldOrangeColor() : 0);
                     Client.main().fontMgr().font("Arial", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff, -1);
                     break;
                 }
-                case "icarus new": {
+                case "Icarus New": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getIcarusNewBlueColor() : 0);
                     Client.main().fontMgr().font("BigNoodleTitling", 20, Font.BOLD).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 1, yOff + 1, -1);
                     break;
                 }
-                case "ambien new": {
+                case "Ambien New": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getAmbienNewBlueColor() : 0);
                     Client.main().fontMgr().font("BigNoodleTitling", 20, Font.PLAIN).drawCenteredString(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x + 30, yOff + 1, -1);
                     break;
                 }
-                case "hero": {
+                case "Hero": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getHeroGreenColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x, yOff + 1, -1);
                     break;
                 }
-                case "koks": {
+                case "Koks": {
                     RenderUtils.drawRect(x - 1, yOff - 1, x + guiWidth, y + tabHeight * i + 11, i == selectedTab ? Colors.main().getKoksGreenColor() : 0);
                     Client.main().fontMgr().font("Raleway Light", 20, Font.PLAIN).drawStringWithShadow(StringUtils.capitalize((tabsList.get(i)).tabName.toLowerCase()), x, yOff + 1, -1);
                     break;

@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.gui;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -46,21 +47,21 @@ public class HUD extends Module {
         hitAnimation.add("Normal");
         hitAnimation.add("Stoned");
 
-        Client.main().setMgr().newSetting(new Setting("Design", this, "Ambien", design));
-        Client.main().setMgr().newSetting(new Setting("Chat Mode", this, "Custom", chatMode));
-        Client.main().setMgr().newSetting(new Setting("Chat Font", this, "Custom", chatFont));
-        Client.main().setMgr().newSetting(new Setting("Hit Animation", this, "Stoned", hitAnimation));
-        Client.main().setMgr().newSetting(new Setting("Item Height", this, 0.0F, -0.35F, 1.5F, false));
-        Client.main().setMgr().newSetting(new Setting("Hotbar", this, true));
-        Client.main().setMgr().newSetting(new Setting("ArrayList", this, true));
-        Client.main().setMgr().newSetting(new Setting("TabGUI", this, true));
-        Client.main().setMgr().newSetting(new Setting("Watermark", this, true));
-        Client.main().setMgr().newSetting(new Setting("Target HUD", this, true));
-        Client.main().setMgr().newSetting(new Setting("KeyStrokes", this, true));
-        Client.main().setMgr().newSetting(new Setting("GUI Animation", this, true));
-        Client.main().setMgr().newSetting(new Setting("GUI Blur", this, true));
-        Client.main().setMgr().newSetting(new Setting("Blockhit Animation", this, true));
-        Client.main().setMgr().newSetting(new Setting("Developer Mode", this, false));
+        SettingsManager sM = Client.main().setMgr();
+        sM.newSetting(new Setting("Design", this, "Ambien", design));
+        sM.newSetting(new Setting("Chat Mode", this, "Custom", chatMode));
+        sM.newSetting(new Setting("Chat Font", this, "Custom", chatFont));
+        sM.newSetting(new Setting("Hit Animation", this, "Stoned", hitAnimation));
+        sM.newSetting(new Setting("Item Height", this, 0.0F, -0.35F, 1.5F, false));
+        sM.newSetting(new Setting("Hotbar", this, true));
+        sM.newSetting(new Setting("ArrayList", this, true));
+        sM.newSetting(new Setting("TabGUI", this, true));
+        sM.newSetting(new Setting("Watermark", this, true));
+        sM.newSetting(new Setting("KeyStrokes", this, true));
+        sM.newSetting(new Setting("GUI Animation", this, true));
+        sM.newSetting(new Setting("GUI Blur", this, true));
+        sM.newSetting(new Setting("Blockhit Animation", this, true));
+        sM.newSetting(new Setting("Developer Mode", this, false));
     }
 
     @Override

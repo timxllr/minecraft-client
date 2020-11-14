@@ -33,19 +33,19 @@ public class NoFall extends Module {
             String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
 
             switch (mode) {
-                case "vanilla": {
+                case "Vanilla": {
                     doVanilla();
                     break;
                 }
-                case "aac 1.9.10": {
+                case "AAC 1.9.10": {
                     doAAC1910();
                     break;
                 }
-                case "aac 3.3.8": {
+                case "AAC 3.3.8": {
                     doAAC338();
                     break;
                 }
-                case "aac 3.3.11": {
+                case "AAC 3.3.11": {
                     doAAC3311();
                     break;
                 }

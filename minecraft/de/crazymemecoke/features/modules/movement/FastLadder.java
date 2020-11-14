@@ -45,11 +45,11 @@ public class FastLadder extends Module {
         String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
 
         switch (mode) {
-            case "vanilla": {
+            case "Vanilla": {
                 doVanilla();
                 break;
             }
-            case "aac": {
+            case "AAC": {
                 doAAC();
                 break;
             }

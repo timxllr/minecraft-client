@@ -45,11 +45,11 @@ public class Step extends Module {
 
             if (mc.thePlayer.isCollidedHorizontally) {
                 switch (mode) {
-                    case "vanilla": {
+                    case "Vanilla": {
                         doVanilla();
                         break;
                     }
-                    case "ncp": {
+                    case "NCP": {
                         doNCP();
                         break;
                     }
