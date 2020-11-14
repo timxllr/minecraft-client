@@ -19,7 +19,7 @@ public class Tower extends Module {
     public Tower() {
         super("Tower", Keyboard.KEY_NONE, Category.WORLD);
 
-        Client.main().setMgr().newSetting(new Setting("Slow", this, false));
+        Client.main().setMgr().addSetting(new Setting("Slow", this, false));
     }
 
     private final TimeHelper time = new TimeHelper();

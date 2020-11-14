@@ -37,7 +37,7 @@ public class Jesus extends Module {
         mode.add("AAC");
         mode.add("NCP");
 
-        Client.main().setMgr().newSetting(new Setting("Mode", this, "Normal", mode));
+        Client.main().setMgr().addSetting(new Setting("Mode", this, "Normal", mode));
     }
 
     @Override

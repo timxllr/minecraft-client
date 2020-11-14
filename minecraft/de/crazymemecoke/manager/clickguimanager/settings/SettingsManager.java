@@ -36,7 +36,7 @@ public class SettingsManager {
 
     }
 
-    public void newSetting(Setting in) {
+    public void addSetting(Setting in) {
         this.settings.add(in);
     }
 

@@ -15,7 +15,7 @@ public class AutoRespawn extends Module {
     public AutoRespawn() {
         super("AutoRespawn", Keyboard.KEY_NONE, Category.PLAYER);
 
-        Client.main().setMgr().newSetting(new Setting("Delay", this, 0, 0, 1000, false));
+        Client.main().setMgr().addSetting(new Setting("Delay", this, 0, 0, 1000, false));
     }
 
     @Override

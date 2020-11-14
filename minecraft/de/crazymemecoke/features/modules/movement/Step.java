@@ -24,9 +24,9 @@ public class Step extends Module {
         mode.add("Vanilla");
         mode.add("NCP");
 
-        Client.main().setMgr().newSetting(new Setting("Step Height", this, 1.0, 1.0, 10.0, false));
-        Client.main().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
-        Client.main().setMgr().newSetting(new Setting("Reverse", this, false));
+        Client.main().setMgr().addSetting(new Setting("Step Height", this, 1.0, 1.0, 10.0, false));
+        Client.main().setMgr().addSetting(new Setting("Mode", this, "Vanilla", mode));
+        Client.main().setMgr().addSetting(new Setting("Reverse", this, false));
     }
 
     @Override

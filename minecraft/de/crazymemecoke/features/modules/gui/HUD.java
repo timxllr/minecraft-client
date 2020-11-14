@@ -48,20 +48,20 @@ public class HUD extends Module {
         hitAnimation.add("Stoned");
 
         SettingsManager sM = Client.main().setMgr();
-        sM.newSetting(new Setting("Design", this, "Ambien", design));
-        sM.newSetting(new Setting("Chat Mode", this, "Custom", chatMode));
-        sM.newSetting(new Setting("Chat Font", this, "Custom", chatFont));
-        sM.newSetting(new Setting("Hit Animation", this, "Stoned", hitAnimation));
-        sM.newSetting(new Setting("Item Height", this, 0.0F, -0.35F, 1.5F, false));
-        sM.newSetting(new Setting("Hotbar", this, true));
-        sM.newSetting(new Setting("ArrayList", this, true));
-        sM.newSetting(new Setting("TabGUI", this, true));
-        sM.newSetting(new Setting("Watermark", this, true));
-        sM.newSetting(new Setting("KeyStrokes", this, true));
-        sM.newSetting(new Setting("GUI Animation", this, true));
-        sM.newSetting(new Setting("GUI Blur", this, true));
-        sM.newSetting(new Setting("Blockhit Animation", this, true));
-        sM.newSetting(new Setting("Developer Mode", this, false));
+        sM.addSetting(new Setting("Design", this, "Ambien", design));
+        sM.addSetting(new Setting("Chat Mode", this, "Custom", chatMode));
+        sM.addSetting(new Setting("Chat Font", this, "Custom", chatFont));
+        sM.addSetting(new Setting("Hit Animation", this, "Stoned", hitAnimation));
+        sM.addSetting(new Setting("Item Height", this, 0.0F, -0.35F, 1.5F, false));
+        sM.addSetting(new Setting("Hotbar", this, true));
+        sM.addSetting(new Setting("ArrayList", this, true));
+        sM.addSetting(new Setting("TabGUI", this, true));
+        sM.addSetting(new Setting("Watermark", this, true));
+        sM.addSetting(new Setting("KeyStrokes", this, true));
+        sM.addSetting(new Setting("GUI Animation", this, true));
+        sM.addSetting(new Setting("GUI Blur", this, true));
+        sM.addSetting(new Setting("Blockhit Animation", this, true));
+        sM.addSetting(new Setting("Developer Mode", this, false));
     }
 
     @Override

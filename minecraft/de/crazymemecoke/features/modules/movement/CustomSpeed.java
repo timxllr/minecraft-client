@@ -15,10 +15,10 @@ public class CustomSpeed extends Module {
     public CustomSpeed() {
         super("CustomSpeed", Keyboard.KEY_NONE, Category.MOVEMENT);
 
-        Client.main().setMgr().newSetting(new Setting("Motion X", this, 0, 0, 50, false));
-        Client.main().setMgr().newSetting(new Setting("Motion Y", this, 0, 0, 50, false));
-        Client.main().setMgr().newSetting(new Setting("Motion Z", this, 0, 0, 50, false));
-        Client.main().setMgr().newSetting(new Setting("Timer Speed", this, 1, 0, 50, false));
+        Client.main().setMgr().addSetting(new Setting("Motion X", this, 0, 0, 50, false));
+        Client.main().setMgr().addSetting(new Setting("Motion Y", this, 0, 0, 50, false));
+        Client.main().setMgr().addSetting(new Setting("Motion Z", this, 0, 0, 50, false));
+        Client.main().setMgr().addSetting(new Setting("Timer Speed", this, 1, 0, 50, false));
     }
 
     @Override

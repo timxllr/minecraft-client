@@ -32,7 +32,7 @@ public class NameTags extends Module {
     public NameTags() {
         super("NameTags", Keyboard.KEY_NONE, Category.RENDER);
 
-        Client.main().setMgr().newSetting(new Setting("Show Armor", this, true));
+        Client.main().setMgr().addSetting(new Setting("Show Armor", this, true));
     }
 
     @Override

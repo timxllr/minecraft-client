@@ -28,10 +28,10 @@ public class TrailESP extends Module {
     public TrailESP() {
         super("TrailESP", Keyboard.KEY_NONE, Category.RENDER);
 
-        Client.main().setMgr().newSetting(new Setting("Point Counter", this, 100, 10, 1000, true));
-        Client.main().setMgr().newSetting(new Setting("Trail Length", this, 1000, 100, 10000, true));
-        Client.main().setMgr().newSetting(new Setting("Trail Width", this, 2, 1, 50, true));
-        Client.main().setMgr().newSetting(new Setting("Rainbow", this, true));
+        Client.main().setMgr().addSetting(new Setting("Point Counter", this, 100, 10, 1000, true));
+        Client.main().setMgr().addSetting(new Setting("Trail Length", this, 1000, 100, 10000, true));
+        Client.main().setMgr().addSetting(new Setting("Trail Width", this, 2, 1, 50, true));
+        Client.main().setMgr().addSetting(new Setting("Rainbow", this, true));
     }
 
     @Override

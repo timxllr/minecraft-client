@@ -41,19 +41,19 @@ public class Aura extends Module {
     public Aura() {
         super("Aura", Keyboard.KEY_NONE, Category.COMBAT);
 
-        sM.newSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
-        sM.newSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
-        sM.newSetting(new Setting("Prediction Multiplier", this, 0.4F, 0F, 1F, false));
-        sM.newSetting(new Setting("Ticks Existed", this, 30, 0, 100, true));
-        sM.newSetting(new Setting("Range", this, 4, 3.5, 7, true));
-        sM.newSetting(new Setting("CPS", this, 10, 1, 20, true));
-        sM.newSetting(new Setting("Players", this, true));
-        sM.newSetting(new Setting("Animals", this, false));
-        sM.newSetting(new Setting("Mobs", this, false));
-        sM.newSetting(new Setting("Villager", this, false));
-        sM.newSetting(new Setting("Teams", this, false));
-        sM.newSetting(new Setting("Rotations", this, true));
-        sM.newSetting(new Setting("Ignore Dead", this, false));
+        sM.addSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
+        sM.addSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
+        sM.addSetting(new Setting("Prediction Multiplier", this, 0.4F, 0F, 1F, false));
+        sM.addSetting(new Setting("Ticks Existed", this, 30, 0, 100, true));
+        sM.addSetting(new Setting("Range", this, 4, 3.5, 7, true));
+        sM.addSetting(new Setting("CPS", this, 10, 1, 20, true));
+        sM.addSetting(new Setting("Players", this, true));
+        sM.addSetting(new Setting("Animals", this, false));
+        sM.addSetting(new Setting("Mobs", this, false));
+        sM.addSetting(new Setting("Villager", this, false));
+        sM.addSetting(new Setting("Teams", this, false));
+        sM.addSetting(new Setting("Rotations", this, true));
+        sM.addSetting(new Setting("Ignore Dead", this, false));
     }
 
 

@@ -22,9 +22,9 @@ public class ClickGUI extends Module {
 
         theme.add("Caesium");
 
-        Client.main().setMgr().newSetting(new Setting("Design", this, "Caesium", theme));
-        Client.main().setMgr().newSetting(new Setting("Sound", this, false));
-        Client.main().setMgr().newSetting(new Setting("Blur", this, true));
+        Client.main().setMgr().addSetting(new Setting("Design", this, "Caesium", theme));
+        Client.main().setMgr().addSetting(new Setting("Sound", this, false));
+        Client.main().setMgr().addSetting(new Setting("Blur", this, true));
     }
 
     @Override

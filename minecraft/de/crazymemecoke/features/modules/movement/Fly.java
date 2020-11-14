@@ -50,9 +50,9 @@ public class Fly extends Module {
         glideMode.add("Old");
         glideMode.add("New");
 
-        sM.newSetting(new Setting("Mode", this, "Fly", mode));
-        sM.newSetting(new Setting("Fly Mode", this, "Jetpack", flyMode));
-        sM.newSetting(new Setting("Glide Mode", this, "New", glideMode));
+        sM.addSetting(new Setting("Mode", this, "Fly", mode));
+        sM.addSetting(new Setting("Fly Mode", this, "Jetpack", flyMode));
+        sM.addSetting(new Setting("Glide Mode", this, "New", glideMode));
     }
 
     @Override

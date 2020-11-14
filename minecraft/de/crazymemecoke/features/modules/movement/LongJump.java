@@ -26,7 +26,7 @@ public class LongJump extends Module {
         mode.add("NCP");
         mode.add("MineSecure");
 
-        Client.main().setMgr().newSetting(new Setting("Mode", this, "NCP", mode));
+        Client.main().setMgr().addSetting(new Setting("Mode", this, "NCP", mode));
     }
 
     @Override

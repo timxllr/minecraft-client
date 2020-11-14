@@ -28,7 +28,7 @@ public class Fucker extends Module {
         options.add("Cores");
         options.add("Eggs");
         options.add("Cakes");
-        Client.main().setMgr().newSetting(new Setting("Mode", this, "Beds", options));
+        Client.main().setMgr().addSetting(new Setting("Mode", this, "Beds", options));
     }
 
     public void smashBlock(BlockPos pos) {

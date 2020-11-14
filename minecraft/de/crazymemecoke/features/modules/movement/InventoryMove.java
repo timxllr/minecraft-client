@@ -16,7 +16,7 @@ public class InventoryMove extends Module {
     public InventoryMove() {
         super("InventoryMove", Keyboard.KEY_NONE, Category.MOVEMENT);
 
-        Client.main().setMgr().newSetting(new Setting("Camera Speed", this, 3, 0.1, 5, false));
+        Client.main().setMgr().addSetting(new Setting("Camera Speed", this, 3, 0.1, 5, false));
     }
 
 

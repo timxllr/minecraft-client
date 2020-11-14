@@ -16,8 +16,8 @@ public class ChestStealer extends Module {
 
     public ChestStealer() {
         super("ChestStealer", Keyboard.KEY_NONE, Category.PLAYER);
-        Client.main().setMgr().newSetting(new Setting("Delay", this, 75, 0, 250, true));
-        Client.main().setMgr().newSetting(new Setting("Auto Close", this, true));
+        Client.main().setMgr().addSetting(new Setting("Delay", this, 75, 0, 250, true));
+        Client.main().setMgr().addSetting(new Setting("Auto Close", this, true));
     }
 
     @Override

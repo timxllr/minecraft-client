@@ -19,9 +19,9 @@ public class FastLadder extends Module {
         mode.add("Vanilla");
         mode.add("AAC");
 
-        Client.main().setMgr().newSetting(new Setting("Mode", this, "Vanilla", mode));
-        Client.main().setMgr().newSetting(new Setting("Vanilla Speed", this, 0.4, 0.1, 1.0, false));
-        Client.main().setMgr().newSetting(new Setting("AAC Speed", this, 0.2, 0.1, 1.0, false));
+        Client.main().setMgr().addSetting(new Setting("Mode", this, "Vanilla", mode));
+        Client.main().setMgr().addSetting(new Setting("Vanilla Speed", this, 0.4, 0.1, 1.0, false));
+        Client.main().setMgr().addSetting(new Setting("AAC Speed", this, 0.2, 0.1, 1.0, false));
     }
 
     private void doAAC() {

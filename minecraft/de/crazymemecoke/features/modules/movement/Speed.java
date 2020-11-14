@@ -75,11 +75,11 @@ public class Speed extends Module {
         mode.add("Ground");
         mode.add("Timer");
 
-        sM.newSetting(new Setting("Mode", this, "Jump", mode));
-        sM.newSetting(new Setting("AAC 3.3.11 Speed", this, 3, 2, 6, false));
-        sM.newSetting(new Setting("Race Speed", this, 0.5, 0.05, 2, false));
-        sM.newSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
-        sM.newSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
+        sM.addSetting(new Setting("Mode", this, "Jump", mode));
+        sM.addSetting(new Setting("AAC 3.3.11 Speed", this, 3, 2, 6, false));
+        sM.addSetting(new Setting("Race Speed", this, 0.5, 0.05, 2, false));
+        sM.addSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
+        sM.addSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
     }
 
     public static float getDistanceBetweenAngles(float angle1, float angle2) {

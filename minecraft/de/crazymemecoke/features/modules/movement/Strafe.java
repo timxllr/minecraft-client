@@ -22,7 +22,7 @@ public class Strafe extends Module {
         mode.add("NCP");
         mode.add("AAC");
 
-        Client.main().setMgr().newSetting(new Setting("Mode", this, "NCP", mode));
+        Client.main().setMgr().addSetting(new Setting("Mode", this, "NCP", mode));
     }
 
 

@@ -23,8 +23,8 @@ public class MotionGraph extends Module {
     public MotionGraph() {
         super("MotionGraph", Keyboard.KEY_NONE, Category.RENDER);
 
-        Client.main().setMgr().newSetting(new Setting("Outline", this, true));
-        Client.main().setMgr().newSetting(new Setting("Rainbow", this, true));
+        Client.main().setMgr().addSetting(new Setting("Outline", this, true));
+        Client.main().setMgr().addSetting(new Setting("Rainbow", this, true));
     }
 
     @Override

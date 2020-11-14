@@ -39,12 +39,12 @@ public class ESP extends Module {
         mode.add("Outline");
         mode.add("Box");
 
-        sM.newSetting(new Setting("Mode", this, "Shader", mode));
-        sM.newSetting(new Setting("Players", this, true));
-        sM.newSetting(new Setting("Mobs", this, false));
-        sM.newSetting(new Setting("Animals", this, false));
-        sM.newSetting(new Setting("Villager", this, false));
-        sM.newSetting(new Setting("Items", this, false));
+        sM.addSetting(new Setting("Mode", this, "Shader", mode));
+        sM.addSetting(new Setting("Players", this, true));
+        sM.addSetting(new Setting("Mobs", this, false));
+        sM.addSetting(new Setting("Animals", this, false));
+        sM.addSetting(new Setting("Villager", this, false));
+        sM.addSetting(new Setting("Items", this, false));
     }
 
     public void player(EntityLivingBase entity) {

@@ -33,7 +33,7 @@ public class Scaffold extends Module {
     public Scaffold() {
         super("Scaffold", Keyboard.KEY_NONE, Category.WORLD);
 
-        Client.main().setMgr().newSetting(new Setting("SafeWalk", this, true));
+        Client.main().setMgr().addSetting(new Setting("SafeWalk", this, true));
     }
 
     public Queue<Consumer<EntityPlayerSP>> getPostponeActions() {

@@ -13,8 +13,8 @@ public class AntiBot extends Module {
 
         SettingsManager s = new SettingsManager();
 
-        s.newSetting(new Setting("Ticks Existed", this, 30, 0, 100, true));
-        s.newSetting(new Setting("Is Alive?", this, true));
+        s.addSetting(new Setting("Ticks Existed", this, 30, 0, 100, true));
+        s.addSetting(new Setting("Is Alive?", this, true));
     }
 
     @Override

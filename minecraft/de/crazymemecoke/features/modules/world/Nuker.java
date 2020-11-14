@@ -20,7 +20,7 @@ public class Nuker extends Module {
     public Nuker() {
         super("Nuker", Keyboard.KEY_NONE, Category.WORLD);
 
-        Client.main().setMgr().newSetting(new Setting("Range", this, 3.5, 0, 5, false));
+        Client.main().setMgr().addSetting(new Setting("Range", this, 3.5, 0, 5, false));
     }
 
     @Override

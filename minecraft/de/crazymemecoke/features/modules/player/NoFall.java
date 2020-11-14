@@ -24,7 +24,7 @@ public class NoFall extends Module {
         mode.add("AAC 1.9.10");
         mode.add("Vanilla");
 
-        Client.main().setMgr().newSetting(new Setting("Mode", this, "AAC 1.9.10", mode));
+        Client.main().setMgr().addSetting(new Setting("Mode", this, "AAC 1.9.10", mode));
     }
 
     @Override
