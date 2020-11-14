@@ -9,12 +9,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
 
     public void initGui() {
-        buttonList.add(new GuiButton(0, width / 2 - 50, 250, 120, 20, "Ok, verstanden!"));
+        buttonList.add(new GuiButton(0, width / 2 - 50, height - 50, 120, 20, "Ok, verstanden!"));
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
@@ -43,15 +44,22 @@ public class GuiFirstUse extends GuiScreen implements GuiYesNoCallback {
         GlStateManager.scale(f, f, f);
         GlStateManager.popMatrix();
 
-        UnicodeFontRenderer comfortaa50 = Client.main().fontMgr().comfortaa50;
-        comfortaa50.drawStringWithShadow("Willkommen!", width / 2 - 70, 40, -1);
-        UnicodeFontRenderer comfortaa22 = Client.main().fontMgr().comfortaa22;
-        comfortaa22.drawStringWithShadow("Wenn du den Client das 1. Mal verwendest:\n" +
-                "RSHIFT - ClickGUI\n" +
-                "LCONTROL + RCONTROL - Invis Mode aktivieren\n" +
-                "SHIFT + RCONTROL - Invis Mode deaktivieren\n" +
-                "END - Item GUI\n" +
-                "Chat-Prefix: " + Client.main().getClientPrefix(), width / 2 - 115, 80, -1);
+        UnicodeFontRenderer titleFont = Client.main().fontMgr().font("BigNoodleTitling", 50, Font.PLAIN);
+        String title = "§cWillkommen!";
+        titleFont.drawStringWithShadow(title, width / 2 - titleFont.getStringWidth(title) / 2, 40, -1);
+        UnicodeFontRenderer messageFont = Client.main().fontMgr().font("Comfortaa", 22, Font.PLAIN);
+
+        String m1 = "§cRSHIFT §8- §6Öffnet das ClickGUI";
+        String m2 = "§cLCONTROL + RCONTROL §8- §6Aktiviert den Invis Mode";
+        String m3 = "§cSHIFT + RCONTROL §8- §6Deaktiviert den Invis Mode";
+        String m4 = "§cEND §8- §6Öffnet den 'Item & PlayerUtilities' GuiScreen";
+        String m5 = "§cChat-Prefix§8: §4" + Client.main().getClientPrefix() + " §8(§c" + Client.main().getClientPrefixWorded() + "§8)";
+
+        messageFont.drawStringWithShadow(m1, width / 2 - messageFont.getStringWidth(m1) / 2, height / 2 - 100, -1);
+        messageFont.drawStringWithShadow(m2, width / 2 - messageFont.getStringWidth(m2) / 2, height / 2 - 80, -1);
+        messageFont.drawStringWithShadow(m3, width / 2 - messageFont.getStringWidth(m3) / 2, height / 2 - 60, -1);
+        messageFont.drawStringWithShadow(m4, width / 2 - messageFont.getStringWidth(m4) / 2, height / 2 - 40, -1);
+        messageFont.drawStringWithShadow(m5, width / 2 - messageFont.getStringWidth(m5) / 2, height / 2 - 20, -1);
 
         float scale = 5.0F;
         GL11.glScalef(scale, scale, scale);
