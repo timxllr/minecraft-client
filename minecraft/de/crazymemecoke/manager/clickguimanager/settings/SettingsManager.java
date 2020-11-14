@@ -1,13 +1,14 @@
 package de.crazymemecoke.manager.clickguimanager.settings;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.utils.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.FileUtils;
+import java.util.Objects;
 
 /**
  * Made by HeroCode it's free to use but you have to credit me
@@ -89,22 +90,25 @@ public class SettingsManager {
     }
 
     public void loadSettings() {
-        FileUtils.loadFile(settingsFile).forEach(line -> {
-            final String[] arguments = line.split(":");
-            if (arguments.length == 3) {
-                Module parent = arguments[0].equalsIgnoreCase("global") ? null : Client.main().modMgr().getByName(arguments[0]);
-                Setting set = settingByName(arguments[1], parent);
+        try {
+            Objects.requireNonNull(FileUtils.loadFile(settingsFile)).forEach(line -> {
+                final String[] arguments = line.split(":");
+                if (arguments.length == 3) {
+                    Module parent = arguments[0].equalsIgnoreCase("global") ? null : Client.main().modMgr().getByName(arguments[0]);
+                    Setting set = settingByName(arguments[1], parent);
 
-                if (set != null) {
-                    if (set.isSlider())
-                        set.setNum(Double.parseDouble(arguments[2]));
-                    if (set.isCheck())
-                        set.setBool(Boolean.parseBoolean(arguments[2]));
-                    if (set.isCombo())
-                        set.setMode(arguments[2]);
+                    if (set != null) {
+                        if (set.isSlider())
+                            set.setNum(Double.parseDouble(arguments[2]));
+                        if (set.isCheck())
+                            set.setBool(Boolean.parseBoolean(arguments[2]));
+                        if (set.isCombo())
+                            set.setMode(arguments[2]);
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception ignored) {
+        }
     }
 
     public File getSettingsFile() {
