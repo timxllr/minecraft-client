@@ -10,6 +10,7 @@ import de.crazymemecoke.manager.commandmanager.CommandManager;
 import de.crazymemecoke.manager.eventmanager.EventManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.manager.particlemanager.FBP;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.render.Shader;
@@ -26,6 +27,7 @@ public class Client {
     private double clientVersion = 1.2;
     private String clientCoder = "CrazyMemeCoke";
     private String clientPrefix = ".";
+    private String clientPrefixWorded = "Punkt";
     private String fakeVer = "OptiFine 1.8.8 HD_I7";
     private String clientBackground = "textures/client/background.jpg";
     private String clientIcon = "textures/client/icon.png";
@@ -55,22 +57,44 @@ public class Client {
 
     public void startClient() {
         if (!clientDir.exists()) {
-            clientDir.mkdir();
+            try{
+                clientDir.mkdir();
+                NotifyUtil.debug("Client-Ordner wurde erstellt!");
+            }catch(Exception e) {
+                NotifyUtil.debug("Client-Ordner konnte nicht erstellt werden!");
+            }
+
             mc.displayGuiScreen(new GuiFirstUse());
+            NotifyUtil.debug("GuiScreen 'FirstUse' wurde aufgerufen!");
         }
         eventManager = new EventManager();
+        NotifyUtil.debug("EventManager geladen!");
         fontManager = new FontManager();
+        NotifyUtil.debug("FontManager geladen!");
         fontManager.initFonts();
+        NotifyUtil.debug("Schriftarten initialisiert!");
         setmgr = new SettingsManager();
-        moduleManager = new ModuleManager();
+        NotifyUtil.debug("SettingsManager geladen!");
         setmgr.loadSettings();
+        NotifyUtil.debug("Einstellungen geladen!");
+        moduleManager = new ModuleManager();
+        NotifyUtil.debug("ModuleManager geladen!");
         moduleManager.loadModules();
+        NotifyUtil.debug("Modules geladen!");
         moduleManager.loadBinds();
+        NotifyUtil.debug("Keybinds geladen!");
         commandManager = new CommandManager();
+        NotifyUtil.debug("CommandManager geladen!");
         AltManager.loadAlts();
+        NotifyUtil.debug("Accounts geladen!");
         clickgui = new ClickGui();
+        NotifyUtil.debug("ClickGUI geladen!");
         new FBP().onStart();
+        NotifyUtil.debug("Partikelsystem geladen!");
         Runtime.getRuntime().addShutdownHook(new Thread(this::onShutdown));
+        NotifyUtil.debug("ShutdownHook geladen!");
+
+        NotifyUtil.debug("CLIENT VOLLSTÄNDIG GELADEN!");
     }
 
     public void onShutdown() {
@@ -80,7 +104,7 @@ public class Client {
         AltManager.saveAlts();
 
         Client.main().modMgr().getModule(Crasher.class).setState(false);
-        NotifyUtil.debug("Disabled Crasher module");
+        NotifyUtil.debug("[ModuleManager] Crasher deaktiviert");
     }
 
     public File getClientDir() {
@@ -175,4 +199,31 @@ public class Client {
         return fakeVer;
     }
 
+    public static Client getInstance() {
+        return instance;
+    }
+
+    public String getClientPrefixWorded() {
+        return clientPrefixWorded;
+    }
+
+    public ModuleManager getModuleManager() {
+        return moduleManager;
+    }
+
+    public SettingsManager getSetmgr() {
+        return setmgr;
+    }
+
+    public ClickGui getClickgui() {
+        return clickgui;
+    }
+
+    public FontManager getFontManager() {
+        return fontManager;
+    }
+
+    public EventManager getEventManager() {
+        return eventManager;
+    }
 }
