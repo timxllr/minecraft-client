@@ -256,8 +256,10 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
                 GlStateManager.alphaFunc(516, 0.003921569F);
             }
 
+            //TODO: ESP mode Outline
             if (Client.main().modMgr().getByName("ESP").state()) {
-                if (Client.main().setMgr().settingByName("Mode", Client.main().modMgr().getByName("ESP")).getMode().equalsIgnoreCase("Outline")) {
+                final String mode = Client.main().setMgr().settingByName("Mode", Client.main().modMgr().getByName("ESP")).getMode();
+                if (mode.equalsIgnoreCase("Outline")) {
                     if (entitylivingbaseIn instanceof EntityPlayer && Client.main().setMgr().settingByName("Players", Client.main().modMgr().getByName("ESP")).getBool()) {
                         GL11.glPushMatrix();
                         {

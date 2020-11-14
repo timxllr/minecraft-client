@@ -1,14 +1,15 @@
 package de.crazymemecoke.manager.clickguimanager.clickgui.components;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGui;
 import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
-import de.crazymemecoke.manager.clickguimanager.clickgui.components.listeners.ComponentListener;
+import de.crazymemecoke.manager.clickguimanager.clickgui.listeners.ComponentListener;
 import de.crazymemecoke.manager.clickguimanager.clickgui.util.RenderUtil;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
@@ -64,7 +65,7 @@ public class GuiButton implements GuiComponent {
 		
 		int color = Panel.fontColor;
 
-		if (Client.main().modMgr().getByName(getText()).isEnabled())
+		if (Client.main().modMgr().getByName(getText()).state())
 			color = Panel.color;
 
 		Panel.fR.drawStringWithShadow(getText(), posX + (width / 2) - Panel.fR.getStringWidth(getText()) / 2, posY + 2,
@@ -133,7 +134,7 @@ public class GuiButton implements GuiComponent {
 
 	public void addExtendListener(ComponentListener listener) {
 		listener.addComponents();
-		guiComponents.addAll(listener.getComponents());
+		guiComponents.addAll((Collection<? extends GuiComponent>) listener.getComponents());
 	}
 
 }

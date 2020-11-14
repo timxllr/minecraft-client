@@ -4,11 +4,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
-import de.crazymemecoke.manager.clickguimanager.clickgui.components.listeners.KeyListener;
+import de.crazymemecoke.manager.clickguimanager.clickgui.listeners.KeyListener;
 import de.crazymemecoke.manager.clickguimanager.clickgui.util.RenderUtil;
-import org.lwjgl.input.Keyboard;
-
 import de.crazymemecoke.utils.render.RenderUtils;
+import org.lwjgl.input.Keyboard;
 
 /**
  * @author sendQueue <Vinii>
@@ -103,4 +102,3 @@ public class GuiGetKey implements GuiComponent {
 	}
 
 }
-

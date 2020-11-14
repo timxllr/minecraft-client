@@ -16,6 +16,7 @@ import de.crazymemecoke.features.modules.player.*;
 import de.crazymemecoke.features.modules.render.*;
 import de.crazymemecoke.features.modules.world.*;
 import de.crazymemecoke.utils.FileUtils;
+import net.minecraft.client.Minecraft;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class ModuleManager {
     public ArrayList<Module> modules = new ArrayList<Module>();
     private File modulesFile;
     private File bindsFile;
+
+    Minecraft mc = Minecraft.mc();
 
     public ModuleManager() {
 
@@ -165,7 +168,7 @@ public class ModuleManager {
                     Module module = getByName(args[0]);
                     boolean state = Boolean.valueOf(args[1]);
 
-                    if (state)
+                    if (state && !(module.getClass().equals(ClickGUI.class)))
                         module.setState(true);
                 }
             });

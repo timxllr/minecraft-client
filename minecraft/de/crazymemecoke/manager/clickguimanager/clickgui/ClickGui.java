@@ -1,10 +1,19 @@
 package de.crazymemecoke.manager.clickguimanager.clickgui;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.gui.ClickGUI;
 import de.crazymemecoke.manager.clickguimanager.clickgui.components.Frame;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Keyboard;
 
 /**
  * @author sendQueue <Vinii>
@@ -18,7 +27,8 @@ public class ClickGui extends GuiScreen {
 	public static int compID = 0;
 
 	private ArrayList<Frame> frames = new ArrayList<Frame>();
-
+	//dont change
+	private final UnicodeFontRenderer fr = Client.main().fontMgr().font("Arial", 12, Font.PLAIN);
 	/**
 	 * 
 	 */
@@ -35,6 +45,15 @@ public class ClickGui extends GuiScreen {
 
 	@Override
 	public void initGui() {
+		if (OpenGlHelper.shadersSupported && mc.getRenderViewEntity() instanceof EntityPlayer) {
+			if (mc.entityRenderer.theShaderGroup != null) {
+				mc.entityRenderer.theShaderGroup.deleteShaderGroup();
+			}
+			if (Client.main().setMgr().settingByName("Blur", Client.main().modMgr().getModule(ClickGUI.class)).getBool()) {
+				mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
+			}
+		}
+
 		for (Frame frame : frames) {
 			frame.initialize();
 		}
@@ -54,7 +73,17 @@ public class ClickGui extends GuiScreen {
 		for (Frame frame : frames) {
 			frame.keyTyped(keyCode, typedChar);
 		}
+
+		if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
+			mc.displayGuiScreen(null);
+			Client.main().modMgr().getModule(ClickGUI.class).setState(false);
+		}
 	}
+
+	public ArrayList<Frame> getFrames() {
+		return frames;
+	}
+
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		for (Frame frame : frames) {

@@ -1,8 +1,9 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.components.listeners;
+package de.crazymemecoke.manager.clickguimanager.clickgui.listeners;
 
 import de.crazymemecoke.manager.clickguimanager.clickgui.components.GuiComponent;
 
 import java.util.ArrayList;
+
 
 
 /**

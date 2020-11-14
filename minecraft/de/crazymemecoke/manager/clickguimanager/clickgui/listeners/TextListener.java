@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.components.listeners;
+package de.crazymemecoke.manager.clickguimanager.clickgui.listeners;
 
 /**
  * @author sendQueue <Vinii>
@@ -7,10 +7,9 @@ package de.crazymemecoke.manager.clickguimanager.clickgui.components.listeners;
  *         Use is only authorized if given credit!
  * 
  */
-public interface ValueListener {
+public interface TextListener {
 	
-	void valueUpdated(float value);
+	void keyTyped(char key, String text);
 	
-	void valueChanged(float value);
-	
+	void keyEntered(String text);
 }

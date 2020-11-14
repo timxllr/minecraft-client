@@ -82,22 +82,22 @@ public class GuiNewChat extends Gui {
                                 String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
 
                                 switch (mode) {
-                                    case "normal": {
+                                    case "Normal": {
                                         this.mc.fontRendererObj.drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
                                         break;
                                     }
-                                    case "custom": {
+                                    case "Custom": {
                                         if (!(Client.main().modMgr().getModule(Invis.class).state())) {
                                             switch (font) {
-                                                case "comfortaa": {
+                                                case "Comfortaa": {
                                                     Client.main().fontMgr().font("Comfortaa", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
                                                     break;
                                                 }
-                                                case "bauhaus": {
+                                                case "Bauhaus": {
                                                     Client.main().fontMgr().font("Bauhaus Regular", 18, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
                                                     break;
                                                 }
-                                                case "exo": {
+                                                case "Exo": {
                                                     Client.main().fontMgr().font("Exo Regular", 17, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
                                                     break;
                                                 }

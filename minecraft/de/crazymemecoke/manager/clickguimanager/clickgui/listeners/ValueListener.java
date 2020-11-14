@@ -1,7 +1,4 @@
-/**
- * 
- */
-package de.crazymemecoke.manager.clickguimanager.clickgui.components.listeners;
+package de.crazymemecoke.manager.clickguimanager.clickgui.listeners;
 
 /**
  * @author sendQueue <Vinii>
@@ -10,7 +7,10 @@ package de.crazymemecoke.manager.clickguimanager.clickgui.components.listeners;
  *         Use is only authorized if given credit!
  * 
  */
-public interface ComboListener {
+public interface ValueListener {
 	
-	void comboChanged(String combo);
+	void valueUpdated(float value);
+	
+	void valueChanged(float value);
+	
 }

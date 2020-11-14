@@ -63,7 +63,7 @@ public class GuiChat extends GuiScreen {
         String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
 
         switch (mode) {
-            case "normal": {
+            case "Normal": {
                 Keyboard.enableRepeatEvents(true);
                 sentHistoryCursor = mc.ingameGUI.getChatGUI().getSentMessages().size();
                 inputField = new GuiTextField(0, fontRendererObj, 4, height - 12, width - 4, 12);
@@ -74,21 +74,21 @@ public class GuiChat extends GuiScreen {
                 inputField.setCanLoseFocus(false);
                 break;
             }
-            case "custom": {
+            case "Custom": {
                 if (!(Client.main().modMgr().getModule(Invis.class).state())) {
                     Keyboard.enableRepeatEvents(true);
                     sentHistoryCursor = mc.ingameGUI.getChatGUI().getSentMessages().size();
 
                     switch (font) {
-                        case "comfortaa": {
+                        case "Comfortaa": {
                             inputField = new GuiTextField(0, Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN), 3, height - 11, width - 4, 12);
                             break;
                         }
-                        case "bauhaus": {
+                        case "Bauhaus": {
                             inputField = new GuiTextField(0, Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
                             break;
                         }
-                        case "exo": {
+                        case "Exo": {
                             inputField = new GuiTextField(0, Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
                             break;
                         }
@@ -301,26 +301,26 @@ public class GuiChat extends GuiScreen {
         int fixedWidth = 5;
 
         switch (mode) {
-            case "normal": {
+            case "Normal": {
                 RenderUtils.drawRect(2, height - 14, width - 2, height - 2, Integer.MIN_VALUE);
                 break;
             }
-            case "custom": {
+            case "Custom": {
                 if (!(Client.main().modMgr().getModule(Invis.class).state())) {
                     Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("§a" + String.valueOf(inputField.getText().length()) + " §8/ §c" + inputField.getMaxStringLength(), 2, s.height() - 25, -1);
 
                     switch (font) {
-                        case "comfortaa": {
+                        case "Comfortaa": {
                             width2 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
                             RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
                             break;
                         }
-                        case "bauhaus": {
+                        case "Bauhaus": {
                             width2 = Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
                             RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
                             break;
                         }
-                        case "exo": {
+                        case "Exo": {
                             width2 = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
                             RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
                             break;

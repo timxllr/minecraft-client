@@ -25,9 +25,6 @@ public class ClickGUI extends Module {
         Client.main().setMgr().newSetting(new Setting("Design", this, "Caesium", theme));
         Client.main().setMgr().newSetting(new Setting("Sound", this, false));
         Client.main().setMgr().newSetting(new Setting("Blur", this, true));
-        Client.main().setMgr().newSetting(new Setting("Red", this, 255, 0, 255, true));
-        Client.main().setMgr().newSetting(new Setting("Green", this, 26, 0, 255, true));
-        Client.main().setMgr().newSetting(new Setting("Blue", this, 42, 0, 255, true));
     }
 
     @Override
@@ -40,6 +37,5 @@ public class ClickGUI extends Module {
 
     @Override
     public void onEvent(Event event) {
-
     }
 }

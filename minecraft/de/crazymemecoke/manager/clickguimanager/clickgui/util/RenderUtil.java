@@ -13,7 +13,7 @@ import net.minecraft.client.gui.Gui;
 public final class RenderUtil {
 
 	public static void drawRect(int left, int top, int right, int bottom, int color) {
-		//Gui.drawRect(left, top, right, bottom, color);
+//		Gui.drawRect(left, top, right, bottom, color);
 		RenderUtils.drawRect(left, top, right, bottom, color);
 	}
 

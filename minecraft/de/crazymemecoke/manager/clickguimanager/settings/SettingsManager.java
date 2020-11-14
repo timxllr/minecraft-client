@@ -60,13 +60,13 @@ public class SettingsManager {
         return out;
     }
 
-    public Setting settingByName(String name, Module module) {
+    public Setting settingByName(String settingName, Module settingModule) {
         for (Setting set : getSettings()) {
-            if (set.getFullName().equalsIgnoreCase((module == null ? "global" : module.name()) + "_" + name)) {
+            if (set.getFullName().equalsIgnoreCase((settingModule == null ? "global" : settingModule.name()) + "_" + settingName)) {
                 return set;
             }
         }
-        System.err.println("[" + Client.main().getClientName() + "] Error Setting NOT found: '" + name + "'!");
+        System.err.println("[" + Client.main().getClientName() + "] Error Setting NOT found: '" + settingName + "'!");
         return null;
     }
 
