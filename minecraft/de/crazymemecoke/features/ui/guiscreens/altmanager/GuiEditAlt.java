@@ -39,8 +39,8 @@ public class GuiEditAlt extends GuiScreen {
         buttonList.add(new GuiButton(1, width / 2 - 100, height - 160, 200, 20, I18n.format("gui.cancel")));
         usernameField = new GuiTextField(0, fontRendererObj, width / 2 - 100, height - 350, 200, 20);
         passwordField = new GuiTextField(1, fontRendererObj, width / 2 - 100, height - 300, 200, 20);
-        usernameField.setMaxStringLength(200);
-        passwordField.setMaxStringLength(200);
+        usernameField.setMaxStringLength(500);
+        passwordField.setMaxStringLength(500);
         usernameField.setText(altToEdit.getUsername());
         passwordField.setText(altToEdit.getPassword());
     }
