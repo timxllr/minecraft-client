@@ -316,13 +316,11 @@ public class GuiAltManager extends GuiScreen {
 
         UnicodeFontRenderer comfortaa20 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
         mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
-        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
-                width, height, sr.width(), sr.height());
         byte y = 0;
         comfortaa20.drawString("AltManager", width / 2 - comfortaa20.getStringWidth("AltManager") / 2, 21, RenderUtils.reAlpha(Colors.main().getGrey(), opacity));
         comfortaa20.drawString("AltManager", width / 2 - comfortaa20.getStringWidth("AltManager") / 2, 20, RenderUtils.reAlpha(-1, opacity));
-        Gui.drawRect(10, 50, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(darkGray, opacity));
-        Gui.drawRect(sr.width() - 150, 50, sr.width() - 5, sr.height() - 10, RenderUtils.reAlpha(-16119286, 0.75F * opacity));
+        RenderUtils.drawRect(10, 50, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(darkGray, opacity));
+        RenderUtils.drawRect(sr.width() - 150, 50, sr.width() - 5, sr.height() - 10, RenderUtils.reAlpha(-16119286, 0.75F * opacity));
         comfortaa20.drawString("Status:", (sr.width() - 145), 55, RenderUtils.reAlpha(Colors.main().getHeroGreenColor(), opacity));
         boolean isOnline = mc.session.getProfile().isComplete();
         String strType = isOnline ? "Online" : "Offline";
@@ -365,11 +363,6 @@ public class GuiAltManager extends GuiScreen {
             }
         }
 
-        for (Iterator slot = AltManager.slotList.iterator(); slot.hasNext(); all += 25) {
-            AltSlot slotY = (AltSlot) slot.next();
-        }
-
-        //TODO: Slider fixen
         for (Iterator var21 = AltManager.slotList.iterator(); var21.hasNext(); altSlotY += 25) {
             AltSlot altSlot = (AltSlot) var21.next();
             altSlot.y = (int) ((int) altSlotY - sliderYY);
@@ -380,9 +373,9 @@ public class GuiAltManager extends GuiScreen {
             altSlot.drawScreen(posX, posY);
         }
 
-        Gui.drawRect(10, 50, sr.width() - 150, 75, RenderUtils.reAlpha(lightGray, opacity));
+        RenderUtils.drawRect(10, 50, sr.width() - 150, 75, RenderUtils.reAlpha(lightGray, opacity));
         comfortaa20.drawString("EMAIL:PASS", width / 2 - comfortaa20.getStringWidth("EMAIL:PASS") / 2, 59, RenderUtils.reAlpha(-1, opacity));
-        Gui.drawRect(10, sr.height() - 35, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(lightGray, opacity));
+        RenderUtils.drawRect(10, sr.height() - 35, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(lightGray, opacity));
         super.drawScreen(posX, posY, f);
         drawSlider(posX, posY);
     }
