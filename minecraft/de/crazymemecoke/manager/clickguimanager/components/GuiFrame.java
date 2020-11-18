@@ -91,13 +91,13 @@ public class GuiFrame implements Frame {
                         final int top = posY + height + 12;
                         final int bottom = top + yOffset + 1;
                         // 8 is the scroll reduction
-                        int wheelY = Mouse.getDWheel() * -1 / 8;
+                        int wheelY = Mouse.getDWheel() * -1 / 25;
                         if (bottom + scrollHeight < yOffset) {
                             wheelY *= -1;
-                            scrollHeight += 10;
+                            scrollHeight += 5;
                         }else if(bottom + scrollHeight > s.height()){
                             wheelY *= -1;
-                            scrollHeight -= 10;
+                            scrollHeight -= 5;
                         }
                         scrollHeight += wheelY;
                         RenderUtil.drawRect(left + 1, top + 1 + scrollHeight, right, bottom + scrollHeight,
