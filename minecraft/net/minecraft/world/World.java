@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
+import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.particlemanager.FBP;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHopper;
@@ -1175,6 +1176,7 @@ public abstract class World implements IBlockAccess
             this.getChunkFromChunkCoords(i, j).addEntity(entityIn);
             this.loadedEntityList.add(entityIn);
             this.onEntityAdded(entityIn);
+            Client.main().setMgr().loadSettings();
             FBP.INSTANCE.eventHandler.onEntityJoinWorldEvent(entityIn,this);
             return true;
         }
