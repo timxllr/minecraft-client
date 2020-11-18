@@ -1,12 +1,13 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.components;
+package de.crazymemecoke.manager.clickguimanager.components;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.ClickGUI;
-import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGui;
-import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
-import de.crazymemecoke.manager.clickguimanager.clickgui.util.RenderUtil;
+import de.crazymemecoke.manager.clickguimanager.ClickGui;
+import de.crazymemecoke.manager.clickguimanager.Panel;
+import de.crazymemecoke.manager.clickguimanager.util.RenderUtil;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Mouse;
 
 import java.awt.*;
@@ -25,10 +26,9 @@ public class GuiFrame implements Frame {
     private boolean isExpaned, isDragging;
     private int id, posX, posY, prevPosX, prevPosY, scrollHeight;
     private String title;
+    ScaledResolution s = new ScaledResolution(mc);
+    float MAX_HEIGHT = s.height();
 
-    /**
-     *
-     */
     public GuiFrame(String title, int posX, int posY, boolean expanded) {
         this.title = title;
         this.posX = posX;
@@ -50,12 +50,6 @@ public class GuiFrame implements Frame {
         }
     }
 
-    /**
-     * Handles Caesium theme
-     *
-     * @param mouseX
-     * @param mouseY
-     */
     private void renderCaesium(int mouseX, int mouseY) {
         final int color = Panel.color;
         final int fontColor = Panel.fontColor;
@@ -98,9 +92,12 @@ public class GuiFrame implements Frame {
                         final int bottom = top + yOffset + 1;
                         // 8 is the scroll reduction
                         int wheelY = Mouse.getDWheel() * -1 / 8;
-                        if (bottom + scrollHeight < 30) {
+                        if (bottom + scrollHeight < yOffset) {
                             wheelY *= -1;
                             scrollHeight += 10;
+                        }else if(bottom + scrollHeight > s.height()){
+                            wheelY *= -1;
+                            scrollHeight -= 10;
                         }
                         scrollHeight += wheelY;
                         RenderUtil.drawRect(left + 1, top + 1 + scrollHeight, right, bottom + scrollHeight,
@@ -133,7 +130,6 @@ public class GuiFrame implements Frame {
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         int width = Panel.FRAME_WIDTH;
         if (isExpaned) {
-
             for (GuiButton button : buttons) {
                 // sort for the max needed width
                 width = Math.max(width, button.getWidth());
