@@ -35,7 +35,7 @@ public class GuiAltManager extends GuiScreen {
     private GuiButton cancelButton;
     private int scroll;
     float opacity = 0;
-    private float sliderY = 0;
+    public float sliderY = 0, sliderYY;
     private int sliderY2;
     private boolean clickedSlider;
     private boolean dragSlider;
@@ -176,7 +176,7 @@ public class GuiAltManager extends GuiScreen {
         int MAX_HEIGHT = res.height() - 35;
         int WIDTH = res.width() - 150;
         byte radius = 2;
-        int var10000 = AltManager.slotList.size();
+        int slotListSize = AltManager.slotList.size();
         byte var10001;
         if (AltManager.slotList.size() == 0) {
             var10001 = 0;
@@ -185,7 +185,7 @@ public class GuiAltManager extends GuiScreen {
             var10001 = 25;
         }
 
-        int allAltsHeight = var10000 * var10001;
+        int allAltsHeight = slotListSize * var10001;
         float height;
         if (allAltsHeight <= MAX_HEIGHT - 75) {
             height = (MAX_HEIGHT - 75);
@@ -297,8 +297,6 @@ public class GuiAltManager extends GuiScreen {
     }
 
     public void drawScreen(int posX, int posY, float f) {
-        drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
-
         ScaledResolution sr = new ScaledResolution(Wrapper.mc);
         if (Keyboard.isKeyDown(1)) {
             mc.displayGuiScreen(parent);
@@ -347,11 +345,23 @@ public class GuiAltManager extends GuiScreen {
             } else {
                 sliderY = MAX_HEIGHT;
             }
+
+            if(sliderYY + scrollAmount < MAX_HEIGHT){
+                sliderYY += scrollAmount;
+            }else{
+                sliderYY = MAX_HEIGHT;
+            }
         } else if (scrollAmount < 0) {
             if (sliderY - scrollAmount > MIN_HEIGHT) {
                 sliderY += scrollAmount;
             } else {
                 sliderY = MIN_HEIGHT;
+            }
+
+            if(sliderYY - scrollAmount > MIN_HEIGHT){
+                sliderYY += scrollAmount;
+            }else{
+                sliderYY = 0;
             }
         }
 
@@ -359,9 +369,10 @@ public class GuiAltManager extends GuiScreen {
             AltSlot slotY = (AltSlot) slot.next();
         }
 
+        //TODO: Slider fixen
         for (Iterator var21 = AltManager.slotList.iterator(); var21.hasNext(); altSlotY += 25) {
             AltSlot altSlot = (AltSlot) var21.next();
-            altSlot.y = altSlotY;
+            altSlot.y = (int) ((int) altSlotY - sliderYY);
             altSlot.opacity = opacity;
             altSlot.WIDTH = sr.width() - 160;
             altSlot.MIN_HEIGHT = 50;
@@ -369,10 +380,8 @@ public class GuiAltManager extends GuiScreen {
             altSlot.drawScreen(posX, posY);
         }
 
-        drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
         Gui.drawRect(10, 50, sr.width() - 150, 75, RenderUtils.reAlpha(lightGray, opacity));
         comfortaa20.drawString("EMAIL:PASS", width / 2 - comfortaa20.getStringWidth("EMAIL:PASS") / 2, 59, RenderUtils.reAlpha(-1, opacity));
-        drawString(mc.fontRendererObj, "", width / 2 - 100, 79, 10526880);
         Gui.drawRect(10, sr.height() - 35, sr.width() - 150, sr.height() - 10, RenderUtils.reAlpha(lightGray, opacity));
         super.drawScreen(posX, posY, f);
         drawSlider(posX, posY);
