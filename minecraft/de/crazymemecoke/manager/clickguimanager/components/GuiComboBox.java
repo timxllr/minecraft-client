@@ -1,12 +1,12 @@
 /**
  * 
  */
-package de.crazymemecoke.manager.clickguimanager.clickgui.components;
+package de.crazymemecoke.manager.clickguimanager.components;
 
-import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
-import de.crazymemecoke.manager.clickguimanager.clickgui.listeners.ComboListener;
-import de.crazymemecoke.manager.clickguimanager.clickgui.util.RenderUtil;
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.clickguimanager.Panel;
+import de.crazymemecoke.manager.clickguimanager.listeners.ComboListener;
+import de.crazymemecoke.manager.clickguimanager.util.RenderUtil;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 
 import java.awt.Color;
 import java.util.ArrayList;

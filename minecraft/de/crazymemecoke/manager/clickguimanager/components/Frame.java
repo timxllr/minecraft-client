@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.components;
+package de.crazymemecoke.manager.clickguimanager.components;
 
 /**
  * @author sendQueue <Vinii>

@@ -1,6 +1,6 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.components;
+package de.crazymemecoke.manager.clickguimanager.components;
 
-import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
+import de.crazymemecoke.manager.clickguimanager.Panel;
 
 /**
  * @author sendQueue <Vinii>

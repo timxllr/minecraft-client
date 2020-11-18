@@ -1,8 +1,8 @@
 package de.crazymemecoke.features.modules.gui;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.clickguimanager.Panel;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;

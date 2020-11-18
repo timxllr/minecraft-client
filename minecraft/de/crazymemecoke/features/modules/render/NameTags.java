@@ -2,7 +2,7 @@ package de.crazymemecoke.features.modules.render;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.Invis;
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;

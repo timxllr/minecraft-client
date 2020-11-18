@@ -1,6 +1,6 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.listeners;
+package de.crazymemecoke.manager.clickguimanager.listeners;
 
-import de.crazymemecoke.manager.clickguimanager.clickgui.components.GuiComponent;
+import de.crazymemecoke.manager.clickguimanager.components.GuiComponent;
 
 import java.util.ArrayList;
 

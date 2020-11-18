@@ -1,10 +1,9 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.listeners;
+package de.crazymemecoke.manager.clickguimanager.listeners;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.clickguimanager.clickgui.components.*;
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.clickguimanager.components.*;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.NotifyUtil;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,6 +1,6 @@
 package de.crazymemecoke.features.modules.world;
 
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;

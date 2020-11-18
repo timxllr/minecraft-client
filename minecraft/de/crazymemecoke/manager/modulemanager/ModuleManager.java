@@ -27,10 +27,9 @@ import java.util.Objects;
 public class ModuleManager {
 
     public ArrayList<Module> modules = new ArrayList<Module>();
+    Minecraft mc = Minecraft.mc();
     private File modulesFile;
     private File bindsFile;
-
-    Minecraft mc = Minecraft.mc();
 
     public ModuleManager() {
 
@@ -188,18 +187,15 @@ public class ModuleManager {
     }
 
     public void loadBinds() {
-        try {
-            FileUtils.loadFile(bindsFile).forEach(line -> {
-                final String[] args = line.split(":");
-                if (args.length == 2) {
-                    Module module = getByName(args[0]);
-                    int bind = Integer.valueOf(args[1]);
+        FileUtils.loadFile(bindsFile).forEach(line -> {
+            final String[] args = line.split(":");
+            if (args.length == 2) {
+                Module module = getByName(args[0]);
+                int bind = Integer.valueOf(args[1]);
 
-                    module.setBind(bind);
-                }
-            });
-        } catch (Exception ignored) {
-        }
+                module.setBind(bind);
+            }
+        });
     }
 
     public File getModulesFile() {

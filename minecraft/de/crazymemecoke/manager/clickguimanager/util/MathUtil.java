@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.util;
+package de.crazymemecoke.manager.clickguimanager.util;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

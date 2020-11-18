@@ -1,20 +1,19 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui;
+package de.crazymemecoke.manager.clickguimanager;
 
 import java.awt.*;
 import java.util.HashMap;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.ClickGUI;
-import de.crazymemecoke.manager.clickguimanager.clickgui.components.Frame;
-import de.crazymemecoke.manager.clickguimanager.clickgui.components.GuiButton;
-import de.crazymemecoke.manager.clickguimanager.clickgui.components.GuiFrame;
-import de.crazymemecoke.manager.clickguimanager.clickgui.listeners.ClickListener;
-import de.crazymemecoke.manager.clickguimanager.clickgui.listeners.ComponentsListener;
-import de.crazymemecoke.manager.clickguimanager.clickgui.util.FramePosition;
+import de.crazymemecoke.manager.clickguimanager.components.Frame;
+import de.crazymemecoke.manager.clickguimanager.components.GuiButton;
+import de.crazymemecoke.manager.clickguimanager.components.GuiFrame;
+import de.crazymemecoke.manager.clickguimanager.listeners.ClickListener;
+import de.crazymemecoke.manager.clickguimanager.listeners.ComponentsListener;
+import de.crazymemecoke.manager.clickguimanager.util.FramePosition;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.manager.modulemanager.ModuleManager;
 
 /**
  * @author sendQueue <Vinii>
@@ -56,6 +55,8 @@ public class Panel extends ClickGui {
 
 	@Override
 	public void initGui() {
+		Client.main().setMgr().loadSettings();
+
 		int x = 25;
 		for (Category cat : Category.values()) {
 			GuiFrame frame;
@@ -89,12 +90,13 @@ public class Panel extends ClickGui {
 						new FramePosition(guiFrame.getPosX(), guiFrame.getPosY(), guiFrame.isExpaned()));
 			}
 		}
-
 		if (mc.entityRenderer.theShaderGroup != null) {
 			mc.entityRenderer.theShaderGroup.deleteShaderGroup();
 			mc.entityRenderer.theShaderGroup = null;
 		}
 
 		Client.main().modMgr().getModule(ClickGUI.class).onDisable();
+
+		Client.main().setMgr().saveSettings();
 	}
 }

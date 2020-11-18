@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.clickguimanager.settings;
+package de.crazymemecoke.manager.settingsmanager;
 
 import de.crazymemecoke.manager.modulemanager.Module;
 

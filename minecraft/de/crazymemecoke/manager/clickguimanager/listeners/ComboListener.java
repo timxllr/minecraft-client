@@ -1,4 +1,7 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.listeners;
+/**
+ * 
+ */
+package de.crazymemecoke.manager.clickguimanager.listeners;
 
 /**
  * @author sendQueue <Vinii>
@@ -7,9 +10,7 @@ package de.crazymemecoke.manager.clickguimanager.clickgui.listeners;
  *         Use is only authorized if given credit!
  * 
  */
-public interface TextListener {
+public interface ComboListener {
 	
-	void keyTyped(char key, String text);
-	
-	void keyEntered(String text);
+	void comboChanged(String combo);
 }

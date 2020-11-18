@@ -1,13 +1,12 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.components;
+package de.crazymemecoke.manager.clickguimanager.components;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.ClickGUI;
-import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
-import de.crazymemecoke.manager.clickguimanager.clickgui.util.RenderUtil;
+import de.crazymemecoke.manager.clickguimanager.Panel;
+import de.crazymemecoke.manager.clickguimanager.util.RenderUtil;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

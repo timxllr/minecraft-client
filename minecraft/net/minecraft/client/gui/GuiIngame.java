@@ -4,7 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.notificationmanager.NotificationManager;
 import de.crazymemecoke.utils.Wrapper;

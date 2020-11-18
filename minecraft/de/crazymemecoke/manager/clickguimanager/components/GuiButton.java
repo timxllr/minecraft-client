@@ -1,10 +1,10 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.components;
+package de.crazymemecoke.manager.clickguimanager.components;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.clickguimanager.clickgui.ClickGui;
-import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
-import de.crazymemecoke.manager.clickguimanager.clickgui.listeners.ComponentListener;
-import de.crazymemecoke.manager.clickguimanager.clickgui.util.RenderUtil;
+import de.crazymemecoke.manager.clickguimanager.ClickGui;
+import de.crazymemecoke.manager.clickguimanager.Panel;
+import de.crazymemecoke.manager.clickguimanager.listeners.ComponentListener;
+import de.crazymemecoke.manager.clickguimanager.util.RenderUtil;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

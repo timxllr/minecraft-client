@@ -1,12 +1,12 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.components;
+package de.crazymemecoke.manager.clickguimanager.components;
 
 import java.awt.Color;
 import java.util.ArrayList;
 
-import de.crazymemecoke.manager.clickguimanager.clickgui.Panel;
-import de.crazymemecoke.manager.clickguimanager.clickgui.listeners.ValueListener;
-import de.crazymemecoke.manager.clickguimanager.clickgui.util.MathUtil;
-import de.crazymemecoke.manager.clickguimanager.clickgui.util.RenderUtil;
+import de.crazymemecoke.manager.clickguimanager.Panel;
+import de.crazymemecoke.manager.clickguimanager.listeners.ValueListener;
+import de.crazymemecoke.manager.clickguimanager.util.MathUtil;
+import de.crazymemecoke.manager.clickguimanager.util.RenderUtil;
 import de.crazymemecoke.utils.render.RenderUtils;
 import org.lwjgl.input.Mouse;
 

@@ -1,7 +1,6 @@
-package de.crazymemecoke.manager.clickguimanager.clickgui.util;
+package de.crazymemecoke.manager.clickguimanager.util;
 
 import de.crazymemecoke.utils.render.RenderUtils;
-import net.minecraft.client.gui.Gui;
 
 /**
  * @author sendQueue <Vinii>

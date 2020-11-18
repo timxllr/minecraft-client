@@ -4,7 +4,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.ui.guiscreens.GuiItems;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
-import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
+import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;

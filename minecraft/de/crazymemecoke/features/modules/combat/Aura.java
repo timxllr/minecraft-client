@@ -1,8 +1,8 @@
 package de.crazymemecoke.features.modules.combat;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.clickguimanager.settings.Setting;
-import de.crazymemecoke.manager.clickguimanager.settings.SettingsManager;
+import de.crazymemecoke.manager.settingsmanager.Setting;
+import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.eventmanager.impl.EventMoveFlying;

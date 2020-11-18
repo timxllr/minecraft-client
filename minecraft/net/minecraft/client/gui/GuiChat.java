@@ -1,32 +1,30 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
-
-import java.awt.*;
-import java.io.IOException;
-import java.util.List;
-
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.HUD;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.network.play.client.C14PacketTabComplete;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
+import java.awt.*;
+import java.io.IOException;
+import java.util.List;
+
 public class GuiChat extends GuiScreen {
     private static final Logger logger = LogManager.getLogger();
+    /**
+     * Chat entry field
+     */
+    protected GuiTextField inputField;
     private String historyBuffer = "";
-
     /**
      * keeps position of which chat message you will select when you press up, (does not increase for duplicated
      * messages sent immediately after each other)
@@ -36,12 +34,6 @@ public class GuiChat extends GuiScreen {
     private boolean waitingOnAutocomplete;
     private int autocompleteIndex;
     private List<String> foundPlayerNames = Lists.<String>newArrayList();
-
-    /**
-     * Chat entry field
-     */
-    protected GuiTextField inputField;
-
     /**
      * is the text that appears when you press the chat key and the input box appears pre-filled
      */
@@ -94,11 +86,14 @@ public class GuiChat extends GuiScreen {
                         }
                     }
 
-                    inputField.setMaxStringLength(100);
-                    inputField.setEnableBackgroundDrawing(false);
-                    inputField.setFocused(true);
-                    inputField.setText(defaultInputFieldText);
-                    inputField.setCanLoseFocus(false);
+                    try {
+                        inputField.setMaxStringLength(100);
+                        inputField.setEnableBackgroundDrawing(false);
+                        inputField.setFocused(true);
+                        inputField.setText(defaultInputFieldText);
+                        inputField.setCanLoseFocus(false);
+                    } catch (NullPointerException ignored) {
+                    }
                 }
                 break;
             }

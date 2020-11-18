@@ -1,4 +1,4 @@
-package de.crazymemecoke.manager.clickguimanager.settings;
+package de.crazymemecoke.manager.settingsmanager;
 
 public enum SettingType {
     BOOLEAN("BOOLEAN", 0), VALUE("VALUE", 1), COMBO("COMBO", 2);
