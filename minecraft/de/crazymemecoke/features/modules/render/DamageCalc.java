@@ -6,6 +6,7 @@ import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlime;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -38,7 +39,7 @@ public class DamageCalc extends Module {
                         for (double z = -dist[y]; z <= dist[y]; z += 1.0D) {
                             BlockPos pos = new BlockPos(mc.thePlayer.posX + x, mc.thePlayer.posY - y, mc.thePlayer.posZ + z);
                             Block block = mc.theWorld.getBlockState(pos).getBlock();
-                            if (block.isFullBlock()) {
+                            if (block.isFullBlock() && !(block instanceof BlockSlime)) {
                                 double xRender = pos.getX() - RenderManager.renderPosX;
                                 double yRender = pos.getY() - RenderManager.renderPosY;
                                 double zRender = pos.getZ() - RenderManager.renderPosZ;
