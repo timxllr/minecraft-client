@@ -33,21 +33,10 @@ public class RenderUtils {
     public static int team = 4;
     private static FloatBuffer colorBuffer = GLAllocation.createDirectFloatBuffer(16);
 
-    /**
-     * Defines a rectangle (scissorBox) in window coordinates not GL's: from
-     * https://vinii.de/github/LWJGLUtil/scissorBoxGL.png to
-     * https://vinii.de/github/LWJGLUtil/scissorBoxWindow.png
-     */
-    public static void scissorBox(final int x, final int y, final int width, final int height) {
-        final ScaledResolution scaledResolution = new ScaledResolution(Wrapper.mc);
-        final int factor = scaledResolution.getScaleFactor();
-
-        GL11.glEnable(GL11.GL_SCISSOR_TEST);
-
-        GL11.glScissor(x * factor, (scaledResolution.height() - (y + height)) * factor,
-                ((x + width) - x) * factor, ((y + height) - y) * factor);
-
-        // disable GL_SCISSOR_TEST after bounding
+    public static void scissor(int x, int y, int x2, int y2) {
+        ScaledResolution scaledResolution = new ScaledResolution(Minecraft.mc());
+        double factor = scaledResolution.getScaleFactor();
+        GL11.glScissor((int) (x * factor), (int) ((scaledResolution.height() - y2) * factor), (int) ((x2 - x) * factor), (int) ((y2 - y) * factor));
     }
 
     /**

@@ -9,6 +9,7 @@ import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,12 +23,12 @@ import java.util.ArrayList;
 public class GuiFrame implements Frame {
     public static int dragID;
     Minecraft mc = Minecraft.mc();
+    ScaledResolution s = new ScaledResolution(mc);
+    float MAX_HEIGHT = s.height();
     private ArrayList<GuiButton> buttons = new ArrayList<GuiButton>();
     private boolean isExpaned, isDragging;
     private int id, posX, posY, prevPosX, prevPosY, scrollHeight;
     private String title;
-    ScaledResolution s = new ScaledResolution(mc);
-    float MAX_HEIGHT = s.height();
 
     public GuiFrame(String title, int posX, int posY, boolean expanded) {
         this.title = title;
@@ -86,37 +87,47 @@ public class GuiFrame implements Frame {
                             xOffset = Math.max(xOffset, component.getWidth());
                             yOffset += component.getHeight();
                         }
+
+                        int maxScrollHeight = yOffset;
+                        if (yOffset > 150) yOffset = 150;
+                        maxScrollHeight -= yOffset;
+
                         final int left = posX + width + 2;
                         final int right = left + xOffset;
                         final int top = posY + height + 12;
                         final int bottom = top + yOffset + 1;
-                        // 8 is the scroll reduction
-                        int wheelY = Mouse.getDWheel() * -1 / 25;
-                        if (bottom + scrollHeight < yOffset) {
-                            wheelY *= -1;
-                            scrollHeight += 5;
-                        }else if(bottom + scrollHeight > s.height()){
-                            wheelY *= -1;
-                            scrollHeight -= 5;
-                        }
-                        scrollHeight += wheelY;
-                        RenderUtil.drawRect(left + 1, top + 1 + scrollHeight, right, bottom + scrollHeight,
-                                Panel.black100);
                         int height2 = 0;
+
+                        int wheelY = Mouse.getDWheel() / 8;
+                        scrollHeight += wheelY;
+
+                        if (scrollHeight >= 0) scrollHeight = 0;
+                        if (scrollHeight <= -maxScrollHeight) scrollHeight = -maxScrollHeight;
+
+                        RenderUtil.drawRect(left + 1, top + 1, right, bottom,
+                                Panel.black100);
+
+                        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+
+                        int x = left + 1;
+                        int y = top + 1;
+
+                        RenderUtils.scissor(x, y, right, bottom);
                         for (GuiComponent component : components) {
                             component.render(left, top + height2 + 2 + scrollHeight, xOffset, mouseX, mouseY);
                             height2 += component.getHeight();
                         }
-                        RenderUtil.drawVerticalLine(left, top + scrollHeight, bottom + scrollHeight, color);
-                        RenderUtil.drawVerticalLine(right, top + scrollHeight, bottom + scrollHeight, color);
-                        RenderUtil.drawHorizontalLine(left, right, top + scrollHeight, color);
-                        RenderUtil.drawHorizontalLine(left, right, bottom + scrollHeight, color);
+                        GL11.glDisable(GL11.GL_SCISSOR_TEST);
+
+                        RenderUtil.drawVerticalLine(left, top, bottom, color);
+                        RenderUtil.drawVerticalLine(right, top, bottom, color);
+                        RenderUtil.drawHorizontalLine(left, right, top, color);
+                        RenderUtil.drawHorizontalLine(left, right, bottom, color);
                     }
                 }
                 height += button.getHeight();
             }
             RenderUtil.drawHorizontalLine(posX + 1, posX + width - 1, posY + height + 12, color);
-
             RenderUtil.drawVerticalLine(posX + width, posY - 5, posY + height + 14, Panel.black100);
             RenderUtil.drawVerticalLine(posX + width, posY - 4, posY + height + 14, Panel.black100);
             RenderUtil.drawVerticalLine(posX + width + 1, posY - 4, posY + height + 15, Panel.black100);
