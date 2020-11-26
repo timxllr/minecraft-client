@@ -108,7 +108,7 @@ public class Reflector
     public static ReflectorField EntityViewRenderEvent_FogColors_green = new ReflectorField(EntityViewRenderEvent_FogColors, "green");
     public static ReflectorField EntityViewRenderEvent_FogColors_blue = new ReflectorField(EntityViewRenderEvent_FogColors, "blue");
     public static ReflectorClass Event = new ReflectorClass("net.minecraftforge.fml.common.eventhandler.Event");
-    public static ReflectorMethod Event_isCanceled = new ReflectorMethod(Event, "isCanceled");
+    public static ReflectorMethod Event_isCanceled = new ReflectorMethod(Event, "isCancelled");
     public static ReflectorClass EventBus = new ReflectorClass("net.minecraftforge.fml.common.eventhandler.EventBus");
     public static ReflectorMethod EventBus_post = new ReflectorMethod(EventBus, "post");
     public static ReflectorClass Event_Result = new ReflectorClass("net.minecraftforge.fml.common.eventhandler.Event$Result");

@@ -39,6 +39,7 @@ import javax.imageio.ImageIO;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.ui.guiscreens.GuiMainMenu;
+import de.crazymemecoke.manager.eventmanager.impl.EventKeyPress;
 import de.crazymemecoke.manager.eventmanager.impl.EventTick;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.features.ui.Interface;
@@ -1663,6 +1664,14 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
                     if (this.currentScreen != null) {
                         this.currentScreen.handleKeyboardInput();
                     } else {
+                        // TODO: Key Handling
+
+                        EventKeyPress eventKeyPress = new EventKeyPress(k);
+                        Client.main().eventMgr().onEvent(eventKeyPress);
+
+                        if(eventKeyPress.isCancelled())
+                            return;
+
                         for (Module n : Client.main().modMgr().modules) {
                             if (k == n.bind()) {
                                 n.toggle();

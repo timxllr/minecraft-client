@@ -144,7 +144,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet> {
         EventPacket eventPacket = new EventPacket(EventPacket.Type.RECEIVE, p_channelRead0_2_);
         Client.main().eventMgr().onEvent(eventPacket);
 
-        if(eventPacket.isCanceled())return;
+        if(eventPacket.isCancelled())return;
 
         if (this.channel.isOpen()) {
             try {

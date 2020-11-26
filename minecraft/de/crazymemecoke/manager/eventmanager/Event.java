@@ -4,7 +4,7 @@ public class Event {
 
     boolean canceled = false;
 
-    public boolean isCanceled() {
+    public boolean isCancelled() {
         return canceled;
     }
 
