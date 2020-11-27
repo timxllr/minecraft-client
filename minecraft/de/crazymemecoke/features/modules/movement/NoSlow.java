@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import org.lwjgl.input.Keyboard;
 
@@ -11,10 +12,22 @@ import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
+@ModuleInfo(name = "NoSlow", category = Category.MOVEMENT, description = "You won't get slowed down anymore while blocking, eating or walking through webs")
 public class NoSlow extends Module {
 
-    public NoSlow() {
-        super("NoSlow", Keyboard.KEY_NONE, Category.MOVEMENT);
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

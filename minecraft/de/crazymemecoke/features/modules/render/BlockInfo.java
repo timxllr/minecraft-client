@@ -6,6 +6,7 @@ import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
@@ -17,9 +18,21 @@ import org.lwjgl.input.Keyboard;
 import java.awt.*;
 import java.util.Objects;
 
+@ModuleInfo(name = "BlockInfo", category = Category.RENDER, description = "Shows a small label with block name and id")
 public class BlockInfo extends Module {
-    public BlockInfo() {
-        super("BlockInfo", Keyboard.KEY_NONE, Category.RENDER);
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

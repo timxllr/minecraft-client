@@ -258,9 +258,9 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
 
             //TODO: ESP mode Outline
             if (Client.main().modMgr().getByName("ESP").state()) {
-                final String mode = Client.main().setMgr().settingByName("Mode", Client.main().modMgr().getByName("ESP")).getMode();
+                final String mode = Client.main().setMgr().settingByName("Mode", Client.main().modMgr().getByName("ESP")).getCurrentMode();
                 if (mode.equalsIgnoreCase("Outline")) {
-                    if (entitylivingbaseIn instanceof EntityPlayer && Client.main().setMgr().settingByName("Players", Client.main().modMgr().getByName("ESP")).getBool()) {
+                    if (entitylivingbaseIn instanceof EntityPlayer && Client.main().setMgr().settingByName("Players", Client.main().modMgr().getByName("ESP")).isToggled()) {
                         GL11.glPushMatrix();
                         {
                             GL11.glPushAttrib(GL11.GL_ALL_CLIENT_ATTRIB_BITS);
@@ -283,7 +283,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
                         }
                         GL11.glPopMatrix();
                     }
-                    if (entitylivingbaseIn instanceof EntityMob && Client.main().setMgr().settingByName("Mobs", Client.main().modMgr().getByName("ESP")).getBool()) {
+                    if (entitylivingbaseIn instanceof EntityMob && Client.main().setMgr().settingByName("Mobs", Client.main().modMgr().getByName("ESP")).isToggled()) {
                         GL11.glPushMatrix();
                         {
                             GL11.glPushAttrib(GL11.GL_ALL_CLIENT_ATTRIB_BITS);
@@ -306,7 +306,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
                         }
                         GL11.glPopMatrix();
                     }
-                    if (entitylivingbaseIn instanceof EntityAnimal && Client.main().setMgr().settingByName("Animals", Client.main().modMgr().getByName("ESP")).getBool()) {
+                    if (entitylivingbaseIn instanceof EntityAnimal && Client.main().setMgr().settingByName("Animals", Client.main().modMgr().getByName("ESP")).isToggled()) {
                         GL11.glPushMatrix();
                         {
                             GL11.glPushAttrib(GL11.GL_ALL_CLIENT_ATTRIB_BITS);

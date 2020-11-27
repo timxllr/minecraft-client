@@ -4,11 +4,24 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "AutoClimb", category = Category.MOVEMENT, description = "Automatically climbs ladders")
 public class AutoClimb extends Module {
-    public AutoClimb() {
-        super("AutoClimb", Keyboard.KEY_NONE, Category.MOVEMENT);
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

@@ -1,34 +1,39 @@
 package de.crazymemecoke.features.modules.world;
 
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import org.lwjgl.input.Keyboard;
 
-import java.util.ArrayList;
-
+@ModuleInfo(name = "Fucker", category = Category.WORLD, description = "Automatically breaks selected blocks")
 public class Fucker extends Module {
-    public TimeHelper delay = new TimeHelper();
+
     private int xOffset;
     private int zOffset;
     private int yOffset;
 
-    public Fucker() {
-        super("Fucker", Keyboard.KEY_NONE, Category.WORLD);
-        ArrayList<String> options = new ArrayList<>();
-        options.add("Beds");
-        options.add("Cores");
-        options.add("Eggs");
-        options.add("Cakes");
-        Client.main().setMgr().addSetting(new Setting("Mode", this, "Beds", options));
+    Setting modes = new Setting("Mode", this, "Beds", new String[] {"Beds", "Cores", "Eggs", "Cakes"});;
+
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     public void smashBlock(BlockPos pos) {
@@ -41,7 +46,7 @@ public class Fucker extends Module {
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
+            String mode = Client.main().setMgr().settingByName("Mode", this).getCurrentMode();
             for (this.xOffset = -5; this.xOffset < 6; ++this.xOffset) {
                 for (this.zOffset = -5; this.zOffset < 6; ++this.zOffset) {
                     for (this.yOffset = 5; this.yOffset > -5; --this.yOffset) {

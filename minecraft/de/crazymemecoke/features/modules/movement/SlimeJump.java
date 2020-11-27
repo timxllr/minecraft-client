@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
@@ -11,19 +12,33 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "SlimeJump", category = Category.MOVEMENT, description = "Lets you jump real high on slime blocks")
 public class SlimeJump extends Module {
 
     double jumpHeight;
 
     public SlimeJump() {
-        super("SlimeJump", Keyboard.KEY_NONE, Category.MOVEMENT);
-
         Client.main().setMgr().addSetting(new Setting("Height", this, 1.5, 1.1, 10, false));
     }
 
     @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
+
+    @Override
     public void onEvent(Event event) {
-        jumpHeight = Client.main().setMgr().settingByName("Height", this).getNum();
+        jumpHeight = Client.main().setMgr().settingByName("Height", this).getCurrentValue();
 
         if (event instanceof EventUpdate) {
             if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {

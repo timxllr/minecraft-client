@@ -4,11 +4,25 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "AirJump", category = Category.MOVEMENT, description = "Lets you jump while you're in the air")
 public class AirJump extends Module {
-    public AirJump() {
-        super("AirJump", Keyboard.KEY_NONE, Category.MOVEMENT);
+
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

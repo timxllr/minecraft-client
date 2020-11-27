@@ -1,12 +1,12 @@
 package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.settingsmanager.Setting;
-import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
 import de.crazymemecoke.utils.time.TimerUtil;
@@ -19,20 +19,17 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
-import org.lwjgl.input.Keyboard;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Speed", category = Category.MOVEMENT, description = "Lets you speed like a sonic")
 public class Speed extends Module {
     public static boolean canStep;
     public double speed;
     public double moveSpeed;
     public int stage;
-    ArrayList<String> mode = new ArrayList<>();
-    SettingsManager sM = Client.main().setMgr();
-    String speedMode;
     private TimerUtil framesDelay = new TimerUtil();
     private TimerUtil delayTimer = new TimerUtil();
     private boolean legitHop = false;
@@ -42,45 +39,15 @@ public class Speed extends Module {
     private float prevYaw;
     private int motionTicks;
     private int ticks = 0;
-    private double posY;
     private int tick;
-    private int airticks;
     private int speedTick;
-    private boolean firstjump;
 
-
-    public Speed() {
-        super("Speed", Keyboard.KEY_NONE, Category.MOVEMENT);
-
-        mode.add("AAC 3.3.11");
-        mode.add("AAC 3.3.10");
-        mode.add("AAC 3.3.9");
-        mode.add("AAC 3.3.1");
-        mode.add("AAC 1.9.10");
-        mode.add("AAC 1.9.8");
-        mode.add("AAC Packet");
-        mode.add("NCP BHop");
-        mode.add("NCP Fast");
-        mode.add("NCP Slow");
-        mode.add("MineSecure");
-        mode.add("MineSucht");
-        mode.add("Rewinside");
-        mode.add("CubeCraft");
-        mode.add("Hive SkyGiants");
-        mode.add("MiniHop");
-        mode.add("Race");
-        mode.add("Motion");
-        mode.add("Jump");
-        mode.add("Frames");
-        mode.add("Ground");
-        mode.add("Timer");
-
-        sM.addSetting(new Setting("Mode", this, "Jump", mode));
-        sM.addSetting(new Setting("AAC 3.3.11 Speed", this, 3, 2, 6, false));
-        sM.addSetting(new Setting("Race Speed", this, 0.5, 0.05, 2, false));
-        sM.addSetting(new Setting("Frames Speed", this, 4.25, 0, 50, true));
-        sM.addSetting(new Setting("Timer Speed", this, 4.25, 0, 50, true));
-    }
+    public Setting mode = new Setting("Mode", this, "NCP BHop", new String[]{"AAC 3.3.11", "AAC 3.3.10", "AAC 3.3.9", "AAC 3.3.1", "AAC 1.9.10", "AAC 1.9.8", "AAC Packet", "NCP BHop", "NCP Fast", "NCP Slow",
+            "MineSecure", "MineSucht", "Rewinside", "CubeCraft", "Hive SkyGiants", "MiniHop", "Race", "Motion", "Jump", "Frames", "Ground", "Timer"});
+    public Setting aac3311Speed = new Setting("AAC 3.3.11 Speed", this, 3, 2, 6, false);
+    public Setting raceSpeed = new Setting("Race Speed", this, 0.5, 0.05, 2, false);
+    public Setting framesSpeed = new Setting("Frames Speed", this, 4.25, 0, 50, true);
+    public Setting timerSpeed = new Setting("Timer Speed", this, 4.25, 0, 50, true);
 
     public static float getDistanceBetweenAngles(float angle1, float angle2) {
         float angle = Math.abs(angle1 - angle2) % 360.0F;
@@ -88,6 +55,11 @@ public class Speed extends Module {
             angle = 360.0F - angle;
         }
         return angle;
+    }
+
+    @Override
+    public void onToggle() {
+
     }
 
     public void onEnable() {
@@ -110,14 +82,11 @@ public class Speed extends Module {
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            speedMode = sM.settingByName("Mode", this).getMode();
-            double frames_speed = sM.settingByName("Frames Speed", this).getNum();
-
-            setDisplayName("Speed [" + speedMode + "]");
+            setDisplayName("Speed [" + mode.getCurrentMode() + "]");
 
             if (state()) {
 
-                switch (speedMode) {
+                switch (mode.getCurrentMode()) {
                     case "Ground": {
                         doGround();
                         break;
@@ -127,7 +96,7 @@ public class Speed extends Module {
                         break;
                     }
                     case "Frames": {
-                        doFrames(frames_speed);
+                        doFrames(framesSpeed.getCurrentValue());
                         break;
                     }
                     case "Motion": {
@@ -244,7 +213,7 @@ public class Speed extends Module {
 
     private void doRace() {
         if (mc.thePlayer.onGround && EntityUtils.isMoving()) {
-            PlayerUtil.setSpeed(Client.main().setMgr().settingByName("Race Speed", this).getNum());
+            PlayerUtil.setSpeed(Client.main().setMgr().settingByName("Race Speed", this).getCurrentValue());
         }
     }
 
@@ -314,7 +283,7 @@ public class Speed extends Module {
     }
 
     private void doAAC3311() {
-        mc.timer.timerSpeed = (float) Client.main().setMgr().settingByName("AAC 3.3.11 Speed", this).getNum();
+        mc.timer.timerSpeed = (float) Client.main().setMgr().settingByName("AAC 3.3.11 Speed", this).getCurrentValue();
         mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, true));
 
     }
@@ -467,8 +436,7 @@ public class Speed extends Module {
     }
 
     private void doTimer() {
-        double timer_speed = sM.settingByName("Timer Speed", this).getNum();
-        mc.timer.timerSpeed = (float) timer_speed;
+        mc.timer.timerSpeed = (float) timerSpeed.getCurrentValue();
     }
 
     private void doJump() {
@@ -659,9 +627,6 @@ public class Speed extends Module {
     }
 
     public void onNewMove() {
-        if (!speedMode.equalsIgnoreCase("Jump")) {
-            return;
-        }
         if (mc.gameSettings.keyBindForward.pressed || mc.gameSettings.keyBindBack.pressed || mc.gameSettings.keyBindLeft.pressed || mc.gameSettings.keyBindRight.pressed) {
 
             mc.thePlayer.motionX *= 0.4;
@@ -674,9 +639,6 @@ public class Speed extends Module {
     }
 
     public void onJumpUpdate() {
-        if (!speedMode.equalsIgnoreCase("Jump")) {
-            return;
-        }
         if (((mc.thePlayer.moveForward == 0.0F) && (mc.thePlayer.moveStrafing == 0.0F))
                 || (mc.thePlayer.isCollidedHorizontally)) {
             return;
@@ -692,9 +654,6 @@ public class Speed extends Module {
     }
 
     public void onNewUpdate() {
-        if (!speedMode.equalsIgnoreCase("New")) {
-            return;
-        }
         double speed = 3.15D;
         double slow = 1.49D;
         double offset = 4.9D;

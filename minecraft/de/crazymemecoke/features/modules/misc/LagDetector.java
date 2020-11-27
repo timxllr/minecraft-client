@@ -7,6 +7,7 @@ import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.network.play.server.S02PacketChat;
@@ -14,12 +15,24 @@ import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
 
+@ModuleInfo(name = "LagDetector", category = Category.MISC, description = "Detects any kind of lag of the server")
 public class LagDetector extends Module {
 
     TimeHelper timeHelper = new TimeHelper();
 
-    public LagDetector() {
-        super("LagDetector", Keyboard.KEY_NONE, Category.MISC);
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

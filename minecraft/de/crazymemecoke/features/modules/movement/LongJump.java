@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
@@ -9,30 +10,34 @@ import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
 import de.crazymemecoke.utils.time.TimeHelper;
-import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "LongJump", category = Category.MOVEMENT, description = "Lets you jump very far away")
 public class LongJump extends Module {
-    private final TimeHelper timer = new TimeHelper();
     private boolean jump;
 
-    public LongJump() {
-        super("LongJump", Keyboard.KEY_NONE, Category.MOVEMENT);
+    public Setting mode = new Setting("Mode", this, "NCP", new String[] {"AAC Old", "NCP", "MineSecure"});
 
-        ArrayList<String> mode = new ArrayList<>();
+    @Override
+    public void onToggle() {
 
-        mode.add("AAC Old");
-        mode.add("NCP");
-        mode.add("MineSecure");
+    }
 
-        Client.main().setMgr().addSetting(new Setting("Mode", this, "NCP", mode));
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventMotion) {
-            switch (Client.main().setMgr().settingByName("Mode", this).getMode()) {
+            switch (mode.getCurrentMode()) {
                 case "AAC Old": {
                     doAACOld();
                     break;
@@ -83,10 +88,10 @@ public class LongJump extends Module {
             jump = true;
         }
 
-        if (mc.thePlayer.onGround && timer.isDelayComplete(500L)) {
+        if (mc.thePlayer.onGround && timeHelper.isDelayComplete(500L)) {
             mc.thePlayer.motionY = 0.42D;
             PlayerUtil.toFwd(2.3D);
-            timer.reset();
+            timeHelper.reset();
         } else if (!mc.thePlayer.onGround && jump) {
             mc.thePlayer.motionX = mc.thePlayer.motionZ = 0.0D;
             jump = false;

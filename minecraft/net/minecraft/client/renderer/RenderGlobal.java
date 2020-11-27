@@ -667,13 +667,13 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
                         boolean flag2 = this.mc.getRenderViewEntity() instanceof EntityLivingBase && ((EntityLivingBase) this.mc.getRenderViewEntity()).isPlayerSleeping();
                         boolean flag3 = entity3.isInRangeToRender3d(d0, d1, d2) && (entity3.ignoreFrustumCheck || camera.isBoundingBoxInFrustum(entity3.getEntityBoundingBox()) || entity3.riddenByEntity == this.mc.thePlayer);
                         boolean players, animals, mobs, villager, items;
-                        boolean toggled = Client.main().modMgr().getModule(ESP.class).state() && Client.main().setMgr().settingByName("Mode", Client.main().modMgr().getModule(ESP.class)).getMode().equalsIgnoreCase("Shader");
+                        boolean toggled = Client.main().modMgr().getModule(ESP.class).state() && Client.main().setMgr().settingByName("Mode", Client.main().modMgr().getModule(ESP.class)).getCurrentMode().equalsIgnoreCase("Shader");
 
-                        players = entity3 instanceof EntityPlayer && Client.main().setMgr().settingByName("Players", Client.main().modMgr().getModule(ESP.class)).getBool();
-                        animals = entity3 instanceof EntityAnimal && Client.main().setMgr().settingByName("Animals", Client.main().modMgr().getModule(ESP.class)).getBool();
-                        mobs = entity3 instanceof EntityMob && Client.main().setMgr().settingByName("Mobs", Client.main().modMgr().getModule(ESP.class)).getBool();
-                        villager = entity3 instanceof EntityVillager && Client.main().setMgr().settingByName("Villager", Client.main().modMgr().getModule(ESP.class)).getBool();
-                        items = entity3 instanceof EntityItem && Client.main().setMgr().settingByName("Items", Client.main().modMgr().getModule(ESP.class)).getBool();
+                        players = entity3 instanceof EntityPlayer && Client.main().setMgr().settingByName("Players", Client.main().modMgr().getModule(ESP.class)).isToggled();
+                        animals = entity3 instanceof EntityAnimal && Client.main().setMgr().settingByName("Animals", Client.main().modMgr().getModule(ESP.class)).isToggled();
+                        mobs = entity3 instanceof EntityMob && Client.main().setMgr().settingByName("Mobs", Client.main().modMgr().getModule(ESP.class)).isToggled();
+                        villager = entity3 instanceof EntityVillager && Client.main().setMgr().settingByName("Villager", Client.main().modMgr().getModule(ESP.class)).isToggled();
+                        items = entity3 instanceof EntityItem && Client.main().setMgr().settingByName("Items", Client.main().modMgr().getModule(ESP.class)).isToggled();
 
                         if ((entity3 != this.mc.getRenderViewEntity() || this.mc.gameSettings.thirdPersonView != 0 || flag2) && flag3 && (toggled && (players || animals || mobs || items || villager))) {
                             this.renderManager.renderEntitySimple(entity3, partialTicks);

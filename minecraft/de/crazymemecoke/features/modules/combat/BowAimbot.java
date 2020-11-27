@@ -4,6 +4,7 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,9 +13,22 @@ import org.lwjgl.input.Keyboard;
 
 import java.util.Iterator;
 
+@ModuleInfo(name = "BowAimbot", category = Category.COMBAT, description = "You automatically aim at other targets with your bow")
 public class BowAimbot extends Module {
-    public BowAimbot() {
-        super("BowAimbot", Keyboard.KEY_NONE, Category.COMBAT);
+
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

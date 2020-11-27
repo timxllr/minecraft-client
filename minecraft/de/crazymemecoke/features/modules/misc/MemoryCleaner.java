@@ -4,17 +4,25 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventTick;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.time.TimeHelper;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "MemoryCleaner", category = Category.MISC, description = "Cleans your RAM (for more performance)")
 public class MemoryCleaner extends Module {
-    public MemoryCleaner() {
-        super("MemoryCleaner", Keyboard.KEY_NONE, Category.MISC);
+    TimeHelper timeHelper = new TimeHelper();
+
+    @Override
+    public void onToggle() {
+
     }
 
-    TimeHelper timeHelper = new TimeHelper();
+    @Override
+    public void onEnable() {
+
+    }
 
     @Override
     public void onDisable() {

@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
@@ -8,32 +9,36 @@ import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
-import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Strafe", category = Category.MOVEMENT, description = "Fixes your strafings when you're in air")
 public class Strafe extends Module {
 
-    public Strafe() {
-        super("Strafe", Keyboard.KEY_NONE, Category.MOVEMENT);
+    public Setting mode = new Setting("Mode", this, "NCP", new String[] {"NCP", "AAC"});
 
-        ArrayList<String> mode = new ArrayList<>();
+    @Override
+    public void onToggle() {
 
-        mode.add("NCP");
-        mode.add("AAC");
+    }
 
-        Client.main().setMgr().addSetting(new Setting("Mode", this, "NCP", mode));
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
 
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventMotion) {
-            String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
-
             setDisplayName("Strafe [" + mode + "]");
 
-            switch (mode) {
+            switch (mode.getCurrentMode()) {
                 case "NCP": {
                     doNCP();
                     break;

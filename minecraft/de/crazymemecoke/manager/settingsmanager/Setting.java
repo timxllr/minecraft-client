@@ -18,7 +18,7 @@ public class Setting {
     private final String mode;
 
     private String sval;
-    private ArrayList<String> options;
+    private String[] options;
 
     private boolean bval;
 
@@ -30,13 +30,14 @@ public class Setting {
     private SettingType settingType;
 
 
-    public Setting(String name, Module parent, String modeValue, ArrayList<String> options) {
+    public Setting(String name, Module parent, String modeValue, String[] options) {
         this.name = (parent == null ? "global" : parent.name()) + "_" + name;
         this.parent = parent;
         this.sval = modeValue;
         this.options = options;
         this.mode = "Combo";
         settingType = SettingType.COMBO;
+        parent.s.addSetting(this);
     }
 
     public Setting(String name, Module parent, boolean booleanValue) {
@@ -45,6 +46,7 @@ public class Setting {
         this.bval = booleanValue;
         this.mode = "Check";
         settingType = SettingType.BOOLEAN;
+        parent.s.addSetting(this);
     }
 
     public Setting(String name, Module parent, double dval, double min, double max, boolean onlyInt) {
@@ -56,6 +58,7 @@ public class Setting {
         this.onlyint = onlyInt;
         this.mode = "Slider";
         settingType = SettingType.VALUE;
+        parent.s.addSetting(this);
     }
 
     public String getName() {
@@ -70,7 +73,7 @@ public class Setting {
         return parent;
     }
 
-    public String getMode() {
+    public String getCurrentMode() {
         return this.sval;
     }
 
@@ -78,11 +81,11 @@ public class Setting {
         this.sval = in;
     }
 
-    public ArrayList<String> getOptions() {
+    public String[] getOptions() {
         return this.options;
     }
 
-    public boolean getBool() {
+    public boolean isToggled() {
         return this.bval;
     }
 
@@ -90,7 +93,7 @@ public class Setting {
         this.bval = in;
     }
 
-    public double getNum() {
+    public double getCurrentValue() {
         if (this.onlyint) {
             this.dval = (int) dval;
         }

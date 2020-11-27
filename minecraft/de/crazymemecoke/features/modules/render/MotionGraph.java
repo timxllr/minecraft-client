@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.render;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
@@ -9,30 +10,38 @@ import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.render.Rainbow;
 import net.minecraft.client.gui.ScaledResolution;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ModuleInfo(name = "MotionGraph", category = Category.RENDER, description = "Visualises your movement motion")
 public class MotionGraph extends Module {
 
     private final List<Double> motionSpeed = new ArrayList<>();
 
-    public MotionGraph() {
-        super("MotionGraph", Keyboard.KEY_NONE, Category.RENDER);
+    public Setting outline = new Setting("Outline", this, true);
+    public Setting rainbow = new Setting("Rainbow", this, true);
 
-        Client.main().setMgr().addSetting(new Setting("Outline", this, true));
-        Client.main().setMgr().addSetting(new Setting("Rainbow", this, true));
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override
     public void onEvent(Event event) {
-        boolean isOutlined = Client.main().setMgr().settingByName("Outline", this).getBool();
-        boolean isRainbow = Client.main().setMgr().settingByName("Rainbow", this).getBool();
-
-        if (event instanceof EventTick) {
+        if (event instanceof EventTick && mc.currentScreen == null) {
             motionSpeed.add(Math.hypot(mc.thePlayer.motionX, mc.thePlayer.motionZ) * 100);
 
             if (motionSpeed.size() > 70) {
@@ -43,8 +52,8 @@ public class MotionGraph extends Module {
             if (((EventRender) event).getType() == EventRender.Type.twoD) {
                 ScaledResolution sr = new ScaledResolution(mc);
 
-                if (isOutlined) {
-                    if (isRainbow) {
+                if (outline.isToggled()) {
+                    if (rainbow.isToggled()) {
                         GL11.glPopMatrix();
                         GL11.glPushMatrix();
                         GL11.glColor3f(0, 0, 0);
@@ -107,7 +116,7 @@ public class MotionGraph extends Module {
                         GL11.glEnable(GL11.GL_TEXTURE_2D);
                     }
                 } else {
-                    if (isRainbow) {
+                    if (rainbow.isToggled()) {
                         GL11.glPushMatrix();
                         GL11.glColor3f(1, 1, 1);
                         GL11.glLineWidth(2);

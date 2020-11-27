@@ -3,13 +3,16 @@ package de.crazymemecoke.features.modules.gui;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "Invis", category = Category.GUI, description = "Makes the entire Client invisible for screenshares")
 public class Invis extends Module {
-    public Invis() {
-        super("Invis", Keyboard.KEY_NONE, Category.GUI);
+    @Override
+    public void onToggle() {
+
     }
 
     @Override

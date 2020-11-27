@@ -4,6 +4,7 @@ import java.util.List;
 
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
@@ -14,9 +15,22 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 
-public class Aimbot extends Module {
-	public Aimbot() {
-		super("Aimbot", Keyboard.KEY_NONE, Category.COMBAT);
+@ModuleInfo(name = "AimBot",category = Category.COMBAT, description = "You automatically aim on players")
+public class AimBot extends Module {
+
+	@Override
+	public void onToggle() {
+
+	}
+
+	@Override
+	public void onEnable() {
+
+	}
+
+	@Override
+	public void onDisable() {
+
 	}
 
 	@Override

@@ -1,22 +1,37 @@
 package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
+import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.utils.NotifyUtil;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.inventory.GuiEditSign;
 import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "InventoryMove", category = Category.MOVEMENT, description = "Lets you walk inside of inventories")
 public class InventoryMove extends Module {
 
-    public InventoryMove() {
-        super("InventoryMove", Keyboard.KEY_NONE, Category.MOVEMENT);
+    public Setting cameraSpeed = new Setting("Camera Speed", this, 3, 0.1, 5, false);
 
-        Client.main().setMgr().addSetting(new Setting("Camera Speed", this, 3, 0.1, 5, false));
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+        NotifyUtil.notification("InventoryMove", "Du kannst dich mit den Pfeiltasten im Inventar bewegen", NotificationType.INFO, 5);
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
 
@@ -34,19 +49,17 @@ public class InventoryMove extends Module {
                     KeyBinding.setKeyBindState(bind.getKeyCode(), Keyboard.isKeyDown(bind.getKeyCode()));
                 }
 
-                double camera_speed = Client.main().setMgr().settingByName("Camera Speed", this).getNum();
-
                 if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-                    mc.thePlayer.rotationYaw -= camera_speed;
+                    mc.thePlayer.rotationYaw -= cameraSpeed.getCurrentValue();
                 }
                 if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-                    mc.thePlayer.rotationYaw += camera_speed;
+                    mc.thePlayer.rotationYaw += cameraSpeed.getCurrentValue();
                 }
                 if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-                    mc.thePlayer.rotationPitch += camera_speed;
+                    mc.thePlayer.rotationPitch += cameraSpeed.getCurrentValue();
                 }
                 if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-                    mc.thePlayer.rotationPitch -= camera_speed;
+                    mc.thePlayer.rotationPitch -= cameraSpeed.getCurrentValue();
                 }
             }
         }

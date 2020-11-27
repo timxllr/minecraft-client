@@ -1,5 +1,6 @@
 package de.crazymemecoke.features.modules.player;
 
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.eventmanager.Event;
@@ -9,32 +10,43 @@ import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "ChestStealer", category = Category.PLAYER, description = "Automatically steals all items inside of containers")
 public class ChestStealer extends Module {
-    TimeHelper time = new TimeHelper();
 
-    public ChestStealer() {
-        super("ChestStealer", Keyboard.KEY_NONE, Category.PLAYER);
-        Client.main().setMgr().addSetting(new Setting("Delay", this, 75, 0, 250, true));
-        Client.main().setMgr().addSetting(new Setting("Auto Close", this, true));
+    Setting delay = new Setting("Delay", this, 75, 0, 250, true);
+    Setting autoClose = new Setting("Auto Close", this, true);
+
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            long delay = (long) Client.main().setMgr().settingByName("Delay", this).getNum();
+            long delay = (long) Client.main().setMgr().settingByName("Delay", this).getCurrentValue();
             if (((mc.thePlayer.openContainer instanceof ContainerChest))) {
                 ContainerChest container = (ContainerChest) mc.thePlayer.openContainer;
                 for (int i = 0; i < container.getLowerChestInventory().getSizeInventory(); i++) {
                     if ((container.getLowerChestInventory().getStackInSlot(i) != null)
-                            && (time.hasReached(delay))) {
+                            && (timeHelper.hasReached(delay))) {
                         mc.playerController.windowClick(container.windowId, i, 0, 1, mc.thePlayer);
-                        time.reset();
+                        timeHelper.reset();
                     }
                 }
                 if (isEmpty(container)) {
-                    if (Client.main().setMgr().settingByName("Auto Close", this).getBool()) {
+                    if (Client.main().setMgr().settingByName("Auto Close", this).isToggled()) {
                         mc.thePlayer.closeScreen();
                     }
                 }

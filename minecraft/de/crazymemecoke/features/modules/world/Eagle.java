@@ -4,13 +4,26 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "Eagle", category = Category.WORLD, description = "Automatically fastbridges")
 public class Eagle extends Module {
-    public Eagle() {
-        super("Eagle", Keyboard.KEY_NONE, Category.WORLD);
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

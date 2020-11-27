@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.combat;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.manager.eventmanager.Event;
@@ -23,11 +24,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
-import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
 import java.util.ArrayList;
 
+@ModuleInfo(name = "Aura", category = Category.COMBAT, description = "You automatically hit players")
 public class Aura extends Module {
 
     public static ArrayList<Entity> targets = new ArrayList<>();
@@ -39,8 +40,6 @@ public class Aura extends Module {
     boolean teams, players, animals, mobs, villager, rotations, ignoreDead;
 
     public Aura() {
-        super("Aura", Keyboard.KEY_NONE, Category.COMBAT);
-
         sM.addSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
         sM.addSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
         sM.addSetting(new Setting("Prediction Multiplier", this, 0.4F, 0F, 1F, false));
@@ -54,6 +53,11 @@ public class Aura extends Module {
         sM.addSetting(new Setting("Teams", this, false));
         sM.addSetting(new Setting("Rotations", this, true));
         sM.addSetting(new Setting("Ignore Dead", this, false));
+    }
+
+    @Override
+    public void onToggle() {
+
     }
 
 
@@ -72,16 +76,16 @@ public class Aura extends Module {
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            ticksExisted = sM.settingByName("Ticks Existed", this).getNum();
-            range = sM.settingByName("Range", this).getNum();
-            cps = sM.settingByName("CPS", this).getNum();
-            teams = sM.settingByName("Teams", this).getBool();
-            players = sM.settingByName("Players", this).getBool();
-            animals = sM.settingByName("Animals", this).getBool();
-            mobs = sM.settingByName("Mobs", this).getBool();
-            villager = sM.settingByName("Villager", this).getBool();
-            rotations = sM.settingByName("Rotations", this).getBool();
-            ignoreDead = sM.settingByName("Ignore Dead", this).getBool();
+            ticksExisted = sM.settingByName("Ticks Existed", this).getCurrentValue();
+            range = sM.settingByName("Range", this).getCurrentValue();
+            cps = sM.settingByName("CPS", this).getCurrentValue();
+            teams = sM.settingByName("Teams", this).isToggled();
+            players = sM.settingByName("Players", this).isToggled();
+            animals = sM.settingByName("Animals", this).isToggled();
+            mobs = sM.settingByName("Mobs", this).isToggled();
+            villager = sM.settingByName("Villager", this).isToggled();
+            rotations = sM.settingByName("Rotations", this).isToggled();
+            ignoreDead = sM.settingByName("Ignore Dead", this).isToggled();
 
             currentTarget = getClosest(mc.playerController.getBlockReachDistance());
 
@@ -97,9 +101,9 @@ public class Aura extends Module {
             updateTime();
 
             if (rotations) {
-                float precision = (float) sM.settingByName("Precision", this).getNum();
-                float accuracy = (float) sM.settingByName("Accuracy", this).getNum();
-                float predictionMultiplier = (float) sM.settingByName("Prediction Multiplier", this).getNum();
+                float precision = (float) sM.settingByName("Precision", this).getCurrentValue();
+                float accuracy = (float) sM.settingByName("Accuracy", this).getCurrentValue();
+                float predictionMultiplier = (float) sM.settingByName("Prediction Multiplier", this).getCurrentValue();
 
                 float[] rots = faceEntity(currentTarget, curYaw, curPitch, precision, accuracy, predictionMultiplier);
                 yaw = rots[0];
@@ -162,7 +166,7 @@ public class Aura extends Module {
     }
 
     public boolean shouldAttack() {
-        return (currentTarget instanceof EntityPlayer && sM.settingByName("Players", this).getBool()) || (currentTarget instanceof EntityAnimal && sM.settingByName("Animals", this).getBool()) || (currentTarget instanceof EntityMob && sM.settingByName("Mobs", this).getBool()) || (currentTarget instanceof EntityVillager && sM.settingByName("Villager", this).getBool());
+        return (currentTarget instanceof EntityPlayer && sM.settingByName("Players", this).isToggled()) || (currentTarget instanceof EntityAnimal && sM.settingByName("Animals", this).isToggled()) || (currentTarget instanceof EntityMob && sM.settingByName("Mobs", this).isToggled()) || (currentTarget instanceof EntityVillager && sM.settingByName("Villager", this).isToggled());
     }
 
     public float updateRotation(float curRot, float destination, float speed) {
@@ -258,7 +262,7 @@ public class Aura extends Module {
             mc.thePlayer.swingItem();
             mc.playerController.attackEntity(mc.thePlayer, entity);
 
-            if (Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).getBool()) {
+            if (Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).isToggled()) {
                 renderTargetHUD();
             }
         }
@@ -267,7 +271,7 @@ public class Aura extends Module {
     private void renderTargetHUD() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        if (Aura.currentTarget instanceof EntityPlayer && Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (Aura.currentTarget instanceof EntityPlayer && Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).isToggled()) {
             RenderUtils.drawRect(s.width() / 2 - 130, s.height() / 2 - 60, s.width() / 2 + 90, s.height() / 2 + 20, new Color(0, 0, 0, 110).getRGB());
 
             EntityPlayer p = (EntityPlayer) Aura.currentTarget;

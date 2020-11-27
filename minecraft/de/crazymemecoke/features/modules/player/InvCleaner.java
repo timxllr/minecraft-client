@@ -4,18 +4,16 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import net.minecraft.item.*;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "InvCleaner", category = Category.PLAYER, description = "Automatically cleans your inventory")
 public class InvCleaner extends Module {
 
     private final ArrayList<Integer> uselessItems = new ArrayList<>();
-
-    public InvCleaner() {
-        super("InvCleaner", Keyboard.KEY_NONE, Category.PLAYER);
-    }
 
     private void clean(final int i) {
         mc.playerController.windowClick(0, i, 0, 0, mc.thePlayer);
@@ -71,6 +69,21 @@ public class InvCleaner extends Module {
         if (itemStack.getItem() instanceof ItemPotion) return true;
         if (itemStack.getItem() instanceof ItemFlintAndSteel) return true;
         return itemStack.getItem() instanceof ItemEnderPearl;
+    }
+
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

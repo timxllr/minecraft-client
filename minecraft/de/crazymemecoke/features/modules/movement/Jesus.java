@@ -1,12 +1,11 @@
 package de.crazymemecoke.features.modules.movement;
 
-import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLiquid;
@@ -16,28 +15,20 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.optifine.BlockPosM;
-import org.lwjgl.input.Keyboard;
 
-import java.util.ArrayList;
-
+@ModuleInfo(name = "Jesus", category = Category.MOVEMENT, description = "Lets you walk on water or lava")
 public class Jesus extends Module {
 
-    ArrayList<String> mode = new ArrayList<>();
-    public TimeHelper timeHelper = new TimeHelper();
+    public Setting mode = new Setting("Mode", this, "Normal", new String[] {"Vanilla", "Dolphin", "AAC", "NCP"});
+
     private int stage;
     private boolean canjump;
     private int delay;
     private int time;
 
-    public Jesus() {
-        super("Jesus", Keyboard.KEY_NONE, Category.MOVEMENT);
+    @Override
+    public void onToggle() {
 
-        mode.add("Vanilla");
-        mode.add("Dolphin");
-        mode.add("AAC");
-        mode.add("NCP");
-
-        Client.main().setMgr().addSetting(new Setting("Mode", this, "Normal", mode));
     }
 
     @Override
@@ -46,10 +37,14 @@ public class Jesus extends Module {
     }
 
     @Override
+    public void onDisable() {
+
+    }
+
+    @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            String jesusMode = Client.main().setMgr().settingByName("Mode", this).getMode();
-            switch (jesusMode) {
+            switch (mode.getCurrentMode()) {
                 case "Vanilla": {
                     doVanilla();
                     break;

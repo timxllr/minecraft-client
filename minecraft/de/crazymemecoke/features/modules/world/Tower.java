@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.world;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
@@ -13,16 +14,26 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "Tower", category = Category.WORLD, description = "Automatically towers yourself with blocks into the air")
 public class Tower extends Module {
-    public Tower() {
-        super("Tower", Keyboard.KEY_NONE, Category.WORLD);
 
-        Client.main().setMgr().addSetting(new Setting("Slow", this, false));
+    Setting slowDown = new Setting("Slow", this, false);
+
+    @Override
+    public void onToggle() {
+
     }
 
-    private final TimeHelper time = new TimeHelper();
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
 
     private EnumFacing getFacingDirection(final BlockPos pos) {
         EnumFacing direction = null;
@@ -49,15 +60,15 @@ public class Tower extends Module {
                 final BlockPos pos = new BlockPos(Tower.mc.thePlayer.posX, Tower.mc.thePlayer.posY - 1.0, Tower.mc.thePlayer.posZ);
                 final EnumFacing face = getFacingDirection(pos);
                 try {
-                    boolean slow = Client.main().setMgr().settingByName("Slow", this).getBool();
-                    if (time.hasReached(slow ? 150 : 75) && Tower.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Tower.mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemBlock) {
+                    boolean slow = slowDown.isToggled();
+                    if (timeHelper.hasReached(slow ? 150 : 75) && Tower.mc.thePlayer.getCurrentEquippedItem().getItem() != null && Tower.mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemBlock) {
                         Tower.mc.thePlayer.setPosition(Tower.mc.thePlayer.posX, Tower.mc.thePlayer.posY + 1.1, Tower.mc.thePlayer.posZ);
                         final float[] rotations = BlockHelper.getBlockRotations(Tower.mc.thePlayer.posX, Tower.mc.thePlayer.posY - 1.0, Tower.mc.thePlayer.posZ);
                         if (!Tower.mc.thePlayer.onGround) {
                             mc.rightClickMouse();
                             Tower.mc.thePlayer.swingItem();
                         }
-                        time.reset();
+                        timeHelper.reset();
                     }
                 } catch (Exception ignored) {
                 }

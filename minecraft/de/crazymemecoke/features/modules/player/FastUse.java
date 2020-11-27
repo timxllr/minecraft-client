@@ -1,10 +1,10 @@
 package de.crazymemecoke.features.modules.player;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
-import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -19,15 +19,26 @@ import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
+@ModuleInfo(name = "FastUse", category = Category.PLAYER, description = "Lets you use items real fast")
 public class FastUse extends Module {
 
-    public FastUse() {
-        super("FastUse", Keyboard.KEY_NONE, Category.PLAYER);
+    public Setting delay = new Setting("Delay", this, 15, 0, 20, false);
+    public Setting ncp = new Setting("NCP", this, true);
 
-        Client.main().setMgr().addSetting(new Setting("Delay", this, 15, 0, 20, false));
+    @Override
+    public void onToggle() {
+
     }
 
-    boolean NCP = true;
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
 
     public void shootBow() {
         int item = mc.thePlayer.inventory.currentItem;
@@ -48,7 +59,7 @@ public class FastUse extends Module {
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            double delay = Client.main().setMgr().settingByName("Delay", this).getNum();
+            double delay = Client.main().setMgr().settingByName("Delay", this).getCurrentValue();
 
             try {
                 if (isSword(mc.thePlayer.inventory.getCurrentItem().getItem())) {
@@ -63,7 +74,7 @@ public class FastUse extends Module {
                             .addToSendQueue(new C03PacketPlayer(mc.thePlayer.onGround));
                 }
                 if ((mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemBow)) {
-                    if (!NCP) {
+                    if (!ncp.isToggled()) {
                         shootBow();
                         return;
                     }

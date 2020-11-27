@@ -2,37 +2,34 @@ package de.crazymemecoke.features.modules.gui;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.Panel;
-import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
-import org.lwjgl.input.Keyboard;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 
 import java.util.ArrayList;
 
+@ModuleInfo(name = "ClickGUI", category = Category.GUI, description = "Shows you a visual interface with all modules and settings", bind = 54)
 public class ClickGUI extends Module {
 
-    public ClickGUI() {
-        super("ClickGUI", Keyboard.KEY_RSHIFT, Category.GUI);
-    }
+    public Setting design = new Setting("Design", this, "Caesium", new String[] {"Caesium"});
+    public Setting sound = new Setting("Sound", this, false);
+    public Setting blur = new Setting("Blur", this, true);
 
     @Override
-    public void setup() {
-        ArrayList<String> theme = new ArrayList<>();
-
-        theme.add("Caesium");
-
-        Client.main().setMgr().addSetting(new Setting("Design", this, "Caesium", theme));
-        Client.main().setMgr().addSetting(new Setting("Sound", this, false));
-        Client.main().setMgr().addSetting(new Setting("Blur", this, true));
+    public void onToggle() {
     }
 
     @Override
     public void onEnable() {
-        if (!(Client.main().modMgr().getModule(Invis.class)).state()) {
-            mc.displayGuiScreen(new Panel(Client.main().setMgr().settingByName("Design", this).getMode(), 22));
-            Client.main().modMgr().getModule(ClickGUI.class).setState(false);
-        }
+        mc.displayGuiScreen(new Panel(design.getCurrentMode(), 22));
+        Client.main().modMgr().getModule(ClickGUI.class).setState(false);
+        System.out.println(bind());
+    }
+
+    @Override
+    public void onDisable() {
     }
 
     @Override

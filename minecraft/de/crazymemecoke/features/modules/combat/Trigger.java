@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.combat;
 
 import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.features.commands.Friend;
@@ -17,19 +18,26 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
+@ModuleInfo(name = "Trigger", category = Category.COMBAT, description = "You automatically hit when a target is focused")
 public class Trigger extends Module {
-	public Trigger() {
-		super("Trigger", Keyboard.KEY_NONE, Category.COMBAT);
-	}
-
 	public static int cps = 12;
 	
 	public static boolean hurttime = false;
 	private boolean isCritting;
 	private TimerUtil delay = new TimerUtil();
 
+	@Override
+	public void onToggle() {
+
+	}
+
 	public void onEnable() {
 		this.delay.setLastMS();
+	}
+
+	@Override
+	public void onDisable() {
+
 	}
 
 	@Override

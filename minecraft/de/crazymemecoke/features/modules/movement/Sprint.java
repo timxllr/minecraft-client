@@ -2,16 +2,28 @@ package de.crazymemecoke.features.modules.movement;
 
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.Wrapper;
 
+@ModuleInfo(name = "Sprint", category = Category.MOVEMENT, description = "Automatically sprints when moving")
 public class Sprint extends Module {
 
-	public Sprint() {
-		super("Sprint", Keyboard.KEY_NONE, Category.MOVEMENT);
+	@Override
+	public void onToggle() {
+
+	}
+
+	@Override
+	public void onEnable() {
+
+	}
+
+	@Override
+	public void onDisable() {
 
 	}
 

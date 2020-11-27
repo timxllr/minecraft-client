@@ -4,6 +4,7 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlime;
@@ -17,9 +18,21 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
+@ModuleInfo(name = "DamageCalc", category = Category.RENDER, description = "Calculates the fall damage and visualises it")
 public class DamageCalc extends Module {
-    public DamageCalc() {
-        super("DamageCalc", Keyboard.KEY_NONE, Category.RENDER);
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

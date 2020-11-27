@@ -1,29 +1,35 @@
 package de.crazymemecoke.manager.modulemanager;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.Methods;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.ui.Interface;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
+import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.utils.NotifyUtil;
+import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
-public abstract class Module {
+public abstract class Module extends Methods {
 
     private String name;
     private String visualName;
     private int bind;
     private final Category category;
     public static Minecraft mc = Minecraft.mc();
+    public static SettingsManager s = Client.main().setMgr();
     public boolean enabled;
 
-    public Module(String name, int bind, Category category) {
-        this.name = name;
-        this.visualName = name;
-        this.bind = bind;
-        this.category = category;
-        setup();
+    public TimeHelper timeHelper = new TimeHelper();
+
+    public Module() {
+        ModuleInfo moduleInfo = getClass().getAnnotation(ModuleInfo.class);
+        category = moduleInfo.category();
+        name = moduleInfo.name();
+        visualName = name;
+        bind = moduleInfo.bind();
     }
 
     public String name() {
@@ -69,21 +75,16 @@ public abstract class Module {
 
     public void toggle() {
         this.setState(!this.state());
+        System.out.println(this.state());
     }
 
-    public void onToggle() {
-    }
+    public abstract void onToggle();
 
-    public void onEnable() {
-    }
+    public abstract void onEnable();
 
-    public void onDisable() {
-    }
+    public abstract void onDisable();
 
     public abstract void onEvent(Event event);
-
-    public void setup() {
-    }
 
     public void setBind(int bind) {
         if (bind != 0) {

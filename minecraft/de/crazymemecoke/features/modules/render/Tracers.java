@@ -4,6 +4,7 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,11 +13,8 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
+@ModuleInfo(name = "Tracers", category = Category.RENDER, description = "Renders thin lines to all other players")
 public class Tracers extends Module {
-
-    public Tracers() {
-        super("Tracers", Keyboard.KEY_NUMPAD8, Category.RENDER);
-    }
 
     private void drawLine(final EntityPlayer player) {
         final double x = player.lastTickPosX + (player.posX - player.lastTickPosX) * mc.timer.renderPartialTicks - RenderManager.renderPosX;
@@ -45,6 +43,21 @@ public class Tracers extends Module {
         GL11.glDisable(2848);
         GL11.glDisable(3042);
         GL11.glPopMatrix();
+    }
+
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

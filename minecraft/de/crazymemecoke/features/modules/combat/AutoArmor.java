@@ -1,11 +1,11 @@
 package de.crazymemecoke.features.modules.combat;
 
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.utils.time.TimeHelper;
-import org.lwjgl.input.Keyboard;
 
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -15,12 +15,26 @@ import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
+@ModuleInfo(name = "AutoArmor", category = Category.COMBAT, description = "You automatically equip yourself with the best armor available")
 public class AutoArmor extends Module {
 
     public AutoArmor() {
-        super("AutoArmor", Keyboard.KEY_NONE, Category.COMBAT);
-
         Client.main().setMgr().addSetting(new Setting("Delay", this, 100, 0, 500, true));
+    }
+
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     TimeHelper time = new TimeHelper();
@@ -28,7 +42,7 @@ public class AutoArmor extends Module {
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            double delay = Client.main().setMgr().settingByName("Delay", this).getNum();
+            double delay = Client.main().setMgr().settingByName("Delay", this).getCurrentValue();
             if (state()) {
                 if (mc.thePlayer.capabilities.isCreativeMode
                         || mc.currentScreen instanceof GuiContainer && !(mc.currentScreen instanceof GuiInventory))

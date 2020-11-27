@@ -4,6 +4,7 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -13,11 +14,23 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "FastBow", category = Category.COMBAT, description = "You shoot your arrows like ratatatatam")
 public class FastBow extends Module {
-    public FastBow() {
-        super("FastBow", Keyboard.KEY_NONE, Category.COMBAT);
+
+    @Override
+    public void onToggle() {
+
     }
 
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
 
     @Override
     public void onEvent(Event event) {

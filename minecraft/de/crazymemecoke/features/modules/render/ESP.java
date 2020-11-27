@@ -2,8 +2,8 @@ package de.crazymemecoke.features.modules.render;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.commands.Friend;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
-import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventOutline;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
@@ -19,32 +19,34 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 
+@ModuleInfo(name = "ESP", category = Category.RENDER, description = "Shows selected targets")
 public class ESP extends Module {
 
-    SettingsManager sM = Client.main().setMgr();
+    public Setting mode = new Setting("Mode", this, "Shader", new String[] {"Shader", "Outline", "Box"});
+    public Setting players = new Setting("Players", this, true);
+    public Setting mobs = new Setting("Mobs", this, false);
+    public Setting animals = new Setting("Animals", this, false);
+    public Setting villager = new Setting("Villager", this, false);
+    public Setting items = new Setting("Items", this, false);
 
-    public ESP() {
-        super("ESP", Keyboard.KEY_NUMPAD2, Category.RENDER);
+    @Override
+    public void onToggle() {
 
-        ArrayList<String> mode = new ArrayList<>();
+    }
 
-        mode.add("Shader");
-        mode.add("Outline");
-        mode.add("Box");
+    @Override
+    public void onEnable() {
 
-        sM.addSetting(new Setting("Mode", this, "Shader", mode));
-        sM.addSetting(new Setting("Players", this, true));
-        sM.addSetting(new Setting("Mobs", this, false));
-        sM.addSetting(new Setting("Animals", this, false));
-        sM.addSetting(new Setting("Villager", this, false));
-        sM.addSetting(new Setting("Items", this, false));
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     public void player(EntityLivingBase entity) {
@@ -68,7 +70,7 @@ public class ESP extends Module {
 
     @Override
     public void onEvent(Event event) {
-        String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
+        String mode = Client.main().setMgr().settingByName("Mode", this).getCurrentMode();
 
         if (event instanceof EventRender) {
             if (((EventRender) event).getType() == EventRender.Type.threeD) {

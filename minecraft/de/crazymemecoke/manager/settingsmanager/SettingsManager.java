@@ -77,13 +77,13 @@ public class SettingsManager {
         for (final Setting set : Client.main().setMgr().getSettings()) {
             String yeet = set.getParentMod() != null ? set.getParentMod().name() : "global";
             if (set.isSlider()) {
-                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getNum());
+                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getCurrentValue());
             }
             if (set.isCheck()) {
-                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getBool());
+                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.isToggled());
             }
             if (set.isCombo()) {
-                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getMode());
+                formattedSettings.add(yeet + ":" + set.getName() + ":" + set.getCurrentMode());
             }
         }
         FileUtils.saveFile(settingsFile, formattedSettings);

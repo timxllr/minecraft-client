@@ -4,11 +4,24 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import org.lwjgl.input.Keyboard;
 
+@ModuleInfo(name = "Parkour", category = Category.MOVEMENT, description = "Automatically jumps at the end of a block")
 public class Parkour extends Module {
-    public Parkour() {
-        super("Parkour", Keyboard.KEY_NONE, Category.MOVEMENT);
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override

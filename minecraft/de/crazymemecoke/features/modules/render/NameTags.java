@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.render;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.Invis;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
@@ -21,18 +22,30 @@ import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@ModuleInfo(name = "NameTags", category = Category.RENDER, description = "Shows better name tags")
 public class NameTags extends Module {
-    public NameTags() {
-        super("NameTags", Keyboard.KEY_NONE, Category.RENDER);
 
-        Client.main().setMgr().addSetting(new Setting("Show Armor", this, true));
+    public Setting showArmor = new Setting("Show Armor", this, true);
+
+    @Override
+    public void onToggle() {
+
+    }
+
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override
@@ -104,7 +117,7 @@ public class NameTags extends Module {
                     }
 
                     fontRenderer.drawString(String.valueOf(HEALTH), fontRenderer.getStringWidth(USERNAME) / 2 - fontRenderer.getStringWidth(String.valueOf(HEALTH)), -fontRenderer.getStringHeight(name) / 32 + 0.5F, Colors.main().green.getRGB());
-                    if (Client.main().setMgr().settingByName("Show Armor", this).getBool()) {
+                    if (showArmor.isToggled()) {
                         if ((entity.getCurrentArmor(0) != null) && ((entity.getCurrentArmor(0).getItem() instanceof ItemArmor))) {
                             renderItem(entity.getCurrentArmor(0), 26, i, 0);
                         }

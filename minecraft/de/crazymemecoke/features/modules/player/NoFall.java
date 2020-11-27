@@ -1,6 +1,7 @@
 package de.crazymemecoke.features.modules.player;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.manager.modulemanager.ModuleInfo;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
@@ -8,29 +9,31 @@ import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C03PacketPlayer;
-import org.lwjgl.input.Keyboard;
 
-import java.util.ArrayList;
-
+@ModuleInfo(name = "NoFall", category = Category.PLAYER, description = "Prevents you from getting fall damage")
 public class NoFall extends Module {
 
-    ArrayList<String> mode = new ArrayList<>();
+    public Setting mode = new Setting("Mode", this, "AAC 1.9.10", new String[] {"AAC 3.3.11", "AAC 3.3.8", "AAC 1.9.10", "Vanilla"});
 
-    public NoFall() {
-        super("NoFall", Keyboard.KEY_NONE, Category.PLAYER);
+    @Override
+    public void onToggle() {
 
-        mode.add("AAC 3.3.11");
-        mode.add("AAC 3.3.8");
-        mode.add("AAC 1.9.10");
-        mode.add("Vanilla");
+    }
 
-        Client.main().setMgr().addSetting(new Setting("Mode", this, "AAC 1.9.10", mode));
+    @Override
+    public void onEnable() {
+
+    }
+
+    @Override
+    public void onDisable() {
+
     }
 
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            String mode = Client.main().setMgr().settingByName("Mode", this).getMode();
+            String mode = Client.main().setMgr().settingByName("Mode", this).getCurrentMode();
 
             switch (mode) {
                 case "Vanilla": {

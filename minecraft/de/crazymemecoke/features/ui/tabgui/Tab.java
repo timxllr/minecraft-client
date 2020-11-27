@@ -41,7 +41,7 @@ public class Tab {
         x += 2;
         y += 2;
         // Background
-        String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
+        String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getCurrentMode();
         switch (mode) {
             case "Ambien Old":
             case "Vortex": {

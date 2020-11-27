@@ -76,7 +76,7 @@ public class Panel extends ClickGui {
 				}
 			}
 			addFrame(frame);
-			x += 140;
+			x += 110;
 		}
 		super.initGui();
 	}
