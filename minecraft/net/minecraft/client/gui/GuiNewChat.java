@@ -78,8 +78,8 @@ public class GuiNewChat extends Gui {
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
 
-                                String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getMode();
-                                String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
+                                String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getCurrentMode();
+                                String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getCurrentMode();
 
                                 switch (mode) {
                                     case "Normal": {

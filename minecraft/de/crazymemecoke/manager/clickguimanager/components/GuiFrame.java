@@ -154,7 +154,7 @@ public class GuiFrame implements Frame {
                 isDragging = true;
                 dragID = id;
             } else if (mouseButton == 1) {
-                if (Client.main().setMgr().settingByName("Sound", Client.main().modMgr().getModule(ClickGUI.class)).getBool()) {
+                if (Client.main().setMgr().settingByName("Sound", Client.main().modMgr().getModule(ClickGUI.class)).isToggled()) {
                     mc.thePlayer.playSound("random.click", 1f, 1f);
                 }
                 isExpaned = !isExpaned;

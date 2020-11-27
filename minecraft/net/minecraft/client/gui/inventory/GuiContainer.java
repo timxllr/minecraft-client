@@ -128,7 +128,7 @@ public abstract class GuiContainer extends GuiScreen {
 
         float newzoom = (float) (animationCurve(zoom / maxZoom) * maxZoom);
 
-        if (Client.main().setMgr().settingByName("GUI Animation", Client.main().modMgr().getModule(HUD.class)).getBool()) {
+        if (Client.main().setMgr().settingByName("GUI Animation", Client.main().modMgr().getModule(HUD.class)).isToggled()) {
             GlStateManager.translate(left, top, 0);
             GL11.glScaled(newzoom, newzoom, newzoom);
         }

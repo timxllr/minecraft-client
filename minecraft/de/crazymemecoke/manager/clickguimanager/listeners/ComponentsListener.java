@@ -31,7 +31,7 @@ public class ComponentsListener extends ComponentListener {
                 switch (set.getSettingType()) {
                     case BOOLEAN:
                         GuiToggleButton toggleButton = new GuiToggleButton(set.getName());
-                        toggleButton.setToggled(set.getBool());
+                        toggleButton.setToggled(set.isToggled());
                         toggleButton.addClickListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
@@ -41,7 +41,7 @@ public class ComponentsListener extends ComponentListener {
                         add(toggleButton);
                         break;
                     case VALUE:
-                        GuiSlider slider = new GuiSlider(set.getName(), (float) set.min(), (float) set.max(), (float) set.getNum(),
+                        GuiSlider slider = new GuiSlider(set.getName(), (float) set.min(), (float) set.max(), (float) set.getCurrentValue(),
                                 set.onlyInt() ? 0 : 2);
                         slider.addValueListener(new ValueListener() {
 

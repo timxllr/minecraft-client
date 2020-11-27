@@ -333,7 +333,7 @@ public class ItemRenderer {
                         break;
 
                     case 4:
-                        if (Client.main().setMgr().settingByName("Blockhit Animation", Client.main().modMgr().getModule(HUD.class)).getBool()) {
+                        if (Client.main().setMgr().settingByName("Blockhit Animation", Client.main().modMgr().getModule(HUD.class)).isToggled()) {
                             this.transformFirstPersonItem(-0.4F, f1 - 0.1F);
                         } else {
                             this.transformFirstPersonItem(f, 0.0F);
@@ -346,12 +346,12 @@ public class ItemRenderer {
                         this.func_178098_a(partialTicks, entityplayersp);
                 }
             } else {
-                if (Client.main().setMgr().settingByName("Hit Animation", Client.main().modMgr().getModule(HUD.class)).getMode().equalsIgnoreCase("Stoned")) {
+                if (Client.main().setMgr().settingByName("Hit Animation", Client.main().modMgr().getModule(HUD.class)).getCurrentMode().equalsIgnoreCase("Stoned")) {
                     this.func_178105_d(f1 - 1F);
                 } else {
                     this.func_178105_d(f1);
                 }
-                this.transformFirstPersonItem((float) (f - Client.main().setMgr().settingByName("Item Height", Client.main().modMgr().getModule(HUD.class)).getNum()), f1);
+                this.transformFirstPersonItem((float) (f - Client.main().setMgr().settingByName("Item Height", Client.main().modMgr().getModule(HUD.class)).getCurrentValue()), f1);
             }
 
             this.renderItem(entityplayersp, this.itemToRender, ItemCameraTransforms.TransformType.FIRST_PERSON);

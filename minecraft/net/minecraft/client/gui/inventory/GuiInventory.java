@@ -54,7 +54,7 @@ public class GuiInventory extends InventoryEffectRenderer {
             if (mc.entityRenderer.theShaderGroup != null) {
                 mc.entityRenderer.theShaderGroup.deleteShaderGroup();
             }
-            if (Client.main().setMgr().settingByName("GUI Blur", Client.main().modMgr().getModule(HUD.class)).getBool()) {
+            if (Client.main().setMgr().settingByName("GUI Blur", Client.main().modMgr().getModule(HUD.class)).isToggled()) {
                 mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
             }
         }

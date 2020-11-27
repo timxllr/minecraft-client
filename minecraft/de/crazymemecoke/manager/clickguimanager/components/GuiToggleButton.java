@@ -66,7 +66,7 @@ public class GuiToggleButton implements GuiComponent {
 	public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
 		final int width = Panel.fR.getStringWidth(text) + 10;
 		if (RenderUtil.isHovered(posX, posY + 2, width, getHeight(), mouseX, mouseY)) {
-			if (Client.main().setMgr().settingByName("Sound", Client.main().modMgr().getModule(ClickGUI.class)).getBool()) {
+			if (Client.main().setMgr().settingByName("Sound", Client.main().modMgr().getModule(ClickGUI.class)).isToggled()) {
 				mc.thePlayer.playSound("random.click", 1f, 1f);
 			}
 			toggled = !toggled;

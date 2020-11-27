@@ -61,7 +61,7 @@ public class GuiComboBox implements GuiComponent {
 			int innerHeight = (Panel.fR.FONT_HEIGHT + 5);
 
 			for (String combo : setting.getOptions()) {
-				if (setting.getMode().equalsIgnoreCase(combo)) {
+				if (setting.getCurrentMode().equalsIgnoreCase(combo)) {
 					Panel.fR.drawStringWithShadow(combo, posX + 10, posY + innerHeight, Panel.color);
 				} else {
 					Panel.fR.drawStringWithShadow(combo, posX + 5, posY + innerHeight, Panel.fontColor);
@@ -90,15 +90,15 @@ public class GuiComboBox implements GuiComponent {
 		if (extended) {
 
 			if (RenderUtil.isHovered(posX, posY + Panel.fR.FONT_HEIGHT + 2, width,
-					(Panel.fR.FONT_HEIGHT + 2) * setting.getOptions().size(), mouseX, mouseY) && mouseButton == 0) {
+					(Panel.fR.FONT_HEIGHT + 2) * setting.getOptions().length, mouseX, mouseY) && mouseButton == 0) {
 				int h = Panel.fR.FONT_HEIGHT + 2;
-				for (int i = 1; i <= setting.getOptions().size() + 1; i++) {
+				for (int i = 1; i <= setting.getOptions().length + 1; i++) {
 					if (RenderUtil.isHovered(posX, posY + h * i, width, h * i, mouseX, mouseY)) {
-						setting.setMode(setting.getOptions().get(i - 1));
+						setting.setMode(setting.getOptions()[i - 1]);
 					}
 				}
 				for (ComboListener comboListener : comboListeners) {
-					comboListener.comboChanged(setting.getMode());
+					comboListener.comboChanged(setting.getCurrentMode());
 				}
 			}
 

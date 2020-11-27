@@ -51,8 +51,8 @@ public class GuiChat extends GuiScreen {
      * window resizes, the buttonList is cleared beforehand.
      */
     public void initGui() {
-        String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getMode();
-        String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
+        String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getCurrentMode();
+        String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getCurrentMode();
 
         switch (mode) {
             case "Normal": {
@@ -289,8 +289,8 @@ public class GuiChat extends GuiScreen {
 
         UnicodeFontRenderer font1 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
 
-        String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getMode();
-        String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getMode();
+        String mode = Client.main().setMgr().settingByName("Chat Mode", Client.main().modMgr().getModule(HUD.class)).getCurrentMode();
+        String font = Client.main().setMgr().settingByName("Chat Font", Client.main().modMgr().getModule(HUD.class)).getCurrentMode();
 
         int width2;
         int fixedWidth = 5;

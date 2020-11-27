@@ -345,7 +345,7 @@ public class GuiIngame extends Gui {
         Setting hotbar = Client.main().setMgr().settingByName("Hotbar", Client.main().modMgr().getByName("HUD"));
         ScaledResolution s = new ScaledResolution(Wrapper.mc);
 
-        if (!Client.main().modMgr().getByName("Invis").state() && hotbar.getBool() && Client.main().modMgr().getByName("HUD").state()) {
+        if (!Client.main().modMgr().getByName("Invis").state() && hotbar.isToggled() && Client.main().modMgr().getByName("HUD").state()) {
             RenderUtils.drawRect((s.width() / 2) - 91, s.height() - 23, (s.width() / 2) + 91, s.height(), new Color(12, 14, 13).getRGB());
 
             if (Wrapper.mc.thePlayer.inventory.currentItem == 0) {
