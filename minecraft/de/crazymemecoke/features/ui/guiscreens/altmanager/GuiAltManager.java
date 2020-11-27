@@ -61,7 +61,6 @@ public class GuiAltManager extends GuiScreen {
 
         selected = null;
         scroll = 0;
-        int c = -15698006;
         buttonList.clear();
         buttonList.add(new GuiButton(0, width - 150 - 130, height - 32, 60, 20, "Einloggen"));
         buttonList.add(new GuiButton(1, width - 150 - 65, height - 32, 60, 20, "Hinzufügen"));
@@ -70,11 +69,10 @@ public class GuiAltManager extends GuiScreen {
         buttonList.add(new GuiButton(4, 15, height - 32, 65, 20, "Zurück"));
         buttonList.add(new GuiButton(5, width - 145, height - 55, 135, 20, "Importieren"));
         buttonList.add(new GuiButton(6, width - 145, height - 78, 135, 20, "Session Stealer"));
-        buttonList.add(new GuiButton(8, width - 145, height - 100, 135, 20, "Proxy"));
-        buttonList.add(new GuiButton(10, width - 145, height - 130, 135, 20, "TheAltening"));
-        buttonList.add(new GuiButton(11, width - 145, height - 152, 135, 20, "MCLeaks"));
         buttonList.add(new GuiButton(7, width - 375, height - 32, 90, 20, "Direkt einloggen"));
+        buttonList.add(new GuiButton(8, width - 145, height - 100, 135, 20, "Proxy"));
         buttonList.add(new GuiButton(9, 85, height - 32, 65, 20, "Serverliste"));
+        buttonList.add(new GuiButton(10, width - 145, height - 130, 135, 20, "TheAltening"));
         opacity = 0;
     }
 
@@ -161,10 +159,6 @@ public class GuiAltManager extends GuiScreen {
             }
             case 10: {
                 mc.displayGuiScreen(new GuiTheAltening(this));
-                break;
-            }
-            case 11: {
-                mc.displayGuiScreen(new GuiMCLeaks(this));
                 break;
             }
         }
