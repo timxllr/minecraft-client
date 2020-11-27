@@ -93,7 +93,6 @@ public class LoginUtil {
                     Account account = asynchronousDataRetriever.getAccount();
                     YggdrasilUserAuthentication service = (YggdrasilUserAuthentication) new YggdrasilAuthenticationService(Proxy.NO_PROXY, "").createUserAuthentication(Agent.MINECRAFT);
 
-
                     service.setUsername(account.getToken());
                     service.setPassword(Client.getInstance().getClientName());
 

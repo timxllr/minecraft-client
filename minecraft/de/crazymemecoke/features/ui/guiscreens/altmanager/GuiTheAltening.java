@@ -17,7 +17,7 @@ public class GuiTheAltening extends GuiScreen {
     public GuiScreen parent;
 
     private GuiScreen parentScreen;
-    private GuiTextField token;
+    private GuiTextField token, apiKey;
 
     public GuiTheAltening(GuiScreen parentScreen) {
         parent = parentScreen;
@@ -25,9 +25,11 @@ public class GuiTheAltening extends GuiScreen {
 
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
-        buttonList.add(new GuiButton(0, width / 2 - 100, height - 185, 200, 20, "Token verwenden"));
-        buttonList.add(new GuiButton(1, width / 2 - 100, height - 160, 200, 20, I18n.format("gui.cancel")));
-        token = new GuiTextField(0, fontRendererObj, width / 2 - 100, height - 250, 200, 20);
+        buttonList.add(new GuiButton(0, width / 2 - 100, height / 2 + 70, 200, 20, "Token verwenden"));
+        buttonList.add(new GuiButton(2, width / 2 - 100, height / 2 + 95, 200, 20, "Account generieren"));
+        buttonList.add(new GuiButton(1, width / 2 - 100, height / 2 + 120, 200, 20, I18n.format("gui.cancel")));
+        token = new GuiTextField(0, fontRendererObj, width / 2 - 100, height / 2 - 25, 200, 20);
+        apiKey = new GuiTextField(1, fontRendererObj, width / 2 - 100, height / 2 + 25, 200, 20);
     }
 
     public void onGuiClosed() {
@@ -40,16 +42,28 @@ public class GuiTheAltening extends GuiScreen {
                 mc.displayGuiScreen(parent);
                 break;
             }
+            case 0: {
+                Client.main().getLoginUtil().login(token.getText());
+                mc.displayGuiScreen(parent);
+                break;
+            }
+            case 2: {
+                Client.main().getLoginUtil().generate(apiKey.getText());
+                mc.displayGuiScreen(parent);
+                break;
+            }
         }
     }
 
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
         token.textboxKeyTyped(typedChar, keyCode);
+        apiKey.textboxKeyTyped(typedChar, keyCode);
     }
 
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
         token.mouseClicked(mouseX, mouseY, mouseButton);
+        apiKey.mouseClicked(mouseX, mouseY, mouseButton);
+        super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     public void drawScreen(int posX, int posY, float f) {
@@ -68,11 +82,14 @@ public class GuiTheAltening extends GuiScreen {
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
         UnicodeFontRenderer comfortaa20 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
         String rectTitle = "REEDEM TOKEN (THEALTENING)";
-        comfortaa20.drawString(rectTitle, width / 2 - comfortaa20.getStringWidth(rectTitle) / 2, height / 2 - 140, Colors.main().getGrey());
-        String textBoxTitle = "TOKEN";
-        comfortaa20.drawString(textBoxTitle, width / 2 - comfortaa20.getStringWidth(textBoxTitle) / 2, height - 265, -1);
+        comfortaa20.drawStringWithShadow(rectTitle, width / 2 - comfortaa20.getStringWidth(rectTitle) / 2, height / 2 - 140, Colors.main().getGrey());
+        String token = "TOKEN";
+        String apiKey = "API KEY";
+        comfortaa20.drawStringWithShadow(token, width / 2 - comfortaa20.getStringWidth(token) / 2, height / 2 - 42, -1);
+        comfortaa20.drawStringWithShadow(apiKey, width / 2 - comfortaa20.getStringWidth(apiKey) / 2, height / 2 + 8, -1);
 
-        token.drawTextBox();
+        this.token.drawTextBox();
+        this.apiKey.drawTextBox();
         super.drawScreen(posX, posY, f);
     }
 }
