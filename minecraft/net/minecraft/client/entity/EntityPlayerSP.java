@@ -5,6 +5,7 @@ import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.modules.movement.NoSlow;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
+import de.crazymemecoke.manager.modulemanager.Module;
 import de.crazymemecoke.utils.NotifyUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;

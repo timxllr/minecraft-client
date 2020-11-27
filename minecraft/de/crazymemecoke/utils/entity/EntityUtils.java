@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.google.common.collect.Multimap;
 
+import de.crazymemecoke.Methods;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -16,8 +17,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C0BPacketEntityAction;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 
-public class EntityUtils {
+public class EntityUtils extends Methods {
     private static final Minecraft MINECRAFT = Minecraft.mc();
     private static boolean set = false;
     private static EntityPlayer reference;
@@ -50,6 +53,26 @@ public class EntityUtils {
         float yaw = (float) (Math.atan2(var6, var4) * 180.0D / 3.141592653589793D) - 90.0F;
         float pitch = (float) -(Math.atan2(var8, var14) * 180.0D / 3.141592653589793D);
         return new float[]{yaw, pitch};
+    }
+
+    public static Vec3 getLook(float yaw, float pitch) {
+        return Entity.getVectorForRotation(pitch, yaw);
+    }
+
+    public static MovingObjectPosition rayCastedBlock(float yaw, float pitch) {
+        float range = mc.playerController.getBlockReachDistance();
+
+        Vec3 vec31 = getLook(yaw, pitch);
+
+        Vec3 vec3 = mc.thePlayer.getPositionEyes(1.0F);
+        Vec3 vec32 = vec3.addVector(vec31.xCoord * range, vec31.yCoord * range, vec31.zCoord * range);
+
+
+        MovingObjectPosition ray = mc.theWorld.rayTraceBlocks(vec3, vec32, false, false, false);
+
+        if (ray != null && ray.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+            return ray;
+        return null;
     }
 
     public static float getAngle(float[] original, float[] rotations) {
