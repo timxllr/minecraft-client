@@ -2,10 +2,7 @@ package de.crazymemecoke.manager.modulemanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.combat.*;
-import de.crazymemecoke.features.modules.exploits.Blink;
-import de.crazymemecoke.features.modules.exploits.Crasher;
-import de.crazymemecoke.features.modules.exploits.Paralyze;
-import de.crazymemecoke.features.modules.exploits.Phase;
+import de.crazymemecoke.features.modules.exploits.*;
 import de.crazymemecoke.features.modules.gui.ClickGUI;
 import de.crazymemecoke.features.modules.gui.HUD;
 import de.crazymemecoke.features.modules.gui.Invis;
@@ -62,7 +59,6 @@ public class ModuleManager {
         modules.add(new ChestStealer());
         modules.add(new NoScoreboard());
         modules.add(new AutoRespawn());
-        modules.add(new CustomSpeed());
         modules.add(new MotionGraph());
         modules.add(new LagDetector());
         modules.add(new NameProtect());
@@ -79,6 +75,7 @@ public class ModuleManager {
         modules.add(new SlimeJump());
         modules.add(new BowAimbot());
         modules.add(new BlockInfo());
+        modules.add(new ShopSaver());
         modules.add(new FastFall());
         modules.add(new Velocity());
         modules.add(new IceSpeed());
@@ -101,7 +98,7 @@ public class ModuleManager {
         modules.add(new Tracers());
         modules.add(new AntiBot());
         modules.add(new Sprint());
-        modules.add(new Aimbot());
+        modules.add(new AimBot());
         modules.add(new Strafe());
         modules.add(new NoFall());
         modules.add(new Fucker());
@@ -122,6 +119,8 @@ public class ModuleManager {
         modules.add(new ESP());
         modules.add(new HUD());
         modules.add(new Fly());
+
+        System.out.println(modules.toString());
     }
 
     public ArrayList<Module> getModules() {
