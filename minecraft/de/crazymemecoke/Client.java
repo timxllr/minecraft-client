@@ -11,6 +11,7 @@ import de.crazymemecoke.manager.eventmanager.EventManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.modulemanager.ModuleManager;
 import de.crazymemecoke.manager.particlemanager.FBP;
+import de.crazymemecoke.utils.LoginUtil;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.render.Shader;
 import net.minecraft.client.Minecraft;
@@ -47,6 +48,7 @@ public class Client {
     private Shader shader;
     private AltManager altManager;
     private EventManager eventManager;
+    private LoginUtil loginUtil;
 
     public long initTime = System.currentTimeMillis();
 
@@ -66,6 +68,7 @@ public class Client {
             mc.displayGuiScreen(new GuiFirstUse());
             NotifyUtil.debug("GuiScreen 'FirstUse' wurde aufgerufen!");
         }
+        loginUtil = new LoginUtil();
         eventManager = new EventManager();
         NotifyUtil.debug("EventManager geladen!");
         fontManager = new FontManager();
@@ -224,5 +227,9 @@ public class Client {
 
     public EventManager getEventManager() {
         return eventManager;
+    }
+
+    public LoginUtil getLoginUtil() {
+        return loginUtil;
     }
 }
