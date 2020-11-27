@@ -4,6 +4,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.movement.SafeWalk;
 import de.crazymemecoke.features.modules.world.Scaffold;
 import de.crazymemecoke.manager.eventmanager.impl.EventMoveFlying;
+import de.crazymemecoke.manager.eventmanager.impl.EventSafewalk;
 import de.crazymemecoke.utils.Wrapper;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -589,10 +590,10 @@ public abstract class Entity implements ICommandSender {
             double d5 = z;
             boolean flag = this.onGround && this.isSneaking() && this instanceof EntityPlayer;
 
-            boolean safewalk = Client.main().modMgr().getModule(SafeWalk.class).state();
-            boolean scaffold = Client.main().setMgr().settingByName("SafeWalk", Client.main().modMgr().getModule(Scaffold.class)).getBool() && Client.main().modMgr().getModule(Scaffold.class).state();
+            EventSafewalk safewalk = new EventSafewalk(flag);
+            Client.main().eventMgr().onEvent(safewalk);
 
-            if (flag || safewalk || scaffold) {
+            if (safewalk.isSafe()) {
                 double d6;
 
                 for (d6 = 0.05D; x != 0.0D && this.worldObj.getCollidingBoundingBoxes(this, this.getEntityBoundingBox().offset(x, -1.0D, 0.0D)).isEmpty(); d3 = x) {
@@ -1300,7 +1301,7 @@ public abstract class Entity implements ICommandSender {
     /**
      * Creates a Vec3 using the pitch and yaw of the entities rotation.
      */
-    protected final Vec3 getVectorForRotation(float pitch, float yaw) {
+    public static final Vec3 getVectorForRotation(float pitch, float yaw) {
         float f = MathHelper.cos(-yaw * 0.017453292F - (float) Math.PI);
         float f1 = MathHelper.sin(-yaw * 0.017453292F - (float) Math.PI);
         float f2 = -MathHelper.cos(-pitch * 0.017453292F);
