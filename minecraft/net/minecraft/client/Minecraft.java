@@ -1666,17 +1666,17 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
                     } else {
                         // TODO: Key Handling
 
-                        EventKeyPress eventKeyPress = new EventKeyPress(k);
-                        Client.main().eventMgr().onEvent(eventKeyPress);
-
-                        if(eventKeyPress.isCancelled())
-                            return;
-
                         for (Module n : Client.main().modMgr().modules) {
                             if (k == n.bind()) {
                                 n.toggle();
                             }
                         }
+
+                        EventKeyPress eventKeyPress = new EventKeyPress(k);
+                        Client.main().eventMgr().onEvent(eventKeyPress);
+
+                        if(eventKeyPress.isCancelled())
+                            return;
 
                         if (k == 200) {
                             TabGUI.parseKeyUp();
