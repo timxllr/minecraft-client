@@ -1,11 +1,11 @@
 package de.crazymemecoke.features.ui;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.features.modules.gui.HUD;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.ui.guiscreens.GuiItems;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
-import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -24,14 +24,12 @@ import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Interface extends GuiIngame {
 
     private final static Interface instance = new Interface(Minecraft.mc());
-    String modName;
     Minecraft mc = Wrapper.mc;
-    FontManager font = Client.main().fontMgr();
+    int offset, brightness, saturation, speed;
 
     public Interface(Minecraft mcIn) {
         super(mcIn);
@@ -43,6 +41,10 @@ public class Interface extends GuiIngame {
 
     public void renderGameOverlay(float p_175180_1_) {
         super.renderGameOverlay(p_175180_1_);
+        offset = (int) Client.main().setMgr().settingByName("Rainbow Offset", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
+        speed = (int) Client.main().setMgr().settingByName("Rainbow Speed", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
+        brightness = (int) Client.main().setMgr().settingByName("Rainbow Brightness", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
+        saturation = (int) Client.main().setMgr().settingByName("Rainbow Saturation", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
         if (!(Client.main().modMgr().getByName("Invis").state())) {
             Display.setTitle(Client.main().getClientName() + " " + Client.main().getClientVersion() + " | made by " + Client.main().getClientCoder());
 
@@ -55,7 +57,7 @@ public class Interface extends GuiIngame {
             }
 
             if (Client.main().modMgr().getByName("HUD").state()) {
-                if (Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).getBool()) {
+                if (Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).isToggled()) {
                     doRenderStuff();
                 } else {
                     if (mc.currentScreen == null && !mc.gameSettings.showDebugInfo) {
@@ -75,25 +77,25 @@ public class Interface extends GuiIngame {
         ScaledResolution s = new ScaledResolution(mc);
 
         SettingsManager setMgr = Client.main().setMgr();
-        if (setMgr.settingByName("Watermark", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (setMgr.settingByName("Watermark", Client.main().modMgr().getByName("HUD")).isToggled()) {
             renderWatermark();
         }
-        if (setMgr.settingByName("TabGUI", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (setMgr.settingByName("TabGUI", Client.main().modMgr().getByName("HUD")).isToggled()) {
             renderTabGUI();
         }
-        if (setMgr.settingByName("ArrayList", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (setMgr.settingByName("ArrayList", Client.main().modMgr().getByName("HUD")).isToggled()) {
             renderArrayList();
         }
-        if (setMgr.settingByName("KeyStrokes", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (setMgr.settingByName("KeyStrokes", Client.main().modMgr().getByName("HUD")).isToggled()) {
             renderKeyStrokes();
         }
-        if (setMgr.settingByName("Hotbar", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (setMgr.settingByName("Hotbar", Client.main().modMgr().getByName("HUD")).isToggled()) {
             renderHotbar();
         }
     }
 
     private void renderHotbar() {
-        if (mc.currentScreen == null || Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).getBool()) {
+        if (mc.currentScreen == null || Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).isToggled()) {
             ScaledResolution s = new ScaledResolution(mc);
             UnicodeFontRenderer bigNoodleTitling22 = Client.main().fontMgr().font("BigNoodleTitling", 22, Font.PLAIN);
             UnicodeFontRenderer comfortaa22 = Client.main().fontMgr().font("Comfortaa", 22, Font.PLAIN);
@@ -160,7 +162,7 @@ public class Interface extends GuiIngame {
     private void renderWatermark() {
         ScaledResolution s = new ScaledResolution(mc);
 
-        String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
+        String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getCurrentMode();
 
         switch (mode) {
             case "Ambien Old": {
@@ -211,15 +213,17 @@ public class Interface extends GuiIngame {
             case "Apinity": {
                 RenderUtils.drawRect(0, 35, 40, 175, new Color(0, 0, 0, 150).getRGB());
 
+                double height =
+
                 Client.main().fontMgr().font("Raleway Light", 45, Font.PLAIN).drawStringWithShadow("Apinity", 1, 1, Colors.main().getApinityGreyColor());
                 Client.main().fontMgr().font("Raleway Light", 30, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 72, 1, Colors.main().getApinityBlueColor());
                 try {
-                    Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: " + mc.getCurrentServerData().pingToServer, 2, 116, Colors.main().getApinityBlueColor());
+                    Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: " + mc.getCurrentServerData().pingToServer, 2, 125, Colors.main().getApinityBlueColor());
                 } catch (Exception ex) {
-                    Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: N/A", 1, 116, Colors.main().getApinityBlueColor());
+                    Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: N/A", 1, 125, Colors.main().getApinityBlueColor());
                 }
 
-                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("FPS: " + Minecraft.debugFPS, 2, 125, Colors.main().getApinityBlueColor());
+                Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("FPS: " + Minecraft.debugFPS, 2, 135, Colors.main().getApinityBlueColor());
 
                 Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("X: " + mc.thePlayer.getPosition().getX(), 2, 145, Colors.main().getApinityBlueColor());
                 Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Y: " + mc.thePlayer.getPosition().getY(), 2, 155, Colors.main().getApinityBlueColor());
@@ -330,8 +334,8 @@ public class Interface extends GuiIngame {
     private void renderTabGUI() {
         TabGUI gui = new TabGUI(mc);
 
-        if (Client.main().setMgr().settingByName("Watermark", Client.main().modMgr().getByName("HUD")).getBool()) {
-            String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getMode();
+        if (Client.main().setMgr().settingByName("Watermark", Client.main().modMgr().getByName("HUD")).isToggled()) {
+            String mode = Client.main().setMgr().settingByName("Design", Client.main().modMgr().getByName("HUD")).getCurrentMode();
 
             switch (mode) {
                 case "Ambien Old": {
@@ -382,7 +386,7 @@ public class Interface extends GuiIngame {
     }
 
     private void renderArrayList() {
-        ScaledResolution s = new ScaledResolution(mc);
+        ScaledResolution scaledResolution = new ScaledResolution(mc);
 
         UnicodeFontRenderer font = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN);
 
@@ -396,23 +400,21 @@ public class Interface extends GuiIngame {
         int rectY = 1;
         int stringY = 1;
 
-        for (Iterator moduleIterator = activeModuleNames.iterator(); moduleIterator.hasNext();) {
-            Module m = (Module) moduleIterator.next();
-            int xDist = s.width() - font.getStringWidth(m.visualName()) - 4;
-            RenderUtils.drawRect(s.width() - font.getStringWidth(m.visualName()) - 3, (rectY - 2), s.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
-            RenderUtils.drawRect(s.width() - font.getStringWidth(m.visualName()) - 5, (rectY - 2), s.width() - font.getStringWidth(m.visualName()) - 3, (rectY + 10), Rainbow.rainbow(1, 1).getRGB());
-            font.drawString(m.visualName(), xDist + 3, stringY, Color.RED.getRGB());
+        for (Module m : activeModuleNames) {
+            int xDist = scaledResolution.width() - font.getStringWidth(m.visualName()) - 4;
+            RenderUtils.drawRect(scaledResolution.width() - font.getStringWidth(m.visualName()) - 5, (rectY - 2), scaledResolution.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+            RenderUtils.drawRect(scaledResolution.width() - 2, (rectY - 2), scaledResolution.width(), (rectY + 10), Rainbow.getRainbow(offset, speed, saturation, brightness));
+            font.drawString(m.visualName(), xDist + 1, stringY, Color.RED.getRGB());
             rectY += 12;
             stringY += 12;
+            offset += offset;
         }
     }
 
     protected ArrayList<Module> getActiveModuleNames() {
         ArrayList<Module> list = new ArrayList<Module>();
-        Iterator<Module> moduleIterator = Client.main().modMgr().modules.iterator();
 
-        while (moduleIterator.hasNext()) {
-            Module m = moduleIterator.next();
+        for (Module m : Client.main().modMgr().modules) {
             if (m.state() && !m.isCategory(Category.GUI)) {
                 list.add(m);
             }
