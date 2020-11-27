@@ -48,7 +48,7 @@ public class ClickGui extends GuiScreen {
 			if (mc.entityRenderer.theShaderGroup != null) {
 				mc.entityRenderer.theShaderGroup.deleteShaderGroup();
 			}
-			if (Client.main().setMgr().settingByName("Blur", Client.main().modMgr().getModule(ClickGUI.class)).getBool()) {
+			if (Client.main().setMgr().settingByName("Blur", Client.main().modMgr().getModule(ClickGUI.class)).isToggled()) {
 				mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
 			}
 		}
