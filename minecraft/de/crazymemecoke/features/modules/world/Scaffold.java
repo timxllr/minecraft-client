@@ -2,7 +2,7 @@ package de.crazymemecoke.features.modules.world;
 
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
-import de.crazymemecoke.manager.eventmanager.impl.EventSafewalk;
+import de.crazymemecoke.manager.eventmanager.impl.EventSafeWalk;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Category;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -96,9 +96,9 @@ public class Scaffold extends Module {
 
     @Override
     public void onEvent(Event event) {
-        if (event instanceof EventSafewalk) {
+        if (event instanceof EventSafeWalk) {
             if (safeWalk.isToggled())
-                ((EventSafewalk) event).setSafe(mc.thePlayer.onGround || !onlyGround.isToggled());
+                ((EventSafeWalk) event).setSafe(mc.thePlayer.onGround || !onlyGround.isToggled());
         }
 
         if (event instanceof EventMotion) {
