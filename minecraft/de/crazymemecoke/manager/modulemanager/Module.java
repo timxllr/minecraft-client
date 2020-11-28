@@ -3,26 +3,26 @@ package de.crazymemecoke.manager.modulemanager;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.Methods;
 import de.crazymemecoke.features.modules.gui.Invis;
-import de.crazymemecoke.features.ui.Interface;
+import de.crazymemecoke.features.modules.misc.SendPublic;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.utils.NotifyUtil;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.play.client.C01PacketChatMessage;
 import org.lwjgl.input.Keyboard;
 
 public abstract class Module extends Methods {
 
+    public static Minecraft mc = Minecraft.mc();
+    public static SettingsManager s = Client.main().setMgr();
+    private final Category category;
+    public boolean enabled;
+    public TimeHelper timeHelper = new TimeHelper();
     private String name;
     private String visualName;
     private int bind;
-    private final Category category;
-    public static Minecraft mc = Minecraft.mc();
-    public static SettingsManager s = Client.main().setMgr();
-    public boolean enabled;
-
-    public TimeHelper timeHelper = new TimeHelper();
 
     public Module() {
         ModuleInfo moduleInfo = getClass().getAnnotation(ModuleInfo.class);
@@ -75,7 +75,10 @@ public abstract class Module extends Methods {
 
     public void toggle() {
         this.setState(!this.state());
-        System.out.println(this.state());
+
+        if (getSettingByName("Mod Toggle", getModuleManager().getModule(SendPublic.class)).isToggled()) {
+            sendPacket(new C01PacketChatMessage(state() ? name + " activated" : name + " deactivated"));
+        }
     }
 
     public abstract void onToggle();

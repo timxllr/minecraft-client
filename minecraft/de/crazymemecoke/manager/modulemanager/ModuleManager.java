@@ -8,6 +8,7 @@ import de.crazymemecoke.features.modules.gui.HUD;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.modules.misc.LagDetector;
 import de.crazymemecoke.features.modules.misc.MemoryCleaner;
+import de.crazymemecoke.features.modules.misc.SendPublic;
 import de.crazymemecoke.features.modules.movement.*;
 import de.crazymemecoke.features.modules.player.*;
 import de.crazymemecoke.features.modules.render.*;
@@ -67,6 +68,7 @@ public class ModuleManager {
         modules.add(new NoRotation());
         modules.add(new InvCleaner());
         modules.add(new DamageCalc());
+        modules.add(new SendPublic());
         modules.add(new FastPlace());
         modules.add(new AutoArmor());
         modules.add(new DeathDerp());
