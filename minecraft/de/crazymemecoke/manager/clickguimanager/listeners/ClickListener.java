@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.clickguimanager.components.GuiButton;
-import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.modules.Module;
 
 
 /**

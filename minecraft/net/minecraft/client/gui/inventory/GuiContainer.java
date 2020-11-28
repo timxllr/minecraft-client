@@ -2,7 +2,7 @@ package net.minecraft.client.gui.inventory;
 
 import com.google.common.collect.Sets;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.HUD;
+import de.crazymemecoke.features.modules.impl.gui.HUD;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;

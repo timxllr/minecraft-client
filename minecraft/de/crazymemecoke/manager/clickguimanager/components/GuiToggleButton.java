@@ -1,7 +1,7 @@
 package de.crazymemecoke.manager.clickguimanager.components;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.ClickGUI;
+import de.crazymemecoke.features.modules.impl.gui.ClickGUI;
 import de.crazymemecoke.manager.clickguimanager.Panel;
 import de.crazymemecoke.manager.clickguimanager.util.RenderUtil;
 import de.crazymemecoke.utils.render.RenderUtils;

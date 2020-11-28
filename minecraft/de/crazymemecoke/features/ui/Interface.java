@@ -1,14 +1,14 @@
 package de.crazymemecoke.features.ui;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.HUD;
-import de.crazymemecoke.features.modules.gui.Invis;
+import de.crazymemecoke.features.modules.impl.gui.HUD;
+import de.crazymemecoke.features.modules.impl.gui.Invis;
 import de.crazymemecoke.features.ui.guiscreens.GuiItems;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.manager.modulemanager.Category;
-import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.modules.Category;
+import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.utils.Wrapper;
 import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.Rainbow;

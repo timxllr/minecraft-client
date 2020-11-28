@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.ClickGUI;
+import de.crazymemecoke.features.modules.impl.gui.ClickGUI;
 import de.crazymemecoke.manager.clickguimanager.components.Frame;
 import de.crazymemecoke.manager.clickguimanager.components.GuiButton;
 import de.crazymemecoke.manager.clickguimanager.components.GuiFrame;
@@ -12,8 +12,8 @@ import de.crazymemecoke.manager.clickguimanager.listeners.ClickListener;
 import de.crazymemecoke.manager.clickguimanager.listeners.ComponentsListener;
 import de.crazymemecoke.manager.clickguimanager.util.FramePosition;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.manager.modulemanager.Category;
-import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.modules.Category;
+import de.crazymemecoke.features.modules.Module;
 
 /**
  * @author sendQueue <Vinii>

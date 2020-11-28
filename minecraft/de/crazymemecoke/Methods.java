@@ -1,8 +1,8 @@
 package de.crazymemecoke;
 
 import de.crazymemecoke.manager.fontmanager.FontManager;
-import de.crazymemecoke.manager.modulemanager.Module;
-import de.crazymemecoke.manager.modulemanager.ModuleManager;
+import de.crazymemecoke.features.modules.Module;
+import de.crazymemecoke.features.modules.ModuleManager;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import net.minecraft.client.Minecraft;

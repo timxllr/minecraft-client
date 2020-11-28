@@ -13,7 +13,7 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.render.NoBob;
+import de.crazymemecoke.features.modules.impl.render.NoBob;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;

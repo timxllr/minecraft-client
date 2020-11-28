@@ -1,8 +1,6 @@
 package de.crazymemecoke.manager.settingsmanager;
 
-import de.crazymemecoke.manager.modulemanager.Module;
-
-import java.util.ArrayList;
+import de.crazymemecoke.features.modules.Module;
 
 /**
  * Made by HeroCode

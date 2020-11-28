@@ -1,7 +1,7 @@
 package de.crazymemecoke.manager.eventmanager;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.modules.Module;
 
 public class EventManager {
 

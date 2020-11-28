@@ -1,7 +1,7 @@
 package de.crazymemecoke.manager.settingsmanager;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.utils.FileUtils;
 
 import java.io.File;

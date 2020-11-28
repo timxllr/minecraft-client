@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import java.util.Set;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.player.NoRotation;
+import de.crazymemecoke.features.modules.impl.player.NoRotation;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;

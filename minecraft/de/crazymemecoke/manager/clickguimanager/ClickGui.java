@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.ClickGUI;
+import de.crazymemecoke.features.modules.impl.gui.ClickGUI;
 import de.crazymemecoke.manager.clickguimanager.components.Frame;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import net.minecraft.client.gui.GuiScreen;

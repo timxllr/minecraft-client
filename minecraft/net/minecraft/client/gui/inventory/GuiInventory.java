@@ -3,7 +3,7 @@ package net.minecraft.client.gui.inventory;
 import java.io.IOException;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.HUD;
+import de.crazymemecoke.features.modules.impl.gui.HUD;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.achievement.GuiAchievements;

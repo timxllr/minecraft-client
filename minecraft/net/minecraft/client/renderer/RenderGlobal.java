@@ -23,7 +23,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.render.ESP;
+import de.crazymemecoke.features.modules.impl.render.ESP;
 import de.crazymemecoke.manager.eventmanager.impl.EventOutline;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;

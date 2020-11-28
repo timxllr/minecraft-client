@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.Invis;
+import de.crazymemecoke.features.modules.impl.gui.Invis;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;

@@ -2,8 +2,8 @@ package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.HUD;
-import de.crazymemecoke.features.modules.gui.Invis;
+import de.crazymemecoke.features.modules.impl.gui.HUD;
+import de.crazymemecoke.features.modules.impl.gui.Invis;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.network.play.client.C14PacketTabComplete;

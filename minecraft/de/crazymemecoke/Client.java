@@ -1,15 +1,15 @@
 package de.crazymemecoke;
 
-import de.crazymemecoke.features.commands.Friend;
-import de.crazymemecoke.features.modules.exploits.Crasher;
+import de.crazymemecoke.features.commands.impl.Friend;
+import de.crazymemecoke.features.modules.impl.exploits.Crasher;
 import de.crazymemecoke.features.ui.guiscreens.GuiFirstUse;
 import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.clickguimanager.ClickGui;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
-import de.crazymemecoke.manager.commandmanager.CommandManager;
+import de.crazymemecoke.features.commands.CommandManager;
 import de.crazymemecoke.manager.eventmanager.EventManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
-import de.crazymemecoke.manager.modulemanager.ModuleManager;
+import de.crazymemecoke.features.modules.ModuleManager;
 import de.crazymemecoke.manager.particlemanager.FBP;
 import de.crazymemecoke.utils.LoginUtil;
 import de.crazymemecoke.utils.NotifyUtil;

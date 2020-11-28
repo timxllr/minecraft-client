@@ -1,9 +1,9 @@
 package net.minecraft.client.renderer.entity;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.Invis;
-import de.crazymemecoke.features.modules.render.NameProtect;
-import de.crazymemecoke.features.modules.render.NameTags;
+import de.crazymemecoke.features.modules.impl.gui.Invis;
+import de.crazymemecoke.features.modules.impl.render.NameProtect;
+import de.crazymemecoke.features.modules.impl.render.NameTags;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

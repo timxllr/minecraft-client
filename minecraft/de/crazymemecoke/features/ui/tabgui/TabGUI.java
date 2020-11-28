@@ -1,8 +1,8 @@
 package de.crazymemecoke.features.ui.tabgui;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.modulemanager.Category;
-import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.modules.Category;
+import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.utils.render.RenderUtils;
 import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.Rainbow;

@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.gui.HUD;
+import de.crazymemecoke.features.modules.impl.gui.HUD;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

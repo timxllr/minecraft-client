@@ -41,7 +41,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.ui.guiscreens.GuiMainMenu;
 import de.crazymemecoke.manager.eventmanager.impl.EventKeyPress;
 import de.crazymemecoke.manager.eventmanager.impl.EventTick;
-import de.crazymemecoke.manager.modulemanager.Module;
+import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.features.ui.Interface;
 import de.crazymemecoke.features.ui.tabgui.TabGUI;
 import de.crazymemecoke.manager.particlemanager.FBP;
