@@ -2,11 +2,11 @@ package de.crazymemecoke.manager.eventmanager.impl;
 
 import de.crazymemecoke.manager.eventmanager.Event;
 
-public class EventSafewalk extends Event {
+public class EventSafeWalk extends Event {
 
     boolean safe;
 
-    public EventSafewalk(boolean safe) {
+    public EventSafeWalk(boolean safe) {
         this.safe = safe;
     }
 

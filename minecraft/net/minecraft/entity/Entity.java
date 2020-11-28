@@ -1,11 +1,8 @@
 package net.minecraft.entity;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.movement.SafeWalk;
-import de.crazymemecoke.features.modules.world.Scaffold;
 import de.crazymemecoke.manager.eventmanager.impl.EventMoveFlying;
-import de.crazymemecoke.manager.eventmanager.impl.EventSafewalk;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.manager.eventmanager.impl.EventSafeWalk;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -590,7 +587,7 @@ public abstract class Entity implements ICommandSender {
             double d5 = z;
             boolean flag = this.onGround && this.isSneaking() && this instanceof EntityPlayer;
 
-            EventSafewalk safewalk = new EventSafewalk(flag);
+            EventSafeWalk safewalk = new EventSafeWalk(flag);
             Client.main().eventMgr().onEvent(safewalk);
 
             if (safewalk.isSafe()) {
