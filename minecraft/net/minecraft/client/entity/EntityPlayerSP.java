@@ -3,6 +3,7 @@ package net.minecraft.client.entity;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.gui.Invis;
 import de.crazymemecoke.features.modules.movement.NoSlow;
+import de.crazymemecoke.manager.eventmanager.impl.EventChat;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
 import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.manager.modulemanager.Module;
@@ -252,12 +253,18 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      * Sends a chat message from the player. Args: chatMessage
      */
     public void sendChatMessage(String message) {
+        EventChat eventChat = new EventChat(message);
+        Client.main().eventMgr().onEvent(eventChat);
+        if(eventChat.isCancelled()){
+            return;
+        }
+
         String prefix = Client.main().getClientPrefix();
         if (!(Client.main().modMgr().getModule(Invis.class).state())) {
             if (Client.main().getCommandManager().execute(message)) {
                 return;
             }
-            if (message.startsWith(Client.main().getClientPrefix())) {
+            if (message.startsWith(prefix)) {
                 NotifyUtil.chat("Befehl nicht gefunden - versuche " + Client.main().getClientPrefix() + "help!");
                 return;
             }
