@@ -34,7 +34,7 @@ public class SendPublic extends Module {
     public void onEvent(Event event) {
         if (event instanceof EventChat) {
             if (atAll.isToggled() && !(((EventChat) event).getMessage().startsWith(Client.main().getClientPrefix()))) {
-                event.setCanceled(true);
+                event.setCancelled(true);
                 sendPacket(new C01PacketChatMessage("@a " + ((EventChat) event).getMessage()));
             }
         }

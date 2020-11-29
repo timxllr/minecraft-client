@@ -76,7 +76,7 @@ public abstract class Module extends Methods {
     public void toggle() {
         this.setState(!this.state());
 
-        if (getSettingByName("Mod Toggle", getModuleManager().getModule(SendPublic.class)).isToggled()) {
+        if (getSettingByName("Mod Toggle", getModuleManager().getModule(SendPublic.class)).isToggled() && getModuleManager().getModule(SendPublic.class).state()) {
             sendPacket(new C01PacketChatMessage(state() ? name + " activated" : name + " deactivated"));
         }
     }

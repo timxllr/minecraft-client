@@ -71,16 +71,16 @@ public class Zoot extends Module {
 		if(event instanceof EventPacket) {
 			if (((((EventPacket) event).getPacket() instanceof C03PacketPlayer)) && (isStandingStill()) && (!mc.thePlayer.isUsingItem())) {
 				if (potion.isToggled()) {
-					event.setCanceled(true);
+					event.setCancelled(true);
 					return;
 				}
 				if ((breath.isToggled()) && (mc.thePlayer.isCollidedVertically)
 						&& (((mc.thePlayer.isInsideOfMaterial(Material.lava)) && (!mc.thePlayer.isBurning()))
 						|| (mc.thePlayer.isInsideOfMaterial(Material.water)))) {
-					event.setCanceled(true);
+					event.setCancelled(true);
 				}
 				if ((firionFreeze.isToggled()) && (mc.thePlayer.isBurning()) && (!mc.thePlayer.isInWater())) {
-					event.setCanceled(true);
+					event.setCancelled(true);
 				}
 			}
 		}

@@ -34,30 +34,24 @@ public class Aura extends Module {
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
     SettingsManager sM = Client.main().setMgr();
-    double range, cps, ticksExisted;
     float yaw, pitch, curYaw, curPitch;
     long current, last;
-    boolean teams, players, animals, mobs, villager, rotations, ignoreDead;
-
-    public Aura() {
-        sM.addSetting(new Setting("Precision", this, 0.1F, 0.05F, 0.5F, false));
-        sM.addSetting(new Setting("Accuracy", this, 0.3F, 0.1F, 0.8F, false));
-        sM.addSetting(new Setting("Prediction Multiplier", this, 0.4F, 0F, 1F, false));
-        sM.addSetting(new Setting("Ticks Existed", this, 30, 0, 100, true));
-        sM.addSetting(new Setting("Range", this, 4, 3.5, 7, true));
-        sM.addSetting(new Setting("CPS", this, 10, 1, 20, true));
-        sM.addSetting(new Setting("Players", this, true));
-        sM.addSetting(new Setting("Animals", this, false));
-        sM.addSetting(new Setting("Mobs", this, false));
-        sM.addSetting(new Setting("Villager", this, false));
-        sM.addSetting(new Setting("Teams", this, false));
-        sM.addSetting(new Setting("Rotations", this, true));
-        sM.addSetting(new Setting("Ignore Dead", this, false));
-    }
+    public Setting precision = new Setting("Precision", this, 0.1, 0.05, 0.5, false);
+    public Setting accuracy = new Setting("Accuracy", this, 0.3, 0.1, 0.8, false);
+    public Setting predictionMultiplier = new Setting("Prediction Multiplier", this, 0.4, 0, 1, false);
+    public Setting ticksExisted = new Setting("Ticks Existed", this, 30, 0, 100, true);
+    public Setting range = new Setting("Range", this, 4, 3.5, 7, true);
+    public Setting cps = new Setting("CPS", this, 10, 1, 20, true);
+    public Setting players = new Setting("Players", this, true);
+    public Setting animals = new Setting("Animals", this, false);
+    public Setting mobs = new Setting("Mobs", this, false);
+    public Setting villager = new Setting("Villager", this, false);
+    public Setting teams = new Setting("Teams", this, false);
+    public Setting rotations = new Setting("Rotations", this, true);
+    public Setting ignoreDead = new Setting("Ignore Dead", this, false);
 
     @Override
     public void onToggle() {
-
     }
 
 
@@ -76,17 +70,6 @@ public class Aura extends Module {
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            ticksExisted = sM.settingByName("Ticks Existed", this).getCurrentValue();
-            range = sM.settingByName("Range", this).getCurrentValue();
-            cps = sM.settingByName("CPS", this).getCurrentValue();
-            teams = sM.settingByName("Teams", this).isToggled();
-            players = sM.settingByName("Players", this).isToggled();
-            animals = sM.settingByName("Animals", this).isToggled();
-            mobs = sM.settingByName("Mobs", this).isToggled();
-            villager = sM.settingByName("Villager", this).isToggled();
-            rotations = sM.settingByName("Rotations", this).isToggled();
-            ignoreDead = sM.settingByName("Ignore Dead", this).isToggled();
-
             currentTarget = getClosest(mc.playerController.getBlockReachDistance());
 
             if (currentTarget == null)
@@ -100,7 +83,7 @@ public class Aura extends Module {
 
             updateTime();
 
-            if (rotations) {
+            if (rotations.isToggled()) {
                 float precision = (float) sM.settingByName("Precision", this).getCurrentValue();
                 float accuracy = (float) sM.settingByName("Accuracy", this).getCurrentValue();
                 float predictionMultiplier = (float) sM.settingByName("Prediction Multiplier", this).getCurrentValue();
@@ -115,7 +98,7 @@ public class Aura extends Module {
                 pitch = mc.thePlayer.rotationPitch;
             }
 
-            if (current - last > 1000 / cps) {
+            if (current - last > 1000 / cps.getCurrentValue()) {
                 attack(currentTarget);
                 resetTime();
             }
@@ -131,7 +114,7 @@ public class Aura extends Module {
                 if (currentTarget == null)
                     return;
 
-                if (!rotations) {
+                if (!rotations.isToggled()) {
                     if (shouldAttack()) {
                         mc.thePlayer.rotationYaw = yaw;
                         mc.thePlayer.rotationPitch = pitch;
@@ -151,7 +134,7 @@ public class Aura extends Module {
         }
         if (event instanceof EventPacket) {
             if (((EventPacket) event).getType() == EventPacket.Type.SEND) {
-                if (!rotations)
+                if (!rotations.isToggled())
                     return;
 
                 if (((EventPacket) event).getPacket() instanceof C03PacketPlayer) {
@@ -258,13 +241,9 @@ public class Aura extends Module {
 
 
     private void attack(Entity entity) {
-        if ((entity instanceof EntityPlayer && players) || (entity instanceof EntityMob && mobs) || (entity instanceof EntityAnimal && animals) || (entity instanceof EntityVillager && villager)) {
+        if ((entity instanceof EntityPlayer && players.isToggled()) || (entity instanceof EntityMob && mobs.isToggled()) || (entity instanceof EntityAnimal && animals.isToggled()) || (entity instanceof EntityVillager && villager.isToggled())) {
             mc.thePlayer.swingItem();
             mc.playerController.attackEntity(mc.thePlayer, entity);
-
-            if (Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).isToggled()) {
-                renderTargetHUD();
-            }
         }
     }
 
@@ -315,6 +294,6 @@ public class Aura extends Module {
     }
 
     private boolean canAttack(Entity entity) {
-        return entity != mc.thePlayer && (ignoreDead && !entity.isDead) && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted;
+        return entity != mc.thePlayer && (ignoreDead.isToggled() && !entity.isDead) && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted.getCurrentValue();
     }
 }
