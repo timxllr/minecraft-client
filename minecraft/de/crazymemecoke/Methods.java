@@ -2,11 +2,13 @@ package de.crazymemecoke;
 
 import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.features.modules.ModuleManager;
+import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.network.NetHandlerPlayClient;
@@ -59,6 +61,17 @@ public class Methods {
             getPlayer().sendQueue.addToSendQueue(packet);
         } catch (NullPointerException ignored) {
         }
+    }
+
+    public void reloadClient() {
+        Client.main().modMgr().loadModules();
+        Client.main().modMgr().loadBinds();
+        AltManager.loadAlts();
+        setGuiScreen(mc.currentScreen);
+    }
+
+    public void setGuiScreen(GuiScreen screen) {
+        mc.displayGuiScreen(screen);
     }
 
     public void sendChatMessage(String message) {
