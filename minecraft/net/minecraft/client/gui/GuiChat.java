@@ -325,7 +325,10 @@ public class GuiChat extends GuiScreen {
                 break;
             }
         }
-        inputField.drawTextBox();
+        try {
+            inputField.drawTextBox();
+        } catch (Exception ignored) {
+        }
         IChatComponent ichatcomponent = mc.ingameGUI.getChatGUI().getChatComponent(Mouse.getX(), Mouse.getY());
 
         if (ichatcomponent != null && ichatcomponent.getChatStyle().getChatHoverEvent() != null) {
