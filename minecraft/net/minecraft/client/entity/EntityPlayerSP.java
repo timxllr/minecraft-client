@@ -2,6 +2,7 @@ package net.minecraft.client.entity;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.impl.gui.Invis;
+import de.crazymemecoke.features.modules.impl.misc.Commands;
 import de.crazymemecoke.features.modules.impl.movement.NoSlow;
 import de.crazymemecoke.manager.eventmanager.impl.EventChat;
 import de.crazymemecoke.manager.eventmanager.impl.EventMotion;
@@ -259,7 +260,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
         }
 
         String prefix = Client.main().getClientPrefix();
-        if (!(Client.main().modMgr().getModule(Invis.class).state())) {
+        if (!(Client.main().modMgr().getModule(Invis.class).state()) && Client.main().modMgr().getModule(Commands.class).state()) {
             if (Client.main().getCommandManager().execute(message)) {
                 return;
             }
