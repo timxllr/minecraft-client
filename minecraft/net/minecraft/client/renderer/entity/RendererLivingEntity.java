@@ -256,7 +256,7 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
                 GlStateManager.alphaFunc(516, 0.003921569F);
             }
 
-            //TODO: ESP mode Outline
+            //TODO: OutlineESP
             if (Client.main().modMgr().getByName("ESP").state()) {
                 final String mode = Client.main().setMgr().settingByName("Mode", Client.main().modMgr().getByName("ESP")).getCurrentMode();
                 if (mode.equalsIgnoreCase("Outline")) {
