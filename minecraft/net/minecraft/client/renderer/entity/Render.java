@@ -4,6 +4,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.impl.gui.Invis;
 import de.crazymemecoke.features.modules.impl.render.NameProtect;
 import de.crazymemecoke.features.modules.impl.render.NameTags;
+import de.crazymemecoke.manager.eventmanager.impl.EventNameTag;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -308,6 +309,13 @@ public abstract class Render<T extends Entity> {
      */
     //TODO: NameTags / Tag Rendering
     protected void renderLivingLabel(T entityIn, String str, double x, double y, double z, int maxDistance) {
+        EventNameTag eventNameTag = new EventNameTag(str, x, y, z, maxDistance);
+        Client.main().eventMgr().onEvent(eventNameTag);
+
+        if(eventNameTag.isCancelled()){
+            return;
+        }
+
         if (!(Client.main().modMgr().getModule(NameTags.class).state()) || Client.main().modMgr().getModule(Invis.class).state()) {
             double d0 = entityIn.getDistanceSqToEntity(this.renderManager.livingPlayer);
 
