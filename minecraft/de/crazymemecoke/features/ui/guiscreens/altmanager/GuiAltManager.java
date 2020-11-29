@@ -292,9 +292,14 @@ public class GuiAltManager extends GuiScreen {
 
     public void drawScreen(int posX, int posY, float f) {
         ScaledResolution sr = new ScaledResolution(Wrapper.mc);
+
         if (Keyboard.isKeyDown(1)) {
             mc.displayGuiScreen(parent);
         }
+
+        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
+        Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
+                width, height, sr.width(), sr.height());
 
         boolean topHeight = true;
         int darkGray = -15658735;
