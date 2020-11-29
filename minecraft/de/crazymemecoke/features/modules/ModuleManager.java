@@ -6,9 +6,7 @@ import de.crazymemecoke.features.modules.impl.exploits.*;
 import de.crazymemecoke.features.modules.impl.gui.ClickGUI;
 import de.crazymemecoke.features.modules.impl.gui.HUD;
 import de.crazymemecoke.features.modules.impl.gui.Invis;
-import de.crazymemecoke.features.modules.impl.misc.LagDetector;
-import de.crazymemecoke.features.modules.impl.misc.MemoryCleaner;
-import de.crazymemecoke.features.modules.impl.misc.SendPublic;
+import de.crazymemecoke.features.modules.impl.misc.*;
 import de.crazymemecoke.features.modules.impl.movement.*;
 import de.crazymemecoke.features.modules.impl.player.*;
 import de.crazymemecoke.features.modules.impl.render.*;
@@ -90,6 +88,8 @@ public class ModuleManager {
         modules.add(new AutoWalk());
         modules.add(new TrailESP());
         modules.add(new NameTags());
+        modules.add(new WorldMod());
+        modules.add(new Commands());
         modules.add(new FastUse());
         modules.add(new AntiWeb());
         modules.add(new Trigger());
@@ -99,6 +99,8 @@ public class ModuleManager {
         modules.add(new Crasher());
         modules.add(new Tracers());
         modules.add(new AntiBot());
+        modules.add(new Spammer());
+        modules.add(new Plugins());
         modules.add(new Sprint());
         modules.add(new AimBot());
         modules.add(new Strafe());
