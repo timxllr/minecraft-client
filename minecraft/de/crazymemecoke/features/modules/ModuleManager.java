@@ -76,6 +76,7 @@ public class ModuleManager {
         modules.add(new BowAimbot());
         modules.add(new BlockInfo());
         modules.add(new ShopSaver());
+        modules.add(new FastBreak());
         modules.add(new FastFall());
         modules.add(new Velocity());
         modules.add(new IceSpeed());
