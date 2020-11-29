@@ -3,6 +3,7 @@ package de.crazymemecoke.features.modules;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.Methods;
 import de.crazymemecoke.features.modules.impl.gui.Invis;
+import de.crazymemecoke.features.modules.impl.misc.Plugins;
 import de.crazymemecoke.features.modules.impl.misc.SendPublic;
 import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
@@ -61,13 +62,13 @@ public abstract class Module extends Methods {
         if (state) {
             this.onEnable();
             this.enabled = true;
-            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state()) {
+            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && !(name.equals(Client.main().modMgr().getModule(Plugins.class).name))) {
                 NotifyUtil.notification("Modul aktiviert", "§c" + this.name + "§r wurde aktiviert!", NotificationType.INFO, 2);
             }
         } else {
             this.onDisable();
             this.enabled = false;
-            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state()) {
+            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && !(name.equals(Client.main().modMgr().getModule(Plugins.class).name))) {
                 NotifyUtil.notification("Modul deaktiviert", "§c" + this.name + "§r wurde deaktiviert!", NotificationType.INFO, 2);
             }
         }
