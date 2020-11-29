@@ -1,20 +1,19 @@
 package de.crazymemecoke;
 
-import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.features.modules.ModuleManager;
+import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C01PacketChatMessage;
-
-import java.util.Arrays;
 
 public class Methods {
     public static Minecraft mc = Minecraft.getInstance();
@@ -56,11 +55,22 @@ public class Methods {
     }
 
     public void sendPacket(Packet<? extends INetHandler> packet) {
-        getPlayer().sendQueue.addToSendQueue(packet);
+        try {
+            getPlayer().sendQueue.addToSendQueue(packet);
+        } catch (NullPointerException ignored) {
+        }
     }
 
-    public void sendChatMessage(String[] message) {
-        sendPacket(new C01PacketChatMessage(Arrays.toString(message)));
+    public void sendChatMessage(String message) {
+        sendPacket(new C01PacketChatMessage(message));
+    }
+
+    public NetHandlerPlayClient getNetHandler() {
+        return mc.getNetHandler();
+    }
+
+    public String getClientPrefix() {
+        return Client.main().getClientPrefix();
     }
 
     public GameSettings getGameSettings() {
