@@ -69,6 +69,7 @@ public class Client {
             NotifyUtil.debug("GuiScreen 'FirstUse' wurde aufgerufen!");
         }
         loginUtil = new LoginUtil();
+        NotifyUtil.debug("LoginUtil geladen!");
         eventManager = new EventManager();
         NotifyUtil.debug("EventManager geladen!");
         fontManager = new FontManager();
