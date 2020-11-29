@@ -16,13 +16,15 @@ public class CommandManager {
         commands.add(new Toggle());
         commands.add(new Rename());
         commands.add(new Friend());
+        commands.add(new Vanish());
         commands.add(new Panic());
         commands.add(new Bind());
         commands.add(new Help());
         commands.add(new Info());
+        commands.add(new Kick());
         commands.add(new Fix());
         commands.add(new Say());
-        commands.add(new T());
+        commands.add(new NCP());
     }
 
     public boolean execute(String text) {
