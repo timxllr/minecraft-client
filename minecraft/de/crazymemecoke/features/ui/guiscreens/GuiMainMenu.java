@@ -94,12 +94,6 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
 
         GL20.glUseProgram(0);
 
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
-
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         ScaledResolution sr = new ScaledResolution(mc);
