@@ -2,13 +2,13 @@ package de.crazymemecoke.manager.eventmanager;
 
 public class Event {
 
-    boolean canceled = false;
+    boolean cancelled = false;
 
     public boolean isCancelled() {
-        return canceled;
+        return cancelled;
     }
 
-    public void setCanceled(boolean canceled) {
-        this.canceled = canceled;
+    public void setCancelled(boolean canceled) {
+        this.cancelled = canceled;
     }
 }
