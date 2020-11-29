@@ -12,6 +12,9 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.client.C01PacketChatMessage;
+
+import java.util.Arrays;
 
 public class Methods {
     public static Minecraft mc = Minecraft.getInstance();
@@ -54,6 +57,10 @@ public class Methods {
 
     public void sendPacket(Packet<? extends INetHandler> packet) {
         getPlayer().sendQueue.addToSendQueue(packet);
+    }
+
+    public void sendChatMessage(String[] message) {
+        sendPacket(new C01PacketChatMessage(Arrays.toString(message)));
     }
 
     public GameSettings getGameSettings() {
