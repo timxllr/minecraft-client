@@ -8,7 +8,7 @@ import de.crazymemecoke.utils.NotifyUtil;
 
 public class Toggle extends Command {
 	
-	String syntax = Client.main().getClientPrefix() + "toggle <Module>";
+	String syntax = Client.main().getClientPrefix() + "t <Module>";
 
 	@Override
 	public void execute(String[] args) {
@@ -32,7 +32,7 @@ public class Toggle extends Command {
 
 	@Override
 	public String getName() {
-		return "toggle";
+		return "t";
 	}
 
 }
