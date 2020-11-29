@@ -17,6 +17,7 @@ public class CommandManager {
         commands.add(new Rename());
         commands.add(new Friend());
         commands.add(new Vanish());
+        commands.add(new Reload());
         commands.add(new Panic());
         commands.add(new Bind());
         commands.add(new Help());
