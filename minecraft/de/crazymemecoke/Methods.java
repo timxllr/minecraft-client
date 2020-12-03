@@ -1,5 +1,7 @@
 package de.crazymemecoke;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.features.modules.ModuleManager;
 import de.crazymemecoke.manager.altmanager.AltManager;
@@ -100,6 +102,14 @@ public class Methods {
 
     public double getZ() {
         return getPlayer().posZ;
+    }
+
+    public Gson gson() {
+        return new Gson();
+    }
+
+    public JsonParser jsonParser() {
+        return new JsonParser();
     }
 
 }
