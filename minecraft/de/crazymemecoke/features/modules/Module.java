@@ -9,19 +9,20 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.utils.NotifyUtil;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.time.TimeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C01PacketChatMessage;
 import org.lwjgl.input.Keyboard;
 
-public abstract class Module extends Methods {
+public abstract class Module extends Methods implements Wrapper {
 
     public static Minecraft mc = Minecraft.mc();
     public static SettingsManager s = Client.main().setMgr();
     private final Category category;
     public boolean enabled;
     public TimeHelper timeHelper = new TimeHelper();
-    private String name;
+    private final String name;
     private String visualName;
     private int bind;
 
