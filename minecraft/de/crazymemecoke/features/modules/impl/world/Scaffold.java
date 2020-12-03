@@ -19,11 +19,6 @@ import net.minecraft.util.*;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author kroko
- * @created on 26.11.2020 : 17:33
- */
-
 @ModuleInfo(name = "Scaffold", description = "Its place blocks under you", category = Category.WORLD)
 public class Scaffold extends Module {
 
@@ -70,7 +65,6 @@ public class Scaffold extends Module {
 
         float yaw = updateRotation(currentYaw, calcYaw, speed);
         float pitch = updateRotation(currentPitch, calcPitch, speed);
-
 
         return new float[]{yaw, pitch >= 90 ? 90 : pitch <= -90 ? -90 : pitch};
     }

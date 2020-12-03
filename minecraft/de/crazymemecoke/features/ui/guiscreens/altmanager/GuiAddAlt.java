@@ -2,14 +2,16 @@ package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.altmanager.AltManager;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.Colors;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -97,10 +99,11 @@ public class GuiAddAlt extends GuiScreen {
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.main().fontMgr().comfortaa20.drawString("ADD ALT", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("ADD ALT") / 2, height / 2 - 140, Colors.main().getGrey());
-        Client.main().fontMgr().comfortaa20.drawString("MAIL", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
-        Client.main().fontMgr().comfortaa20.drawString("PASSWORD", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
-        Client.main().fontMgr().comfortaa20.drawString("MAIL : PASS", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("MAIL : PASS") / 2, height - 265, -1);
+        UnicodeFontRenderer comfortaa20 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
+        comfortaa20.drawString("ADD ALT", width / 2 - comfortaa20.getStringWidth("ADD ALT") / 2, height / 2 - 140, Colors.main().getGrey());
+        comfortaa20.drawString("MAIL", width / 2 - comfortaa20.getStringWidth("MAIL") / 2, height - 365, -1);
+        comfortaa20.drawString("PASSWORD", width / 2 - comfortaa20.getStringWidth("PASSWORD") / 2, height - 315, -1);
+        comfortaa20.drawString("MAIL : PASS", width / 2 - comfortaa20.getStringWidth("MAIL : PASS") / 2, height - 265, -1);
         usernameField.drawTextBox();
         passwordField.drawTextBox();
         usernamePasswordField.drawTextBox();

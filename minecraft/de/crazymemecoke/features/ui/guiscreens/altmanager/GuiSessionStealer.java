@@ -5,8 +5,7 @@ import com.google.gson.JsonElement;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.Colors;
-import de.crazymemecoke.utils.JSONUtil;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
@@ -15,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
 import org.lwjgl.input.Keyboard;
 
+import java.awt.*;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -71,7 +71,7 @@ public class GuiSessionStealer extends GuiScreen {
 
                 JsonElement rawJson;
                 try {
-                    rawJson = JSONUtil.jsonParser.parse(
+                    rawJson = methods.jsonParser().parse(
                             new InputStreamReader(new URL("https://api.mojang.com/user/profiles/" + uuid + "/names")
                                     .openConnection().getInputStream()));
                 } catch (Exception e) {
@@ -145,10 +145,11 @@ public class GuiSessionStealer extends GuiScreen {
         int darkGray = -15658735;
         int lightGray = -15066598;
         RenderUtils.drawBorderedRect(width / 2 - 150, height / 2 - 150, width / 2 + 150, height / 2 + 150, 1, darkGray, lightGray);
-        Client.main().fontMgr().comfortaa20.drawString("REDEEM SESSION TOKEN", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("REDEEM SESSION TOKEN") / 2, height / 2 - 140, Colors.main().getGrey());
-        Client.main().fontMgr().comfortaa20.drawString("SESSION ID", width / 2 - Client.main().fontMgr().comfortaa20.getStringWidth("SESSION ID") / 2, height - 265, -1);
+        UnicodeFontRenderer comfortaa20 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
+        comfortaa20.drawString("REDEEM SESSION TOKEN", width / 2 - comfortaa20.getStringWidth("REDEEM SESSION TOKEN") / 2, height / 2 - 140, Colors.main().getGrey());
+        comfortaa20.drawString("SESSION ID", width / 2 - comfortaa20.getStringWidth("SESSION ID") / 2, height - 265, -1);
 
-        UnicodeFontRenderer font = Client.main().fontMgr().comfortaa18;
+        UnicodeFontRenderer font = Client.main().fontMgr().font("Comfortaa", 18, Font.PLAIN);
         String t1 = "Session IDs kannst du in Minecraft Crash Reports finden.";
         String t2 = "Suche im Internet nach \"Minecraft Session ID is token\"";
         String t3 = "Die dort enthaltene ID sieht so aus:";

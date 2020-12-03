@@ -1,9 +1,6 @@
 package de.crazymemecoke.features.commands.impl;
 
-import de.crazymemecoke.Client;
 import de.crazymemecoke.features.commands.Command;
-import de.crazymemecoke.features.modules.ModuleManager;
-import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
 

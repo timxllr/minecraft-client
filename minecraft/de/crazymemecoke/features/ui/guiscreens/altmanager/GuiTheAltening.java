@@ -2,7 +2,7 @@ package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.*;

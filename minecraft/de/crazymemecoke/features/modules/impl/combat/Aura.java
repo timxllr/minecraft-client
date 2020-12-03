@@ -2,6 +2,7 @@ package de.crazymemecoke.features.modules.impl.combat;
 
 import de.crazymemecoke.Client;
 import de.crazymemecoke.features.modules.ModuleInfo;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.manager.eventmanager.Event;
@@ -254,14 +255,15 @@ public class Aura extends Module {
             RenderUtils.drawRect(s.width() / 2 - 130, s.height() / 2 - 60, s.width() / 2 + 90, s.height() / 2 + 20, new Color(0, 0, 0, 110).getRGB());
 
             EntityPlayer p = (EntityPlayer) Aura.currentTarget;
-            Client.main().fontMgr().cabin23.drawStringWithShadow("Spieler: " + p.getName(), s.width() / 2 - 125, s.height() / 2 - 45, -1);
-            Client.main().fontMgr().cabin23.drawStringWithShadow("Leben: " + p.getHealth() + " / " + p.getMaxHealth(), s.width() / 2 - 125, s.height() / 2 - 35, -1);
+            UnicodeFontRenderer cabin23 = Client.main().fontMgr().font("Cabin", 23, Font.PLAIN);
+            cabin23.drawStringWithShadow("Spieler: " + p.getName(), s.width() / 2 - 125, s.height() / 2 - 45, -1);
+            cabin23.drawStringWithShadow("Leben: " + p.getHealth() + " / " + p.getMaxHealth(), s.width() / 2 - 125, s.height() / 2 - 35, -1);
 
             ItemStack i = p.getCurrentEquippedItem();
             if (i == null) {
-                Client.main().fontMgr().cabin23.drawStringWithShadow("Item: Kein Item", s.width() / 2 - 125, s.height() / 2 - 25, -1);
+                cabin23.drawStringWithShadow("Item: Kein Item", s.width() / 2 - 125, s.height() / 2 - 25, -1);
             } else {
-                Client.main().fontMgr().cabin23.drawStringWithShadow("Item: " + i.getDisplayName(), s.width() / 2 - 125, s.height() / 2 - 25, -1);
+                cabin23.drawStringWithShadow("Item: " + i.getDisplayName(), s.width() / 2 - 125, s.height() / 2 - 25, -1);
             }
 
             GuiInventory.drawEntityOnScreen(s.width() / 2 + 30, s.height() / 2 + 15, 30, (float) (51) - 50, (float) (75 - 50) - 20, (EntityLivingBase) Aura.currentTarget);

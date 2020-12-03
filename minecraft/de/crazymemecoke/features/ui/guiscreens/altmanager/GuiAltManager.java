@@ -4,7 +4,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.altmanager.AltManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.utils.render.Colors;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import de.crazymemecoke.utils.time.TimerUtil;
 import net.minecraft.client.gui.*;
@@ -362,9 +362,9 @@ public class GuiAltManager extends GuiScreen {
             }
         }
 
-        for (Iterator var21 = AltManager.slotList.iterator(); var21.hasNext(); altSlotY += 25) {
-            AltSlot altSlot = (AltSlot) var21.next();
-            altSlot.y = (int) ((int) altSlotY - sliderYY);
+        for (Iterator iterator = AltManager.slotList.iterator(); iterator.hasNext(); altSlotY += 25) {
+            AltSlot altSlot = (AltSlot) iterator.next();
+            altSlot.y = (int) (altSlotY - sliderYY);
             altSlot.opacity = opacity;
             altSlot.WIDTH = sr.width() - 160;
             altSlot.MIN_HEIGHT = 50;

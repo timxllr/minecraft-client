@@ -1,6 +1,6 @@
 package de.crazymemecoke.utils.render;
 
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;

@@ -8,7 +8,7 @@ import de.crazymemecoke.features.modules.ModuleInfo;
 
 import de.crazymemecoke.features.modules.Category;
 import de.crazymemecoke.features.modules.Module;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

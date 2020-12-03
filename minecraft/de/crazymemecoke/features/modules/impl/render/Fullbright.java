@@ -5,7 +5,7 @@ import de.crazymemecoke.features.modules.ModuleInfo;
 
 import de.crazymemecoke.features.modules.Category;
 import de.crazymemecoke.features.modules.Module;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 
 @ModuleInfo(name = "Fullbright", category = Category.RENDER, description = "Makes everything really bright")
 public class Fullbright extends Module {

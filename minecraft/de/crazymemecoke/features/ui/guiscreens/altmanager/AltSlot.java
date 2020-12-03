@@ -1,10 +1,13 @@
 package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
+
+import java.awt.*;
 
 public class AltSlot {
     private String username;
@@ -44,7 +47,8 @@ public class AltSlot {
                 }
 
                 String text = this.username + ":******";
-                Client.main().fontMgr().comfortaa20.drawString(text, res.width() / 2 - Client.main().fontMgr().comfortaa20.getStringWidth(text) / 2, (this.y + 12 - Client.main().fontMgr().comfortaa20.getStringHeight(text) / 2), RenderUtils.reAlpha(-4340793, this.opacity));
+                UnicodeFontRenderer comfortaa20 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
+                comfortaa20.drawString(text, res.width() / 2 - comfortaa20.getStringWidth(text) / 2, (this.y + 12 - comfortaa20.getStringHeight(text) / 2), RenderUtils.reAlpha(-4340793, this.opacity));
             }
         }
     }

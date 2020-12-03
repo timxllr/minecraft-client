@@ -15,6 +15,8 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+
+import de.crazymemecoke.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.stream.GuiTwitchUserMode;
 import net.minecraft.client.renderer.GlStateManager;
@@ -44,7 +46,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import tv.twitch.chat.ChatUserInfo;
 
-public abstract class GuiScreen extends Gui implements GuiYesNoCallback
+public abstract class GuiScreen extends Gui implements GuiYesNoCallback, Wrapper
 {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Set<String> PROTOCOLS = Sets.newHashSet(new String[] {"http", "https"});

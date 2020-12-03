@@ -5,7 +5,7 @@ import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

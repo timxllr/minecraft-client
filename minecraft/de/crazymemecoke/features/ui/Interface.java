@@ -9,7 +9,7 @@ import de.crazymemecoke.manager.settingsmanager.SettingsManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
 import de.crazymemecoke.features.modules.Category;
 import de.crazymemecoke.features.modules.Module;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.Rainbow;
 import de.crazymemecoke.utils.render.RenderUtils;
@@ -167,23 +167,26 @@ public class Interface extends GuiIngame {
         switch (mode) {
             case "Ambien Old": {
                 RenderUtils.drawRect(0, 0, 73, 25, new Color(0, 0, 0).getRGB());
-                Client.main().fontMgr().ambien45.drawStringWithShadow("A", 3, 1, Colors.main().getAmbienOldBlueColor());
-                Client.main().fontMgr().ambien45.drawStringWithShadow("mbien", 17, 1, Colors.main().getGrey());
-                Client.main().fontMgr().ambien20.drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 55, 0, 0x349ac0);
+                UnicodeFontRenderer ambien45 = Client.main().fontMgr().font("fifawelcome1.3", 45, Font.PLAIN);
+                ambien45.drawStringWithShadow("A", 3, 1, Colors.main().getAmbienOldBlueColor());
+                ambien45.drawStringWithShadow("mbien", 17, 1, Colors.main().getGrey());
+                UnicodeFontRenderer ambien20 = Client.main().fontMgr().font("fifawelcome1.3", 20, Font.PLAIN);
+                ambien20.drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 55, 0, 0x349ac0);
                 break;
             }
             case "Vortex": {
                 GL11.glPushMatrix();
                 GL11.glScalef(2f, 2f, 2f);
-                Client.main().fontMgr().vortex20.drawString("V", 0, -2, Colors.main().getVortexRedColor());
+                UnicodeFontRenderer vortex20 = Client.main().fontMgr().font("DANUBE", 20, Font.PLAIN);
+                vortex20.drawString("V", 0, -2, Colors.main().getVortexRedColor());
                 GL11.glScalef(2f / 4, 2f / 4, 2f / 4);
                 GL11.glPopMatrix();
 
-                Client.main().fontMgr().vortex20.drawString("ortex", 18, 6, Colors.main().getGrey());
+                vortex20.drawString("ortex", 18, 6, Colors.main().getGrey());
 
                 GL11.glPushMatrix();
                 GL11.glScalef(0.8f, 0.8f, 0.8f);
-                Client.main().fontMgr().vortex20.drawString(String.valueOf(Client.main().getClientVersion()), 72, 9, 0x349ac0);
+                vortex20.drawString(String.valueOf(Client.main().getClientVersion()), 72, 9, 0x349ac0);
                 GL11.glPopMatrix();
                 break;
             }

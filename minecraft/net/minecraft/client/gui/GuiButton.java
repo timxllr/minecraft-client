@@ -159,7 +159,7 @@ public class GuiButton extends Gui {
                 mouseDragged(mc, mouseX, mouseY);
                 int var6 = 14737632;
                 String text = StringUtils.stripControlCodes(displayString);
-                UnicodeFontRenderer fontRenderer = Client.main().fontMgr().comfortaa18;
+                UnicodeFontRenderer fontRenderer = Client.main().fontMgr().font("Comfortaa", 18, Font.PLAIN);
                 fontRenderer.drawStringWithShadow(text, xPosition - (fontRenderer.getStringWidth(text) / 2) + width / 2, yPosition + (height - 6) / 2, var6);
             }
         }

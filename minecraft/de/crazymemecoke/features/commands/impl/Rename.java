@@ -4,7 +4,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.features.commands.Command;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;
 import de.crazymemecoke.utils.NotifyUtil;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import net.minecraft.item.ItemStack;
 
 public class Rename extends Command {

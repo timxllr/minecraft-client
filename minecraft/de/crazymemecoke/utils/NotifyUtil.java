@@ -1,6 +1,7 @@
 package de.crazymemecoke.utils;
 
 import de.crazymemecoke.Client;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.manager.notificationmanager.Notification;
 import de.crazymemecoke.manager.notificationmanager.NotificationManager;
 import de.crazymemecoke.manager.notificationmanager.NotificationType;

@@ -3,7 +3,7 @@ package de.crazymemecoke.features.ui.guiscreens;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.fontmanager.FontManager;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -11,7 +11,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
 import java.awt.*;
 import java.io.IOException;

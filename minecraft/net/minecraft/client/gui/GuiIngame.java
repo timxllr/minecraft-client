@@ -7,7 +7,7 @@ import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.manager.eventmanager.impl.EventRender;
 import de.crazymemecoke.manager.notificationmanager.NotificationManager;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;

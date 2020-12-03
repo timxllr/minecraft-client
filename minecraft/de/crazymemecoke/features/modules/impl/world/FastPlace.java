@@ -4,7 +4,7 @@ import de.crazymemecoke.manager.eventmanager.Event;
 import de.crazymemecoke.features.modules.Category;
 import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.features.modules.ModuleInfo;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 
 @ModuleInfo(name = "FastPlace", category = Category.WORLD, description = "Lets you place blocks real fast")
 public class FastPlace extends Module {

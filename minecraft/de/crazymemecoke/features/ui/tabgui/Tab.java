@@ -99,7 +99,7 @@ public class Tab {
             switch (mode) {
                 case "Ambien Old": {
                     RenderUtils.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Colors.main().getAmbienOldBlueColor() : 0);
-                    Client.main().fontMgr().raleWay20.drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+                    Client.main().fontMgr().font("Raleway", 20, Font.PLAIN).drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
                     break;
                 }
                 case "Ambien Newest": {
@@ -110,17 +110,17 @@ public class Tab {
                 }
                 case "Vortex": {
                     RenderUtils.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Colors.main().getVortexRedColor() : 0);
-                    Client.main().fontMgr().raleWay20.drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+                    Client.main().fontMgr().font("Raleway", 20, Font.PLAIN).drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
                     break;
                 }
                 case "Suicide": {
                     RenderUtils.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Rainbow.rainbow(1, 1f).getRGB() : 0);
-                    Client.main().fontMgr().raleWay20.drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+                    Client.main().fontMgr().font("Raleway", 20, Font.PLAIN).drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
                     break;
                 }
                 case "Apinity": {
                     RenderUtils.drawRect(x - 1, y + gui.tabHeight * i - 1, x + menuWidth, y + gui.tabHeight * i + 11, i == TabGUI.selectedItem ? Colors.main().getApinityBlueColor() : 0);
-                    Client.main().fontMgr().raleWay20.drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
+                    Client.main().fontMgr().font("Raleway", 20, Font.PLAIN).drawStringWithShadow(currentHack.name(), x + 1, y + gui.tabHeight * i + 1, currentHack.state() ? new Color(255, 255, 255).getRGB() : new Color(181, 181, 181).getRGB());
                     break;
                 }
                 case "Huzuni": {

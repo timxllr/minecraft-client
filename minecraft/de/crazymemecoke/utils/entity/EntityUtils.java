@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.collect.Multimap;
 
 import de.crazymemecoke.Methods;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

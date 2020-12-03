@@ -8,7 +8,7 @@ import de.crazymemecoke.features.commands.Command;
 import de.crazymemecoke.features.modules.Module;
 import de.crazymemecoke.features.modules.ModuleManager;
 import de.crazymemecoke.utils.NotifyUtil;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 
 public class Bind extends Command {
 

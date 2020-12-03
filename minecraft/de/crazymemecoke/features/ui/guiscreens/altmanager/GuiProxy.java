@@ -1,28 +1,18 @@
 package de.crazymemecoke.features.ui.guiscreens.altmanager;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import de.crazymemecoke.Client;
 import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.utils.JSONUtil;
-import de.crazymemecoke.utils.Wrapper;
+import de.crazymemecoke.Wrapper;
 import de.crazymemecoke.utils.render.Colors;
 import de.crazymemecoke.utils.render.RenderUtils;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Session;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.Proxy;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class GuiProxy extends GuiScreen {
