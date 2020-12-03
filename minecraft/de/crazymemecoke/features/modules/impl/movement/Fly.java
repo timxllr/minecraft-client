@@ -1,13 +1,12 @@
 package de.crazymemecoke.features.modules.impl.movement;
 
 import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.ModuleInfo;
-import de.crazymemecoke.manager.settingsmanager.Setting;
-import de.crazymemecoke.manager.eventmanager.Event;
-import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
 import de.crazymemecoke.features.modules.Category;
 import de.crazymemecoke.features.modules.Module;
-import de.crazymemecoke.utils.Values;
+import de.crazymemecoke.features.modules.ModuleInfo;
+import de.crazymemecoke.manager.eventmanager.Event;
+import de.crazymemecoke.manager.eventmanager.impl.EventUpdate;
+import de.crazymemecoke.manager.settingsmanager.Setting;
 import de.crazymemecoke.utils.entity.EntityUtils;
 import de.crazymemecoke.utils.entity.PlayerUtil;
 import net.minecraft.block.material.Material;
@@ -17,16 +16,15 @@ import net.minecraft.network.play.client.C03PacketPlayer;
 @ModuleInfo(name = "Fly", category = Category.MOVEMENT, description = "Lets you fly")
 public class Fly extends Module {
 
-    public Setting mode = new Setting("Mode", this, "Fly", new String[] {"Fly", "Glide"});
-    public Setting flyMode = new Setting("Fly Mode", this, "Jetpack", new String[] {"Vanilla", "Jetpack", "Hypixel", "Motion", "AAC 1.9.8", "AAC 1.9.10 Old", "AAC 1.9.10 New", "AAC 3.0.5", "CubeCraft", "Intave"});
-    public Setting glideMode = new Setting("Glide Mode", this, "New", new String[] {"Old", "New"});
-
-    private int delay = 0;
+    public Setting mode = new Setting("Mode", this, "Fly", new String[]{"Fly", "Glide"});
+    public Setting flyMode = new Setting("Fly Mode", this, "Jetpack", new String[]{"Vanilla", "Jetpack", "Hypixel", "Motion", "AAC 1.9.8", "AAC 1.9.10 Old", "AAC 1.9.10 New", "AAC 3.0.5", "CubeCraft", "Intave"});
+    public Setting glideMode = new Setting("Glide Mode", this, "New", new String[]{"Old", "New"});
     public double motion;
     public boolean speed;
     public int time = 0;
     public int dtime = 0;
-
+    double glidespeed = 0.07000000000000001D;
+    private int delay = 0;
 
     @Override
     public void onToggle() {
@@ -46,7 +44,7 @@ public class Fly extends Module {
         if (event instanceof EventUpdate) {
 
             if (mode.getCurrentMode().equalsIgnoreCase("Fly")) {
-                setDisplayName("Fly [" + mode + " / " + flyMode.getCurrentMode() + "]");
+                setDisplayName("Fly [" + mode.getCurrentMode() + " / " + flyMode.getCurrentMode() + "]");
 
                 if (flyMode.getCurrentMode().equalsIgnoreCase("Vanilla")) {
                     mc.thePlayer.capabilities.isFlying = true;
@@ -160,9 +158,9 @@ public class Fly extends Module {
                     }
                 } else if (glideMode.getCurrentMode().equalsIgnoreCase("Old")) {
                     EntityUtils.damagePlayer(1);
-                    if ((mc.thePlayer.motionY <= -Values.getValues().glidespeed) && (!mc.thePlayer.isInWater())
+                    if ((mc.thePlayer.motionY <= -glidespeed) && (!mc.thePlayer.isInWater())
                             && (!mc.thePlayer.onGround) && (!mc.thePlayer.isOnLadder())) {
-                        mc.thePlayer.motionY = (-Values.getValues().glidespeed);
+                        mc.thePlayer.motionY = (-glidespeed);
                     }
                 }
             }
