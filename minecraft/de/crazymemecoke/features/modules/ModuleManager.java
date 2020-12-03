@@ -169,7 +169,7 @@ public class ModuleManager {
                 final String[] args = line.split(":");
                 if (args.length == 2) {
                     Module module = getByName(args[0]);
-                    boolean state = Boolean.valueOf(args[1]);
+                    boolean state = Boolean.parseBoolean(args[1]);
 
                     if (state && !(module.getClass().equals(ClickGUI.class)))
                         module.setState(true);
@@ -191,11 +191,11 @@ public class ModuleManager {
     }
 
     public void loadBinds() {
-        FileUtils.loadFile(bindsFile).forEach(line -> {
+        Objects.requireNonNull(FileUtils.loadFile(bindsFile)).forEach(line -> {
             final String[] args = line.split(":");
             if (args.length == 2) {
                 Module module = getByName(args[0]);
-                int bind = Integer.valueOf(args[1]);
+                int bind = Integer.parseInt(args[1]);
 
                 module.setBind(bind);
             }
