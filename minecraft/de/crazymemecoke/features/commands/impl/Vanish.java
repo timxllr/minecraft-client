@@ -46,7 +46,7 @@ public class Vanish extends Command {
             try {
                 URL url = new URL("https://namemc.com/profile/" + uuid.toString());
                 URLConnection connection = url.openConnection();
-                connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.7; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Windows 10 20H2 x64; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String name = null;
                 String line;
