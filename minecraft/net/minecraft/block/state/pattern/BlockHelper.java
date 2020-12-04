@@ -1,7 +1,7 @@
 package net.minecraft.block.state.pattern;
 
 import com.google.common.base.Predicate;
-import de.crazymemecoke.Wrapper;
+import com.masterof13fps.Wrapper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.MathHelper;

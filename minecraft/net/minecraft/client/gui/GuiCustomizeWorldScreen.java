@@ -5,8 +5,8 @@ import com.google.common.primitives.Floats;
 import java.io.IOException;
 import java.util.Random;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.utils.render.GLSLSandboxShader;
+import com.masterof13fps.Client;
+import com.masterof13fps.utils.render.GLSLSandboxShader;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;

@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.impl.gui.Invis;
+import com.masterof13fps.Client;
+import com.masterof13fps.features.modules.impl.gui.Invis;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;

@@ -1,10 +1,10 @@
 package net.minecraft.client.renderer.entity;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.impl.gui.Invis;
-import de.crazymemecoke.features.modules.impl.render.NameProtect;
-import de.crazymemecoke.features.modules.impl.render.NameTags;
-import de.crazymemecoke.manager.eventmanager.impl.EventNameTag;
+import com.masterof13fps.Client;
+import com.masterof13fps.features.modules.impl.gui.Invis;
+import com.masterof13fps.features.modules.impl.render.NameProtect;
+import com.masterof13fps.features.modules.impl.render.NameTags;
+import com.masterof13fps.manager.eventmanager.impl.EventNameTag;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

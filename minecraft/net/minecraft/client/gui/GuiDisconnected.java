@@ -3,8 +3,8 @@ package net.minecraft.client.gui;
 import java.io.IOException;
 import java.util.List;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.utils.render.GLSLSandboxShader;
+import com.masterof13fps.Client;
+import com.masterof13fps.utils.render.GLSLSandboxShader;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IChatComponent;

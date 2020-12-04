@@ -6,11 +6,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.impl.gui.Invis;
-import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.utils.render.GLSLSandboxShader;
-import de.crazymemecoke.utils.render.RenderUtils;
+import com.masterof13fps.Client;
+import com.masterof13fps.features.modules.impl.gui.Invis;
+import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
+import com.masterof13fps.utils.render.GLSLSandboxShader;
+import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiDisconnected;

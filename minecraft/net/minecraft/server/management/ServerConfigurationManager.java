@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
-import de.crazymemecoke.Client;
+import com.masterof13fps.Client;
 import io.netty.buffer.Unpooled;
 import java.io.File;
 import java.net.SocketAddress;

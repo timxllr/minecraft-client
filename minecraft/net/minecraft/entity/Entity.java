@@ -1,8 +1,8 @@
 package net.minecraft.entity;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.eventmanager.impl.EventMoveFlying;
-import de.crazymemecoke.manager.eventmanager.impl.EventSafeWalk;
+import com.masterof13fps.Client;
+import com.masterof13fps.manager.eventmanager.impl.EventMoveFlying;
+import com.masterof13fps.manager.eventmanager.impl.EventSafeWalk;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

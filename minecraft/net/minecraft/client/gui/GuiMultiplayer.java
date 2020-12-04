@@ -2,11 +2,11 @@ package net.minecraft.client.gui;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
-import de.crazymemecoke.Client;
-import de.crazymemecoke.features.ui.guiscreens.altmanager.GuiAltManager;
-import de.crazymemecoke.features.ui.guiscreens.altmanager.GuiProxy;
-import de.crazymemecoke.utils.render.GLSLSandboxShader;
-import de.crazymemecoke.utils.render.RenderUtils;
+import com.masterof13fps.Client;
+import com.masterof13fps.features.ui.guiscreens.altmanager.GuiAltManager;
+import com.masterof13fps.features.ui.guiscreens.altmanager.GuiProxy;
+import com.masterof13fps.utils.render.GLSLSandboxShader;
+import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.ServerList;

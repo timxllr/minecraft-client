@@ -2,8 +2,8 @@ package net.minecraft.client.gui.stream;
 
 import java.io.IOException;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.utils.render.GLSLSandboxShader;
+import com.masterof13fps.Client;
+import com.masterof13fps.utils.render.GLSLSandboxShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

@@ -12,8 +12,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.particlemanager.FBP;
+import com.masterof13fps.Client;
+import com.masterof13fps.manager.particlemanager.FBP;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockHopper;
 import net.minecraft.block.BlockLiquid;

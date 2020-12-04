@@ -1,10 +1,10 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
-import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.utils.render.GLSLSandboxShader;
-import de.crazymemecoke.utils.render.RenderUtils;
+import com.masterof13fps.Client;
+import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
+import com.masterof13fps.utils.render.GLSLSandboxShader;
+import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.*;
 import net.minecraft.util.Util;

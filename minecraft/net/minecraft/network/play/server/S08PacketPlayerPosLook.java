@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.EnumSet;
 import java.util.Set;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.impl.player.NoRotation;
+import com.masterof13fps.Client;
+import com.masterof13fps.features.modules.impl.player.NoRotation;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;

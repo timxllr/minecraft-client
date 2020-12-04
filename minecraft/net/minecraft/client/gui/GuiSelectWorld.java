@@ -6,8 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.utils.render.GLSLSandboxShader;
+import com.masterof13fps.Client;
+import com.masterof13fps.utils.render.GLSLSandboxShader;
 import net.minecraft.client.AnvilConverterException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

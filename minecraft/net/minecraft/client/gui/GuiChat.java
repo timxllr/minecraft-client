@@ -1,11 +1,11 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Lists;
-import de.crazymemecoke.Client;
-import de.crazymemecoke.features.modules.impl.gui.HUD;
-import de.crazymemecoke.features.modules.impl.gui.Invis;
-import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
-import de.crazymemecoke.utils.render.RenderUtils;
+import com.masterof13fps.Client;
+import com.masterof13fps.features.modules.impl.gui.HUD;
+import com.masterof13fps.features.modules.impl.gui.Invis;
+import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
+import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.network.play.client.C14PacketTabComplete;
 import net.minecraft.util.*;
 import org.apache.commons.lang3.StringUtils;

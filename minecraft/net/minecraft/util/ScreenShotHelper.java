@@ -8,13 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
 
-import de.crazymemecoke.manager.notificationmanager.NotificationType;
-import de.crazymemecoke.utils.NotifyUtil;
+import com.masterof13fps.manager.notificationmanager.NotificationType;
+import com.masterof13fps.utils.NotifyUtil;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.shader.Framebuffer;
-import net.minecraft.event.ClickEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.BufferUtils;

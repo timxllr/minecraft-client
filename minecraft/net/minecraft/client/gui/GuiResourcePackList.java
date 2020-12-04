@@ -1,7 +1,7 @@
 package net.minecraft.client.gui;
 
-import de.crazymemecoke.Client;
-import de.crazymemecoke.manager.fontmanager.UnicodeFontRenderer;
+import com.masterof13fps.Client;
+import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.ResourcePackListEntry;
