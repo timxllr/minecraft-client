@@ -28,4 +28,20 @@ public class NotificationManager {
         if (currentNotification != null)
             currentNotification.render();
     }
+
+    public static LinkedBlockingQueue<Notification> getPendingNotifications() {
+        return pendingNotifications;
+    }
+
+    public static void setPendingNotifications(LinkedBlockingQueue<Notification> pendingNotifications) {
+        NotificationManager.pendingNotifications = pendingNotifications;
+    }
+
+    public static Notification getCurrentNotification() {
+        return currentNotification;
+    }
+
+    public static void setCurrentNotification(Notification currentNotification) {
+        NotificationManager.currentNotification = currentNotification;
+    }
 }
