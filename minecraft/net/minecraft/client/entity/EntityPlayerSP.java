@@ -7,6 +7,7 @@ import com.masterof13fps.features.modules.impl.movement.NoSlow;
 import com.masterof13fps.manager.eventmanager.impl.EventChat;
 import com.masterof13fps.manager.eventmanager.impl.EventMotion;
 import com.masterof13fps.manager.eventmanager.impl.EventUpdate;
+import com.masterof13fps.manager.notificationmanager.NotificationType;
 import com.masterof13fps.utils.NotifyUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
@@ -54,6 +55,11 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      * The amount of time an entity has been in a Portal the previous tick
      */
     public float prevTimeInPortal;
+    /**
+     * Called to update the entity's position/logic.
+     */
+
+    public EventMotion eventMotion;
     protected Minecraft mc;
     /**
      * Used to tell if the player pressed forward twice. If this is at 0 and it's pressed (And they are allowed to
@@ -135,12 +141,6 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             this.mc.getSoundHandler().playSound(new MovingSoundMinecartRiding(this, (EntityMinecart) entityIn));
         }
     }
-
-    /**
-     * Called to update the entity's position/logic.
-     */
-
-    public EventMotion eventMotion;
 
     public void onUpdate() {
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ))) {
@@ -255,7 +255,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     public void sendChatMessage(String message) {
         EventChat eventChat = new EventChat(message);
         Client.main().eventMgr().onEvent(eventChat);
-        if(eventChat.isCancelled()){
+        if (eventChat.isCancelled()) {
             return;
         }
 
@@ -265,7 +265,8 @@ public class EntityPlayerSP extends AbstractClientPlayer {
                 return;
             }
             if (message.startsWith(prefix)) {
-                NotifyUtil.chat("Befehl nicht gefunden - versuche " + Client.main().getClientPrefix() + "help!");
+                NotifyUtil.notification("Befehl nicht gefunden!",
+                        "Versuche es mit '" + Client.main().getClientPrefix() + "help'", NotificationType.ERROR, 5);
                 return;
             }
         }
