@@ -30,9 +30,8 @@ public class Toggle extends Command {
 		}
 	}
 
-	@Override
-	public String getName() {
-		return "t";
+	public Toggle(){
+		super("toggle", "t");
 	}
 
 }

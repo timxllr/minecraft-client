@@ -16,8 +16,7 @@ public class Panic extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "panic";
+    public Panic() {
+        super("panic", "pan");
     }
 }

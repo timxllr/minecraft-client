@@ -23,8 +23,7 @@ public class Say extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "say";
+    public Say() {
+        super("say", "shout");
     }
 }

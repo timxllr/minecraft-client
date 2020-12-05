@@ -1,19 +1,20 @@
 package com.masterof13fps;
 
-import com.masterof13fps.utils.render.Shader;
+import com.masterof13fps.features.commands.CommandManager;
 import com.masterof13fps.features.commands.impl.Friend;
+import com.masterof13fps.features.modules.ModuleManager;
 import com.masterof13fps.features.modules.impl.exploits.Crasher;
 import com.masterof13fps.features.ui.guiscreens.GuiFirstUse;
 import com.masterof13fps.manager.altmanager.AltManager;
 import com.masterof13fps.manager.clickguimanager.ClickGui;
-import com.masterof13fps.manager.settingsmanager.SettingsManager;
-import com.masterof13fps.features.commands.CommandManager;
 import com.masterof13fps.manager.eventmanager.EventManager;
 import com.masterof13fps.manager.fontmanager.FontManager;
-import com.masterof13fps.features.modules.ModuleManager;
+import com.masterof13fps.manager.notificationmanager.NotificationManager;
 import com.masterof13fps.manager.particlemanager.FBP;
+import com.masterof13fps.manager.settingsmanager.SettingsManager;
 import com.masterof13fps.utils.LoginUtil;
 import com.masterof13fps.utils.NotifyUtil;
+import com.masterof13fps.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -21,8 +22,8 @@ import java.io.File;
 public class Client {
 
     private static Client instance = new Client();
+    public long initTime = System.currentTimeMillis();
     private Minecraft mc = Minecraft.mc();
-
     private String clientName = "Vanity";
     private double clientVersion = 1.2;
     private String clientCoder = "CrazyMemeCoke";
@@ -32,13 +33,10 @@ public class Client {
     private String clientBackground = "textures/client/background.jpg";
     private String clientIcon = "textures/client/icon.png";
     private String wurstWatermark = "textures/client/wurst.png";
-
     private String ambienWatermark = "textures/client/ambien-logo.png";
-
     private String shaderLoc = "textures/client/shader/";
     private String clientChangelog = "https://github.com/RealFantaCoke/minecraft-client/commits/master";
     private ModuleManager moduleManager;
-
     private CommandManager commandManager;
     private SettingsManager setmgr;
     private ClickGui clickgui;
@@ -50,18 +48,20 @@ public class Client {
     private EventManager eventManager;
     private LoginUtil loginUtil;
 
-    public long initTime = System.currentTimeMillis();
-
     public static Client main() {
+        return instance;
+    }
+
+    public static Client getInstance() {
         return instance;
     }
 
     public void startClient() {
         if (!clientDir.exists()) {
-            try{
+            try {
                 clientDir.mkdir();
                 NotifyUtil.debug("Client-Ordner wurde erstellt!");
-            }catch(Exception e) {
+            } catch (Exception e) {
                 NotifyUtil.debug("Client-Ordner konnte nicht erstellt werden!");
             }
 
@@ -107,7 +107,9 @@ public class Client {
         AltManager.saveAlts();
 
         Client.main().modMgr().getModule(Crasher.class).setState(false);
-        NotifyUtil.debug("[ModuleManager] Crasher deaktiviert");
+
+        NotificationManager.setPendingNotifications(null);
+        NotificationManager.setCurrentNotification(null);
     }
 
     public File getClientDir() {
@@ -200,10 +202,6 @@ public class Client {
 
     public String getFakeVer() {
         return fakeVer;
-    }
-
-    public static Client getInstance() {
-        return instance;
     }
 
     public String getClientPrefixWorded() {

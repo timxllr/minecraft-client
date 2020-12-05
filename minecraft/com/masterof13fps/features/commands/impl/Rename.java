@@ -33,9 +33,8 @@ public class Rename extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "Rename";
+    public Rename() {
+        super("rename", "ren");
     }
 
 }

@@ -67,9 +67,8 @@ public class Bind extends Command {
 
     }
 
-    @Override
-    public String getName() {
-        return "Bind";
+    public Bind() {
+        super("bind", "bind");
     }
 
 }

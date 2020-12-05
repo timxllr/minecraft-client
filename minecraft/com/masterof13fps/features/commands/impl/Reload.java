@@ -17,8 +17,7 @@ public class Reload extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "Reload";
+    public Reload() {
+        super("reload", "rl");
     }
 }

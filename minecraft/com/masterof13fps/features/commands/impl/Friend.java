@@ -50,9 +50,8 @@ public class Friend extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "Friend";
+    public Friend() {
+        super("friend", "fa");
     }
 
 }

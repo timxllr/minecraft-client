@@ -2,16 +2,16 @@ package com.masterof13fps.features.ui;
 
 import com.masterof13fps.Client;
 import com.masterof13fps.Wrapper;
+import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
-import com.masterof13fps.utils.render.Colors;
-import com.masterof13fps.utils.render.Rainbow;
 import com.masterof13fps.features.modules.impl.gui.HUD;
 import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.features.ui.guiscreens.GuiItems;
 import com.masterof13fps.features.ui.tabgui.TabGUI;
-import com.masterof13fps.manager.settingsmanager.SettingsManager;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
-import com.masterof13fps.features.modules.Category;
+import com.masterof13fps.manager.settingsmanager.SettingsManager;
+import com.masterof13fps.utils.render.Colors;
+import com.masterof13fps.utils.render.Rainbow;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
@@ -218,7 +218,7 @@ public class Interface extends GuiIngame {
 
                 double height =
 
-                Client.main().fontMgr().font("Raleway Light", 45, Font.PLAIN).drawStringWithShadow("Apinity", 1, 1, Colors.main().getApinityGreyColor());
+                        Client.main().fontMgr().font("Raleway Light", 45, Font.PLAIN).drawStringWithShadow("Apinity", 1, 1, Colors.main().getApinityGreyColor());
                 Client.main().fontMgr().font("Raleway Light", 30, Font.PLAIN).drawStringWithShadow(String.valueOf(Client.main().getClientVersion()), 72, 1, Colors.main().getApinityBlueColor());
                 try {
                     Client.main().fontMgr().font("Comfortaa", 15, Font.PLAIN).drawStringWithShadow("Ping: " + mc.getCurrentServerData().pingToServer, 2, 125, Colors.main().getApinityBlueColor());
@@ -399,13 +399,13 @@ public class Interface extends GuiIngame {
                     - font.getStringWidth(m1.visualName());
             return (diff != 0) ? diff : m2.visualName().compareTo(m1.visualName());
         });
-        int yDist = 2;
         int rectY = 1;
         int stringY = 1;
 
         for (Module m : activeModuleNames) {
             int xDist = scaledResolution.width() - font.getStringWidth(m.visualName()) - 4;
-            RenderUtils.drawRect(scaledResolution.width() - font.getStringWidth(m.visualName()) - 5, (rectY - 2), scaledResolution.width(), (rectY + 10), new Color(0, 0, 0, 150).getRGB());
+            RenderUtils.drawRect(scaledResolution.width() - font.getStringWidth(m.visualName()) - 5, (rectY - 2),
+                    scaledResolution.width(), (rectY + 10), new Color(75, 75, 75, 210).getRGB());
             RenderUtils.drawRect(scaledResolution.width() - 2, (rectY - 2), scaledResolution.width(), (rectY + 10), Rainbow.getRainbow(offset, speed, saturation, brightness));
             font.drawString(m.visualName(), xDist + 1, stringY, Color.RED.getRGB());
             rectY += 12;

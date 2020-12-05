@@ -9,6 +9,10 @@ public class Info extends Command {
 
     String syntax = Client.main().getClientPrefix() + "info";
 
+    public Info() {
+        super("info", "information");
+    }
+
     @Override
     public void execute(String[] args) {
         if (args.length == 0) {
@@ -18,11 +22,6 @@ public class Info extends Command {
         } else {
             NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
-    }
-
-    @Override
-    public String getName() {
-        return "Info";
     }
 
 }

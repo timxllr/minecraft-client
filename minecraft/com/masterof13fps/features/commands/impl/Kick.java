@@ -18,8 +18,7 @@ public class Kick extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "Kick";
+    public Kick() {
+        super("kick", "kick");
     }
 }

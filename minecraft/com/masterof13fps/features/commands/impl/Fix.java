@@ -20,9 +20,8 @@ public class Fix extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "Fix";
+    public Fix() {
+        super("fix", "fix");
     }
 
 }

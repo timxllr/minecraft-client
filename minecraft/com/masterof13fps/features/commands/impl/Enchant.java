@@ -57,9 +57,8 @@ public class Enchant extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "enchant";
+    public Enchant() {
+        super("enchant", "ench");
     }
 
 }

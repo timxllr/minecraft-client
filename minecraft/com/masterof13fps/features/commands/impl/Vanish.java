@@ -91,8 +91,7 @@ public class Vanish extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "Vanish";
+    public Vanish() {
+        super("vanish", "vanish");
     }
 }

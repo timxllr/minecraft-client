@@ -19,8 +19,7 @@ public class NCP extends Command {
         }
     }
 
-    @Override
-    public String getName() {
-        return "NCP";
+    public NCP() {
+        super("ncp", "testncp");
     }
 }
