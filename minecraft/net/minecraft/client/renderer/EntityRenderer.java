@@ -13,6 +13,8 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.Wrapper;
+import com.masterof13fps.features.modules.impl.gui.HUD;
 import com.masterof13fps.features.modules.impl.render.NoBob;
 import com.masterof13fps.manager.eventmanager.impl.EventRender;
 import net.minecraft.block.Block;
@@ -92,7 +94,7 @@ import org.lwjgl.util.glu.Project;
 import net.optifine.shadersmod.client.Shaders;
 import net.optifine.shadersmod.client.ShadersRender;
 
-public class EntityRenderer implements IResourceManagerReloadListener {
+public class EntityRenderer implements IResourceManagerReloadListener, Wrapper {
     private static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation locationRainPng = new ResourceLocation("textures/environment/rain.png");
     private static final ResourceLocation locationSnowPng = new ResourceLocation("textures/environment/snow.png");
@@ -560,6 +562,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
     /**
      * Changes the field of view of the player depending on if they are underwater or not
      */
+    private float zoomCount = 1.0F;
     private float getFOVModifier(float partialTicks, boolean p_78481_2_) {
         if (this.debugView) {
             return 90.0F;
@@ -589,15 +592,32 @@ public class EntityRenderer implements IResourceManagerReloadListener {
                 }
 
                 if (Config.zoomMode) {
-                    f /= 4.0F;
+
+                    switch(methods.getSettingByName("Zoom Mode", methods.getModuleManager().getModule(HUD.class)).getCurrentMode()){
+                        case "Smooth":
+                            if(zoomCount < 4.0F){
+                                zoomCount += 0.015F;
+                            }
+                            break;
+                        case "OptiFine":
+                            f /= 4.0F;
+                            break;
+                    }
                 }
-            } else if (Config.zoomMode) {
-                Config.zoomMode = false;
-                this.mc.gameSettings.smoothCamera = false;
-                this.mouseFilterXAxis = new MouseFilter();
-                this.mouseFilterYAxis = new MouseFilter();
-                this.mc.renderGlobal.displayListEntitiesDirty = true;
+            } else  {
+                if(zoomCount > 1.0F){
+                    zoomCount -= 0.015F;
+                }
+                if (Config.zoomMode){
+                    Config.zoomMode = false;
+                    this.mc.gameSettings.smoothCamera = false;
+                    this.mouseFilterXAxis = new MouseFilter();
+                    this.mouseFilterYAxis = new MouseFilter();
+                    this.mc.renderGlobal.displayListEntitiesDirty = true;
+                }
             }
+
+            f /= zoomCount;
 
             if (entity instanceof EntityLivingBase && ((EntityLivingBase) entity).getHealth() <= 0.0F) {
                 float f1 = (float) ((EntityLivingBase) entity).deathTime + partialTicks;
