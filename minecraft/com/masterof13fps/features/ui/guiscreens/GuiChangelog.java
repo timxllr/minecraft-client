@@ -27,7 +27,6 @@ public class GuiChangelog extends GuiScreen {
     FontManager fM = Client.main().fontMgr();
 
     float scrollAmount = (-Mouse.getDWheel()) * 0.07F;
-    float scrolled = 0;
     String result;
     private GuiScreen parentScreen;
 
@@ -89,16 +88,14 @@ public class GuiChangelog extends GuiScreen {
 
         RenderUtils.drawRect(5, 0, width - 5, height, new Color(0, 0, 0, 155).getRGB());
 
+        UnicodeFontRenderer cabin35 = fM.font("Century Gothic", 35, Font.PLAIN);
+        UnicodeFontRenderer cabin23 = fM.font("Century Gothic", 23, Font.PLAIN);
 
-        UnicodeFontRenderer cabin35 = fM.font("Cabin", 35, Font.PLAIN);
-        UnicodeFontRenderer cabin23 = fM.font("Cabin", 23, Font.PLAIN);
-
-        String title = "Credits";
+        String title = "Changelog";
         cabin35.drawStringWithShadow(title, width / 2 - cabin35.getStringWidth(title) / 2, 10, -1);
 
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         RenderUtils.scissor(5, 35, sr.width() - 5, sr.height() - 35);
-        RenderUtils.drawRect(0, 0, sr.width(), sr.height(), new Color(50, 50, 50).getRGB());
         try {
             cabin23.drawStringWithShadow(result, 10, 40 + scrollAmount, -1);
         } catch (Exception ignored) {
