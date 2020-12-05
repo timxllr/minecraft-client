@@ -4,10 +4,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.masterof13fps.Client;
-import com.masterof13fps.manager.settingsmanager.Setting;
 import com.masterof13fps.manager.eventmanager.impl.EventRender;
 import com.masterof13fps.manager.notificationmanager.NotificationManager;
-import com.masterof13fps.Wrapper;
+import com.masterof13fps.manager.settingsmanager.Setting;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -49,49 +48,43 @@ public class GuiIngame extends Gui {
     private static final ResourceLocation vignetteTexPath = new ResourceLocation("textures/misc/vignette.png");
     private static final ResourceLocation widgetsTexPath = new ResourceLocation("textures/gui/widgets.png");
     private static final ResourceLocation pumpkinBlurTexPath = new ResourceLocation("textures/misc/pumpkinblur.png");
+    private static final String __OBFID = "CL_00000661";
     private final Random rand = new Random();
     private final Minecraft mc;
     private final RenderItem itemRenderer;
-
     /**
      * ChatGUI instance that retains all previous chat data
      */
     private final GuiNewChat persistantChatGUI;
     private final GuiStreamIndicator streamIndicator;
-    private int updateCounter;
-
-    /**
-     * The string specifying which record music is playing
-     */
-    private String recordPlaying = "";
-
-    /**
-     * How many ticks the record playing message will be displayed
-     */
-    private int recordPlayingUpFor;
-    private boolean recordIsPlaying;
-
-    /**
-     * Previous frame vignette brightness (slowly changes by 1% each frame)
-     */
-    public float prevVignetteBrightness = 1.0F;
-
-    /**
-     * Remaining ticks the item highlight should be visible
-     */
-    private int remainingHighlightTicks;
-
-    /**
-     * The ItemStack that is currently being highlighted
-     */
-    private ItemStack highlightingItemStack;
     private final GuiOverlayDebug overlayDebug;
-
     /**
      * The spectator GUI for this in-game GUI instance
      */
     private final GuiSpectator spectatorGui;
     private final GuiPlayerTabOverlay overlayPlayerList;
+    /**
+     * Previous frame vignette brightness (slowly changes by 1% each frame)
+     */
+    public float prevVignetteBrightness = 1.0F;
+    private int updateCounter;
+    /**
+     * The string specifying which record music is playing
+     */
+    private String recordPlaying = "";
+    /**
+     * How many ticks the record playing message will be displayed
+     */
+    private int recordPlayingUpFor;
+    private boolean recordIsPlaying;
+    /**
+     * Remaining ticks the item highlight should be visible
+     */
+    private int remainingHighlightTicks;
+    /**
+     * The ItemStack that is currently being highlighted
+     */
+    private ItemStack highlightingItemStack;
     private int field_175195_w;
     private String field_175201_x = "";
     private String field_175200_y = "";
@@ -100,17 +93,14 @@ public class GuiIngame extends Gui {
     private int field_175193_B;
     private int playerHealth = 0;
     private int lastPlayerHealth = 0;
-
     /**
      * The last recorded system time
      */
     private long lastSystemTime = 0L;
-
     /**
      * Used with updateCounter to make the heart bar flash
      */
     private long healthUpdateCounter = 0L;
-    private static final String __OBFID = "CL_00000661";
 
     public GuiIngame(Minecraft mcIn) {
         this.mc = mcIn;
@@ -343,16 +333,26 @@ public class GuiIngame extends Gui {
 
     private void renderHotbar(float partialTicks) {
         Setting hotbar = Client.main().setMgr().settingByName("Hotbar", Client.main().modMgr().getByName("HUD"));
-        ScaledResolution s = new ScaledResolution(Wrapper.mc);
+        ScaledResolution s = new ScaledResolution(mc);
 
         if (!Client.main().modMgr().getByName("Invis").state() && hotbar.isToggled() && Client.main().modMgr().getByName("HUD").state()) {
-            RenderUtils.drawRect((s.width() / 2) - 91, s.height() - 23, (s.width() / 2) + 91, s.height(), new Color(12, 14, 13).getRGB());
+            RenderUtils.drawRect((s.width() / 2) - 91, s.height() - 23, (s.width() / 2) + 91, s.height(), new Color(14, 14, 14).getRGB());
 
-            if (Wrapper.mc.thePlayer.inventory.currentItem == 0) {
-                RenderUtils.drawRect((s.width() / 2) - 91 + Wrapper.mc.thePlayer.inventory.currentItem * 20, s.height() - 23, (s.width() / 2) + 91 - 20 * 8, s.height(), new Color(255, 255, 255, 120).getRGB());
+            Color selectedColor = new Color(32, 32, 32);
+
+            Color tbTop = new Color(0xbd4b56);
+            Color tbBottom = new Color(0x450816);
+
+            if (mc.thePlayer.inventory.currentItem == 0) {
+                RenderUtils.drawRect((s.width() / 2) - 91 + mc.thePlayer.inventory.currentItem * 20,
+                        s.height() - 23, (s.width() / 2) + 91 - 20 * 8, s.height(), selectedColor.getRGB());
             } else {
-                RenderUtils.drawRect((s.width() / 2) - 91 + Wrapper.mc.thePlayer.inventory.currentItem * 20, s.height() - 23, (s.width() / 2) + 91 - 20 * (8 - Wrapper.mc.thePlayer.inventory.currentItem), s.height(), new Color(255, 255, 255, 120).getRGB());
+                RenderUtils.drawRect((s.width() / 2) - 91 + mc.thePlayer.inventory.currentItem * 20,
+                        s.height() - 23, (s.width() / 2) + 91 - 20 * (8 - mc.thePlayer.inventory.currentItem), s.height(), selectedColor.getRGB());
             }
+
+            RenderUtils.drawRect(s.width() / 2 - 91, s.height() - 25, s.width() / 2 + 91, s.height() - 24, tbTop.getRGB());
+            RenderUtils.drawRect(s.width() / 2 - 91, s.height() - 24, s.width() / 2 + 91, s.height() - 23, tbBottom.getRGB());
 
             EntityPlayer entityplayer = (EntityPlayer) this.mc.getRenderViewEntity();
             RenderHelper.enableGUIStandardItemLighting();
