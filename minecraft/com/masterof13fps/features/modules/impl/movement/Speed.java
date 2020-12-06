@@ -81,7 +81,7 @@ public class Speed extends Module {
     @Override
     public void onEvent(Event event) {
         if (event instanceof EventUpdate) {
-            setDisplayName("Speed [" + mode.getCurrentMode() + "]");
+            setDisplayName("Speed §7" + mode.getCurrentMode());
 
             if (state()) {
 

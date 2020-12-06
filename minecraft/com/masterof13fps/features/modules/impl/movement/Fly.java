@@ -44,7 +44,7 @@ public class Fly extends Module {
         if (event instanceof EventUpdate) {
 
             if (mode.getCurrentMode().equalsIgnoreCase("Fly")) {
-                setDisplayName("Fly [" + mode.getCurrentMode() + " / " + flyMode.getCurrentMode() + "]");
+                setDisplayName("Fly §7" + mode.getCurrentMode() + " / " + flyMode.getCurrentMode());
 
                 if (flyMode.getCurrentMode().equalsIgnoreCase("Vanilla")) {
                     mc.thePlayer.capabilities.isFlying = true;
