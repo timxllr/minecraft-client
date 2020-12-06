@@ -57,6 +57,7 @@ public class ModuleManager {
         modules.add(new MemoryCleaner());
         modules.add(new ChestStealer());
         modules.add(new NoScoreboard());
+        modules.add(new SeekerFinder());
         modules.add(new AutoRespawn());
         modules.add(new MotionGraph());
         modules.add(new LagDetector());
