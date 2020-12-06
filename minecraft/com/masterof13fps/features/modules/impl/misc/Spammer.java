@@ -12,20 +12,44 @@ import java.util.Random;
 @ModuleInfo(name = "Spammer", category = Category.MISC, description = "Spams the chat with pre-defined messages")
 public class Spammer extends Module {
 
-    public Setting antiSpam = new Setting("Anti Spam", this, true);
-    public Setting delay = new Setting("Delay", this, 2, 0.1, 20, false);
+    Setting mode = new Setting("Mode", this, "Normal", new String[]{"Normal", "Memes"});
+    Setting antiSpam = new Setting("Anti Spam", this, true);
+    Setting delay = new Setting("Delay", this, 2, 0.1, 20, false);
 
-    String[] messages = {"Got Rekt? Get Vanity!", "Enjoy Eskay!", "N00B G3T R3KT", "www.masterof13fps.com", "Sub CrazyMemeCoke on YT!"};
+    String[] messages = {"Got Rekt? Get " + getClientName() + "!", "Enjoy Eskay!", "N00B G3T R3KT", "www" +
+            ".masterof13fps" +
+            ".com", "Sub " +
+            "CrazyMemeCoke on YT!"};
+    String[] memeMessages = {"Pastebin, weil Ich ein Paste bin", "Ja Ok, Ich bin 12", "Ich fand Nero dumm, und jetzt " +
+            "ist er auch noch Asiate", "Jannick hat eine Gomme Aura", "Ich weiß, woran's liegt ...", "Du kannst aus " +
+            "jeder Schlampe eine Bitch machen ...", "Ich glaub Ich muss noch meine Tabletten nehmen.", "Spiel mit " +
+            "mir, Ich bin performanter als Eject", "Ich bin Jannick, mich besteigt man.", "Kein Ding für'n Ping.",
+            "Woran erkennt man wo Osten ist? Man legt eine Banane auf die Mauer und guckt wo abgebissen wird.",
+            "Welcher Client ist unperformanter als Eject?"};
     int lastUsed;
 
     private String randomPhrase() {
         Random rand = new Random();
-        int randInt = rand.nextInt(messages.length);
-        while (lastUsed == randInt) {
-            randInt = rand.nextInt(messages.length);
+        int randInt = 0;
+        switch(mode.getCurrentMode()){
+            case "Normal": {
+                randInt = rand.nextInt(messages.length);
+                while (lastUsed == randInt) {
+                    randInt = rand.nextInt(messages.length);
+                }
+                lastUsed = randInt;
+                return messages[randInt];
+            }
+            case "Memes":{
+                randInt = rand.nextInt(memeMessages.length);
+                while (lastUsed == randInt) {
+                    randInt = rand.nextInt(memeMessages.length);
+                }
+                lastUsed = randInt;
+                return memeMessages[randInt];
+            }
         }
-        lastUsed = randInt;
-        return messages[randInt];
+        return null;
     }
 
     @Override
