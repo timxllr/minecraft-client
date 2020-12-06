@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleManager;
+import com.masterof13fps.features.modules.impl.combat.Aura;
 import com.masterof13fps.manager.altmanager.AltManager;
 import com.masterof13fps.manager.eventmanager.EventManager;
 import com.masterof13fps.manager.fontmanager.FontManager;
@@ -16,6 +17,7 @@ import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraft.entity.Entity;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C01PacketChatMessage;
@@ -123,6 +125,10 @@ public class Methods {
 
     public String getClientCredits(){
         return "https://pastebin.com/raw/u66J4vGm";
+    }
+
+    public Entity getCurrentTarget() {
+        return Aura.currentTarget;
     }
 
 }
