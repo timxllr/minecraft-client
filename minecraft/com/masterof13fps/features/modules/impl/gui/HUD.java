@@ -15,6 +15,7 @@ public class HUD extends Module {
     Setting chatFont = new Setting("Chat Font", this, "Comfortaa", new String[] {"Comfortaa", "Bauhaus", "Exo"});
     Setting hitAnimation = new Setting("Hit Animation", this, "Stoned", new String[] {"Normal", "Stoned"});
     Setting zoomMode = new Setting("Zoom Mode", this, "Smooth", new String[]{"Smooth", "OptiFine"});
+    Setting hotbarMode = new Setting("Hotbar Mode", this, "Rainbow", new String[]{"Rainbow", "Static Color"});
     Setting itemHeight = new Setting("Item Height", this, 0.0F, -0.35F, 1.5F, false);
     Setting rainbowOffset = new Setting("Rainbow Offset", this, 200, 50, 1000, true);
     Setting rainbowSpeed = new Setting("Rainbow Speed", this, 10000, 500, 20000, true);

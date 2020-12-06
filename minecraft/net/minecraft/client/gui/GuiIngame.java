@@ -4,9 +4,13 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.masterof13fps.Client;
+import com.masterof13fps.Wrapper;
+import com.masterof13fps.features.modules.Module;
+import com.masterof13fps.features.modules.impl.gui.HUD;
 import com.masterof13fps.manager.eventmanager.impl.EventRender;
 import com.masterof13fps.manager.notificationmanager.NotificationManager;
 import com.masterof13fps.manager.settingsmanager.Setting;
+import com.masterof13fps.utils.render.Rainbow;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -44,7 +48,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-public class GuiIngame extends Gui {
+public class GuiIngame extends Gui implements Wrapper {
     private static final ResourceLocation vignetteTexPath = new ResourceLocation("textures/misc/vignette.png");
     private static final ResourceLocation widgetsTexPath = new ResourceLocation("textures/gui/widgets.png");
     private static final ResourceLocation pumpkinBlurTexPath = new ResourceLocation("textures/misc/pumpkinblur.png");
@@ -339,9 +343,14 @@ public class GuiIngame extends Gui {
             RenderUtils.drawRect((s.width() / 2) - 91, s.height() - 23, (s.width() / 2) + 91, s.height(), new Color(14, 14, 14).getRGB());
 
             Color selectedColor = new Color(32, 32, 32);
+            Module hudModule = methods.getModuleManager().getModule(HUD.class);
+            int rainbowOffset = (int) methods.getSettingByName("Rainbow Offset", hudModule).getCurrentValue();
+            int rainbowSpeed = (int) methods.getSettingByName("Rainbow Speed", hudModule).getCurrentValue();
+            float rainbowSaturation = (float) methods.getSettingByName("Rainbow Saturation", hudModule).getCurrentValue();
+            float rainbowBrightness = (float) methods.getSettingByName("Rainbow Brightness", hudModule).getCurrentValue();
+            String hotbarMode = methods.getSettingByName("Hotbar Mode", hudModule).getCurrentMode();
 
-            Color tbTop = new Color(0xbd4b56);
-            Color tbBottom = new Color(0x450816);
+            Color hotbarTopColor = new Color(0xbd4b56);
 
             if (mc.thePlayer.inventory.currentItem == 0) {
                 RenderUtils.drawRect((s.width() / 2) - 91 + mc.thePlayer.inventory.currentItem * 20,
@@ -351,8 +360,16 @@ public class GuiIngame extends Gui {
                         s.height() - 23, (s.width() / 2) + 91 - 20 * (8 - mc.thePlayer.inventory.currentItem), s.height(), selectedColor.getRGB());
             }
 
-            RenderUtils.drawRect(s.width() / 2 - 91, s.height() - 25, s.width() / 2 + 91, s.height() - 24, tbTop.getRGB());
-            RenderUtils.drawRect(s.width() / 2 - 91, s.height() - 24, s.width() / 2 + 91, s.height() - 23, tbBottom.getRGB());
+            switch (hotbarMode) {
+                case "Rainbow":
+                    RenderUtils.drawRect(s.width() / 2 - 91, s.height() - 24, s.width() / 2 + 91, s.height() - 23,
+                            Rainbow.getRainbow(rainbowOffset, rainbowSpeed, rainbowSaturation, rainbowBrightness));
+                    break;
+                case "Static Color":
+                    RenderUtils.drawRect(s.width() / 2 - 91, s.height() - 24, s.width() / 2 + 91, s.height() - 23,
+                            hotbarTopColor.getRGB());
+                    break;
+            }
 
             EntityPlayer entityplayer = (EntityPlayer) this.mc.getRenderViewEntity();
             RenderHelper.enableGUIStandardItemLighting();
