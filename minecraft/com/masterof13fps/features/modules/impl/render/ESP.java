@@ -174,6 +174,6 @@ public class ESP extends Module {
         double z =
                 entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * mc.timer.renderPartialTicks - mc.getRenderManager().renderPosZ;
         GL11.glTranslated(x, y, z);
-        GL11.glNormal3d(0.0, 0.0, 0.0);
+        GL11.glNormal3d(0.0, 1.0, 0.0);
     }
 }
