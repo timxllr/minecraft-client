@@ -4,6 +4,7 @@ import com.masterof13fps.Client;
 import com.masterof13fps.Wrapper;
 import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
+import com.masterof13fps.features.modules.impl.combat.Aura;
 import com.masterof13fps.features.modules.impl.gui.HUD;
 import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.features.ui.guiscreens.GuiItems;
@@ -16,6 +17,8 @@ import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -25,11 +28,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Interface extends GuiIngame {
+public class Interface extends GuiIngame implements Wrapper {
 
     private final static Interface instance = new Interface(Minecraft.mc());
     Minecraft mc = Wrapper.mc;
-    int offset, brightness, saturation, speed;
+    int rainbowOffset, rainbowBrightness, rainbowSaturation, rainbowSpeed;
 
     public Interface(Minecraft mcIn) {
         super(mcIn);
@@ -41,10 +44,10 @@ public class Interface extends GuiIngame {
 
     public void renderGameOverlay(float p_175180_1_) {
         super.renderGameOverlay(p_175180_1_);
-        offset = (int) Client.main().setMgr().settingByName("Rainbow Offset", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
-        speed = (int) Client.main().setMgr().settingByName("Rainbow Speed", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
-        brightness = (int) Client.main().setMgr().settingByName("Rainbow Brightness", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
-        saturation = (int) Client.main().setMgr().settingByName("Rainbow Saturation", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
+        rainbowOffset = (int) Client.main().setMgr().settingByName("Rainbow Offset", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
+        rainbowSpeed = (int) Client.main().setMgr().settingByName("Rainbow Speed", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
+        rainbowBrightness = (int) Client.main().setMgr().settingByName("Rainbow Brightness", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
+        rainbowSaturation = (int) Client.main().setMgr().settingByName("Rainbow Saturation", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
         if (!(Client.main().modMgr().getByName("Invis").state())) {
             Display.setTitle(Client.main().getClientName() + " " + Client.main().getClientVersion() + " | made by " + Client.main().getClientCoder());
 
@@ -75,22 +78,56 @@ public class Interface extends GuiIngame {
 
     private void doRenderStuff() {
         ScaledResolution s = new ScaledResolution(mc);
+        Module hudModule = methods.getModuleManager().getModule(HUD.class);
+        Module auraModule = methods.getModuleManager().getModule(Aura.class);
 
         SettingsManager setMgr = Client.main().setMgr();
-        if (setMgr.settingByName("Watermark", Client.main().modMgr().getByName("HUD")).isToggled()) {
+        if (setMgr.settingByName("Watermark", hudModule).isToggled()) {
             renderWatermark();
         }
-        if (setMgr.settingByName("TabGUI", Client.main().modMgr().getByName("HUD")).isToggled()) {
+        if (setMgr.settingByName("TabGUI", hudModule).isToggled()) {
             renderTabGUI();
         }
-        if (setMgr.settingByName("ArrayList", Client.main().modMgr().getByName("HUD")).isToggled()) {
+        if (setMgr.settingByName("ArrayList", hudModule).isToggled()) {
             renderArrayList();
         }
-        if (setMgr.settingByName("KeyStrokes", Client.main().modMgr().getByName("HUD")).isToggled()) {
+        if (setMgr.settingByName("KeyStrokes", hudModule).isToggled()) {
             renderKeyStrokes();
         }
-        if (setMgr.settingByName("Hotbar", Client.main().modMgr().getByName("HUD")).isToggled()) {
+        if (setMgr.settingByName("Hotbar", hudModule).isToggled()) {
             renderHotbar();
+        }
+        if (setMgr.settingByName("Target HUD", auraModule).isToggled()) {
+            renderTargetHUD();
+        }
+    }
+
+    private void renderTargetHUD() {
+        Entity target = methods.getCurrentTarget();
+        if (target instanceof EntityPlayer) {
+            ScaledResolution s = new ScaledResolution(mc);
+            Color backgroundColor = new Color(0, 0, 0, 120);
+            Color emptyBarColor = new Color(59, 59, 59, 160);
+            Color healthBarColor = new Color(92, 228, 128);
+            Color armorBarColor = new Color(20, 81, 208);
+            int left = s.width() / 2 + 5, right = s.width() / 2 + 120, top = s.height() / 2 - 25,
+                    bottom =
+                    s.height() / 2 + 25;
+
+            int targetLength = target.getName().length() + 10, targetHealth =
+                    (int) ((EntityPlayer) target).getHealth() + 22, targetArmor =
+                    ((EntityPlayer) target).getTotalArmorValue() + 22;
+
+            RenderUtils.drawRect(left, top, right + targetLength, bottom, backgroundColor);
+
+            fontManager.font("Century Gothic", 24, Font.PLAIN).drawStringWithShadow(target.getName(), left + 50, top,
+                    -1);
+            fontManager.font("Century Gothic", 18, Font.PLAIN).drawStringWithShadow("Health: " + (int) ((EntityPlayer) target).getHealth(), left + 50, top + 15, -1);
+
+            RenderUtils.drawRect(left + 5, bottom - 14, right  + targetLength - 5, bottom - 12, emptyBarColor);
+            RenderUtils.drawRect(left + 5, bottom - 14, right  + targetHealth - 5, bottom - 12, healthBarColor);
+            RenderUtils.drawRect(left + 5, bottom - 7, right  + targetHealth - 5, bottom - 5, emptyBarColor);
+            RenderUtils.drawRect(left + 5, bottom - 7, right  + targetArmor - 5, bottom - 5, armorBarColor);
         }
     }
 
@@ -391,26 +428,45 @@ public class Interface extends GuiIngame {
     private void renderArrayList() {
         ScaledResolution scaledResolution = new ScaledResolution(mc);
 
-        UnicodeFontRenderer font = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN);
+        UnicodeFontRenderer exoRegular20 = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN);
+        UnicodeFontRenderer centuryGothic20 = Client.main().fontMgr().font("Century Gothic", 20, Font.PLAIN);
+        UnicodeFontRenderer arial20 = Client.main().fontMgr().font("Arial", 20, Font.PLAIN);
 
         ArrayList<Module> activeModuleNames = this.getActiveModuleNames();
         activeModuleNames.sort((m1, m2) -> {
-            final int diff = font.getStringWidth(m2.visualName())
-                    - font.getStringWidth(m1.visualName());
+            final int diff = exoRegular20.getStringWidth(m2.visualName())
+                    - exoRegular20.getStringWidth(m1.visualName());
             return (diff != 0) ? diff : m2.visualName().compareTo(m1.visualName());
         });
         int rectY = 1;
         int stringY = 1;
 
         for (Module m : activeModuleNames) {
-            int xDist = scaledResolution.width() - font.getStringWidth(m.visualName()) - 4;
-            RenderUtils.drawRect(scaledResolution.width() - font.getStringWidth(m.visualName()) - 5, (rectY - 2),
-                    scaledResolution.width(), (rectY + 10), new Color(75, 75, 75, 210).getRGB());
-            RenderUtils.drawRect(scaledResolution.width() - 2, (rectY - 2), scaledResolution.width(), (rectY + 10), Rainbow.getRainbow(offset, speed, saturation, brightness));
-            font.drawString(m.visualName(), xDist + 1, stringY, Color.RED.getRGB());
-            rectY += 12;
-            stringY += 12;
-            offset += offset;
+            int xDistExo = scaledResolution.width() - exoRegular20.getStringWidth(m.visualName()) - 4;
+            int xDistCenturyGothic = scaledResolution.width() - centuryGothic20.getStringWidth(m.visualName()) - 4;
+            int xDistArial = scaledResolution.width() - arial20.getStringWidth(m.visualName()) - 4;
+
+            switch(methods.getSettingByName("ArrayList Mode", methods.getModuleManager().getModule(HUD.class)).getCurrentMode()){
+                case "Koks": {
+                    RenderUtils.drawRect(scaledResolution.width() - exoRegular20.getStringWidth(m.visualName()) - 5, (rectY - 2),
+                            scaledResolution.width(), (rectY + 10), new Color(25, 25, 25, 170).getRGB());
+                    RenderUtils.drawRect(scaledResolution.width() - 2, (rectY - 2), scaledResolution.width(), (rectY + 10), Rainbow.getRainbow(rainbowOffset, rainbowSpeed, rainbowSaturation, rainbowBrightness));
+                    exoRegular20.drawString(m.visualName(), xDistExo + 1, stringY, Color.RED.getRGB());
+
+                    rectY += 12;
+                    stringY += 12;
+                    break;
+                }
+                case "Cycle": {
+                    centuryGothic20.drawString(m.visualName(), xDistCenturyGothic + 3, stringY, Color.WHITE.getRGB());
+
+                    rectY += 12;
+                    stringY += 12;
+                    break;
+                }
+            }
+
+            rainbowOffset += rainbowOffset;
         }
     }
 
