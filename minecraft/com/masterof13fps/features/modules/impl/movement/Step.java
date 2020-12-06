@@ -1,12 +1,13 @@
 package com.masterof13fps.features.modules.impl.movement;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
-import com.masterof13fps.manager.settingsmanager.Setting;
 import com.masterof13fps.manager.eventmanager.Event;
 import com.masterof13fps.manager.eventmanager.impl.EventUpdate;
-import com.masterof13fps.features.modules.Category;
+import com.masterof13fps.manager.settingsmanager.Setting;
+import com.masterof13fps.utils.entity.EntityUtils;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
@@ -16,7 +17,7 @@ import static net.minecraft.network.play.client.C03PacketPlayer.C04PacketPlayerP
 @ModuleInfo(name = "Step", category = Category.MOVEMENT, description = "Automatically jumps real fast when colliding horizontally")
 public class Step extends Module {
 
-    public Setting mode = new Setting("Mode", this, "Vanilla", new String[] {"Vanilla", "NCP"});
+    public Setting mode = new Setting("Mode", this, "Vanilla", new String[]{"Vanilla", "NCP", "Intave"});
     public Setting stepHeight = new Setting("Step Height", this, 1.0, 1.0, 10.0, false);
     public Setting reverse = new Setting("Reverse", this, false);
 
@@ -53,8 +54,24 @@ public class Step extends Module {
                         doNCP();
                         break;
                     }
+                    case "Intave": {
+                        doIntave();
+                        break;
+                    }
                 }
             }
+        }
+    }
+
+    private void doIntave() {
+        if (getPlayer().isCollidedHorizontally && !getPlayer().isOnLadder() && getPlayer().onGround && EntityUtils.isMoving() && getPlayer().stepHeight != 1.0f) {
+            getPlayer().motionY = 0.408;
+            getPlayer().onGround = false;
+            getPlayer().stepHeight = 1.0f;
+        }
+        getPlayer().stepHeight = 0.5f;
+        if (getPlayer().isCollidedHorizontally && !getPlayer().isOnLadder() && EntityUtils.isMoving()) {
+            getPlayer().onGround = true;
         }
     }
 
