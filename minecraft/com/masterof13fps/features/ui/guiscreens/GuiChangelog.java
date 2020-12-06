@@ -4,6 +4,7 @@ import com.masterof13fps.Client;
 import com.masterof13fps.Wrapper;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
+import com.masterof13fps.utils.NotifyUtil;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -18,6 +19,8 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.StringJoiner;
 
@@ -28,6 +31,7 @@ public class GuiChangelog extends GuiScreen {
 
     float scrollAmount = (-Mouse.getDWheel()) * 0.07F;
     String result;
+    Thread changelogThread;
     private GuiScreen parentScreen;
 
     public GuiChangelog(GuiScreen parentScreen) {
@@ -36,9 +40,11 @@ public class GuiChangelog extends GuiScreen {
 
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
-        buttonList.add(new GuiButton(1, width / 2 - 100, height - 30, 200, 20, "Zurück"));
+        buttonList.add(new GuiButton(1, width / 2 - 230, height - 25, 200, 20, "Zurück"));
+        buttonList.add(new GuiButton(2, width / 2 + 30, height - 25, 200, 20, "Open GitHub Repository"));
+        buttonList.add(new GuiButton(3, width / 2 - 25, height - 25, 50, 20, "Reload"));
 
-        Thread changelogThread = new Thread(() -> {
+        changelogThread = new Thread(() -> {
             try {
                 URL url = new URL(methods.getClientChangelog());
                 InputStreamReader isr = new InputStreamReader(url.openStream());
@@ -68,8 +74,24 @@ public class GuiChangelog extends GuiScreen {
     }
 
     protected void actionPerformed(GuiButton button) throws IOException {
-        if (button.id == 1) {
-            mc.displayGuiScreen(parent);
+        switch (button.id) {
+            case 1:
+                mc.displayGuiScreen(parent);
+                break;
+            case 2:
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://github.com/RealFantaCoke/minecraft-client/commits"));
+                        NotifyUtil.debug("Opened GitHub Repository from Changelog screen");
+                    } catch (URISyntaxException ignored) {
+                        NotifyUtil.debug("Failed to open GitHub Repository from Changelog screen");
+                    }
+                }
+                break;
+            case 3:
+                mc.displayGuiScreen(this);
+                NotifyUtil.debug("Reloaded Changelog screen");
+                break;
         }
     }
 
@@ -86,7 +108,8 @@ public class GuiChangelog extends GuiScreen {
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 
-        RenderUtils.drawRect(5, 0, width - 5, height, new Color(0, 0, 0, 155).getRGB());
+        RenderUtils.drawRect(5, 0, width - 5, height - 30, new Color(0, 0, 0, 155).getRGB());
+        RenderUtils.drawRect(5, height - 30, width - 5, height, new Color(45, 45, 45, 155).getRGB());
 
         UnicodeFontRenderer cabin35 = fM.font("Century Gothic", 35, Font.PLAIN);
         UnicodeFontRenderer cabin23 = fM.font("Century Gothic", 23, Font.PLAIN);
@@ -95,7 +118,7 @@ public class GuiChangelog extends GuiScreen {
         cabin35.drawStringWithShadow(title, width / 2 - cabin35.getStringWidth(title) / 2, 10, -1);
 
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
-        RenderUtils.scissor(5, 35, sr.width() - 5, sr.height() - 35);
+        RenderUtils.scissor(5, 35, sr.width() - 5, sr.height() - 30);
         try {
             cabin23.drawStringWithShadow(result, 10, 40 + scrollAmount, -1);
         } catch (Exception ignored) {
