@@ -106,7 +106,7 @@ public class Jesus extends Module {
         for (int x = xmin; x <= xmax; ++x) {
             for (int y = ymin; y <= ymax; ++y) {
                 for (int z = zmin; z <= zmax; ++z) {
-                    final Block block = getBlock(new BlockPos(x, y, z));
+                    final Block block = (Block) getBlock(new BlockPos(x, y, z));
                     if (block instanceof BlockLiquid && !mc.thePlayer.isInsideOfMaterial(Material.lava) && !mc.thePlayer.isInsideOfMaterial(Material.water)) {
                         return true;
                     }
@@ -114,10 +114,6 @@ public class Jesus extends Module {
             }
         }
         return false;
-    }
-
-    public static Block getBlock(final BlockPos pos) {
-        return Minecraft.mc().theWorld.getBlockState(pos).getBlock();
     }
 
     public static boolean isInLiquid() {
