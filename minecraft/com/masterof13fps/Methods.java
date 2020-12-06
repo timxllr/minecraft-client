@@ -4,8 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleManager;
-import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.altmanager.AltManager;
+import com.masterof13fps.manager.eventmanager.EventManager;
+import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.settingsmanager.Setting;
 import com.masterof13fps.manager.settingsmanager.SettingsManager;
 import net.minecraft.client.Minecraft;
@@ -48,6 +49,10 @@ public class Methods {
 
     public Setting getSettingByName(String setting, Module mod) {
         return getSettingsManager().settingByName(setting, mod);
+    }
+
+    public EventManager getEventManager() {
+        return new EventManager();
     }
 
     public double getClientVersion() {
@@ -110,6 +115,14 @@ public class Methods {
 
     public JsonParser jsonParser() {
         return new JsonParser();
+    }
+
+    public String getClientChangelog(){
+        return "https://pastebin.com/raw/3NiZ3SMC";
+    }
+
+    public String getClientCredits(){
+        return "https://pastebin.com/raw/u66J4vGm";
     }
 
 }

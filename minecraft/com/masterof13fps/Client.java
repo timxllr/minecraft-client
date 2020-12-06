@@ -7,7 +7,6 @@ import com.masterof13fps.features.modules.impl.exploits.Crasher;
 import com.masterof13fps.features.ui.guiscreens.GuiFirstUse;
 import com.masterof13fps.manager.altmanager.AltManager;
 import com.masterof13fps.manager.clickguimanager.ClickGui;
-import com.masterof13fps.manager.eventmanager.EventManager;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.notificationmanager.NotificationManager;
 import com.masterof13fps.manager.particlemanager.FBP;
@@ -19,7 +18,7 @@ import net.minecraft.client.Minecraft;
 
 import java.io.File;
 
-public class Client {
+public class Client extends Methods implements Wrapper{
 
     private static Client instance = new Client();
     public long initTime = System.currentTimeMillis();
@@ -45,8 +44,6 @@ public class Client {
     private Friend friend;
     private Shader shader;
     private AltManager altManager;
-    private EventManager eventManager;
-    private LoginUtil loginUtil;
 
     public static Client main() {
         return instance;
@@ -68,9 +65,9 @@ public class Client {
             mc.displayGuiScreen(new GuiFirstUse());
             NotifyUtil.debug("GuiScreen 'FirstUse' wurde aufgerufen!");
         }
-        loginUtil = new LoginUtil();
+        getLoginUtil();
         NotifyUtil.debug("LoginUtil geladen!");
-        eventManager = new EventManager();
+        getEventManager();
         NotifyUtil.debug("EventManager geladen!");
         fontManager = new FontManager();
         NotifyUtil.debug("FontManager geladen!");
@@ -114,10 +111,6 @@ public class Client {
 
     public File getClientDir() {
         return clientDir;
-    }
-
-    public EventManager eventMgr() {
-        return eventManager;
     }
 
     public ModuleManager modMgr() {
@@ -222,10 +215,6 @@ public class Client {
 
     public FontManager getFontManager() {
         return fontManager;
-    }
-
-    public EventManager getEventManager() {
-        return eventManager;
     }
 
     public LoginUtil getLoginUtil() {

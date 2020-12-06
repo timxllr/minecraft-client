@@ -1,6 +1,6 @@
 package net.minecraft.entity;
 
-import com.masterof13fps.Client;
+import com.masterof13fps.Wrapper;
 import com.masterof13fps.manager.eventmanager.impl.EventMoveFlying;
 import com.masterof13fps.manager.eventmanager.impl.EventSafeWalk;
 import net.minecraft.block.*;
@@ -37,7 +37,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-public abstract class Entity implements ICommandSender {
+public abstract class Entity implements ICommandSender, Wrapper {
     private static final AxisAlignedBB ZERO_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
     private static int nextEntityID;
     private int entityId;
@@ -588,7 +588,7 @@ public abstract class Entity implements ICommandSender {
             boolean flag = this.onGround && this.isSneaking() && this instanceof EntityPlayer;
 
             EventSafeWalk safewalk = new EventSafeWalk(flag);
-            Client.main().eventMgr().onEvent(safewalk);
+            eventManager.onEvent(safewalk);
 
             if (safewalk.isSafe()) {
                 double d6;
@@ -1076,7 +1076,7 @@ public abstract class Entity implements ICommandSender {
     public void moveFlying(float strafe, float forward, float friction) {
 
         EventMoveFlying moveFlying = new EventMoveFlying(this.rotationYaw);
-        Client.main().eventMgr().onEvent(moveFlying);
+        eventManager.onEvent(moveFlying);
 
         float f = strafe * strafe + forward * forward;
 

@@ -159,7 +159,7 @@ public class GuiIngame extends Gui implements Wrapper {
 
 
         EventRender eventRender = new EventRender(EventRender.Type.twoD);
-        Client.main().eventMgr().onEvent(eventRender);
+        eventManager.onEvent(eventRender);
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(icons);

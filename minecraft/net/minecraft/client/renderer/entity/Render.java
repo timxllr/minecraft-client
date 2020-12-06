@@ -1,6 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.Wrapper;
 import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.features.modules.impl.render.NameProtect;
 import com.masterof13fps.features.modules.impl.render.NameTags;
@@ -27,7 +28,7 @@ import net.optifine.Config;
 import net.optifine.shadersmod.client.Shaders;
 import org.lwjgl.opengl.GL11;
 
-public abstract class Render<T extends Entity> {
+public abstract class Render<T extends Entity> implements Wrapper {
     private static final ResourceLocation shadowTextures = new ResourceLocation("textures/misc/shadow.png");
     private static final String __OBFID = "CL_00000992";
     protected final RenderManager renderManager;
@@ -310,7 +311,7 @@ public abstract class Render<T extends Entity> {
     //TODO: NameTags / Tag Rendering
     protected void renderLivingLabel(T entityIn, String str, double x, double y, double z, int maxDistance) {
         EventNameTag eventNameTag = new EventNameTag(str, x, y, z, maxDistance);
-        Client.main().eventMgr().onEvent(eventNameTag);
+        eventManager.onEvent(eventNameTag);
 
         if(eventNameTag.isCancelled()){
             return;

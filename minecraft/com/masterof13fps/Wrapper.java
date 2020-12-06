@@ -1,5 +1,6 @@
 package com.masterof13fps;
 
+import com.masterof13fps.manager.eventmanager.EventManager;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.utils.LoginUtil;
 import com.masterof13fps.utils.MathUtils;
@@ -16,4 +17,5 @@ public interface Wrapper {
     NotifyUtil notify = new NotifyUtil();
     MathUtils mathUtils = new MathUtils();
     Methods methods = new Methods();
+    EventManager eventManager = new EventManager();
 }

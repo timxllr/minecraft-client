@@ -1,6 +1,7 @@
 package net.minecraft.client.entity;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.Wrapper;
 import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.features.modules.impl.misc.Commands;
 import com.masterof13fps.features.modules.impl.movement.NoSlow;
@@ -35,7 +36,7 @@ import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
 @SuppressWarnings("EntityConstructor")
-public class EntityPlayerSP extends AbstractClientPlayer {
+public class EntityPlayerSP extends AbstractClientPlayer implements Wrapper {
     public final NetHandlerPlayClient sendQueue;
     private final StatFileWriter statWriter;
     public MovementInput movementInput;
@@ -145,10 +146,10 @@ public class EntityPlayerSP extends AbstractClientPlayer {
     public void onUpdate() {
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ))) {
             EventUpdate eventUpdate = new EventUpdate();
-            Client.main().eventMgr().onEvent(eventUpdate);
+            eventManager.onEvent(eventUpdate);
 
             EventMotion eventMotion = new EventMotion(EventMotion.Type.PRE, this.rotationYaw, this.rotationPitch);
-            Client.main().eventMgr().onEvent(eventMotion);
+            eventManager.onEvent(eventMotion);
             this.eventMotion = eventMotion;
 
             super.onUpdate();
@@ -231,7 +232,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             }
         }
         EventMotion eventMotion = new EventMotion(EventMotion.Type.POST, this.eventMotion.getYaw(), this.eventMotion.getPitch());
-        Client.main().eventMgr().onEvent(eventMotion);
+        eventManager.onEvent(eventMotion);
     }
 
     /**
@@ -254,7 +255,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      */
     public void sendChatMessage(String message) {
         EventChat eventChat = new EventChat(message);
-        Client.main().eventMgr().onEvent(eventChat);
+        eventManager.onEvent(eventChat);
         if (eventChat.isCancelled()) {
             return;
         }
