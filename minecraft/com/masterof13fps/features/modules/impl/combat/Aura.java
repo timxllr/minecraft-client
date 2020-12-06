@@ -1,6 +1,5 @@
 package com.masterof13fps.features.modules.impl.combat;
 
-import com.masterof13fps.Client;
 import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
@@ -9,45 +8,37 @@ import com.masterof13fps.manager.eventmanager.impl.EventMotion;
 import com.masterof13fps.manager.eventmanager.impl.EventMoveFlying;
 import com.masterof13fps.manager.eventmanager.impl.EventPacket;
 import com.masterof13fps.manager.eventmanager.impl.EventUpdate;
-import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
 import com.masterof13fps.manager.settingsmanager.Setting;
-import com.masterof13fps.manager.settingsmanager.SettingsManager;
-import com.masterof13fps.utils.render.RenderUtils;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 @ModuleInfo(name = "Aura", category = Category.COMBAT, description = "You automatically hit players")
 public class Aura extends Module {
 
-    public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
-    public Setting precision = new Setting("Precision", this, 0.1, 0.05, 0.5, false);
-    public Setting accuracy = new Setting("Accuracy", this, 0.3, 0.1, 0.8, false);
-    public Setting predictionMultiplier = new Setting("Prediction Multiplier", this, 0.4, 0, 1, false);
-    public Setting ticksExisted = new Setting("Ticks Existed", this, 30, 0, 100, true);
-    public Setting range = new Setting("Range", this, 4, 3.5, 7, true);
-    public Setting cps = new Setting("CPS", this, 10, 1, 20, true);
-    public Setting players = new Setting("Players", this, true);
-    public Setting animals = new Setting("Animals", this, false);
-    public Setting mobs = new Setting("Mobs", this, false);
-    public Setting villager = new Setting("Villager", this, false);
-    public Setting teams = new Setting("Teams", this, false);
-    public Setting rotations = new Setting("Rotations", this, true);
-    public Setting ignoreDead = new Setting("Ignore Dead", this, false);
-    SettingsManager sM = Client.main().setMgr();
+    static ArrayList<Entity> targets = new ArrayList<>();
+    Setting precision = new Setting("Precision", this, 0.1, 0.05, 0.5, false);
+    Setting accuracy = new Setting("Accuracy", this, 0.3, 0.1, 0.8, false);
+    Setting predictionMultiplier = new Setting("Prediction Multiplier", this, 0.4, 0, 1, false);
+    Setting ticksExisted = new Setting("Ticks Existed", this, 30, 0, 100, true);
+    Setting range = new Setting("Range", this, 4, 3.5, 7, true);
+    Setting cps = new Setting("CPS", this, 10, 1, 20, true);
+    Setting players = new Setting("Players", this, true);
+    Setting animals = new Setting("Animals", this, false);
+    Setting mobs = new Setting("Mobs", this, false);
+    Setting villager = new Setting("Villager", this, false);
+    Setting teams = new Setting("Teams", this, false);
+    Setting rotations = new Setting("Rotations", this, true);
+    Setting ignoreDead = new Setting("Ignore Dead", this, false);
+    Setting targetHUD = new Setting("Target HUD", this, true);
     float yaw, pitch, curYaw, curPitch;
     long current, last;
 
@@ -76,20 +67,18 @@ public class Aura extends Module {
             if (currentTarget == null)
                 return;
 
-            if (currentTarget instanceof EntityPlayer) {
-
-            } else {
+            if (currentTarget instanceof EntityPlayer)
+                setDisplayName("Aura §7" + currentTarget.getName());
+            else
                 setDisplayName("Aura");
-            }
+
 
             updateTime();
 
             if (rotations.isToggled()) {
-                float precision = (float) sM.settingByName("Precision", this).getCurrentValue();
-                float accuracy = (float) sM.settingByName("Accuracy", this).getCurrentValue();
-                float predictionMultiplier = (float) sM.settingByName("Prediction Multiplier", this).getCurrentValue();
-
-                float[] rots = faceEntity(currentTarget, curYaw, curPitch, precision, accuracy, predictionMultiplier);
+                float[] rots = faceEntity(currentTarget, curYaw, curPitch, (float) precision.getCurrentValue(),
+                        (float) accuracy.getCurrentValue(),
+                        (float) predictionMultiplier.getCurrentValue());
                 yaw = rots[0];
                 pitch = rots[1];
                 curYaw = yaw;
@@ -149,11 +138,11 @@ public class Aura extends Module {
         }
     }
 
-    public boolean shouldAttack() {
-        return (currentTarget instanceof EntityPlayer && sM.settingByName("Players", this).isToggled()) || (currentTarget instanceof EntityAnimal && sM.settingByName("Animals", this).isToggled()) || (currentTarget instanceof EntityMob && sM.settingByName("Mobs", this).isToggled()) || (currentTarget instanceof EntityVillager && sM.settingByName("Villager", this).isToggled());
+    boolean shouldAttack() {
+        return (currentTarget instanceof EntityPlayer && players.isToggled()) || (currentTarget instanceof EntityAnimal && animals.isToggled()) || (currentTarget instanceof EntityMob && mobs.isToggled()) || (currentTarget instanceof EntityVillager && villager.isToggled());
     }
 
-    public float updateRotation(float curRot, float destination, float speed) {
+    float updateRotation(float curRot, float destination, float speed) {
         float f = MathHelper.wrapAngleTo180_float(destination - curRot);
 
         if (f > speed) {
@@ -167,19 +156,7 @@ public class Aura extends Module {
         return curRot + f;
     }
 
-    public final Vec3 getVectorForRotation(float pitch, float yaw) {
-        float f = MathHelper.cos(-yaw * 0.017453292F - (float) Math.PI);
-        float f1 = MathHelper.sin(-yaw * 0.017453292F - (float) Math.PI);
-        float f2 = -MathHelper.cos(-pitch * 0.017453292F);
-        float f3 = MathHelper.sin(-pitch * 0.017453292F);
-        return new Vec3(f1 * f2, f3, f * f2);
-    }
-
-    public Vec3 getLook(float yaw, float pitch) {
-        return getVectorForRotation(pitch, yaw);
-    }
-
-    public Vec3 getBestVector(Entity entity, float accuracy, float precision) {
+    Vec3 getBestVector(Entity entity, float accuracy, float precision) {
         try {
             Vec3 playerVector = mc.thePlayer.getPositionEyes(1.0F);
             Vec3 nearestVector = new Vec3(Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
@@ -203,7 +180,7 @@ public class Aura extends Module {
         }
     }
 
-    public float[] faceEntity(Entity entity, float currentYaw, float currentPitch, float accuracy, float precision, float predictionMultiplier) {
+    float[] faceEntity(Entity entity, float currentYaw, float currentPitch, float accuracy, float precision, float predictionMultiplier) {
         Vec3 rotations = getBestVector(entity, accuracy, precision);
 
         double x = rotations.xCoord - mc.thePlayer.posX;
@@ -245,29 +222,6 @@ public class Aura extends Module {
         if ((entity instanceof EntityPlayer && players.isToggled()) || (entity instanceof EntityMob && mobs.isToggled()) || (entity instanceof EntityAnimal && animals.isToggled()) || (entity instanceof EntityVillager && villager.isToggled())) {
             mc.thePlayer.swingItem();
             mc.playerController.attackEntity(mc.thePlayer, entity);
-        }
-    }
-
-    private void renderTargetHUD() {
-        ScaledResolution s = new ScaledResolution(mc);
-
-        if (Aura.currentTarget instanceof EntityPlayer && Client.main().setMgr().settingByName("Target HUD", Client.main().modMgr().getByName("HUD")).isToggled()) {
-            RenderUtils.drawRect(s.width() / 2 - 130, s.height() / 2 - 60, s.width() / 2 + 90, s.height() / 2 + 20, new Color(0, 0, 0, 110).getRGB());
-
-            EntityPlayer p = (EntityPlayer) Aura.currentTarget;
-            UnicodeFontRenderer cabin23 = Client.main().fontMgr().font("Cabin", 23, Font.PLAIN);
-            cabin23.drawStringWithShadow("Spieler: " + p.getName(), s.width() / 2 - 125, s.height() / 2 - 45, -1);
-            cabin23.drawStringWithShadow("Leben: " + p.getHealth() + " / " + p.getMaxHealth(), s.width() / 2 - 125, s.height() / 2 - 35, -1);
-
-            ItemStack i = p.getCurrentEquippedItem();
-            if (i == null) {
-                cabin23.drawStringWithShadow("Item: Kein Item", s.width() / 2 - 125, s.height() / 2 - 25, -1);
-            } else {
-                cabin23.drawStringWithShadow("Item: " + i.getDisplayName(), s.width() / 2 - 125, s.height() / 2 - 25, -1);
-            }
-
-            GuiInventory.drawEntityOnScreen(s.width() / 2 + 30, s.height() / 2 + 15, 30, (float) (51) - 50, (float) (75 - 50) - 20, (EntityLivingBase) Aura.currentTarget);
-
         }
     }
 
