@@ -1,17 +1,17 @@
 package com.masterof13fps.features.modules.impl.combat;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
-import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
-import com.masterof13fps.manager.settingsmanager.Setting;
-import com.masterof13fps.manager.settingsmanager.SettingsManager;
 import com.masterof13fps.manager.eventmanager.Event;
 import com.masterof13fps.manager.eventmanager.impl.EventMotion;
 import com.masterof13fps.manager.eventmanager.impl.EventMoveFlying;
 import com.masterof13fps.manager.eventmanager.impl.EventPacket;
 import com.masterof13fps.manager.eventmanager.impl.EventUpdate;
-import com.masterof13fps.features.modules.Category;
+import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
+import com.masterof13fps.manager.settingsmanager.Setting;
+import com.masterof13fps.manager.settingsmanager.SettingsManager;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
@@ -34,9 +34,6 @@ public class Aura extends Module {
 
     public static ArrayList<Entity> targets = new ArrayList<>();
     public static Entity currentTarget;
-    SettingsManager sM = Client.main().setMgr();
-    float yaw, pitch, curYaw, curPitch;
-    long current, last;
     public Setting precision = new Setting("Precision", this, 0.1, 0.05, 0.5, false);
     public Setting accuracy = new Setting("Accuracy", this, 0.3, 0.1, 0.8, false);
     public Setting predictionMultiplier = new Setting("Prediction Multiplier", this, 0.4, 0, 1, false);
@@ -50,6 +47,9 @@ public class Aura extends Module {
     public Setting teams = new Setting("Teams", this, false);
     public Setting rotations = new Setting("Rotations", this, true);
     public Setting ignoreDead = new Setting("Ignore Dead", this, false);
+    SettingsManager sM = Client.main().setMgr();
+    float yaw, pitch, curYaw, curPitch;
+    long current, last;
 
     @Override
     public void onToggle() {
@@ -296,6 +296,10 @@ public class Aura extends Module {
     }
 
     private boolean canAttack(Entity entity) {
-        return entity != mc.thePlayer && (ignoreDead.isToggled() && !entity.isDead) && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted.getCurrentValue();
+        if (!ignoreDead.isToggled()) {
+            return entity != mc.thePlayer && !entity.isDead && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted.getCurrentValue();
+        } else {
+            return entity != mc.thePlayer && mc.thePlayer.getDistanceToEntity(entity) <= mc.playerController.getBlockReachDistance() && entity.ticksExisted > ticksExisted.getCurrentValue();
+        }
     }
 }
