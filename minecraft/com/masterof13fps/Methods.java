@@ -10,6 +10,7 @@ import com.masterof13fps.manager.eventmanager.EventManager;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.settingsmanager.Setting;
 import com.masterof13fps.manager.settingsmanager.SettingsManager;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
@@ -21,6 +22,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C01PacketChatMessage;
+import net.minecraft.util.BlockPos;
 
 public class Methods {
     public static Minecraft mc = Minecraft.getInstance();
@@ -129,6 +131,10 @@ public class Methods {
 
     public Entity getCurrentTarget() {
         return Aura.currentTarget;
+    }
+
+    public static IBlockState getBlock(final BlockPos pos) {
+        return mc.theWorld.getBlockState(pos);
     }
 
 }
