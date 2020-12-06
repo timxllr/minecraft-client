@@ -40,7 +40,7 @@ public class GuiCredits extends GuiScreen {
 
         Thread creditsThread = new Thread(() -> {
             try {
-                URL url = new URL("https://pastebin.com/raw/u66J4vGm");
+                URL url = new URL(methods.getClientCredits());
                 InputStreamReader isr = new InputStreamReader(url.openStream());
                 BufferedReader reader = new BufferedReader(isr);
                 StringJoiner sb = new StringJoiner("");
