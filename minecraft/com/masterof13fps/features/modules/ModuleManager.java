@@ -127,8 +127,6 @@ public class ModuleManager {
         modules.add(new ESP());
         modules.add(new HUD());
         modules.add(new Fly());
-
-        System.out.println(modules.toString());
     }
 
     public ArrayList<Module> getModules() {
