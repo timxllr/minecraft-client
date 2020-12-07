@@ -37,6 +37,7 @@ public class HUD extends Module {
     Setting guiBlur = new Setting("GUI Blur", this, true);
     Setting blockhitAnimation = new Setting("Blockhit Animation", this, true);
     Setting toggleNotifications = new Setting("Toggle Notifications", this, false);
+    Setting customScoreboard = new Setting("Custom Scoreboard", this, true);
     Setting developerMode = new Setting("Developer Mode", this, false);
 
     @Override
