@@ -2,6 +2,7 @@ package com.masterof13fps.features.modules;
 
 import com.masterof13fps.Client;
 import com.masterof13fps.Wrapper;
+import com.masterof13fps.features.modules.impl.gui.HUD;
 import com.masterof13fps.utils.time.TimeHelper;
 import com.masterof13fps.Methods;
 import com.masterof13fps.features.modules.impl.gui.Invis;
@@ -63,14 +64,14 @@ public abstract class Module extends Methods implements Wrapper {
         if (state) {
             this.onEnable();
             this.enabled = true;
-            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && !(name.equals(Client.main().modMgr().getModule(Plugins.class).name))) {
-                NotifyUtil.notification("Modul aktiviert", "§c" + this.name + "§r wurde aktiviert!", NotificationType.INFO, 2);
+            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && getSettingByName("Toggle Notifications", getModuleManager().getModule(HUD.class)).isToggled()) {
+                NotifyUtil.notification("Modul aktiviert", "§c" + this.name, NotificationType.INFO, 1);
             }
         } else {
             this.onDisable();
             this.enabled = false;
-            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && !(name.equals(Client.main().modMgr().getModule(Plugins.class).name))) {
-                NotifyUtil.notification("Modul deaktiviert", "§c" + this.name + "§r wurde deaktiviert!", NotificationType.INFO, 2);
+            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && getSettingByName("Toggle Notifications", getModuleManager().getModule(HUD.class)).isToggled()) {
+                NotifyUtil.notification("Modul deaktiviert", "§c" + this.name, NotificationType.INFO, 1);
             }
         }
     }
