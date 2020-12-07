@@ -21,6 +21,16 @@ public class Colors {
     public Color grey = new Color(81, 81, 81);
     public Color aqua = new Color(0, 249, 255);
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     public int ambienOldBlueColor = new Color(32, 188, 240).getRGB();
     public int ambienNewBlueColor = new Color(0x0090ff).getRGB();
     public int ambienNewDarkGreyColor = new Color(0x20252b).getRGB();
@@ -174,5 +184,81 @@ public class Colors {
 
     public int getKoksGreenColor() {
         return koksGreenColor;
+    }
+
+    public static Colors getInstance() {
+        return instance;
+    }
+
+    public Color getNotificationInfo() {
+        return notificationInfo;
+    }
+
+    public Color getNotificationWarning() {
+        return notificationWarning;
+    }
+
+    public Color getNotificationError() {
+        return notificationError;
+    }
+
+    public Color getAmbienBlueTop() {
+        return ambienBlueTop;
+    }
+
+    public Color getAmbienBlueBottom() {
+        return ambienBlueBottom;
+    }
+
+    public Color getRed() {
+        return red;
+    }
+
+    public Color getOrange() {
+        return orange;
+    }
+
+    public Color getGreen() {
+        return green;
+    }
+
+    public Color getAqua() {
+        return aqua;
+    }
+
+    public static String getAnsiReset() {
+        return ANSI_RESET;
+    }
+
+    public static String getAnsiBlack() {
+        return ANSI_BLACK;
+    }
+
+    public static String getAnsiRed() {
+        return ANSI_RED;
+    }
+
+    public static String getAnsiGreen() {
+        return ANSI_GREEN;
+    }
+
+    public static String getAnsiYellow() {
+        return ANSI_YELLOW;
+    }
+
+    public static String getAnsiBlue() {
+        return ANSI_BLUE;
+    }
+
+    public static String getAnsiPurple() {
+        return ANSI_PURPLE;
+    }
+
+    public static String getAnsiCyan() {
+        return ANSI_CYAN;
+    }
+
+    public static String getAnsiWhite() {
+        return ANSI_WHITE;
     }
 }

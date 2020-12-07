@@ -1,16 +1,17 @@
 package com.masterof13fps.utils;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.Methods;
 import com.masterof13fps.Wrapper;
 import com.masterof13fps.manager.notificationmanager.Notification;
 import com.masterof13fps.manager.notificationmanager.NotificationManager;
 import com.masterof13fps.manager.notificationmanager.NotificationType;
 import net.minecraft.util.ChatComponentText;
 
-public class NotifyUtil {
+public class NotifyUtil extends Methods implements Wrapper {
 
     public static void debug(String msg) {
-        System.out.println(Client.main().getClientName() + " >> " + msg);
+        System.out.println(methods.getColors().getAnsiPurple() + "[" + methods.getColors().getAnsiCyan() + methods.getTime() + methods.getColors().getAnsiPurple() + "] " + methods.getColors().getAnsiBlue() + Client.main().getClientName() + methods.getColors().getAnsiPurple() + " >> " + methods.getColors().getAnsiRed() + msg + methods.getColors().getAnsiReset());
     }
 
     public static void chat(String msg) {
@@ -19,7 +20,7 @@ public class NotifyUtil {
         }
     }
 
-    public static void notification(String title, String message, NotificationType type, int seconds){
+    public static void notification(String title, String message, NotificationType type, long seconds){
         NotificationManager.show(new Notification(type, title, message, seconds));
     }
 
