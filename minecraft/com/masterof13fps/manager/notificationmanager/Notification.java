@@ -22,7 +22,7 @@ public class Notification {
     private long end;
 
 
-    public Notification(NotificationType type, String title, String messsage, int length) {
+    public Notification(NotificationType type, String title, String messsage, long length) {
         this.type = type;
         this.title = title;
         this.messsage = messsage;
