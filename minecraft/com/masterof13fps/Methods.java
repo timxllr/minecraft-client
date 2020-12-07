@@ -10,6 +10,7 @@ import com.masterof13fps.manager.eventmanager.EventManager;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.settingsmanager.Setting;
 import com.masterof13fps.manager.settingsmanager.SettingsManager;
+import com.masterof13fps.utils.render.Colors;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -23,6 +24,9 @@ import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C01PacketChatMessage;
 import net.minecraft.util.BlockPos;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Methods {
     public static Minecraft mc = Minecraft.getInstance();
@@ -135,6 +139,22 @@ public class Methods {
 
     public static IBlockState getBlock(final BlockPos pos) {
         return mc.theWorld.getBlockState(pos);
+    }
+
+    public String getTime() {
+        SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss");
+        Date time = new Date(System.currentTimeMillis());
+        return formatter.format(time);
+    }
+
+    public String getDate() {
+        SimpleDateFormat formatter= new SimpleDateFormat("dd. MM yyyy");
+        Date date = new Date(System.currentTimeMillis());
+        return formatter.format(date);
+    }
+
+    public Colors getColors() {
+        return new Colors();
     }
 
 }
