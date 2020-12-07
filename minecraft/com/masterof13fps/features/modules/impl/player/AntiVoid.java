@@ -5,7 +5,9 @@ import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
 import com.masterof13fps.manager.eventmanager.Event;
 import com.masterof13fps.manager.eventmanager.impl.EventUpdate;
+import com.masterof13fps.manager.notificationmanager.NotificationType;
 import com.masterof13fps.manager.settingsmanager.Setting;
+import com.masterof13fps.utils.NotifyUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.BlockPos;
@@ -22,7 +24,7 @@ public class AntiVoid extends Module {
 
     @Override
     public void onEnable() {
-
+        NotifyUtil.notification("AntiVoid Hinweis", "Das Modul funktioniert nur auf Servern mit AntiCheat!", NotificationType.INFO, 5);
     }
 
     @Override
