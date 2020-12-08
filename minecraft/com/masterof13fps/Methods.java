@@ -10,6 +10,8 @@ import com.masterof13fps.manager.eventmanager.EventManager;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.settingsmanager.Setting;
 import com.masterof13fps.manager.settingsmanager.SettingsManager;
+import com.masterof13fps.utils.entity.EntityUtils;
+import com.masterof13fps.utils.entity.PlayerUtil;
 import com.masterof13fps.utils.render.Colors;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -28,132 +30,172 @@ import net.minecraft.util.BlockPos;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Methods {
-    public static Minecraft mc = Minecraft.getInstance();
+public interface Methods extends Wrapper {
+    Minecraft mc = Minecraft.getInstance();
 
-    public EntityPlayerSP getPlayer() {
+    default EntityPlayerSP getPlayer() {
         return mc.thePlayer;
     }
 
-    public PlayerControllerMP getPlayerController() {
+    default double getBaseMoveSpeed() {
+        return 0.27;
+    }
+
+    default PlayerControllerMP getPlayerController() {
         return mc.playerController;
     }
 
-    public WorldClient getWorld() {
+    default WorldClient getWorld() {
         return mc.theWorld;
     }
 
-    public SettingsManager getSettingsManager() {
+    default SettingsManager getSettingsManager() {
         return Client.main().setMgr();
     }
 
-    public ModuleManager getModuleManager() {
+    default ModuleManager getModuleManager() {
         return Client.main().modMgr();
     }
 
-    public FontManager getFontManager() {
+    default FontManager getFontManager() {
         return Client.main().fontMgr();
     }
 
-    public Setting getSettingByName(String setting, Module mod) {
+    default Setting getSettingByName(String setting, Module mod) {
         return getSettingsManager().settingByName(setting, mod);
     }
 
-    public EventManager getEventManager() {
+    default EventManager getEventManager() {
         return new EventManager();
     }
 
-    public double getClientVersion() {
+    default double getClientVersion() {
         return Client.main().getClientVersion();
     }
 
-    public String getClientName() {
+    default String getClientName() {
         return Client.main().getClientName();
     }
 
-    public void sendPacket(Packet<? extends INetHandler> packet) {
+    default void sendPacket(Packet<? extends INetHandler> packet) {
         try {
             getPlayer().sendQueue.addToSendQueue(packet);
         } catch (NullPointerException ignored) {
         }
     }
 
-    public void reloadClient() {
+    default void reloadClient() {
         Client.main().modMgr().loadModules();
         Client.main().modMgr().loadBinds();
         AltManager.loadAlts();
         setGuiScreen(mc.currentScreen);
     }
 
-    public void setGuiScreen(GuiScreen screen) {
+    default void setGuiScreen(GuiScreen screen) {
         mc.displayGuiScreen(screen);
     }
 
-    public void sendChatMessage(String message) {
+    default void sendChatMessage(String message) {
         sendPacket(new C01PacketChatMessage(message));
     }
 
-    public NetHandlerPlayClient getNetHandler() {
+    default NetHandlerPlayClient getNetHandler() {
         return mc.getNetHandler();
     }
 
-    public String getClientPrefix() {
+    default String getClientPrefix() {
         return Client.main().getClientPrefix();
     }
 
-    public GameSettings getGameSettings() {
+    default GameSettings getGameSettings() {
         return mc.gameSettings;
     }
 
-    public double getX() {
+    default double getX() {
         return getPlayer().posX;
     }
 
-    public double getY() {
+    default double getY() {
         return getPlayer().posY;
     }
 
-    public double getZ() {
+    default double getZ() {
         return getPlayer().posZ;
     }
 
-    public Gson gson() {
+    default void setX(double x) {
+        getPlayer().posX = x;
+    }
+
+    default void setY(double y) {
+        getPlayer().posY = y;
+    }
+
+    default void setZ(double z) {
+        getPlayer().posZ = z;
+    }
+
+    default void setMotionX(double x) {
+        getPlayer().motionX = x;
+    }
+
+    default void setMotionY(double y) {
+        getPlayer().motionY = y;
+    }
+
+    default void setSpeed(double speed){
+        PlayerUtil.setSpeed(speed);
+    }
+
+    default void setMotionZ(double z) {
+        getPlayer().motionZ = z;
+    }
+
+    default boolean isMoving() {
+        return getPlayer().moveForward != 0 || getPlayer().moveStrafing != 0;
+    }
+
+    default void setTimerSpeed(float timerSpeed){
+        mc.timer.timerSpeed = timerSpeed;
+    }
+
+    default Gson gson() {
         return new Gson();
     }
 
-    public JsonParser jsonParser() {
+    default JsonParser jsonParser() {
         return new JsonParser();
     }
 
-    public String getClientChangelog(){
+    default String getClientChangelog(){
         return "https://pastebin.com/raw/3NiZ3SMC";
     }
 
-    public String getClientCredits(){
+    default String getClientCredits(){
         return "https://pastebin.com/raw/u66J4vGm";
     }
 
-    public Entity getCurrentTarget() {
+    default Entity getCurrentTarget() {
         return Aura.currentTarget;
     }
 
-    public static IBlockState getBlock(final BlockPos pos) {
+    static IBlockState getBlock(final BlockPos pos) {
         return mc.theWorld.getBlockState(pos);
     }
 
-    public String getTime() {
+    static String getTime() {
         SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss");
         Date time = new Date(System.currentTimeMillis());
         return formatter.format(time);
     }
 
-    public String getDate() {
+    default String getDate() {
         SimpleDateFormat formatter= new SimpleDateFormat("dd. MM yyyy");
         Date date = new Date(System.currentTimeMillis());
         return formatter.format(date);
     }
 
-    public Colors getColors() {
+    static Colors getColors() {
         return new Colors();
     }
 
