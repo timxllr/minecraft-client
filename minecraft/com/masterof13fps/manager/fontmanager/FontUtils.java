@@ -28,18 +28,6 @@ class FontUtils
         this.setupTexture(antiAlias);
     }
 
-    public FontUtils(final Font font, final boolean antiAlias) {
-        this.IMAGE_WIDTH = 1024;
-        this.IMAGE_HEIGHT = 1024;
-        this.chars = new IntObject[2048];
-        this.fontHeight = -1;
-        this.charOffset = 8;
-        this.font = font;
-        this.antiAlias = antiAlias;
-        this.charOffset = 8;
-        this.setupTexture(antiAlias);
-    }
-
     private void setupTexture(final boolean antiAlias) {
         if (this.font.getSize() <= 15) {
             this.IMAGE_WIDTH = 256;
@@ -98,8 +86,8 @@ class FontUtils
     }
 
     private BufferedImage getFontImage(final char ch, final boolean antiAlias) {
-        final BufferedImage tempfontImage = new BufferedImage(1, 1, 2);
-        final Graphics2D g = (Graphics2D)tempfontImage.getGraphics();
+        final BufferedImage tempFontImage = new BufferedImage(1, 1, 2);
+        final Graphics2D g = (Graphics2D)tempFontImage.getGraphics();
         if (antiAlias) {
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         }
@@ -229,7 +217,7 @@ class FontUtils
         return this.font;
     }
 
-    private class IntObject
+    private static class IntObject
     {
         public int width;
         public int height;
