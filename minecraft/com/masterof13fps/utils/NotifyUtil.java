@@ -8,10 +8,10 @@ import com.masterof13fps.manager.notificationmanager.NotificationManager;
 import com.masterof13fps.manager.notificationmanager.NotificationType;
 import net.minecraft.util.ChatComponentText;
 
-public class NotifyUtil extends Methods implements Wrapper {
+public class NotifyUtil implements Methods {
 
     public static void debug(String msg) {
-        System.out.println(methods.getColors().getAnsiPurple() + "[" + methods.getColors().getAnsiCyan() + methods.getTime() + methods.getColors().getAnsiPurple() + "] " + methods.getColors().getAnsiBlue() + Client.main().getClientName() + methods.getColors().getAnsiPurple() + " >> " + methods.getColors().getAnsiRed() + msg + methods.getColors().getAnsiReset());
+        System.out.println(Methods.getColors().getAnsiPurple() + "[" + Methods.getColors().getAnsiCyan() + Methods.getTime() + Methods.getColors().getAnsiPurple() + "] " + Methods.getColors().getAnsiBlue() + Client.main().getClientName() + Methods.getColors().getAnsiPurple() + " >> " + Methods.getColors().getAnsiRed() + msg + Methods.getColors().getAnsiReset());
     }
 
     public static void chat(String msg) {
