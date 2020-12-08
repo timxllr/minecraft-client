@@ -1,6 +1,7 @@
 package com.masterof13fps.features.ui;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.Methods;
 import com.masterof13fps.Wrapper;
 import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
@@ -28,7 +29,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Interface extends GuiIngame implements Wrapper {
+public class Interface extends GuiIngame implements Wrapper, Methods {
 
     private final static Interface instance = new Interface(Minecraft.mc());
     Minecraft mc = Wrapper.mc;
@@ -78,8 +79,8 @@ public class Interface extends GuiIngame implements Wrapper {
 
     private void doRenderStuff() {
         ScaledResolution s = new ScaledResolution(mc);
-        Module hudModule = methods.getModuleManager().getModule(HUD.class);
-        Module auraModule = methods.getModuleManager().getModule(Aura.class);
+        Module hudModule = getModuleManager().getModule(HUD.class);
+        Module auraModule = getModuleManager().getModule(Aura.class);
 
         SettingsManager setMgr = Client.main().setMgr();
         if (setMgr.settingByName("Watermark", hudModule).isToggled()) {
@@ -103,7 +104,7 @@ public class Interface extends GuiIngame implements Wrapper {
     }
 
     private void renderTargetHUD() {
-        Entity target = methods.getCurrentTarget();
+        Entity target = getCurrentTarget();
         if (target instanceof EntityPlayer) {
             ScaledResolution s = new ScaledResolution(mc);
             Color backgroundColor = new Color(0, 0, 0, 120);
@@ -446,7 +447,7 @@ public class Interface extends GuiIngame implements Wrapper {
             int xDistCenturyGothic = scaledResolution.width() - centuryGothic20.getStringWidth(m.visualName()) - 4;
             int xDistArial = scaledResolution.width() - arial20.getStringWidth(m.visualName()) - 4;
 
-            switch(methods.getSettingByName("ArrayList Mode", methods.getModuleManager().getModule(HUD.class)).getCurrentMode()){
+            switch(getSettingByName("ArrayList Mode", getModuleManager().getModule(HUD.class)).getCurrentMode()){
                 case "Koks": {
                     RenderUtils.drawRect(scaledResolution.width() - exoRegular20.getStringWidth(m.visualName()) - 5, (rectY - 2),
                             scaledResolution.width(), (rectY + 10), new Color(25, 25, 25, 170).getRGB());
