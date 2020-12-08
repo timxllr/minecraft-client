@@ -16,7 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C01PacketChatMessage;
 import org.lwjgl.input.Keyboard;
 
-public abstract class Module extends Methods implements Wrapper {
+public abstract class Module implements Wrapper, Methods {
 
     public static Minecraft mc = Minecraft.mc();
     public static SettingsManager s = Client.main().setMgr();
