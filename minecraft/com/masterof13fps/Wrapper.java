@@ -16,6 +16,5 @@ public interface Wrapper {
     LoginUtil loginUtil = new LoginUtil();
     NotifyUtil notify = new NotifyUtil();
     MathUtils mathUtils = new MathUtils();
-    Methods methods = new Methods();
     EventManager eventManager = new EventManager();
 }
