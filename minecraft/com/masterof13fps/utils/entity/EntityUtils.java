@@ -20,7 +20,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 
-public class EntityUtils extends Methods {
+public class EntityUtils implements Methods, Wrapper {
     private static final Minecraft MINECRAFT = Minecraft.mc();
     private static boolean set = false;
     private static EntityPlayer reference;
@@ -29,10 +29,6 @@ public class EntityUtils extends Methods {
         double partialTicks = (double) Minecraft.mc().timer.renderPartialTicks;
         double[] pos = new double[]{entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * partialTicks, entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * partialTicks, entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * partialTicks};
         return pos;
-    }
-
-    public static boolean isMoving() {
-        return Wrapper.mc.thePlayer.moveForward != 0 || Wrapper.mc.thePlayer    .moveStrafing != 0;
     }
 
     public static boolean isReferenceSet() {
@@ -60,15 +56,15 @@ public class EntityUtils extends Methods {
     }
 
     public static MovingObjectPosition rayCastedBlock(float yaw, float pitch) {
-        float range = mc.playerController.getBlockReachDistance();
+        float range = Methods.mc.playerController.getBlockReachDistance();
 
         Vec3 vec31 = getLook(yaw, pitch);
 
-        Vec3 vec3 = mc.thePlayer.getPositionEyes(1.0F);
+        Vec3 vec3 = Methods.mc.thePlayer.getPositionEyes(1.0F);
         Vec3 vec32 = vec3.addVector(vec31.xCoord * range, vec31.yCoord * range, vec31.zCoord * range);
 
 
-        MovingObjectPosition ray = mc.theWorld.rayTraceBlocks(vec3, vec32, false, false, false);
+        MovingObjectPosition ray = Methods.mc.theWorld.rayTraceBlocks(vec3, vec32, false, false, false);
 
         if (ray != null && ray.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
             return ray;
