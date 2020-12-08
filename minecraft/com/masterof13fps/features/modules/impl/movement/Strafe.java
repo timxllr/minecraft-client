@@ -49,7 +49,7 @@ public class Strafe extends Module {
     }
 
     private void doAAC() {
-        if (EntityUtils.isMoving()) {
+        if (isMoving()) {
             if (mc.gameSettings.keyBindJump.pressed) {
                 PlayerUtil.setSpeed(0.23D);
             } else {
@@ -59,7 +59,7 @@ public class Strafe extends Module {
     }
 
     private void doNCP() {
-        if (EntityUtils.isMoving()) {
+        if (isMoving()) {
             if (mc.gameSettings.keyBindJump.pressed) {
                 PlayerUtil.setSpeed(0.26D);
             } else {

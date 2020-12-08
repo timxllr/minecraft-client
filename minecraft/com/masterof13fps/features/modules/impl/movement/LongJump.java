@@ -51,7 +51,7 @@ public class LongJump extends Module {
     }
 
     private void doMineSecure() {
-        if (EntityUtils.isMoving()) {
+        if (isMoving()) {
             if ((mc.thePlayer.onGround) && !(mc.thePlayer.isInWater())) {
                 mc.timer.timerSpeed = 1.0F;
                 mc.thePlayer.motionY = 0.54D;
@@ -64,7 +64,7 @@ public class LongJump extends Module {
     }
 
     private void doNCP() {
-        if ((EntityUtils.isMoving()) && (mc.thePlayer.fallDistance < 1.0F)) {
+        if ((isMoving()) && (mc.thePlayer.fallDistance < 1.0F)) {
             float x = (float) -Math.sin(PlayerUtil.getDirection());
             float z = (float) Math.cos(PlayerUtil.getDirection());
             if (mc.thePlayer.isCollidedVertically && mc.gameSettings.keyBindJump.pressed) {

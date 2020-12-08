@@ -64,13 +64,13 @@ public class Step extends Module {
     }
 
     private void doIntave() {
-        if (getPlayer().isCollidedHorizontally && !getPlayer().isOnLadder() && getPlayer().onGround && EntityUtils.isMoving() && getPlayer().stepHeight != 1.0f) {
+        if (getPlayer().isCollidedHorizontally && !getPlayer().isOnLadder() && getPlayer().onGround && isMoving() && getPlayer().stepHeight != 1.0f) {
             getPlayer().motionY = 0.408;
             getPlayer().onGround = false;
             getPlayer().stepHeight = 1.0f;
         }
         getPlayer().stepHeight = 0.5f;
-        if (getPlayer().isCollidedHorizontally && !getPlayer().isOnLadder() && EntityUtils.isMoving()) {
+        if (getPlayer().isCollidedHorizontally && !getPlayer().isOnLadder() && isMoving()) {
             getPlayer().onGround = true;
         }
     }
