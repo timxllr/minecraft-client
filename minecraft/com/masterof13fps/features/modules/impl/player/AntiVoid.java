@@ -1,5 +1,6 @@
 package com.masterof13fps.features.modules.impl.player;
 
+import com.masterof13fps.Methods;
 import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
@@ -36,7 +37,7 @@ public class AntiVoid extends Module {
     public void onEvent(Event event) {
         if(event instanceof EventUpdate){
             for (int i = 0; i < getY(); ++i) {
-                if (getBlock(new BlockPos(getX(), i, getZ())).getBlock() != Blocks.air) {
+                if (Methods.getBlock(new BlockPos(getX(), i, getZ())).getBlock() != Blocks.air) {
                     return;
                 }
             }
