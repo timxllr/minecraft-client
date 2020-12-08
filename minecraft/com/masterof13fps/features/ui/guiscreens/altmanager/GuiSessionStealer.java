@@ -71,7 +71,7 @@ public class GuiSessionStealer extends GuiScreen {
 
                 JsonElement rawJson;
                 try {
-                    rawJson = Wrapper.methods.jsonParser().parse(
+                    rawJson = jsonParser().parse(
                             new InputStreamReader(new URL("https://api.mojang.com/user/profiles/" + uuid + "/names")
                                     .openConnection().getInputStream()));
                 } catch (Exception e) {

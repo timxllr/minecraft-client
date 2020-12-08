@@ -46,7 +46,7 @@ public class GuiChangelog extends GuiScreen {
 
         changelogThread = new Thread(() -> {
             try {
-                URL url = new URL(methods.getClientChangelog());
+                URL url = new URL(getClientChangelog());
                 InputStreamReader isr = new InputStreamReader(url.openStream());
                 BufferedReader reader = new BufferedReader(isr);
                 StringJoiner sb = new StringJoiner("");

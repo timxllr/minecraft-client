@@ -1,6 +1,7 @@
 package com.masterof13fps.features.ui.guiscreens;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.Methods;
 import com.masterof13fps.Wrapper;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
@@ -22,7 +23,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.StringJoiner;
 
-public class GuiCredits extends GuiScreen {
+public class GuiCredits extends GuiScreen implements Wrapper, Methods {
 
     public GuiScreen parent;
     FontManager fM = Client.main().fontMgr();
@@ -42,7 +43,7 @@ public class GuiCredits extends GuiScreen {
 
         Thread creditsThread = new Thread(() -> {
             try {
-                URL url = new URL(methods.getClientCredits());
+                URL url = new URL(getClientCredits());
                 InputStreamReader isr = new InputStreamReader(url.openStream());
                 BufferedReader reader = new BufferedReader(isr);
                 StringJoiner sb = new StringJoiner("");
@@ -61,7 +62,7 @@ public class GuiCredits extends GuiScreen {
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
         if (Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)) {
-            mc.displayGuiScreen(parentScreen);
+            Methods.mc.displayGuiScreen(parentScreen);
         }
     }
 
@@ -72,10 +73,10 @@ public class GuiCredits extends GuiScreen {
     protected void actionPerformed(GuiButton button) throws IOException {
         switch (button.id) {
             case 1:
-                mc.displayGuiScreen(parent);
+                Methods.mc.displayGuiScreen(parent);
                 break;
             case 2:
-                mc.displayGuiScreen(this);
+                Methods.mc.displayGuiScreen(this);
                 NotifyUtil.debug("Reloaded Credits screen");
                 break;
         }
@@ -90,7 +91,7 @@ public class GuiCredits extends GuiScreen {
         scrollAmount += scroll;
         if (scrollAmount >= bottom) scrollAmount = bottom;
 
-        mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
+        Methods.mc.getTextureManager().bindTexture(new ResourceLocation(Client.main().getClientBackground()));
         Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, sr.width(), sr.height(),
                 width, height, sr.width(), sr.height());
 

@@ -3,6 +3,7 @@ package net.minecraft.client.renderer;
 import com.google.common.base.Predicates;
 import com.google.gson.JsonSyntaxException;
 import com.masterof13fps.Client;
+import com.masterof13fps.Methods;
 import com.masterof13fps.Wrapper;
 import com.masterof13fps.features.modules.impl.gui.HUD;
 import com.masterof13fps.features.modules.impl.render.NoBob;
@@ -74,7 +75,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-public class EntityRenderer implements IResourceManagerReloadListener, Wrapper {
+public class EntityRenderer implements IResourceManagerReloadListener, Wrapper, Methods {
     private static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation locationRainPng = new ResourceLocation("textures/environment/rain.png");
     private static final ResourceLocation locationSnowPng = new ResourceLocation("textures/environment/snow.png");
@@ -573,7 +574,7 @@ public class EntityRenderer implements IResourceManagerReloadListener, Wrapper {
 
                 if (Config.zoomMode) {
 
-                    switch(methods.getSettingByName("Zoom Mode", methods.getModuleManager().getModule(HUD.class)).getCurrentMode()){
+                    switch(getSettingByName("Zoom Mode", getModuleManager().getModule(HUD.class)).getCurrentMode()){
                         case "Smooth":
                             if(zoomCount < 4.0F){
                                 zoomCount += 0.015F;

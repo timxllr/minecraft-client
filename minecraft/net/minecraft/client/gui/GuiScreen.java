@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import com.masterof13fps.Methods;
 import com.masterof13fps.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.stream.GuiTwitchUserMode;
@@ -46,7 +47,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import tv.twitch.chat.ChatUserInfo;
 
-public abstract class GuiScreen extends Gui implements GuiYesNoCallback, Wrapper
+public abstract class GuiScreen extends Gui implements GuiYesNoCallback, Wrapper, Methods
 {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Set<String> PROTOCOLS = Sets.newHashSet(new String[] {"http", "https"});

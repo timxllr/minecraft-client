@@ -344,12 +344,12 @@ public class GuiIngame extends Gui implements Wrapper {
             RenderUtils.drawRect((s.width() / 2) - 91, s.height() - 23, (s.width() / 2) + 91, s.height(), new Color(14, 14, 14).getRGB());
 
             Color selectedColor = new Color(32, 32, 32);
-            Module hudModule = methods.getModuleManager().getModule(HUD.class);
-            int rainbowOffset = (int) methods.getSettingByName("Rainbow Offset", hudModule).getCurrentValue();
-            int rainbowSpeed = (int) methods.getSettingByName("Rainbow Speed", hudModule).getCurrentValue();
-            float rainbowSaturation = (float) methods.getSettingByName("Rainbow Saturation", hudModule).getCurrentValue();
-            float rainbowBrightness = (float) methods.getSettingByName("Rainbow Brightness", hudModule).getCurrentValue();
-            String hotbarMode = methods.getSettingByName("Hotbar Mode", hudModule).getCurrentMode();
+            Module hudModule = getModuleManager().getModule(HUD.class);
+            int rainbowOffset = (int) getSettingByName("Rainbow Offset", hudModule).getCurrentValue();
+            int rainbowSpeed = (int) getSettingByName("Rainbow Speed", hudModule).getCurrentValue();
+            float rainbowSaturation = (float) getSettingByName("Rainbow Saturation", hudModule).getCurrentValue();
+            float rainbowBrightness = (float) getSettingByName("Rainbow Brightness", hudModule).getCurrentValue();
+            String hotbarMode = getSettingByName("Hotbar Mode", hudModule).getCurrentMode();
 
             Color hotbarTopColor = new Color(0xbd4b56);
 
@@ -550,8 +550,8 @@ public class GuiIngame extends Gui implements Wrapper {
     // TODO: NoScoreboard / Scoreboard Rendering Method
     private void renderScoreboard(ScoreObjective scoreObjective, ScaledResolution scaledResolution) {
 
-        boolean customScoreboard = methods.getSettingByName("Custom Scoreboard", methods.getModuleManager().getModule(HUD.class)).isToggled() && methods.getModuleManager().getModule(HUD.class).state();
-        UnicodeFontRenderer scoreboardFont = methods.getFontManager().font("Exo", 19, Font.PLAIN);
+        boolean customScoreboard = getSettingByName("Custom Scoreboard", getModuleManager().getModule(HUD.class)).isToggled() && getModuleManager().getModule(HUD.class).state();
+        UnicodeFontRenderer scoreboardFont = getFontManager().font("Exo", 19, Font.PLAIN);
 
         if (!Client.main().modMgr().getByName("NoScoreboard").state()) {
             Scoreboard scoreboard = scoreObjective.getScoreboard();
