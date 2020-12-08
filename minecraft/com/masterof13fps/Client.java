@@ -18,7 +18,7 @@ import net.minecraft.client.Minecraft;
 
 import java.io.File;
 
-public class Client extends Methods implements Wrapper{
+public class Client implements Wrapper, Methods {
 
     private static Client instance = new Client();
     public long initTime = System.currentTimeMillis();

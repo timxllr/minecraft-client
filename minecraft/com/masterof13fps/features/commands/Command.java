@@ -6,7 +6,7 @@ import com.masterof13fps.manager.eventmanager.Event;
 import com.masterof13fps.utils.time.TimeHelper;
 import net.minecraft.client.Minecraft;
 
-public abstract class Command extends Methods implements Wrapper {
+public abstract class Command implements Wrapper, Methods {
 
     public static Minecraft mc = Minecraft.mc();
     public TimeHelper timeHelper = new TimeHelper();
