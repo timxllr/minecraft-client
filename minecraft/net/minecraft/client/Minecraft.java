@@ -1277,7 +1277,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage, Wrapper {
         }
     }
 
-    private void clickMouse() {
+    public void clickMouse() {
         if (this.leftClickCounter <= 0) {
             this.thePlayer.swingItem();
 
