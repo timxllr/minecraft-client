@@ -37,7 +37,7 @@ public class AntiVoid extends Module {
     public void onEvent(Event event) {
         if(event instanceof EventUpdate){
             for (int i = 0; i < getY(); ++i) {
-                if (Methods.getBlock(new BlockPos(getX(), i, getZ())).getBlock() != Blocks.air) {
+                if (getBlock(new BlockPos(getX(), i, getZ())).getBlock() != Blocks.air) {
                     return;
                 }
             }
