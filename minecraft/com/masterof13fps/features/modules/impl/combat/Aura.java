@@ -1,5 +1,6 @@
 package com.masterof13fps.features.modules.impl.combat;
 
+import com.masterof13fps.Methods;
 import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
@@ -224,20 +225,6 @@ public class Aura extends Module {
         return (currentTarget instanceof EntityPlayer && players.isToggled()) || (currentTarget instanceof EntityAnimal && animals.isToggled()) || (currentTarget instanceof EntityMob && mobs.isToggled()) || (currentTarget instanceof EntityVillager && villager.isToggled());
     }
 
-    float updateRotation(float curRot, float destination, float speed) {
-        float f = MathHelper.wrapAngleTo180_float(destination - curRot);
-
-        if (f > speed) {
-            f = speed;
-        }
-
-        if (f < -speed) {
-            f = -speed;
-        }
-
-        return curRot + f;
-    }
-
     Vec3 getBestVector(Entity entity, float accuracy, float precision) {
         try {
             Vec3 playerVector = mc.thePlayer.getPositionEyes(1.0F);
@@ -290,8 +277,8 @@ public class Aura extends Module {
         float difYaw = yawAngle - currentYaw;
         float difPitch = finalPitch - currentPitch;
 
-        float yaw = updateRotation(currentYaw + f2, yawAngle, Math.abs(MathHelper.wrapAngleTo180_float(difYaw * 0.1F)));
-        float pitch = updateRotation(currentPitch + f3, finalPitch, Math.abs(MathHelper.wrapAngleTo180_float(difPitch * 0.1F)));
+        float yaw = Methods.updateRotation(currentYaw + f2, yawAngle, Math.abs(MathHelper.wrapAngleTo180_float(difYaw * 0.1F)));
+        float pitch = Methods.updateRotation(currentPitch + f3, finalPitch, Math.abs(MathHelper.wrapAngleTo180_float(difPitch * 0.1F)));
 
         yaw -= yaw % f1;
         pitch -= pitch % f1;

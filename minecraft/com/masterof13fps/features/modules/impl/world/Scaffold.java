@@ -1,5 +1,6 @@
 package com.masterof13fps.features.modules.impl.world;
 
+import com.masterof13fps.Methods;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
 import com.masterof13fps.utils.entity.EntityUtils;
@@ -62,24 +63,10 @@ public class Scaffold extends Module {
 
         //TODO: Besserer Mouse Sensi Fix da er auf Verus Kickt
 
-        float yaw = updateRotation(currentYaw, calcYaw, speed);
-        float pitch = updateRotation(currentPitch, calcPitch, speed);
+        float yaw = Methods.updateRotation(currentYaw, calcYaw, speed);
+        float pitch = Methods.updateRotation(currentPitch, calcPitch, speed);
 
         return new float[]{yaw, pitch >= 90 ? 90 : pitch <= -90 ? -90 : pitch};
-    }
-
-    public static float updateRotation(float curRot, float destination, float speed) {
-        float f = MathHelper.wrapAngleTo180_float(destination - curRot);
-
-        if (f > speed) {
-            f = speed;
-        }
-
-        if (f < -speed) {
-            f = -speed;
-        }
-
-        return curRot + f;
     }
 
     @Override
