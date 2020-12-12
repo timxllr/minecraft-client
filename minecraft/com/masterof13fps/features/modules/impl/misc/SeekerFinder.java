@@ -22,7 +22,7 @@ public class SeekerFinder extends Module {
         for (Entity e : mc.theWorld.loadedEntityList) {
             try {
                 if (((e instanceof EntityPlayer)) && ((((EntityPlayer) e).getCurrentEquippedItem().getItem() instanceof ItemSword))) {
-                    NotifyUtil.notification("Seeker erkannt!", "Achtung! " + e.getName() + " ist der Seeker!",
+                    notify.notification("Seeker erkannt!", "Achtung! " + e.getName() + " ist der Seeker!",
                             NotificationType.INFO, 5);
                 }
             } catch (NullPointerException ignored) {

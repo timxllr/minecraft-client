@@ -12,7 +12,6 @@ import com.masterof13fps.manager.notificationmanager.NotificationManager;
 import com.masterof13fps.manager.particlemanager.FBP;
 import com.masterof13fps.manager.settingsmanager.SettingsManager;
 import com.masterof13fps.utils.LoginUtil;
-import com.masterof13fps.utils.NotifyUtil;
 import com.masterof13fps.utils.render.Shader;
 import net.minecraft.client.Minecraft;
 
@@ -57,44 +56,44 @@ public class Client implements Wrapper, Methods {
         if (!clientDir.exists()) {
             try {
                 clientDir.mkdir();
-                NotifyUtil.debug("Client-Ordner wurde erstellt!");
+                notify.debug("Client-Ordner wurde erstellt!");
             } catch (Exception e) {
-                NotifyUtil.debug("Client-Ordner konnte nicht erstellt werden!");
+                notify.debug("Client-Ordner konnte nicht erstellt werden!");
             }
 
             mc.displayGuiScreen(new GuiFirstUse());
-            NotifyUtil.debug("GuiScreen 'FirstUse' wurde aufgerufen!");
+            notify.debug("GuiScreen 'FirstUse' wurde aufgerufen!");
         }
         getLoginUtil();
-        NotifyUtil.debug("LoginUtil geladen!");
+        notify.debug("LoginUtil geladen!");
         getEventManager();
-        NotifyUtil.debug("EventManager geladen!");
+        notify.debug("EventManager geladen!");
         fontManager = new FontManager();
-        NotifyUtil.debug("FontManager geladen!");
+        notify.debug("FontManager geladen!");
         fontManager.initFonts();
-        NotifyUtil.debug("Schriftarten initialisiert!");
+        notify.debug("Schriftarten initialisiert!");
         setmgr = new SettingsManager();
-        NotifyUtil.debug("SettingsManager geladen!");
+        notify.debug("SettingsManager geladen!");
         setmgr.loadSettings();
-        NotifyUtil.debug("Einstellungen geladen!");
+        notify.debug("Einstellungen geladen!");
         moduleManager = new ModuleManager();
-        NotifyUtil.debug("ModuleManager geladen!");
+        notify.debug("ModuleManager geladen!");
         moduleManager.loadModules();
-        NotifyUtil.debug("Modules geladen!");
+        notify.debug("Modules geladen!");
         moduleManager.loadBinds();
-        NotifyUtil.debug("Keybinds geladen!");
+        notify.debug("Keybinds geladen!");
         commandManager = new CommandManager();
-        NotifyUtil.debug("CommandManager geladen!");
+        notify.debug("CommandManager geladen!");
         AltManager.loadAlts();
-        NotifyUtil.debug("Accounts geladen!");
+        notify.debug("Accounts geladen!");
         clickgui = new ClickGui();
-        NotifyUtil.debug("ClickGUI geladen!");
+        notify.debug("ClickGUI geladen!");
         new FBP().onStart();
-        NotifyUtil.debug("Partikelsystem geladen!");
+        notify.debug("Partikelsystem geladen!");
         Runtime.getRuntime().addShutdownHook(new Thread(this::onShutdown));
-        NotifyUtil.debug("ShutdownHook geladen!");
+        notify.debug("ShutdownHook geladen!");
 
-        NotifyUtil.debug("CLIENT VOLLSTÄNDIG GELADEN!");
+        notify.debug("CLIENT VOLLSTÄNDIG GELADEN!");
     }
 
     public void onShutdown() {

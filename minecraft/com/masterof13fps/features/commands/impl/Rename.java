@@ -14,13 +14,13 @@ public class Rename extends Command {
     @Override
     public void execute(String[] args) {
         if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
-            NotifyUtil.chat("Nur im Kreativmodus verfügbar!");
+            notify.chat("Nur im Kreativmodus verfügbar!");
         }
         if (args.length == 0) {
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         } else {
             if (Wrapper.mc.thePlayer.getHeldItem() == null) {
-                NotifyUtil.chat("Halte ein Item in der Hand!");
+                notify.chat("Halte ein Item in der Hand!");
                 return;
             }
             String message = args[0];
@@ -29,7 +29,7 @@ public class Rename extends Command {
             message = message.replace("&", "§").replace("&", "§");
             ItemStack item = Wrapper.mc.thePlayer.inventory.getCurrentItem();
             item.setStackDisplayName(message);
-            NotifyUtil.chat("Item umbenannt zu: \"" + message + "\".");
+            notify.chat("Item umbenannt zu: \"" + message + "\".");
         }
     }
 

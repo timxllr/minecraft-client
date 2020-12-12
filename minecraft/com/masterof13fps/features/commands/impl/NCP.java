@@ -13,9 +13,9 @@ public class NCP extends Command {
     public void execute(String[] args) {
         if (args.length == 1) {
             sendChatMessage("/testncp input " + args[0]);
-            NotifyUtil.notification("Input gesetzt!", "Falls TestNCP auf diesem Server vorhanden ist, wurde dein Input auf \"" + args[0] + "\" gesetzt!", NotificationType.INFO, 5);
+            notify.notification("Input gesetzt!", "Falls TestNCP auf diesem Server vorhanden ist, wurde dein Input auf \"" + args[0] + "\" gesetzt!", NotificationType.INFO, 5);
         } else {
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

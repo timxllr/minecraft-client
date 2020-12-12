@@ -13,7 +13,7 @@ public class Reload extends Command {
         if(args.length == 0){
             reloadClient();
         }else{
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

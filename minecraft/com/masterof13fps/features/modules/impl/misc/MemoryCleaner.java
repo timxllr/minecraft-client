@@ -39,9 +39,9 @@ public class MemoryCleaner extends Module {
                     System.gc();
                     long clearedMemory = ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024) - memoryBeforeCleaning;
                     if (clearedMemory > memoryBeforeCleaning) {
-                        NotifyUtil.notification("MemoryCleaner", "Zwischenspeicher (" + clearedMemory / 1024 + " MB) geleert!", NotificationType.INFO, 5);
+                        notify.notification("MemoryCleaner", "Zwischenspeicher (" + clearedMemory / 1024 + " MB) geleert!", NotificationType.INFO, 5);
                     }else{
-                        NotifyUtil.debug("Could not clean the memory - nothing to clean found. Trying again in 60 seconds ...");
+                        notify.debug("Could not clean the memory - nothing to clean found. Trying again in 60 seconds ...");
                     }
                     timeHelper.reset();
                 });

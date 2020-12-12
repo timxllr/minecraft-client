@@ -16,36 +16,36 @@ public class Friend extends Command {
     public void execute(String[] args) {
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("list")) {
-                NotifyUtil.chat("Deine Freunde:");
-                NotifyUtil.chat(friends.toString());
+                notify.chat("Deine Freunde:");
+                notify.chat(friends.toString());
             } else {
-                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+                notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         } else {
             if (args.length == 2) {
                 if (args[0].equalsIgnoreCase("add")) {
                     if (!friends.contains(args[1])) {
                         friends.add(args[1]);
-                        NotifyUtil.chat(args[1] + " wurde zu deiner Freundesliste hinzugefügt!");
+                        notify.chat(args[1] + " wurde zu deiner Freundesliste hinzugefügt!");
                     } else {
                         if (friends.contains(args[1])) {
-                            NotifyUtil.chat(args[1] + " ist bereits in deiner Freundesliste!");
+                            notify.chat(args[1] + " ist bereits in deiner Freundesliste!");
                         }
                     }
                 } else if (args[0].equalsIgnoreCase("remove")) {
                     if (friends.contains(args[1])) {
                         friends.remove(args[1]);
-                        NotifyUtil.chat(args[1] + " wurde aus deiner Freundesliste entfernt!");
+                        notify.chat(args[1] + " wurde aus deiner Freundesliste entfernt!");
                     } else {
                         if (!friends.contains(args[1])) {
-                            NotifyUtil.chat(args[1] + " ist nicht in deiner Freundesliste!");
+                            notify.chat(args[1] + " ist nicht in deiner Freundesliste!");
                         }
                     }
                 } else {
-                    NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+                    notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
                 }
             } else {
-                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+                notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         }
     }

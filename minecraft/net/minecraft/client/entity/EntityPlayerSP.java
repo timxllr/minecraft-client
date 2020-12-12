@@ -266,7 +266,7 @@ public class EntityPlayerSP extends AbstractClientPlayer implements Wrapper {
                 return;
             }
             if (message.startsWith(prefix)) {
-                NotifyUtil.notification("Befehl nicht gefunden!",
+                notify.notification("Befehl nicht gefunden!",
                         "Versuche es mit '" + Client.main().getClientPrefix() + "help'", NotificationType.ERROR, 5);
                 return;
             }

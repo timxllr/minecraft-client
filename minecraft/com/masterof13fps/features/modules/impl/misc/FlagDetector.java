@@ -41,7 +41,7 @@ public class FlagDetector extends Module {
         }
 
         if(event instanceof EventUpdate && flagged){
-            NotifyUtil.notification("Flag erkannt!", "Du wurdest geflagged, überprüfe deine aktiven Mods um einen Kick / Bann zu verhindern!", NotificationType.WARNING, 5);
+            notify.notification("Flag erkannt!", "Du wurdest geflagged, überprüfe deine aktiven Mods um einen Kick / Bann zu verhindern!", NotificationType.WARNING, 5);
             flagged = false;
         }
     }

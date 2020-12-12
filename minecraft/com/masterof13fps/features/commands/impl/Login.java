@@ -18,11 +18,11 @@ public class Login extends Command implements Wrapper {
         switch (args.length) {
             case 1:
                 sendChatMessage("/login " + args[0]);
-                NotifyUtil.notification("Erfolgreich angemeldet!", "Du hast dich mit dem Passwort '" + args[0] +
+                notify.notification("Erfolgreich angemeldet!", "Du hast dich mit dem Passwort '" + args[0] +
                         "' angemeldet!", NotificationType.INFO, 5);
                 break;
             default:
-                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+                notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
                 break;
         }
     }

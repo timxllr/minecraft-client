@@ -1,7 +1,7 @@
 package com.masterof13fps.features.ui.guiscreens.altmanager;
 
+import com.masterof13fps.Methods;
 import com.masterof13fps.utils.render.Colors;
-import com.masterof13fps.utils.time.TimerUtil;
 import com.masterof13fps.Client;
 import com.masterof13fps.manager.altmanager.AltManager;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
@@ -42,7 +42,6 @@ public class GuiAltManager extends GuiScreen {
     private final JFileChooser fc = new JFileChooser();
     private final int MAX_PARTICLES = 5000;
     private final Random random = new Random();
-    public static TimerUtil timer = new TimerUtil();
     public static AltSlot selected = null;
 
     public File getAltFile() {
@@ -87,11 +86,10 @@ public class GuiAltManager extends GuiScreen {
             AltSlot slot = (AltSlot) slotList.next();
             if (slot.isHovering(mouseX, mouseY) && selected != slot) {
                 selected = slot;
-                timer.setLastMs(-1900);
             }
         }
-        if (timer.isDelayComplete(2000L) && selected != null && selected.isHovering(mouseX, mouseY)) {
-            timer.reset();
+        if (timeHelper.isDelayComplete(2000L) && selected != null && selected.isHovering(mouseX, mouseY)) {
+            timeHelper.reset();
         }
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }

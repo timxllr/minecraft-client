@@ -3,9 +3,7 @@ package com.masterof13fps.features.modules.impl.movement;
 import com.masterof13fps.Client;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
-import com.masterof13fps.utils.entity.EntityUtils;
 import com.masterof13fps.utils.entity.PlayerUtil;
-import com.masterof13fps.utils.time.TimerUtil;
 import com.masterof13fps.manager.eventmanager.Event;
 import com.masterof13fps.manager.eventmanager.impl.EventUpdate;
 import com.masterof13fps.features.modules.Category;
@@ -15,7 +13,6 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.C03PacketPlayer;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
@@ -29,8 +26,6 @@ public class Speed extends Module {
     public double speed;
     public double moveSpeed;
     public int stage;
-    private TimerUtil framesDelay = new TimerUtil();
-    private TimerUtil delayTimer = new TimerUtil();
     private boolean legitHop = false;
     private boolean move;
     private boolean hop;
@@ -62,8 +57,6 @@ public class Speed extends Module {
     }
 
     public void onEnable() {
-        framesDelay.setLastMS();
-        delayTimer.setLastMS();
         motionTicks = 0;
         move = false;
         hop = false;
@@ -221,12 +214,12 @@ public class Speed extends Module {
         d = Math.sqrt(getPlayer().motionX * getPlayer().motionX + getPlayer().motionZ * getPlayer().motionZ);
         if (isMoving() && getPlayer().hurtTime == 0 && !(getPlayer().isCollidedHorizontally)) {
             if (getPlayer().onGround) {
-                if (delayTimer.isDelayComplete(180L)) {
+                if (timeHelper.isDelayComplete(180L)) {
                     blocks = 1.0D;
                     float x = (float) (-((double) MathHelper.sin(PlayerUtil.getDirection()) * blocks));
                     float z = (float) ((double) MathHelper.cos(PlayerUtil.getDirection()) * blocks);
                     getPlayer().setPositionAndUpdate(getPlayer().posX + (double) x, getPlayer().posY, getPlayer().posZ + (double) z);
-                    delayTimer.reset();
+                    timeHelper.reset();
                 }
             }
         } else {
@@ -272,11 +265,11 @@ public class Speed extends Module {
 
     private void doMineSucht() {
         float x;
-        if (isMoving() && delayTimer.isDelayComplete(500L)) {
+        if (isMoving() && timeHelper.isDelayComplete(500L)) {
             x = -(MathHelper.sin(PlayerUtil.getDirection()) * 2.0F);
             float z = MathHelper.cos(PlayerUtil.getDirection()) * 2.0F;
             getPlayer().setPositionAndUpdate(getPlayer().posX + (double) x, getPlayer().posY, getPlayer().posZ + (double) z);
-            delayTimer.reset();
+            timeHelper.reset();
         }
 
     }
@@ -494,7 +487,7 @@ public class Speed extends Module {
                 hop = true;
                 getPlayer().jump();
                 if (motionTicks == 1) {
-                    framesDelay.reset();
+                    timeHelper.reset();
                     if (move) {
                         getPlayer().motionX /= speed * 2.0D;
                         getPlayer().motionZ /= speed * 2.0D;
@@ -504,7 +497,7 @@ public class Speed extends Module {
                 } else {
                     motionTicks = 1;
                 }
-            } else if ((!move) && (motionTicks == 1) && (framesDelay.isDelayComplete(450L))) {
+            } else if ((!move) && (motionTicks == 1) && (timeHelper.isDelayComplete(450L))) {
                 getPlayer().motionX *= speed;
                 getPlayer().motionZ *= speed;
                 move = true;

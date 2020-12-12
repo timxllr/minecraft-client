@@ -26,7 +26,7 @@ public class Toggle extends Command {
 				}
 			}
 		} else {
-			NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+			notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
 		}
 	}
 

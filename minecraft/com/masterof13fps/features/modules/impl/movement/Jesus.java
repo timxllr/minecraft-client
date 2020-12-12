@@ -19,7 +19,7 @@ import net.minecraft.util.MathHelper;
 import net.optifine.BlockPosM;
 
 @ModuleInfo(name = "Jesus", category = Category.MOVEMENT, description = "Lets you walk on water or lava")
-public class Jesus extends Module implements Methods, Wrapper {
+public class Jesus extends Module {
 
     public Setting mode = new Setting("Mode", this, "Normal", new String[]{"Vanilla", "Dolphin", "AAC", "NCP", "Intave"});
 
@@ -34,27 +34,27 @@ public class Jesus extends Module implements Methods, Wrapper {
         int mz = i;
         int max = i;
         int maz = i;
-        if (mc.thePlayer.motionX > 0.01) {
+        if (getPlayer().motionX > 0.01) {
             mx = 0;
-        } else if (mc.thePlayer.motionX < -0.01) {
+        } else if (getPlayer().motionX < -0.01) {
             max = 0;
         }
-        if (mc.thePlayer.motionZ > 0.01) {
+        if (getPlayer().motionZ > 0.01) {
             mz = 0;
-        } else if (mc.thePlayer.motionZ < -0.01) {
+        } else if (getPlayer().motionZ < -0.01) {
             maz = 0;
         }
-        final int xmin = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minX - mx);
-        final int ymin = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minY - 1.0);
-        final int zmin = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minZ - mz);
-        final int xmax = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minX + max);
-        final int ymax = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minY + 1.0);
-        final int zmax = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minZ + maz);
+        final int xmin = MathHelper.floor_double(getPlayer().getEntityBoundingBox().minX - mx);
+        final int ymin = MathHelper.floor_double(getPlayer().getEntityBoundingBox().minY - 1.0);
+        final int zmin = MathHelper.floor_double(getPlayer().getEntityBoundingBox().minZ - mz);
+        final int xmax = MathHelper.floor_double(getPlayer().getEntityBoundingBox().minX + max);
+        final int ymax = MathHelper.floor_double(getPlayer().getEntityBoundingBox().minY + 1.0);
+        final int zmax = MathHelper.floor_double(getPlayer().getEntityBoundingBox().minZ + maz);
         for (int x = xmin; x <= xmax; ++x) {
             for (int y = ymin; y <= ymax; ++y) {
                 for (int z = zmin; z <= zmax; ++z) {
                     final Block block = (Block) getBlock(new BlockPos(x, y, z));
-                    if (block instanceof BlockLiquid && !mc.thePlayer.isInsideOfMaterial(Material.lava) && !mc.thePlayer.isInsideOfMaterial(Material.water)) {
+                    if (block instanceof BlockLiquid && !getPlayer().isInsideOfMaterial(Material.lava) && !getPlayer().isInsideOfMaterial(Material.water)) {
                         return true;
                     }
                 }
@@ -63,13 +63,13 @@ public class Jesus extends Module implements Methods, Wrapper {
         return false;
     }
 
-    public static boolean isInLiquid() {
+    public boolean isInLiquid() {
         boolean inLiquid = false;
-        int y = (int) mc.thePlayer.boundingBox.minY;
-        for (int x = MathHelper.floor_double(mc.thePlayer.boundingBox.minX); x < MathHelper
-                .floor_double(mc.thePlayer.boundingBox.maxX) + 1; x++) {
-            for (int z = MathHelper.floor_double(mc.thePlayer.boundingBox.minZ); z < MathHelper
-                    .floor_double(mc.thePlayer.boundingBox.maxZ) + 1; z++) {
+        int y = (int) getPlayer().boundingBox.minY;
+        for (int x = MathHelper.floor_double(getPlayer().boundingBox.minX); x < MathHelper
+                .floor_double(getPlayer().boundingBox.maxX) + 1; x++) {
+            for (int z = MathHelper.floor_double(getPlayer().boundingBox.minZ); z < MathHelper
+                    .floor_double(getPlayer().boundingBox.maxZ) + 1; z++) {
                 Block block = mc.theWorld.getBlockState(new BlockPos(x, y, z)).getBlock();
                 if ((block != null) && (!(block instanceof BlockAir))) {
                     if (!(block instanceof BlockLiquid)) {
@@ -134,28 +134,28 @@ public class Jesus extends Module implements Methods, Wrapper {
     }
 
     private void doNCP() {
-        final BlockPos bp = new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY - 1.0, mc.thePlayer.posZ);
+        final BlockPos bp = new BlockPos(getPlayer().posX, getPlayer().posY - 1.0, getPlayer().posZ);
         if (mc.theWorld.getBlockState(bp).getBlock() == Blocks.water && timeHelper.isDelayComplete(377L)) {
-            mc.thePlayer.motionY = 0.2805;
+            getPlayer().motionY = 0.2805;
             timeHelper.reset();
         }
     }
 
     private void doAAC() {
-        if (mc.thePlayer.isInWater()) {
-            mc.thePlayer.motionY = 5.9D;
-            mc.thePlayer.jumpMovementFactor *= 0.9F;
-            mc.thePlayer.motionY = 0.2D;
+        if (getPlayer().isInWater()) {
+            getPlayer().motionY = 5.9D;
+            getPlayer().jumpMovementFactor *= 0.9F;
+            getPlayer().motionY = 0.2D;
         }
     }
 
     private void doDolphin() {
-        final BlockPos bp = new BlockPosM(mc.thePlayer.posX, mc.thePlayer.posY - 1.0, mc.thePlayer.posZ);
+        final BlockPos bp = new BlockPosM(getPlayer().posX, getPlayer().posY - 1.0, getPlayer().posZ);
         if (!canjump && mc.theWorld.getBlockState(bp).getBlock() == Blocks.water) {
             ++delay;
             stage = 0;
-            mc.thePlayer.motionY = 0.1;
-        } else if (mc.thePlayer.onGround && mc.theWorld.getBlockState(bp).getBlock() != Blocks.water) {
+            getPlayer().motionY = 0.1;
+        } else if (getPlayer().onGround && mc.theWorld.getBlockState(bp).getBlock() != Blocks.water) {
             canjump = false;
             delay = 0;
         }
@@ -164,7 +164,7 @@ public class Jesus extends Module implements Methods, Wrapper {
         }
         if (canjump) {
             ++stage;
-            double moty = mc.thePlayer.motionY;
+            double moty = getPlayer().motionY;
             switch (stage) {
                 case 1: {
                     moty = 0.5;
@@ -347,22 +347,22 @@ public class Jesus extends Module implements Methods, Wrapper {
                     break;
                 }
             }
-            mc.thePlayer.motionY = moty;
+            getPlayer().motionY = moty;
         }
-        if (mc.thePlayer.moveForward == 0.0f && mc.thePlayer.moveStrafing == 0.0f && !mc.thePlayer.isSneaking() && getColliding(0)) {
+        if (getPlayer().moveForward == 0.0f && getPlayer().moveStrafing == 0.0f && !getPlayer().isSneaking() && getColliding(0)) {
             final int delay = 40;
             if (time < delay) {
                 ++time;
             } else {
                 ++time;
                 if (time < delay + 5) {
-                    mc.thePlayer.motionX = 0.1;
+                    getPlayer().motionX = 0.1;
                 } else if (time < delay + 20 && time > delay + 10) {
-                    mc.thePlayer.motionZ = -0.1;
+                    getPlayer().motionZ = -0.1;
                 } else if (time < delay + 30 && time > delay + 20) {
-                    mc.thePlayer.motionX = -0.1;
+                    getPlayer().motionX = -0.1;
                 } else if (time < delay + 40 && time > delay + 30) {
-                    mc.thePlayer.motionZ = 0.1;
+                    getPlayer().motionZ = 0.1;
                 }
                 if (time > delay + 40) {
                     time = delay;
@@ -374,19 +374,19 @@ public class Jesus extends Module implements Methods, Wrapper {
     }
 
     private void doVanilla() {
-        if (mc.thePlayer == null) {
+        if (getPlayer() == null) {
             return;
         }
-        if ((isInLiquid()) && (mc.thePlayer.isInsideOfMaterial(Material.air)) && (!mc.thePlayer.isSneaking())) {
+        if ((isInLiquid()) && (getPlayer().isInsideOfMaterial(Material.air)) && (!getPlayer().isSneaking())) {
             try {
                 if (timeHelper.isDelayComplete(50L)) {
-                    mc.thePlayer.motionY = 0.01D;
+                    getPlayer().motionY = 0.01D;
                     timeHelper.setLastMS();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mc.thePlayer.motionY = 0.11D;
+            getPlayer().motionY = 0.11D;
         }
     }
 }

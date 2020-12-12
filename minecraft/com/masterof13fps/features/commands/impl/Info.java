@@ -16,11 +16,11 @@ public class Info extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length == 0) {
-            NotifyUtil.chat("Client-Name: " + Client.main().getClientName());
-            NotifyUtil.chat("Client-Version: " + Client.main().getClientVersion());
-            NotifyUtil.chat("Client-Author: " + Client.main().getClientCoder());
+            notify.chat("Client-Name: " + Client.main().getClientName());
+            notify.chat("Client-Version: " + Client.main().getClientVersion());
+            notify.chat("Client-Author: " + Client.main().getClientCoder());
         } else {
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

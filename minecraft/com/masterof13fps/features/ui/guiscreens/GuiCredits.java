@@ -5,7 +5,6 @@ import com.masterof13fps.Methods;
 import com.masterof13fps.Wrapper;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
-import com.masterof13fps.utils.NotifyUtil;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -77,7 +76,7 @@ public class GuiCredits extends GuiScreen implements Wrapper, Methods {
                 break;
             case 2:
                 Methods.mc.displayGuiScreen(this);
-                NotifyUtil.debug("Reloaded Credits screen");
+                notify.debug("Reloaded Credits screen");
                 break;
         }
     }

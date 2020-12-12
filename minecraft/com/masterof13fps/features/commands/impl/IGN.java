@@ -19,20 +19,20 @@ public class IGN extends Command {
     public void execute(String[] args) {
         switch (args.length) {
             case 0:
-                NotifyUtil.notification("Dein Username", "Dein Username lautet '" + mc.session.getUsername() + "'",
+                notify.notification("Dein Username", "Dein Username lautet '" + mc.session.getUsername() + "'",
                         NotificationType.INFO, 5);
                 break;
             case 1:
                 if (args[0].equalsIgnoreCase("copy")) {
                     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(mc.session.getUsername()), null);
-                    NotifyUtil.notification("Username kopiert", "Dein aktueller Username wurde in die Zwischenablage " +
+                    notify.notification("Username kopiert", "Dein aktueller Username wurde in die Zwischenablage " +
                             "kopiert!", NotificationType.INFO, 5);
                 } else {
-                    NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+                    notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
                 }
                 break;
             default:
-                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+                notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
                 break;
         }
     }

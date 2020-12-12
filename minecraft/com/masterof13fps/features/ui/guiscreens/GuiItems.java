@@ -163,76 +163,76 @@ public class GuiItems extends GuiScreen {
     private void spawner() {
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Blocks.mob_spawner);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast einen §cSpawner §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast einen §cSpawner §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void dragonEgg() {
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Blocks.dragon_egg);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast ein §cDrachenei §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast ein §cDrachenei §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void commandBlock() {
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Blocks.command_block);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast einen §cBefehlsblock §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast einen §cBefehlsblock §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void barrier() {
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Blocks.barrier);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast eine §cBarriere §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast eine §cBarriere §rerhalten!", NotificationType.INFO, 5);
     }
     
     private  void miscKit() {
         String itemName = "§cMisc§6Kit";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Blocks.hopper);
@@ -245,18 +245,18 @@ public class GuiItems extends GuiScreen {
         itemStack.setStackDisplayName(itemName);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast das §cMisc Kit §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast das §cMisc Kit §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void tntSpawner() {
         String itemName = "§cTNT§6Spawner";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Blocks.mob_spawner);
@@ -269,18 +269,18 @@ public class GuiItems extends GuiScreen {
         itemStack.setStackDisplayName(itemName);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast ein §cTNT Spawner §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast ein §cTNT Spawner §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void crashSword() {
         String itemName = "§cCrash§6Sword";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Items.diamond_sword);
@@ -293,18 +293,18 @@ public class GuiItems extends GuiScreen {
         itemStack.setStackDisplayName(itemName);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast ein §cCrash Sword §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast ein §cCrash Sword §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void opBook() {
         String itemName = "§aPuzzle (Spiel)";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Items.written_book);
@@ -317,18 +317,18 @@ public class GuiItems extends GuiScreen {
         itemStack.setStackDisplayName(itemName);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast ein §cOP Book §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast ein §cOP Book §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void betterArmorStand() {
         String itemName = "§aBetter §cArmor§6Stand";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Items.armor_stand);
@@ -341,18 +341,18 @@ public class GuiItems extends GuiScreen {
         itemStack.setStackDisplayName(itemName);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast ein §cBetter ArmorStand §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast ein §cBetter ArmorStand §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void crashHopper() {
         String itemName = "§cCrash§6Hopper";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack itemStack = new ItemStack(Blocks.hopper);
@@ -365,18 +365,18 @@ public class GuiItems extends GuiScreen {
         itemStack.setStackDisplayName(itemName);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, itemStack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast ein §cCrashHopper §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast ein §cCrashHopper §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void trollPotion() {
         String itemName = "§cTroll§6Potion";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack stack = new ItemStack(Items.potionitem);
@@ -393,18 +393,18 @@ public class GuiItems extends GuiScreen {
         stack.setStackDisplayName(itemName);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, stack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast eine §cTrollPotion §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast eine §cTrollPotion §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void killerPotion() {
         String itemName = "§cKiller§6Potion";
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(0) != null) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür den ersten Slot in der Hotbar leeren!", NotificationType.ERROR, 5);
             return;
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack stack = new ItemStack(Items.potionitem);
@@ -419,7 +419,7 @@ public class GuiItems extends GuiScreen {
         stack.setStackDisplayName(itemName);
         Wrapper.mc.thePlayer.sendQueue.addToSendQueue(new C10PacketCreativeInventoryAction(36, stack));
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast eine §cKillerPotion §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast eine §cKillerPotion §rerhalten!", NotificationType.INFO, 5);
     }
 
     private void crashChest() {
@@ -427,16 +427,16 @@ public class GuiItems extends GuiScreen {
         if (Wrapper.mc.thePlayer.inventory.getStackInSlot(36) != null) {
             if (Wrapper.mc.thePlayer.inventory.getStackInSlot(36).getDisplayName().equals(itemName)) {
                 mc.displayGuiScreen(null);
-                NotifyUtil.notification("Aktion abgebrochen!", "Du hast bereits eine §cCrashChest§r!", NotificationType.INFO, 5);
+                notify.notification("Aktion abgebrochen!", "Du hast bereits eine §cCrashChest§r!", NotificationType.INFO, 5);
                 return;
             } else {
                 mc.displayGuiScreen(null);
-                NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür deine Schuhe ausziehen!", NotificationType.ERROR, 5);
+                notify.notification("Nicht verfügbar!", "Du musst hierfür deine Schuhe ausziehen!", NotificationType.ERROR, 5);
                 return;
             }
         } else if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode) {
             mc.displayGuiScreen(null);
-            NotifyUtil.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
+            notify.notification("Nicht verfügbar!", "Du musst hierfür im Kreativmodus sein!", NotificationType.ERROR, 5);
             return;
         }
         ItemStack stack = new ItemStack(Blocks.chest);
@@ -449,7 +449,7 @@ public class GuiItems extends GuiScreen {
         Wrapper.mc.thePlayer.getInventory()[0] = stack;
         stack.setStackDisplayName(itemName);
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Item erhalten", "Du hast eine §cCrashChest §rerhalten!", NotificationType.INFO, 5);
+        notify.notification("Item erhalten", "Du hast eine §cCrashChest §rerhalten!", NotificationType.INFO, 5);
     }
 
     @Override

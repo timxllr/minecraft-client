@@ -57,10 +57,10 @@ public class Plugins extends Module {
                         }
                     }
                     if (message.length() > 0) {
-                        NotifyUtil.notification("Plugins gefunden!", "Es wurden Plugins gefunden! Siehe im Chat nach für weitere Informationen!", NotificationType.INFO, 5);
-                        NotifyUtil.chat("Plugins (" + size + "): §7" + message);
+                        notify.notification("Plugins gefunden!", "Es wurden Plugins gefunden! Siehe im Chat nach für weitere Informationen!", NotificationType.INFO, 5);
+                        notify.chat("Plugins (" + size + "): §7" + message);
                     } else {
-                        NotifyUtil.notification("Keine Plugins gefunden!", "Es wurden keine Plugins gefunden!", NotificationType.INFO, 5);
+                        notify.notification("Keine Plugins gefunden!", "Es wurden keine Plugins gefunden!", NotificationType.INFO, 5);
                     }
                     event.setCancelled(true);
                 }

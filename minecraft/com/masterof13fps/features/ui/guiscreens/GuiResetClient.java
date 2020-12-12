@@ -49,7 +49,7 @@ public class GuiResetClient extends GuiScreen {
             case 0: {
                 Client.main().getClientDir().delete();
                 Client.main().getClientDir().deleteOnExit();
-                NotifyUtil.debug("Deleted all settings (Client Reset!)");
+                notify.debug("Deleted all settings (Client Reset!)");
                 mc.displayGuiScreen(new GuiMainMenu());
                 break;
             }

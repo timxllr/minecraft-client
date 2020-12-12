@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.imageio.ImageIO;
 
+import com.masterof13fps.Methods;
+import com.masterof13fps.Wrapper;
 import com.masterof13fps.manager.notificationmanager.NotificationType;
 import com.masterof13fps.utils.NotifyUtil;
 import net.minecraft.client.renderer.GlStateManager;
@@ -20,7 +22,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class ScreenShotHelper
+public class ScreenShotHelper implements Methods, Wrapper
 {
     private static final Logger logger = LogManager.getLogger();
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
@@ -116,13 +118,13 @@ public class ScreenShotHelper
             }
 
             ImageIO.write(bufferedimage, "png", (File)file2);
-            NotifyUtil.notification("Screenshot erstellt", "Screenshot (" + file2.getName() + ") wurde erstellt!", NotificationType.INFO, 5);
+            notify.notification("Screenshot erstellt", "Screenshot (" + file2.getName() + ") wurde erstellt!", NotificationType.INFO, 5);
             return new ChatComponentTranslation("screenshot.success", file2.getName());
         }
         catch (Exception exception)
         {
             logger.warn((String)"Couldn\'t save screenshot", (Throwable)exception);
-            NotifyUtil.notification("Screenshot Fehler", "Screenshot konnte nicht erstellt werden!", NotificationType.ERROR, 5);
+            notify.notification("Screenshot Fehler", "Screenshot konnte nicht erstellt werden!", NotificationType.ERROR, 5);
             return new ChatComponentTranslation("screenshot.failure", exception.getMessage());
         }
     }

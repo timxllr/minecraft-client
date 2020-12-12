@@ -52,7 +52,7 @@ public class Scaffold extends Module {
         List<Block> blackList = Arrays.asList(Blocks.red_flower, Blocks.yellow_flower, Blocks.crafting_table, Blocks.chest, Blocks.enchanting_table, Blocks.anvil, Blocks.sand, Blocks.gravel, Blocks.glass_pane, Blocks.stained_glass_pane, Blocks.ice, Blocks.packed_ice, Blocks.cobblestone_wall, Blocks.water, Blocks.lava, Blocks.web, Blocks.sapling, Blocks.rail, Blocks.golden_rail, Blocks.activator_rail, Blocks.detector_rail, Blocks.tnt, Blocks.red_flower, Blocks.yellow_flower, Blocks.flower_pot, Blocks.tallgrass, Blocks.red_mushroom, Blocks.brown_mushroom, Blocks.ladder, Blocks.torch, Blocks.stone_button, Blocks.wooden_button, Blocks.redstone_torch, Blocks.redstone_wire, Blocks.furnace, Blocks.cactus, Blocks.oak_fence, Blocks.acacia_fence, Blocks.nether_brick_fence, Blocks.birch_fence, Blocks.dark_oak_fence, Blocks.jungle_fence, Blocks.oak_fence, Blocks.acacia_fence_gate, Blocks.snow_layer, Blocks.trapdoor, Blocks.ender_chest, Blocks.beacon, Blocks.hopper, Blocks.daylight_detector, Blocks.daylight_detector_inverted, Blocks.carpet);
     }
 
-    public static float[] faceBlock(BlockPos pos, float yTranslation, float currentYaw, float currentPitch, float speed) {
+    public float[] faceBlock(BlockPos pos, float yTranslation, float currentYaw, float currentPitch, float speed) {
         double x = (pos.getX() + 0.5F) - mc.thePlayer.posX - mc.thePlayer.motionX;
         double y = (pos.getY() - yTranslation) - (mc.thePlayer.posY + mc.thePlayer.getEyeHeight());
         double z = (pos.getZ() + 0.5F) - mc.thePlayer.posZ - mc.thePlayer.motionZ;
@@ -63,8 +63,8 @@ public class Scaffold extends Module {
 
         //TODO: Besserer Mouse Sensi Fix da er auf Verus Kickt
 
-        float yaw = Methods.updateRotation(currentYaw, calcYaw, speed);
-        float pitch = Methods.updateRotation(currentPitch, calcPitch, speed);
+        float yaw = updateRotation(currentYaw, calcYaw, speed);
+        float pitch = updateRotation(currentPitch, calcPitch, speed);
 
         return new float[]{yaw, pitch >= 90 ? 90 : pitch <= -90 ? -90 : pitch};
     }

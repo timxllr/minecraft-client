@@ -58,6 +58,8 @@ public class ModuleManager {
         modules.add(new ChestStealer());
         modules.add(new NoScoreboard());
         modules.add(new SeekerFinder());
+        modules.add(new ServerFucker());
+        modules.add(new FlagDetector());
         modules.add(new AutoRespawn());
         modules.add(new MotionGraph());
         modules.add(new LagDetector());
@@ -78,6 +80,7 @@ public class ModuleManager {
         modules.add(new BlockInfo());
         modules.add(new ShopSaver());
         modules.add(new FastBreak());
+        modules.add(new ChestAura());
         modules.add(new FastFall());
         modules.add(new Velocity());
         modules.add(new IceSpeed());

@@ -14,9 +14,9 @@ public class Fix extends Command {
     public void execute(String[] args) {
         if (args.length == 0) {
             Wrapper.mc.thePlayer.motionY = 0.1;
-            NotifyUtil.notification("Befehl ausgeführt", "Deine PlayerPos wurde gefixed", NotificationType.INFO, 5);
+            notify.notification("Befehl ausgeführt", "Deine PlayerPos wurde gefixed", NotificationType.INFO, 5);
         } else {
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

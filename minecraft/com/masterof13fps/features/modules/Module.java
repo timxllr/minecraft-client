@@ -65,13 +65,13 @@ public abstract class Module implements Wrapper, Methods {
             this.onEnable();
             this.enabled = true;
             if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && getSettingByName("Toggle Notifications", getModuleManager().getModule(HUD.class)).isToggled()) {
-                NotifyUtil.notification("Modul aktiviert", "§c" + this.name, NotificationType.INFO, 1);
+                notify.notification("Modul aktiviert", "§c" + this.name, NotificationType.INFO, 1);
             }
         } else {
             this.onDisable();
             this.enabled = false;
             if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && getSettingByName("Toggle Notifications", getModuleManager().getModule(HUD.class)).isToggled()) {
-                NotifyUtil.notification("Modul deaktiviert", "§c" + this.name, NotificationType.INFO, 1);
+                notify.notification("Modul deaktiviert", "§c" + this.name, NotificationType.INFO, 1);
             }
         }
     }

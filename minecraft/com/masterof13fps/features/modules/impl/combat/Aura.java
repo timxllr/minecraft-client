@@ -277,8 +277,8 @@ public class Aura extends Module {
         float difYaw = yawAngle - currentYaw;
         float difPitch = finalPitch - currentPitch;
 
-        float yaw = Methods.updateRotation(currentYaw + f2, yawAngle, Math.abs(MathHelper.wrapAngleTo180_float(difYaw * 0.1F)));
-        float pitch = Methods.updateRotation(currentPitch + f3, finalPitch, Math.abs(MathHelper.wrapAngleTo180_float(difPitch * 0.1F)));
+        float yaw = updateRotation(currentYaw + f2, yawAngle, Math.abs(MathHelper.wrapAngleTo180_float(difYaw * 0.1F)));
+        float pitch = updateRotation(currentPitch + f3, finalPitch, Math.abs(MathHelper.wrapAngleTo180_float(difPitch * 0.1F)));
 
         yaw -= yaw % f1;
         pitch -= pitch % f1;

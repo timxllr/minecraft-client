@@ -19,21 +19,21 @@ public class Register extends Command implements Wrapper {
         switch (args.length) {
             case 1:
                 sendChatMessage("/register " + args[0]);
-                NotifyUtil.notification("Registration abgeschlossen!", "Du hast dich mit dem Passwort '" + args[0] +
+                notify.notification("Registration abgeschlossen!", "Du hast dich mit dem Passwort '" + args[0] +
                         "' registriert!", NotificationType.INFO, 5);
                 break;
             case 2:
                 if (args[1].equalsIgnoreCase(args[0])) {
                     sendChatMessage("/register " + args[0] + " " + args[1]);
-                    NotifyUtil.notification("Registration abgeschlossen!", "Du hast dich mit dem Passwort '" + args[0] +
+                    notify.notification("Registration abgeschlossen!", "Du hast dich mit dem Passwort '" + args[0] +
                             "' registriert!", NotificationType.INFO, 5);
                 } else {
-                    NotifyUtil.notification("Passwörter nicht gleich!", "Die beiden Passwörter stimmen nicht überein " +
+                    notify.notification("Passwörter nicht gleich!", "Die beiden Passwörter stimmen nicht überein " +
                             "und wurden nicht abgesendet!", NotificationType.ERROR, 5);
                 }
                 break;
             default:
-                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+                notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
                 break;
         }
     }

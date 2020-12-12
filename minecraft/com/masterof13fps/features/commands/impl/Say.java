@@ -19,7 +19,7 @@ public class Say extends Command {
             }
             mc.thePlayer.sendQueue.addToSendQueue(new C01PacketChatMessage(message.toString()));
         }else{
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

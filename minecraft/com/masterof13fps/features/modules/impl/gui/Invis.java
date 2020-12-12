@@ -17,12 +17,12 @@ public class Invis extends Module {
     @Override
     public void onEnable() {
         mc.displayGuiScreen(null);
-        NotifyUtil.notification("Invis aktiviert", "Drücke §cSHIFT + RCONTROL§r um den §6Invis-Modus§r zu §6deaktivieren§r!", NotificationType.INFO, 5);
+        notify.notification("Invis aktiviert", "Drücke §cSHIFT + RCONTROL§r um den §6Invis-Modus§r zu §6deaktivieren§r!", NotificationType.INFO, 5);
     }
 
     @Override
     public void onDisable() {
-        NotifyUtil.notification("Invis deaktiviert", "Alle Funktionen sind nun wieder verfügbar!", NotificationType.INFO, 5);
+        notify.notification("Invis deaktiviert", "Alle Funktionen sind nun wieder verfügbar!", NotificationType.INFO, 5);
     }
 
     @Override

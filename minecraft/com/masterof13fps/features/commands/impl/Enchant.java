@@ -16,13 +16,13 @@ public class Enchant extends Command {
     public void execute(String[] args) {
 
         if (!Wrapper.mc.thePlayer.capabilities.isCreativeMode)
-            NotifyUtil.chat("Nur im Kreativmodus verfügbar!");
+            notify.chat("Nur im Kreativmodus verfügbar!");
 
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("hand")) {
                 ItemStack currentItem = Wrapper.mc.thePlayer.inventory.getCurrentItem();
                 if (currentItem == null)
-                    NotifyUtil.chat("Halte ein Item in der Hand!");
+                    notify.chat("Halte ein Item in der Hand!");
                 for (Enchantment enchantment : Enchantment.enchantmentsList)
                     try {
                         if (enchantment == Enchantment.silkTouch)
@@ -48,12 +48,12 @@ public class Enchant extends Command {
 
                         }
                 }
-                NotifyUtil.chat("Erfolgreich alle Items verzaubert!");
+                notify.chat("Erfolgreich alle Items verzaubert!");
             } else {
-                NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+                notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
             }
         } else {
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

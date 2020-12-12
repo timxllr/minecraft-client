@@ -16,13 +16,13 @@ public class Help extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length == 0) {
-            NotifyUtil.chat("Alle Befehle:");
+            notify.chat("Alle Befehle:");
 
             for (Command c : Client.main().getCommandManager().getCommands()) {
-                NotifyUtil.chat(Client.main().getClientPrefix() + c.getName().toLowerCase());
+                notify.chat(Client.main().getClientPrefix() + c.getName().toLowerCase());
             }
         } else {
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 

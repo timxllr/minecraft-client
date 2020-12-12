@@ -25,7 +25,7 @@ public class AntiVoid extends Module {
 
     @Override
     public void onEnable() {
-        NotifyUtil.notification("AntiVoid Hinweis", "Das Modul funktioniert nur auf Servern mit AntiCheat!", NotificationType.INFO, 5);
+        notify.notification("AntiVoid Hinweis", "Das Modul funktioniert nur auf Servern mit AntiCheat!", NotificationType.INFO, 5);
     }
 
     @Override

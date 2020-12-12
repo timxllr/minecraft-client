@@ -28,7 +28,7 @@ public class Vanish extends Command {
     public void execute(String[] args) {
         if (args.length == 0) {
             if (vanishedPlayers.isEmpty()) {
-                NotifyUtil.notification("Keine Treffer!", "Es sind derzeit keine Spieler unsichtbar!", NotificationType.INFO, 5);
+                notify.notification("Keine Treffer!", "Es sind derzeit keine Spieler unsichtbar!", NotificationType.INFO, 5);
             } else {
                 for (GameProfile profile : this.vanishedPlayers) {
                     if (profile != null) {
@@ -37,7 +37,7 @@ public class Vanish extends Command {
                 }
             }
         } else {
-            NotifyUtil.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
+            notify.notification("Falscher Syntax!", "Nutze §c" + syntax + "§r!", NotificationType.ERROR, 5);
         }
     }
 
@@ -58,10 +58,10 @@ public class Vanish extends Command {
                 }
                 reader.close();
                 invisiblePlayers.add(name);
-                NotifyUtil.chat(invisiblePlayers.toString());
+                notify.chat(invisiblePlayers.toString());
                 invisiblePlayers.clear();
             } catch (Exception e) {
-                NotifyUtil.notification("Timeout", "NameMC sendet keine Rückmeldung!", NotificationType.ERROR, 5);
+                notify.notification("Timeout", "NameMC sendet keine Rückmeldung!", NotificationType.ERROR, 5);
             }
         }).start();
     }

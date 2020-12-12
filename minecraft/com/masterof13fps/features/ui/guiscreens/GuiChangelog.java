@@ -4,7 +4,6 @@ import com.masterof13fps.Client;
 import com.masterof13fps.Wrapper;
 import com.masterof13fps.manager.fontmanager.FontManager;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
-import com.masterof13fps.utils.NotifyUtil;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -82,15 +81,15 @@ public class GuiChangelog extends GuiScreen {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     try {
                         Desktop.getDesktop().browse(new URI("https://github.com/RealFantaCoke/minecraft-client/commits"));
-                        NotifyUtil.debug("Opened GitHub Repository from Changelog screen");
+                        notify.debug("Opened GitHub Repository from Changelog screen");
                     } catch (URISyntaxException ignored) {
-                        NotifyUtil.debug("Failed to open GitHub Repository from Changelog screen");
+                        notify.debug("Failed to open GitHub Repository from Changelog screen");
                     }
                 }
                 break;
             case 3:
                 mc.displayGuiScreen(this);
-                NotifyUtil.debug("Reloaded Changelog screen");
+                notify.debug("Reloaded Changelog screen");
                 break;
         }
     }

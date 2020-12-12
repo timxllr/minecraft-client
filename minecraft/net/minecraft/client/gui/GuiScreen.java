@@ -18,6 +18,7 @@ import java.util.Set;
 
 import com.masterof13fps.Methods;
 import com.masterof13fps.Wrapper;
+import com.masterof13fps.utils.time.TimeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.stream.GuiTwitchUserMode;
 import net.minecraft.client.renderer.GlStateManager;
@@ -52,6 +53,8 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback, Wrapper
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Set<String> PROTOCOLS = Sets.newHashSet(new String[] {"http", "https"});
     private static final Splitter NEWLINE_SPLITTER = Splitter.on('\n');
+
+    public TimeHelper timeHelper = new TimeHelper();
 
     /** Reference to the Minecraft object. */
     protected Minecraft mc;

@@ -25,7 +25,7 @@ public class InventoryMove extends Module {
 
     @Override
     public void onEnable() {
-        NotifyUtil.notification("InventoryMove", "Du kannst dich mit den Pfeiltasten im Inventar bewegen", NotificationType.INFO, 5);
+        notify.notification("InventoryMove", "Du kannst dich mit den Pfeiltasten im Inventar bewegen", NotificationType.INFO, 5);
     }
 
     @Override
