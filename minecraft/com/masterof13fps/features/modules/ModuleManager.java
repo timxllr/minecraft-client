@@ -97,6 +97,7 @@ public class ModuleManager {
         modules.add(new Commands());
         modules.add(new AirStuck());
         modules.add(new AntiVoid());
+        modules.add(new LongJump());
         modules.add(new FastUse());
         modules.add(new AntiWeb());
         modules.add(new Trigger());
