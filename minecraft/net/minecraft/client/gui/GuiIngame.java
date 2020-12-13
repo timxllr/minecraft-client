@@ -126,8 +126,8 @@ public class GuiIngame extends Gui implements Wrapper {
 
     public void renderGameOverlay(float partialTicks) {
         ScaledResolution scaledresolution = new ScaledResolution(mc);
-        int i = scaledresolution.width();
-        int j = scaledresolution.height();
+        int width = scaledresolution.width();
+        int height = scaledresolution.height();
         mc.entityRenderer.setupOverlayRendering();
         GlStateManager.enableBlend();
 
@@ -169,7 +169,7 @@ public class GuiIngame extends Gui implements Wrapper {
         if (showCrosshair() && mc.gameSettings.thirdPersonView < 1) {
             GlStateManager.tryBlendFuncSeparate(775, 769, 1, 0);
             GlStateManager.enableAlpha();
-            drawTexturedModalRect(i / 2 - 7, j / 2 - 7, 0, 0, 16, 16);
+            drawTexturedModalRect(width / 2 - 7, height / 2 - 7, 0, 0, 16, 16);
         }
 
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
@@ -195,14 +195,14 @@ public class GuiIngame extends Gui implements Wrapper {
             }
 
             int k = (int) (220.0F * f2) << 24 | 1052704;
-            drawRect(0, 0, i, j, k);
+            drawRect(0, 0, width, height, k);
             GlStateManager.enableAlpha();
             GlStateManager.enableDepth();
             mc.mcProfiler.endSection();
         }
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        int i2 = i / 2 - 91;
+        int i2 = width / 2 - 91;
 
         if (mc.thePlayer.isRidingHorse()) {
             renderHorseJumpBar(scaledresolution, i2);
@@ -235,7 +235,7 @@ public class GuiIngame extends Gui implements Wrapper {
 
             if (k1 > 8) {
                 GlStateManager.pushMatrix();
-                GlStateManager.translate((float) (i / 2), (float) (j - 68), 0.0F);
+                GlStateManager.translate((float) (width / 2), (float) (height - 68), 0.0F);
                 GlStateManager.enableBlend();
                 GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
                 int i1 = 16777215;
@@ -270,7 +270,7 @@ public class GuiIngame extends Gui implements Wrapper {
 
             if (l1 > 8) {
                 GlStateManager.pushMatrix();
-                GlStateManager.translate((float) (i / 2), (float) (j / 2), 0.0F);
+                GlStateManager.translate((float) (width / 2), (float) (height / 2), 0.0F);
                 GlStateManager.enableBlend();
                 GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
                 GlStateManager.pushMatrix();
@@ -311,7 +311,7 @@ public class GuiIngame extends Gui implements Wrapper {
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.disableAlpha();
         GlStateManager.pushMatrix();
-        GlStateManager.translate(0.0F, (float) (j - 48), 0.0F);
+        GlStateManager.translate(0.0F, (float) (height - 48), 0.0F);
         mc.mcProfiler.startSection("chat");
         persistantChatGUI.drawChat(updateCounter);
         mc.mcProfiler.endSection();
@@ -322,7 +322,7 @@ public class GuiIngame extends Gui implements Wrapper {
             overlayPlayerList.updatePlayerList(false);
         } else {
             overlayPlayerList.updatePlayerList(true);
-            overlayPlayerList.renderPlayerlist(i, scoreboard, scoreobjective1);
+            overlayPlayerList.renderPlayerlist(width, scoreboard, scoreobjective1);
         }
 
         NotificationManager.render();
@@ -429,7 +429,7 @@ public class GuiIngame extends Gui implements Wrapper {
         mc.mcProfiler.endSection();
     }
 
-    public void renderExpBar(ScaledResolution p_175176_1_, int p_175176_2_) {
+    public void renderExpBar(ScaledResolution scaledResolution, int p_175176_2_) {
         if (!Client.main().modMgr().getByName("NoEXP").state()) {
             mc.mcProfiler.startSection("expBar");
             mc.getTextureManager().bindTexture(Gui.icons);
@@ -438,7 +438,7 @@ public class GuiIngame extends Gui implements Wrapper {
             if (i > 0) {
                 short short1 = 182;
                 int k = (int) (mc.thePlayer.experience * (float) (short1 + 1));
-                int j = p_175176_1_.height() - 32 + 3;
+                int j = scaledResolution.height() - 32 + 3;
                 drawTexturedModalRect(p_175176_2_, j, 0, 64, short1, 5);
 
                 if (k > 0) {
@@ -457,8 +457,8 @@ public class GuiIngame extends Gui implements Wrapper {
                 }
 
                 String s = "" + mc.thePlayer.experienceLevel;
-                int i1 = (p_175176_1_.width() - getFontRenderer().getStringWidth(s)) / 2;
-                int l = p_175176_1_.height() - 31 - 4;
+                int i1 = (scaledResolution.width() - getFontRenderer().getStringWidth(s)) / 2;
+                int l = scaledResolution.height() - 31 - 4;
                 boolean flag = false;
                 getFontRenderer().drawString(s, i1 + 1, l, 0);
                 getFontRenderer().drawString(s, i1 - 1, l, 0);
