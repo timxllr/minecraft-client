@@ -2,6 +2,7 @@ package com.masterof13fps.features.modules.impl.movement;
 
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
+import com.masterof13fps.manager.notificationmanager.NotificationType;
 import com.masterof13fps.utils.entity.EntityUtils;
 import com.masterof13fps.utils.entity.PlayerUtil;
 import com.masterof13fps.manager.settingsmanager.Setting;
@@ -23,17 +24,17 @@ public class LongJump extends Module {
 
     @Override
     public void onEnable() {
-
+        notify.notification("Verwendungshinweis", "Drücke JUMP um LongJump zu verwenden!", NotificationType.INFO, 5);
     }
 
     @Override
     public void onDisable() {
-
+        setTimerSpeed(1.0f);
     }
 
     @Override
     public void onEvent(Event event) {
-        if (event instanceof EventMotion) {
+        if (event instanceof EventMotion && getGameSettings().keyBindJump.isKeyDown()) {
             switch (mode.getCurrentMode()) {
                 case "AAC Old": {
                     doAACOld();
@@ -102,44 +103,44 @@ public class LongJump extends Module {
 
     private void doMineSecure() {
         if (isMoving()) {
-            if ((mc.thePlayer.onGround) && !(mc.thePlayer.isInWater())) {
+            if ((getPlayer().onGround) && !(getPlayer().isInWater())) {
                 mc.timer.timerSpeed = 1.0F;
-                mc.thePlayer.motionY = 0.54D;
-            } else if (!mc.thePlayer.isInWater()) {
+                getPlayer().motionY = 0.54D;
+            } else if (!getPlayer().isInWater()) {
                 PlayerUtil.setSpeed(3.0D);
             }
         } else {
-            mc.thePlayer.motionZ = (mc.thePlayer.motionX = 0.0D);
+            getPlayer().motionZ = (getPlayer().motionX = 0.0D);
         }
     }
 
     private void doNCP() {
-        if ((isMoving()) && (mc.thePlayer.fallDistance < 1.0F)) {
+        if ((isMoving()) && (getPlayer().fallDistance < 1.0F)) {
             float x = (float) -Math.sin(PlayerUtil.getDirection());
             float z = (float) Math.cos(PlayerUtil.getDirection());
-            if (mc.thePlayer.isCollidedVertically && mc.gameSettings.keyBindJump.pressed) {
-                mc.thePlayer.motionX = (x * 0.29F);
-                mc.thePlayer.motionZ = (z * 0.29F);
+            if (getPlayer().isCollidedVertically && mc.gameSettings.keyBindJump.pressed) {
+                getPlayer().motionX = (x * 0.29F);
+                getPlayer().motionZ = (z * 0.29F);
             }
-            if (mc.thePlayer.motionY == 0.33319999363422365D) {
-                mc.thePlayer.motionX = (x * 1.261D);
-                mc.thePlayer.motionZ = (z * 1.261D);
+            if (getPlayer().motionY == 0.33319999363422365D) {
+                getPlayer().motionX = (x * 1.261D);
+                getPlayer().motionZ = (z * 1.261D);
             }
         }
     }
 
     private void doAACOld() {
         mc.gameSettings.keyBindForward.pressed = false;
-        if (mc.thePlayer.onGround) {
+        if (getPlayer().onGround) {
             jump = true;
         }
 
-        if (mc.thePlayer.onGround && timeHelper.isDelayComplete(500L)) {
-            mc.thePlayer.motionY = 0.42D;
+        if (getPlayer().onGround && timeHelper.isDelayComplete(500L)) {
+            getPlayer().motionY = 0.42D;
             PlayerUtil.toFwd(2.3D);
             timeHelper.reset();
-        } else if (!mc.thePlayer.onGround && jump) {
-            mc.thePlayer.motionX = mc.thePlayer.motionZ = 0.0D;
+        } else if (!getPlayer().onGround && jump) {
+            getPlayer().motionX = getPlayer().motionZ = 0.0D;
             jump = false;
         }
     }
