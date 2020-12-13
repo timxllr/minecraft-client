@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.masterof13fps.Client;
-import com.masterof13fps.features.modules.impl.gui.Invis;
+import com.masterof13fps.features.modules.impl.gui.HUD;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -96,7 +96,7 @@ public class GuiOverlayDebug extends Gui {
         String fakeVer = Client.main().getFakeVer();
         BlockPos blockpos = new BlockPos(this.mc.getRenderViewEntity().posX, this.mc.getRenderViewEntity().getEntityBoundingBox().minY, this.mc.getRenderViewEntity().posZ);
 
-        if (!(Client.main().modMgr().getModule(Invis.class)).state()) {
+        if (Client.main().modMgr().getModule(HUD.class).state()) {
             if (this.isReducedDebug()) {
                 return Lists.newArrayList(new String[]{"Minecraft 1.8.8 (" + this.mc.getVersion() + "/" + ClientBrandRetriever.getClientModName() + ")", this.mc.debug, this.mc.renderGlobal.getDebugInfoRenders(), this.mc.renderGlobal.getDebugInfoEntities(), "P: " + this.mc.effectRenderer.getStatistics() + ". T: " + this.mc.theWorld.getDebugLoadedEntities(), this.mc.theWorld.getProviderName(), "", String.format("Chunk-relative: %d %d %d", new Object[]{Integer.valueOf(blockpos.getX() & 15), Integer.valueOf(blockpos.getY() & 15), Integer.valueOf(blockpos.getZ() & 15)})});
             } else {

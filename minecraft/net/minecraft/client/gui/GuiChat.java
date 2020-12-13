@@ -3,7 +3,6 @@ package net.minecraft.client.gui;
 import com.google.common.collect.Lists;
 import com.masterof13fps.Client;
 import com.masterof13fps.features.modules.impl.gui.HUD;
-import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.network.play.client.C14PacketTabComplete;
@@ -67,34 +66,29 @@ public class GuiChat extends GuiScreen {
                 break;
             }
             case "Custom": {
-                if (!(Client.main().modMgr().getModule(Invis.class).state())) {
-                    Keyboard.enableRepeatEvents(true);
-                    sentHistoryCursor = mc.ingameGUI.getChatGUI().getSentMessages().size();
+                Keyboard.enableRepeatEvents(true);
+                sentHistoryCursor = mc.ingameGUI.getChatGUI().getSentMessages().size();
 
-                    switch (font) {
-                        case "Comfortaa": {
-                            inputField = new GuiTextField(0, Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN), 3, height - 11, width - 4, 12);
-                            break;
-                        }
-                        case "Bauhaus": {
-                            inputField = new GuiTextField(0, Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
-                            break;
-                        }
-                        case "Exo": {
-                            inputField = new GuiTextField(0, Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
-                            break;
-                        }
+                switch (font) {
+                    case "Comfortaa": {
+                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN), 3, height - 11, width - 4, 12);
+                        break;
                     }
-
-                    try {
-                        inputField.setMaxStringLength(100);
-                        inputField.setEnableBackgroundDrawing(false);
-                        inputField.setFocused(true);
-                        inputField.setText(defaultInputFieldText);
-                        inputField.setCanLoseFocus(false);
-                    } catch (NullPointerException ignored) {
+                    case "Bauhaus": {
+                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
+                        break;
+                    }
+                    case "Exo": {
+                        inputField = new GuiTextField(0, Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN), 3, height - 12, width - 4, 12);
+                        break;
                     }
                 }
+
+                inputField.setMaxStringLength(100);
+                inputField.setEnableBackgroundDrawing(false);
+                inputField.setFocused(true);
+                inputField.setText(defaultInputFieldText);
+                inputField.setCanLoseFocus(false);
                 break;
             }
         }
@@ -301,25 +295,23 @@ public class GuiChat extends GuiScreen {
                 break;
             }
             case "Custom": {
-                if (!(Client.main().modMgr().getModule(Invis.class).state())) {
-                    Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("§a" + String.valueOf(inputField.getText().length()) + " §8/ §c" + inputField.getMaxStringLength(), 2, s.height() - 25, -1);
+                Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).drawStringWithShadow("§a" + String.valueOf(inputField.getText().length()) + " §8/ §c" + inputField.getMaxStringLength(), 2, s.height() - 25, -1);
 
-                    switch (font) {
-                        case "Comfortaa": {
-                            width2 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                            RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
-                            break;
-                        }
-                        case "Bauhaus": {
-                            width2 = Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                            RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
-                            break;
-                        }
-                        case "Exo": {
-                            width2 = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
-                            RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
-                            break;
-                        }
+                switch (font) {
+                    case "Comfortaa": {
+                        width2 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
+                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        break;
+                    }
+                    case "Bauhaus": {
+                        width2 = Client.main().fontMgr().font("Bauhaus Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
+                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        break;
+                    }
+                    case "Exo": {
+                        width2 = Client.main().fontMgr().font("Exo Regular", 20, Font.PLAIN).getStringWidth(inputField.getText()) + fixedWidth;
+                        RenderUtils.drawRect(2, height - 14, width2 + 4, height - 2, Integer.MIN_VALUE);
+                        break;
                     }
                 }
                 break;

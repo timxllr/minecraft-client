@@ -2,7 +2,6 @@ package net.minecraft.client.renderer.entity;
 
 import com.masterof13fps.Client;
 import com.masterof13fps.Wrapper;
-import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.features.modules.impl.render.NameProtect;
 import com.masterof13fps.features.modules.impl.render.NameTags;
 import com.masterof13fps.manager.eventmanager.impl.EventNameTag;
@@ -317,7 +316,7 @@ public abstract class Render<T extends Entity> implements Wrapper {
             return;
         }
 
-        if (!(Client.main().modMgr().getModule(NameTags.class).state()) || Client.main().modMgr().getModule(Invis.class).state()) {
+        if (!(Client.main().modMgr().getModule(NameTags.class).state())) {
             double d0 = entityIn.getDistanceSqToEntity(this.renderManager.livingPlayer);
 
             if (d0 <= (double) (maxDistance * maxDistance)) {

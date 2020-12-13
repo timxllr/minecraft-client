@@ -7,7 +7,6 @@ import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.impl.combat.Aura;
 import com.masterof13fps.features.modules.impl.gui.HUD;
-import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.features.ui.guiscreens.GuiItems;
 import com.masterof13fps.features.ui.tabgui.TabGUI;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
@@ -49,30 +48,19 @@ public class Interface extends GuiIngame implements Wrapper, Methods {
         rainbowSpeed = (int) Client.main().setMgr().settingByName("Rainbow Speed", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
         rainbowBrightness = (int) Client.main().setMgr().settingByName("Rainbow Brightness", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
         rainbowSaturation = (int) Client.main().setMgr().settingByName("Rainbow Saturation", Client.main().modMgr().getModule(HUD.class)).getCurrentValue();
-        if (!(Client.main().modMgr().getByName("Invis").state())) {
-            Display.setTitle(Client.main().getClientName() + " " + Client.main().getClientVersion() + " | made by " + Client.main().getClientCoder());
+        Display.setTitle(Client.main().getClientName() + " " + Client.main().getClientVersion() + " | made by " + Client.main().getClientCoder());
 
-            if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL) && Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
-                Client.main().modMgr().getModule(Invis.class).setState(true);
-            }
+        if (Keyboard.isKeyDown(Keyboard.KEY_END) && mc.currentScreen == null) {
+            mc.displayGuiScreen(new GuiItems(null));
+        }
 
-            if (Keyboard.isKeyDown(Keyboard.KEY_END) && mc.currentScreen == null) {
-                mc.displayGuiScreen(new GuiItems(null));
-            }
-
-            if (Client.main().modMgr().getByName("HUD").state()) {
-                if (Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).isToggled()) {
+        if (Client.main().modMgr().getByName("HUD").state()) {
+            if (Client.main().setMgr().settingByName("Developer Mode", Client.main().modMgr().getByName("HUD")).isToggled()) {
+                doRenderStuff();
+            } else {
+                if (mc.currentScreen == null && !mc.gameSettings.showDebugInfo) {
                     doRenderStuff();
-                } else {
-                    if (mc.currentScreen == null && !mc.gameSettings.showDebugInfo) {
-                        doRenderStuff();
-                    }
                 }
-            }
-        } else {
-            Display.setTitle("Minecraft 1.8.8");
-            if (Keyboard.isKeyDown(Keyboard.KEY_RCONTROL) && (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))) {
-                Client.main().modMgr().getModule(Invis.class).setState(false);
             }
         }
     }

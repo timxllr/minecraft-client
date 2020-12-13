@@ -3,7 +3,6 @@ package net.minecraft.client.gui;
 import com.google.common.collect.Lists;
 import com.masterof13fps.Client;
 import com.masterof13fps.features.modules.impl.gui.HUD;
-import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -87,7 +86,6 @@ public class GuiNewChat extends Gui {
                                         break;
                                     }
                                     case "Custom": {
-                                        if (!(Client.main().modMgr().getModule(Invis.class).state())) {
                                             switch (font) {
                                                 case "Comfortaa": {
                                                     Client.main().fontMgr().font("Comfortaa", 16, Font.PLAIN).drawStringWithShadow(s, (float) i2, (float) (j2 - 7), 16777215 + (l1 << 24));
@@ -102,7 +100,6 @@ public class GuiNewChat extends Gui {
                                                     break;
                                                 }
                                             }
-                                        }
                                         break;
                                     }
                                 }

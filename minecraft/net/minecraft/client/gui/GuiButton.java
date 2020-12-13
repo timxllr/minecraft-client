@@ -6,54 +6,45 @@ import com.masterof13fps.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 
 import java.awt.*;
 
 public class GuiButton extends Gui {
+    protected static final ResourceLocation buttonTextures = new ResourceLocation("textures/gui/widgets.png");
     public double cs = 0;
     public int alpha = 255;
-
-    protected static final ResourceLocation buttonTextures = new ResourceLocation("textures/gui/widgets.png");
-
-    /**
-     * Button width in pixels
-     */
-    protected int width;
-
-    /**
-     * Button height in pixels
-     */
-    protected int height;
-
     /**
      * The x position of this control.
      */
     public int xPosition;
-
     /**
      * The y position of this control.
      */
     public int yPosition;
-
     /**
      * The string displayed on this control.
      */
     public String displayString;
     public String[] buttonDesc;
     public int id;
-
     /**
      * True if this control is enabled, false to disable.
      */
     public boolean enabled;
-
     /**
      * Hides the button completely if false.
      */
     public boolean visible;
+    /**
+     * Button width in pixels
+     */
+    protected int width;
+    /**
+     * Button height in pixels
+     */
+    protected int height;
     protected boolean hovered;
 
     public GuiButton(int buttonId, int x, int y, String buttonText) {
@@ -107,61 +98,36 @@ public class GuiButton extends Gui {
      * Draws this button to the screen.
      */
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-        if (Client.main().modMgr().getByName("Invis").state()) {
-            if (visible) {
-                FontRenderer fontrenderer = mc.fontRendererObj;
-                mc.getTextureManager().bindTexture(buttonTextures);
-                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                hovered = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height;
-                int i = getHoverState(hovered);
-                GlStateManager.enableBlend();
-                GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-                GlStateManager.blendFunc(770, 771);
-                drawTexturedModalRect(xPosition, yPosition, 0, 46 + i * 20, width / 2, height);
-                drawTexturedModalRect(xPosition + width / 2, yPosition, 200 - width / 2, 46 + i * 20, width / 2, height);
-                mouseDragged(mc, mouseX, mouseY);
-                int j = 14737632;
-
-                if (!enabled) {
-                    j = 10526880;
-                } else if (hovered) {
-                    j = 16777120;
+        if (visible) {
+            hovered = ((mouseX >= xPosition) && (mouseY >= yPosition)
+                    && (mouseX < xPosition + width) && (mouseY < yPosition + height));
+            updatefade();
+            if (hovered) {
+                if (cs >= 0.1) {
+                    cs = 0.1;
                 }
-
-                drawCenteredString(fontrenderer, displayString, xPosition + width / 2, yPosition + (height - 8) / 2, j);
+                cs += 0.1;
+            } else {
+                if (cs <= 0) {
+                    cs = 0;
+                }
+                cs -= 1;
             }
-        } else {
-            if (visible) {
-                hovered = ((mouseX >= xPosition) && (mouseY >= yPosition)
-                        && (mouseX < xPosition + width) && (mouseY < yPosition + height));
-                updatefade();
-                if (hovered) {
-                    if (cs >= 0.1) {
-                        cs = 0.1;
-                    }
-                    cs += 0.1;
-                } else {
-                    if (cs <= 0) {
-                        cs = 0;
-                    }
-                    cs -= 1;
-                }
 
-                Color color1 = new Color(0.0F, 0.0F, 0.0F, alpha / 255.0F);
-                int col1 = color1.getRGB();
+            Color color1 = new Color(0.0F, 0.0F, 0.0F, alpha / 255.0F);
+            int col1 = color1.getRGB();
 
-                if (enabled) {
-                    RenderUtils.drawRoundedRect((float) (xPosition + cs), yPosition, (float) ((float) width - cs - 5), height - 5, 9, new Color(16, 16, 16).getRGB());
-                } else {
-                    RenderUtils.drawRoundedRect((float) (xPosition + cs), yPosition, (float) ((float) width - cs - 5), height - 5, 9, new Color(103, 103, 103).getRGB());
-                }
-
-                mouseDragged(mc, mouseX, mouseY);
-                int var6 = 14737632;
-                String text = StringUtils.stripControlCodes(displayString);
-                UnicodeFontRenderer fontRenderer = Client.main().fontMgr().font("Comfortaa", 18, Font.PLAIN);
-                fontRenderer.drawStringWithShadow(text, xPosition - (fontRenderer.getStringWidth(text) / 2) + width / 2, yPosition + (height - 6) / 2, var6);
+            if (enabled) {
+                RenderUtils.drawRoundedRect((float) (xPosition + cs), yPosition, (float) ((float) width - cs - 5), height - 5, 9, new Color(16, 16, 16).getRGB());
+            } else {
+                RenderUtils.drawRoundedRect((float) (xPosition + cs), yPosition, (float) ((float) width - cs - 5), height - 5, 9, new Color(103, 103, 103).getRGB());
             }
+
+            mouseDragged(mc, mouseX, mouseY);
+            int var6 = 14737632;
+            String text = StringUtils.stripControlCodes(displayString);
+            UnicodeFontRenderer fontRenderer = Client.main().fontMgr().font("Comfortaa", 18, Font.PLAIN);
+            fontRenderer.drawStringWithShadow(text, xPosition - (fontRenderer.getStringWidth(text) / 2) + width / 2, yPosition + (height - 6) / 2, var6);
         }
     }
 

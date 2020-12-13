@@ -11,7 +11,6 @@ import com.masterof13fps.features.modules.impl.world.*;
 import com.masterof13fps.utils.FileUtils;
 import com.masterof13fps.features.modules.impl.gui.ClickGUI;
 import com.masterof13fps.features.modules.impl.gui.HUD;
-import com.masterof13fps.features.modules.impl.gui.Invis;
 import net.minecraft.client.Minecraft;
 
 import java.io.File;
@@ -120,7 +119,6 @@ public class ModuleManager {
         modules.add(new Tower());
         modules.add(new Blink());
         modules.add(new NoBob());
-        modules.add(new Invis());
         modules.add(new Phase());
         modules.add(new Eagle());
         modules.add(new Nuker());

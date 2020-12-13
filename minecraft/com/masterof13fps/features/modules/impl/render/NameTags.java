@@ -5,7 +5,6 @@ import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
 import com.masterof13fps.utils.render.Colors;
 import com.masterof13fps.utils.render.RenderUtils;
-import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.manager.settingsmanager.Setting;
 import com.masterof13fps.manager.eventmanager.Event;
 import com.masterof13fps.manager.eventmanager.impl.EventRender;
@@ -52,7 +51,7 @@ public class NameTags extends Module {
     public void onEvent(Event event) {
         if (event instanceof EventRender) {
             for (EntityPlayer entity : mc.theWorld.playerEntities) {
-                if ((entity != mc.thePlayer) && (!entity.isInvisible()) && !(Client.main().modMgr().getModule(Invis.class).state())) {
+                if ((entity != mc.thePlayer) && (!entity.isInvisible())) {
                     String name;
                     if (!(Client.main().modMgr().getModule(NameProtect.class).state())) {
                         name = entity.getName();

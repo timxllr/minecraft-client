@@ -2,14 +2,11 @@ package net.minecraft.client.entity;
 
 import com.masterof13fps.Client;
 import com.masterof13fps.Wrapper;
-import com.masterof13fps.features.modules.impl.gui.Invis;
-import com.masterof13fps.features.modules.impl.misc.Commands;
 import com.masterof13fps.features.modules.impl.movement.NoSlow;
 import com.masterof13fps.manager.eventmanager.impl.EventChat;
 import com.masterof13fps.manager.eventmanager.impl.EventMotion;
 import com.masterof13fps.manager.eventmanager.impl.EventUpdate;
 import com.masterof13fps.manager.notificationmanager.NotificationType;
-import com.masterof13fps.utils.NotifyUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -261,15 +258,13 @@ public class EntityPlayerSP extends AbstractClientPlayer implements Wrapper {
         }
 
         String prefix = Client.main().getClientPrefix();
-        if (!(Client.main().modMgr().getModule(Invis.class).state()) && Client.main().modMgr().getModule(Commands.class).state()) {
-            if (Client.main().getCommandManager().execute(message)) {
-                return;
-            }
-            if (message.startsWith(prefix)) {
-                notify.notification("Befehl nicht gefunden!",
-                        "Versuche es mit '" + Client.main().getClientPrefix() + "help'", NotificationType.ERROR, 5);
-                return;
-            }
+        if (Client.main().getCommandManager().execute(message)) {
+            return;
+        }
+        if (message.startsWith(prefix)) {
+            notify.notification("Befehl nicht gefunden!",
+                    "Versuche es mit '" + Client.main().getClientPrefix() + "help'", NotificationType.ERROR, 5);
+            return;
         }
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
     }

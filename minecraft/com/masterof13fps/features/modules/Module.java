@@ -5,13 +5,10 @@ import com.masterof13fps.Wrapper;
 import com.masterof13fps.features.modules.impl.gui.HUD;
 import com.masterof13fps.utils.time.TimeHelper;
 import com.masterof13fps.Methods;
-import com.masterof13fps.features.modules.impl.gui.Invis;
-import com.masterof13fps.features.modules.impl.misc.Plugins;
 import com.masterof13fps.features.modules.impl.misc.SendPublic;
 import com.masterof13fps.manager.eventmanager.Event;
 import com.masterof13fps.manager.notificationmanager.NotificationType;
 import com.masterof13fps.manager.settingsmanager.SettingsManager;
-import com.masterof13fps.utils.NotifyUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C01PacketChatMessage;
 import org.lwjgl.input.Keyboard;
@@ -64,13 +61,13 @@ public abstract class Module implements Wrapper, Methods {
         if (state) {
             this.onEnable();
             this.enabled = true;
-            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && getSettingByName("Toggle Notifications", getModuleManager().getModule(HUD.class)).isToggled()) {
+            if (!(this.isCategory(Category.GUI)) && getSettingByName("Toggle Notifications", getModuleManager().getModule(HUD.class)).isToggled()) {
                 notify.notification("Modul aktiviert", "§c" + this.name, NotificationType.INFO, 1);
             }
         } else {
             this.onDisable();
             this.enabled = false;
-            if (!(this.isCategory(Category.GUI)) && !(Client.main().modMgr().getModule(Invis.class)).state() && getSettingByName("Toggle Notifications", getModuleManager().getModule(HUD.class)).isToggled()) {
+            if (!(this.isCategory(Category.GUI)) && getSettingByName("Toggle Notifications", getModuleManager().getModule(HUD.class)).isToggled()) {
                 notify.notification("Modul deaktiviert", "§c" + this.name, NotificationType.INFO, 1);
             }
         }

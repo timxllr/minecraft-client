@@ -1,13 +1,6 @@
 package net.minecraft.client.multiplayer;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.masterof13fps.Client;
-import com.masterof13fps.features.modules.impl.gui.Invis;
 import com.masterof13fps.manager.fontmanager.UnicodeFontRenderer;
 import com.masterof13fps.utils.render.GLSLSandboxShader;
 import com.masterof13fps.utils.render.RenderUtils;
@@ -30,11 +23,16 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
-public class GuiConnecting extends GuiScreen {
-    private GLSLSandboxShader shader;
+import java.awt.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.concurrent.atomic.AtomicInteger;
 
+public class GuiConnecting extends GuiScreen {
     private static final AtomicInteger CONNECTION_ID = new AtomicInteger(0);
     private static final Logger logger = LogManager.getLogger();
+    private GLSLSandboxShader shader;
     private NetworkManager networkManager;
     private boolean cancel;
     private GuiScreen previousGuiScreen;
@@ -176,22 +174,14 @@ public class GuiConnecting extends GuiScreen {
 
         RenderUtils.drawRect(s.width() / 2 - 120, s.height() / 2 - 50, s.width() / 2 + 120, s.height() / 2 + 30, new Color(0, 0, 0, 140).getRGB());
 
-        if (!(Client.main().modMgr().getModule(Invis.class)).state()) {
-            UnicodeFontRenderer font1 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
-            String connecting = I18n.format("connect.connecting");
-            String authorizing = I18n.format("connect.authorizing");
+        UnicodeFontRenderer font1 = Client.main().fontMgr().font("Comfortaa", 20, Font.PLAIN);
+        String connecting = I18n.format("connect.connecting");
+        String authorizing = I18n.format("connect.authorizing");
 
-            if (this.networkManager == null) {
-                font1.drawStringWithShadow(connecting, width / 2 - font1.getStringWidth(connecting) / 2, height / 2 - 30, 16777215);
-            } else {
-                font1.drawStringWithShadow(authorizing, width / 2 - font1.getStringWidth(authorizing) / 2, height / 2 - 30, 16777215);
-            }
+        if (this.networkManager == null) {
+            font1.drawStringWithShadow(connecting, width / 2 - font1.getStringWidth(connecting) / 2, height / 2 - 30, 16777215);
         } else {
-            if (this.networkManager == null) {
-                this.drawCenteredString(this.fontRendererObj, I18n.format("connect.connecting"), width / 2, height / 2 - 50, 16777215);
-            } else {
-                this.drawCenteredString(this.fontRendererObj, I18n.format("connect.authorizing"), width / 2, height / 2 - 50, 16777215);
-            }
+            font1.drawStringWithShadow(authorizing, width / 2 - font1.getStringWidth(authorizing) / 2, height / 2 - 30, 16777215);
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);
