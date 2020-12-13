@@ -331,11 +331,11 @@ public class GuiMultiplayer extends GuiScreen implements GuiYesNoCallback {
 
         ScaledResolution sr = new ScaledResolution(mc);
 
-        RenderUtils.drawRect(0, sr.height() - 55, sr.width(), sr.height(), new Color(0, 0, 0, 120).getRGB());
+        RenderUtils.drawRect(0, sr.height() - 60, sr.width(), sr.height(), new Color(0, 0, 0, 120).getRGB());
 
         hoveringText = null;
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
-        RenderUtils.scissor(0, 30, sr.width(), sr.height() - 55);
+        RenderUtils.scissor(0, 30, sr.width(), sr.height() - 60);
         serverListSelector.drawScreen(mouseX, mouseY, partialTicks);
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
         drawCenteredString(fontRendererObj, I18n.format("multiplayer.title", new Object[0]), width / 2, 20, 16777215);
