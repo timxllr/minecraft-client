@@ -1,9 +1,7 @@
 package com.masterof13fps.features.modules.impl.misc;
 
-import com.masterof13fps.Client;
 import com.masterof13fps.features.modules.Module;
 import com.masterof13fps.features.modules.ModuleInfo;
-import com.masterof13fps.utils.NotifyUtil;
 import com.masterof13fps.features.modules.Category;
 import com.masterof13fps.manager.eventmanager.Event;
 import com.masterof13fps.manager.eventmanager.impl.EventPacket;
@@ -22,9 +20,7 @@ public class Plugins extends Module {
     @Override
     public void onEnable() {
         sendPacket(new C14PacketTabComplete("/"));
-        Client.main().modMgr().getModule(Plugins.class).setState(false);
-        this.setState(false);
-        onDisable();
+        this.toggle();
     }
 
     @Override
