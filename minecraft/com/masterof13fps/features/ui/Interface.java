@@ -105,30 +105,53 @@ public class Interface extends GuiIngame implements Wrapper, Methods {
 
     private void renderTargetHUD() {
         Entity target = getCurrentTarget();
-        if (target instanceof EntityPlayer) {
+        final boolean players = getSettingByName("Players", getModuleManager().getModule(Aura.class)).isToggled();
+        if (target instanceof EntityPlayer && players) {
             ScaledResolution s = new ScaledResolution(mc);
+
+            UnicodeFontRenderer nameFont = fontManager.font("Century Gothic", 24, Font.PLAIN);
+            UnicodeFontRenderer otherFont = fontManager.font("Century Gothic", 18, Font.PLAIN);
+
             Color backgroundColor = new Color(0, 0, 0, 120);
             Color emptyBarColor = new Color(59, 59, 59, 160);
             Color healthBarColor = new Color(92, 228, 128);
-            Color armorBarColor = new Color(20, 81, 208);
-            int left = s.width() / 2 + 5, right = s.width() / 2 + 120, top = s.height() / 2 - 25,
-                    bottom =
-                    s.height() / 2 + 25;
+            Color distBarColor = new Color(20, 81, 208);
 
-            int targetLength = target.getName().length() + 10, targetHealth =
-                    (int) ((EntityPlayer) target).getHealth() + 22, targetArmor =
-                    ((EntityPlayer) target).getTotalArmorValue() + 22;
+            float auraRange = (float) getSettingByName("Range", getModuleManager().getModule(Aura.class)).getCurrentValue();
 
-            RenderUtils.drawRect(left, top, right + targetLength, bottom, backgroundColor);
+            int left = s.width() / 2 + 5;
+            int right2 = 120;
+            int right = s.width() / 2 + right2;
+            int right3 = 120 + nameFont.getStringWidth(target.getName()) / 2 - 15;
+            int top = s.height() / 2 - 25;
+            int bottom = s.height() / 2 + 25;
 
-            fontManager.font("Century Gothic", 24, Font.PLAIN).drawStringWithShadow(target.getName(), left + 50, top,
-                    -1);
-            fontManager.font("Century Gothic", 18, Font.PLAIN).drawStringWithShadow("Health: " + (int) ((EntityPlayer) target).getHealth(), left + 50, top + 15, -1);
+            float curTargetHealth = ((EntityPlayer) target).getHealth();
+            float maxTargetHealth = ((EntityPlayer) target).getMaxHealth();
 
-            RenderUtils.drawRect(left + 5, bottom - 14, right  + targetLength - 5, bottom - 12, emptyBarColor);
-            RenderUtils.drawRect(left + 5, bottom - 14, right  + targetHealth - 5, bottom - 12, healthBarColor);
-            RenderUtils.drawRect(left + 5, bottom - 7, right  + targetHealth - 5, bottom - 5, emptyBarColor);
-            RenderUtils.drawRect(left + 5, bottom - 7, right  + targetArmor - 5, bottom - 5, armorBarColor);
+            float distanceToTarget = getPlayer().getDistanceToEntity(target) / auraRange;
+
+            if (distanceToTarget > 1.0f) {
+                distanceToTarget = 1.0f;
+            }
+
+            float calculatedHealth = curTargetHealth / maxTargetHealth;
+
+            int rectRight = right + nameFont.getStringWidth(target.getName()) / 2 - 5;
+
+            float healthPos = calculatedHealth * right3;
+            float distPos = distanceToTarget * right3;
+
+            RenderUtils.drawRect(left, top, rectRight, bottom, backgroundColor);
+
+            RenderUtils.drawRect(left + 5, bottom - 14, left + right3, bottom - 12, emptyBarColor);
+            RenderUtils.drawRect(left + 5, bottom - 14, left + healthPos, bottom - 12, healthBarColor);
+
+            RenderUtils.drawRect(left + 5, bottom - 8, left + right3, bottom - 6, emptyBarColor);
+            RenderUtils.drawRect(left + 5, bottom - 8, left + distPos, bottom - 6, distBarColor);
+
+            nameFont.drawStringWithShadow(target.getName(), left + 50, top, -1);
+            otherFont.drawStringWithShadow("Health: " + curTargetHealth, left + 50, top + 15, -1);
         }
     }
 
@@ -447,7 +470,7 @@ public class Interface extends GuiIngame implements Wrapper, Methods {
             int xDistCenturyGothic = scaledResolution.width() - centuryGothic20.getStringWidth(m.visualName()) - 4;
             int xDistArial = scaledResolution.width() - arial20.getStringWidth(m.visualName()) - 4;
 
-            switch(getSettingByName("ArrayList Mode", getModuleManager().getModule(HUD.class)).getCurrentMode()){
+            switch (getSettingByName("ArrayList Mode", getModuleManager().getModule(HUD.class)).getCurrentMode()) {
                 case "Koks": {
                     RenderUtils.drawRect(scaledResolution.width() - exoRegular20.getStringWidth(m.visualName()) - 5, (rectY - 2),
                             scaledResolution.width(), (rectY + 10), new Color(25, 25, 25, 170).getRGB());
