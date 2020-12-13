@@ -32,7 +32,10 @@ public class ChestAura extends Module {
 
     @Override
     public void onDisable() {
-        openedChests.clear();
+        try {
+            openedChests.clear();
+        } catch (NullPointerException ignored) {
+        }
     }
 
     @Override
