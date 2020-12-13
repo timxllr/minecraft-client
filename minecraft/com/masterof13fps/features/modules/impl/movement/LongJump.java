@@ -13,7 +13,8 @@ import com.masterof13fps.features.modules.Category;
 public class LongJump extends Module {
     private boolean jump;
 
-    public Setting mode = new Setting("Mode", this, "NCP", new String[] {"AAC Old", "NCP", "MineSecure"});
+    public Setting mode = new Setting("Mode", this, "NCP", new String[] {"AAC Old", "NCP", "MineSecure", "CubeCraft",
+    "RedeSky", "BlocksMC"});
 
     @Override
     public void onToggle() {
@@ -46,7 +47,56 @@ public class LongJump extends Module {
                     doMineSecure();
                     break;
                 }
+                case "CubeCraft": {
+                    doCubeCraft();
+                    break;
+                }
+                case "RedeSky": {
+                    doRedeSky();
+                    break;
+                }
+                case "BlocksMC": {
+                    doBlocksMC();
+                    break;
+                }
             }
+        }
+    }
+
+    private void doBlocksMC() {
+        if(getPlayer().onGround){
+            setMotionY(0.75);
+        }
+
+        setSpeed(0.45);
+    }
+
+    private void doRedeSky() {
+        if(getPlayer().onGround){
+            setMotionY(0.5);
+        }else{
+            getPlayer().motionY += 0.025;
+        }
+
+        setSpeed(getBaseMoveSpeed() + 0.5);
+
+        if(getPlayer().fallDistance != 0.0){
+            this.toggle();
+        }
+    }
+
+    private void doCubeCraft() {
+        if(getPlayer().onGround){
+            setMotionY(0.42);
+            timeHelper.reset();
+        }else{
+            setMotionY(0.1);
+            setSpeed(3.6);
+            setTimerSpeed(0.4f);
+        }
+
+        if(timeHelper.hasReached(650L)){
+            this.toggle();
         }
     }
 
