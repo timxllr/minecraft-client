@@ -20,7 +20,6 @@ public class Plugins extends Module {
     @Override
     public void onEnable() {
         sendPacket(new C14PacketTabComplete("/"));
-        this.toggle();
     }
 
     @Override
@@ -55,8 +54,10 @@ public class Plugins extends Module {
                     if (message.length() > 0) {
                         notify.notification("Plugins gefunden!", "Es wurden Plugins gefunden! Siehe im Chat nach für weitere Informationen!", NotificationType.INFO, 5);
                         notify.chat("Plugins (" + size + "): §7" + message);
+                        this.toggle();
                     } else {
                         notify.notification("Keine Plugins gefunden!", "Es wurden keine Plugins gefunden!", NotificationType.INFO, 5);
+                        this.toggle();
                     }
                     event.setCancelled(true);
                 }
