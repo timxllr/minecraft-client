@@ -1,7 +1,9 @@
 package net.minecraft.client.entity;
 
 import com.masterof13fps.Client;
+import com.masterof13fps.Methods;
 import com.masterof13fps.Wrapper;
+import com.masterof13fps.features.modules.impl.misc.Commands;
 import com.masterof13fps.features.modules.impl.movement.NoSlow;
 import com.masterof13fps.manager.eventmanager.impl.EventChat;
 import com.masterof13fps.manager.eventmanager.impl.EventMotion;
@@ -33,7 +35,7 @@ import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 
 @SuppressWarnings("EntityConstructor")
-public class EntityPlayerSP extends AbstractClientPlayer implements Wrapper {
+public class EntityPlayerSP extends AbstractClientPlayer implements Methods, Wrapper {
     public final NetHandlerPlayClient sendQueue;
     private final StatFileWriter statWriter;
     public MovementInput movementInput;
@@ -257,14 +259,16 @@ public class EntityPlayerSP extends AbstractClientPlayer implements Wrapper {
             return;
         }
 
-        String prefix = Client.main().getClientPrefix();
-        if (Client.main().getCommandManager().execute(message)) {
-            return;
-        }
-        if (message.startsWith(prefix)) {
-            notify.notification("Befehl nicht gefunden!",
-                    "Versuche es mit '" + Client.main().getClientPrefix() + "help'", NotificationType.ERROR, 5);
-            return;
+        if(getModuleManager().getModule(Commands.class).state()) {
+            String prefix = Client.main().getClientPrefix();
+            if (Client.main().getCommandManager().execute(message)) {
+                return;
+            }
+            if (message.startsWith(prefix)) {
+                notify.notification("Befehl nicht gefunden!",
+                        "Versuche es mit '" + prefix + "help'", NotificationType.ERROR, 5);
+                return;
+            }
         }
         this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
     }
