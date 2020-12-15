@@ -25,7 +25,7 @@ public class Spammer extends Module {
             "jeder Schlampe eine Bitch machen ...", "Ich glaub Ich muss noch meine Tabletten nehmen.", "Spiel mit " +
             "mir, Ich bin performanter als Eject", "Ich bin Jannick, mich besteigt man.", "Kein Ding für'n Ping.",
             "Woran erkennt man wo Osten ist? Man legt eine Banane auf die Mauer und guckt wo abgebissen wird.",
-            "Welcher Client ist unperformanter als Eject?"};
+            "Welcher Client ist unperformanter als Eject?", "Ich hab das Video nur am Handy installiert."};
     int lastUsed;
 
     private String randomPhrase() {
