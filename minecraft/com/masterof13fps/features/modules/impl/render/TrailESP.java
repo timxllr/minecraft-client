@@ -22,10 +22,10 @@ public class TrailESP extends Module {
 
     private final List<Vec4> points = new ArrayList<>();
 
-    public Setting pointCounter = new Setting("Point Counter", this, 100, 10, 1000, true);
-    public Setting trailLength = new Setting("Trail Length", this, 1000, 100, 10000, true);
-    public Setting trailWidth = new Setting("Trail Width", this, 2, 1, 50, true);
-    public Setting rainbow = new Setting("Rainbow", this, true);
+    Setting pointCounter = new Setting("Point Counter", this, 100, 10, 1000, true);
+    Setting trailLength = new Setting("Trail Length", this, 1000, 100, 10000, true);
+    Setting trailWidth = new Setting("Trail Width", this, 2, 1, 50, true);
+    Setting rainbow = new Setting("Rainbow", this, true);
 
     @Override
     public void onToggle() {
