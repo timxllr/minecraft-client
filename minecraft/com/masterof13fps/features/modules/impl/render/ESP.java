@@ -107,6 +107,7 @@ public class ESP extends Module {
         }
 
         for (Entity entity : getWorld().loadedEntityList) {
+            GL11.glPushMatrix();
             int currentOffset = 0;
             float animationY = 0.0f;
             float animationY2 = 0.0f;
@@ -139,6 +140,8 @@ public class ESP extends Module {
                 }
                 GL11.glEnd();
             }
+            GL11.glColor3d(1, 1, 1);
+            GL11.glPopMatrix();
         }
 
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
@@ -174,6 +177,6 @@ public class ESP extends Module {
         double z =
                 (entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * mc.timer.renderPartialTicks) - mc.getRenderManager().renderPosZ;
         GL11.glTranslated(x, y, z);
-        GL11.glNormal3d(0.0, 1.0, 0.0);
+        GL11.glNormal3d(0.0, 0.0, 0.0);
     }
 }
