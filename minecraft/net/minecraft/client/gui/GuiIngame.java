@@ -337,10 +337,10 @@ public class GuiIngame extends Gui implements Wrapper {
     }
 
     private void renderHotbar(float partialTicks) {
-        Setting hotbar = Client.main().setMgr().settingByName("Hotbar", Client.main().modMgr().getByName("HUD"));
+        Setting hotbar = Client.main().setMgr().settingByName("Hotbar", Client.main().modMgr().getModule(HUD.class));
         ScaledResolution s = new ScaledResolution(mc);
 
-        if (!Client.main().modMgr().getByName("Invis").state() && hotbar.isToggled() && Client.main().modMgr().getByName("HUD").state()) {
+        if (Client.main().modMgr().getByName("HUD").state() && hotbar.isToggled()) {
             RenderUtils.drawRect((s.width() / 2) - 91, s.height() - 23, (s.width() / 2) + 91, s.height(), new Color(14, 14, 14).getRGB());
 
             Color selectedColor = new Color(32, 32, 32);
