@@ -216,7 +216,7 @@ public interface Methods extends Wrapper {
         return formatter.format(date);
     }
 
-    default Vec3 getVectorForRotation(final float pitch, final float yaw) {
+    static Vec3 getVectorForRotation(final float pitch, final float yaw) {
         final float f = MathHelper.cos(-yaw * 0.017453292f - 3.1415927f);
         final float f2 = MathHelper.sin(-yaw * 0.017453292f - 3.1415927f);
         final float f3 = -MathHelper.cos(-pitch * 0.017453292f);
